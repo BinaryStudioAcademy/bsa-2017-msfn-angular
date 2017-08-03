@@ -8,7 +8,7 @@ const routes: Routes = [
     children: []
   },
     { // 
-    path: 'forget-password',
+    path: 'forget-password', // for testing forgetPasswordComponent, can be removed
     children: [],
     component: ForgetPasswordComponent
   }
