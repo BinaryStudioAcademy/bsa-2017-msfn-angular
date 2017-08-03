@@ -24,5 +24,4 @@ User.pre('save', function(next) {
     });
 });
 
-
 module.exports = mongoose.model('User', User);
