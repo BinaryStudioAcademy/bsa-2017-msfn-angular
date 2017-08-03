@@ -76,6 +76,9 @@ module.exports = {
     ]
   },
   "context": __dirname + "/frontend",
+	"devServer": {
+		"contentBase": 'public'
+	},
   "entry": {
     "main": [
       "./src/main.ts"

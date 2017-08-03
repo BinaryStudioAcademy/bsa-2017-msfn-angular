@@ -24,7 +24,9 @@ context.mongoStore = new MongoStore({
     mongooseConnection: mongooseConnection
 });
 
-const staticPath = path.resolve(__dirname + '/../public');
+console.log('__dirname: ', __dirname);
+
+const staticPath = path.resolve(__dirname + '/../dist');
 app.use(express.static(staticPath));
 
 app.use(bodyParser.json());
