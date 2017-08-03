@@ -8,6 +8,7 @@ Stack
 -----------------
 * Angular 4
 * NodeJS + Express
+* MongoDB
 * Scss/Sass
 * Webpack
 * Socket.io
