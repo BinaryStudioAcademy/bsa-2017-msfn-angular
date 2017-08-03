@@ -1,12 +1,12 @@
 {
-  "$schema": "../node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
     "name": "msfn",
     "ejected": true
   },
   "apps": [
     {
-      "root": "src",
+      "root": "./frontend/src",
       "outDir": "dist",
       "assets": [
         "assets",
@@ -57,6 +57,10 @@
   "defaults": {
     "styleExt": "scss",
     "component": {
+      "spec": false
+    },
+    "service": {
+      "spec": false
     }
   }
 }
