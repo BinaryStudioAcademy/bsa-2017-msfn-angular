@@ -1,5 +1,5 @@
-var injectData = require('../../middleware/injectedDataMiddleware');
-var apiResponse = require('express-api-response');
+const injectData = require('../../middleware/injectedDataMiddleware');
+const apiResponse = require('express-api-response');
 
 module.exports = function(app) {
 	app.get('/', function(req, res, next) {

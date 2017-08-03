@@ -1,5 +1,5 @@
 function dbConnectionHandler() {
-    var mongoose = require('mongoose'),
+    const mongoose = require('mongoose'),
         config = require('../config');
 
     mongoose.connect(config.db.uri, config.db.opts);

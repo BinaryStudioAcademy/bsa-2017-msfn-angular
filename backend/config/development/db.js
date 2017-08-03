@@ -1,6 +1,6 @@
 module.exports = {
-	dbname: 'notbasecamp',
-	uri: 'mongodb://localhost/notbasecamp',
+	dbname: 'msfn',
+	uri: 'mongodb://localhost/msfn',
 	mocked_db: false,
 	opts: {
 		server: {

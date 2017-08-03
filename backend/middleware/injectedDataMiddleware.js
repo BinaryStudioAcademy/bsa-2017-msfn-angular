@@ -1,4 +1,4 @@
-var fs = require('fs'),
+const fs = require('fs'),
     replaceStream = require('replacestream');
 
 module.exports = function (req, res, obj, error) {
