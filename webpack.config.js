@@ -75,6 +75,7 @@ module.exports = {
       "./node_modules"
     ]
   },
+  "context": __dirname + "/frontend",
   "entry": {
     "main": [
       "./src/main.ts"
@@ -433,7 +434,7 @@ module.exports = {
         "environments/environment.ts": "environments/environment.ts"
       },
       "exclude": [],
-      "tsConfigPath": "src/tsconfig.app.json",
+      "tsConfigPath": "./frontend/src/tsconfig.app.json",
       "skipCodeGeneration": true
     })
   ],
