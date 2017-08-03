@@ -9,6 +9,7 @@ const User = new Schema({
     password: String,
     isCoach: String,
     position: String,
+    salt: String
 });
 
 User.pre('save', function(next) {
@@ -16,12 +17,28 @@ User.pre('save', function(next) {
 
     if (!userData.isModified('password')) return next();
 
-    bcrypt.genSalt(1012, function(err, salt) {
-        bcrypt.hash(userData.password, null, null, function(err, hash) {
+    bcrypt.genSalt(1012, (err, salt) => {
+        userData.salt = salt;
+        this.encryptPassword(this.password, (err, hash) => {
+            "use strict";
+            if (err) return next(err);
+
             userData.password = hash;
             next();
-        });
+        })
     });
 });
+
+User.methods.checkPassword = function(password){
+    "use strict";
+    return (this.encryptPassword(password) === this.password);
+};
+
+User.methods.encryptPassword = function(password, callback){
+    "use strict";
+    bcrypt.hash(password, this.salt, null, (err, hash) => {
+        callback(err, hash);
+    });
+};
 
 module.exports = mongoose.model('User', User);
