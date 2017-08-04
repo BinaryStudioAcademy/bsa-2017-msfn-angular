@@ -5,7 +5,6 @@ const
     baseUrl = '/user/';
 
 module.exports = function (app) {
-
     app.get(baseUrl+'me', function (req, res, next) {
         res.data = req.session.user;
         next();

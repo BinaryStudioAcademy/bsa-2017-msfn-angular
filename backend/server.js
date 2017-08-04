@@ -7,6 +7,7 @@ const bodyParser = require('body-parser'),
     MongoStore = require('connect-mongo')(session),
     sessionSecret = require('./config/session').secret,
     mongoose = require('mongoose'),
+    //passport = require('passport'),
     cookieParser = require('cookie-parser'),
     port = 3060;
 
@@ -24,6 +25,9 @@ app.use(session({
 context.mongoStore = new MongoStore({
     mongooseConnection: mongooseConnection
 });
+
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 const staticPath = path.resolve(__dirname + '/../dist');
 app.use(express.static(staticPath));
