@@ -36,9 +36,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-const apiRoutes = require('./routes/api/routes');
-app.use('/api', apiRoutes);
-
+const apiRoutes = require('./routes/api/routes')(app);
 const viewRoutes = require('./routes/view/routes')(app);
 
 console.log(`app runs on port: ${port}`);

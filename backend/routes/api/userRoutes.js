@@ -1,8 +1,8 @@
 const
     apiResponse = require('express-api-response'),
     userService = require('../../services/userService'),
-    userRepository = require('../../repositories/userRepository'),
-    baseUrl = '/user/';
+    userRepository = require('../../repositories/userRepository'),    
+    baseUrl = '/api/user/';
 
 module.exports = function (app) {
 
