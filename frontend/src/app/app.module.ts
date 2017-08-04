@@ -7,7 +7,17 @@ import { HttpService } from './services/http.service';
 import { LoginComponent } from './components/login/login.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
-import { MdSnackBarModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MdSnackBarModule,
+  MdChipsModule,
+  MdIconModule,
+  MdRadioModule,
+  MdInputModule,
+  MdCheckboxModule,
+  MdButtonModule,
+  MdDialogModule
+} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -18,7 +28,15 @@ import { MdSnackBarModule } from '@angular/material';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MdSnackBarModule
+    BrowserAnimationsModule,
+    MdSnackBarModule,
+    MdChipsModule,
+    MdIconModule,
+    MdRadioModule,
+    MdInputModule,
+    MdCheckboxModule,
+    MdButtonModule,
+    MdDialogModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
