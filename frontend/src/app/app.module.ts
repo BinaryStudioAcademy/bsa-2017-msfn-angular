@@ -7,6 +7,8 @@ import { HttpService } from './services/http.service';
 import { LoginComponent } from './components/login/login.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
+import { MdSnackBarModule } from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +17,8 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MdSnackBarModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
