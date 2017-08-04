@@ -36,8 +36,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-const apiRoutes = require('./routes/api/routes')(app),
-    viewRoutes = require('./routes/view/routes')(app);
+const apiRoutes = require('./routes/api/routes');
+app.use('/api', apiRoutes);
+
+const viewRoutes = require('./routes/view/routes')(app);
 
 console.log(`app runs on port: ${port}`);
 const server = app.listen(port);
