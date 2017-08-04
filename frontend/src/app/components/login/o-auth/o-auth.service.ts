@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
+import {FacebookService} from 'ngx-facebook';
 
 declare let gapi: any;
+declare var window: any;
 
 @Injectable()
 export class OAuthService {
     googleLoginButtonId = 'g-signin2';
+    facebookLoginButtonId = 'fb-signin2';
 
-    constructor() {
+    constructor(private fb: FacebookService) {
     }
 
     renderGoogleLoginButton() {
@@ -23,8 +26,8 @@ export class OAuthService {
     }
 
     onGoogleLoginSuccess(googleUser) {
-        console.log('log in success!');
-
+        console.log('log in with google success!');
+        console.groupCollapsed('google');
         const profile = googleUser.getBasicProfile();
         console.log(profile);
         console.log('ID: ' + profile.getId());
@@ -36,5 +39,18 @@ export class OAuthService {
         ///for backend
         const id_token = googleUser.getAuthResponse().id_token;
         console.log(id_token);
+        console.groupEnd();
     }
+
+    renderFacebookLoginButton() {
+        this.fb.init({
+            appId: '1492797114115423',
+            version: 'v2.10',
+            status: true,
+            xfbml: true,
+        });
+        // this.fb.getLoginStatus().then
+    }
+
+
 }

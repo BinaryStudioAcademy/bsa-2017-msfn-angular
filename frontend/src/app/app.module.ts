@@ -1,25 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpService } from './services/http.service';
-import { LoginComponent } from './components/login/login.component';
-import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
-import { OAuthComponent } from './components/login/o-auth/o-auth.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HttpService} from './services/http.service';
+import {LoginComponent} from './components/login/login.component';
+import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
+import {OAuthComponent} from './components/login/o-auth/o-auth.component';
+import {FacebookService} from 'ngx-facebook';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    ForgetPasswordComponent,
-    OAuthComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [HttpService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        ForgetPasswordComponent,
+        OAuthComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule
+    ],
+    providers: [
+        HttpService,
+        FacebookService
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

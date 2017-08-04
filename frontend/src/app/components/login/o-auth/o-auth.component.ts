@@ -17,7 +17,8 @@ export class OAuthComponent implements OnInit {
         this.renderButtons();
     }
 
-    private renderButtons() {
+    public renderButtons() {
         this.oAuthService.renderGoogleLoginButton();
+        this.oAuthService.renderFacebookLoginButton();
     }
 }
