@@ -7,7 +7,8 @@ const bodyParser = require('body-parser'),
     MongoStore = require('connect-mongo')(session),
     sessionSecret = require('./config/session').secret,
     mongoose = require('mongoose'),
-    //passport = require('passport'),
+    passport = require('passport'),
+    isLogged = require('./middleware/passportStrategyMiddleware').isLogged,
     cookieParser = require('cookie-parser'),
     port = 3060;
 
@@ -26,8 +27,11 @@ context.mongoStore = new MongoStore({
     mongooseConnection: mongooseConnection
 });
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
+
+//middleware for checking authorized user (if auth { next() } else { redirect to '/'})
+app.all('/profile/*', isLogged);
 
 const staticPath = path.resolve(__dirname + '/../dist');
 app.use(express.static(staticPath));
