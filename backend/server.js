@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(function (req, res, next) {
-    //console.log(req.session.user);
+    // console.log(req.session.user);
     next();
 });
 
@@ -40,6 +40,6 @@ const apiRoutes = require('./routes/api/routes')(app),
     viewRoutes = require('./routes/view/routes')(app);
 
 console.log(`app runs on port: ${port}`);
-const server = app.listen(3060);
+const server = app.listen(port);
 
 module.exports = app;
