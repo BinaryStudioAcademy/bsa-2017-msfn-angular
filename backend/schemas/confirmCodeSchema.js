@@ -27,5 +27,5 @@ ConfirmCode.pre('save', function (next) {
 });
 
 
-ConfirmCode.plugin(ttl, { ttl: 5000 });
+ConfirmCode.plugin(ttl, { ttl: 3600000 });
 module.exports = mongoose.model('ConfirmCode', ConfirmCode);
