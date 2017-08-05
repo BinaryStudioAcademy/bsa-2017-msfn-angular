@@ -1,3 +1,4 @@
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -10,8 +11,13 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegistrationComponent
+    component: RegistrationComponent,
     // canActivate: [ForLoggedInGuard]
+  },
+    {
+    path: 'forget-password', // for testing forgetPasswordComponent, can be removed
+    children: [],
+    component: ForgetPasswordComponent
   }
 ];
 

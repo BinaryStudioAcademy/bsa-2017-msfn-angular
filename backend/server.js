@@ -6,7 +6,8 @@ const bodyParser = require('body-parser'),
     session = require('express-session'),
     MongoStore = require('connect-mongo')(session),
     sessionSecret = require('./config/session').secret,
-    mongoose = require('mongoose')
+    mongoose = require('mongoose'),
+    cookieParser = require('cookie-parser'),
     port = 3060;
 
 const app = express();
@@ -28,15 +29,17 @@ const staticPath = path.resolve(__dirname + '/../dist');
 app.use(express.static(staticPath));
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(function (req, res, next) {
-    //console.log(req.session.user);
+    // console.log(req.session.user);
     next();
 });
 
-const apiRoutes = require('./routes/api/routes')(app),
-    viewRoutes = require('./routes/view/routes')(app);
+const apiRoutes = require('./routes/api/routes')(app);
+const viewRoutes = require('./routes/view/routes')(app);
 
 console.log(`app runs on port: ${port}`);
-const server = app.listen(3060);
+const server = app.listen(port);
 
 module.exports = app;

@@ -5,7 +5,10 @@ import { RegistrationService } from './registration.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+  styleUrls: [
+    '../../../globalStyles/materialTheme.scss',
+    './registration.component.scss'
+  ],
   providers: [RegistrationService]
 })
 
