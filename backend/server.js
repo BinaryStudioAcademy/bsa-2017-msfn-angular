@@ -8,6 +8,7 @@ const bodyParser = require('body-parser'),
     sessionSecret = require('./config/session').secret,
     mongoose = require('mongoose'),
     cookieParser = require('cookie-parser'),
+    passport = require('passport'),
     port = 3060;
 
 const app = express();
@@ -29,14 +30,26 @@ const staticPath = path.resolve(__dirname + '/../dist');
 app.use(express.static(staticPath));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(function (req, res, next) {
     // console.log(req.session.user);
     next();
 });
 
-const passport = require('./config/passport')(app);
+////// For working app. Must be deleted after merge with msfn-5
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+    done(null, user);
+});
+//////
+
+const passportOAuthInit = require('./middleware/passportOAuthMiddleware')();
 
 const oAuthRoutes = require('./routes/oAuth/routes')(app);
 const apiRoutes = require('./routes/api/routes')(app);
