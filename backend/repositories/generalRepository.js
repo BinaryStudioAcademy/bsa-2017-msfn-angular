@@ -14,6 +14,7 @@ Repository.prototype.findByObject = findByObject;
 function add(data, callback) {
     const model = this.model;
     const newItem = new model(data);
+    console.log(123);
     newItem.save(callback);
 }
 
