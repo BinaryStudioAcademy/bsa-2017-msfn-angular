@@ -2,8 +2,8 @@
 
 /* general */
 
-*, input, input::placeholder {
-  font-family: 'Quicksand', sans-serif;
+*, input::placeholder {
+  font-family: 'Roboto', sans-serif;
   color: $text-main-color;
 }
 
@@ -14,6 +14,8 @@ a {
 /* registration form */
 
 #registration {
+  display: flex;
+  justify-content: center;
   width: 100vw;
   min-height: 100vh;
   color: $text-main-color;
@@ -24,15 +26,16 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: absolute;
-  left: 50%;
-  top: 30px;
-  transform: translateX(-50%);
   width: 370px;
   height: 80vh;
+  margin: 25px;
   padding: 60px 45px 30px;
-  border: 2px solid #000;
   background: $gradient-from-color;
+  background: -webkit-linear-gradient($gradient-to-color, $gradient-from-color);
+  background: -o-linear-gradient($gradient-to-color, $gradient-from-color);
+  background: -moz-linear-gradient($gradient-to-color, $gradient-from-color);
+  background: linear-gradient($gradient-to-color, $gradient-from-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
 #exit-icon {
@@ -173,7 +176,7 @@ input::placeholder {
     border-radius: 45px;
     outline: none;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 600;
     background: $btn-color;
   }
 

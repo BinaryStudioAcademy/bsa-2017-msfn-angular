@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
-import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MdSnackBarModule,
@@ -24,8 +23,7 @@ import {
   declarations: [
     AppComponent,
     RegistrationComponent,
-    LoginComponent,
-    ForgetPasswordComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
