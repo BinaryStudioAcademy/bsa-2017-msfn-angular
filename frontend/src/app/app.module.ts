@@ -20,12 +20,14 @@ import {
   MdDialogModule,
   MdSlideToggleModule
 } from '@angular/material';
+import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    RestorePasswordComponent
   ],
   imports: [
     BrowserModule,
