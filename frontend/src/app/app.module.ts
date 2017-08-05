@@ -7,7 +7,6 @@ import {HttpService} from './services/http.service';
 import {LoginComponent} from './components/login/login.component';
 import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
 import {OAuthComponent} from './components/login/o-auth/o-auth.component';
-import {FacebookService} from 'ngx-facebook';
 
 @NgModule({
     declarations: [
@@ -20,10 +19,7 @@ import {FacebookService} from 'ngx-facebook';
         BrowserModule,
         AppRoutingModule
     ],
-    providers: [
-        HttpService,
-        FacebookService
-    ],
+    providers: [HttpService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
