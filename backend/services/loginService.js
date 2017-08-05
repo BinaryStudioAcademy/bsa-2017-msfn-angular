@@ -1,4 +1,5 @@
 const passport = require('passport'),
+      decrypt = require('./decryptService'),
       profilePath = '/profile';
 
 function LoginService() {
@@ -8,6 +9,7 @@ function LoginService() {
 LoginService.prototype.login = login;
 
 function login(req, res, next) {
+    req = decrypt(req)
     passport.authenticate('local',
         function(err, user, info) {
             if (err) {
