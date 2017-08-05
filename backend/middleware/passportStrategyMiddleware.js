@@ -14,10 +14,15 @@
                 if (!user) {
                     return done(null, false, { message: 'Incorrect email' });
                 }
-                if (!(user.checkPassword(password))) {
-                    return done(null, false, { message: 'Incorrect password' });
-                }
-                return done(null, user);
+                user.checkPassword(password, user.password, (err, result) => {
+                    if (err) { return done(err); }
+                    if (!result) {
+                        return done(null, false, { message: 'Incorrect password' });
+                    } else {
+                        return done(null, user);
+                    }
+                })
+                
             });
         }
     ));

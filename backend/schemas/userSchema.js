@@ -29,16 +29,11 @@ User.pre('save', function(next) {
     });
 });
 
-User.methods.checkPassword = function(password, callback){
+User.methods.checkPassword = function(password, crypt, callback){
     "use strict";
     this.encryptPassword(password, (err, hash) => {
         if (err) return callback(err);
-
-        if (hash === password){
-            callback(null, true);
-        } else {
-            callback(null, false);
-        }
+        callback(err, (hash === crypt))
     });
 };
 
