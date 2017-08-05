@@ -16,7 +16,8 @@ import {
   MdInputModule,
   MdCheckboxModule,
   MdButtonModule,
-  MdDialogModule
+  MdDialogModule,
+  MdSlideToggleModule
 } from '@angular/material';
 
 @NgModule({
@@ -37,7 +38,8 @@ import {
     MdInputModule,
     MdCheckboxModule,
     MdButtonModule,
-    MdDialogModule
+    MdDialogModule,
+    MdSlideToggleModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
