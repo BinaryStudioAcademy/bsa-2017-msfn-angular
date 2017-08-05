@@ -1,0 +1,141 @@
+<div id="registration">
+  <div id="form">
+    <div id="exit-icon">
+      <div></div>
+      <div></div>
+    </div>
+    <div id="social-register">Register via
+      <a href="">Facebook</a> or <a href="">Google</a></div>
+    <div id="user-error" *ngIf="userError">{{ userError }}</div>
+
+    <form #form="ngForm">
+      <div class="input-row">
+        <div class="error" *ngIf="emailInput.errors && emailInput.errors.required && emailInput.touched">Email cannot be empty</div>
+        <div class="error" *ngIf="emailInput.errors && emailInput.errors.pattern && emailInput.touched">Email is not valid</div>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          [(ngModel)]="user.email"
+          #emailInput="ngModel">
+      </div>
+
+      <div class="input-row">
+        <div class="error" *ngIf="firstNameInput.errors && firstNameInput.errors.required && firstNameInput.touched">First name cannot be empty</div>
+        <div class="error" *ngIf="firstNameInput.errors && firstNameInput.errors.minlength && firstNameInput.touched">First name should contain at least 2 characters</div>
+        <input
+          id="first-name"
+          type="text"
+          name="firstName"
+          placeholder="First name"
+          required
+          minlength="2"
+          [(ngModel)]="user.firstName"
+          #firstNameInput="ngModel">
+      </div>
+
+      <div class="input-row">
+        <div class="error" *ngIf="lastNameInput.errors && lastNameInput.errors.required && lastNameInput.touched">Last name cannot be empty</div>
+        <div class="error" *ngIf="lastNameInput.errors && lastNameInput.errors.minlength && lastNameInput.touched">Last name should contain at least 2 characters</div>
+        <input
+          id="last-name"
+          type="text"
+          name="lastName"
+          placeholder="Last name"
+          required
+          minlength="2"
+          [(ngModel)]="user.lastName"
+          #lastNameInput="ngModel">
+      </div>
+
+      <div id="birthday" class="input-row">
+        <div>Birthday</div>
+        <div id="birthday-warning">You should be older than 18. Others don't see your birthday.</div>
+        <div id="birthday-inputs">
+          <select name="month" [(ngModel)]="selectedMonth" (change)="setMonth(selectedMonth)">
+            <option *ngFor="let option of monthOptions"
+              value="{{ option }}">
+              {{ option }}
+            </option>
+          </select>
+
+          <select name="day">
+            <option *ngFor="let option of dayOptions"
+              value="{{ option }}">
+              {{ option }}
+            </option>
+          </select>
+
+          <select name="year" [(ngModel)]="selectedYear" (change)="setYear(selectedYear)">
+            <option *ngFor="let option of yearOptions"
+              value="{{ option }}">
+              {{ option }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div class="error" *ngIf="heightInput.errors && heightInput.errors.required && heightInput.touched">Height field cannot be empty</div>
+        <div class="error" *ngIf="heightInput.errors && heightInput.errors.minlength && heightInput.touched">Height should contain at least 2 characters</div>
+        <div class="error" *ngIf="weightInput.errors && weightInput.errors.required && weightInput.touched">Weight field cannot be empty</div>
+        <div class="error" *ngIf="weightInput.errors && weightInput.errors.minlength && weightInput.touched">Weight should contain at least 2 characters</div>
+        <input
+          id="height"
+          type="number"
+          name="height"
+          placeholder="Height"
+          required
+          minlength="2"
+          min="50"
+          max="270"
+          [(ngModel)]="user.height"
+          #heightInput="ngModel">
+
+        <input
+          id="weight"
+          type="number"
+          name="weight"
+          placeholder="Weight"
+          required
+          minlength="2"
+          min="5"
+          max="500"
+          [(ngModel)]="user.weight"
+          #weightInput="ngModel">
+      </div>
+
+      <div id="password-input" class="input-row">
+        <div for="password">Create a password:</div>
+        <div class="error" *ngIf="passwordInput.errors && passwordInput.errors.required && passwordInput.touched">Password cannot be empty</div>
+        <div class="error" *ngIf="passwordInput.errors && passwordInput.errors.minlength && passwordInput.touched">Password should contain at least 3 characters</div>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          required
+          minlength="3"
+          [(ngModel)]="user.password"
+          #passwordInput="ngModel">
+      </div>
+
+      <div id="submit-button">
+        <div>By pressing "Register" I accept the following terms: Terms of Service, Payment Service Conditions, Confidentiality Policy</div>
+        <button
+          type="submit"
+          (click)="methodOnSubmit(form)"
+          [disabled]="!form.form.valid">
+          {{ buttonName }}
+        </button>
+      </div>
+    </form>
+
+    <div id="login">
+      Already have an account?
+      <a href="../login">Login</a>
+    </div>
+  </div>
+</div>

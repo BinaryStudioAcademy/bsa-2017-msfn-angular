@@ -1,0 +1,187 @@
+@import '../../app.component.scss';
+
+/* general */
+
+*, input, input::placeholder {
+  font-family: 'Quicksand', sans-serif;
+  color: $text-main-color;
+}
+
+a {
+  color: $text-main-color;
+}
+
+/* registration form */
+
+#registration {
+  width: 100vw;
+  min-height: 100vh;
+  color: $text-main-color;
+  background: $bg-color;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  transform: translateX(-50%);
+  width: 370px;
+  height: 80vh;
+  padding: 60px 45px 30px;
+  border: 2px solid #000;
+  background: $gradient-from-color;
+}
+
+#exit-icon {
+  position: absolute;
+  right: 45px;
+  top: 20px;
+  width: 16px;
+  height: 16px;
+  font-size: 0;
+
+  div {
+    width: 16px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: $text-main-color;
+  }
+
+  div:first-child {
+    transform: translateY(8px) rotate(-45deg);
+  }
+
+  div:last-child {
+    transform: translateY(6px) rotate(45deg);
+  }
+}
+
+#exit-icon:hover {
+  cursor: pointer;
+}
+
+#social-register {
+  font-size: 14px;
+}
+
+form {
+  flex-basis: 90%;
+}
+
+.input-row {
+  width: 100%;
+  height: auto;
+
+  .error {
+    display: block;
+    width: 100%;
+    margin: 0;
+    text-align: left;
+    font-size: 12px;
+    color: $error-color;
+  }
+}
+
+input {
+  width: calc(100% - 20px);
+  height: 36px;
+  margin-bottom: 25px;
+  padding: 0 10px;
+  border: none;
+  border-bottom: 1px solid $text-second-color;
+  outline: none;
+  background: none;
+}
+
+input::placeholder {
+  font-size: 16px;
+}
+
+#birthday {
+  div {
+    text-align: left;
+    font-size: 16px;
+  }
+
+  #birthday-warning {
+    margin: 5px 0 25px;
+    font-size: 10px;
+  }
+
+  #birthday-inputs {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  select {
+    width: 30%;
+    height: 36px;
+    padding: 0 10px;
+    border: none;
+    border-bottom: 1px solid $text-second-color;
+    outline: none;
+    background: none;
+
+    option {
+      margin: 15px;
+      border: none;
+      outline: none;
+      background: $bg-color;
+    }
+  }
+}
+
+#height, #weight {
+  width: 42%;
+}
+
+#height {
+  float: left;
+}
+
+#weight {
+  float: right;
+}
+
+#password-input {
+  div {
+    float: left;
+  }
+
+  div:first-child {
+    margin-bottom: 5px;
+    font-size: 10px;
+  }
+}
+
+#submit-button {
+  div {
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 10px;
+  }
+
+  button {
+    width: 370px;
+    height: 45px;
+    border: none;
+    border-radius: 45px;
+    outline: none;
+    font-size: 20px;
+    font-weight: bold;
+    background: $btn-color;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+}
+
+#login {
+  flex-basis: 5%;
+}
