@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http } from '@angular/http';
+// import { FormsModule } from '@angular/forms';
 // import { Observable } from 'rxjs/Observable';
 // import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/toPromise';
@@ -9,27 +10,28 @@ import 'rxjs/add/operator/toPromise';
 export class HttpService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
-  // public failMessage = 'Fail';
+  public failMessage = 'Fail';
 
   constructor(private _http: Http, public snackBar: MdSnackBar) { }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
-    // this.openSnackBar(this.failMessage);
+  private handleError = (error: any): Promise<any> => {
+    // console.error('An error occurred', error);
+    this.openSnackBar(this.failMessage);
     return Promise.reject(error.message || error);
   }
 
-  sendReq(options) {
+  public sendReq(options): Promise<any>  {
     let url: string;
     if (!options.url) {
-      return 'Error url';
+      return Promise.reject('Url required');
     } else {
       url = options.url;
     }
     const method: 'GET' | 'POST' | 'PUT' | 'DELETE' = options.method || 'GET';
     const body = options.body || {};
     const successMessage: string = options.successMessage || 'Success';
-    const failMessage: string = options.failMessage || 'Fail';
+    // const failMessage = options.failMessage || this.failMessage;
+    this.failMessage = options.failMessage || this.failMessage;
     const headers = options.headers || this.headers;
 
     if (method === 'GET') {
@@ -37,16 +39,16 @@ export class HttpService {
         .toPromise()
         .then(response => {
           this.openSnackBar(successMessage);
-          return response.json().data;
+          return response.json();
         })
         .catch(this.handleError);
     } else if (method === 'POST') {
       return this._http
         .post(url, body, { headers: this.headers })
         .toPromise()
-        .then(res => {
+        .then(response => {
           this.openSnackBar(successMessage);
-          return res.json().data;
+          return response.json().data;
         })
         .catch(this.handleError);
     } else if (method === 'PUT') {
@@ -69,7 +71,7 @@ export class HttpService {
     }
   }
 
-  openSnackBar(message: string, action = 'close') {
+  private openSnackBar(message: string, action = 'Close') {
     this.snackBar.open(message, action, {
       duration: 4000,
     });
