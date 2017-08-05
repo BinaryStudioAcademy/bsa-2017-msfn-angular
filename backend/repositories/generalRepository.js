@@ -45,4 +45,27 @@ function findByObject(obj, populate, select, callback) {
     query.exec(callback);
 }
 
+Repository.prototype.update = function(id, body, callback){
+    let query = this.model.update({_id:id}, body);
+    query.exec(callback);
+};
+
+Repository.prototype.get = function(params, callback){
+    if (params.filter === undefined){
+        params.filter = {};
+    }
+    if (params.sort === undefined){
+        params.sort = null;
+    }
+    if (params.limit === undefined){
+        params.limit = null;
+    }
+    if (params.offset === undefined){
+        params.offset = null;
+    }
+    let model = this.model;
+    let query = model.find(params.filter).sort(params.sort).limit(params.limit).skip(params.offset);
+    query.exec(callback);
+};
+
 module.exports = Repository;
