@@ -11,6 +11,11 @@ a {
   color: $text-main-color;
 }
 
+svg {
+  width: 40px;
+  margin: 10px 0;
+}
+
 /* registration form */
 
 #registration {
@@ -66,7 +71,7 @@ a {
   cursor: pointer;
 }
 
-#social-register {
+#social-registration {
   font-size: 14px;
 }
 
@@ -77,15 +82,19 @@ form {
 .input-row {
   width: 100%;
   height: auto;
+}
 
-  .error {
-    display: block;
-    width: 100%;
-    margin: 0;
-    text-align: left;
-    font-size: 12px;
-    color: $error-color;
-  }
+md-slide-toggle {
+  margin: 0 7px 0 15px;
+}
+
+.error {
+  display: block;
+  width: 100%;
+  margin: 0;
+  text-align: left;
+  font-size: 12px;
+  color: $error-color;
 }
 
 input {
@@ -163,6 +172,8 @@ input::placeholder {
 }
 
 #submit-button {
+  margin-bottom: 10px;
+
   div {
     margin-bottom: 20px;
     text-align: left;

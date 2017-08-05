@@ -13,12 +13,14 @@ import {
   MdChipsModule,
   MdIconModule,
   MdRadioModule,
+  MdCardModule,
   MdInputModule,
   MdCheckboxModule,
   MdButtonModule,
   MdDialogModule,
   MdSlideToggleModule
 } from '@angular/material';
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import {
     MdChipsModule,
     MdIconModule,
     MdRadioModule,
+    MdCardModule,
     MdInputModule,
     MdCheckboxModule,
     MdButtonModule,
