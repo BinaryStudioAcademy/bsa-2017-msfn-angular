@@ -31,7 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //middleware for checking authorized user (if auth { next() } else { redirect to '/'})
-app.all('/profile/*', isLogged);
+app.use('/profile/*', isLogged);
 
 const staticPath = path.resolve(__dirname + '/../dist');
 app.use(express.static(staticPath));

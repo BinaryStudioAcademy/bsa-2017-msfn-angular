@@ -2,14 +2,14 @@
     var passport = require('passport'),
         LocalStrategy = require('passport-local').Strategy,
         mongoose = require('mongoose'),
-        User = require('../schemas/userSchema')
+        userRepository = require('../repositories/userRepository')
 
     passport.use(new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password'
         },
         function(username, password, done) {
-            User.findOne({ email: username }, function(err, user) {
+            userRepository.getUserByEmail(username, function(err, user) {
                 if (err) { return done(err); }
                 if (!user) {
                     return done(null, false, { message: 'Incorrect email' });
@@ -27,7 +27,7 @@
     });
 
     passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
+        userRepository.findById(id, function(err, user) {
             done(err, user);
         });
     });
