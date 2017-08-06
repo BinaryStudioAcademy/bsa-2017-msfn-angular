@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegistrationService } from './registration.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -39,40 +40,37 @@ export class RegistrationComponent implements OnInit {
   yearOptions = this.registrationService.generateYears();
   dayOptions = this.registrationService.generateDays(this.user.month, this.user.year);
 
-  constructor(public router: Router, public registrationService: RegistrationService) { }
+  constructor(public router: Router, public registrationService: RegistrationService, private http: HttpClient) { }
 
-  setDayOptions(month, year): void {
+  setDayOptions(month: string, year: number): void {
     this.dayOptions = this.registrationService.generateDays(month, year);
   }
 
-  setMonth() {
-    this.setDayOptions(this.user.month, this.user.year);
-  }
-
-  setYear() {
-    this.setDayOptions(this.user.month, this.user.year);
-  }
-
-  setGender(e) {
+  setGender(e): void {
     this.user.gender = e.checked ? 'Female' : 'Male';
   }
 
-  register(form): void {
+  register(form: HTMLFormElement): void {
     if (form.valid) {
       this.errors = this.registrationService.checkInputs(
         this.user.year, this.user.height, this.user.weight
       );
       this.inputsValid = true;
+
       for (const i in this.errors) {
         this.inputsValid = !this.errors[i];
+        if (!this.inputsValid) {
+          break;
+        }
       }
 
       if (this.inputsValid) {
+        this.userError = '';
         const user = this.user;
-        console.log(user);
-      }
 
-      // make a post request
+        const req = this.http.post('/api/user', user);
+        req.subscribe();
+      }
     } else {
       this.userError = 'Please fill in all fields correctly';
     }

@@ -41,7 +41,7 @@ export class RegistrationService {
     }
   ];
 
-  generateDays(selMonth, selYear): number[] {
+  generateDays(selMonth: string, selYear: number): number[] {
     const daysOutput = [];
     let monthLength;
 
@@ -80,7 +80,7 @@ export class RegistrationService {
     return yearsOutput;
   }
 
-  checkInputs(year, height, weight) {
+  checkInputs(year: number, height: number, weight: number) {
     const errors = {
       year: false,
       height: '',

@@ -41,7 +41,7 @@ svg {
   background: -o-linear-gradient($gradient-to-color, $gradient-from-color);
   background: -moz-linear-gradient($gradient-to-color, $gradient-from-color);
   background: linear-gradient($gradient-to-color, $gradient-from-color);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .6);
 }
 
 #exit-icon {
@@ -121,6 +121,11 @@ input {
 
 input::placeholder {
   font-size: 16px;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px $gradient-to-color inset;
+  -webkit-text-fill-color: $text-main-color;
 }
 
 #birthday {
