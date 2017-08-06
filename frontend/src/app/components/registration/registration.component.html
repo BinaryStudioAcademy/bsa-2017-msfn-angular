@@ -14,12 +14,15 @@
         <g fill="#82CA9C"><path d="M735.9,518.1H264.1V645c0,30.3-24.4,54.7-54.4,54.7c-30.3,0-54.4-24.5-54.4-54.7v-21c-5.7,2-11.8,3.1-18.1,3.1c-30.3,0-54.4-24.4-54.4-54.5v-54.4H10v-36.3h72.6v-54.4c0-30.1,24.4-54.5,54.4-54.5c6.4,0,12.5,1.1,18.1,3.1l0,0v-21c0-30.3,24.4-54.7,54.4-54.7c30.3,0,54.4,24.5,54.4,54.7v126.8h471.9V355c0-30.3,24.4-54.7,54.4-54.7c30.3,0,54.4,24.5,54.4,54.7v21c5.7-2,11.8-3.1,18.1-3.1c30.3,0,54.4,24.4,54.4,54.5v54.4H990v36.3h-72.6v54.4c0,30.1-24.4,54.5-54.4,54.5c-6.4,0-12.5-1.1-18.1-3.1v21c0,30.3-24.4,54.7-54.4,54.7c-30.3,0-54.4-24.5-54.4-54.7V518.1L735.9,518.1z"/></g>
       </svg>
 
-      <div class="input-row">
-        Male<md-slide-toggle required></md-slide-toggle>Female
+      <div id="general-error" class="error" *ngIf="userError">{{ userError }}</div>
+
+      <div id="gender" class="input-row">Male
+        <md-slide-toggle required (change)="setGender($event)"></md-slide-toggle>
+        Female
       </div>
 
       <div class="input-row">
-        <div id="user-error" *ngIf="userError">{{ userError }}</div>
+        <div class="error" *ngIf="emailError">{{ emailError }}</div>
         <div class="error" *ngIf="emailInput.errors && emailInput.errors.required && emailInput.touched">Email cannot be empty</div>
         <div class="error" *ngIf="emailInput.errors && emailInput.errors.pattern && emailInput.touched">Email is not valid</div>
         <input
@@ -63,12 +66,12 @@
 
       <div id="birthday" class="input-row">
         <div>Birthday</div>
-        <div id="birthday-warning">You should be older than 18. Others don't see your birthday.</div>
+        <div id="birthday-warning" [ngClass]="{'error': errors.year}">You should be older than 18. Others don't see your birthday.</div>
         <div id="birthday-inputs">
           <select
             name="month"
-            [(ngModel)]="selectedMonth"
-            (change)="setMonth(selectedMonth)">
+            [(ngModel)]="user.month"
+            (change)="setMonth(user.month)">
             <option *ngFor="let option of monthOptions"
               value="{{ option }}">
               {{ option }}
@@ -82,7 +85,10 @@
             </option>
           </select>
 
-          <select name="year" [(ngModel)]="selectedYear" (change)="setYear(selectedYear)">
+          <select
+            name="year"
+            [(ngModel)]="user.year"
+            (change)="setYear(user.year)">
             <option *ngFor="let option of yearOptions"
               value="{{ option }}">
               {{ option }}
@@ -92,6 +98,8 @@
       </div>
 
       <div class="input-row">
+        <div class="error" *ngIf="errors.height">{{ errors.height }}</div>
+        <div class="error" *ngIf="errors.weight">{{ errors.weight }}</div>
         <div class="error" *ngIf="heightInput.errors && heightInput.errors.required && heightInput.touched">Height field cannot be empty</div>
         <div class="error" *ngIf="heightInput.errors && heightInput.errors.minlength && heightInput.touched">Height should contain at least 2 characters</div>
         <div class="error" *ngIf="weightInput.errors && weightInput.errors.required && weightInput.touched">Weight field cannot be empty</div>
@@ -122,7 +130,7 @@
       </div>
 
       <div id="password-input" class="input-row">
-        <div for="password">Create a password:</div>
+        <div>Create a password:</div>
         <div class="error" *ngIf="passwordInput.errors && passwordInput.errors.required && passwordInput.touched">Password cannot be empty</div>
         <div class="error" *ngIf="passwordInput.errors && passwordInput.errors.minlength && passwordInput.touched">Password should contain at least 6 characters</div>
         <input
@@ -139,8 +147,8 @@
         <div>By pressing "Register" I accept the following terms: Terms of Service, Payment Service Conditions, Confidentiality Policy</div>
         <button md-icon-button
           type="submit"
-          (click)="methodOnSubmit(form)">
-          {{ buttonName }}
+          (click)="register(form)">
+          Register
         </button>
       </div>
 

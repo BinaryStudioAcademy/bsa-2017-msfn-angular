@@ -80,5 +80,22 @@ export class RegistrationService {
     return yearsOutput;
   }
 
+  checkInputs(year, height, weight) {
+    const errors = {
+      year: false,
+      height: '',
+      weight: ''
+    };
+
+    const date = new Date();
+    const currentYear = date.getFullYear();
+
+    errors.year = currentYear - year < 18;
+    errors.height = height > 270 ? 'Height should be less than 270cm' : '';
+    errors.weight = weight > 500 ? 'Weight should be less than 500kg' : '';
+
+    return errors;
+  }
+
   constructor() { }
 }
