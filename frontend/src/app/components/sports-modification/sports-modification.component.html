@@ -1,0 +1,46 @@
+<!--Wrapper container-->
+<div class="wrapper">
+  <!--Wrapper container-->
+  <div class="sport-modification__container">
+ <section class="sport__modification"> 
+   <!--Wrapper container-->
+  <form class="sport-create__form" [formGroup]="regForm">
+        <div class="sport-create__block">
+          <div class="block-leveling-input">
+            <md-input-container class="input__container">
+              <input mdInput placeholder="Name of the sport" formControlName="name">
+            </md-input-container>
+            <md-input-container class="input__container">
+              <input mdInput placeholder="Kind of sport" formControlName="name">
+            </md-input-container>
+            <md-input-container class="input__container">
+              <input mdInput placeholder="Category of sport" formControlName="name">
+            </md-input-container>
+          </div>
+        </div>
+      <!--Wrapper container-->
+        <div class="Type-of_season">
+          <div class="title-of__season descr__type">Type of the season</div>
+            <div class="selection-of__season">
+                <md-radio-group>
+                  <md-radio-button value="1" class="type__season">Summer</md-radio-button>
+                  <md-radio-button value="2" class="type__season">Winter</md-radio-button>
+                  <md-radio-button value="3" class="type__season">General</md-radio-button>
+                </md-radio-group>
+            </div>
+        </div>
+        <!--Wrapper container-->
+        <div class="title-of__season descr__type">Type of the season</div>
+          <div class="block-text__descr">
+              <textarea class="textarea__descr"></textarea>
+          </div>
+             <button class='create-sport__button' md-raised-button [disabled]="!regForm.valid">Create sport</button>
+        </form>
+
+  </section>
+    </div>
+</div>
+
+
+
+

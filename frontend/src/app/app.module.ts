@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import 'hammerjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,12 +22,14 @@ import {
   MdDialogModule,
   MdSlideToggleModule
 } from '@angular/material';
+import { SportsModificationComponent } from './components/sports-modification/sports-modification.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    SportsModificationComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,9 @@ import {
     MdCheckboxModule,
     MdButtonModule,
     MdDialogModule,
-    MdSlideToggleModule
+    MdSlideToggleModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

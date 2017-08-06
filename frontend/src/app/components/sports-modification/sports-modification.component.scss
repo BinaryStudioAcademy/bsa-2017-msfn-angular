@@ -1,0 +1,115 @@
+@import "./../../../../src/globalStyles/variables";
+
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
+
+
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: $text-second-color;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: $text-second-color;
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: $text-second-color;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: $text-second-color;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    background-color: $bg-color;
+    font-family: $font-general;
+    justify-content: center;
+   
+}
+.sport__modification {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    border: 2px #2A2A2A solid;
+    background-image: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
+    margin: 100px 0 200px 0;
+    
+    
+}
+.descr__type{
+    margin-top: 30px;
+}
+.sport-create__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.sport-create__block {
+    display: flex;
+    justify-content: center;
+}
+
+.block-leveling-input{
+    max-width: 300px;
+}
+
+.input__container {
+    width: 100%;
+}
+
+.selection-of__season {
+    margin-top: 35px;
+}
+
+.checkbox__season {
+    padding: 20px;
+}
+
+.title-of__season {
+    position: relative;
+    &::after{
+       content: '';
+       height: 1px;
+       width: 150px;
+       left: 50%;
+       margin-left: -75px;
+       margin-top: 30px;
+       background: rgba(255, 255, 255, 0.12);
+       position: absolute; 
+    }
+}
+
+.type__season{
+    font-family: $font-general;
+    padding: 0 15px;
+}
+.block-text__descr {
+    margin: 30px 0;
+}
+.textarea__descr {
+    width: 90%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 0px;
+    font-family: $font-general;
+    color: $text-main-color;
+}
+ textarea {
+    height: 200px; 
+    resize: none;
+   } 
+.create-sport__button{
+    background: $btn-color;
+    font-family: $font-general;
+}
