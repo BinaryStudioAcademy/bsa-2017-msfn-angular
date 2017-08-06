@@ -8,26 +8,83 @@ const passport = require('passport'),
 module.exports = function () {
     passport.use(new GoogleStrategy(oauthConfig.googleOptions,
         function (accessToken, refreshToken, profile, done) {
-            console.log(profile.displayName);
-            console.log(profile.emails[0].value);
-            //userService.addItem()
-            return done(null, profile);
+            const userBody = {
+                firstName: profile.name.givenName,
+                lastName: profile.name.familyName,
+                email: profile.emails[0].value,
+            };
+            userService.addItem(userBody, (err, user) => {
+                if (err) {
+                    //якщо юзер вже зареєстрований, то просто логінимо його
+                    if (err.message.error === "User with such email already exists") {
+                        return done(null, true);
+                    }
+                    //інакше повертаємо помилку
+                    return done(err)
+                }
+                //якщо не зареєстований і додався в базу то теж логінимо його
+                return done(null, true);
+            });
         }
     ));
     passport.use(new FacebookStrategy(oauthConfig.facebookOptions,
         function (accessToken, refreshToken, profile, done) {
-            console.log(profile.displayName);
-            console.log(profile.emails[0].value);
-            //userService.addItem()
-            return done(null, profile);
+            const userBody = {
+                firstName: profile.name.givenName,
+                lastName: profile.name.familyName,
+                email: profile.emails[0].value,
+            };
+            userService.addItem(userBody, (err, user) => {
+                if (err) {
+                    //якщо юзер вже зареєстрований, то просто логінимо його
+                    if (err.message.error === "User with such email already exists") {
+                        return done(null, true);
+                    }
+                    //інакше повертаємо помилку
+                    return done(err)
+                }
+                //якщо не зареєстований і додався в базу то теж логінимо його
+                return done(null, true);
+            });
         }
     ));
     passport.use(new TwitterStrategy(oauthConfig.twitterOptions,
         function (token, tokenSecret, profile, done) {
-            console.log(profile.displayName);
-            console.log(profile.emails[0].value);
-            //userService.addItem()
-            return done(null, profile);
+            const userBody = {
+                firstName: profile.name.givenName,
+                lastName: profile.name.familyName,
+                email: profile.emails[0].value,
+            };
+            userService.addItem(userBody, (err, user) => {
+                if (err) {
+                    //якщо юзер вже зареєстрований, то просто логінимо його
+                    if (err.message.error === "User with such email already exists") {
+                        return done(null, true);
+                    }
+                    //інакше повертаємо помилку
+                    return done(err)
+                }
+                //якщо не зареєстований і додався в базу то теж логінимо його
+                return done(null, true);
+            });
         }
     ));
 };
+
+// function(username, password, done) {
+//     userRepository.getUserByEmail(username, function(err, user) {
+//         if (err) { return done(err); }
+//         if (!user) {
+//             return done(null, false, { message: 'Incorrect email' });
+//         }
+//         user.checkPassword(password, user.password, (err, result) => {
+//             if (err) { return done(err); }
+//             if (!result) {
+//                 return done(null, false, { message: 'Incorrect password' });
+//             } else {
+//                 return done(null, user);
+//             }
+//         })
+//
+//     });
+// }
