@@ -14,7 +14,7 @@
                 if (!user) {
                     return done(null, false, { message: 'Incorrect email' });
                 }
-                user.checkPassword(password, user.password, (err, result) => {
+                user.checkPassword(password, (err, result) => {
                     if (err) { return done(err); }
                     if (!result) {
                         return done(null, false, { message: 'Incorrect password' });
