@@ -57,7 +57,7 @@ export class RegistrationComponent implements OnInit {
       );
       this.inputsValid = true;
 
-      for (const i in this.errors) {
+      for (const i of Object.keys(this.errors)) {
         this.inputsValid = !this.errors[i];
         if (!this.inputsValid) {
           break;
@@ -69,7 +69,10 @@ export class RegistrationComponent implements OnInit {
         const user = this.user;
 
         const req = this.http.post('/api/user', user);
-        req.subscribe();
+        req.subscribe(
+          data => {},
+          err => this.userError = err.statusText
+        );
       }
     } else {
       this.userError = 'Please fill in all fields correctly';
