@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 import { Headers, Http } from '@angular/http';
+import { IHttpReq } from '../models/http-req';
 // import { FormsModule } from '@angular/forms';
 // import { Observable } from 'rxjs/Observable';
 // import 'rxjs/add/observable/throw';
@@ -12,25 +13,23 @@ export class HttpService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   public failMessage = 'Fail';
 
-  constructor(private _http: Http, public snackBar: MdSnackBar) { }
+  constructor(private _http: Http, private snackBar: MdSnackBar) { }
 
   private handleError = (error: any): Promise<any> => {
-    // console.error('An error occurred', error);
     this.openSnackBar(this.failMessage);
-    return Promise.reject(error.message || error);
+    return (error.message || error);
   }
 
-  public sendReq(options): Promise<any>  {
+  public sendRequest(options: IHttpReq): Promise<any> {
     let url: string;
     if (!options.url) {
       return Promise.reject('Url required');
     } else {
       url = options.url;
     }
-    const method: 'GET' | 'POST' | 'PUT' | 'DELETE' = options.method || 'GET';
+    const method = options.method || 'GET';
     const body = options.body || {};
     const successMessage: string = options.successMessage || 'Success';
-    // const failMessage = options.failMessage || this.failMessage;
     this.failMessage = options.failMessage || this.failMessage;
     const headers = options.headers || this.headers;
 
@@ -44,11 +43,11 @@ export class HttpService {
         .catch(this.handleError);
     } else if (method === 'POST') {
       return this._http
-        .post(url, body, { headers: this.headers })
+        .post(url, body, { headers: headers })
         .toPromise()
         .then(response => {
           this.openSnackBar(successMessage);
-          return response.json().data;
+          return response.json();
         })
         .catch(this.handleError);
     } else if (method === 'PUT') {

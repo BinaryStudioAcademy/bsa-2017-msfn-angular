@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
 import { LoginComponent } from './components/login/login.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { TestHttpComponent } from './components/test-http/test-http.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -26,7 +27,8 @@ import {
   declarations: [
     AppComponent,
     LoginComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    TestHttpComponent
   ],
   imports: [
     BrowserModule,
