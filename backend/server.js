@@ -51,7 +51,6 @@ passport.deserializeUser(function (user, done) {
 
 const passportOAuthInit = require('./middleware/passportOAuthMiddleware')();
 
-const oAuthRoutes = require('./routes/oAuth/routes')(app);
 const apiRoutes = require('./routes/api/routes')(app);
 const viewRoutes = require('./routes/view/routes')(app);
 
