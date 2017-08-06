@@ -34,11 +34,7 @@ User.methods.checkPassword = function(password, callback){
     this.encryptPassword(password, (err, hash) => {
         if (err) return callback(err);
 
-        if (hash === password){
-            callback(null, true);
-        } else {
-            callback(null, false);
-        }
+        callback(null, hash === this.password);
     });
 };
 
