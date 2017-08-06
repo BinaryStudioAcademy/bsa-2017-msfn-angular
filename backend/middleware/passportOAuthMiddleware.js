@@ -70,21 +70,3 @@ module.exports = function () {
         }
     ));
 };
-
-// function(username, password, done) {
-//     userRepository.getUserByEmail(username, function(err, user) {
-//         if (err) { return done(err); }
-//         if (!user) {
-//             return done(null, false, { message: 'Incorrect email' });
-//         }
-//         user.checkPassword(password, user.password, (err, result) => {
-//             if (err) { return done(err); }
-//             if (!result) {
-//                 return done(null, false, { message: 'Incorrect password' });
-//             } else {
-//                 return done(null, user);
-//             }
-//         })
-//
-//     });
-// }
