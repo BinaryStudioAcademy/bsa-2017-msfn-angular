@@ -15,7 +15,9 @@ export class SportsModificationComponent implements OnInit {
   }
   buildForm() {
     this.regForm = this.fb.group({
-      'name': [null, Validators.required]
+      'name': [null, Validators.required],
+      'name2': [null, Validators.required],
+      'name3': [null, Validators.required]
 
     });
   }
