@@ -74,7 +74,7 @@ export class RegistrationComponent implements OnInit {
 
       // make a post request
     } else {
-      this.userError = 'Please fill in all fields';
+      this.userError = 'Please fill in all fields correctly';
     }
   }
 

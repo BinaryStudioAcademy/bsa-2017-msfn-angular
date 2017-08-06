@@ -31,10 +31,11 @@ svg {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 370px;
+  position: relative;
+  width: 90%;
   height: 80%;
   margin: 25px;
-  padding: 60px 45px 30px;
+  padding: 20px;
   background: $gradient-from-color;
   background: -webkit-linear-gradient($gradient-to-color, $gradient-from-color);
   background: -o-linear-gradient($gradient-to-color, $gradient-from-color);
@@ -45,25 +46,25 @@ svg {
 
 #exit-icon {
   position: absolute;
-  right: 45px;
+  right: 20px;
   top: 20px;
-  width: 16px;
-  height: 16px;
+  width: 25px;
+  height: 25px;
   font-size: 0;
 
   div {
-    width: 16px;
+    width: 25px;
     height: 2px;
     border-radius: 2px;
     background-color: $text-main-color;
   }
 
   div:first-child {
-    transform: translateY(8px) rotate(-45deg);
+    transform: translateY(10px) rotate(-45deg);
   }
 
   div:last-child {
-    transform: translateY(6px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
   }
 }
 
@@ -72,6 +73,7 @@ svg {
 }
 
 #social-registration {
+  text-align: left;
   font-size: 14px;
 }
 
@@ -88,6 +90,10 @@ form {
   margin-bottom: 20px;
 }
 
+#gender {
+  margin-bottom: 10px;
+}
+
 md-slide-toggle {
   margin: 0 7px 0 15px;
 }
@@ -97,14 +103,15 @@ md-slide-toggle {
   width: 100%;
   margin: 0;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 600;
   color: $error-color;
 }
 
 input {
   width: calc(100% - 20px);
   height: 36px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   padding: 0 10px;
   border: none;
   border-bottom: 1px solid $text-second-color;
@@ -123,19 +130,20 @@ input::placeholder {
   }
 
   #birthday-warning {
-    margin: 5px 0 25px;
-    font-size: 10px;
+    margin: 5px 0 10px;
+    font-size: 12px;
   }
 
   #birthday-inputs {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
 
   select {
-    width: 30%;
+    width: 45%;
     height: 36px;
     padding: 0 10px;
     border: none;
@@ -153,7 +161,7 @@ input::placeholder {
 }
 
 #height, #weight {
-  width: 42%;
+  width: 35%;
 }
 
 #height {
@@ -185,7 +193,7 @@ input::placeholder {
   }
 
   button {
-    width: 370px;
+    width: 90%;
     height: 45px;
     border: none;
     border-radius: 45px;
@@ -202,4 +210,90 @@ input::placeholder {
 
 #login {
   flex-basis: 5%;
+}
+
+
+@media only screen and (min-width: $small-screen) {
+
+  #form {
+    padding: 30px;
+  }
+
+  #exit-icon {
+    right: 30px;
+    width: 20px;
+    height: 20px;
+
+    div {
+      width: 20px;
+    }
+
+    div:first-child {
+      transform: translateY(8px) rotate(-45deg);
+    }
+
+    div:last-child {
+      transform: translateY(6px) rotate(45deg);
+    }
+  }
+
+  #social-registration {
+    text-align: center;
+  }
+
+  .error {
+    font-size: 12px;
+  }
+
+  #birthday {
+    #birthday-inputs {
+      flex-wrap: nowrap;
+    }
+
+    select {
+      width: 30%;
+    }
+  }
+
+  #height, #weight {
+    width: 40%;
+  }
+}
+
+
+@media only screen and (min-width: $medium-screen) {
+
+  #form {
+    width: 370px;
+    height: 80%;
+    padding: 60px 45px 30px;
+  }
+
+  input {
+    margin-bottom: 25px;
+  }
+
+  #birthday {
+    #birthday-warning {
+      margin: 5px 0 25px;
+      font-size: 10px;
+    }
+
+    #birthday-inputs {
+      margin-bottom: 25px;
+    }
+  }
+
+  #password-input {
+    div:first-child {
+      margin-bottom: 5px;
+      font-size: 10px;
+    }
+  }
+
+  #submit-button {
+    button {
+      width: 370px;
+    }
+  }
 }
