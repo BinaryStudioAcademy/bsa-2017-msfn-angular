@@ -15,9 +15,15 @@ export class HttpService {
 
   constructor(private _http: Http, private snackBar: MdSnackBar) { }
 
+  private openSnackBar(message: string, action = 'Close') {
+    this.snackBar.open(message, action, {
+      duration: 4000,
+    });
+  }
+
   private handleError = (error: any): Promise<any> => {
     this.openSnackBar(this.failMessage);
-    return (error.message || error);
+    return error;
   }
 
   public sendRequest(options: IHttpReq): Promise<any> {
@@ -69,52 +75,4 @@ export class HttpService {
         .catch(this.handleError);
     }
   }
-
-  private openSnackBar(message: string, action = 'Close') {
-    this.snackBar.open(message, action, {
-      duration: 4000,
-    });
-  }
-
 }
-
-
-  // sendRequest(options, callback) {
-  //   let url: string;
-  //   if (options.url) {
-  //     url = options.url;
-  //   } else {
-  //     callback('Error url');
-  //     return;
-  //   }
-  //   const method: string = options.method || 'GET';
-  //   const body = options.body || {};
-  //   const successMessage: string = options.successMessage || 'Success';
-  //   const failMessage: string = options.failMessage || 'Fail';
-  //   const xmlHttp = new XMLHttpRequest();
-
-  //   xmlHttp.open(method, url, true);
-  //   xmlHttp.setRequestHeader('Content-Type', 'application/json');
-  //   xmlHttp.send(JSON.stringify(body));
-
-  //   xmlHttp.onreadystatechange = () => {
-  //     if (xmlHttp.readyState === 4) {
-  //       if (xmlHttp.status === 200) {
-  //         this.openSnackBar(successMessage);
-  //         callback(xmlHttp.responseText);
-  //       } else if (xmlHttp.status >= 500) {
-  //         this.openSnackBar(failMessage);
-  //         callback(xmlHttp.responseText);
-  //       } else if (xmlHttp.status === 404) {
-  //         this.openSnackBar(failMessage);
-  //         callback(xmlHttp.responseText);
-  //       } else if (xmlHttp.status >= 403) {
-  //         this.openSnackBar(failMessage);
-  //         callback(xmlHttp.responseText);
-  //       } else if (xmlHttp.status >= 400) {
-  //         this.openSnackBar(failMessage);
-  //         callback(xmlHttp.responseText);
-  //       }
-  //     }
-  //   };
-  // }
