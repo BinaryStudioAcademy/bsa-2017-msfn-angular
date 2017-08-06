@@ -36,6 +36,7 @@
     justify-content: center;
    
 }
+
 .sport__modification {
     display: flex;
     flex-direction: column;
@@ -95,9 +96,11 @@
     font-family: $font-general;
     padding: 0 15px;
 }
+
 .block-text__descr {
     margin: 30px 0;
 }
+
 .textarea__descr {
     width: 90%;
     background: rgba(255, 255, 255, 0.12);
@@ -105,6 +108,7 @@
     font-family: $font-general;
     color: $text-main-color;
 }
+
  textarea {
     height: 200px; 
     resize: none;
@@ -112,4 +116,11 @@
 .create-sport__button{
     background: $btn-color;
     font-family: $font-general;
+}
+
+@media only screen and (max-width: $small-screen)  {
+   .sport__modification{
+       width: 200px;
+       padding: 10px;
+   }
 }

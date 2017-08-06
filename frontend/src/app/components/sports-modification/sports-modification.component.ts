@@ -18,8 +18,7 @@ export class SportsModificationComponent implements OnInit {
       'name': [null, Validators.required],
       'name2': [null, Validators.required],
       'name3': [null, Validators.required]
-
-    });
+  });
   }
 
 }
