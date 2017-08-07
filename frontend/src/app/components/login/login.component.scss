@@ -1,6 +1,7 @@
 @import "./../../../globalStyles/variables";
 @import "./../../../globalStyles/materialTheme";
 @import "./../../../globalStyles/indentations";
+@import '../../../globalStyles/text.scss';
 
 @mixin linear-gradient($direction, $color-stops...) {
     background: nth(nth($color-stops, 1), 1);
