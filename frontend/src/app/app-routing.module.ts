@@ -7,13 +7,15 @@ import {HeaderViewComponent} from './components/header-view/header-view.componen
 import {RegistrationComponent} from './components/registration/registration.component';
 import {LoginComponent} from './components/login/login.component';
 import { IsLoggedGuard } from './guards/is-logged.guard';
+import {ForgotPasswordMailComponent} from './components/forgot-password-mail/forgot-password-mail.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     redirectTo: 'register'
-  }, {
+  },
+  {
     path: 'login',
     children: [],
     component: LoginComponent
@@ -27,14 +29,21 @@ const routes: Routes = [
     children: [],
     component: ForgetPasswordComponent
 
-  }, {
+  },
+  {
     path: 'test-http', // for testing, can be removed
     children: [],
     component: TestHttpComponent
-  }, {
+  },
+  {
     path: 'header', // for testing
     component: HeaderViewComponent
-  }, {
+  },
+  {
+    path: 'forgot-password-mail',
+    component: ForgotPasswordMailComponent
+  },
+  {
     path: 'restore-password', // for testing restorePasswordComponent, can be removed
     children: [],
     component: RestorePasswordComponent

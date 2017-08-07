@@ -93,6 +93,7 @@ export class RegistrationComponent implements OnInit {
       if (!this.yearError) {
         this.userError = '';
         const user = this.user;
+        console.log(user);
 
         const req = this.http.post('/api/user', user);
         req.subscribe(

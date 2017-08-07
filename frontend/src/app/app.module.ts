@@ -13,6 +13,7 @@ import {LoginComponent} from './components/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RestorePasswordComponent} from './components/restore-password/restore-password.component';
 import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
+import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import {TestHttpComponent} from './components/test-http/test-http.component';
 import { WindowObj } from './services/window.service';
 
@@ -40,7 +41,8 @@ import 'hammerjs';
     ForgetPasswordComponent,
     TestHttpComponent,
     HeaderViewComponent,
-    RestorePasswordComponent
+    RestorePasswordComponent,
+    ForgotPasswordMailComponent
   ],
   imports: [
     BrowserModule,
