@@ -1,18 +1,18 @@
-const 
+const
     apiResponse = require('express-api-response'),
     userService = require('../../services/userService'),
     userRepository = require('../../repositories/userRepository'),    
-    baseUrl = '/user/';
+    baseUrl = '/api/user/';
 
 module.exports = function (app) {
 
-    app.get(baseUrl+'me', function (req, res, next) {    
+    app.get(baseUrl+'me', function (req, res, next) {
         res.data = req.session.user;
         next();
     }, apiResponse);
 
-    app.get(baseUrl, function (req, res, next) {    
-        userRepository.getAll(function (err, data) {            
+    app.get(baseUrl, function (req, res, next) {
+        userRepository.getAll(function (err, data) {
             res.data = data;
             res.err = err;
             next();
