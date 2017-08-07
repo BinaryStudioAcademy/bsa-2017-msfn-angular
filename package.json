@@ -46,6 +46,7 @@
     "express-api-response": "^0.4.0",
     "express-session": "^1.15.5",
     "mongoose": "^4.11.5",
+    "mongoose-ttl": "0.0.3",
     "nodemailer": "^4.0.1",
     "replacestream": "^4.0.2",
     "rxjs": "^5.4.1",
