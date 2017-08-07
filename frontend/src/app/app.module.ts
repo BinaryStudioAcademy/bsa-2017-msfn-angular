@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import {
   MdSnackBarModule,
   MdChipsModule,
@@ -27,7 +29,9 @@ import 'hammerjs';
   declarations: [
     AppComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    ForgetPasswordComponent,
+    RestorePasswordComponent
   ],
   imports: [
     BrowserModule,
