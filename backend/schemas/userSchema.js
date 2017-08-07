@@ -9,7 +9,10 @@ const User = new Schema({
     password: String,
     isCoach: String,
     position: String,
-    salt: String
+    salt: String,
+    google: Object,
+    facebook: Object,
+    twitter: Object,
 });
 
 User.pre('save', function(next) {
