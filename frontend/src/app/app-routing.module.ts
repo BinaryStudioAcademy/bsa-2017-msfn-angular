@@ -1,4 +1,5 @@
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { LoginComponent } from './components/login/login.component';
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -26,6 +27,10 @@ const routes: Routes = [
     path: 'forget-password', // for testing forgetPasswordComponent, can be removed
     children: [],
     component: ForgetPasswordComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'restore-password', // for testing restorePasswordComponent, can be removed
