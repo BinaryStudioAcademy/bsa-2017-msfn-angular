@@ -35,4 +35,7 @@ export class ProfileComponent implements OnInit {
   onClick() {
 
   }
+  onUpload() {
+
+  }
 }
