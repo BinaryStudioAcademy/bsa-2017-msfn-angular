@@ -41,7 +41,8 @@ import { RestorePasswordComponent } from './components/restore-password/restore-
     MdCheckboxModule,
     MdButtonModule,
     MdDialogModule,
-    MdSlideToggleModule
+    MdSlideToggleModule,
+    FormsModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
