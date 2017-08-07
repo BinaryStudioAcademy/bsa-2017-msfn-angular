@@ -44,18 +44,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-////// For working app. Must be deleted after merge with msfn-5
-app.use(passport.initialize());
-app.use(passport.session());
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (user, done) {
-    done(null, user);
-});
-//////
-
 const passportOAuthInit = require('./middleware/passportOAuthMiddleware')();
 
 const apiRoutes = require('./routes/api/routes')(app);

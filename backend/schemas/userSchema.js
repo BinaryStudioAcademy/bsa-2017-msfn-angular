@@ -17,8 +17,12 @@ const User = new Schema({
     isCoach: String,
     position: String,
     salt: {
-      type: String,
-    }
+        type: String,
+    },
+    googleID: String,
+    facebookID: String,
+    twitterID: String
+
 });
 
 User.pre('save', function(next) {
