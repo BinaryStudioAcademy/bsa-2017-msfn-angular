@@ -21,5 +21,9 @@ function findById(id, callback) {
     query.exec(callback);
 }
 
+function getUserByQuery(query, callback) {
+  const innerQuery = this.model.findOne(query);
+  innerQuery.exec(callback);
+}
 
 module.exports = new UserRepository();
