@@ -7,7 +7,10 @@ const bodyParser = require('body-parser'),
     MongoStore = require('connect-mongo')(session),
     sessionSecret = require('./config/session').secret,
     mongoose = require('mongoose'),
+    passport = require('passport'),
+    isLogged = require('./middleware/passportStrategyMiddleware').isLogged,
     cookieParser = require('cookie-parser'),
+    passport = require('passport'),
     port = 3060;
 
 const app = express();
@@ -25,16 +28,36 @@ context.mongoStore = new MongoStore({
     mongooseConnection: mongooseConnection
 });
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+//middleware for checking authorized user (if auth { next() } else { redirect to '/'})
+app.use('/profile/*', isLogged);
+
 const staticPath = path.resolve(__dirname + '/../dist');
 app.use(express.static(staticPath));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(function (req, res, next) {
     // console.log(req.session.user);
     next();
 });
+
+////// For working app. Must be deleted after merge with msfn-5
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+    done(null, user);
+});
+//////
+
+const passportOAuthInit = require('./middleware/passportOAuthMiddleware')();
 
 const apiRoutes = require('./routes/api/routes')(app);
 const viewRoutes = require('./routes/view/routes')(app);
