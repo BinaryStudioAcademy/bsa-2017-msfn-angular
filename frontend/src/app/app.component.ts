@@ -1,3 +1,5 @@
+/// <reference path="../../../typings/webapi.d.ts" />
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 
@@ -8,5 +10,5 @@ import { ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  title = 'app';
+  constructor() {  }
 }
