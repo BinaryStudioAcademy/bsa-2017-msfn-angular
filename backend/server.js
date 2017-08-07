@@ -10,7 +10,6 @@ const bodyParser = require('body-parser'),
     passport = require('passport'),
     isLogged = require('./middleware/passportStrategyMiddleware').isLogged,
     cookieParser = require('cookie-parser'),
-    passport = require('passport'),
     port = 3060;
 
 const app = express();
@@ -44,18 +43,6 @@ app.use(function (req, res, next) {
     // console.log(req.session.user);
     next();
 });
-
-////// For working app. Must be deleted after merge with msfn-5
-app.use(passport.initialize());
-app.use(passport.session());
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (user, done) {
-    done(null, user);
-});
-//////
 
 const passportOAuthInit = require('./middleware/passportOAuthMiddleware')();
 

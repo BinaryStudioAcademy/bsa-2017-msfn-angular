@@ -9,7 +9,10 @@ const User = new Schema({
     password: String,
     isCoach: String,
     position: String,
-    salt: String
+    salt: String,
+    googleID: String,
+    facebookID: String,
+    twitterID: String
 });
 
 User.pre('save', function(next) {
@@ -29,7 +32,7 @@ User.pre('save', function(next) {
     });
 });
 
-User.methods.checkPassword = function(password, callback){
+User.methods.checkPassword = function(password, callback) {
     "use strict";
     this.encryptPassword(password, (err, hash) => {
         if (err) return callback(err);
@@ -37,7 +40,7 @@ User.methods.checkPassword = function(password, callback){
     });
 };
 
-User.methods.encryptPassword = function(password, callback){
+User.methods.encryptPassword = function(password, callback) {
     "use strict";
     bcrypt.hash(password, this.salt, null, (err, hash) => {
         callback(err, hash);

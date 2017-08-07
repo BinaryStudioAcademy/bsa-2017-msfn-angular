@@ -3,53 +3,102 @@ const passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy,
     TwitterStrategy = require('passport-twitter').Strategy,
     oauthConfig = require('../config/oauth'),
-    userService = require('../services/userService');
+    userService = require('../services/userService'),
+    userRepository = require('../repositories/userRepository');
 
 module.exports = function () {
     passport.use(new GoogleStrategy(oauthConfig.googleOptions,
-        function (accessToken, refreshToken, profile, done) {
-            const userBody = {
-                firstName: profile.name.givenName,
-                lastName: profile.name.familyName,
-                email: profile.emails[0].value,
+        (req, accessToken, refreshToken, profile, done) => {
+            const queryWithID = {
+                "googleID": profile.id
             };
-            userService.addItem(userBody, (err, user) => {
-                if (err) {
-                    //якщо юзер вже зареєстрований, то просто логінимо його
-                    if (err.message.error === "User with such email already exists") {
-                        return done(null, true);
+            if (!req.user) {
+                // Not logged-in. Authenticate based on Google account.
+                console.log('Not logged-in');
+                userRepository.getUserByQuery(queryWithID, (err, user) => {
+                    if (err) {
+                        return done(err);
                     }
-                    //інакше повертаємо помилку
-                    return done(err)
-                }
-                //якщо не зареєстований і додався в базу то теж логінимо його
-                return done(null, true);
-            });
+                    if (user) {
+                        //If user register already, just login
+                        done(null, user)
+                    } else {
+                        //else register with google account
+                        const userBody = {
+                            firstName: profile.name.givenName,
+                            lastName: profile.name.familyName,
+                            email: profile.emails[0].value,
+                            googleID: profile.id
+                        };
+                        userService.addItem(userBody, (err, user) => {
+                            if (err) {
+                                return done(err);
+                            }
+                            //and login
+                            return done(null, user)
+                        })
+                    }
+                });
+            } else {
+                //Logged in. Associate google account with user
+                console.log('Loggen in');
+                console.log(req.user);
+                userService.updateItem(req.user._id, queryWithID, (err, cb) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    return done(null, req.user)
+                })
+            }
         }
     ));
     passport.use(new FacebookStrategy(oauthConfig.facebookOptions,
-        function (accessToken, refreshToken, profile, done) {
-            const userBody = {
-                firstName: profile.name.givenName,
-                lastName: profile.name.familyName,
-                email: profile.emails[0].value,
+        (req, accessToken, refreshToken, profile, done) => {
+            const queryWithID = {
+                "facebookID": profile.id
             };
-            userService.addItem(userBody, (err, user) => {
-                if (err) {
-                    //якщо юзер вже зареєстрований, то просто логінимо його
-                    if (err.message.error === "User with such email already exists") {
-                        return done(null, true);
+            if (!req.user) {
+                // Not logged-in. Authenticate based on Google account.
+                console.log('Not logged-in');
+                userRepository.getUserByQuery(queryWithID, (err, user) => {
+                    if (err) {
+                        return done(err);
                     }
-                    //інакше повертаємо помилку
-                    return done(err)
-                }
-                //якщо не зареєстований і додався в базу то теж логінимо його
-                return done(null, true);
-            });
+                    if (user) {
+                        //If user register already, just login
+                        done(null, user)
+                    } else {
+                        //else register with google account
+                        const userBody = {
+                            firstName: profile.name.givenName,
+                            lastName: profile.name.familyName,
+                            email: profile.emails[0].value,
+                            googleID: profile.id
+                        };
+                        userService.addItem(userBody, (err, user) => {
+                            if (err) {
+                                return done(err);
+                            }
+                            //and login
+                            return done(null, user)
+                        })
+                    }
+                });
+            } else {
+                //Logged in. Associate google account with user
+                console.log('Loggen in');
+                console.log(req.user);
+                userService.updateItem(req.user._id, queryWithID, (err, cb) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    return done(null, req.user)
+                })
+            }
         }
     ));
     passport.use(new TwitterStrategy(oauthConfig.twitterOptions,
-        function (token, tokenSecret, profile, done) {
+        (req, token, tokenSecret, profile, done) => {
             const userBody = {
                 firstName: profile.name.givenName,
                 lastName: profile.name.familyName,
