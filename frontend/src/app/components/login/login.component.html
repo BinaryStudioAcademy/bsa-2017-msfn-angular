@@ -21,7 +21,7 @@
       </md-error>
     </md-input-container>
 
-    <button class="login-button" (click)="login()">Sign in</button>
+    <button class="login-button" [disabled]="!passwordFormControl.valid && !emailFormControl.valid" (click)="login()">Sign in</button>
     <div class="login-links">Sign in with
       <a href="">Facebook</a> or
       <a href="">Google</a>
