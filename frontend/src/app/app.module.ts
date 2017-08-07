@@ -15,6 +15,7 @@ import {ForgetPasswordComponent} from './components/forget-password/forget-passw
 import {TestHttpComponent} from './components/test-http/test-http.component';
 import {OAuthComponent} from './components/login/o-auth/o-auth.component';
 import { ForAdminGuard } from './guards/for-admin.guard';
+import { WindowObj } from './services/window.service';
 
 import {
   MdSnackBarModule,
@@ -62,7 +63,7 @@ import 'hammerjs';
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [HttpService, ForAdminGuard],
+  providers: [HttpService, WindowObj, ForAdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
