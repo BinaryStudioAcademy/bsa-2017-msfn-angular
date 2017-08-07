@@ -6,7 +6,7 @@ import {TestHttpComponent} from './components/test-http/test-http.component';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import {RegistrationComponent} from './components/registration/registration.component';
 import {LoginComponent} from './components/login/login.component';
-// import { ForLoggedInGuard } from './guards/for-logged-in.guard';
+import { IsLoggedGuard } from './guards/is-logged.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent,
-    // canActivate: [ForLoggedInGuard]
+    canActivate: [IsLoggedGuard]
   }, {
     path: 'forget-password', // for testing forgetPasswordComponent, can be removed
     children: [],

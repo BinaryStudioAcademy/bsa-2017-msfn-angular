@@ -1,3 +1,4 @@
+import { IsLoggedGuard } from './guards/is-logged.guard';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
@@ -14,6 +15,7 @@ import {RestorePasswordComponent} from './components/restore-password/restore-pa
 import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
 import {TestHttpComponent} from './components/test-http/test-http.component';
 import {OAuthComponent} from './components/login/o-auth/o-auth.component';
+import { WindowObj } from './services/window.service';
 
 import {
   MdSnackBarModule,
@@ -60,10 +62,10 @@ import 'hammerjs';
     MdDialogModule,
     MdSlideToggleModule,
     FormsModule,
-    HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
-  providers: [HttpService],
+  providers: [HttpService, WindowObj, IsLoggedGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
