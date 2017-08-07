@@ -29,6 +29,7 @@ import {
 } from '@angular/material';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import 'hammerjs';
+import { IndexPageComponent } from './components/index-page/index-page.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import 'hammerjs';
     TestHttpComponent,
     HeaderViewComponent,
     RestorePasswordComponent,
-    OAuthComponent
+    OAuthComponent,
+    IndexPageComponent
   ],
   imports: [
     BrowserModule,
