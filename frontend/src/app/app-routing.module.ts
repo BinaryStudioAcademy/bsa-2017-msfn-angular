@@ -3,6 +3,7 @@ import { RestorePasswordComponent } from './components/restore-password/restore-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RegistrationComponent } from './components/registration/registration.component';
+import {LoginComponent} from './components/login/login.component';
 // import { ForLoggedInGuard } from './guards/for-logged-in.guard';
 
 const routes: Routes = [
@@ -12,7 +13,12 @@ const routes: Routes = [
     redirectTo: 'register'
   },
   {
-     path: 'register',
+    path: 'login',
+    children: [],
+    component: LoginComponent
+}
+  {
+    path: 'register',
     component: RegistrationComponent,
     // canActivate: [ForLoggedInGuard]
   },

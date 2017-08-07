@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import {OAuthComponent} from './components/login/o-auth/o-auth.component';
+
 import {
   MdSnackBarModule,
   MdChipsModule,
@@ -31,7 +33,8 @@ import 'hammerjs';
     RegistrationComponent,
     LoginComponent,
     ForgetPasswordComponent,
-    RestorePasswordComponent
+    RestorePasswordComponent,
+    OAuthComponent
   ],
   imports: [
     BrowserModule,
@@ -53,4 +56,5 @@ import 'hammerjs';
   providers: [HttpService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
