@@ -37,7 +37,7 @@ import 'hammerjs';
     LoginComponent,
     ForgetPasswordComponent,
     TestHttpComponent,
-    HeaderViewComponent
+    HeaderViewComponent,
     RestorePasswordComponent,
     OAuthComponent
   ],
@@ -58,7 +58,7 @@ import 'hammerjs';
     MdDialogModule,
     MdSlideToggleModule,
     FormsModule,
-    HttpModule
+    HttpModule,
     ReactiveFormsModule
   ],
   providers: [HttpService],
