@@ -149,6 +149,72 @@ module.exports = function () {
             }
         }
         ));
+  
+     passport.use(new GoogleStrategy(oauthConfig.googleOptions,
+        function (accessToken, refreshToken, profile, done) {
+            const userBody = {
+                firstName: profile.name.givenName,
+                lastName: profile.name.familyName,
+                email: profile.emails[0].value,
+            };
+            userService.addItem(userBody, (err, user) => {
+                if (err) {
+                    //якщо юзер вже зареєстрований, то просто логінимо його
+                    if (err.message.error === "User with such email already exists") {
+                        return done(null, true);
+                    }
+                    //інакше повертаємо помилку
+                    return done(err)
+                }
+                //якщо не зареєстований і додався в базу то теж логінимо його
+                return done(null, true);
+            });
+        }
+    ));
+    passport.use(new FacebookStrategy(oauthConfig.facebookOptions,
+        function (accessToken, refreshToken, profile, done) {
+            const userBody = {
+                firstName: profile.name.givenName,
+                lastName: profile.name.familyName,
+                email: profile.emails[0].value,
+            };
+            userService.addItem(userBody, (err, user) => {
+                if (err) {
+                    //якщо юзер вже зареєстрований, то просто логінимо його
+                    if (err.message.error === "User with such email already exists") {
+                        return done(null, true);
+                    }
+                    //інакше повертаємо помилку
+                    return done(err)
+                }
+                //якщо не зареєстований і додався в базу то теж логінимо його
+                return done(null, true);
+            });
+        }
+    ));
+  
+    passport.use(new TwitterStrategy(oauthConfig.twitterOptions,
+          function (token, tokenSecret, profile, done) {
+              const userBody = {
+                  firstName: profile.name.givenName,
+                  lastName: profile.name.familyName,
+                  email: profile.emails[0].value,
+              };
+              userService.addItem(userBody, (err, user) => {
+                  if (err) {
+                      //якщо юзер вже зареєстрований, то просто логінимо його
+                      if (err.message.error === "User with such email already exists") {
+                          return done(null, true);
+                      }
+                      //інакше повертаємо помилку
+                      return done(err)
+                  }
+                  //якщо не зареєстований і додався в базу то теж логінимо його
+                  return done(null, true);
+              });
+          }
+     ));
+  
     passport.use(new TwitterStrategy(oauthConfig.twitterOptions,
         (req, token, tokenSecret, profile, done) => {
             if (req.user) {
@@ -200,7 +266,7 @@ module.exports = function () {
                             done(null, user)
                         } else {
                             user = {};
-                            user.twitter.id = profile.id;
+                            user.twitter.id = profile.id;userService
                             user.twitter.username = profile.username;
                             user.twitter.displayName = profile.displayName;
                             userService.addItem(user, (error) => {
@@ -213,6 +279,6 @@ module.exports = function () {
                     });
                 });
             }
-        }
-    ));
-};
+        });
+
+    userService = require('../services/userService');

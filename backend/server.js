@@ -10,6 +10,7 @@ const bodyParser = require('body-parser'),
     passport = require('passport'),
     isLogged = require('./middleware/passportStrategyMiddleware').isLogged,
     cookieParser = require('cookie-parser'),
+    passport = require('passport'),
     port = 3060;
 
 const app = express();
