@@ -5,7 +5,7 @@
       <div></div>
     </div>
     <div id="social-registration">Register via
-      <a href="">Facebook</a> or <a href="">Google</a>
+      <a href="/auth/facebook">Facebook</a> or <a href="/auth/google">Google</a>
     </div>
 
     <form #form="ngForm">
@@ -20,6 +20,18 @@
         <md-slide-toggle required (change)="setGender($event)"></md-slide-toggle>
         Female
       </div>
+
+
+      <md-input-container class="input-row">
+        <input mdInput type="email" placeholder="Email" [(ngModel)]="user.email" [errorStateMatcher]="myErrorStateMatcher">
+        <md-error>This field is required</md-error>
+      </md-input-container>
+
+      <md-input-container>
+        <input mdInput [(ngModel)]="user.email" required [errorStateMatcher]="myErrorStateMatcher">
+        <md-error>This field is required</md-error>
+      </md-input-container>
+
 
       <div class="input-row">
         <div class="error" *ngIf="emailError">{{ emailError }}</div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegistrationService } from './registration.service';
 import { HttpClient } from '@angular/common/http';
+import { MD_ERROR_GLOBAL_OPTIONS, showOnDirtyErrorStateMatcher } from '@angular/material';
+import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +12,10 @@ import { HttpClient } from '@angular/common/http';
     '../../../globalStyles/materialTheme.scss',
     './registration.component.scss'
   ],
-  providers: [RegistrationService]
+  providers: [
+    RegistrationService,
+    {provide: MD_ERROR_GLOBAL_OPTIONS, useValue: { errorStateMatcher: showOnDirtyErrorStateMatcher }}
+  ]
 })
 
 export class RegistrationComponent implements OnInit {
@@ -77,6 +82,11 @@ export class RegistrationComponent implements OnInit {
     } else {
       this.userError = 'Please fill in all fields correctly';
     }
+  }
+
+  myErrorStateMatcher(control: FormControl, form: FormGroupDirective | NgForm): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 
   ngOnInit() { }
