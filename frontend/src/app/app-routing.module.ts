@@ -2,6 +2,7 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TestHttpComponent } from './components/test-http/test-http.component';
+import { HeaderViewComponent } from './components/header-view/header-view.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,9 @@ const routes: Routes = [
       path: 'test-http', // for testing, can be removed
       children: [],
       component: TestHttpComponent
+    }, {
+      path: 'header', // for testing
+      component: HeaderViewComponent
     }
 ];
 

@@ -22,13 +22,15 @@ import {
   MdDialogModule,
   MdSlideToggleModule
 } from '@angular/material';
+import { HeaderViewComponent } from './components/header-view/header-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ForgetPasswordComponent,
-    TestHttpComponent
+    TestHttpComponent,
+    HeaderViewComponent
   ],
   imports: [
     BrowserModule,
