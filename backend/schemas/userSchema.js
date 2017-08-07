@@ -29,9 +29,13 @@ User.pre('save', function(next) {
     });
 });
 
-User.methods.checkPassword = function(password){
+User.methods.checkPassword = function(password, callback){
     "use strict";
-    return (this.encryptPassword(password) === this.password);
+    this.encryptPassword(password, (err, hash) => {
+        if (err) return callback(err);
+
+        callback(null, hash === this.password);
+    });
 };
 
 User.methods.encryptPassword = function(password, callback){
