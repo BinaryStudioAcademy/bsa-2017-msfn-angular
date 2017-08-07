@@ -29,7 +29,13 @@ function updateItem(id, body, callback) {
         if (data === null){
             callback(new ApiError("User not found"));
         } else {
-            userRepository.update(id, body, callback);
+            userRepository.getUserByEmail(body.email, (err, existingUser) => {
+                if (err) return callback(err);
+
+                if (existingUser && existingUser.id !== id) return callback(new ApiError("User with such email already exists"));
+
+                userRepository.update(id, body, callback);
+            });
         }
     })
 }
