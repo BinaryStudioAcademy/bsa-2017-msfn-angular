@@ -14,7 +14,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RestorePasswordComponent} from './components/restore-password/restore-password.component';
 import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
 import {TestHttpComponent} from './components/test-http/test-http.component';
-import {OAuthComponent} from './components/login/o-auth/o-auth.component';
 import { WindowObj } from './services/window.service';
 
 import {
@@ -41,8 +40,7 @@ import 'hammerjs';
     ForgetPasswordComponent,
     TestHttpComponent,
     HeaderViewComponent,
-    RestorePasswordComponent,
-    OAuthComponent
+    RestorePasswordComponent
   ],
   imports: [
     BrowserModule,
