@@ -58,6 +58,7 @@ import 'hammerjs';
     MdDialogModule,
     MdSlideToggleModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule
   ],
   providers: [HttpService],
