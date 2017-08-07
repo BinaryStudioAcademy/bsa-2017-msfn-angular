@@ -1,3 +1,4 @@
+import { IsLoggedGuard } from './guards/is-logged.guard';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
@@ -62,7 +63,7 @@ import 'hammerjs';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [HttpService, WindowObj],
+  providers: [HttpService, WindowObj, IsLoggedGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
