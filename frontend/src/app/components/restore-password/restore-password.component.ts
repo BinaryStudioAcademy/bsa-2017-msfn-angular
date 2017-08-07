@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from "@angular/forms";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-restore-password',
@@ -18,16 +18,14 @@ passwordMatched: boolean;
   ngOnInit() {
     this.passwordMatched = false;
   }
-  
 
   changePassword(form: NgForm) {
     this.passwordMatched = this.newPass === this.repeatPass;
     if (form.valid && this.passwordMatched) {
-      console.log("OK " + this.newPass);
+      console.log('OK ' + this.newPass);
       // send message()
-    }
-    else{
-      console.log("ER");
+    } else {
+      console.log('ER');
     }
   }
 
