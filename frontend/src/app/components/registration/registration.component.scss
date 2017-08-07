@@ -1,4 +1,5 @@
 @import '../../../globalStyles/variables.scss';
+@import '../../../globalStyles/indentations.scss';
 
 /* general */
 
@@ -13,7 +14,7 @@ a {
 
 svg {
   width: 40px;
-  margin: 10px 0;
+  margin: $content-between-margin 0;
 }
 
 /* registration form */
@@ -21,8 +22,8 @@ svg {
 #registration {
   display: flex;
   justify-content: center;
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100%;
   color: $text-main-color;
   background: $bg-color;
 }
@@ -33,7 +34,7 @@ svg {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  width: 90%;
+  width: 80%;
   height: 80%;
   margin-top: 25px;
   padding: 20px;
@@ -48,7 +49,7 @@ svg {
 #exit-icon {
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: $close-top-margin;
   width: 25px;
   height: 25px;
   font-size: 0;
@@ -74,20 +75,22 @@ svg {
 }
 
 #social-registration {
+  margin: 0 20px;
   text-align: left;
   font-size: 14px;
 }
 
 .input-row {
   width: 100%;
+  margin: 3px;
 }
 
 #general-error {
-  margin-bottom: 20px;
+  margin: 0 0 $content-between-margin;
 }
 
 #gender {
-  margin-bottom: 10px;
+  margin: 0 0 $content-between-margin;
   text-align: center;
 }
 
@@ -98,7 +101,7 @@ md-slide-toggle {
 .error {
   display: block;
   width: 100%;
-  margin: 0;
+  margin: $content-between-margin 0;
   text-align: left;
   font-size: 14px;
   font-weight: 600;
@@ -111,8 +114,12 @@ md-slide-toggle {
     font-size: 16px;
   }
 
+  div:first-child {
+    margin-top: $content-between-margin;
+  }
+
   #birthday-warning {
-    margin: 5px 0 10px;
+    margin-bottom: 40px;
     font-size: 12px;
   }
 
@@ -121,7 +128,7 @@ md-slide-toggle {
     justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: $content-between-margin;
   }
 
   md-select {
@@ -148,7 +155,8 @@ md-slide-toggle {
 }
 
 #submit-button {
-  margin-bottom: 10px;
+  margin: $content-between-margin 0 0;
+  text-align: center;
 
   div {
     margin-bottom: 20px;
@@ -172,15 +180,11 @@ md-slide-toggle {
   }
 }
 
-#login {
-  flex-basis: 5%;
-}
-
 
 @media only screen and (min-width: $small-screen) {
 
   #form {
-    padding: 30px;
+    padding: $header-top-margin $content-lr-margin $content-lr-margin;
   }
 
   #exit-icon {
@@ -215,7 +219,7 @@ md-slide-toggle {
     }
 
     md-select {
-      width: 25%;
+      width: 30%;
     }
   }
 
@@ -230,21 +234,11 @@ md-slide-toggle {
   #form {
     width: 370px;
     height: 80%;
-    padding: 60px 45px 30px;
   }
-
-  //input {
-  //  margin-bottom: 25px;
-  //}
 
   #birthday {
     #birthday-warning {
-      margin: 5px 0 25px;
       font-size: 12px;
-    }
-
-    #birthday-inputs {
-      margin-bottom: 25px;
     }
   }
 

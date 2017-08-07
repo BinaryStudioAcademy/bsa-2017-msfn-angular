@@ -5,7 +5,7 @@
       <div></div>
     </div>
     <div id="social-registration">Register via
-      <a routerLink="/auth/facebook">Facebook</a> or <a routerLink="/auth/google">Google</a>
+      <a routerLink="/auth/facebook">Facebook</a>, <a routerLink="/auth/google">Google</a> or <a routerLink="/auth/twitter">Twitter</a>
     </div>
 
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
@@ -22,37 +22,57 @@
 
     <md-input-container class="input-row">
       <input mdInput type="email" placeholder="Email" required [(ngModel)]="user.email" [formControl]="emailFormControl">
-      <md-error *ngIf="emailFormControl.hasError('required')">Email is required</md-error>
-      <md-error *ngIf="emailFormControl.hasError('pattern')">Email is not valid</md-error>
+      <md-error *ngIf="emailFormControl.hasError('required')">
+        Email is required
+      </md-error>
+      <md-error *ngIf="emailFormControl.hasError('pattern')">
+        Email is not valid
+      </md-error>
     </md-input-container>
 
     <md-input-container class="input-row">
       <input mdInput type="text" placeholder="First name" required [(ngModel)]="user.firstName" [formControl]="firstNameFormControl">
-      <md-error *ngIf="firstNameFormControl.hasError('required')">First name is required</md-error>
-      <md-error *ngIf="firstNameFormControl.hasError('minLength')">First name should contain at least 2 characters</md-error>
+      <md-error *ngIf="firstNameFormControl.hasError('required')">
+        First name is required
+      </md-error>
+      <md-error *ngIf="firstNameFormControl.hasError('minLength')">
+        First name should contain at least 2 characters
+      </md-error>
     </md-input-container>
 
     <md-input-container class="input-row">
       <input mdInput type="text" placeholder="Last name" required [(ngModel)]="user.lastName" [formControl]="lastNameFormControl">
-      <md-error *ngIf="lastNameFormControl.hasError('required')">Last name is required</md-error>
-      <md-error *ngIf="lastNameFormControl.hasError('minLength')">Last name should contain at least 2 characters</md-error>
+      <md-error *ngIf="lastNameFormControl.hasError('required')">
+        Last name is required
+      </md-error>
+      <md-error *ngIf="lastNameFormControl.hasError('minLength')">
+        Last name should contain at least 2 characters
+      </md-error>
     </md-input-container>
 
     <div id="birthday" class="input-row">
       <div>Birthday</div>
-      <div id="birthday-warning" [ngClass]="{'error': yearError}">You should be older than 18. Others don't see your birthday.</div>
+      <div id="birthday-warning" [ngClass]="{'error': yearError}">
+        You should be older than 18. Others don't see your birthday.
+      </div>
 
       <div id="birthday-inputs">
         <md-select placeholder="Month" [(ngModel)]="user.month" (change)="setDayOptions(user.month, user.year)">
-          <md-option *ngFor="let month of monthOptions" [value]="month">{{ month }}</md-option>
+          <md-option *ngFor="let month of monthOptions" [value]="month">
+            {{ month }}
+          </md-option>
         </md-select>
 
         <md-select placeholder="Day" [(ngModel)]="user.day">
-          <md-option *ngFor="let day of dayOptions" [value]="day">{{ day }}</md-option>
+          <md-option *ngFor="let day of dayOptions" [value]="day">
+            {{ day }}
+          </md-option>
         </md-select>
 
         <md-select placeholder="Year" [(ngModel)]="user.year" (change)="setDayOptions(user.month, user.year)">
-          <md-option *ngFor="let year of yearOptions" [value]="year">{{ year }}</md-option>
+          <md-option *ngFor="let year of yearOptions" [value]="year">
+            {{ year }}
+          </md-option>
         </md-select>
       </div>
     </div>
@@ -60,28 +80,38 @@
     <div class="input-row">
       <md-input-container id="height">
         <input mdInput type="number" placeholder="Height" required [(ngModel)]="user.height" [formControl]="heightFormControl">
-        <md-error *ngIf="heightFormControl.hasError('required')">Height is required</md-error>
-        <md-error *ngIf="heightFormControl.hasError('min') || heightFormControl.hasError('max')">Height should be 50-270cm</md-error>
+        <md-error *ngIf="heightFormControl.hasError('required')">
+          Height is required
+        </md-error>
+        <md-error *ngIf="heightFormControl.hasError('min') || heightFormControl.hasError('max')">
+          Height should be 50-270cm
+        </md-error>
       </md-input-container>
 
       <md-input-container id="weight">
         <input mdInput type="number" placeholder="Weight" required [(ngModel)]="user.weight" [formControl]="weightFormControl">
-        <md-error *ngIf="weightFormControl.hasError('required')">Weight is required</md-error>
-        <md-error *ngIf="weightFormControl.hasError('min') || weightFormControl.hasError('max')">Weight should be 5-500kg</md-error>
+        <md-error *ngIf="weightFormControl.hasError('required')">
+          Weight is required
+        </md-error>
+        <md-error *ngIf="weightFormControl.hasError('min') || weightFormControl.hasError('max')">
+          Weight should be 5-500kg
+        </md-error>
       </md-input-container>
     </div>
 
     <md-input-container class="input-row">
       <input type="password" mdInput placeholder="Password" required [(ngModel)]="user.password" [formControl]="passwordFormControl">
-      <md-error *ngIf="passwordFormControl.hasError('required')">Password is required</md-error>
-      <md-error *ngIf="passwordFormControl.hasError('minLength')">Password should contain at least 6 characters</md-error>
+      <md-error *ngIf="passwordFormControl.hasError('required')">
+        Password is required
+      </md-error>
+      <md-error *ngIf="passwordFormControl.hasError('minLength')">
+        Password should contain at least 6 characters
+      </md-error>
     </md-input-container>
 
     <div id="submit-button">
       <div>By pressing "Register" I accept the following terms: Terms of Service, Payment Service Conditions, Confidentiality Policy</div>
-      <button md-icon-button
-              type="submit"
-              (click)="register()">
+      <button md-icon-button type="submit" (click)="register()">
         Register
       </button>
     </div>

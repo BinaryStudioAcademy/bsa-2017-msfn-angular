@@ -42,16 +42,16 @@ export class RegistrationService {
   ];
 
   generateDays(selMonth: string, selYear: number): number[] {
-    const daysOutput = [];
+    const daysOutput: number[] = [];
     let monthLength;
 
     if (selMonth === 'February' &&
         (selYear % 4 === 0 && selYear % 100 !== 0 || selYear % 400 === 0)) {
       monthLength = 29;
     } else {
-      for (const month of this.months) {
-        if (selMonth === month.name) {
-          monthLength = month.duration;
+      for (let i = 0; i < this.months.length; i++) {
+        if (selMonth === this.months[i].name) {
+          monthLength = this.months[i].duration;
         }
       }
     }
@@ -63,7 +63,7 @@ export class RegistrationService {
   }
 
   generateMonths(): string[] {
-    const monthsOutput = [];
+    const monthsOutput: string[] = [];
     for (const month of this.months) {
       monthsOutput.push(month.name);
     }
@@ -75,7 +75,7 @@ export class RegistrationService {
     const date = new Date();
     const currentYear = date.getFullYear();
     for (let i = 1900; i <= currentYear; i++) {
-      yearsOutput.unshift(i);
+      yearsOutput.push(i);
     }
     return yearsOutput;
   }
