@@ -12,6 +12,8 @@ module.exports = function (req, res, obj, error) {
             obj.userLastName = req.session.user.lastName;
             obj.role = req.session.user.role;
             obj.currentProject = req.session.user.currentProject;
+        } else {
+            obj.isLoggedIn = false;
         }
 
         res.header = ('Content-Type', 'text/html');
