@@ -1,0 +1,36 @@
+@import "../../../../src/globalStyles/variables";
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    background-color: $gradient-to-color;
+    font-family: 'Roboto', sans-serif; // when fonts will be added globaly it can be removed
+
+    .logo {
+        font-size: 25px;
+        margin-left: 5%;
+
+        .title {
+            margin-left: 14px;
+            vertical-align: super;
+        }
+    }
+
+    .notifications {
+        .count {
+            vertical-align: super;
+        }
+    }
+
+    .settings {
+        margin-right: 5%;
+        
+        .name {
+            margin-left: 14px;
+            vertical-align: super;
+            font-size: 17px;
+        }
+    }
+}
