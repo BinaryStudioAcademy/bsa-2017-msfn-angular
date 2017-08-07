@@ -62,7 +62,7 @@ export class RegistrationService {
     return daysOutput;
   }
 
-  generateMonths(): number[] {
+  generateMonths(): string[] {
     const monthsOutput = [];
     for (const month of this.months) {
       monthsOutput.push(month.name);
@@ -80,21 +80,13 @@ export class RegistrationService {
     return yearsOutput;
   }
 
-  checkInputs(year: number, height: number, weight: number) {
-    const errors = {
-      year: false,
-      height: '',
-      weight: ''
-    };
-
+  checkYear(year: number): boolean {
+    let yearError = false;
     const date = new Date();
     const currentYear = date.getFullYear();
+    yearError = currentYear - year < 18;
 
-    errors.year = currentYear - year < 18;
-    errors.height = height > 270 ? 'Height should be less than 270cm' : '';
-    errors.weight = weight > 500 ? 'Weight should be less than 500kg' : '';
-
-    return errors;
+    return yearError;
   }
 
   constructor() { }

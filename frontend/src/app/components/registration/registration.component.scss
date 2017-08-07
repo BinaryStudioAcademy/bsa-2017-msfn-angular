@@ -2,7 +2,7 @@
 
 /* general */
 
-*, input::placeholder {
+* {
   font-family: 'Roboto', sans-serif;
   color: $text-main-color;
 }
@@ -31,10 +31,11 @@ svg {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   position: relative;
   width: 90%;
   height: 80%;
-  margin: 25px;
+  margin-top: 25px;
   padding: 20px;
   background: $gradient-from-color;
   background: -webkit-linear-gradient($gradient-to-color, $gradient-from-color);
@@ -77,13 +78,8 @@ svg {
   font-size: 14px;
 }
 
-form {
-  flex-basis: 90%;
-}
-
 .input-row {
   width: 100%;
-  //height: auto;
 }
 
 #general-error {
@@ -92,6 +88,7 @@ form {
 
 #gender {
   margin-bottom: 10px;
+  text-align: center;
 }
 
 md-slide-toggle {
@@ -107,26 +104,6 @@ md-slide-toggle {
   font-weight: 600;
   color: $error-color;
 }
-
-input {
-  //width: calc(100% - 20px);
-  //height: 36px;
-  //margin-bottom: 15px;
-  //padding: 0 10px;
-  //border: none;
-  //border-bottom: 1px solid $text-second-color;
-  //outline: none;
-  //background: none;
-}
-
-//input::placeholder {
-//  font-size: 16px;
-//}
-//
-//input:-webkit-autofill {
-//  -webkit-box-shadow: 0 0 0 30px $gradient-to-color inset;
-//  -webkit-text-fill-color: $text-main-color;
-//}
 
 #birthday {
   div {
@@ -147,21 +124,8 @@ input {
     margin-bottom: 15px;
   }
 
-  select {
+  md-select {
     width: 45%;
-    height: 36px;
-    padding: 0 10px;
-    border: none;
-    border-bottom: 1px solid $text-second-color;
-    outline: none;
-    background: none;
-
-    option {
-      margin: 15px;
-      border: none;
-      outline: none;
-      background: $bg-color;
-    }
   }
 }
 
@@ -177,15 +141,10 @@ input {
   float: right;
 }
 
-#password-input {
-  div {
-    float: left;
-  }
-
-  div:first-child {
-    margin-bottom: 5px;
-    font-size: 10px;
-  }
+.mat-input-flex {
+  display: inline-flex;
+  align-items: baseline;
+  width: 80%;
 }
 
 #submit-button {
@@ -194,7 +153,7 @@ input {
   div {
     margin-bottom: 20px;
     text-align: left;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   button {
@@ -255,13 +214,13 @@ input {
       flex-wrap: nowrap;
     }
 
-    select {
-      width: 30%;
+    md-select {
+      width: 25%;
     }
   }
 
   #height, #weight {
-    width: 40%;
+    width: 45%;
   }
 }
 
@@ -281,7 +240,7 @@ input {
   #birthday {
     #birthday-warning {
       margin: 5px 0 25px;
-      font-size: 10px;
+      font-size: 12px;
     }
 
     #birthday-inputs {
@@ -289,16 +248,9 @@ input {
     }
   }
 
-  #password-input {
-    div:first-child {
-      margin-bottom: 5px;
-      font-size: 10px;
-    }
-  }
-
   #submit-button {
     button {
-      width: 370px;
+      width: 100%;
     }
   }
 }
