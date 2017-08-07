@@ -5,11 +5,20 @@ const bcrypt = require('bcrypt-nodejs');
 const User = new Schema({
     firstName: String,
     lastName: String,
-    email: String,
-    password: String,
+    email: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
     isCoach: String,
     position: String,
-    salt: String
+    salt: {
+      type: String,
+    }
 });
 
 User.pre('save', function(next) {
@@ -27,6 +36,22 @@ User.pre('save', function(next) {
             next();
         })
     });
+});
+
+User.pre('update', function(next) {
+  const fields = this._update.$set;
+
+  if (!fields.password) return next();
+
+  bcrypt.genSalt(1012, (err, salt) => {
+    fields.salt = salt;
+    bcrypt.hash(fields.password, fields.salt, null, (err, hash) => {
+      if (err) return next(err);
+
+      fields.password = hash;
+      next();
+    });
+  });
 });
 
 User.methods.checkPassword = function(password, callback){
