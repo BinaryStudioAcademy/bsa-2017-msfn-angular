@@ -7,6 +7,7 @@ import {HeaderViewComponent} from './components/header-view/header-view.componen
 import {RegistrationComponent} from './components/registration/registration.component';
 import {LoginComponent} from './components/login/login.component';
 // import { ForLoggedInGuard } from './guards/for-logged-in.guard';
+import {ForAdminGuard} from './guards/for-admin.guard';
 
 const routes: Routes = [
   {
