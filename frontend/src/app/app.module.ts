@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpService} from './services/http.service';
+import {EncryptService} from './services/encrypt.service';
 import {HttpClientModule} from '@angular/common/http';
 import {RegistrationComponent} from './components/registration/registration.component';
 import {LoginComponent} from './components/login/login.component';
@@ -62,7 +63,11 @@ import 'hammerjs';
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [HttpService, WindowObj],
+  providers: [
+    HttpService,
+    WindowObj,
+    EncryptService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
