@@ -1,8 +1,7 @@
 **Binary Studio Academy 2017**
 # _MY SOCIAL FITNESS NETWORK_
 
-![banner of app](/path/to/img.jpg "banner of app")
-<br><br><br>
+![banner of app](_README.md/banner_msfn.png "banner of app")
 
 Stack
 -----------------

@@ -33,8 +33,7 @@ User.methods.checkPassword = function(password, callback){
     "use strict";
     this.encryptPassword(password, (err, hash) => {
         if (err) return callback(err);
-
-        callback(null, hash === this.password);
+        callback(err, (hash === this.password))
     });
 };
 
