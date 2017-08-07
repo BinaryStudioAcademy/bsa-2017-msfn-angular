@@ -8,7 +8,8 @@ import { RegistrationComponent } from './components/registration/registration.co
 const routes: Routes = [
   {
     path: '',
-    children: []
+    pathMatch: 'full',
+    redirectTo: 'register'
   },
   {
      path: 'register',
