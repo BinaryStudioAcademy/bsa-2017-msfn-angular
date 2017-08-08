@@ -17,9 +17,3 @@ $theme: mat-dark-theme($primary, $accent, $warn);
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($theme);
-
-body {
-	color: #fff;
-	background-color: #333;
-	margin: 0;
-}
