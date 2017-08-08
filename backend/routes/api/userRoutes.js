@@ -28,10 +28,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.post(baseUrl, function (req, res, next) {
-         console.log(req.body);
         userService.addItem(req.body, function (err, data) {
-           
-            console.log(data);
             res.data = data;
             res.err = err;
             next();
