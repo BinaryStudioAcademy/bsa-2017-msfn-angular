@@ -1,8 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:100');
-
-// fonts
-$font-general:  'Roboto', sans-serif;
-
 //breakpoints
 $large-screen: 960px;
 $medium-screen: 600px;
@@ -10,17 +5,19 @@ $small-screen: 440px;
 
 // colors
 $bg-color: #333;
+
 $text-main-color: #fff;
 $text-second-color: #9f9f9f;
+$text-dark-color: #111;
+
 $gradient-from-color: #222;
 $gradient-to-color: #424242;
+
 $btn-color: #82ca9c;
 $btn-second-color: #7da7d9;
-$error-color: #ff5057;
-$option1-color: #d1c501;
-$text-second-color: #9f9f9f ;
-$gradient-from-color: #222222 ;
-$gradient-to-color: #424242 ;
-$btn-color: #82ca9c ;
-$btn-second-color: #7da7d9 ;
+
 $text-warn-color: indianred;
+$error-color: #ff5057;
+
+$option1-color: #d1c501;
+

@@ -42,16 +42,16 @@ export class RegistrationService {
   ];
 
   generateDays(selMonth: string, selYear: number): number[] {
-    const daysOutput = [];
+    const daysOutput: number[] = [];
     let monthLength;
 
     if (selMonth === 'February' &&
         (selYear % 4 === 0 && selYear % 100 !== 0 || selYear % 400 === 0)) {
       monthLength = 29;
     } else {
-      for (const month of this.months) {
-        if (selMonth === month.name) {
-          monthLength = month.duration;
+      for (let i = 0; i < this.months.length; i++) {
+        if (selMonth === this.months[i].name) {
+          monthLength = this.months[i].duration;
         }
       }
     }
@@ -62,8 +62,8 @@ export class RegistrationService {
     return daysOutput;
   }
 
-  generateMonths(): number[] {
-    const monthsOutput = [];
+  generateMonths(): string[] {
+    const monthsOutput: string[] = [];
     for (const month of this.months) {
       monthsOutput.push(month.name);
     }
@@ -74,27 +74,19 @@ export class RegistrationService {
     const yearsOutput = [];
     const date = new Date();
     const currentYear = date.getFullYear();
-    for (let i = 1900; i <= currentYear; i++) {
-      yearsOutput.unshift(i);
+    for (let i = 1900; i <= currentYear - 14; i++) {
+      yearsOutput.push(i);
     }
     return yearsOutput;
   }
 
-  checkInputs(year: number, height: number, weight: number) {
-    const errors = {
-      year: false,
-      height: '',
-      weight: ''
-    };
-
+  checkYear(year: number): boolean {
+    let yearError = false;
     const date = new Date();
     const currentYear = date.getFullYear();
+    yearError = currentYear - year < 14;
 
-    errors.year = currentYear - year < 18;
-    errors.height = height > 270 ? 'Height should be less than 270cm' : '';
-    errors.weight = weight > 500 ? 'Weight should be less than 500kg' : '';
-
-    return errors;
+    return yearError;
   }
 
   constructor() { }

@@ -39,22 +39,10 @@ app.use(express.static(staticPath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     // console.log(req.session.user);
     next();
 });
-
-////// For working app. Must be deleted after merge with msfn-5
-app.use(passport.initialize());
-app.use(passport.session());
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (user, done) {
-    done(null, user);
-});
-//////
 
 const passportOAuthInit = require('./middleware/passportOAuthMiddleware')();
 
@@ -63,5 +51,8 @@ const viewRoutes = require('./routes/view/routes')(app);
 
 console.log(`app runs on port: ${port}`);
 const server = app.listen(port);
+
+const io = require('socket.io')(server);
+const socketsInit = require('./middleware/testSocketMiddleware')(io);
 
 module.exports = app;

@@ -23,13 +23,12 @@
 
     <button class="login-button" [disabled]="!passwordFormControl.valid && !emailFormControl.valid" (click)="login()">Sign in</button>
     <div class="login-links">Sign in with
-      <a href="">Facebook</a> or
-      <a href="">Google</a>
+      <a href="/auth/facebook">Facebook</a>
+      <a href="/auth/twitter">Google</a>
+      <a href="/auth/twitter">Twitter</a>
     </div>
     <div class="login-links">
       <a routerLink="/forget-password">Forgot password?</a>
     </div>
   </div>
 </div>
-
-<app-o-auth></app-o-auth>
