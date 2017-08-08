@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 const bcrypt = require('bcrypt-nodejs');
+
 
 const User = new Schema({
     firstName: String,
@@ -18,7 +20,8 @@ const User = new Schema({
     position: String,
     salt: {
       type: String,
-    }
+    },
+    follow: [ObjectId],
 });
 
 User.pre('save', function(next) {

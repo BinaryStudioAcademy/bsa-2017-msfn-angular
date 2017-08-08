@@ -1,7 +1,6 @@
 const
     apiResponse = require('express-api-response'),
     passwordService = require('../../services/passwordService'),
-    userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/password/';
 
 module.exports = function (app) {
