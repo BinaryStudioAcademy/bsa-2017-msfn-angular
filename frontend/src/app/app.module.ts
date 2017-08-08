@@ -1,3 +1,4 @@
+import { IsLoggedGuard } from './guards/is-logged.guard';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
@@ -12,14 +13,16 @@ import {LoginComponent} from './components/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RestorePasswordComponent} from './components/restore-password/restore-password.component';
 import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
+import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import {TestHttpComponent} from './components/test-http/test-http.component';
-import {OAuthComponent} from './components/login/o-auth/o-auth.component';
+import { WindowObj } from './services/window.service';
 
 import {
   MdSnackBarModule,
   MdChipsModule,
   MdIconModule,
   MdRadioModule,
+  MdSelectModule,
   MdCardModule,
   MdInputModule,
   MdCheckboxModule,
@@ -41,7 +44,8 @@ import { IndexPageComponent } from './components/index-page/index-page.component
     HeaderViewComponent,
     RestorePasswordComponent,
     OAuthComponent,
-    IndexPageComponent
+    IndexPageComponent,
+    ForgotPasswordMailComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +57,7 @@ import { IndexPageComponent } from './components/index-page/index-page.component
     MdChipsModule,
     MdIconModule,
     MdRadioModule,
+    MdSelectModule,
     MdCardModule,
     MdInputModule,
     MdCheckboxModule,
@@ -60,10 +65,10 @@ import { IndexPageComponent } from './components/index-page/index-page.component
     MdDialogModule,
     MdSlideToggleModule,
     FormsModule,
-    HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
-  providers: [HttpService],
+  providers: [HttpService, WindowObj, IsLoggedGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
