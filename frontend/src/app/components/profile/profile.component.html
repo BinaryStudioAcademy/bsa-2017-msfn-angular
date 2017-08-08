@@ -21,11 +21,11 @@
         <div class="profile-fullname">
           
           <md-input-container class="profile-name">
-            <input id="name" class=profile-input mdInput value="John" formControlName="name">
+            <input id="name" class=profile-input mdInput  formControlName="name">
           </md-input-container>
 
           <md-input-container class="profile-lastname">
-            <input id="lastname" class="profile-input" mdInput value="Smith" formControlName="lastname">
+            <input id="lastname" class="profile-input" mdInput  formControlName="lastname">
           </md-input-container>
         </div>
 
@@ -34,7 +34,9 @@
 
         <div class="profile-email">
           <div class="profile-current-email">
-            <p>john.smith@gmail.com</p>
+              <md-input-container >
+                <input mdInput class="profile-email-input" formControlName="email" [disabled]="true">
+              </md-input-container>
           </div>
           <div class=profile-email-btn>
             <button md-raised-button>Add Email Address</button>
@@ -43,21 +45,21 @@
 
         <div class="profile-birthday">
           <div class="birthday-month">
-            <md-select placeholder="Month" [(ngModel)]="selectedMonth" floatPlaceholder="never" [ngModelOptions]="{standalone: true}">
+            <md-select placeholder="Month" (change)="onSelect(selectedMonth)"  [(ngModel)]="selectedMonth" floatPlaceholder="never" [ngModelOptions]="{standalone: true}">
               <md-option *ngFor="let month of months" [value]="month.value">
-                {{ month.viewValue }}
+                {{ month.value }}
               </md-option>
             </md-select>
           </div>
           <div class="birthday-day">
-            <md-select placeholder="Day" [(ngModel)]="selectedDay" floatPlaceholder="never" [ngModelOptions]="{standalone: true}">
+            <md-select placeholder="Day" [(ngModel)]="selectedDay"  [ngModelOptions]="{standalone: true}">
               <md-option *ngFor="let day of days" [value]="days">
                 {{ day }}
               </md-option>
             </md-select>
           </div>
           <div class="birthday-year">
-            <md-select placeholder="Year" [(ngModel)]="selectedYear" floatPlaceholder="never" [ngModelOptions]="{standalone: true}">
+            <md-select placeholder="Year" [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}">
               <md-option *ngFor="let year of years" [value]=years>
                 {{ year }}
               </md-option>
@@ -70,13 +72,13 @@
           <div class="weight-container">
             <label for='weight' class="label">Weight</label>
             <md-input-container class="ph-input">
-              <input type="number" id="weight" class="profile-input" mdInput value="80">
+              <input type="number" id="weight" class="profile-input" mdInput value="80" formControlName="weight">
             </md-input-container>
           </div>
           <div class="height-container">
             <label for='height' class="label">Height</label>
             <md-input-container class="ph-input">
-              <input type="number" id="height" class="profile-input" mdInput value="175">
+              <input type="number" id="height" class="profile-input"  mdInput  formControlName="height" >
             </md-input-container>
 
           </div>
