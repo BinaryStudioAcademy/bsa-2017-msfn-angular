@@ -2,7 +2,7 @@ const apiResponse = require('express-api-response');
 const passport = require('passport');
 module.exports = function (app) {
     const redirect = {
-        successRedirect: '/', //must change to user profile route
+        successRedirect: '/profile',
         failureRedirect: '/login'
     };
 

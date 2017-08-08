@@ -27,11 +27,12 @@ module.exports = function() {
                             firstName: profile.name.givenName,
                             lastName: profile.name.familyName,
                             email: profile.emails[0].value,
+                            password: 'qwerty',
                             googleID: profile.id
                         };
                         userService.addItem(userBody, (err, user) => {
                             if (err) {
-                                return done(err);
+                                return done(err.error);
                             }
                             //and login
                             return done(null, user)
@@ -66,11 +67,12 @@ module.exports = function() {
                             firstName: profile.name.givenName,
                             lastName: profile.name.familyName,
                             email: profile.emails[0].value,
+                            password: 'qwerty',
                             facebookID: profile.id
                         };
                         userService.addItem(userBody, (err, user) => {
                             if (err) {
-                                return done(err);
+                                return done(err.error);
                             }
                             return done(null, user)
                         })
@@ -101,12 +103,13 @@ module.exports = function() {
                     } else {
                         const userBody = {
                             firstName: profile.displayName,
-                            email: profile.emails[0].value,
+                            email: profile.emails[0].value || 'default@msfn.com',
+                            password: 'qwerty',
                             twitterID: profile.id
                         };
                         userService.addItem(userBody, (err, user) => {
                             if (err) {
-                                return done(err);
+                                return done(err.error);
                             }
                             return done(null, user)
                         })
