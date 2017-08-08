@@ -1,44 +1,32 @@
-<!--Wrapper container-->
-<div class="wrapper">
-  <!--Wrapper container-->
-  <div class="sport-modification__container">
- <section class="sport__modification"> 
-   <!--Wrapper container-->
-  <form class="sport-create__form" [formGroup]="regForm">
-        <div class="sport-create__block">
-          <div class="block-leveling-input">
-            <md-input-container class="input__container">
-              <input mdInput placeholder="Name of the sport" formControlName="name">
-            </md-input-container>
-            <md-input-container class="input__container">
-              <input mdInput placeholder="Kind of sport" formControlName="name2">
-            </md-input-container>
-            <md-input-container class="input__container">
-              <input mdInput placeholder="Category of sport" formControlName="name3">
-            </md-input-container>
-          </div>
-        </div>
-      <!--Wrapper container-->
-        <div class="Type-of_season">
-          <div class="title-of__season descr__type">Type of the season</div>
-            <div class="selection-of__season">
-                <md-radio-group>
-                  <md-radio-button value="1" class="type__season">Summer</md-radio-button>
-                  <md-radio-button value="2" class="type__season">Winter</md-radio-button>
-                  <md-radio-button value="3" class="type__season">General</md-radio-button>
-                </md-radio-group>
+<div class='wrapper'>
+    <div class='general__container'>
+        <div class='sport-list__container'>
+            <div class="sport-list__wrap">
+            <ul class='sport__list'>
+                <div class="hov">
+                <li class='sport__item' *ngFor='let sport of sports' 
+                    [class.selected]='sport === selectedSport' 
+                    (click)="onSelect(sport)"> <span>{{sport.title}}</span>
+                </li>
+                </div>
+            </ul>
             </div>
         </div>
-        <!--Wrapper container-->
-        <div class="title-of__season descr__type">Description</div>
-          <div class="block-text__descr">
-              <textarea class="textarea__descr"></textarea>
-          </div>
-             <button class='create-sport__button' md-raised-button [disabled]="!regForm.valid">Create sport</button>
-        </form>
-
-  </section>
-    </div>
+        <div class='block__descr'>
+            <div *ngIf='selectedSport'>
+                <div class='general__descr'>
+                    <div class='general-descr__wrapp'>
+                        <div class='name__descr'>Name of the sport: {{selectedSport.title}}</div>
+                        <div class='name__descr'>Category: {{selectedSport.category}}</div>
+                        <div class='name__descr'>Season: {{selectedSport.season}}</div> 
+                        <div class='name__descr'>Type of training: {{selectedSport.type}}</div>
+                    </div>
+                </div>
+                <div class='title-descr'>General description</div>
+                <div class='paragraph__descr'>{{selectedSport.description}}</div>
+            </div>
+        </div>   
+    </div>   
 </div>
 
 

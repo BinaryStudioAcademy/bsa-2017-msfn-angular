@@ -37,90 +37,57 @@
    
 }
 
-.sport__modification {
+.general__container {
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: 300px;
     border: 2px #2A2A2A solid;
     background-image: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
-    margin: 100px 0 200px 0;
-    
-    
+    margin: 50px 0 200px 0;
+   
 }
-.descr__type{
-    margin-top: 30px;
-}
-.sport-create__form {
+
+.sport-list__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-top: 20px;
 }
 
-.sport-create__block {
+.sport-list__wrap {
+   display: flex;
+   justify-content: center;
+}
+.sport__list {
+    padding: 0;
+}
+.sport__item {
+    list-style: none;
+    font-size: 22px;
+    padding-bottom: 20px;
+}
+span:hover {
+    border-bottom: 1px solid;
+    padding-bottom: 5px;
+}
+.block__descr {
+    background: rgba(255, 255, 255, 0.12);
+}
+.general__descr {
     display: flex;
     justify-content: center;
 }
-
-.block-leveling-input{
-    max-width: 300px;
+.general-descr__wrapp {
+    margin-top: 20px;
 }
-
-.input__container {
-    width: 100%;
+.name__descr {
+    padding-top: 10px;
 }
-
-.selection-of__season {
-    margin-top: 35px;
+.title-descr {
+    padding-top: 20px;
+    text-align: center;
 }
-
-.checkbox__season {
-    padding: 20px;
-}
-
-.title-of__season {
-    position: relative;
-    &::after{
-       content: '';
-       height: 1px;
-       width: 150px;
-       left: 50%;
-       margin-left: -75px;
-       margin-top: 30px;
-       background: rgba(255, 255, 255, 0.12);
-       position: absolute; 
-    }
-}
-
-.type__season{
-    font-family: $font-general;
-    padding: 0 15px;
-}
-
-.block-text__descr {
-    margin: 30px 0;
-}
-
-.textarea__descr {
-    width: 90%;
-    background: rgba(255, 255, 255, 0.12);
-    border: 0px;
-    font-family: $font-general;
-    color: $text-main-color;
-}
-
- textarea {
-    height: 200px; 
-    resize: none;
-   } 
-.create-sport__button{
-    background: $btn-color;
-    font-family: $font-general;
-}
-
-@media only screen and (max-width: $small-screen)  {
-   .sport__modification{
-       width: 200px;
-       padding: 10px;
-   }
+.paragraph__descr {
+    text-align: center;
+    padding: 10px 0 20px 0;
 }
