@@ -6,7 +6,7 @@ import {TestHttpComponent} from './components/test-http/test-http.component';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import {RegistrationComponent} from './components/registration/registration.component';
 import {LoginComponent} from './components/login/login.component';
-import {IndexPageComponent} from "./components/index-page/index-page.component";
+import {IndexPageComponent} from './components/index-page/index-page.component';
 // import { ForLoggedInGuard } from './guards/for-logged-in.guard';
 
 const routes: Routes = [

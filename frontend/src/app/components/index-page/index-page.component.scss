@@ -1,3 +1,5 @@
+@import '../../../globalStyles/variables.scss';
+
 * {
 	font-family: 'Roboto', sans-serif;
 	box-sizing: border-box;
@@ -12,8 +14,8 @@
 .index__banner-wrap {
     width: 100%;
     height: calc(100vh - 70px);
-    //background: url(./index-bg.jpg) center;
-    //background-size: cover;
+    background: url(./floor.png) center;
+    background-size: cover;
 }
 
 .index__banner-content {
@@ -27,12 +29,15 @@
         padding: 10px 0;
     }
     .index__heading-text {
-        font-size: 32px;
+        font-size: 40px;
         padding: 10px 0;
         font-weight: 700;
+        color: $text-dark-color;
     }
     .index__heading-description {
-        font-size: 22px;
+        font-size: 32px;
+        color: $text-dark-color;
+        font-weight: 600;
     }
 
     .index__auth-wrap {
@@ -72,12 +77,9 @@
             margin: 40px 20px;
         }
     }
-}
-
-@media screen and (max-width: 480px) {
     .index__banner-content {
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         text-align: center;
 
         .index__heading-wrap {
@@ -88,4 +90,8 @@
             margin: 20px 0;
         }
     }
+}
+
+@media screen and (max-width: 480px) {
+
 }
