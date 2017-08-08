@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ProfileService } from './profile.service';
 import { HttpClient } from '@angular/common/http';
+import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +18,12 @@ export class ProfileComponent implements OnInit {
   isDisabledEmail = true;
   userError;
 
+  // for cropperImg:
+  cropperSettings: CropperSettings;
+  data: any;
+  @ViewChild('cropper', undefined)
+  cropper: ImageCropperComponent;
+  hideCropper = true;
 
 
   user = {
@@ -36,7 +43,22 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService,
     private formBuilder: FormBuilder,
     private http: HttpClient
-  ) { }
+  ) {
+    this.cropperSettings = new CropperSettings();
+    this.cropperSettings.noFileInput = true;
+    this.cropperSettings.width = 150;
+    this.cropperSettings.height = 150;
+    this.cropperSettings.croppedWidth = 150;
+    this.cropperSettings.croppedHeight = 150;
+    this.cropperSettings.canvasWidth = 400;
+    this.cropperSettings.canvasHeight = 300;
+    this.cropperSettings.rounded = true;
+    this.cropperSettings.touchRadius = 10;
+
+    this.data = {
+      image: 'http://via.placeholder.com/150x150'
+    };
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -66,6 +88,27 @@ export class ProfileComponent implements OnInit {
       data => { },
       err => this.userError = err.statusText
     );
+  }
+
+  // for cropperImg:
+  fileChangeListener($event) {
+    this.hideCropper = !this.hideCropper;
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    myReader.onloadend = (loadEvent: any) => {
+      image.src = loadEvent.target.result;
+      this.cropper.setImage(image);
+
+    };
+
+    myReader.readAsDataURL(file);
+  }
+
+  saveImg() {
+    if (!this.hideCropper) {
+      this.hideCropper = true;
+    }
   }
 
 }

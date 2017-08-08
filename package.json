@@ -51,6 +51,7 @@
     "hammerjs": "^2.0.8",
     "mongoose": "^4.11.5",
     "mongoose-ttl": "0.0.3",
+    "ng2-img-cropper": "^0.9.0",
     "nodemailer": "^4.0.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
