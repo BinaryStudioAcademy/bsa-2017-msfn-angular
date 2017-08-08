@@ -12,6 +12,7 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileService } from './components/profile/profile.service';
+import {HttpClientModule} from '@angular/common/http';
 
 import {
   MdSnackBarModule,
@@ -55,7 +56,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     MdCardModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    MdSelectModule
+    MdSelectModule,
+    HttpClientModule
   ],
   providers: [HttpService, ProfileService],
   bootstrap: [AppComponent]

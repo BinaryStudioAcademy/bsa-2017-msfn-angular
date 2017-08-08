@@ -8,10 +8,12 @@
 p {
     margin: 0;
 }
-a{
-    text-decoration:none;
+
+a {
+    text-decoration: none;
     display: inline-block;
 }
+
 * {
     box-sizing: border-box;
 }
@@ -20,8 +22,8 @@ label {
     padding: 0;
 }
 
-.ph-input{
-    width:45%;  
+.ph-input {
+    width: 45%;
     margin-left: 10px;
 }
 
@@ -100,7 +102,6 @@ label {
     justify-content: center;
     >img {
         border-radius: 50%;
-      
     }
 }
 
@@ -132,8 +133,6 @@ label {
     padding: 5px;
     color: $text-main-color;
     background-color: $btn-color;
-    // font-weight: bold;
-    // font-size: 11pt;
     border-radius: 50px;
     outline: none;
     width: 160px;
@@ -177,7 +176,8 @@ label {
     flex: 1 1 185px;
     justify-content: flex-end;
 }
-.profile-email-input{
+
+.profile-email-input {
     text-align: center;
 }
 
@@ -188,7 +188,8 @@ label {
     >div {
         justify-content: center;
         display: flex;
-        flex: 1 1 125px;
+        flex: 1 1 130px;
+        margin-top:25px;
     }
 }
 
@@ -246,7 +247,7 @@ label {
     }
     .profile-birthday {
         >div {
-            margin: 10px 0 10px;
+            margin: 20px 0 20px;
         }
     }
     .birthday-year {
