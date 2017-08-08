@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderViewComponent implements OnInit {
 
+  private thereIsLoggedInUser = false;
+
   constructor() { }
 
   ngOnInit() {
+    // this.thereIsLoggedInUser = true;
   }
 
 }
