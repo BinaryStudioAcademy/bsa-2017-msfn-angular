@@ -43,7 +43,6 @@ import { IndexPageComponent } from './components/index-page/index-page.component
     TestHttpComponent,
     HeaderViewComponent,
     RestorePasswordComponent,
-    OAuthComponent,
     IndexPageComponent,
     ForgotPasswordMailComponent
   ],
