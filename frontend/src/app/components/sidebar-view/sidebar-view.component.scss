@@ -1,0 +1,49 @@
+@import "../../../../src/globalStyles/variables";
+@import '../../../globalStyles/text.scss';
+
+.menu-element {
+    display: block;
+}
+
+aside {
+    width: 25%;
+    // background-color: #353535;
+    height: calc(100vh - 70px);
+    font-family: $font-general;
+    // background: linear-gradient(#353535, $gradient-from-color);
+    // background: linear-gradient(#252525, )
+    // background: linear-gradient(to top right, #252525, $gradient-to-color);
+    background: linear-gradient(#353535 75%, #252525);
+    nav {
+        float: right;
+        width: 220px;
+        margin-top: 30px;
+
+        .navigation__your-section {
+            margin-top: 30px;
+        }
+
+        .navigation__subheader {
+            // margin-bottom: 10px;
+        }
+
+        .menu-element {
+            margin-top: 11px;
+        }
+
+        .navigation__icon {
+            margin-right: 13px;
+        }
+
+        .navigation__icon {
+            fill: #DCDCDC;
+            vertical-align: middle;
+        }
+
+        .test {
+            fill: #fff !important;
+            color: #fff;
+            font-weight: bold;
+        }
+    }
+}

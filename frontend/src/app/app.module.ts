@@ -32,6 +32,7 @@ import {
 } from '@angular/material';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import 'hammerjs';
+import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import 'hammerjs';
     TestHttpComponent,
     HeaderViewComponent,
     RestorePasswordComponent,
-    ForgotPasswordMailComponent
+    ForgotPasswordMailComponent,
+    SidebarViewComponent
   ],
   imports: [
     BrowserModule,

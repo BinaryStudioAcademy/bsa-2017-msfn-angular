@@ -8,6 +8,7 @@ import {RegistrationComponent} from './components/registration/registration.comp
 import {LoginComponent} from './components/login/login.component';
 import { IsLoggedGuard } from './guards/is-logged.guard';
 import {ForgotPasswordMailComponent} from './components/forgot-password-mail/forgot-password-mail.component';
+import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
     path: 'restore-password', // for testing restorePasswordComponent, can be removed
     children: [],
     component: RestorePasswordComponent
+  },
+  {
+    path: 'sidebar', // for testing
+    component: SidebarViewComponent
   }
 ];
 
