@@ -3,6 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {CdkTableModule} from '@angular/cdk';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -28,10 +29,12 @@ import {
   MdCheckboxModule,
   MdButtonModule,
   MdDialogModule,
-  MdSlideToggleModule
+  MdSlideToggleModule,
+  MdTableModule
 } from '@angular/material';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import 'hammerjs';
+import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import 'hammerjs';
     TestHttpComponent,
     HeaderViewComponent,
     RestorePasswordComponent,
-    ForgotPasswordMailComponent
+    ForgotPasswordMailComponent,
+    ExerciseTypeComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,9 @@ import 'hammerjs';
     MdSlideToggleModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    MdTableModule,
+    CdkTableModule
   ],
   providers: [HttpService, WindowObj, IsLoggedGuard],
   bootstrap: [AppComponent]

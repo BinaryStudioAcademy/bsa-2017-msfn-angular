@@ -1,3 +1,4 @@
+import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
 import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
 import {RestorePasswordComponent} from './components/restore-password/restore-password.component';
 import {NgModule} from '@angular/core';
@@ -47,6 +48,11 @@ const routes: Routes = [
     path: 'restore-password', // for testing restorePasswordComponent, can be removed
     children: [],
     component: RestorePasswordComponent
+  },
+  {
+    path: 'exercise-type', // can be removed
+    children: [],
+    component: ExerciseTypeComponent
   }
 ];
 
