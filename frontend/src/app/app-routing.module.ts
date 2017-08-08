@@ -8,13 +8,16 @@ import {RegistrationComponent} from './components/registration/registration.comp
 import {LoginComponent} from './components/login/login.component';
 import {IndexPageComponent} from './components/index-page/index-page.component';
 // import { ForLoggedInGuard } from './guards/for-logged-in.guard';
+import { IsLoggedGuard } from './guards/is-logged.guard';
+import {ForgotPasswordMailComponent} from './components/forgot-password-mail/forgot-password-mail.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     component: IndexPageComponent
-  }, {
+  },
+  {
     path: 'login',
     children: [],
     component: LoginComponent
@@ -22,20 +25,27 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent,
-    // canActivate: [ForLoggedInGuard]
+    canActivate: [IsLoggedGuard]
   }, {
     path: 'forget-password', // for testing forgetPasswordComponent, can be removed
     children: [],
     component: ForgetPasswordComponent
 
-  }, {
+  },
+  {
     path: 'test-http', // for testing, can be removed
     children: [],
     component: TestHttpComponent
-  }, {
+  },
+  {
     path: 'header', // for testing
     component: HeaderViewComponent
-  }, {
+  },
+  {
+    path: 'forgot-password-mail',
+    component: ForgotPasswordMailComponent
+  },
+  {
     path: 'restore-password', // for testing restorePasswordComponent, can be removed
     children: [],
     component: RestorePasswordComponent

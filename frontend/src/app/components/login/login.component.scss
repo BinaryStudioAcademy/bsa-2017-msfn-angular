@@ -1,5 +1,7 @@
-@import "./../../../../src/globalStyles/variables";
-@import "./../../../../src/globalStyles/materialTheme";
+@import "./../../../globalStyles/variables";
+@import "./../../../globalStyles/materialTheme";
+@import "./../../../globalStyles/indentations";
+@import '../../../globalStyles/text.scss';
 
 @mixin linear-gradient($direction, $color-stops...) {
     background: nth(nth($color-stops, 1), 1);
@@ -22,7 +24,7 @@
     align-items: center;
     width: 350px;
     height: 280px;
-    margin-top: 50px;
+    margin-top: $header-top-margin;
     padding: 10px;
     border: 2px #2A2A2A solid;
     background-image: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
@@ -31,24 +33,28 @@
 .login-imput-container {
     width: 90%;
     color: $text-main-color;
+
+    input {
+        padding: 0 $input-padding;
+    }
 }
 
 .login-button {
     border: none;
-    margin-top: 10px;
+    margin-top: $content-between-margin;
     width: 90%;
     padding: 15px;
     color: $text-main-color;
     background-color: $btn-color;
     font-weight: bold;
-    font-size: 11pt;
+    font-size: 14px;
     border-radius: 50px;
     cursor: pointer;
     outline: none;
 }
 
 .login-links {
-    margin-top: 20px;
+    margin-top: $content-between-margin;
     color: $text-main-color;
 
     a {
@@ -65,5 +71,11 @@
 
     .login-block {
         width: 300px;
+    }
+
+    .login-links {
+        a {
+            margin: 0;
+        }
     }
 }
