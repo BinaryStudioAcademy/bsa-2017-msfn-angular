@@ -16,12 +16,12 @@
                 </div>
                 <div class="profile-fullname">
                     <md-input-container class="profile-name">
-                        <input id="name" class=profile-input mdInput formControlName="name">
+                        <input id="name" class="input" mdInput formControlName="name">
                         <md-error>Name can`t consist less than two characters</md-error>
                     </md-input-container>
 
                     <md-input-container class="profile-lastname">
-                        <input id="lastname" class="profile-input" mdInput formControlName="lastname">
+                        <input id="lastname" class="input" mdInput formControlName="lastname">
                         <md-error>Lastname can`t consist less than two characters</md-error>
                     </md-input-container>
                 </div>
@@ -30,7 +30,7 @@
                 <div class="profile-email">
                     <div class="profile-current-email">
                         <md-input-container>
-                            <input mdInput class="profile-email-input" formControlName="email">
+                            <input mdInput class="profile-email-input input" formControlName="email">
                         </md-input-container>
                     </div>
                     <div class=profile-email-btn>
@@ -64,16 +64,16 @@
                 </div>
                 <div class="profile-physparam">
                     <div class="weight-container">
-                        <label for='weight' class="label">Weight</label>
+                        <label for='weight' class="label">Weight, kg</label>
                         <md-input-container class="ph-input">
-                            <input type="number" id="weight" class="profile-input" mdInput  formControlName="weight">
+                            <input type="number" id="weight" class="input" mdInput formControlName="weight">
                             <md-error>Weight should be 30-300 kgs</md-error>
                         </md-input-container>
                     </div>
                     <div class="height-container">
-                        <label for='height' class="label">Height</label>
+                        <label for='height' class="label">Height, cm</label>
                         <md-input-container class="ph-input">
-                            <input type="number" id="height" class="profile-input" mdInput formControlName="height">
+                            <input type="number" id="height" class="input" mdInput formControlName="height">
                             <md-error>Height should be 100-300 cm</md-error>
                         </md-input-container>
                     </div>

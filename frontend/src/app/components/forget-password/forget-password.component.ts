@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-forget-password',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgetPasswordComponent implements OnInit {
 
+  email: string;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  sendLetter(form: NgForm) {
+    if (form.valid) {
+      console.log('OK ' + this.email);
+      // send message()
+    } else {
+      console.log('ER ' + this.email);
+    }
   }
 
 }

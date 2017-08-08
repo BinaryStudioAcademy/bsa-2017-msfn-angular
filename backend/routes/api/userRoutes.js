@@ -1,11 +1,11 @@
 const
     apiResponse = require('express-api-response'),
     userService = require('../../services/userService'),
-    userRepository = require('../../repositories/userRepository'),    
-    baseUrl = '/api/user/';
+    userRepository = require('../../repositories/userRepository'),
+    baseUrl = '/api/user/',
+    subscribeRoutes = require('./subscribeRoutes');
 
 module.exports = function (app) {
-
     app.get(baseUrl+'me', function (req, res, next) {
         res.data = req.session.user;
         next();
@@ -50,4 +50,6 @@ module.exports = function (app) {
             next();
         });
     }, apiResponse);
+
+    app.use(baseUrl + 'subscribe', subscribeRoutes);
 };

@@ -1,0 +1,6 @@
+<md-input-container>
+    <input mdInput value="Say hi to server" placeholder="Message" #message>
+</md-input-container>
+
+
+<button md-button (click)="sendToServer(message.value)">Send to server</button>

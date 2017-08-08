@@ -1,15 +1,31 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 const bcrypt = require('bcrypt-nodejs');
+
 
 const User = new Schema({
     firstName: String,
     lastName: String,
-    email: String,
-    password: String,
+    email: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
     isCoach: String,
     position: String,
-    salt: String
+    salt: {
+        type: String,
+    },
+    googleID: String,
+    facebookID: String,
+    twitterID: String,
+    follow: [ObjectId],
+
 });
 
 User.pre('save', function(next) {
@@ -29,9 +45,28 @@ User.pre('save', function(next) {
     });
 });
 
-User.methods.checkPassword = function(password){
+User.pre('update', function(next) {
+  const fields = this._update.$set;
+
+  if (!fields.password) return next();
+
+  bcrypt.genSalt(1012, (err, salt) => {
+    fields.salt = salt;
+    bcrypt.hash(fields.password, fields.salt, null, (err, hash) => {
+      if (err) return next(err);
+
+      fields.password = hash;
+      next();
+    });
+  });
+});
+
+User.methods.checkPassword = function(password, callback){
     "use strict";
-    return (this.encryptPassword(password) === this.password);
+    this.encryptPassword(password, (err, hash) => {
+        if (err) return callback(err);
+        callback(err, (hash === this.password))
+    });
 };
 
 User.methods.encryptPassword = function(password, callback){

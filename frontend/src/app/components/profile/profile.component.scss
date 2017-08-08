@@ -1,4 +1,6 @@
 @import '../../../globalStyles/variables.scss';
+@import '../../../globalStyles/indentations.scss';
+@import '../../../globalStyles/text.scss';
 @mixin linear-gradient($direction, $color-stops...) {
     background: nth(nth($color-stops, 1), 1);
     background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
@@ -9,13 +11,18 @@ p {
     margin: 0;
 }
 
-a {
-    text-decoration: none;
-    display: inline-block;
+* {
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
 }
 
-* {
-    box-sizing: border-box;
+a {
+    display: block;
+    color: $text-main-color;
+}
+
+md-error{
+     color: $error-color;   
 }
 
 label {
@@ -23,7 +30,7 @@ label {
 }
 
 .ph-input {
-    width: 45%;
+    width: 40%;
     margin-left: 10px;
 }
 
@@ -53,19 +60,22 @@ label {
     width: 100%;
     min-height: 500px;
     background-color: $bg-color;
-    font-family: $font-general;
+    font-family: 'Times New Roman', Times, serif;
     justify-content: center;
 }
 
 .profile {
     display: flex;
     flex-direction: column;
+    position: relative;
     width: 460px;
     padding: 20px;
     margin: 30px 0;
     border: 1px #2A2A2A solid;
     background: $gradient-from-color;
     background-image: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .6);
+
 }
 
 .profile-title {
@@ -74,8 +84,8 @@ label {
     margin-bottom: 25px;
 }
 
-.profile-input {
-    padding: 0 10px 0;
+.input{
+    padding: $input-padding;
 }
 
 .profile-form {
@@ -169,6 +179,7 @@ label {
 .profile-current-email {
     display: flex;
     flex: 1 1 180px;
+    color: $usual-text;
 }
 
 .profile-email-btn {
@@ -189,7 +200,7 @@ label {
         justify-content: center;
         display: flex;
         flex: 1 1 130px;
-        margin-top:25px;
+        margin-top: 25px;
     }
 }
 
@@ -206,14 +217,10 @@ label {
     }
 }
 
-.phys-input {
-    margin-left: 10px;
-    width: 37%;
-}
-
 .profile-password {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .password-container {
@@ -252,5 +259,11 @@ label {
     }
     .birthday-year {
         flex: 0;
+    }
+    .profile-password {
+        margin-top: 15px;
+    }
+    .ph-input{
+            width: 25%;
     }
 }

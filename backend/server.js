@@ -7,6 +7,8 @@ const bodyParser = require('body-parser'),
     MongoStore = require('connect-mongo')(session),
     sessionSecret = require('./config/session').secret,
     mongoose = require('mongoose'),
+    passport = require('passport'),
+    isLogged = require('./middleware/passportStrategyMiddleware').isLogged,
     cookieParser = require('cookie-parser'),
     port = 3060;
 
@@ -25,21 +27,32 @@ context.mongoStore = new MongoStore({
     mongooseConnection: mongooseConnection
 });
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+//middleware for checking authorized user (if auth { next() } else { redirect to '/'})
+app.use('/profile/*', isLogged);
+
 const staticPath = path.resolve(__dirname + '/../dist');
 app.use(express.static(staticPath));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     // console.log(req.session.user);
     next();
 });
+
+const passportOAuthInit = require('./middleware/passportOAuthMiddleware')();
 
 const apiRoutes = require('./routes/api/routes')(app);
 const viewRoutes = require('./routes/view/routes')(app);
 
 console.log(`app runs on port: ${port}`);
 const server = app.listen(port);
+
+const io = require('socket.io')(server);
+const socketsInit = require('./middleware/testSocketMiddleware')(io);
 
 module.exports = app;
