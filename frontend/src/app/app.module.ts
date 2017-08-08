@@ -7,6 +7,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpService} from './services/http.service';
+import {EncryptService} from './services/encrypt.service';
 import {HttpClientModule} from '@angular/common/http';
 import {RegistrationComponent} from './components/registration/registration.component';
 import {LoginComponent} from './components/login/login.component';
@@ -68,7 +69,12 @@ import {IndexPageComponent} from './components/index-page/index-page.component';
         ReactiveFormsModule,
         HttpModule
     ],
-    providers: [HttpService, WindowObj, IsLoggedGuard],
+    providers: [
+        HttpService, 
+        WindowObj, 
+        IsLoggedGuard, 
+        EncryptService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
