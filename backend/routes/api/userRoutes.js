@@ -2,7 +2,8 @@ const
     apiResponse = require('express-api-response'),
     userService = require('../../services/userService'),
     userRepository = require('../../repositories/userRepository'),
-    baseUrl = '/api/user/';
+    baseUrl = '/api/user/',
+    subscribeRoutes = require('./subscribeRoutes');
 
 module.exports = function (app) {
     app.get(baseUrl+'me', function (req, res, next) {
@@ -27,7 +28,10 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.post(baseUrl, function (req, res, next) {
+         console.log(req.body);
         userService.addItem(req.body, function (err, data) {
+           
+            console.log(data);
             res.data = data;
             res.err = err;
             next();
@@ -49,4 +53,6 @@ module.exports = function (app) {
             next();
         });
     }, apiResponse);
+
+    app.use(baseUrl + 'subscribe', subscribeRoutes);
 };
