@@ -1,0 +1,256 @@
+@import '../../../globalStyles/variables.scss';
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+label {
+    padding: 0;
+}
+
+.ph-input {
+    width: 45%;
+    margin-left: 10px;
+}
+
+.btn {
+    border: none;
+    margin-top: 35px;
+    width: 90%;
+    padding: 15px;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 11pt;
+    border-radius: 50px;
+    outline: none;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.input {
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 500px;
+    background-color: $bg-color;
+    font-family: $font-general;
+    justify-content: center;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    width: 460px;
+    padding: 20px;
+    margin: 30px 0;
+    border: 1px #2A2A2A solid;
+    background: $gradient-from-color;
+    background-image: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
+}
+
+.profile-title {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.profile-input {
+    padding: 0 10px 0;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.profile-avatar {
+    display: flex;
+    flex: 1 1 200px;
+    flex-direction: column;
+}
+
+.profile-picture {
+    display: flex;
+    justify-content: center;
+    >img {
+        border-radius: 50%;
+    }
+}
+
+.profile-upload {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.profile-upload-container {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.profile-upload-container input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.upload-btn {
+    border: none;
+    padding: 5px;
+    color: $text-main-color;
+    background-color: $btn-color;
+    border-radius: 50px;
+    outline: none;
+    width: 160px;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.profile-fullname {
+    display: flex;
+    flex: 1 1 200px;
+    flex-direction: column;
+    >p {
+        margin: 0;
+        text-align: left;
+    }
+}
+
+.profile-content {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.profile-email {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0 10px;
+}
+
+.profile-current-email {
+    display: flex;
+    flex: 1 1 180px;
+}
+
+.profile-email-btn {
+    display: flex;
+    flex: 1 1 185px;
+    justify-content: flex-end;
+}
+
+.profile-email-input {
+    text-align: center;
+}
+
+.profile-birthday {
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 30px;
+    >div {
+        justify-content: center;
+        display: flex;
+        flex: 1 1 130px;
+        margin-top:25px;
+    }
+}
+
+.profile-physparam {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    >div {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex: 1 1 170px;
+    }
+}
+
+.phys-input {
+    margin-left: 10px;
+    width: 37%;
+}
+
+.profile-password {
+    display: flex;
+    justify-content: center;
+}
+
+.password-container {
+    max-width: 300px;
+}
+
+.profile-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-form-button {
+    margin-top: 30px;
+    width: 375px;
+}
+
+@media only screen and (max-width: $small-screen) {
+    .profile-current-email {
+        justify-content: center;
+        margin: 0 15px 15px;
+    }
+    .profile-email-btn {
+        flex: 0;
+    }
+    .profile-fullname {
+        align-items: center;
+    }
+    .profile-name,
+    .profile-lastname {
+        width: 80%;
+    }
+    .profile-birthday {
+        >div {
+            margin: 20px 0 20px;
+        }
+    }
+    .birthday-year {
+        flex: 0;
+    }
+}

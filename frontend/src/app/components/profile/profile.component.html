@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="profile">
+        <md-card-title class="profile-title">Your profile</md-card-title>
+        <form class="profile-form" [formGroup]="profileForm">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <div class="profile-picture">
+                        <img src="http://via.placeholder.com/150x150" alt="user picture" class="profile-picture-img">
+                    </div>
+                    <div class="profile-upload">
+                        <button class="profile-upload-container upload-btn">
+               <span>Upload new picture</span>
+               <input type="file" class="upload"/>
+             </button>
+                    </div>
+                </div>
+                <div class="profile-fullname">
+                    <md-input-container class="profile-name">
+                        <input id="name" class=profile-input mdInput formControlName="name">
+                        <md-error>Name can`t consist less than two characters</md-error>
+                    </md-input-container>
+
+                    <md-input-container class="profile-lastname">
+                        <input id="lastname" class="profile-input" mdInput formControlName="lastname">
+                        <md-error>Lastname can`t consist less than two characters</md-error>
+                    </md-input-container>
+                </div>
+            </div>
+            <div class="profile-content">
+                <div class="profile-email">
+                    <div class="profile-current-email">
+                        <md-input-container>
+                            <input mdInput class="profile-email-input" formControlName="email">
+                        </md-input-container>
+                    </div>
+                    <div class=profile-email-btn>
+                        <button md-raised-button>Add Email Address</button>
+                    </div>
+                </div>
+                <div class="profile-birthday">
+                    <div class="birthday-month">
+                        <md-select placeholder="Month" [(ngModel)]="user.birthday.month" (change)="onSelect(user.birthday.month,user.birthday.year)"
+                            [ngModelOptions]="{standalone: true}">
+                            <md-option *ngFor="let month of months" [value]="month.value">
+                                {{ month.value }}
+                            </md-option>
+                        </md-select>
+                    </div>
+                    <div class="birthday-day">
+                        <md-select placeholder="Day" [(ngModel)]="user.birthday.day" [ngModelOptions]="{standalone: true}">
+                            <md-option *ngFor="let day of days" [value]="day">
+                                {{ day }}
+                            </md-option>
+                        </md-select>
+                    </div>
+                    <div class="birthday-year">
+                        <md-select placeholder="Year" [(ngModel)]="user.birthday.year" (change)="onSelect(user.birthday.month,user.birthday.year)"
+                            [ngModelOptions]="{standalone: true}">
+                            <md-option *ngFor="let year of years" [value]="year">
+                                {{ year }}
+                            </md-option>
+                        </md-select>
+                    </div>
+                </div>
+                <div class="profile-physparam">
+                    <div class="weight-container">
+                        <label for='weight' class="label">Weight</label>
+                        <md-input-container class="ph-input">
+                            <input type="number" id="weight" class="profile-input" mdInput  formControlName="weight">
+                            <md-error>Weight should be 30-300 kgs</md-error>
+                        </md-input-container>
+                    </div>
+                    <div class="height-container">
+                        <label for='height' class="label">Height</label>
+                        <md-input-container class="ph-input">
+                            <input type="number" id="height" class="profile-input" mdInput formControlName="height">
+                            <md-error>Height should be 100-300 cm</md-error>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div class="profile-password">
+                    <button md-raised-button class="">Change password</button>
+                </div>
+            </div>
+            <div class="profile-footer">
+                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" [disabled]="!profileForm.valid">Save changes</button>
+            </div>
+        </form>
+    </div>
+</div>

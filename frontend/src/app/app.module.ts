@@ -18,6 +18,7 @@ import {TestHttpComponent} from './components/test-http/test-http.component';
 import {TestSocketsComponent} from './components/test-sockets/test-sockets.component';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import {WindowObj} from './services/window.service';
+import { ProfileComponent } from './components/profile/profile.component';
 
 import {
     MdButtonModule,
@@ -46,7 +47,8 @@ import {IndexPageComponent} from './components/index-page/index-page.component';
         RestorePasswordComponent,
         IndexPageComponent,
         ForgotPasswordMailComponent,
-        TestSocketsComponent],
+        TestSocketsComponent,
+        ProfileComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
