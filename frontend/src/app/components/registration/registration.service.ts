@@ -74,7 +74,7 @@ export class RegistrationService {
     const yearsOutput = [];
     const date = new Date();
     const currentYear = date.getFullYear();
-    for (let i = 1900; i <= currentYear; i++) {
+    for (let i = 1900; i <= currentYear - 14; i++) {
       yearsOutput.push(i);
     }
     return yearsOutput;
@@ -84,7 +84,7 @@ export class RegistrationService {
     let yearError = false;
     const date = new Date();
     const currentYear = date.getFullYear();
-    yearError = currentYear - year < 18;
+    yearError = currentYear - year < 14;
 
     return yearError;
   }

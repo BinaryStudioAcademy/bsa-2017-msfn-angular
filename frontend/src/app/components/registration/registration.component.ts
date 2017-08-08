@@ -98,7 +98,9 @@ export class RegistrationComponent implements OnInit {
         const req = this.http.post('/api/user', user);
         req.subscribe(
           data => {},
-          err => this.userError = err.statusText
+          err => {
+            this.userError = err.error.error;
+          }
         );
       }
     } else {

@@ -135,6 +135,10 @@ md-slide-toggle {
   md-select {
     width: 45%;
   }
+
+  .mat-select /deep/ .mat-select-trigger {
+    min-width: 80px;
+  }
 }
 
 #height, #weight {
@@ -174,10 +178,6 @@ md-slide-toggle {
     font-size: $button-text;
     font-weight: 600;
     background: $btn-color;
-  }
-
-  button:hover {
-    cursor: pointer;
   }
 }
 
@@ -233,7 +233,7 @@ md-slide-toggle {
 @media only screen and (min-width: $medium-screen) {
 
   #form {
-    width: 370px;
+    width: 400px;
     height: 80%;
   }
 

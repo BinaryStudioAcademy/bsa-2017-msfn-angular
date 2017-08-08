@@ -35,7 +35,7 @@
       <md-error *ngIf="firstNameFormControl.hasError('required')">
         First name is required
       </md-error>
-      <md-error *ngIf="firstNameFormControl.hasError('minLength')">
+      <md-error *ngIf="firstNameFormControl.hasError('minlength')">
         First name should contain at least 2 characters
       </md-error>
     </md-input-container>
@@ -45,7 +45,7 @@
       <md-error *ngIf="lastNameFormControl.hasError('required')">
         Last name is required
       </md-error>
-      <md-error *ngIf="lastNameFormControl.hasError('minLength')">
+      <md-error *ngIf="lastNameFormControl.hasError('minlength')">
         Last name should contain at least 2 characters
       </md-error>
     </md-input-container>
@@ -53,7 +53,7 @@
     <div id="birthday" class="input-row">
       <div>Birthday</div>
       <div id="birthday-warning" [ngClass]="{'error': yearError}">
-        You should be older than 18. Others don't see your birthday.
+        You should be older than 14. Others don't see your birthday.
       </div>
 
       <div id="birthday-inputs">
@@ -79,7 +79,7 @@
 
     <div class="input-row">
       <md-input-container id="height">
-        <input mdInput type="number" placeholder="Height" required [(ngModel)]="user.height" [formControl]="heightFormControl">
+        <input mdInput type="number" placeholder="Height, cm" required [(ngModel)]="user.height" [formControl]="heightFormControl">
         <md-error *ngIf="heightFormControl.hasError('required')">
           Height is required
         </md-error>
@@ -89,7 +89,7 @@
       </md-input-container>
 
       <md-input-container id="weight">
-        <input mdInput type="number" placeholder="Weight" required [(ngModel)]="user.weight" [formControl]="weightFormControl">
+        <input mdInput type="number" placeholder="Weight, kg" required [(ngModel)]="user.weight" [formControl]="weightFormControl">
         <md-error *ngIf="weightFormControl.hasError('required')">
           Weight is required
         </md-error>
@@ -104,7 +104,7 @@
       <md-error *ngIf="passwordFormControl.hasError('required')">
         Password is required
       </md-error>
-      <md-error *ngIf="passwordFormControl.hasError('minLength')">
+      <md-error *ngIf="passwordFormControl.hasError('minlength')">
         Password should contain at least 6 characters
       </md-error>
     </md-input-container>
