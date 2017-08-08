@@ -39,7 +39,7 @@ app.use(express.static(staticPath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     // console.log(req.session.user);
     next();
 });
@@ -51,5 +51,8 @@ const viewRoutes = require('./routes/view/routes')(app);
 
 console.log(`app runs on port: ${port}`);
 const server = app.listen(port);
+
+const io = require('socket.io')(server);
+const socketsInit = require('./middleware/testSocketMiddleware')(io);
 
 module.exports = app;
