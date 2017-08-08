@@ -6,6 +6,8 @@ import {TestHttpComponent} from './components/test-http/test-http.component';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import {RegistrationComponent} from './components/registration/registration.component';
 import {LoginComponent} from './components/login/login.component';
+import {IndexPageComponent} from './components/index-page/index-page.component';
+// import { ForLoggedInGuard } from './guards/for-logged-in.guard';
 import { IsLoggedGuard } from './guards/is-logged.guard';
 import {ForgotPasswordMailComponent} from './components/forgot-password-mail/forgot-password-mail.component';
 
@@ -13,7 +15,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'register'
+    component: IndexPageComponent
   },
   {
     path: 'login',
