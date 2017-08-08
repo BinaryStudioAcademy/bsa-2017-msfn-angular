@@ -19,6 +19,7 @@ import {TestHttpComponent} from './components/test-http/test-http.component';
 import {TestSocketsComponent} from './components/test-sockets/test-sockets.component';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import {WindowObj} from './services/window.service';
+import {ForAdminGuard} from './guards/for-admin.guard';
 
 import {
     MdButtonModule,
@@ -70,10 +71,11 @@ import {IndexPageComponent} from './components/index-page/index-page.component';
         HttpModule
     ],
     providers: [
-        HttpService, 
-        WindowObj, 
-        IsLoggedGuard, 
-        EncryptService
+        HttpService,
+        WindowObj,
+        IsLoggedGuard,
+        EncryptService,
+        ForAdminGuard
     ],
     bootstrap: [AppComponent]
 })
