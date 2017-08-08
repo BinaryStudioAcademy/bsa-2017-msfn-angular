@@ -4,6 +4,8 @@ const
     userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/user/';
 
+const GoogleCalendar = require('../../services/googleCalendarService');
+
 module.exports = function (app) {
     app.get(baseUrl+'me', function (req, res, next) {
         res.data = req.session.user;
@@ -11,11 +13,14 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl, function (req, res, next) {
-        userRepository.getAll(function (err, data) {
-            res.data = data;
-            res.err = err;
-            next();
-        });
+
+        GoogleCalendar();
+        next();
+        // userRepository.getAll(function (err, data) {
+        //     res.data = data;
+        //     res.err = err;
+        //     next();
+        // });
     }, apiResponse);
 
     app.get(baseUrl + ':id', function (req, res, next) {
