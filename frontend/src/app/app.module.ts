@@ -31,6 +31,7 @@ import {
 } from '@angular/material';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import 'hammerjs';
+import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import 'hammerjs';
     TestHttpComponent,
     HeaderViewComponent,
     RestorePasswordComponent,
-    OAuthComponent
+    OAuthComponent,
+    NotificationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,7 @@ import 'hammerjs';
     HttpModule
   ],
   providers: [HttpService, WindowObj, IsLoggedGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ NotificationDialogComponent ],
 })
 export class AppModule {}
