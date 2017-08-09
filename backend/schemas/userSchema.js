@@ -17,6 +17,7 @@ const User = new Schema({
       required: true
     },
     isCoach: String,
+    isAdmin: Boolean,
     position: String,
     salt: {
         type: String,

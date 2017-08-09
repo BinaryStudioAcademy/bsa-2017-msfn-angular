@@ -21,6 +21,8 @@ import { TestSocketsComponent } from './components/test-sockets/test-sockets.com
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { WindowObj } from './services/window.service';
 import { ForAdminGuard } from './guards/for-admin.guard';
+import { ProfileComponent } from './components/profile/profile.component';
+import {ImageCropperModule} from 'ng2-img-cropper';
 
 import {
     MdSnackBarModule,
@@ -56,7 +58,9 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
         TestSocketsComponent,
         ListComponent,
         ExerciseTypeComponent,
-        AutocompletePipe],
+        AutocompletePipe,
+        ProfileComponent
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -79,14 +83,14 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
         HttpModule,
         MdTableModule,
         CdkTableModule,
-        MdAutocompleteModule
+        MdAutocompleteModule,
+        ImageCropperModule
     ],
     providers: [
-      HttpService,
-      WindowObj,
-      IsLoggedGuard,
-      EncryptService,
-      ForAdminGuard
+        HttpService,
+        WindowObj,
+        IsLoggedGuard,
+        EncryptService
     ],
     bootstrap: [AppComponent]
 })

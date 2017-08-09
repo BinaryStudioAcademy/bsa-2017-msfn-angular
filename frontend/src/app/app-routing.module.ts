@@ -1,18 +1,19 @@
 import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
-import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
-import {RestorePasswordComponent} from './components/restore-password/restore-password.component';
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {TestHttpComponent} from './components/test-http/test-http.component';
-import {HeaderViewComponent} from './components/header-view/header-view.component';
-import {RegistrationComponent} from './components/registration/registration.component';
-import {LoginComponent} from './components/login/login.component';
-import {IndexPageComponent} from './components/index-page/index-page.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { TestHttpComponent } from './components/test-http/test-http.component';
+import { HeaderViewComponent } from './components/header-view/header-view.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
+import { IndexPageComponent } from './components/index-page/index-page.component';
 // import { ForLoggedInGuard } from './guards/for-logged-in.guard';
-import {IsLoggedGuard} from './guards/is-logged.guard';
-import {ForgotPasswordMailComponent} from './components/forgot-password-mail/forgot-password-mail.component';
-import {TestSocketsComponent} from './components/test-sockets/test-sockets.component';
-import {ForAdminGuard} from './guards/for-admin.guard';
+import { IsLoggedGuard } from './guards/is-logged.guard';
+import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
+import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
+import { ForAdminGuard } from './guards/for-admin.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
     {
@@ -59,9 +60,12 @@ const routes: Routes = [
         component: TestSocketsComponent
     },
     {
-    path: 'exercise-type', // can be removed
-    children: [],
-    component: ExerciseTypeComponent
+        path: 'exercise-type', // can be removed
+        children: [],
+        component: ExerciseTypeComponent
+    }, {
+        path: 'profile',
+        component: ProfileComponent
     }
 ];
 
@@ -73,4 +77,4 @@ const routes: Routes = [
     ]
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule { }

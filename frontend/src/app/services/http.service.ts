@@ -6,6 +6,7 @@ import { IHttpReq } from '../models/http-req';
 // import { Observable } from 'rxjs/Observable';
 // import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/toPromise';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpService {
@@ -13,7 +14,7 @@ export class HttpService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   public failMessage = 'Fail';
 
-  constructor(private _http: Http, private snackBar: MdSnackBar) { }
+  constructor(private _http: Http, private snackBar: MdSnackBar, private _router: Router) { }
 
   private openSnackBar(message: string, action = 'Close') {
     this.snackBar.open(message, action, {
@@ -22,6 +23,9 @@ export class HttpService {
   }
 
   private handleError = (error: any): Promise<any> => {
+    if (error && error.status === 401) {
+      this._router.navigate(['/login']);
+    }
     this.openSnackBar(this.failMessage);
     return error;
   }

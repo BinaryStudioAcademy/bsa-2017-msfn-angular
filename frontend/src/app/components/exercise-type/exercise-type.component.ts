@@ -54,11 +54,9 @@ export class ExerciseTypeComponent implements OnInit {
   }
   deleteExerciseTypeByCode(code: number) {
     const request: IHttpReq = {
-      url: '/api/exercise-type',
+      url: '/api/exercise-type/' + code.toString(),
       method: 'DELETE',
-      body: {
-        code: code
-      }
+      body: {}
     };
     this.httpService.sendRequest(request).then(data => {
       console.log(data);

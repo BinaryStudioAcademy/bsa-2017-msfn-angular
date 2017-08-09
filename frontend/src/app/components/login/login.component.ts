@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { EncryptService } from '../../services/encrypt.service';
+import { IHttpReq } from '../../models/http-req';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +26,28 @@ export class LoginComponent {
     Validators.minLength(6)
   ]);
 
-  constructor() { }
+  constructor(
+    private encryptor: EncryptService,
+    private httpHandler: HttpService,
+    private router: Router
+  ) { }
 
   login() {
-    const data = {
+    const encData = this.encryptor.encrypt({
       'password': this.password,
       'email': this.email
-    };
+    }),
+      sendData: IHttpReq = {
+        url: '/api/login',
+        method: 'POST',
+        body: {data: encData}
+      }
+
+    this.httpHandler.sendRequest(sendData)
+      .then((res) => {
+        if (res.access) {
+          this.router.navigate(['/profile'])
+        }
+      })
   }
 }
