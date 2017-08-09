@@ -3,6 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {CdkTableModule} from '@angular/cdk';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -22,9 +23,42 @@ import {WindowObj} from './services/window.service';
 import {ForAdminGuard} from './guards/for-admin.guard';
 
 import {
-    MdButtonModule,
-    MdCardModule,
-    MdCheckboxModule,
+  MdSnackBarModule,
+  MdChipsModule,
+  MdIconModule,
+  MdRadioModule,
+  MdSelectModule,
+  MdCardModule,
+  MdInputModule,
+  MdCheckboxModule,
+  MdButtonModule,
+  MdDialogModule,
+  MdSlideToggleModule,
+  MdTableModule
+} from '@angular/material';
+import 'hammerjs';
+import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    RegistrationComponent,
+    LoginComponent,
+    ForgetPasswordComponent,
+    TestHttpComponent,
+    HeaderViewComponent,
+    RestorePasswordComponent,
+    ForgotPasswordMailComponent,
+    ExerciseTypeComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MdSnackBarModule,
+>>>>>>> task-37
     MdChipsModule,
     MdDialogModule,
     MdIconModule,
@@ -32,6 +66,7 @@ import {
     MdRadioModule,
     MdSelectModule,
     MdSlideToggleModule,
+<<<<<<< HEAD
     MdSnackBarModule
 } from '@angular/material';
 import 'hammerjs';
@@ -78,6 +113,16 @@ import {IndexPageComponent} from './components/index-page/index-page.component';
         ForAdminGuard
     ],
     bootstrap: [AppComponent]
+=======
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    MdTableModule,
+    CdkTableModule
+  ],
+  providers: [HttpService, WindowObj, IsLoggedGuard],
+  bootstrap: [AppComponent]
+>>>>>>> task-37
 })
 export class AppModule {
 }

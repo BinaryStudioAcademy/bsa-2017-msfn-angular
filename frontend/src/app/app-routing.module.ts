@@ -1,3 +1,4 @@
+import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
 import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
 import {RestorePasswordComponent} from './components/restore-password/restore-password.component';
 import {NgModule} from '@angular/core';
@@ -34,6 +35,7 @@ const routes: Routes = [
         children: [],
         component: ForgetPasswordComponent
 
+<<<<<<< HEAD
     },
     {
         path: 'test-http', // for testing, can be removed
@@ -57,6 +59,11 @@ const routes: Routes = [
         path: 'test-socket', // for testing socket.io
         children: [],
         component: TestSocketsComponent
+    },
+    {
+    path: 'exercise-type', // can be removed
+    children: [],
+    component: ExerciseTypeComponent
     }
 ];
 
