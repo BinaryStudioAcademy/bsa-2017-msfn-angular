@@ -10,6 +10,7 @@ const bodyParser = require('body-parser'),
     passport = require('passport'),
     isLogged = require('./middleware/passportStrategyMiddleware').isLogged,
     cookieParser = require('cookie-parser'),
+    initService = require('./services/initService')();
     port = 3060;
 
 const app = express();
@@ -39,17 +40,18 @@ app.use(express.static(staticPath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     // console.log(req.session.user);
     next();
 });
-
-const passportOAuthInit = require('./middleware/passportOAuthMiddleware')();
 
 const apiRoutes = require('./routes/api/routes')(app);
 const viewRoutes = require('./routes/view/routes')(app);
 
 console.log(`app runs on port: ${port}`);
 const server = app.listen(port);
+
+const io = require('socket.io')(server);
+const socketsInit = require('./middleware/testSocketMiddleware')(io);
 
 module.exports = app;

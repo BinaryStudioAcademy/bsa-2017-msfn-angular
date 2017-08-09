@@ -1,9 +1,16 @@
-(function () {
-    var passport = require('passport'),
-        LocalStrategy = require('passport-local').Strategy,
-        mongoose = require('mongoose'),
-        userRepository = require('../repositories/userRepository')
+const passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    mongoose = require('mongoose'),
+    userRepository = require('../repositories/userRepository');
 
+function PassportStrategy() {
+
+}
+
+PassportStrategy.prototype.strategy = strategy;
+PassportStrategy.prototype.isLogged = isLogged;
+
+function strategy() {
     passport.use(new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password'
@@ -37,9 +44,10 @@
             done(err, user);
         });
     });
-})()
+};
 
-exports.isLogged = function (req, res, next) {
-    console.log(req.isAuthenticated())
+function isLogged(req, res, next) {
     req.isAuthenticated() ? next() : res.redirect('/');
 };
+
+module.exports = new PassportStrategy;
