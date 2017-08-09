@@ -21,8 +21,8 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.delete(baseUrl, function (req, res, next) {
-        exerciseTypeService.deleteExerciseTypeByCode(req.body.code, function(err, data) {
+    app.delete(baseUrl + ':code', function (req, res, next) {
+        exerciseTypeService.deleteExerciseTypeByCode(req.params.code, function(err, data) {
             res.err = err;
             next();
        });
