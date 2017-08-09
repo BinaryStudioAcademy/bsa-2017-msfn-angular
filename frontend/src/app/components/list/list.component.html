@@ -1,6 +1,11 @@
-<p>
-  list works!
-</p>
-<md-chip-list>
-    <md-chip>Text</md-chip>
-</md-chip-list>
+<md-input-container floatPlaceholder="always" class="items-list">
+    <md-chip-list>
+        <md-chip class="chip" *ngFor="let item of items; index as i;">{{item}}
+            <md-icon class="icon" (click)="deleteItem(i)">clear</md-icon>
+        </md-chip>
+        <input mdInput [(ngModel)]="input" [placeholder]="placeholder" type="text" class="list-input" name="item"
+               (keydown)="addItem($event)">
+    </md-chip-list>
+</md-input-container>
+
+
