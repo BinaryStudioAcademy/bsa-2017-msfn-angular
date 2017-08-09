@@ -5,13 +5,15 @@
             <div class="profile-header">
                 <div class="profile-avatar">
                     <div class="profile-picture">
-                        <img src="http://via.placeholder.com/150x150" alt="user picture" class="profile-picture-img">
+                        <img [src]="data.image" alt="user picture" class="profile-picture-img">
+                        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
                     </div>
                     <div class="profile-upload">
-                        <button class="profile-upload-container upload-btn">
-               <span>Upload new picture</span>
-               <input type="file" class="upload"/>
-             </button>
+                        <div class="profile-upload-container upload-btn" (click)="saveImg('save')">
+               <span>{{hideCropper ? 'Upload new picture' : 'Save'}}</span>
+               <input type="file" accept="image/*" *ngIf="hideCropper" class="upload" (change)="fileChangeListener($event)"/>
+             </div>
+            <div class="profile-upload-container upload-btn" *ngIf="!hideCropper" (click)="saveImg('cancel')">Cancel</div>
                     </div>
                 </div>
                 <div class="profile-fullname">
