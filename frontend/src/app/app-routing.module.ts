@@ -10,7 +10,7 @@ import {IndexPageComponent} from './components/index-page/index-page.component';
 // import { ForLoggedInGuard } from './guards/for-logged-in.guard';
 import {IsLoggedGuard} from './guards/is-logged.guard';
 import {ForgotPasswordMailComponent} from './components/forgot-password-mail/forgot-password-mail.component';
-import {TestSocketsComponent} from './components/test-sockets/test-sockets.component';
+// import {TestSocketsComponent} from './components/test-sockets/test-sockets.component';
 import {ForAdminGuard} from './guards/for-admin.guard';
 
 const routes: Routes = [
@@ -52,11 +52,6 @@ const routes: Routes = [
         path: 'restore-password', // for testing restorePasswordComponent, can be removed
         children: [],
         component: RestorePasswordComponent
-    },
-    {
-        path: 'test-socket', // for testing socket.io
-        children: [],
-        component: TestSocketsComponent
     }
 ];
 

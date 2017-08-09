@@ -16,7 +16,7 @@ import {RestorePasswordComponent} from './components/restore-password/restore-pa
 import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
 import {ForgotPasswordMailComponent} from './components/forgot-password-mail/forgot-password-mail.component';
 import {TestHttpComponent} from './components/test-http/test-http.component';
-import {TestSocketsComponent} from './components/test-sockets/test-sockets.component';
+// import {TestSocketsComponent} from './components/test-sockets/test-sockets.component';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import {WindowObj} from './services/window.service';
 import {ForAdminGuard} from './guards/for-admin.guard';
@@ -36,6 +36,7 @@ import {
 } from '@angular/material';
 import 'hammerjs';
 import {IndexPageComponent} from './components/index-page/index-page.component';
+import { ListComponent } from './components/list/list.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +49,8 @@ import {IndexPageComponent} from './components/index-page/index-page.component';
         RestorePasswordComponent,
         IndexPageComponent,
         ForgotPasswordMailComponent,
-        TestSocketsComponent],
+        // TestSocketsComponent,
+        ListComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
