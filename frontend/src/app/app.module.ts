@@ -22,6 +22,7 @@ import { HeaderViewComponent } from './components/header-view/header-view.compon
 import { WindowObj } from './services/window.service';
 import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
+import {ImageCropperModule} from 'ng2-img-cropper';
 
 import {
   MdSnackBarModule,
@@ -79,7 +80,8 @@ import { ListComponent } from './components/list/list.component';
         ReactiveFormsModule,
         HttpModule,
         MdTableModule,
-        CdkTableModule
+        CdkTableModule,
+        ImageCropperModule
     ],
     providers: [HttpService, WindowObj, IsLoggedGuard],
     bootstrap: [AppComponent]
