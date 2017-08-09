@@ -5,8 +5,8 @@
             <div class="profile-header">
                 <div class="profile-avatar">
                     <div class="profile-picture">
-                        <img [src]="data.image" *ngIf="hideCropper" alt="user picture" class="profile-picture-img">
-                        <img-cropper #cropper *ngIf="!hideCropper" [image]="data" [settings]="cropperSettings"></img-cropper>
+                        <img [src]="data.image" alt="user picture" class="profile-picture-img">
+                        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
                     </div>
                     <div class="profile-upload">
                         <div class="profile-upload-container upload-btn" (click)="saveImg('save')">

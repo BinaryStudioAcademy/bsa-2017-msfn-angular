@@ -54,6 +54,7 @@ export class ProfileComponent implements OnInit {
     this.cropperSettings.canvasWidth = 400;
     this.cropperSettings.canvasHeight = 300;
     this.cropperSettings.rounded = true;
+    this.cropperSettings.dynamicSizing = true;
     this.cropperSettings.touchRadius = 10;
 
     this.data = {
