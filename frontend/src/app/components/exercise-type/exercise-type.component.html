@@ -28,5 +28,10 @@
     <md-row *cdkRowDef="let data; columns: displayedColumns;"></md-row>
   </md-table>
 
+<!--Example of usage-->
+<button (click)="getAllExerciseTypes()" md-raised-button>Get all</button>
+<button (click)="deleteExerciseTypeByCode(2)" md-raised-button>Delete by code</button>
+<button (click)="updateExerciseTypeByCode(1, 'Push ups')" md-raised-button>Update by code</button>
+<button (click)="addExerciseType('Jogging')" md-raised-button>Add</button>
 
 </div>

@@ -1,125 +1,104 @@
 const ApiError = require('./apiErrorService');
 const exerciseTypeRepository = require('../repositories/exerciseTypeRepository');
 
-function ExerciseTypeService() {
-}
+function ExerciseTypeService() {}
 
-PasswordService.prototype.createConfirmCode = createConfirmCode; // used funcs
-PasswordService.prototype.checkConfirmCode = checkConfirmCode;
+ExerciseTypeService.prototype.createExerciseType = createExerciseType; // used funcs
+ExerciseTypeService.prototype.getAllExerciseTypes = getAllExerciseTypes;
+ExerciseTypeService.prototype.updateExerciseTypeByCode = updateExerciseTypeByCode;
+ExerciseTypeService.prototype.deleteExerciseTypeByCode = deleteExerciseTypeByCode;
+ExerciseTypeService.prototype.deleteAllExerciseTypes = deleteAllExerciseTypes;
 
 
 
+function createExerciseType(name, callback) {
 
-
-    // func which do: 1) send name, get last id, save in repo name, last id and return last id for view
-    // delete by id, upd view
-    // store here base for table, update when loaded
-    // this service use in ExerciseTypeComponent
-    // All must be debugged
-
-function createConfirmCode(body, callback) {
-
-    userRepository.getUserByEmail(body.email, (err, data) => {
+    exerciseTypeRepository.getAll((err, exerciseTypeData) => {
         "use strict";
+
         if (err) return callback(err);
+        let max = 0;
+        if (exerciseTypeData instanceof Array && exerciseTypeData.length) {
+            max = exerciseTypeData[0].code;
 
-        if (data === null) {
-            callback(new ApiError("User not found"));
-        } else {
-
-            const confirmData = {};
-            confirmData.user = data._id;
-            confirmCodeRepository.get({ user: data._id }, (err, data) => {
-                let deleteErr = false;
-                if (data.length > 0) {
-                    for (let i = 0; i < data.length; i++) {
-                        const confirmCodeId = data[i];
-                        confirmCodeRepository.deleteById(confirmCodeId, (err, data) => {
-                            if (err) {
-                                deleteErr = true;
-                            }
-                        });
-                    }
-                }
-                if (!deleteErr) {
-                    confirmCodeRepository.add(confirmData, (err, data) => {
-                        const resetLink = "https://msfn.com/password_reset/" + data.confirmCode;
-                        emailService.send(
-                            {
-                                to: body.email,
-                                subject: "Please reset your password",
-                                html: "<a href=\"" + resetLink + "\">" + resetLink + "</a>"
-                            },
-                            (err, data) => {
-                                "use strict";
-                                if (err) return next(err);
-                                if (data.rejected.length == 0) {
-                                    data.status = 'ok';
-                                }
-                                callback(null, data);
-                            }
-                        );
-                    });
-                }
+            exerciseTypeData.forEach((elem) => {
+                max = Math.max(max, elem.code);
             });
 
+        };
+
+        let data = {
+            name: name,
+            code: max + 1
+        };
+
+
+        exerciseTypeRepository.add(data, (err, exerciseTypeData) => {
+            "use strict";
+
+            if (err) return callback(err);
+            if (exerciseTypeData === null) {
+                callback(null, []);
+            } else {
+                callback(null, exerciseTypeData);
+            }
+        });
+    });
+}
+
+
+function updateExerciseTypeByCode(code, body, callback) {
+    exerciseTypeRepository.updateByCode(code, body, (err, exerciseTypeData)=>{
+        "use strict";
+
+        if (err) return callback(err);
+        if (exerciseTypeData === null) {
+            callback(null, []);
+        } else {
+            callback(null, exerciseTypeData);
+        }
+    });
+}
+
+function deleteExerciseTypeByCode(code, callback) {
+    exerciseTypeRepository.deleteByCode(code, (err, exerciseTypeData)=>{
+        "use strict";
+
+        if (err) return callback(err);
+        if (exerciseTypeData === null) {
+            callback(null, []);
+        } else {
+            callback(null, exerciseTypeData);
         }
     });
 }
 
 
-function checkConfirmCode(body, callback) {
-    userRepository.getUserByEmail(body.email, (err, userData) => {
+function deleteAllExerciseTypes(callback) {
+    exerciseTypeRepository.deleteAll((err, exerciseTypeData) => {
         "use strict";
 
         if (err) return callback(err);
-
-        if (userData === null) {
-            callback(new ApiError("User not found"));
+        if (exerciseTypeData === null) {
+            callback(null, []);
         } else {
-            const user = userData._id;
-            confirmCodeRepository.get({ user: user }, (err, data) => {
-                if (data.length > 0) {
-                    const confirmData = data[0];
-                    if (confirmData && confirmData.confirmCode === body.confirmCode) {
-                        const pass = body.password;
-                        userRepository.update(user, { password: pass }, (err, result) => {
-
-                            if (result.ok == 1) {
-
-                                confirmCodeRepository.deleteById(confirmData._id, (err, data) => {
-                                    //need log error deleting
-                                });
-
-                                emailService.send(
-                                    {
-                                        to: body.email,
-                                        subject: "Password changed",
-                                        html: "Hi, " + userData.firstName + ". <br>Your password was changed. <br>If you did not perform this action, you can recover access by entering " + userData.email + " into the form at <a href=\"https://msfn.com/forgot_password\">https://msfn.com/forgot_password</a>."
-                                    },
-                                    (err, data) => {
-                                        "use strict";
-                                        if (err) return next(err);
-                                        if (data.rejected.length == 0) {
-                                            data.status = 'ok';
-                                        }
-                                        callback(null, data);
-                                    }
-                                );
-                            }
-                        });
-                    } else {
-                        callback(new ApiError("Wrong confirm code, or time expired"));
-                    }
-                    //const resetLink = "https://msfn.com/password_reset/" + data.confirmCode;
-
-                    // callback(null, data);
-                } else {
-                    callback(new ApiError("Wrong confirm code, or time expired"));
-                }
-            });
+            callback(null, exerciseTypeData);
         }
     });
 }
 
-module.exports = new PasswordService();
+function getAllExerciseTypes(callback) {
+    exerciseTypeRepository.getAll((err, exerciseTypeData) => {
+        "use strict";
+
+        if (err) return callback(err);
+        if (exerciseTypeData === null) {
+            callback(null, []);
+        } else {
+            callback(null, exerciseTypeData);
+        }
+    });
+}
+
+
+module.exports = new ExerciseTypeService();
