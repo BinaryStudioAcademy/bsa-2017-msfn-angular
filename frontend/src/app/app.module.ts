@@ -25,23 +25,24 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {ImageCropperModule} from 'ng2-img-cropper';
 
 import {
-  MdSnackBarModule,
-  MdChipsModule,
-  MdIconModule,
-  MdRadioModule,
-  MdSelectModule,
-  MdCardModule,
-  MdInputModule,
-  MdCheckboxModule,
-  MdButtonModule,
-  MdDialogModule,
-  MdSlideToggleModule,
-  MdTableModule
+    MdSnackBarModule,
+    MdChipsModule,
+    MdIconModule,
+    MdRadioModule,
+    MdSelectModule,
+    MdCardModule,
+    MdInputModule,
+    MdCheckboxModule,
+    MdButtonModule,
+    MdDialogModule,
+    MdSlideToggleModule,
+    MdTableModule, MdAutocompleteModule
 } from '@angular/material';
 import 'hammerjs';
 import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { ListComponent } from './components/list/list.component';
+import { AutocompletePipe } from './components/list/autocomplete.pipe';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { ListComponent } from './components/list/list.component';
         TestSocketsComponent,
         ListComponent,
         ExerciseTypeComponent,
+        AutocompletePipe,
         ProfileComponent
     ],
     imports: [
@@ -81,6 +83,7 @@ import { ListComponent } from './components/list/list.component';
         HttpModule,
         MdTableModule,
         CdkTableModule,
+        MdAutocompleteModule,
         ImageCropperModule
     ],
     providers: [
