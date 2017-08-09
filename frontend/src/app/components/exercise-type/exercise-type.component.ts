@@ -1,6 +1,7 @@
-import { Observable } from 'rxjs/Observable';
-import { Component, OnInit } from '@angular/core';
-import { DataSource } from "@angular/cdk";
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {DataSource} from '@angular/cdk';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-exercise-type',
@@ -8,36 +9,48 @@ import { DataSource } from "@angular/cdk";
   styleUrls: ['./exercise-type.component.scss']
 })
 export class ExerciseTypeComponent implements OnInit {
+  displayedColumns = ['exerciseId', 'typeName'];
+  tableDatabase = new TableDatabase();
   dataSource: ExampleDataSource | null;
-  data: any;
-  displayedColumns = ['userId', 'userName', 'progress'];
-  constructor() { }
+  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-     this.data = {
-       one: [1, 2, 3], 
-       two: [1, 2, 3], 
-       three: [1, 2, 3]
-      }; 
-     this.dataSource = new ExampleDataSource(this.data);
-      console.log("WORK");
+     this.dataSource = new ExampleDataSource(this.tableDatabase);
+     // This must have because material table have an issue when work with routes
+     setTimeout(() => this.cd.markForCheck());
   }
-  
 
 }
 
-export class ExampleDataSource extends DataSource<any> {
-  data: any;
-  constructor(data) {
-    console.log("f");
-    super();
-    this.data = data;
-    console.log(this.data);
+export class TableDatabase {
+  dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  get data(): any[] { return this.dataChange.value; }
+
+  constructor() {
+    this.addRow();
   }
 
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  addRow() {
+    const copiedData = this.data.slice();
+    copiedData.push({
+       id: 0,
+       name: 'running'
+     });
+    copiedData.push({
+       id: 1,
+       name: 'swimming'
+     });
+    this.dataChange.next(copiedData);
+  }
+}
+
+export class ExampleDataSource extends DataSource<any> {
+  constructor(private _tableDatabase: TableDatabase) {
+    super();
+  }
+
   connect(): Observable<any[]> {
-    return this.data;
+    return this._tableDatabase.dataChange;
   }
 
   disconnect() {}

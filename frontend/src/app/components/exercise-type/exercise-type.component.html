@@ -1,32 +1,17 @@
-<div class="main-container">
+ <div class="main-container">
+   <md-table #table [dataSource]="dataSource">
 
-  <md-table>
-
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- ID Column -->
-    <ng-container cdkColumnDef="userId">
+    <ng-container cdkColumnDef="exerciseId">
       <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
-      <md-cell *cdkCellDef="let data"> {{data.one}} </md-cell>
+      <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
     </ng-container>
 
-    <!-- Progress Column -->
-    <ng-container cdkColumnDef="progress">
-      <md-header-cell *cdkHeaderCellDef> Progress </md-header-cell>
-      <md-cell *cdkCellDef="let data"> {{data.two}}% </md-cell>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container cdkColumnDef="userName">
+    <ng-container cdkColumnDef="typeName">
       <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
-      <md-cell *cdkCellDef="let data"> {{data.three}} </md-cell>
+      <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
     </ng-container>
-
 
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *cdkRowDef="let data; columns: displayedColumns;"></md-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
   </md-table>
-
-
-</div>
+</div> 
