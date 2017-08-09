@@ -21,7 +21,7 @@ import { TestSocketsComponent } from './components/test-sockets/test-sockets.com
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { WindowObj } from './services/window.service';
 import { ForAdminGuard } from './guards/for-admin.guard';
-import { ProfileComponent } from './components/profile/profile.component'
+import { ProfileComponent } from './components/profile/profile.component';
 
 import {
   MdSnackBarModule,

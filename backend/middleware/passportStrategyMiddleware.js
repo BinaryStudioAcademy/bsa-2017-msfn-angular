@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     mongoose = require('mongoose'),
@@ -12,14 +11,6 @@ PassportStrategy.prototype.strategy = strategy;
 PassportStrategy.prototype.isLogged = isLogged;
 
 function strategy() {
-=======
-(function () {
-    var passport = require('passport'),
-        LocalStrategy = require('passport-local').Strategy,
-        mongoose = require('mongoose'),
-        userRepository = require('../repositories/userRepository')
-
->>>>>>> msfn-7
     passport.use(new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password'
@@ -53,19 +44,11 @@ function strategy() {
             done(err, user);
         });
     });
-<<<<<<< HEAD
-};
+
+}
 
 function isLogged(req, res, next) {
     req.isAuthenticated() ? next() : res.redirect('/');
-};
+}
 
 module.exports = new PassportStrategy;
-=======
-})()
-
-exports.isLogged = function (req, res, next) {
-    console.log(req.isAuthenticated())
-    req.isAuthenticated() ? next() : res.redirect('/');
-};
->>>>>>> msfn-7
