@@ -21,6 +21,7 @@ import { TestSocketsComponent } from './components/test-sockets/test-sockets.com
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { WindowObj } from './services/window.service';
 import { ForAdminGuard } from './guards/for-admin.guard';
+import { ProfileComponent } from './components/profile/profile.component'
 
 import {
   MdSnackBarModule,
@@ -74,17 +75,9 @@ import { ListComponent } from './components/list/list.component';
         MdSlideToggleModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpModule,
-        MdTableModule,
-        CdkTableModule
+        HttpModule
     ],
-    providers: [
-      HttpService,
-      WindowObj,
-      IsLoggedGuard,
-      EncryptService,
-      ForAdminGuard
-    ],
+    providers: [HttpService, WindowObj, IsLoggedGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule {

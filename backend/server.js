@@ -45,6 +45,8 @@ app.use(function(req, res, next) {
     next();
 });
 
+const passportOAuthInit = require('./middleware/passportOAuthMiddleware')();
+
 const apiRoutes = require('./routes/api/routes')(app);
 const viewRoutes = require('./routes/view/routes')(app);
 
