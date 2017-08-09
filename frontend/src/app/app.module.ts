@@ -1,41 +1,44 @@
-import {IsLoggedGuard} from './guards/is-logged.guard';
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {HttpModule} from '@angular/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { IsLoggedGuard } from './guards/is-logged.guard';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CdkTableModule } from '@angular/cdk';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {HttpService} from './services/http.service';
-import {EncryptService} from './services/encrypt.service';
-import {HttpClientModule} from '@angular/common/http';
-import {RegistrationComponent} from './components/registration/registration.component';
-import {LoginComponent} from './components/login/login.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RestorePasswordComponent} from './components/restore-password/restore-password.component';
-import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
-import {ForgotPasswordMailComponent} from './components/forgot-password-mail/forgot-password-mail.component';
-import {TestHttpComponent} from './components/test-http/test-http.component';
-// import {TestSocketsComponent} from './components/test-sockets/test-sockets.component';
-import {HeaderViewComponent} from './components/header-view/header-view.component';
-import {WindowObj} from './services/window.service';
-import {ForAdminGuard} from './guards/for-admin.guard';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HttpService } from './services/http.service';
+import { EncryptService } from './services/encrypt.service';
+import { HttpClientModule } from '@angular/common/http';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
+import { TestHttpComponent } from './components/test-http/test-http.component';
+import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
+import { HeaderViewComponent } from './components/header-view/header-view.component';
+import { WindowObj } from './services/window.service';
+import { ForAdminGuard } from './guards/for-admin.guard';
 
 import {
-    MdButtonModule,
-    MdCardModule,
-    MdCheckboxModule,
-    MdChipsModule,
-    MdDialogModule,
-    MdIconModule,
-    MdInputModule,
-    MdRadioModule,
-    MdSelectModule,
-    MdSlideToggleModule,
-    MdSnackBarModule
+  MdSnackBarModule,
+  MdChipsModule,
+  MdIconModule,
+  MdRadioModule,
+  MdSelectModule,
+  MdCardModule,
+  MdInputModule,
+  MdCheckboxModule,
+  MdButtonModule,
+  MdDialogModule,
+  MdSlideToggleModule,
+  MdTableModule
 } from '@angular/material';
 import 'hammerjs';
-import {IndexPageComponent} from './components/index-page/index-page.component';
+import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
+import { IndexPageComponent } from './components/index-page/index-page.component';
 import { ListComponent } from './components/list/list.component';
 
 @NgModule({
@@ -49,8 +52,9 @@ import { ListComponent } from './components/list/list.component';
         RestorePasswordComponent,
         IndexPageComponent,
         ForgotPasswordMailComponent,
-        // TestSocketsComponent,
-        ListComponent],
+        TestSocketsComponent,
+        ListComponent,
+        ExerciseTypeComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -70,14 +74,16 @@ import { ListComponent } from './components/list/list.component';
         MdSlideToggleModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpModule
+        HttpModule,
+        MdTableModule,
+        CdkTableModule
     ],
     providers: [
-        HttpService,
-        WindowObj,
-        IsLoggedGuard,
-        EncryptService,
-        ForAdminGuard
+      HttpService,
+      WindowObj,
+      IsLoggedGuard,
+      EncryptService,
+      ForAdminGuard
     ],
     bootstrap: [AppComponent]
 })
