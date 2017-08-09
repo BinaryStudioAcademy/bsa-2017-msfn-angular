@@ -8,6 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class IndexPageComponent implements OnInit {
 
     public test = ['test', 'test1'];
+    public options = ['qwetqewt', 'gqwegqewg', 'gqwegqweg', 'gqewgqewg', 'gqwegqweg', 'hdhdfghd', '47ythsrtd'];
 
     constructor() {
     }

@@ -8,25 +8,25 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ListComponent implements OnInit {
 
     public input: string;
+    public test: any;
 
     @Input() items: string[];
     @Input() placeholder: string;
+    @Input() options: string[];
 
     constructor() {
     }
 
     ngOnInit() {
-        console.log(this.items);
     }
 
-    addItem(e) {
-        if (e.keyCode !== 13) { return; }
-
-        if (this.input) {
-            e.preventDefault();
-            this.items.push(this.input);
-            this.input = '';
-        }
+    addItem() {
+        setTimeout(() => {
+            if (this.input) {
+                this.items.push(this.input);
+                this.input = '';
+            }
+        }, 0);
     }
 
     deleteItem(index) {

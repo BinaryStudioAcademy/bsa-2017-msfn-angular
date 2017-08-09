@@ -23,23 +23,24 @@ import { WindowObj } from './services/window.service';
 import { ForAdminGuard } from './guards/for-admin.guard';
 
 import {
-  MdSnackBarModule,
-  MdChipsModule,
-  MdIconModule,
-  MdRadioModule,
-  MdSelectModule,
-  MdCardModule,
-  MdInputModule,
-  MdCheckboxModule,
-  MdButtonModule,
-  MdDialogModule,
-  MdSlideToggleModule,
-  MdTableModule
+    MdSnackBarModule,
+    MdChipsModule,
+    MdIconModule,
+    MdRadioModule,
+    MdSelectModule,
+    MdCardModule,
+    MdInputModule,
+    MdCheckboxModule,
+    MdButtonModule,
+    MdDialogModule,
+    MdSlideToggleModule,
+    MdTableModule, MdAutocompleteModule
 } from '@angular/material';
 import 'hammerjs';
 import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { ListComponent } from './components/list/list.component';
+import { AutocompletePipe } from './components/list/autocomplete.pipe';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { ListComponent } from './components/list/list.component';
         ForgotPasswordMailComponent,
         TestSocketsComponent,
         ListComponent,
-        ExerciseTypeComponent],
+        ExerciseTypeComponent,
+        AutocompletePipe],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -76,7 +78,8 @@ import { ListComponent } from './components/list/list.component';
         ReactiveFormsModule,
         HttpModule,
         MdTableModule,
-        CdkTableModule
+        CdkTableModule,
+        MdAutocompleteModule
     ],
     providers: [
       HttpService,
