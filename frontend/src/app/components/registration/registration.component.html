@@ -21,7 +21,7 @@
     </div>
 
     <md-input-container class="input-row">
-      <input mdInput type="email" placeholder="Email" required [(ngModel)]="user.email" [formControl]="emailFormControl">
+      <input mdInput type="email" name="email" placeholder="Email" required [(ngModel)]="user.email" [formControl]="emailFormControl">
       <md-error *ngIf="emailFormControl.hasError('required')">
         Email is required
       </md-error>
@@ -31,7 +31,7 @@
     </md-input-container>
 
     <md-input-container class="input-row">
-      <input mdInput type="text" placeholder="First name" required [(ngModel)]="user.firstName" [formControl]="firstNameFormControl">
+      <input mdInput type="text" name="firstName" placeholder="First name" required [(ngModel)]="user.firstName" [formControl]="firstNameFormControl">
       <md-error *ngIf="firstNameFormControl.hasError('required')">
         First name is required
       </md-error>
@@ -41,7 +41,7 @@
     </md-input-container>
 
     <md-input-container class="input-row">
-      <input mdInput type="text" placeholder="Last name" required [(ngModel)]="user.lastName" [formControl]="lastNameFormControl">
+      <input mdInput type="text" name="lastName" placeholder="Last name" required [(ngModel)]="user.lastName" [formControl]="lastNameFormControl">
       <md-error *ngIf="lastNameFormControl.hasError('required')">
         Last name is required
       </md-error>
