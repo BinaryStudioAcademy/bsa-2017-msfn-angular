@@ -8,7 +8,7 @@ export class AutocompletePipe implements PipeTransform {
     transform(value: string[], filter: string): any {
         return value.filter(item => {
             if (!filter) {
-                return true;
+                return false;
             }
             return item.includes(filter);
         });
