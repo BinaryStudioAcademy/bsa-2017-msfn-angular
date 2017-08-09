@@ -34,8 +34,6 @@ const routes: Routes = [
         path: 'forget-password', // for testing forgetPasswordComponent, can be removed
         children: [],
         component: ForgetPasswordComponent
-
-<<<<<<< HEAD
     },
     {
         path: 'test-http', // for testing, can be removed
