@@ -44,10 +44,11 @@ function strategy() {
             done(err, user);
         });
     });
-};
+
+}
 
 function isLogged(req, res, next) {
     req.isAuthenticated() ? next() : res.redirect('/');
-};
+}
 
 module.exports = new PassportStrategy;

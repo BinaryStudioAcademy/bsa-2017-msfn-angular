@@ -1,0 +1,37 @@
+<div class="main-container">
+
+  <md-table>
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container cdkColumnDef="userId">
+      <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
+      <md-cell *cdkCellDef="let data"> {{data.one}} </md-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container cdkColumnDef="progress">
+      <md-header-cell *cdkHeaderCellDef> Progress </md-header-cell>
+      <md-cell *cdkCellDef="let data"> {{data.two}}% </md-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container cdkColumnDef="userName">
+      <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+      <md-cell *cdkCellDef="let data"> {{data.three}} </md-cell>
+    </ng-container>
+
+
+    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *cdkRowDef="let data; columns: displayedColumns;"></md-row>
+  </md-table>
+
+<!--Example of usage-->
+<button (click)="getAllExerciseTypes()" md-raised-button>Get all</button>
+<button (click)="deleteExerciseTypeByCode(2)" md-raised-button>Delete by code</button>
+<button (click)="updateExerciseTypeByCode(1, 'Push ups')" md-raised-button>Update by code</button>
+<button (click)="addExerciseType('Jogging')" md-raised-button>Add</button>
+
+</div>

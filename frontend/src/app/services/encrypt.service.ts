@@ -19,10 +19,8 @@ export class EncryptService {
 
   public encrypt(dataObj) {
     const _rand = Date.now().toString().slice(-1);
-    return {
-      protectData: AES.encrypt(JSON.stringify(dataObj), this.tokenArr[_rand]),
-      protectFile: _rand
-    };
+
+    return AES.encrypt(JSON.stringify(dataObj), this.tokenArr[_rand]).toString() + _rand;
   }
 
 }

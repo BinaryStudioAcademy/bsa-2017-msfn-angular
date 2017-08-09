@@ -6,6 +6,7 @@ import { ToastrService } from './toastr.service';
 // import { Observable } from 'rxjs/Observable';
 // import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/toPromise';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpService {
@@ -13,9 +14,12 @@ export class HttpService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   public failMessage = 'Fail';
 
-  constructor(private _http: Http, public toastrService: ToastrService) { }
+  constructor(private _http: Http, public toastrService: ToastrService, private _router: Router) { }
 
   private handleError = (error: any): Promise<any> => {
+    if (error && error.status === 401) {
+      this._router.navigate(['/login']);
+    }
     this.toastrService.showMessage('error', error.message, this.failMessage);
     return error;
   }

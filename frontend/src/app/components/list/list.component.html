@@ -1,0 +1,16 @@
+<md-input-container floatPlaceholder="always" class="items-list">
+    <md-chip-list>
+        <md-chip class="chip" *ngFor="let item of items; index as i;">{{item}}
+            <md-icon class="icon" (click)="deleteItem(i)">clear</md-icon>
+        </md-chip>
+        <input mdInput [(ngModel)]="input" [placeholder]="placeholder" type="text" class="list-input" name="item"
+               [mdAutocomplete]="auto">
+    </md-chip-list>
+</md-input-container>
+<md-autocomplete #auto="mdAutocomplete">
+    <md-option *ngFor="let option of (options | autocompletePipe:input)" [value]="option"
+               (onSelectionChange)="addItem()">{{ option }}
+    </md-option>
+</md-autocomplete>
+
+
