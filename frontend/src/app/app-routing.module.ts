@@ -15,6 +15,7 @@ import { TestSocketsComponent } from './components/test-sockets/test-sockets.com
 import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
+import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 
 const routes: Routes = [
     {
@@ -71,6 +72,9 @@ const routes: Routes = [
         path: 'test-toastr', // for testing, can be removed
         children: [],
         component: TestToastrComponent
+    }, {
+        path: 'sidebar', // for testing
+        component: SidebarViewComponent
     }
 ];
 

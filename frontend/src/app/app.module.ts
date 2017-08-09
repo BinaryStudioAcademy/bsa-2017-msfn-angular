@@ -47,6 +47,8 @@ import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
+import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
+import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 
 @NgModule({
     declarations: [
@@ -64,7 +66,9 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
         ExerciseTypeComponent,
         AutocompletePipe,
         ProfileComponent,
-        TestToastrComponent
+        TestToastrComponent,
+        SidebarViewComponent,
+        NotificationDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -102,7 +106,8 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
         EncryptService,
         ToastrService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [ NotificationDialogComponent ]
 })
 export class AppModule {
 }
