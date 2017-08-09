@@ -26,9 +26,9 @@ export class TestToastrComponent implements OnInit {
         this.toastrService.showMessage('error', 'Your login attempt was declined', 'Oh, sorry!');
     }
 
-    // Just notify user about something not so important
+    // Just notify user about something not so important. With omitted heading
     notifyUser() {
-        this.toastrService.showMessage('info', 'How are you?', 'What a nice day!');
+        this.toastrService.showMessage('info', 'How are you?');
     }
 
     // Or maybe Warn user about something))

@@ -8,7 +8,7 @@ export class ToastrService {
 
     // Method showMessage() expects to get 3 arguments:
     // 1 - Type of message (it's color), 2 - Some text of message (may be null), 3 - Some heading of message (has defaults).
-    showMessage(type: 'success' | 'warning' | 'error' | 'info', msg: string, heading: string) {
+    showMessage(type: 'success' | 'warning' | 'error' | 'info', msg: string, heading?: string) {
         switch (type) {
             // to get "green" message - send 'success' as first argument
             case ('success'):
