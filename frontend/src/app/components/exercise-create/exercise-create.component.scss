@@ -1,0 +1,18 @@
+@import '../../../globalStyles/variables.scss';
+@import '../../../globalStyles/text.scss';
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+.exercise-create-form {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    margin: 50px auto;
+    flex-direction: column;
+    padding: 20px 50px 40px;
+    background: #222222;
+    background: linear-gradient(#424242, #222222);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}

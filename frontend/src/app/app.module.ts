@@ -23,6 +23,7 @@ import { WindowObj } from './services/window.service';
 import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 
+
 import {
   MdSnackBarModule,
   MdChipsModule,
@@ -38,9 +39,10 @@ import {
   MdTableModule
 } from '@angular/material';
 import 'hammerjs';
-import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
+// import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { ListComponent } from './components/list/list.component';
+import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +57,8 @@ import { ListComponent } from './components/list/list.component';
         ForgotPasswordMailComponent,
         TestSocketsComponent,
         ListComponent,
-        ExerciseTypeComponent],
+        ProfileComponent,
+        ExerciseCreateComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,

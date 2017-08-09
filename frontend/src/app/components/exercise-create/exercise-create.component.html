@@ -1,0 +1,11 @@
+<form class="exercise-create-form">
+  <h2>Create A New Exercise</h2>
+  <md-input-container>
+    <input mdInput placeholder="Exercise Description" value="Sushi">
+  </md-input-container>
+  <md-select placeholder="Exercise type" [(ngModel)]="selectedValue" name="food">
+    <md-option *ngFor="let food of foods" [value]="food.value">
+      {{food.viewValue}}
+    </md-option>
+  </md-select>
+</form>
