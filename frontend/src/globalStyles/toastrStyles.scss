@@ -1,0 +1,19 @@
+#toast-container .toast {
+    border-radius: 0;
+}
+
+.toast-success {
+    background-color: $btn-color;
+}
+
+.toast-warning {
+	background-color: $option1-color;
+}
+
+.toast-error {
+	background-color: $error-color;
+}
+
+.toast-info {
+    background-color: $btn-second-color;
+}

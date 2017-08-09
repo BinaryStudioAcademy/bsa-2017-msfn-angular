@@ -11,6 +11,7 @@ import {IndexPageComponent} from './components/index-page/index-page.component';
 import {IsLoggedGuard} from './guards/is-logged.guard';
 import {ForgotPasswordMailComponent} from './components/forgot-password-mail/forgot-password-mail.component';
 import {TestSocketsComponent} from './components/test-sockets/test-sockets.component';
+import {TestToastrComponent} from './components/test-toastr/test-toastr.component';
 
 const routes: Routes = [
     {
@@ -56,6 +57,11 @@ const routes: Routes = [
         path: 'test-socket', // for testing socket.io
         children: [],
         component: TestSocketsComponent
+    },
+    {
+        path: 'test-toastr', // for testing, can be removed
+        children: [],
+        component: TestToastrComponent
     }
 ];
 

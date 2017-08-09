@@ -19,6 +19,8 @@ import {TestHttpComponent} from './components/test-http/test-http.component';
 import {TestSocketsComponent} from './components/test-sockets/test-sockets.component';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import {WindowObj} from './services/window.service';
+import {ToastrModule} from 'ngx-toastr';
+import {TestToastrComponent} from './components/test-toastr/test-toastr.component';
 
 import {
     MdButtonModule,
@@ -47,7 +49,9 @@ import {IndexPageComponent} from './components/index-page/index-page.component';
         RestorePasswordComponent,
         IndexPageComponent,
         ForgotPasswordMailComponent,
-        TestSocketsComponent],
+        TestSocketsComponent,
+        TestToastrComponent
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -67,12 +71,13 @@ import {IndexPageComponent} from './components/index-page/index-page.component';
         MdSlideToggleModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpModule
+        HttpModule,
+        ToastrModule.forRoot()
     ],
     providers: [
-        HttpService, 
-        WindowObj, 
-        IsLoggedGuard, 
+        HttpService,
+        WindowObj,
+        IsLoggedGuard,
         EncryptService
     ],
     bootstrap: [AppComponent]
