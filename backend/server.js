@@ -10,7 +10,9 @@ const bodyParser = require('body-parser'),
     passport = require('passport'),
     isLogged = require('./middleware/passportStrategyMiddleware').isLogged,
     cookieParser = require('cookie-parser'),
-    initService = require('./services/initService')();
+    useragent = require('express-useragent'),
+    blockUserAgentMiddleware = require('./middleware/blockUserAgentMiddleware'),
+    initService = require('./services/initService')(),
     port = 3060;
 
 const app = express();
@@ -27,6 +29,8 @@ app.use(session({
 context.mongoStore = new MongoStore({
     mongooseConnection: mongooseConnection
 });
+app.use(useragent.express());
+app.use(blockUserAgentMiddleware);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -36,6 +40,7 @@ app.use('/profile/*', isLogged);
 
 const staticPath = path.resolve(__dirname + '/../dist');
 app.use(express.static(staticPath));
+app.use(express.static(path.resolve(__dirname + '/static')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -44,8 +49,6 @@ app.use(function(req, res, next) {
     // console.log(req.session.user);
     next();
 });
-
-const passportOAuthInit = require('./middleware/passportOAuthMiddleware')();
 
 const apiRoutes = require('./routes/api/routes')(app);
 const viewRoutes = require('./routes/view/routes')(app);

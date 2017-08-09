@@ -1,5 +1,4 @@
 const cryptojs = require("crypto-js"),
-<<<<<<< HEAD
     tokenArr = [
         'DeCoratiOn15',
         'hinrIchS963',
@@ -14,12 +13,9 @@ const cryptojs = require("crypto-js"),
     ];
 
 module.exports = function decrypt(data) {
-    const bytes  = cryptojs.AES.decrypt(data.protectData.toString(), tokenArr[tokenArr.length - data.protectFile - 1]);
-=======
-    cryptWordFromClient = 'nobodyShouldKnowThisKey';
-
-module.exports = function decrypt(data) {
-    const bytes  = cryptojs.AES.decrypt(data.toString(), cryptWordFromClient);
->>>>>>> msfn-7
+    const dataForEnc = data.slice(0, data.length-1),
+        tokenIndex = +data.slice(-1)
+        bytes  = cryptojs.AES.decrypt(dataForEnc, tokenArr[tokenArr.length - tokenIndex - 1]);
+        
     return JSON.parse(bytes.toString(cryptojs.enc.Utf8));
 }
