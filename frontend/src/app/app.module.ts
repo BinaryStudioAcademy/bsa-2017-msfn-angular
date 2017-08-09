@@ -8,6 +8,7 @@ import { CdkTableModule } from '@angular/cdk';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
+import { ExerciseTypeService } from './services/exercise-type.service';
 import { EncryptService } from './services/encrypt.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -83,7 +84,7 @@ import { ListComponent } from './components/list/list.component';
         CdkTableModule,
         ImageCropperModule
     ],
-    providers: [HttpService, WindowObj, IsLoggedGuard],
+    providers: [HttpService, WindowObj, IsLoggedGuard, ExerciseTypeService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

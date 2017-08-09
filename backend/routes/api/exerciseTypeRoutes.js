@@ -29,7 +29,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.get(baseUrl, isAdmin, function (req, res, next) {
+    app.get(baseUrl, function (req, res, next) {
             exerciseTypeService.getAllExerciseTypes(function(err, data) {
             res.data = data;
             res.err = err;

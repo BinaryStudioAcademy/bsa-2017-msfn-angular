@@ -9,10 +9,7 @@ function LoginService() {
 LoginService.prototype.login = login;
 
 function login(req, res, next) {
-<<<<<<< HEAD
-=======
     req = decrypt(req)
->>>>>>> msfn-7
     passport.authenticate('local',
         function(err, user, info) {
             if (err) {
