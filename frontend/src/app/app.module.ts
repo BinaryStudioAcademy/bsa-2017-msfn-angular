@@ -55,7 +55,9 @@ import { ListComponent } from './components/list/list.component';
         ForgotPasswordMailComponent,
         TestSocketsComponent,
         ListComponent,
-        ExerciseTypeComponent],
+        ExerciseTypeComponent,
+        ProfileComponent
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -75,7 +77,9 @@ import { ListComponent } from './components/list/list.component';
         MdSlideToggleModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpModule
+        HttpModule,
+        MdTableModule,
+        CdkTableModule
     ],
     providers: [HttpService, WindowObj, IsLoggedGuard],
     bootstrap: [AppComponent]
