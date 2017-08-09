@@ -23,7 +23,7 @@ export class HttpService {
   }
 
   private handleError = (error: any): Promise<any> => {
-    if (error && error.status === 403) {
+    if (error && error.status === 401) {
       this._router.navigate(['/login']);
     }
     this.openSnackBar(this.failMessage);
