@@ -9,10 +9,8 @@ function LoginService() {
 LoginService.prototype.login = login;
 
 function login(req, res, next) {
-<<<<<<< HEAD
-=======
-    req = decrypt(req)
->>>>>>> msfn-7
+    req.body = decrypt(req.body.data)
+
     passport.authenticate('local',
         function(err, user, info) {
             if (err) {
@@ -22,10 +20,12 @@ function login(req, res, next) {
                     if (err) {
                         return next(err)
                     } else {
-                        return res.redirect(profilePath);
+                        res.status(302)
+                        return res.send({access: true});
                     }
                 })
             } else {
+                res.status(401)
                 res.send(info.message);
             }
         }

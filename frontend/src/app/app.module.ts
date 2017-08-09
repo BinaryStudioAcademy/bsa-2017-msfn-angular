@@ -83,7 +83,12 @@ import { ListComponent } from './components/list/list.component';
         CdkTableModule,
         ImageCropperModule
     ],
-    providers: [HttpService, WindowObj, IsLoggedGuard],
+    providers: [
+        HttpService,
+        WindowObj,
+        IsLoggedGuard,
+        EncryptService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
