@@ -21,6 +21,7 @@ import {HeaderViewComponent} from './components/header-view/header-view.componen
 import {WindowObj} from './services/window.service';
 import {ToastrModule} from 'ngx-toastr';
 import {TestToastrComponent} from './components/test-toastr/test-toastr.component';
+import {ToastrService} from './services/toastr.service';
 
 import {
     MdButtonModule,
@@ -72,13 +73,17 @@ import {IndexPageComponent} from './components/index-page/index-page.component';
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot({
+            timeOut: 5000,
+            positionClass: 'toast-bottom-right'
+          })
     ],
     providers: [
         HttpService,
         WindowObj,
         IsLoggedGuard,
-        EncryptService
+        EncryptService,
+        ToastrService
     ],
     bootstrap: [AppComponent]
 })

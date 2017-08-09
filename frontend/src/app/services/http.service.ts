@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MdSnackBar } from '@angular/material';
 import { Headers, Http } from '@angular/http';
 import { IHttpReq } from '../models/http-req';
+import { ToastrService } from './toastr.service';
 // import { FormsModule } from '@angular/forms';
 // import { Observable } from 'rxjs/Observable';
 // import 'rxjs/add/observable/throw';
@@ -13,16 +13,10 @@ export class HttpService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   public failMessage = 'Fail';
 
-  constructor(private _http: Http, private snackBar: MdSnackBar) { }
-
-  private openSnackBar(message: string, action = 'Close') {
-    this.snackBar.open(message, action, {
-      duration: 4000,
-    });
-  }
+  constructor(private _http: Http, public toastrService: ToastrService) { }
 
   private handleError = (error: any): Promise<any> => {
-    this.openSnackBar(this.failMessage);
+    this.toastrService.showMessage('error', error.message, this.failMessage);
     return error;
   }
 
@@ -43,7 +37,7 @@ export class HttpService {
       return this._http.get(url)
         .toPromise()
         .then(response => {
-          this.openSnackBar(successMessage);
+          this.toastrService.showMessage('success', null, successMessage);
           return response.json();
         })
         .catch(this.handleError);
@@ -52,7 +46,7 @@ export class HttpService {
         .post(url, body, { headers: headers })
         .toPromise()
         .then(response => {
-          this.openSnackBar(successMessage);
+          this.toastrService.showMessage('success', null, successMessage);
           return response.json();
         })
         .catch(this.handleError);
@@ -61,7 +55,7 @@ export class HttpService {
         .put(url, body, { headers: headers })
         .toPromise()
         .then(() => {
-          this.openSnackBar(successMessage);
+          this.toastrService.showMessage('success', null, successMessage);
           return body;
         })
         .catch(this.handleError);
@@ -69,7 +63,7 @@ export class HttpService {
       return this._http.delete(url, { headers: headers })
         .toPromise()
         .then(() => {
-          this.openSnackBar(successMessage);
+          this.toastrService.showMessage('success', null, successMessage);
           return null;
         })
         .catch(this.handleError);
