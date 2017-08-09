@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   hideCropper = true;
+  image: string;
 
 
   user = {
@@ -92,21 +93,28 @@ export class ProfileComponent implements OnInit {
 
   // for cropperImg:
   fileChangeListener($event) {
-    this.hideCropper = !this.hideCropper;
+    this.hideCropper = false;
     const image: any = new Image();
     const file: File = $event.target.files[0];
     const myReader: FileReader = new FileReader();
     myReader.onloadend = (loadEvent: any) => {
       image.src = loadEvent.target.result;
       this.cropper.setImage(image);
-
     };
 
     myReader.readAsDataURL(file);
   }
 
-  saveImg() {
-    if (!this.hideCropper) {
+  saveImg(event) {
+    if (event === 'save') {
+      if (!this.hideCropper) {
+        this.image = this.data.image;
+        this.hideCropper = true;
+      }
+    } else if (event === 'cancel') {
+      this.data = {
+        image: this.image || 'http://via.placeholder.com/150x150'
+      };
       this.hideCropper = true;
     }
   }

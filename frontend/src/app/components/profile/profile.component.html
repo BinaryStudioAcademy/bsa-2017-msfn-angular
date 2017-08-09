@@ -9,10 +9,11 @@
                         <img-cropper #cropper *ngIf="!hideCropper" [image]="data" [settings]="cropperSettings"></img-cropper>
                     </div>
                     <div class="profile-upload">
-                        <div class="profile-upload-container upload-btn" (click)="saveImg()">
-               <span>{{hideCropper ? 'Upload new picture' : 'save'}}</span>
+                        <div class="profile-upload-container upload-btn" (click)="saveImg('save')">
+               <span>{{hideCropper ? 'Upload new picture' : 'Save'}}</span>
                <input type="file" accept="image/*" *ngIf="hideCropper" class="upload" (change)="fileChangeListener($event)"/>
              </div>
+            <div class="profile-upload-container upload-btn" *ngIf="!hideCropper" (click)="saveImg('cancel')">Cancel</div>
                     </div>
                 </div>
                 <div class="profile-fullname">
