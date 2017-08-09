@@ -32,7 +32,9 @@ import {
 } from '@angular/material';
 import {HeaderViewComponent} from './components/header-view/header-view.component';
 import 'hammerjs';
+
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
+import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.com
     HeaderViewComponent,
     RestorePasswordComponent,
     ForgotPasswordMailComponent,
-    SidebarViewComponent
+    SidebarViewComponent,
+    NotificationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.com
     HttpModule
   ],
   providers: [HttpService, WindowObj, IsLoggedGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ NotificationDialogComponent ],
 })
 export class AppModule {}

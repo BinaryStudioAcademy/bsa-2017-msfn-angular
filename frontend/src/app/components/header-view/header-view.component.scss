@@ -18,6 +18,11 @@ header {
         font-size: 25px;
         margin-left: $header-inner-margin;
 
+        a {
+            text-decoration: none;
+            color: $text-main-color;
+        }
+
         .logo__icon {
             width: 53px;
             height: 40px;
@@ -34,6 +39,10 @@ header {
     .notifications {
         .notifications__count {
             vertical-align: super;
+        }
+
+        .notification__alert {
+            cursor: pointer;
         }
     }
 
