@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
-import { Test1Component } from './admin.components/test1/test1.component';
-import { Test2Component } from './admin.components/test2/test2.component';
+import { ProfileComponent } from '../profile/profile.component';
+import { RegistrationComponent } from '../registration/registration.component';
 
 const adminRoutes: Routes = [
   {
@@ -13,8 +13,8 @@ const adminRoutes: Routes = [
       {
         path: '',
         children: [
-          { path: 'test1', component: Test1Component },
-          { path: 'test2', component: Test2Component }
+          { path: 'test1', component: ProfileComponent },
+          { path: 'test2', component: RegistrationComponent }
         ]
       }
     ]

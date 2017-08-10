@@ -3,7 +3,7 @@
     <h1>Exercises</h1>
   </div>
 
-  <md-table id="table" [dataSource]="dataSource" mdSort>
+  <md-table id="table" #table [dataSource]="dataSource" mdSort>
     <ng-container cdkColumnDef="name">
       <md-header-cell *cdkHeaderCellDef md-sort-header>
         Name
