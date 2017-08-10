@@ -3,6 +3,10 @@
     <h1>Exercises</h1>
   </div>
 
+  <md-input-container>
+    <input mdInput type="text" #filter placeholder="search by name" [(ngModel)]="name">
+  </md-input-container>
+
   <md-table id="table" #table [dataSource]="dataSource" mdSort>
     <ng-container cdkColumnDef="name">
       <md-header-cell *cdkHeaderCellDef md-sort-header>
@@ -32,6 +36,6 @@
     </ng-container>
 
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;" ></md-row>
   </md-table>
 </div>

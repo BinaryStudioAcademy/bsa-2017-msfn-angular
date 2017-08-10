@@ -34,6 +34,11 @@ export class ExerciseListService {
         name: 'name3',
         type: 'type3',
         description: 'description3'
+      },
+      {
+        name: 'name3',
+        type: 'type4',
+        description: 'description4'
       }
     ];
     callback(exerciseData);

@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { DataSource } from '@angular/cdk';
 import { MdSort } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -7,6 +7,9 @@ import { ExerciseListService } from './exercise-list.service';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/observable/fromEvent';
 
 @Component({
   selector: 'app-exercise-list',
@@ -17,6 +20,7 @@ import 'rxjs/add/operator/map';
 
 export class ExerciseListComponent implements OnInit {
 
+  name = '';
   displayedColumns = [
     'name',
     'type',
@@ -25,6 +29,7 @@ export class ExerciseListComponent implements OnInit {
   tableDatabase = new TableDatabase();
   dataSource: ExampleDataSource | null;
   @ViewChild(MdSort) sort: MdSort;
+  @ViewChild('filter') filter: ElementRef;
 
   constructor(private cd: ChangeDetectorRef, private exerciseListService: ExerciseListService) { }
 
@@ -34,6 +39,15 @@ export class ExerciseListComponent implements OnInit {
     this.getExercises((result) => {
       this.tableDatabase.addExercises(result);
     });
+
+
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(() => {
+        if (!this.dataSource) { return; }
+        this.dataSource.filter = this.filter.nativeElement.value;
+      });
   }
 
   getExercises(callback) {
@@ -59,6 +73,14 @@ export class TableDatabase {
 }
 
 export class ExampleDataSource extends DataSource<any> {
+  _filterChange = new BehaviorSubject('');
+  get filter(): string {
+    return this._filterChange.value;
+  }
+  set filter(filter: string) {
+    this._filterChange.next(filter);
+  }
+
   constructor(private _exampleDatabase: TableDatabase, private _sort: MdSort, private service: ExerciseListService) {
     super();
   }
@@ -66,11 +88,15 @@ export class ExampleDataSource extends DataSource<any> {
   connect(): Observable<any[]> {
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
-      this._sort.mdSortChange
+      this._sort.mdSortChange,
+      this._filterChange
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
-      return this.getSortedData();
+      return this.getSortedData().slice().filter((item) => {
+        const searchStr = (item.name).toLowerCase();
+        return searchStr.includes(this.filter.toLowerCase());
+      });
     });
   }
 
