@@ -28,7 +28,8 @@ function createExerciseType(name, callback) {
 
         let data = {
             name: name,
-            code: max + 1
+            code: max + 1,
+            isRemoved: false
         };
 
 

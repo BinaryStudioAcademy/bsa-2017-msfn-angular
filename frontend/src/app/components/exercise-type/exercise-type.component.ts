@@ -123,7 +123,8 @@ export class TableDatabase {
     }
     copiedData.push({
       code: code,
-      name: name
+      name: name,
+      isRemoved: false
     });
     this.dataChange.next(copiedData);
     return copiedData.length;
@@ -136,7 +137,8 @@ export class TableDatabase {
     }
     copiedData.push({
       code: null,
-      name: ''
+      name: '',
+      isRemoved: false
     });
     this.dataChange.next(copiedData);
     return copiedData.length;
