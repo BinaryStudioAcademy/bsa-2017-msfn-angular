@@ -1,11 +1,12 @@
 @import "./../../../globalStyles/variables";
 @import "./../../../globalStyles/indentations";
 @import '../../../globalStyles/text.scss';
-.main-container{
+.main-container {
     margin: 0 auto;
     width: 60%;
     text-align: center;
 }
+
 .btn {
     border: none;
     padding: 3px;
@@ -16,7 +17,62 @@
     border-radius: 50px;
 }
 
-.btn-forget {
+button:focus {
+    outline:0;
+}
+
+.mat-row {
+    height: 80px;
+}
+
+.mat-table{
+    min-width: 350px;
+}
+
+.input-container {
+    margin: 10px;
+    width: 200px;
+}
+
+#btn-add {
     width: 100%;
-    margin-top: $submit-top-margin;
+    margin: 40px 0;
+}
+
+.row-text:hover {
+    cursor: pointer;
+}
+
+.row-text {
+    margin: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+}
+
+.row-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.italic{
+    font-style: italic;
+    color: $text-second-color;
+}
+
+.delete-ico {
+    color: $btn-color;
+}
+
+.delete-ico:hover {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: $small-screen + 15px){
+    .main-container{
+        width: 100%;
+        margin: 0;
+    }
 }

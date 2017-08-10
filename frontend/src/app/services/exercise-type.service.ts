@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IHttpReq } from "../models/http-req";
-import { HttpService } from "./http.service";
+import { IHttpReq } from '../models/http-req';
+import { HttpService } from './http.service';
 
 @Injectable()
 export class ExerciseTypeService {
@@ -26,7 +26,6 @@ export class ExerciseTypeService {
 
 
   getAllExerciseTypes(callback) {
-    let result = [];
     const request: IHttpReq = {
       url: '/api/exercise-type',
       method: 'GET',
@@ -58,7 +57,7 @@ export class ExerciseTypeService {
 
 
 
-    updateExerciseTypeByCode(code: number, name: string, callback) {
+  updateExerciseTypeByCode(code: number, name: string, callback) {
     const request: IHttpReq = {
       url: '/api/exercise-type',
       method: 'PUT',
@@ -72,5 +71,4 @@ export class ExerciseTypeService {
       // UPDATE COL AFTER UPDATING
     });
   }
-
 }

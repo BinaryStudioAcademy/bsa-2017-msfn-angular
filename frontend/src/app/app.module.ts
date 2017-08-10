@@ -100,7 +100,8 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
         WindowObj,
         IsLoggedGuard,
         EncryptService,
-        ToastrService
+        ToastrService,
+        ExerciseTypeService
     ],
     bootstrap: [AppComponent]
 })
