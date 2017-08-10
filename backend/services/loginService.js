@@ -19,7 +19,6 @@ function login(req, res, next) {
                     if (err) {
                         return next(err)
                     } else {
-                        res.status(302)
                         return res.send({access: true});
                     }
                 })
