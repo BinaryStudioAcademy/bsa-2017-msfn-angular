@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ProfileService } from './profile.service';
 import { HttpClient } from '@angular/common/http';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
+import {MdDialog} from '@angular/material';
+import {ConfirmPasswordDialogComponent} from '../confirm-password-dialog/confirm-password-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -43,7 +45,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private profileService: ProfileService,
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private dialog: MdDialog
   ) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.noFileInput = true;
@@ -90,6 +93,10 @@ export class ProfileComponent implements OnInit {
       data => { },
       err => this.userError = err.statusText
     );
+  }
+
+  openConfirmPasswordDoalog() {
+    this.dialog.open(ConfirmPasswordDialogComponent);
   }
 
   // for cropperImg:

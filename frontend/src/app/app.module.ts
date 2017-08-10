@@ -22,7 +22,8 @@ import { HeaderViewComponent } from './components/header-view/header-view.compon
 import { WindowObj } from './services/window.service';
 import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
-import {ImageCropperModule} from 'ng2-img-cropper';
+import { ImageCropperModule } from 'ng2-img-cropper';
+import { ConfirmPasswordDialogComponent } from './components/confirm-password-dialog/confirm-password-dialog.component'
 
 import {
     MdSnackBarModule,
@@ -59,7 +60,8 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
         ListComponent,
         ExerciseTypeComponent,
         AutocompletePipe,
-        ProfileComponent
+        ProfileComponent,
+        ConfirmPasswordDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -91,6 +93,9 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
         WindowObj,
         IsLoggedGuard,
         EncryptService
+    ],
+    entryComponents: [
+        ConfirmPasswordDialogComponent
     ],
     bootstrap: [AppComponent]
 })

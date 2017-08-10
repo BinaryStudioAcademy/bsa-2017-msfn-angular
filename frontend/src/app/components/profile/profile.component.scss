@@ -21,8 +21,8 @@ a {
     color: $text-main-color;
 }
 
-md-error{
-     color: $error-color;   
+md-error {
+    color: $error-color;
 }
 
 label {
@@ -41,7 +41,8 @@ label {
     padding: 15px;
     color: $text-main-color;
     background-color: $btn-color;
-    font-weight: bold;
+    font-size: $button-text;
+    font-weight: 600;
     font-size: 11pt;
     border-radius: 50px;
     outline: none;
@@ -75,7 +76,6 @@ label {
     background: $gradient-from-color;
     background-image: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, .6);
-
 }
 
 .profile-title {
@@ -84,7 +84,7 @@ label {
     margin-bottom: 25px;
 }
 
-.input{
+.input {
     padding: $input-padding;
 }
 
@@ -112,12 +112,10 @@ label {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     >img {
         width: 150px;
         border-radius: 50%;
     }
-
     .img-cropper {
         margin-top: 10px;
     }
@@ -272,7 +270,7 @@ label {
     .profile-password {
         margin-top: 15px;
     }
-    .ph-input{
-            width: 25%;
+    .ph-input {
+        width: 25%;
     }
 }
