@@ -57,14 +57,12 @@ export class ExerciseTypeService {
 
 
 
-  updateExerciseTypeByCode(code: number, name: string, callback) {
+  updateExerciseTypeByCode(code: number, body, callback) {
+    body = Object.assign(body, {code: code});
     const request: IHttpReq = {
       url: '/api/exercise-type',
       method: 'PUT',
-      body: {
-        code: code,
-        name: name
-      }
+      body: body
     };
     this.httpService.sendRequest(request).then(data => {
       callback(data);

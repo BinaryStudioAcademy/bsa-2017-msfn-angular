@@ -60,16 +60,16 @@ button:focus {
     align-items: center;
 }
 
-.italic {
+.transp {
     font-style: italic;
     color: $text-second-color;
 }
 
-.delete-ico {
+.ico {
     color: $btn-color;
 }
 
-.delete-ico:hover {
+.ico:hover {
     cursor: pointer;
 }
 

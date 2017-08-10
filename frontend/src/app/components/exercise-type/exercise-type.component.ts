@@ -36,7 +36,7 @@ export class ExerciseTypeComponent implements OnInit {
     this.dataSource = new ExampleDataSource(this.tableDatabase);
     // This must have because material table have an issue when work with routes
 
-    this.getAllExerciseTypes((result: IExerciseType[]) => {
+    this.exerciseTypeService.getAllExerciseTypes((result: IExerciseType[]) => {
       this.loaded = this.tableDatabase.addRows(result) === 0 ? false : true;
       this.cd.markForCheck();
     });
@@ -47,15 +47,16 @@ export class ExerciseTypeComponent implements OnInit {
     this.focusedRowCode = code;
   }
 
-  updateRow(code: number, name: string) {
+  updateRow(code: number, body) {
     if (code) {
-      this.exerciseTypeService.updateExerciseTypeByCode(code, name, (data) => {
-        this.loaded = this.tableDatabase.updateRow(data.code, data.name) === 0 ? false : true;
+      console.log(code);
+      this.exerciseTypeService.updateExerciseTypeByCode(code, body, (data) => { // SUDI
+        this.loaded = this.tableDatabase.updateRow(code, body) === 0 ? false : true;
         this.cd.markForCheck();
       });
     } else {
-      this.exerciseTypeService.addExerciseType(name, (data) => {
-        this.loaded = this.tableDatabase.addRow(data.code, data.name) === 0 ? false : true;
+      this.exerciseTypeService.addExerciseType(body.name, (data) => {
+        this.loaded = this.tableDatabase.addRow(data.code, body.name) === 0 ? false : true;
         this.cd.markForCheck();
       });
       this.addedTemporaryRow = false;
@@ -86,22 +87,6 @@ export class ExerciseTypeComponent implements OnInit {
 
   }
 
-
-  addExerciseType(name: string, callback) {
-    this.exerciseTypeService.addExerciseType(name, callback);
-  }
-
-  getAllExerciseTypes(callback) {
-    return this.exerciseTypeService.getAllExerciseTypes(callback);
-  }
-
-  deleteExerciseTypeByCode(code: number, callback) {
-    this.exerciseTypeService.deleteExerciseTypeByCode(code, callback);
-  }
-
-  updateExerciseTypeByCode(code: number, name: string, callback) {
-    this.exerciseTypeService.updateExerciseTypeByCode(code, name, callback);
-  }
 }
 
 
@@ -121,6 +106,7 @@ export class TableDatabase {
     if (this.data && this.data instanceof Array) {
       copiedData = this.data.slice(0, -1);
     }
+    console.log(code, name);
     copiedData.push({
       code: code,
       name: name,
@@ -152,14 +138,14 @@ export class TableDatabase {
     return rows.length;
   }
 
-  updateRow(code: number, name: string) {
+  updateRow(code: number, body) {
     if (!this.data || !(this.data instanceof Array)) {
       return 0;
     }
     const copiedData = this.data.slice();
     copiedData.some(function (element) {
       if (element.code === code) {
-        element.name = name;
+        element = Object.assign(element, body);
         return true;
       }
       return false;

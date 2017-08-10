@@ -33,10 +33,10 @@ function deleteAll(callback) {
     query.exec(callback);
 }
 
-function updateByCode(code, name, callback) {
+function updateByCode(code, body, callback) {
     const query = this.model.update({
         code: code
-    }, { $set: { name: name }});
+    }, body);
     query.exec(callback);
 };
 
