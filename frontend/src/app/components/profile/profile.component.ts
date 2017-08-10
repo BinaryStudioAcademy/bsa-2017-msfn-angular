@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   hideCropper = true;
-  image = './../../../../../resources/userPhoto/default.png';
+  image = './resources/userPhoto/default.png';
 
 
   user = {
