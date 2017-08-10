@@ -74,7 +74,13 @@ const routes: Routes = [
         path: 'exercise_create',
         children: [],
         component: ExerciseCreateComponent,
-        // canActivate: [IsLoggedGuard]
+        // canActivate: [ForAdminGuard]
+    },
+    {
+        path: 'exercise_edit/:id',
+        children: [],
+        component: ExerciseCreateComponent,
+        // canActivate: [ForAdminGuard]
     },
 
 ];

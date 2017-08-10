@@ -1,11 +1,17 @@
-<form class="exercise-create-form">
-  <h2>Create A New Exercise</h2>
-  <md-input-container>
-    <input mdInput placeholder="Exercise Description" value="Sushi">
+<form class="exercise-create-form" #form="ngForm">
+
+  <h2>Create/Edit Exercise</h2>
+  <md-input-container class="input">
+    <input mdInput placeholder="Exercise Title" [(ngModel)]="title" name="title" required>
   </md-input-container>
-  <md-select placeholder="Exercise type" [(ngModel)]="selectedValue" name="food">
-    <md-option *ngFor="let food of foods" [value]="food.value">
-      {{food.viewValue}}
+  <md-select placeholder="Exercise type" [(ngModel)]="selectedValue" name="exercise" class="select-row input" required>
+    <md-option *ngFor="let exercise of exercises" [value]="exercise.value">
+      {{exercise.viewValue}}
     </md-option>
   </md-select>
+  <md-input-container class="example-full-width" class="input">
+    <textarea mdInput placeholder="Exercise Description" [(ngModel)]="description" name="description"></textarea>
+  </md-input-container>
+
+  <button md-button class="btn btn-save" (click)="save(form)">Save</button>
 </form>
