@@ -170,7 +170,7 @@ label {
 
 .profile-content {
     margin-top: 20px;
-    display: flex;
+    //display: flex;
     justify-content: center;
     flex-direction: column;
 }
@@ -224,10 +224,19 @@ label {
     }
 }
 
-.profile-password {
+.button-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 20px;
+    padding: 0 40px;
+}
+
+#coach-button {
+    flex-basis: 40%;
+
+    div {
+        font-size: $minor-text;
+    }
 }
 
 .password-container {
