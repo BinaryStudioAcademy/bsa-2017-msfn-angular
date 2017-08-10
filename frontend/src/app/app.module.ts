@@ -49,6 +49,7 @@ import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
+import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
 
 @NgModule({
     declarations: [
@@ -68,7 +69,8 @@ import { NotificationDialogComponent } from './components/notification-dialog/no
         ProfileComponent,
         TestToastrComponent,
         SidebarViewComponent,
-        NotificationDialogComponent
+        NotificationDialogComponent,
+        ExerciseCreateComponent
     ],
     imports: [
         BrowserModule,

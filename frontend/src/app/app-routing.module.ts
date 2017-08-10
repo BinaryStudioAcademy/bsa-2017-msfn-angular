@@ -16,6 +16,7 @@ import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
+import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
 
 const routes: Routes = [
     {
@@ -61,12 +62,14 @@ const routes: Routes = [
         children: [],
         component: TestSocketsComponent
     },
+    // {
+    //     path: 'exercise-type', // can be removed
+    //     children: [],
+    //     component: ExerciseTypeComponent
+    // },
     {
-        path: 'exercise-type', // can be removed
-        children: [],
-        component: ExerciseTypeComponent
-    }, {
         path: 'profile',
+        children: [],
         component: ProfileComponent
     }, {
         path: 'test-toastr', // for testing, can be removed
@@ -75,7 +78,20 @@ const routes: Routes = [
     }, {
         path: 'sidebar', // for testing
         component: SidebarViewComponent
-    }
+    },
+    {
+        path: 'exercise_create',
+        children: [],
+        component: ExerciseCreateComponent,
+        // canActivate: [ForAdminGuard]
+    },
+    {
+        path: 'exercise_edit/:id',
+        children: [],
+        component: ExerciseCreateComponent,
+        // canActivate: [ForAdminGuard]
+    },
+
 ];
 
 @NgModule({
