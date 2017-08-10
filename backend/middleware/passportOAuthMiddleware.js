@@ -28,6 +28,8 @@ module.exports = function() {
                             lastName: profile.name.familyName,
                             email: profile.emails[0].value,
                             password: 'qwerty',
+                            isCoach: false,
+                            isAdmin: false,
                             googleID: profile.id
                         };
                         userService.addItem(userBody, (err, user) => {
@@ -64,10 +66,12 @@ module.exports = function() {
                         done(null, user)
                     } else {
                         const userBody = {
-                            firstName: profile.name.givenName,
+                            firstName: profile.name.givenName || profile.displayName,
                             lastName: profile.name.familyName,
                             email: profile.emails[0].value,
                             password: 'qwerty',
+                            isCoach: false,
+                            isAdmin: false,
                             facebookID: profile.id
                         };
                         userService.addItem(userBody, (err, user) => {
@@ -90,6 +94,8 @@ module.exports = function() {
     ));
     passport.use(new TwitterStrategy(oauthConfig.twitterOptions,
         (req, accessToken, refreshToken, profile, done) => {
+            console.log(profile);
+
             const queryWithID = {
                 "twitterID": profile.id
             };
@@ -105,6 +111,8 @@ module.exports = function() {
                             firstName: profile.displayName,
                             email: profile.emails[0].value || 'default@msfn.com',
                             password: 'qwerty',
+                            isCoach: false,
+                            isAdmin: false,
                             twitterID: profile.id
                         };
                         userService.addItem(userBody, (err, user) => {

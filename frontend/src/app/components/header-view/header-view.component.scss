@@ -1,37 +1,76 @@
 @import "../../../../src/globalStyles/variables";
 @import '../../../globalStyles/text.scss';
 
+$header-inner-margin: 5%;
+$header-icons-intendation: 14px;
+$header-height: 70px;
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    min-width: 260px;
+    height: $header-height;
     background-color: $gradient-to-color;
-    font-family: 'Roboto', sans-serif; // when fonts will be added globaly it can be removed
+    font-family: $font-general;
 
     .logo {
         font-size: 25px;
-        margin-left: 5%;
+        margin-left: $header-inner-margin;
 
-        .title {
-            margin-left: 14px;
+        a {
+            text-decoration: none;
+            color: $text-main-color;
+        }
+
+        .logo__icon {
+            width: 53px;
+            height: 40px;
+            vertical-align: bottom;
+            margin-bottom: 1px;
+        }
+
+        .logo__title {
+            margin-left: $header-icons-intendation;
             vertical-align: super;
         }
     }
 
     .notifications {
-        .count {
+        .notifications__count {
             vertical-align: super;
+        }
+
+        .notification__alert {
+            cursor: pointer;
         }
     }
 
     .settings {
-        margin-right: 5%;
-        
-        .name {
-            margin-left: 14px;
+    
+        .settings__name {
+            margin-left: $header-icons-intendation;
             vertical-align: super;
             font-size: 17px;
+        }
+    }
+
+    .header__navigation-panel {
+        margin-right: $header-inner-margin;
+
+        .header__button {
+            background: $btn-color;
+            border-radius: 5px;
+            line-height: 30px;
+            font-weight: bold;
+        }
+    }
+}
+
+@media screen and (max-width: 390px) {
+    header {
+        .logo__title {
+            display: none;
         }
     }
 }

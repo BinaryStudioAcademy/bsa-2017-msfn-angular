@@ -1,34 +1,29 @@
 import {Component, OnInit} from '@angular/core';
 import * as io from 'socket.io-client';
-import {MdSnackBar} from '@angular/material';
+import {ToastrService} from '../../services/toastr.service';
 
 @Component({
     selector: 'app-test-sockets',
+    providers: [ToastrService],
     templateUrl: './test-sockets.component.html',
     styleUrls: ['./test-sockets.component.scss']
 })
 export class TestSocketsComponent implements OnInit {
     socket = io.connect('http://localhost:3060');
 
-    constructor(private snackBar: MdSnackBar) {
+    constructor(private toastrService: ToastrService) {
 
-    }
-
-    private openSnackBar(message: string, action = 'Close') {
-        this.snackBar.open(message, action, {
-            duration: 4000,
-        });
     }
 
     ngOnInit() {
         this.socket.on('connect', () => {
-            this.openSnackBar('connected to server');
+            this.toastrService.showMessage('success', 'connected to server');
         });
         this.socket.on('disconnect', () => {
-            this.openSnackBar('server is DOWN');
+            this.toastrService.showMessage('error', 'server is DOWN');
         });
         this.socket.on('feedbackFromServer', (message) => {
-            this.openSnackBar(message);
+            this.toastrService.showMessage('info', message);
         });
     }
 

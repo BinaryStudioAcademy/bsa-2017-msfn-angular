@@ -41,13 +41,13 @@ export class LoginComponent {
         url: '/api/login',
         method: 'POST',
         body: {data: encData}
-      }
+      };
 
     this.httpHandler.sendRequest(sendData)
       .then((res) => {
         if (res.access) {
-          this.router.navigate(['/profile'])
+          this.router.navigate(['/profile']);
         }
-      })
+      });
   }
 }

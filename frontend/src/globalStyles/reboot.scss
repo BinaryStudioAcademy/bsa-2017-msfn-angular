@@ -1,6 +1,8 @@
 @import './variables.scss';
 @import './indentations.scss';
 @import './text.scss';
+@import '../../../node_modules/ngx-toastr/toastr.css';
+@import './toastrStyles.scss';
 
 // Reboot
 //
@@ -48,6 +50,7 @@ body {
     font-size: $usual-text;
     font-weight: 300;
     line-height: 1.15;
+    -webkit-font-smoothing: antialiased;
     color: #fff;
     background-color: #333; // 2
 } 
@@ -109,7 +112,7 @@ dfn {
 
 b,
 strong {
-    font-weight: bolder; // Add the correct font weight in Chrome, Edge, and Safari
+    font-weight: bold;
 }
 
 small {
