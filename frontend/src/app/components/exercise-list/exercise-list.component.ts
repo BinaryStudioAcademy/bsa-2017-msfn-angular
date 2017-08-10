@@ -19,7 +19,6 @@ import 'rxjs/add/observable/fromEvent';
 })
 
 export class ExerciseListComponent implements OnInit {
-
   name = '';
   displayedColumns = [
     'name',

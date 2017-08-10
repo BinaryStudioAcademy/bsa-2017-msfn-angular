@@ -21,7 +21,8 @@ import {
     MdSlideToggleModule,
     MdTableModule,
     MdAutocompleteModule,
-    MdSortModule
+    MdSortModule,
+    MdTooltipModule
 } from '@angular/material';
 import 'hammerjs';
 
@@ -49,6 +50,7 @@ export const ImportModule = [
     MdAutocompleteModule,
     ImageCropperModule,
     MdSortModule,
+    MdTooltipModule,
     ToastrModule.forRoot({
         timeOut: 5000,
         positionClass: 'toast-bottom-right'

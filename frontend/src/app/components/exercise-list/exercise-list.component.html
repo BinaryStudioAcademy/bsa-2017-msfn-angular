@@ -30,8 +30,8 @@
       <md-header-cell *cdkHeaderCellDef>
         Description
       </md-header-cell>
-      <md-cell *cdkCellDef="let row">
-        {{ row.description }}
+      <md-cell *cdkCellDef="let row" md-tooltip="{{ row.description }}">
+        {{ row.description.substring(0, 30) }}...
       </md-cell>
     </ng-container>
 
