@@ -23,10 +23,7 @@ import { HeaderViewComponent } from './components/header-view/header-view.compon
 import { WindowObj } from './services/window.service';
 import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
-import { ImageCropperModule } from 'ng2-img-cropper';
-import { ToastrModule } from 'ngx-toastr';
-import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
-import { ToastrService } from './services/toastr.service';
+import {ImageCropperModule} from 'ng2-img-cropper';
 
 import {
     MdSnackBarModule,
@@ -47,9 +44,7 @@ import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
-import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
-import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
-import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
+import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 
 @NgModule({
     declarations: [
@@ -67,10 +62,7 @@ import { ExerciseCreateComponent } from './components/exercise-create/exercise-c
         ExerciseTypeComponent,
         AutocompletePipe,
         ProfileComponent,
-        TestToastrComponent,
-        SidebarViewComponent,
-        NotificationDialogComponent,
-        ExerciseCreateComponent
+        ExerciseListComponent
     ],
     imports: [
         BrowserModule,
@@ -95,21 +87,15 @@ import { ExerciseCreateComponent } from './components/exercise-create/exercise-c
         MdTableModule,
         CdkTableModule,
         MdAutocompleteModule,
-        ImageCropperModule,
-        ToastrModule.forRoot({
-            timeOut: 5000,
-            positionClass: 'toast-bottom-right'
-        })
+        ImageCropperModule
     ],
     providers: [
         HttpService,
         WindowObj,
         IsLoggedGuard,
-        EncryptService,
-        ToastrService
+        EncryptService
     ],
-    bootstrap: [AppComponent],
-    entryComponents: [ NotificationDialogComponent ]
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

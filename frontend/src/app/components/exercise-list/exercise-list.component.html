@@ -1,0 +1,37 @@
+<div id="exercise-list">
+  <div id="title">
+    <h1>Exercises</h1>
+  </div>
+
+  <md-table id="table" [dataSource]="dataSource" mdSort>
+    <ng-container cdkColumnDef="name">
+      <md-header-cell *cdkHeaderCellDef md-sort-header>
+        Name
+      </md-header-cell>
+      <md-cell *cdkCellDef="let row">
+        {{ row.name }}
+      </md-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="type">
+      <md-header-cell *cdkHeaderCellDef md-sort-header>
+        Type
+      </md-header-cell>
+      <md-cell *cdkCellDef="let row">
+        {{ row.type }}
+      </md-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="description">
+      <md-header-cell *cdkHeaderCellDef>
+        Description
+      </md-header-cell>
+      <md-cell *cdkCellDef="let row">
+        {{ row.description }}
+      </md-cell>
+    </ng-container>
+
+    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+  </md-table>
+</div>

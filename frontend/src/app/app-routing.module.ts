@@ -17,6 +17,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
+import {ExerciseListComponent} from './components/exercise-list/exercise-list.component';
 
 const routes: Routes = [
     {
@@ -91,7 +92,10 @@ const routes: Routes = [
         component: ExerciseCreateComponent,
         // canActivate: [ForAdminGuard]
     },
-
+    {
+        path: 'exercise-list',
+        component: ExerciseListComponent
+    }
 ];
 
 @NgModule({
