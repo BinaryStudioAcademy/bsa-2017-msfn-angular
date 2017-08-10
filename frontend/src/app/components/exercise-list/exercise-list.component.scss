@@ -1,0 +1,35 @@
+@import '../../../globalStyles/indentations.scss';
+@import '../../../globalStyles/text.scss';
+
+#exercise-list {
+  position: relative;
+}
+
+#title {
+  margin: $content-lr-margin 0;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+}
+
+md-input-container {
+  position: absolute;
+  right: 10%;
+  top: 0;
+}
+
+.mat-table {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.mat-row, .mat-header-row {
+  height: auto;
+  padding: $content-tb-margin 60px;
+}
+
+.mat-header-cell {
+  font-size: $main-text;
+}

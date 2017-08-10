@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IHttpReq } from "../models/http-req";
-import { HttpService } from "./http.service";
+import { IHttpReq } from '../models/http-req';
+import { HttpService } from './http.service';
 
 @Injectable()
 export class ExerciseTypeService {
@@ -26,7 +26,7 @@ export class ExerciseTypeService {
 
 
   getAllExerciseTypes(callback) {
-    let result = [];
+    // let result = [];
     const request: IHttpReq = {
       url: '/api/exercise-type',
       method: 'GET',

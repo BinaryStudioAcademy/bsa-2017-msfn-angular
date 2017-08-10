@@ -81,11 +81,11 @@
                     </div>
                 </div>
                 <div class="profile-password">
-                    <button md-raised-button class="">Change password</button>
+                    <button md-raised-button (click)="openConfirmPasswordDoalog()" class="">Change password</button>
                 </div>
             </div>
             <div class="profile-footer">
-                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" [disabled]="!profileForm.valid">Save changes</button>
+                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
             </div>
         </form>
     </div>
