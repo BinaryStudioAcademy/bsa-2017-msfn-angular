@@ -40,7 +40,8 @@ import {
     MdButtonModule,
     MdDialogModule,
     MdSlideToggleModule,
-    MdTableModule, MdAutocompleteModule
+    MdTableModule, MdAutocompleteModule,
+    MdSortModule
 } from '@angular/material';
 import 'hammerjs';
 import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
@@ -98,6 +99,7 @@ import { ExerciseCreateComponent } from './components/exercise-create/exercise-c
         CdkTableModule,
         MdAutocompleteModule,
         ImageCropperModule,
+        MdSortModule,
         ToastrModule.forRoot({
             timeOut: 5000,
             positionClass: 'toast-bottom-right'

@@ -38,4 +38,23 @@ export class ExerciseListService {
     ];
     callback(exerciseData);
   }
+
+  sortData(data, column, direction) {
+    return data.sort((a, b) => {
+      let propA = '';
+      let propB = '';
+
+      switch (column) {
+        case 'name': [propA, propB] = [a.name, b.name];
+          break;
+        case 'type': [propA, propB] = [a.type, b.type];
+          break;
+      }
+
+      const valueA = isNaN(+propA) ? propA : +propA;
+      const valueB = isNaN(+propA) ? propB : +propB;
+
+      return (valueA < valueB ? -1 : 1) * (direction === 'asc' ? 1 : -1);
+    });
+  }
 }
