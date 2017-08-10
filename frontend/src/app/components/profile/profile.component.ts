@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   hideCropper = true;
-  image: string;
+  image = './../../../../../resources/userPhoto/default.png';
 
 
   user = {
@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
     this.cropperSettings.touchRadius = 10;
 
     this.data = {
-      image: 'http://via.placeholder.com/150x150'
+      image: this.image
     };
   }
 
@@ -111,13 +111,13 @@ export class ProfileComponent implements OnInit {
       if (!this.hideCropper) {
         this.image = this.data.image;
         this.hideCropper = true;
+        this.profileService.savePhoto(this.data.image);
+      } else if (event === 'cancel') {
+        this.data = {
+          image: this.image
+        };
+        this.hideCropper = true;
       }
-    } else if (event === 'cancel') {
-      this.data = {
-        image: this.image || 'http://via.placeholder.com/150x150'
-      };
-      this.hideCropper = true;
     }
   }
-
 }

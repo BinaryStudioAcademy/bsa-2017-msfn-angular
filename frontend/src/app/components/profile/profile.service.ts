@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { months } from './month';
+import { IHttpReq } from '../../models/http-req';
+import { HttpService } from '../../services/http.service';
+import { HttpClient } from '@angular/common/http';
+
 @Injectable()
 export class ProfileService {
 
 
-  constructor() { }
+  constructor(private http: HttpClient, private httpHandler: HttpService) { }
 
   getMonth() {
     return months;
@@ -39,6 +43,16 @@ export class ProfileService {
       daysOutput.push(i);
     }
     return daysOutput;
+  }
+
+  savePhoto(image) {
+    const sendData: IHttpReq = {
+      url: '/api/file',
+      method: 'POST',
+      body: { img: image, name: 'id1' }
+    };
+
+    this.httpHandler.sendRequest(sendData);
   }
 
 }
