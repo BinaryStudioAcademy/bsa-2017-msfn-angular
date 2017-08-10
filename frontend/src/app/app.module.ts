@@ -23,7 +23,7 @@ import { HeaderViewComponent } from './components/header-view/header-view.compon
 import { WindowObj } from './services/window.service';
 import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
-import {ImageCropperModule} from 'ng2-img-cropper';
+import { ImageCropperModule } from 'ng2-img-cropper';
 import { ToastrModule } from 'ngx-toastr';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { ToastrService } from './services/toastr.service';
@@ -51,6 +51,7 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
+import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
     declarations: [
@@ -76,6 +77,7 @@ import { ExerciseCreateComponent } from './components/exercise-create/exercise-c
     ],
     imports: [
         BrowserModule,
+        AdminModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
