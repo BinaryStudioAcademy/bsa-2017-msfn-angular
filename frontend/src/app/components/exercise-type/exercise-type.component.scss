@@ -18,15 +18,15 @@
 }
 
 button:focus {
-    outline:0;
+    outline: 0;
 }
 
 .mat-row {
     height: 80px;
 }
 
-.mat-table{
-    min-width: 350px;
+.mat-table {
+    margin-top: 40px;
 }
 
 .input-container {
@@ -35,8 +35,11 @@ button:focus {
 }
 
 #btn-add {
-    width: 100%;
-    margin: 40px 0;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .row-text:hover {
@@ -57,7 +60,7 @@ button:focus {
     align-items: center;
 }
 
-.italic{
+.italic {
     font-style: italic;
     color: $text-second-color;
 }
@@ -70,9 +73,13 @@ button:focus {
     cursor: pointer;
 }
 
-@media only screen and (max-width: $small-screen + 15px){
-    .main-container{
+@media only screen and (max-width: $small-screen + 15px) {
+    .main-container {
         width: 100%;
         margin: 0;
     }
+}
+
+.hiding{
+    display: none !important;
 }

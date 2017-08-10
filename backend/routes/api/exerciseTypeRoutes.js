@@ -31,6 +31,9 @@ module.exports = function (app) {
 
     app.get(baseUrl, function (req, res, next) {
             exerciseTypeService.getAllExerciseTypes(function(err, data) {
+            if (!data.length){
+                data = [{}];
+            }
             res.data = data;
             res.err = err;
             next();

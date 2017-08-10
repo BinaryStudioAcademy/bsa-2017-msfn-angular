@@ -21,6 +21,7 @@ export class ExerciseTypeComponent implements OnInit {
   dataSource: ExampleDataSource | null;
 
   addedTemporaryRow = false;
+  loaded = false;
 
 
   constructor(private cd: ChangeDetectorRef, public exerciseTypeService: ExerciseTypeService) {
@@ -36,7 +37,7 @@ export class ExerciseTypeComponent implements OnInit {
     // This must have because material table have an issue when work with routes
 
     this.getAllExerciseTypes((result: IExerciseType[]) => {
-      this.tableDatabase.addRows(result);
+      this.loaded = this.tableDatabase.addRows(result) === 0 ? false : true;
       this.cd.markForCheck();
     });
   }
@@ -49,12 +50,12 @@ export class ExerciseTypeComponent implements OnInit {
   updateRow(code: number, name: string) {
     if (code) {
       this.exerciseTypeService.updateExerciseTypeByCode(code, name, (data) => {
-        this.tableDatabase.updateRow(data.code, data.name);
+        this.loaded = this.tableDatabase.updateRow(data.code, data.name) === 0 ? false : true;
         this.cd.markForCheck();
       });
     } else {
       this.exerciseTypeService.addExerciseType(name, (data) => {
-        this.tableDatabase.addRow(data.code, data.name);
+        this.loaded = this.tableDatabase.addRow(data.code, data.name) === 0 ? false : true;
         this.cd.markForCheck();
       });
       this.addedTemporaryRow = false;
@@ -66,14 +67,15 @@ export class ExerciseTypeComponent implements OnInit {
 
   deleteRow(code: number) {
     this.exerciseTypeService.deleteExerciseTypeByCode(code, (data) => {
-      this.tableDatabase.deleteRow(code);
+      this.loaded = this.tableDatabase.deleteRow(code) === 0 ? false : true;
       this.cd.markForCheck();
     });
   }
 
 
   addRow() {
-    this.tableDatabase.addTemporaryRow();
+    this.loaded = this.tableDatabase.addTemporaryRow() === 0 ? false : true;
+    console.log(this.loaded);
     this.cd.markForCheck();
     this.addedTemporaryRow = true;
     setTimeout(() => {
@@ -115,28 +117,43 @@ export class TableDatabase {
   }
 
   addRow(code: number, name: string) {
-    const copiedData = this.data.slice(0, -1);
+    let copiedData = [];
+    if (this.data && this.data instanceof Array) {
+      copiedData = this.data.slice(0, -1);
+    }
     copiedData.push({
       code: code,
       name: name
     });
     this.dataChange.next(copiedData);
+    return copiedData.length;
   }
 
   addTemporaryRow() {
-    const copiedData = this.data.slice();
+    let copiedData = [];
+    if (this.data && this.data instanceof Array) {
+      copiedData = this.data.slice();
+    }
     copiedData.push({
       code: null,
       name: ''
     });
     this.dataChange.next(copiedData);
+    return copiedData.length;
   }
 
   addRows(rows: IExerciseType[]) {
+    if (!rows || !(rows instanceof Array) || !rows.length || (!rows[0].name && !rows[0].code && rows.length === 1)) {
+      return 0;
+    }
     this.dataChange.next(rows);
+    return rows.length;
   }
 
   updateRow(code: number, name: string) {
+    if (!this.data || !(this.data instanceof Array)) {
+      return 0;
+    }
     const copiedData = this.data.slice();
     copiedData.some(function (element) {
       if (element.code === code) {
@@ -146,10 +163,14 @@ export class TableDatabase {
       return false;
     });
     this.dataChange.next(copiedData);
+    return copiedData.length;
   }
 
 
   deleteRow(code: number) {
+    if (!this.data || !(this.data instanceof Array)) {
+      return 0;
+    }
     const copiedData = this.data.slice();
     let ind = copiedData.length;
     copiedData.some(function (element, index) {
@@ -161,6 +182,7 @@ export class TableDatabase {
     });
     copiedData.splice(ind, 1);
     this.dataChange.next(copiedData);
+    return copiedData.length;
   }
 }
 
