@@ -27,6 +27,7 @@ button:focus {
 
 .mat-table {
     margin-top: 40px;
+    min-width: 350px;
 }
 
 .input-container {
@@ -36,10 +37,8 @@ button:focus {
 
 #btn-add {
     width: 40%;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    min-width: 180px;
+    margin: 40px auto;
 }
 
 .row-text:hover {
@@ -73,13 +72,14 @@ button:focus {
     cursor: pointer;
 }
 
-@media only screen and (max-width: $small-screen + 15px) {
-    .main-container {
-        width: 100%;
-        margin: 0;
-    }
-}
-
 .hiding{
     display: none !important;
 }
+
+@media only screen and (max-width: $medium-screen) {
+    .main-container {
+        width: 80%;
+    }
+}
+
+
