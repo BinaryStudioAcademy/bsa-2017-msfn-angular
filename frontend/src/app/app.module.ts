@@ -24,6 +24,9 @@ import { WindowObj } from './services/window.service';
 import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import {ImageCropperModule} from 'ng2-img-cropper';
+import { ToastrModule } from 'ngx-toastr';
+import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
+import { ToastrService } from './services/toastr.service';
 
 import {
     MdSnackBarModule,
@@ -45,6 +48,9 @@ import { IndexPageComponent } from './components/index-page/index-page.component
 import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
+import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
+import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
 
 @NgModule({
     declarations: [
@@ -62,7 +68,11 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
         ExerciseTypeComponent,
         AutocompletePipe,
         ProfileComponent,
-        ExerciseListComponent
+        ExerciseListComponent,
+        TestToastrComponent,
+        SidebarViewComponent,
+        NotificationDialogComponent,
+        ExerciseCreateComponent
     ],
     imports: [
         BrowserModule,
@@ -87,15 +97,21 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
         MdTableModule,
         CdkTableModule,
         MdAutocompleteModule,
-        ImageCropperModule
+        ImageCropperModule,
+        ToastrModule.forRoot({
+            timeOut: 5000,
+            positionClass: 'toast-bottom-right'
+        })
     ],
     providers: [
         HttpService,
         WindowObj,
         IsLoggedGuard,
-        EncryptService
+        EncryptService,
+        ToastrService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [ NotificationDialogComponent ]
 })
 export class AppModule {
 }
