@@ -8,8 +8,9 @@ import { HeaderViewComponent } from './components/header-view/header-view.compon
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { IndexPageComponent } from './components/index-page/index-page.component';
-// import { ForLoggedInGuard } from './guards/for-logged-in.guard';
-import { IsLoggedGuard } from './guards/is-logged.guard';
+import { IsLoggedInGuard } from './guards/is-logged-in.guard';
+import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
+import { ForAdminGuard } from './guards/for-admin.guard';
 import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -19,27 +20,31 @@ import { ExerciseCreateComponent } from './components/exercise-create/exercise-c
 import { AdminComponent } from './components/admin/admin.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        component: IndexPageComponent
+        component: IndexPageComponent,
+        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'login',
         children: [],
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'register',
         component: RegistrationComponent,
-        canActivate: [IsLoggedGuard]
+        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'forget-password', // for testing forgetPasswordComponent, can be removed
         children: [],
-        component: ForgetPasswordComponent
+        component: ForgetPasswordComponent,
+        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'test-http', // for testing, can be removed
@@ -52,12 +57,14 @@ const routes: Routes = [
     },
     {
         path: 'forgot-password-mail',
-        component: ForgotPasswordMailComponent
+        component: ForgotPasswordMailComponent,
+        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'restore-password', // for testing restorePasswordComponent, can be removed
         children: [],
-        component: RestorePasswordComponent
+        component: RestorePasswordComponent,
+        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'test-socket', // for testing socket.io
@@ -71,7 +78,8 @@ const routes: Routes = [
     {
         path: 'profile',
         children: [],
-        component: ProfileComponent
+        component: ProfileComponent,
+        canActivate: [IsLoggedInGuard]
     }, {
         path: 'test-toastr', // for testing, can be removed
         children: [],
@@ -83,21 +91,24 @@ const routes: Routes = [
     {
         path: 'admin',
         children: [],
-        component: AdminComponent
+        component: AdminComponent,
+        canActivate: [ForAdminGuard]
     },
     {
         path: 'test-markdown',
         component: TestMarkdownComponent
-
+    }, {
+        path: 'notfound',
+        component: PageNotFoundComponent
+    }, {
+        path: '**',
+        redirectTo: 'notfound'
     }
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-    providers: [
-        // ForLoggedInGuard
-    ]
+    exports: [RouterModule]
 })
 
 export class AppRoutingModule { }
