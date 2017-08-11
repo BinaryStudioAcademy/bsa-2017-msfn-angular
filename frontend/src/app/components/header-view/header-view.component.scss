@@ -1,5 +1,6 @@
-@import "../../../../src/globalStyles/variables";
+@import '../../../../src/globalStyles/variables';
 @import '../../../globalStyles/text.scss';
+@import '../../../globalStyles/indentations.scss';
 
 $header-inner-margin: 5%;
 $header-icons-intendation: 14px;
@@ -53,6 +54,8 @@ header {
             vertical-align: super;
             font-size: 17px;
         }
+        
+        cursor: pointer;
     }
 
     .header__navigation-panel {
@@ -64,6 +67,17 @@ header {
             line-height: 30px;
             font-weight: bold;
         }
+    }
+}
+.user_menu {
+    background-color: $gradient-to-color;
+    position: absolute;
+    width: 300px;
+    top: 70px;
+    right: 0;
+
+    button {
+        width: 100%;
     }
 }
 

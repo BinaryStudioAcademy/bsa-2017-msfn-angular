@@ -1,5 +1,5 @@
-<header>
-  <div class="logo" >
+<header (mouseleave)="showUserMenu = false">
+  <div class="logo">
       <a routerLink="/">
         <svg class="logo__icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
             <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
@@ -11,10 +11,13 @@
   <div class="notifications" *ngIf="thereIsLoggedInUser">
     <md-icon (click)="openDialog()" class="notification__alert">notifications</md-icon><span class="notifications__count">2</span>
   </div> 
-  <div class="settings header__navigation-panel" *ngIf="thereIsLoggedInUser">
+  <div class="settings header__navigation-panel" *ngIf="thereIsLoggedInUser" (click)="userMenuDialog()">
     <md-icon>data_usage</md-icon><span class="settings__name">Dima Beseda</span>
   </div>
-
+  <div class="user_menu" *ngIf="showUserMenu">
+    <button md-button routerLink="/profile">Edit profile</button>
+    <button md-button (click)="logout()">Logout</button>
+  </div>
   <div class="user-forms header__navigation-panel" *ngIf="!thereIsLoggedInUser">
     <button md-button routerLink="/register" class="header__button">Register</button>
     <button md-button routerLink="/login" class="header__button">Login</button>
