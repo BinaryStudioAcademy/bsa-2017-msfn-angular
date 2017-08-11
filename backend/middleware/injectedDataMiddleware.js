@@ -11,7 +11,13 @@ module.exports = function (req, res, obj, error) {
             obj.userId = req.user._id;
             obj.userFirstName = user.firstName;
             obj.userLastName = user.lastName;
-            obj.role = user.role;
+            if(req.user.isAdmin) {
+               obj.role = 'admin';
+           } else if(req.user.iSCoach) {
+               obj.role = 'coach';
+           } else {
+               obj.role = 'usual'
+           }
             obj.currentProject = user.currentProject;
         } else {
             obj.isLoggedIn = false;

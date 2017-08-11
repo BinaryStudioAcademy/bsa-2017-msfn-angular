@@ -12,7 +12,6 @@ import { IndexPageComponent } from './components/index-page/index-page.component
 import { IsLoggedGuard } from './guards/is-logged.guard';
 import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
-import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
@@ -100,8 +99,7 @@ const routes: Routes = [
     {
         path: 'admin',
         children: [],
-        component: AdminComponent,
-        // canActivate: [ForAdminGuard]
+        component: AdminComponent
     },
     {
         path: 'test-markdown',

@@ -49,7 +49,6 @@ export class ExerciseTypeComponent implements OnInit {
 
   updateRow(code: number, body) {
     if (code) {
-      console.log(code);
       this.exerciseTypeService.updateExerciseTypeByCode(code, body, (data) => { // SUDI
         this.loaded = this.tableDatabase.updateRow(code, body) === 0 ? false : true;
         this.cd.markForCheck();

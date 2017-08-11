@@ -1,3 +1,4 @@
+import { ForAdminGuard } from './../../guards/for-admin.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -9,6 +10,7 @@ const adminRoutes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [ForAdminGuard],
     children: [
       {
         path: '',
