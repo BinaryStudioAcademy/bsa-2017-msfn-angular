@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
 import { HttpService } from '../../services/http.service';
 import { IHttpReq } from '../../models/http-req';
+import { WindowObj } from '../../services/window.service';
 
 @Component({
   selector: 'app-header-view',
@@ -12,8 +13,8 @@ import { IHttpReq } from '../../models/http-req';
 })
 export class HeaderViewComponent implements OnInit {
 
-  private thereIsLoggedInUser: boolean;
-  private showUserMenu: boolean;
+  public thereIsLoggedInUser: boolean;
+  public showUserMenu: boolean;
   private notificationsDialogConfig = {
       height: '300px',
       width: '200px',
@@ -26,7 +27,8 @@ export class HeaderViewComponent implements OnInit {
   constructor(
     public dialog: MdDialog,
     private httpHandler: HttpService,
-    private router: Router
+    private router: Router,
+    public window: WindowObj
   ) {}
 
   ngOnInit() {

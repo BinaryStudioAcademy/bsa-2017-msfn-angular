@@ -27,7 +27,6 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         component: IndexPageComponent,
-        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'login',
