@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
   };
 
   requestForCoaching = false;
+  coachingMessage: string;
 
   constructor(private profileService: ProfileService,
     private formBuilder: FormBuilder,
@@ -74,12 +75,6 @@ export class ProfileComponent implements OnInit {
     this.months = this.profileService.getMonth();
     this.days = this.profileService.getDays(this.user.birthday.month, this.user.birthday.year);
     this.years = this.profileService.getYears();
-
-    // this.profileService.getProfile(data => {
-    //   this.user = data;
-    //   this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
-    // });
-
     this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
   }
 
@@ -147,14 +142,18 @@ export class ProfileComponent implements OnInit {
   }
 
   applyForCoaching() {
-    // this.requestForCoaching = true;
     const userData = {
       requestForCoaching: true
     };
+    this.requestForCoaching = true;
 
-    this.profileService.updateProfile(userData, () => {
-      this.user['requestForCoaching'] = true;
-      this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
-    });
+    this.profileService.updateProfile(
+      userData,
+      () => {
+        this.coachingMessage = 'We\'ll moderate your request in 24 hours. You\'ll get a notification when it would be done.';
+      },
+      () => {
+        this.coachingMessage = 'Request was unsuccessful. Please try again.';
+      });
   }
 }

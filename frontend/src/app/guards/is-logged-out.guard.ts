@@ -10,7 +10,6 @@ export class IsLoggedOutGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      console.log('out==', this.window.data._injectedData.isLoggedIn);
       if (this.window.data._injectedData.isLoggedIn === false || this.window.data._injectedData.isLoggedIn === undefined) { return true; }
 
       this.router.navigate(['/profile']);

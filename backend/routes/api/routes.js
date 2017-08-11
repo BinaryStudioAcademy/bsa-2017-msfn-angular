@@ -6,6 +6,7 @@ module.exports = function (app) {
         oAuthRoutes: require('./oAuthRoutes')(app),
         passRoutes: require('./passwordRoutes')(app),
         exerciseTypeRoutes: require('./exerciseTypeRoutes')(app),
-        fileRoutes: require('./fileRoutes')(app),
+        couchRoutes: require('./couchRoutes')(app),
+        fileRoutes: require('./fileRoutes')(app)
     };
 };
