@@ -21,13 +21,13 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
         component: IndexPageComponent,
-        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'login',
@@ -97,7 +97,12 @@ const routes: Routes = [
     {
         path: 'test-markdown',
         component: TestMarkdownComponent
-    }, {
+    },
+    {
+        path: 'user-list',
+        component: UserListComponent
+    },
+    {
         path: 'notfound',
         component: PageNotFoundComponent
     }, {

@@ -80,7 +80,6 @@ export class ProfileService {
   }
 
   updateUser(user, id) {
-    console.log('userTOGo', user);
     const request: IHttpReq = {
       url: '/api/user/' + id,
       method: 'PUT',
