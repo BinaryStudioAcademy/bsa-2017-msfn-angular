@@ -44,27 +44,20 @@ export class ProfileService {
     return daysOutput;
   }
 
-  // getProfile(callback) {
-  //   const request: IHttpReq = {
-  //     url: '/api/user/_id',
-  //     method: 'GET',
-  //     body: {}
-  //   };
-  //   this.httpService.sendRequest(request).then(data => {
-  //     console.log(data);
-  //     callback(data);
-  //   });
-  // }
-
-  updateProfile(userData, callback) {
+  updateProfile(userData, callback, errorCallback) {
     const request: IHttpReq = {
-      url: '/api/exercise-list',
+      url: '/api/coach/apply/',
       method: 'PUT',
       body: userData
     };
-    this.httpService.sendRequest(request).then(data => {
-      console.log(data);
-      callback();
-    });
+
+    this.httpService.sendRequest(request)
+      .then(res => {
+        if (res === userData) {
+          callback();
+        } else {
+          errorCallback();
+        }
+      });
   }
 }
