@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-header-view',
@@ -19,10 +20,15 @@ export class HeaderViewComponent implements OnInit {
       }
   };
 
-  constructor(public dialog: MdDialog) { }
+  constructor(public dialog: MdDialog, private loginService: LoginService) { }
 
   ngOnInit() {
-    this.thereIsLoggedInUser = true;
+    // this.thereIsLoggedInUser = true;
+
+    this.loginService.userStateUpdate.subscribe((value) => {
+      console.log('ggg');
+      this.thereIsLoggedInUser = value;
+    });
   }
 
   openDialog() {

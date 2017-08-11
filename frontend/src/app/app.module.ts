@@ -32,6 +32,7 @@ import { NotificationDialogComponent } from './components/notification-dialog/no
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
 import { AdminModule } from './components/admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { LoginService } from './components/login/login.service';
 
 @NgModule({
     declarations: [
@@ -67,7 +68,8 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
         WindowObj,
         IsLoggedGuard,
         EncryptService,
-        ToastrService
+        ToastrService,
+        LoginService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,

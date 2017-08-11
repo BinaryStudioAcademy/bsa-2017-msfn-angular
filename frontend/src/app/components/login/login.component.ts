@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EncryptService } from '../../services/encrypt.service';
 import { IHttpReq } from '../../models/http-req';
 import { HttpService } from '../../services/http.service';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent {
   constructor(
     private encryptor: EncryptService,
     private httpHandler: HttpService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) { }
 
   login() {
@@ -46,6 +48,7 @@ export class LoginComponent {
     this.httpHandler.sendRequest(sendData)
       .then((res) => {
         if (res.access) {
+          this.loginService.userStateUpdate.emit(true);
           this.router.navigate(['/profile']);
         }
       });
