@@ -35,6 +35,7 @@ import { ExerciseCreateComponent } from './components/exercise-create/exercise-c
 import { AdminModule } from './components/admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import {UserListComponent} from './components/user-list/user-list.component';
 
 @NgModule({
     declarations: [
@@ -60,6 +61,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
         ExerciseCreateComponent,
         TestMarkdownComponent,
         PageNotFoundComponent,
+        UserListComponent,
     ],
     imports: [
         ImportModule,
