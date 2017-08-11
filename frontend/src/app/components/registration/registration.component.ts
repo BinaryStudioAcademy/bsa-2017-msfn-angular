@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegistrationService } from './registration.service';
-import { HttpClient } from '@angular/common/http';
 import { FormControl, Validators } from '@angular/forms';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-registration',
@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit {
 
   emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
 
-  constructor(public router: Router, public registrationService: RegistrationService, private http: HttpClient) { }
+  constructor(public router: Router, public registrationService: RegistrationService, private httpService: HttpService) { }
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -78,6 +78,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   setGender(e): void {
+
     this.user.gender = e.checked ? 'Female' : 'Male';
   }
 
@@ -95,11 +96,11 @@ export class RegistrationComponent implements OnInit {
         const user = this.user;
         console.log(user);
 
-        const req = this.http.post('/api/user', user);
-        req.subscribe(
-          data => {},
-          err => this.userError = err.error.error
-        );
+        // const req = this.http.post('/api/user', user);
+        // req.subscribe(
+        //   data => {},
+        //   err => this.userError = err.error.error
+        // );
       }
     } else {
       this.userError = 'Please fill in all fields correctly';

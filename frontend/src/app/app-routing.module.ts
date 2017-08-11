@@ -9,7 +9,6 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LoginComponent } from './components/login/login.component';
 import { IndexPageComponent } from './components/index-page/index-page.component';
 // import { ForLoggedInGuard } from './guards/for-logged-in.guard';
-import { IsLoggedGuard } from './guards/is-logged.guard';
 import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { ForAdminGuard } from './guards/for-admin.guard';
@@ -20,6 +19,7 @@ import { ExerciseCreateComponent } from './components/exercise-create/exercise-c
 import { AdminComponent } from './components/admin/admin.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { ForNotLoggedGuard } from './guards/for-not-logged.guard';
 
 const routes: Routes = [
     {
@@ -35,7 +35,7 @@ const routes: Routes = [
     {
         path: 'register',
         component: RegistrationComponent,
-        canActivate: [IsLoggedGuard]
+        canActivate: [ForNotLoggedGuard]
     },
     {
         path: 'forget-password', // for testing forgetPasswordComponent, can be removed

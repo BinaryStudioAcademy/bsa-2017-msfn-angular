@@ -1,9 +1,7 @@
 // @angular
 import { ImportModule } from './import.module';
 import { NgModule } from '@angular/core';
-
 // other components
-import { IsLoggedGuard } from './guards/is-logged.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
@@ -32,6 +30,8 @@ import { NotificationDialogComponent } from './components/notification-dialog/no
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
 import { AdminModule } from './components/admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { ForLoggedGuard } from './guards/for-logged.guard';
+import { ForNotLoggedGuard } from './guards/for-not-logged.guard';
 
 @NgModule({
     declarations: [
@@ -65,7 +65,8 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
     providers: [
         HttpService,
         WindowObj,
-        IsLoggedGuard,
+        ForLoggedGuard,
+        ForNotLoggedGuard,
         EncryptService,
         ToastrService,
         ExerciseTypeService
