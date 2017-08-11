@@ -30,6 +30,7 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
+import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import { ExerciseCreateComponent } from './components/exercise-create/exercise-c
         TestToastrComponent,
         SidebarViewComponent,
         NotificationDialogComponent,
-        ExerciseCreateComponent
+        ExerciseCreateComponent,
+        TestMarkdownComponent
     ],
     imports: [
         ImportModule,
