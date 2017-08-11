@@ -15,7 +15,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.put(baseUrl, function (req, res, next) {
-        exerciseTypeService.updateExerciseTypeByCode(req.body.code, req.body.name, function(err, data) {
+        exerciseTypeService.updateExerciseTypeByCode(req.body.code, req.body, function(err, data) {
             res.data = data;
             res.err = err;
             next();
@@ -31,6 +31,9 @@ module.exports = function (app) {
 
     app.get(baseUrl, function (req, res, next) {
             exerciseTypeService.getAllExerciseTypes(function(err, data) {
+            if (!data.length){
+                data = [{}];
+            }
             res.data = data;
             res.err = err;
             next();

@@ -3,7 +3,7 @@
 @import './text.scss';
 @import '../../../node_modules/ngx-toastr/toastr.css';
 @import './toastrStyles.scss';
-
+@import './markdownStyles.scss';
 // Reboot
 //
 // Normalization of HTML elements, manually forked from Normalize.css to remove
@@ -24,7 +24,7 @@ html {
 *::before,
 *::after {
     box-sizing: inherit; // 1
-} 
+}
 
 // Shim for "new" HTML5 structural elements to display correctly (IE10, older browsers)
 article,
@@ -39,7 +39,7 @@ main,
 nav,
 section {
     display: block;
-} 
+}
 // Body
 //
 // 1. Remove the margin in all browsers.
@@ -53,7 +53,7 @@ body {
     -webkit-font-smoothing: antialiased;
     color: #fff;
     background-color: #333; // 2
-} 
+}
 
 // Suppress the focus outline on elements that cannot be accessed via keyboard.
 // This prevents an unwanted focus outline from appearing around elements that
@@ -117,7 +117,7 @@ strong {
 
 small {
     font-size: 80%; // Add the correct font size in all browsers
-} 
+}
 //
 // Prevent `sub` and `sup` elements from affecting the line height in
 // all browsers.
@@ -136,13 +136,13 @@ sub {
 
 sup {
     top: -.5em;
-} 
+}
 //
 // Links
 //
 a {
     -webkit-text-decoration-skip: objects; // Remove gaps in links underline in iOS 8+ and Safari 8+.
-} 
+}
 
 pre,
 code,
@@ -251,7 +251,7 @@ input {
 button,
 select {
     text-transform: none; // Remove the inheritance of text transform in Firefox
-} 
+}
 
 // 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
 //    controls in Android 4.
@@ -261,7 +261,7 @@ html [type="button"], // 1
 [type="reset"],
 [type="submit"] {
     -webkit-appearance: button; // 2
-} 
+}
 
 // Remove inner border and padding from Firefox, but don't restore the outline like Normalize.
 button::-moz-focus-inner,
@@ -355,7 +355,7 @@ progress {
  ::-webkit-file-upload-button {
     font: inherit; // 2
     -webkit-appearance: button; // 1
-} 
+}
 
 //
 // Correct element displays

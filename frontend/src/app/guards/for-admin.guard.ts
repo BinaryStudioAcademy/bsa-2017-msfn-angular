@@ -10,7 +10,7 @@ export class ForAdminGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-       return this.isAdmin();
+      return this.isAdmin();
   }
 
   isAdmin(): boolean {

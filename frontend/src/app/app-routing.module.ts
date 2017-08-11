@@ -12,12 +12,13 @@ import { IndexPageComponent } from './components/index-page/index-page.component
 import { IsLoggedGuard } from './guards/is-logged.guard';
 import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
-import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
-import {ExerciseListComponent} from './components/exercise-list/exercise-list.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 
 const routes: Routes = [
     {
@@ -60,7 +61,6 @@ const routes: Routes = [
     },
     {
         path: 'test-socket', // for testing socket.io
-        children: [],
         component: TestSocketsComponent
     },
     // {
@@ -81,20 +81,14 @@ const routes: Routes = [
         component: SidebarViewComponent
     },
     {
-        path: 'exercise_create',
+        path: 'admin',
         children: [],
-        component: ExerciseCreateComponent,
-        // canActivate: [ForAdminGuard]
+        component: AdminComponent
     },
     {
-        path: 'exercise_edit/:id',
-        children: [],
-        component: ExerciseCreateComponent,
-        // canActivate: [ForAdminGuard]
-    },
-    {
-        path: 'exercise-list',
-        component: ExerciseListComponent
+        path: 'test-markdown',
+        component: TestMarkdownComponent
+
     }
 ];
 

@@ -44,6 +44,8 @@ export class ProfileComponent implements OnInit {
     password: '123456'
   };
 
+  requestForCoaching = false;
+
   constructor(private profileService: ProfileService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -72,6 +74,13 @@ export class ProfileComponent implements OnInit {
     this.months = this.profileService.getMonth();
     this.days = this.profileService.getDays(this.user.birthday.month, this.user.birthday.year);
     this.years = this.profileService.getYears();
+
+    // this.profileService.getProfile(data => {
+    //   this.user = data;
+    //   this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
+    // });
+
+    this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
   }
 
   buildForm() {
@@ -135,5 +144,17 @@ export class ProfileComponent implements OnInit {
         this.hideCropper = true;
       }
     }
+  }
+
+  applyForCoaching() {
+    // this.requestForCoaching = true;
+    const userData = {
+      requestForCoaching: true
+    };
+
+    this.profileService.updateProfile(userData, () => {
+      this.user['requestForCoaching'] = true;
+      this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
+    });
   }
 }

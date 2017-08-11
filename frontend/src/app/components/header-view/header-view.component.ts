@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
 import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
+import { HttpService } from '../../services/http.service';
+import { IHttpReq } from '../../models/http-req';
 
 @Component({
   selector: 'app-header-view',
@@ -9,8 +12,9 @@ import { NotificationDialogComponent } from '../notification-dialog/notification
 })
 export class HeaderViewComponent implements OnInit {
 
-  private thereIsLoggedInUser = false;
-  private dialogConfig = {
+  private thereIsLoggedInUser: boolean;
+  private showUserMenu: boolean;
+  private notificationsDialogConfig = {
       height: '300px',
       width: '200px',
       data: 'you have N notifications',
@@ -19,14 +23,36 @@ export class HeaderViewComponent implements OnInit {
       }
   };
 
-  constructor(public dialog: MdDialog) { }
+  constructor(
+    public dialog: MdDialog,
+    private httpHandler: HttpService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.thereIsLoggedInUser = true;
+    this.showUserMenu = false;
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(NotificationDialogComponent, this.dialogConfig);
+    const dialogRef = this.dialog.open(NotificationDialogComponent, this.notificationsDialogConfig);
+  }
+
+  userMenuDialog() {
+    this.showUserMenu = !this.showUserMenu;
+  }
+
+  logout() {
+    const sendData: IHttpReq = {
+      url: '/api/logout',
+      method: 'POST',
+      body: {}
+    };
+    this.httpHandler.sendRequest(sendData)
+      .then((res) => {
+        location.reload();
+        this.router.navigate(['/']);
+      });
   }
 
 }

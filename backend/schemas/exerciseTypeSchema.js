@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const ExerciseType = new Schema({
     name: String,
-    code: Number
+    code: Number,
+    isRemoved: Boolean
 });
 
 

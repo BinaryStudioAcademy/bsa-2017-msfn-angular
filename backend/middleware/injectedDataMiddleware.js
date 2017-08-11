@@ -5,13 +5,19 @@ module.exports = function (req, res, obj, error) {
     error = error || false;
 
     populateInjectData(req.user, function (data) {
-        if (req.session && req.session.passport && req.session.passport.user) {
+        if (req.session && req.user) {
             const user = req.user;
             obj.isLoggedIn = true;
             obj.userId = user._id;
             obj.userFirstName = user.firstName;
             obj.userLastName = user.lastName;
-            obj.role = user.role;
+            if(user.isAdmin) {
+               obj.role = 'admin';
+           } else if(user.iSCoach) {
+               obj.role = 'coach';
+           } else {
+               obj.role = 'usual'
+           }
             obj.currentProject = user.currentProject;
             obj.userPhoto = user.userPhoto;
         } else {

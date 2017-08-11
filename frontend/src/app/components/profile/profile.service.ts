@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { months } from './month';
-import { IHttpReq } from '../../models/http-req';
 import { HttpService } from '../../services/http.service';
-import { HttpClient } from '@angular/common/http';
+import { IHttpReq } from '../../models/http-req';
 
 @Injectable()
 export class ProfileService {
 
 
-  constructor(private http: HttpClient, private httpHandler: HttpService) { }
+  constructor(private httpService: HttpService) { }
 
   getMonth() {
     return months;
@@ -52,7 +51,30 @@ export class ProfileService {
       body: { data: image, userId: userId, fileType: fileType},
     };
 
-    this.httpHandler.sendRequest(sendData).then(data => { callback(data); });
+    this.httpService.sendRequest(sendData).then(data => { callback(data); });
   }
 
+  // getProfile(callback) {
+  //   const request: IHttpReq = {
+  //     url: '/api/user/_id',
+  //     method: 'GET',
+  //     body: {}
+  //   };
+  //   this.httpService.sendRequest(request).then(data => {
+  //     console.log(data);
+  //     callback(data);
+  //   });
+  // }
+
+  updateProfile(userData, callback) {
+    const request: IHttpReq = {
+      url: '/api/exercise-list',
+      method: 'PUT',
+      body: userData
+    };
+    this.httpService.sendRequest(request).then(data => {
+      console.log(data);
+      callback();
+    });
+  }
 }
