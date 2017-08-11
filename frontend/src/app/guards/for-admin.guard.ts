@@ -14,6 +14,7 @@ export class ForAdminGuard implements CanActivate {
   }
 
   isAdmin(): boolean {
+    console.log((this.window.data._injectedData as any));
     if ((this.window.data._injectedData as any).role === 'admin') { return true; }
     // without "as any" TS show error, when role doesn't excist in _injectedDate
 

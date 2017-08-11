@@ -27,6 +27,7 @@ const adminRoutes: Routes = [
   imports: [
     RouterModule.forChild(adminRoutes)
   ],
+  providers: [ForAdminGuard],
   exports: [
     RouterModule
   ]

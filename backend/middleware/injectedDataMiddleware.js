@@ -7,13 +7,14 @@ module.exports = function (req, res, obj, error) {
     populateInjectData(req.user, function (data) {
         if (req.session && req.user) {
             const user = req.user;
+            console.log(user);
             obj.isLoggedIn = true;
-            obj.userId = req.user._id;
+            obj.userId = user._id;
             obj.userFirstName = user.firstName;
             obj.userLastName = user.lastName;
-            if(req.user.isAdmin) {
+            if(user.isAdmin) {
                obj.role = 'admin';
-           } else if(req.user.iSCoach) {
+           } else if(user.iSCoach) {
                obj.role = 'coach';
            } else {
                obj.role = 'usual'
