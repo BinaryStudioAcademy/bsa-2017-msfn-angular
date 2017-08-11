@@ -43,6 +43,7 @@ import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
+import { GoogleTestComponent } from './components/google-test/google-test.component';
 
 @NgModule({
     declarations: [
@@ -59,7 +60,8 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
         ListComponent,
         ExerciseTypeComponent,
         AutocompletePipe,
-        ProfileComponent
+        ProfileComponent,
+        GoogleTestComponent
     ],
     imports: [
         BrowserModule,
