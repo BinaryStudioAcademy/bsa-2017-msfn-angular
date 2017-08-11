@@ -74,10 +74,13 @@ button:focus {
     cursor: pointer;
 }
 
-@media only screen and (max-width: $small-screen + 15px) {
+@media only screen and (max-width: $medium-screen) {
     .main-container {
         width: 100%;
         margin: 0;
+    }
+    #btn-add{
+        width: auto;
     }
 }
 

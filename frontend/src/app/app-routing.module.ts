@@ -81,22 +81,6 @@ const routes: Routes = [
         component: SidebarViewComponent
     },
     {
-        path: 'exercise_create',
-        children: [],
-        component: ExerciseCreateComponent,
-        // canActivate: [ForAdminGuard]
-    },
-    {
-        path: 'exercise_edit/:id',
-        children: [],
-        component: ExerciseCreateComponent,
-        // canActivate: [ForAdminGuard]
-    },
-    {
-        path: 'exercise-list',
-        component: ExerciseListComponent
-    },
-    {
         path: 'admin',
         children: [],
         component: AdminComponent
@@ -104,11 +88,6 @@ const routes: Routes = [
     {
         path: 'test-markdown',
         component: TestMarkdownComponent
-
-    },
-    {
-        path: 'exercise-type',
-        component: ExerciseTypeComponent
 
     }
 ];

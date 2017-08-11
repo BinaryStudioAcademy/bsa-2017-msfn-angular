@@ -7,7 +7,6 @@ module.exports = function (req, res, obj, error) {
     populateInjectData(req.user, function (data) {
         if (req.session && req.user) {
             const user = req.user;
-            console.log(user);
             obj.isLoggedIn = true;
             obj.userId = user._id;
             obj.userFirstName = user.firstName;
