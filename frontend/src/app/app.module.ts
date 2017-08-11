@@ -18,26 +18,8 @@ import { TestHttpComponent } from './components/test-http/test-http.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { WindowObj } from './services/window.service';
-import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
-import { ImageCropperModule } from 'ng2-img-cropper';
-import { ConfirmPasswordDialogComponent } from './components/confirm-password-dialog/confirm-password-dialog.component'
-
-import {
-    MdSnackBarModule,
-    MdChipsModule,
-    MdIconModule,
-    MdRadioModule,
-    MdSelectModule,
-    MdCardModule,
-    MdInputModule,
-    MdCheckboxModule,
-    MdButtonModule,
-    MdDialogModule,
-    MdSlideToggleModule,
-    MdTableModule, MdAutocompleteModule
-} from '@angular/material';
-import 'hammerjs';
+import { ConfirmPasswordDialogComponent } from './components/confirm-password-dialog/confirm-password-dialog.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { ToastrService } from './services/toastr.service';
 import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
