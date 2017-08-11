@@ -6,3 +6,11 @@ declare module WebApi {
         isLoggedIn: boolean;
     }
 }
+
+declare module ExerciseApi {
+    export interface IExerciseType {
+        name?: string;
+        code?: string;
+        isRemoved?: string;
+    }
+}

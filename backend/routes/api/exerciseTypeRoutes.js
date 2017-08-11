@@ -6,7 +6,7 @@ const
 
 module.exports = function (app) {
 
-    app.post(baseUrl, function (req, res, next) {
+    app.post(baseUrl, isAdmin, function (req, res, next) {
        exerciseTypeService.createExerciseType(req.body.name, function(err, data) {
             res.data = data;
             res.err = err;
@@ -14,7 +14,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.put(baseUrl, function (req, res, next) {
+    app.put(baseUrl, isAdmin, function (req, res, next) {
         exerciseTypeService.updateExerciseTypeByCode(req.body.code, req.body, function(err, data) {
             res.data = data;
             res.err = err;
@@ -22,14 +22,14 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.delete(baseUrl + ':code', function (req, res, next) {
+    app.delete(baseUrl + ':code', isAdmin, function (req, res, next) {
         exerciseTypeService.deleteExerciseTypeByCode(req.params.code, function(err, data) {
             res.err = err;
             next();
        });
     }, apiResponse);
 
-    app.get(baseUrl, function (req, res, next) {
+    app.get(baseUrl, isAdmin, function (req, res, next) {
             exerciseTypeService.getAllExerciseTypes(function(err, data) {
             if (!data.length){
                 data = [{}];

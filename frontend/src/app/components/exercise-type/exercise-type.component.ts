@@ -1,4 +1,3 @@
-import { IExerciseType } from './../../models/exercise-type';
 import { HttpService } from '../../services/http.service';
 import { IHttpReq } from '../../models/http-req';
 import { ExerciseTypeService } from '../../services/exercise-type.service';
@@ -36,7 +35,7 @@ export class ExerciseTypeComponent implements OnInit {
     this.dataSource = new ExampleDataSource(this.tableDatabase);
     // This must have because material table have an issue when work with routes
 
-    this.exerciseTypeService.getAllExerciseTypes((result: IExerciseType[]) => {
+    this.exerciseTypeService.getAllExerciseTypes((result: ExerciseApi.IExerciseType[]) => {
       this.loaded = this.tableDatabase.addRows(result) === 0 ? false : true;
       this.cd.markForCheck();
     });
@@ -129,7 +128,7 @@ export class TableDatabase {
     return copiedData.length;
   }
 
-  addRows(rows: IExerciseType[]) {
+  addRows(rows: ExerciseApi.IExerciseType[]) {
     if (!rows || !(rows instanceof Array) || !rows.length || (!rows[0].name && !rows[0].code && rows.length === 1)) {
       return 0;
     }
@@ -177,12 +176,12 @@ export class TableDatabase {
 
 
 
-export class ExampleDataSource extends DataSource<any> {
+export class ExampleDataSource extends DataSource<ExerciseApi.IExerciseType> {
   constructor(private _tableDatabase: TableDatabase) {
     super();
   }
 
-  connect(): Observable<any[]> {
+  connect(): Observable<ExerciseApi.IExerciseType[]> {
     return this._tableDatabase.dataChange;
   }
 
