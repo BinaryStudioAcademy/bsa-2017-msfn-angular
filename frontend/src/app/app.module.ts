@@ -32,6 +32,7 @@ import { NotificationDialogComponent } from './components/notification-dialog/no
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
 import { AdminModule } from './components/admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
         SidebarViewComponent,
         NotificationDialogComponent,
         ExerciseCreateComponent,
-        TestMarkdownComponent
+        TestMarkdownComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         ImportModule,
