@@ -19,6 +19,7 @@ import { ExerciseCreateComponent } from './components/exercise-create/exercise-c
 import { AdminComponent } from './components/admin/admin.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
     {
@@ -88,7 +89,12 @@ const routes: Routes = [
     {
         path: 'test-markdown',
         component: TestMarkdownComponent
-
+    }, {
+        path: 'notfound',
+        component: PageNotFoundComponent
+    }, {
+        path: '**',
+        redirectTo: 'notfound'
     }
 ];
 
