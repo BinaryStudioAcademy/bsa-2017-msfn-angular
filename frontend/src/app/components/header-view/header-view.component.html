@@ -14,14 +14,14 @@
     </div>
     <div class="settings header__navigation-panel" *ngIf="thereIsLoggedInUser" (click)="userMenuDialog()">
         <md-icon>data_usage</md-icon>
-        <span class="settings__name">Dima Beseda</span>
+        <span class="settings__name">{{displayName}}</span>
     </div>
     <div class="user_menu" *ngIf="showUserMenu">
         <button md-button routerLink="/profile">Edit profile</button>
         <button md-button (click)="logout()">Logout</button>
     </div>
-    <div class="user-forms header__navigation-panel" *ngIf="!thereIsLoggedInUser">
-        <button md-button routerLink="/register" class="header__button">Register</button>
-        <button md-button routerLink="/login" class="header__button">Login</button>
-    </div>
+    <!--<div class="user-forms header__navigation-panel" *ngIf="!thereIsLoggedInUser">-->
+        <!--<button md-button routerLink="/register" class="header__button">Register</button>-->
+        <!--<button md-button routerLink="/login" class="header__button">Login</button>-->
+    <!--</div>-->
 </header>
