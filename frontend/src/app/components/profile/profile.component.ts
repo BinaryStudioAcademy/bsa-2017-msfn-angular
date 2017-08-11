@@ -106,6 +106,7 @@ export class ProfileComponent implements OnInit {
     this.hideCropper = false;
     const image: any = new Image();
     const file: File = $event.target.files[0];
+    if ($event.target.files === 0) { return; }
     const myReader: FileReader = new FileReader();
     myReader.onloadend = (loadEvent: any) => {
       image.src = loadEvent.target.result;
@@ -118,10 +119,15 @@ export class ProfileComponent implements OnInit {
   saveImg(event) {
     if (event === 'save') {
       if (!this.hideCropper) {
-        this.image = this.data.image;
-        this.hideCropper = true;
+        this.profileService.savePhoto(this.data.image, this.userId, 'img', result => {
+          if (result.statusCode === 201) {
+            this.image = this.data.image;
+          } else {
+            this.data.image = this.image;
+          }
+          this.hideCropper = true;
+        });
 
-        this.profileService.savePhoto(this.data.image, this.userId, 'img');
       } else if (event === 'cancel') {
         this.data = {
           image: this.image

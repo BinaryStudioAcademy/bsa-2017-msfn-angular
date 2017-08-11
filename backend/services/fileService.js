@@ -13,31 +13,25 @@ module.exports = function (req, res, obj, error) {
                 const buf = new Buffer(file, 'base64');
                 const userPhotoPath = '/../../resources/usersImg/' + req.body.userId + '.' + type;
                 const filepath = __dirname + userPhotoPath;
-                let fileSize = 0;
+                let responseMessage = {};
 
+                // max size is 3mb
+                if (buf.byteLength > 3e+6) {
+                    res.writeHead(500, { 'Status': 'file is too big, max size is 3mb' });
+                    return res.end();
+                }
+
+                // add/update userPhotoPath in database
                 userRepository.findById(req.body.userId, (err, currentUser) => {
-
                     currentUser.userPhoto = userPhotoPath;
                     userRepository.update(req.body.userId, currentUser);
                 });
 
-                res.header = ('Content-Type', 'image/' + type);
-
                 let writeStream = new fs.WriteStream(filepath, { flags: 'w' });
                 writeStream.write(buf);
+
+                // error processing
                 req
-                    .on('data', chunk => {
-                        fileSize += chunk.length;
-                        console.log('data');
-                        if (size > 1e6) {
-                            console.log('too big!');
-                            res.statusCode = 413;
-                            res.setHeader('Connection', 'close');
-                            res.end('File is too big!');
-                            writeStream.destroy();
-                            fs.unlink(filepath, err => { });
-                        }
-                    })
                     .on('close', () => {
                         writeStream.destroy();
                         fs.unlink(filepath, err => { });
@@ -48,20 +42,25 @@ module.exports = function (req, res, obj, error) {
                         console.error(err);
                         if (!res.headersSent) {
                             res.writeHead(500, { 'Connection': 'close' });
-                            res.end('Internal error');
+                            return res.end();
                         } else {
-                            res.end();
+                            return res.end();
                         }
                         fs.unlink(filepath, err => { });
                     })
                     .on('close', () => {
-                        res.end('done');
+                        res.writeHead(201, { 'Status': 'done' });
+                        responseMessage.statusCode = 201
+                        responseMessage.statusMessage = 'done';
+                        return res.end(JSON.stringify(responseMessage));
                     });
             } else {
-                return res.end('wrong format');
+                res.writeHead(400, { 'Status': 'wrong format' });
+                return res.end();
             }
         } else {
-            return res.end('empty file')
+            res.writeHead(400, { 'Status': 'empty file' });
+            return res.end();
         }
     });
 
