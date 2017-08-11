@@ -30,6 +30,7 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
+import { AdminModule } from './components/admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 
 @NgModule({
@@ -58,6 +59,7 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
     ],
     imports: [
         ImportModule,
+        AdminModule,
         AppRoutingModule
     ],
     providers: [
