@@ -19,6 +19,9 @@ import 'rxjs/add/observable/fromEvent';
 })
 
 export class ExerciseListComponent implements OnInit {
+  options = [];
+  items = [];
+
   name = '';
   displayedColumns = [
     'name',
@@ -37,6 +40,9 @@ export class ExerciseListComponent implements OnInit {
     setTimeout(() => this.cd.markForCheck());
     this.getExercises((result) => {
       this.tableDatabase.addExercises(result);
+      for (let i = 0; i < result.length; i++) {
+        this.options.push(result[i].type);
+      }
     });
 
 

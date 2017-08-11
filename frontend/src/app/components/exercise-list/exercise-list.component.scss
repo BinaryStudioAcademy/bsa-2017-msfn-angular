@@ -1,10 +1,6 @@
 @import '../../../globalStyles/indentations.scss';
 @import '../../../globalStyles/text.scss';
 
-#exercise-list {
-  position: relative;
-}
-
 #title {
   margin: $content-lr-margin 0;
 }
@@ -14,10 +10,17 @@ h1 {
   text-align: center;
 }
 
+#inputs {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+}
+
 md-input-container {
-  position: absolute;
-  right: 10%;
-  top: 0;
+  //position: absolute;
+  //right: 10%;
+  //top: 0;
 }
 
 .mat-table {

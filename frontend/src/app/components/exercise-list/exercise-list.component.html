@@ -3,9 +3,12 @@
     <h1>Exercises</h1>
   </div>
 
-  <md-input-container>
-    <input mdInput type="text" #filter placeholder="search by name" [(ngModel)]="name">
-  </md-input-container>
+  <div id="inputs">
+    <app-list [items]="items" [options]="options" placeholder="types"></app-list>
+    <md-input-container>
+      <input mdInput type="text" #filter placeholder="search by name" [(ngModel)]="name">
+    </md-input-container>
+  </div>
 
   <md-table id="table" #table [dataSource]="dataSource" mdSort>
     <ng-container cdkColumnDef="name">
