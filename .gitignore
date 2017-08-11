@@ -5,6 +5,9 @@
 /tmp
 /out-tsc
 
+#Users photo
+/resources/usersImg
+
 # dependencies
 /node_modules
 

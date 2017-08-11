@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import {MdDialog} from '@angular/material';
 import {ConfirmPasswordDialogComponent} from '../confirm-password-dialog/confirm-password-dialog.component';
+import {WindowObj} from './../../services/window.service';
 
 @Component({
   selector: 'app-profile',
@@ -26,8 +27,8 @@ export class ProfileComponent implements OnInit {
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   hideCropper = true;
-  image = './resources/userPhoto/default.png';
-
+  image = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
+  userId =  (this.window.data._injectedData as any).userId;
 
   user = {
     name: 'John',
@@ -46,7 +47,8 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private dialog: MdDialog
+    private dialog: MdDialog,
+    private window: WindowObj
   ) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.noFileInput = true;
@@ -118,7 +120,8 @@ export class ProfileComponent implements OnInit {
       if (!this.hideCropper) {
         this.image = this.data.image;
         this.hideCropper = true;
-        this.profileService.savePhoto(this.data.image);
+
+        this.profileService.savePhoto(this.data.image, this.userId, 'img');
       } else if (event === 'cancel') {
         this.data = {
           image: this.image

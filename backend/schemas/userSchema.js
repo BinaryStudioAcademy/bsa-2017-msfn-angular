@@ -26,6 +26,7 @@ const User = new Schema({
     facebookID: String,
     twitterID: String,
     follow: [ObjectId],
+    userPhoto: String,
 
 });
 

@@ -6,13 +6,14 @@ module.exports = function (req, res, obj, error) {
 
     populateInjectData(req.user, function (data) {
         if (req.session && req.session.passport && req.session.passport.user) {
-            const user = req.session.passport.user;
+            const user = req.user;
             obj.isLoggedIn = true;
             obj.userId = user._id;
             obj.userFirstName = user.firstName;
             obj.userLastName = user.lastName;
             obj.role = user.role;
             obj.currentProject = user.currentProject;
+            obj.userPhoto = user.userPhoto;
         } else {
             obj.isLoggedIn = false;
         }

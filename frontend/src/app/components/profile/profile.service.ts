@@ -45,11 +45,11 @@ export class ProfileService {
     return daysOutput;
   }
 
-  savePhoto(image) {
+  savePhoto(image, userId, fileType) {
     const sendData: IHttpReq = {
       url: '/api/file',
       method: 'POST',
-      body: { img: image, name: 'id1' }
+      body: { data: image, userId: userId, fileType: fileType}
     };
 
     this.httpHandler.sendRequest(sendData);
