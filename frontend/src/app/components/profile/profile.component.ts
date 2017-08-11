@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ProfileService } from './profile.service';
 import { HttpClient } from '@angular/common/http';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
-import {MdDialog} from '@angular/material';
-import {ConfirmPasswordDialogComponent} from '../confirm-password-dialog/confirm-password-dialog.component';
-import {WindowObj} from './../../services/window.service';
+import { MdDialog } from '@angular/material';
+import { ConfirmPasswordDialogComponent } from '../confirm-password-dialog/confirm-password-dialog.component';
+import { WindowObj } from './../../services/window.service';
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   cropper: ImageCropperComponent;
   hideCropper = true;
   image = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
-  userId =  (this.window.data._injectedData as any).userId;
+  userId = (this.window.data._injectedData as any).userId;
 
   user = {
     name: 'John',
@@ -131,13 +131,12 @@ export class ProfileComponent implements OnInit {
           }
           this.hideCropper = true;
         });
-
-      } else if (event === 'cancel') {
-        this.data = {
-          image: this.image
-        };
-        this.hideCropper = true;
       }
+    } else if (event === 'cancel') {
+      this.data = {
+        image: this.image
+      };
+      this.hideCropper = true;
     }
   }
 
