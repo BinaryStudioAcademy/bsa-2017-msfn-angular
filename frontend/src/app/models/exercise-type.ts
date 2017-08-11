@@ -1,4 +1,4 @@
-export interface IExerciseType{
-    name?:string;
-    code?:string;
+export interface IExerciseType {
+    name?: string;
+    code?: string;
 }

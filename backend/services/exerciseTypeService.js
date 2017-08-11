@@ -15,7 +15,6 @@ function createExerciseType(name, callback) {
 
     exerciseTypeRepository.getAll((err, exerciseTypeData) => {
         "use strict";
-
         if (err) return callback(err);
         let max = 0;
         if (exerciseTypeData instanceof Array && exerciseTypeData.length) {
@@ -29,7 +28,8 @@ function createExerciseType(name, callback) {
 
         let data = {
             name: name,
-            code: max + 1
+            code: max + 1,
+            isRemoved: false
         };
 
 

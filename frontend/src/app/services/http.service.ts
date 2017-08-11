@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
 export class HttpService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    public failMessage = 'Fail';
+    private failMessage = 'Fail';
 
-    constructor(private _http: Http, public toastrService: ToastrService, private _router: Router) { }
+    constructor(private _http: Http, private toastrService: ToastrService, private _router: Router) { }
 
     private handleError = (error: any): Promise<any> => {
         if (error && error.status === 401) {

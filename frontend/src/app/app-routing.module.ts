@@ -107,6 +107,11 @@ const routes: Routes = [
         path: 'test-markdown',
         component: TestMarkdownComponent
 
+    },
+    {
+        path: 'exercise-type',
+        component: ExerciseTypeComponent
+
     }
 ];
 
