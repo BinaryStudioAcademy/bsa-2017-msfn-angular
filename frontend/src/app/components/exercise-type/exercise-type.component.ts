@@ -139,6 +139,7 @@ export class TableDatabase {
   }
 
   updateRow(code: number, body) {
+    console.log('Do');
     if (!this.data || !(this.data instanceof Array)) {
       return 0;
     }

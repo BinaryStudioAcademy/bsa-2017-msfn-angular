@@ -14,9 +14,9 @@
                 <div class="row-container">
                     <div></div>
                     <div class="content">
-                        <div class="row-text" *ngIf="row.code && row.code != focusedRowCode" (click)="clickRow(row.code)" [ngClass]="{'transp' : !row.name || row.isRemoved}">{{row.name ? row.name : "Empty field"}}</div>
+                        <div class="row-text" *ngIf="(row.code && row.code != focusedRowCode) || row.isRemoved" (click)="clickRow(row.code)" [ngClass]="{'transp' : !row.name || row.isRemoved}">{{row.name ? row.name : "Empty field"}}</div>
 
-                        <md-input-container class="input-container" *ngIf="!row.code || row.code == focusedRowCode">
+                        <md-input-container class="input-container" *ngIf="(!row.code || row.code == focusedRowCode) && !row.isRemoved">
                             <input mdInput #exercise type="text" (blur)="updateRow(row.code, {name: exercise.value})" value="{{row.name}}" [ngClass]="{'input-focused' : !row.code}"
                                 (keyup.enter)="updateRow(row.code, {name: exercise.value})">
                         </md-input-container>
