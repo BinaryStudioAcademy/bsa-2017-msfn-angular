@@ -4,7 +4,6 @@ import { IHttpReq } from '../../models/http-req';
 
 @Injectable()
 export class ExerciseListService {
-
   constructor(private httpService: HttpService) { }
 
   getExercises(callback): void {

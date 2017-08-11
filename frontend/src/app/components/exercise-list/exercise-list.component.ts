@@ -32,11 +32,16 @@ export class ExerciseListComponent implements OnInit {
   dataSource: ExampleDataSource | null;
   @ViewChild(MdSort) sort: MdSort;
   @ViewChild('filter') filter: ElementRef;
+  @ViewChild('itemFilter') itemFilter: ElementRef;
 
-  constructor(private cd: ChangeDetectorRef, private exerciseListService: ExerciseListService) { }
+  constructor(private cd: ChangeDetectorRef,
+              private exerciseListService: ExerciseListService) { }
 
   ngOnInit() {
-    this.dataSource = new ExampleDataSource(this.tableDatabase, this.sort, this.exerciseListService);
+    this.dataSource = new ExampleDataSource(this.tableDatabase,
+      this.sort,
+      this.exerciseListService);
+
     setTimeout(() => this.cd.markForCheck());
     this.getExercises((result) => {
       this.tableDatabase.addExercises(result);
@@ -45,13 +50,13 @@ export class ExerciseListComponent implements OnInit {
       }
     });
 
-
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
       .subscribe(() => {
         if (!this.dataSource) { return; }
         this.dataSource.filter = this.filter.nativeElement.value;
+        this.dataSource.itemFilter = this.items.toString();
       });
   }
 
@@ -69,11 +74,8 @@ export class TableDatabase {
   constructor() { }
 
   addExercises(data) {
-    for (let i = 0; i < data.length; i++) {
-      const copiedData = data.slice();
-      copiedData.push(data[i]);
-      this.dataChange.next(copiedData);
-    }
+    const copiedData = [...data];
+    this.dataChange.next(copiedData);
   }
 }
 
@@ -86,7 +88,17 @@ export class ExampleDataSource extends DataSource<any> {
     this._filterChange.next(filter);
   }
 
-  constructor(private _exampleDatabase: TableDatabase, private _sort: MdSort, private service: ExerciseListService) {
+  _itemFilterChange = new BehaviorSubject('');
+  get itemFilter(): string {
+    return this._itemFilterChange.value;
+  }
+  set itemFilter(filter: string) {
+    this._itemFilterChange.next(filter);
+  }
+
+  constructor(private _exampleDatabase: TableDatabase,
+              private _sort: MdSort,
+              private service: ExerciseListService) {
     super();
   }
 
@@ -94,13 +106,21 @@ export class ExampleDataSource extends DataSource<any> {
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
       this._sort.mdSortChange,
-      this._filterChange
+      this._filterChange,
+      this._itemFilterChange
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
       return this.getSortedData().slice().filter((item) => {
         const searchStr = (item.name).toLowerCase();
-        return searchStr.includes(this.filter.toLowerCase());
+        const searchType = (item.type).toLowerCase();
+
+        if (this.itemFilter) {
+          return this.itemFilter.toLowerCase().includes(searchType) &&
+            searchStr.includes(this.filter.toLowerCase());
+        } else {
+          return searchStr.includes(this.filter.toLowerCase());
+        }
       });
     });
   }
