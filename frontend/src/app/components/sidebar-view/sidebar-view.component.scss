@@ -13,6 +13,7 @@ aside {
     width: 25%;
     height: $height;
     font-family: $font-general;
+    float: left;
     background: linear-gradient($header-gradient-from 75%, $header-gradient-to);
 
     nav {
@@ -87,14 +88,14 @@ aside {
             width: 180px;
         }
     }
-    
+
 }
 
 @media screen and (max-width: 810px) and (min-width: 600px) {
     aside {
         min-width: 205px;
     }
-    
+
 }
 
 @media screen and (max-width: 600px) {

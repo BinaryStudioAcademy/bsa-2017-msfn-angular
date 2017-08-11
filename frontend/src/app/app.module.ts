@@ -27,11 +27,11 @@ import { IndexPageComponent } from './components/index-page/index-page.component
 import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
-import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
 import { AdminModule } from './components/admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { UserModule } from './components/user/user.module';
 
 @NgModule({
     declarations: [
@@ -52,7 +52,6 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
         ConfirmPasswordDialogComponent,
         ExerciseListComponent,
         TestToastrComponent,
-        SidebarViewComponent,
         NotificationDialogComponent,
         ExerciseCreateComponent,
         TestMarkdownComponent
@@ -60,6 +59,7 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
     imports: [
         ImportModule,
         AdminModule,
+        UserModule,
         AppRoutingModule
     ],
     providers: [
