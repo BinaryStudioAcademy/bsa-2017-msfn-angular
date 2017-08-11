@@ -5,7 +5,9 @@ import * as marked from 'marked';
 export class MarkdownService {
     md;
 
-    /* How to use
+    /* https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+    *
+    *                       How to use
     *in tag
     *       [innerHtml] = "convertedText"
     *in component code
