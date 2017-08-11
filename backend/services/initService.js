@@ -8,7 +8,8 @@ var mongoose = require('mongoose'),
         email: 'admin@msfn.com',
         password: 'bsa2017Angular',
         isCoach: 'true',
-        position: '1'
+        isAdmin: true,
+        position: 1
     }
 
 module.exports = function () {

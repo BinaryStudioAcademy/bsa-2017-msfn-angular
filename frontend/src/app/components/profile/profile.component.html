@@ -80,12 +80,22 @@
                         </md-input-container>
                     </div>
                 </div>
-                <div class="profile-password">
-                    <button md-raised-button class="">Change password</button>
+                <div class="button-wrapper">
+                    <div class="profile-password">
+                        <button md-raised-button (click)="openConfirmPasswordDoalog()" class="">Change password</button>
+                    </div>
+                    <div id="coach-button">
+                        <button md-raised-button type="submit"  *ngIf="!requestForCoaching" (click)="applyForCoaching()">
+                            Become a coach
+                        </button>
+                        <div *ngIf="requestForCoaching">
+                            We'll moderate your request in 24 hours. You'll get a notification when it would be done.
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="profile-footer">
-                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" [disabled]="!profileForm.valid">Save changes</button>
+                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
             </div>
         </form>
     </div>

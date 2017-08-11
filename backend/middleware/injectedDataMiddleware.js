@@ -5,13 +5,14 @@ module.exports = function (req, res, obj, error) {
     error = error || false;
 
     populateInjectData(req.user, function (data) {
-        if (req.session && req.session.user) {
+        if (req.session && req.session.passport && req.session.passport.user) {
+            const user = req.session.passport.user;
             obj.isLoggedIn = true;
-            obj.userId = req.session.user._id;
-            obj.userFirstName = req.session.user.firstName;
-            obj.userLastName = req.session.user.lastName;
-            obj.role = req.session.user.role;
-            obj.currentProject = req.session.user.currentProject;
+            obj.userId = user._id;
+            obj.userFirstName = user.firstName;
+            obj.userLastName = user.lastName;
+            obj.role = user.role;
+            obj.currentProject = user.currentProject;
         } else {
             obj.isLoggedIn = false;
         }

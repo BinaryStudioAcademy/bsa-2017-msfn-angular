@@ -10,7 +10,6 @@ LoginService.prototype.login = login;
 
 function login(req, res, next) {
     req.body = decrypt(req.body.data)
-
     passport.authenticate('local',
         function(err, user, info) {
             if (err) {
@@ -20,7 +19,6 @@ function login(req, res, next) {
                     if (err) {
                         return next(err)
                     } else {
-                        res.status(302)
                         return res.send({access: true});
                     }
                 })
