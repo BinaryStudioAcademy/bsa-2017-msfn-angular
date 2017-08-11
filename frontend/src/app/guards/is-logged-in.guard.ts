@@ -4,20 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import { WindowObj } from './../services/window.service';
 
 @Injectable()
-export class ForAdminGuard implements CanActivate {
+export class IsLoggedInGuard implements CanActivate {
   constructor(private router: Router, private window: WindowObj) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      return this.isAdmin();
-  }
+      if (this.window.data._injectedData.isLoggedIn === true) { return true; }
 
-  isAdmin(): boolean {
-    if ((this.window.data._injectedData as any).role === 'admin') { return true; }
-    // without "as any" TS show error, when role doesn't excist in _injectedDate
-
-    this.router.navigate(['/login']);   // can be change to main page or special-forbidden-page
-    return false;
+      this.router.navigate(['/login']);
+      return false;
   }
 }

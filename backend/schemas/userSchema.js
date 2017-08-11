@@ -18,6 +18,7 @@ const User = new Schema({
     },
     isCoach: Boolean,
     isAdmin: Boolean,
+    requestForCoaching: Boolean,
     position: Number,
     salt: {
         type: String,
@@ -26,6 +27,7 @@ const User = new Schema({
     facebookID: String,
     twitterID: String,
     follow: [ObjectId],
+    userPhoto: String,
 
 });
 

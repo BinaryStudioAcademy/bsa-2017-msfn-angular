@@ -6,7 +6,6 @@ import { IHttpReq } from '../../models/http-req';
 @Injectable()
 export class ProfileService {
 
-
   constructor(private httpService: HttpService) { }
 
   getMonth() {
@@ -44,27 +43,30 @@ export class ProfileService {
     return daysOutput;
   }
 
-  // getProfile(callback) {
-  //   const request: IHttpReq = {
-  //     url: '/api/user/_id',
-  //     method: 'GET',
-  //     body: {}
-  //   };
-  //   this.httpService.sendRequest(request).then(data => {
-  //     console.log(data);
-  //     callback(data);
-  //   });
-  // }
+  savePhoto(image, userId, fileType, callback) {
+    const sendData: IHttpReq = {
+      url: '/api/file',
+      method: 'POST',
+      body: { data: image, userId: userId, fileType: fileType},
+    };
 
-  updateProfile(userData, callback) {
+    this.httpService.sendRequest(sendData).then(data => { callback(data); });
+  }
+
+  updateProfile(userData, callback, errorCallback) {
     const request: IHttpReq = {
-      url: '/api/exercise-list',
+      url: '/api/coach/apply/',
       method: 'PUT',
       body: userData
     };
-    this.httpService.sendRequest(request).then(data => {
-      console.log(data);
-      callback();
-    });
+
+    this.httpService.sendRequest(request)
+      .then(res => {
+        if (res === userData) {
+          callback();
+        } else {
+          errorCallback();
+        }
+      });
   }
 }

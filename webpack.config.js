@@ -77,7 +77,7 @@ module.exports = {
     },
     "context": __dirname + "/frontend",
     "devServer": {
-        "contentBase": 'public'
+        "contentBase": 'dist'
     },
     "entry": {
         "main": [
@@ -93,7 +93,8 @@ module.exports = {
     "output": {
         "path": path.join(process.cwd(), "dist"),
         "filename": "[name].bundle.js",
-        "chunkFilename": "[id].chunk.js"
+        "chunkFilename": "[id].chunk.js",
+        "publicPath": '/dist/'
     },
     "module": {
         "rules": [

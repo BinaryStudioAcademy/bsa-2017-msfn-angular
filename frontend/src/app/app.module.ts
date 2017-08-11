@@ -1,7 +1,11 @@
 // @angular
 import { ImportModule } from './import.module';
 import { NgModule } from '@angular/core';
+
 // other components
+import { IsLoggedInGuard } from './guards/is-logged-in.guard';
+import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
+import { ForAdminGuard } from './guards/for-admin.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
@@ -30,8 +34,7 @@ import { NotificationDialogComponent } from './components/notification-dialog/no
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
 import { AdminModule } from './components/admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
-import { ForLoggedGuard } from './guards/for-logged.guard';
-import { ForNotLoggedGuard } from './guards/for-not-logged.guard';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +58,8 @@ import { ForNotLoggedGuard } from './guards/for-not-logged.guard';
         SidebarViewComponent,
         NotificationDialogComponent,
         ExerciseCreateComponent,
-        TestMarkdownComponent
+        TestMarkdownComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         ImportModule,
@@ -65,8 +69,9 @@ import { ForNotLoggedGuard } from './guards/for-not-logged.guard';
     providers: [
         HttpService,
         WindowObj,
-        ForLoggedGuard,
-        ForNotLoggedGuard,
+        IsLoggedInGuard,
+        IsLoggedOutGuard,
+        ForAdminGuard,
         EncryptService,
         ToastrService,
         ExerciseTypeService
