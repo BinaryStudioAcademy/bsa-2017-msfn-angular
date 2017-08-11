@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserComponent} from './user.component';
-import {TestU1Component} from './user.components/test-u1/test-u1.component';
-import {TestU2Component} from './user.components/test-u2/test-u2.component';
+import {ProfileComponent} from './user.components/profile/profile.component';
 
 
 const userRoutes: Routes = [
@@ -12,13 +11,9 @@ const userRoutes: Routes = [
         component: UserComponent,
         children: [
             {
-               path: 'test1',
-                component: TestU1Component,
+               path: 'profile',
+                component: ProfileComponent,
             },
-            {
-                path: 'test2',
-                component: TestU2Component,
-            }
         ]
     }
 ];

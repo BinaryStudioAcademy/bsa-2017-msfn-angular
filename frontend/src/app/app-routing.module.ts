@@ -14,7 +14,6 @@ import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
 import { ForAdminGuard } from './guards/for-admin.guard';
 import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
@@ -78,11 +77,6 @@ const routes: Routes = [
     //     component: ExerciseTypeComponent
     // },
     {
-        path: 'profile',
-        children: [],
-        component: ProfileComponent,
-        canActivate: [IsLoggedInGuard]
-    }, {
         path: 'test-toastr', // for testing, can be removed
         children: [],
         component: TestToastrComponent

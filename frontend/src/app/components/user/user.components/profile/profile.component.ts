@@ -3,10 +3,10 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ProfileService } from './profile.service';
 import { HttpClient } from '@angular/common/http';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
-import { MdDialog } from '@angular/material';
-import { ConfirmPasswordDialogComponent } from '../confirm-password-dialog/confirm-password-dialog.component';
-import { WindowObj } from './../../services/window.service';
-import { IUser } from '../../models/user';
+import {MdDialog} from '@angular/material';
+import {ConfirmPasswordDialogComponent} from '../../../confirm-password-dialog/confirm-password-dialog.component';
+import {WindowObj} from '../../../../services/window.service';
+import {IUser} from '../../../../models/user';
 
 @Component({
   selector: 'app-profile',

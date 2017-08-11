@@ -1,12 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {UserRoutingModule} from './user-routing.module';
-import {ImportModule} from '../../import.module';
-import {UserComponent} from './user.component';
-import {TestU1Component} from './user.components/test-u1/test-u1.component';
-import {TestU2Component} from './user.components/test-u2/test-u2.component';
-import {SidebarViewComponent} from '../sidebar-view/sidebar-view.component';
+import { NgModule  } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { UserRoutingModule } from './user-routing.module';
+import { ImportModule } from '../../import.module';
+import { UserComponent } from './user.component';
+import { SidebarViewComponent } from '../sidebar-view/sidebar-view.component';
+import { ProfileComponent } from './user.components/profile/profile.component';
 
 @NgModule({
     imports: [
@@ -18,8 +17,7 @@ import {SidebarViewComponent} from '../sidebar-view/sidebar-view.component';
     declarations: [
         SidebarViewComponent,
         UserComponent,
-        TestU1Component,
-        TestU2Component,
+        ProfileComponent,
     ]
 })
 export class UserModule {}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { months } from './month';
-import { HttpService } from '../../services/http.service';
-import { IHttpReq } from '../../models/http-req';
+import { HttpService } from '../../../../services/http.service';
+import { IHttpReq } from '../../../../models/http-req';
 
 @Injectable()
 export class ProfileService {
