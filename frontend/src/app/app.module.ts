@@ -67,7 +67,8 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
         WindowObj,
         IsLoggedGuard,
         EncryptService,
-        ToastrService
+        ToastrService,
+        ExerciseTypeService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,

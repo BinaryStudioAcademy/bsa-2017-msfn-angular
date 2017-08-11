@@ -1,22 +1,43 @@
-<div class="main-container">
+<div class="main-container" #container>
 
-   <md-table #table [dataSource]="dataSource">
+    <md-table #table [dataSource]="dataSource" [ngClass]="{'hiding' : !loaded}">
 
-    <ng-container cdkColumnDef="exerciseCode">
-      <md-header-cell *cdkHeaderCellDef> Code </md-header-cell>
-      <md-cell *cdkCellDef="let row"> {{row.code}} </md-cell>
-    </ng-container>
-    <ng-container cdkColumnDef="typeName">
-      <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
-      <md-cell *cdkCellDef="let row"> 
-        {{row.name}}
-        </md-cell>
-    </ng-container>
+        <ng-container cdkColumnDef="exerciseCode">
+            <md-header-cell *cdkHeaderCellDef> Code </md-header-cell>
+            <md-cell *cdkCellDef="let row"> 
+                <div [ngClass]="{'transp' : !row.name || row.isRemoved}">{{row.code}}</div>
+            </md-cell>
+        </ng-container>
+        <ng-container cdkColumnDef="typeName">
+            <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <div class="row-container">
+                    <div></div>
+                    <div class="content">
+                        <div class="row-text" *ngIf="row.code && row.code != focusedRowCode" (click)="clickRow(row.code)" [ngClass]="{'transp' : !row.name || row.isRemoved}">{{row.name ? row.name : "Empty field"}}</div>
 
-    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
-  </md-table>
+                        <md-input-container class="input-container" *ngIf="!row.code || row.code == focusedRowCode">
+                            <input mdInput #exercise type="text" (blur)="updateRow(row.code, {name: exercise.value})" value="{{row.name}}" [ngClass]="{'input-focused' : !row.code}"
+                                (keyup.enter)="updateRow(row.code, {name: exercise.value})">
+                        </md-input-container>
+                    </div>
+                    <div *ngIf="!row.isRemoved">
+                        <i class="material-icons ico" (click)="updateRow(row.code, {isRemoved: true})">
+                            delete
+                        </i>
+                    </div>
+                    <div *ngIf="row.isRemoved">
+                        <i class="material-icons ico" (click)="updateRow(row.code, {isRemoved: false})">
+                            add
+                        </i>
+                    </div>
+                </div>
+            </md-cell>
+        </ng-container>
 
-  <button md-button disableRipple class="btn btn-forget">Add new exercise type</button>
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+
+    <button md-button disableRipple class="btn" id="btn-add" (click)="addRow(table)">Add new exercise type</button>
 </div>
-
