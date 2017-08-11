@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
 import { ProfileComponent } from '../profile/profile.component';
-import { RegistrationComponent } from '../registration/registration.component';
+import { TestSocketsComponent } from '../test-sockets/test-sockets.component';
 
 const adminRoutes: Routes = [
   {
@@ -14,7 +14,7 @@ const adminRoutes: Routes = [
         path: '',
         children: [
           { path: 'test1', component: ProfileComponent },
-          { path: 'test2', component: RegistrationComponent }
+          { path: 'test2', component: TestSocketsComponent }
         ]
       }
     ]
