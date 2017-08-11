@@ -47,7 +47,7 @@ export class ProfileService {
     const sendData: IHttpReq = {
       url: '/api/file',
       method: 'POST',
-      body: { data: image, userId: userId, fileType: fileType},
+      body: { data: image, userId: userId, fileType: fileType },
     };
 
     this.httpService.sendRequest(sendData).then(data => { callback(data); });
@@ -68,5 +68,14 @@ export class ProfileService {
           errorCallback();
         }
       });
+  }
+
+  getUser(id, callback) {
+    const request: IHttpReq = {
+      url: '/api/user/' + id,
+      method: 'GET',
+      body: ''
+    };
+    this.httpService.sendRequest(request).then(res => { console.log(res); callback(res); });
   }
 }

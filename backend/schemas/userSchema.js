@@ -28,7 +28,12 @@ const User = new Schema({
     twitterID: String,
     follow: [ObjectId],
     userPhoto: String,
-
+    gender: String,
+    month: String,
+    day: Number,
+    year: Number,
+    height: Number,
+    weight: Number,
 });
 
 User.pre('save', function(next) {

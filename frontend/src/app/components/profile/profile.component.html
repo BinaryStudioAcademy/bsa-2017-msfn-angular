@@ -1,7 +1,7 @@
 <div class="container">
     <div class="profile">
         <md-card-title class="profile-title">Your profile</md-card-title>
-        <form class="profile-form" [formGroup]="profileForm">
+        <form *ngIf="user" class="profile-form" [formGroup]="profileForm">
             <div class="profile-header">
                 <div class="profile-avatar">
                     <div class="profile-picture">

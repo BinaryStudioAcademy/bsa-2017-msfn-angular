@@ -6,6 +6,7 @@ import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { MdDialog } from '@angular/material';
 import { ConfirmPasswordDialogComponent } from '../confirm-password-dialog/confirm-password-dialog.component';
 import { WindowObj } from './../../services/window.service';
+import { IUser } from '../../models/user';
 
 @Component({
   selector: 'app-profile',
@@ -30,19 +31,7 @@ export class ProfileComponent implements OnInit {
   image = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
   userId = (this.window.data._injectedData as any).userId;
 
-  user = {
-    name: 'John',
-    lastname: 'Smith',
-    email: 'john.smith@gmail.com',
-    birthday: {
-      day: 25,
-      month: 'March',
-      year: 1996
-    },
-    weight: 85,
-    height: 180,
-    password: '123456'
-  };
+  user: IUser;
 
   requestForCoaching = false;
   coachingMessage: string;
@@ -71,17 +60,20 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.buildForm();
-    this.months = this.profileService.getMonth();
-    this.days = this.profileService.getDays(this.user.birthday.month, this.user.birthday.year);
-    this.years = this.profileService.getYears();
-    this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
+    this.profileService.getUser(this.userId, res => {
+      this.user = res;
+      this.months = this.profileService.getMonth();
+      this.days = this.profileService.getDays(this.user.month, this.user.year);
+      this.years = this.profileService.getYears();
+      this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
+      this.buildForm();
+    });
   }
 
   buildForm() {
     this.profileForm = this.formBuilder.group({
-      'name': [this.user.name, Validators.compose([Validators.required, Validators.minLength(2)])],
-      'lastname': [this.user.lastname, Validators.compose([Validators.required, Validators.minLength(2)])],
+      'name': [this.user.firstName, Validators.compose([Validators.required, Validators.minLength(2)])],
+      'lastname': [this.user.lastName, Validators.compose([Validators.required, Validators.minLength(2)])],
       'email': new FormControl({ value: this.user.email, disabled: this.isDisabledEmail }),
       'weight': [this.user.weight, Validators.compose([Validators.required, Validators.min(30), Validators.max(300)])],
       'height': [this.user.height, Validators.compose([Validators.required, Validators.min(100), Validators.max(300)])],
@@ -93,7 +85,10 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit(userModel) {
-    userModel.birthday = this.user.birthday;
+    userModel.birthday = {
+      year: this.user.year,
+      month: this.user.month
+    };
     const req = this.http.put('/api/user', userModel);
     req.subscribe(
       data => { },
