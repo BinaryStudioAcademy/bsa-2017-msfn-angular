@@ -72,8 +72,8 @@ export class ProfileComponent implements OnInit {
 
   buildForm() {
     this.profileForm = this.formBuilder.group({
-      'name': [this.user.firstName, Validators.compose([Validators.required, Validators.minLength(2)])],
-      'lastname': [this.user.lastName, Validators.compose([Validators.required, Validators.minLength(2)])],
+      'firstName': [this.user.firstName, Validators.compose([Validators.required, Validators.minLength(2)])],
+      'lastName': [this.user.lastName, Validators.compose([Validators.required, Validators.minLength(2)])],
       'email': new FormControl({ value: this.user.email, disabled: this.isDisabledEmail }),
       'weight': [this.user.weight, Validators.compose([Validators.required, Validators.min(30), Validators.max(300)])],
       'height': [this.user.height, Validators.compose([Validators.required, Validators.min(100), Validators.max(300)])],
@@ -84,16 +84,11 @@ export class ProfileComponent implements OnInit {
     this.days = this.profileService.getDays(month, year);
   }
 
-  onSubmit(userModel) {
-    userModel.birthday = {
-      year: this.user.year,
-      month: this.user.month
-    };
-    const req = this.http.put('/api/user', userModel);
-    req.subscribe(
-      data => { },
-      err => this.userError = err.statusText
-    );
+  onSubmit(user) {
+    user.day = this.user.day;
+    user.year = this.user.year;
+    user.month = this.user.month;
+    this.profileService.updateUser(user, this.user._id);
   }
 
   openConfirmPasswordDoalog() {

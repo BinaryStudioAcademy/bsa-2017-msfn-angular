@@ -76,6 +76,16 @@ export class ProfileService {
       method: 'GET',
       body: ''
     };
-    this.httpService.sendRequest(request).then(res => { console.log(res); callback(res); });
+    this.httpService.sendRequest(request).then(res => { callback(res); });
+  }
+
+  updateUser(user, id) {
+    console.log('userTOGo', user);
+    const request: IHttpReq = {
+      url: '/api/user/' + id,
+      method: 'PUT',
+      body: user
+    };
+    this.httpService.sendRequest(request);
   }
 }
