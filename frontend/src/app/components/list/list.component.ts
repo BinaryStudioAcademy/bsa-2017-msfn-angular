@@ -22,7 +22,9 @@ export class ListComponent implements OnInit {
     addItem() {
         setTimeout(() => {
             if (this.input) {
-                this.items.push(this.input);
+                if (this.items.indexOf(this.input) === -1) {
+                    this.items.push(this.input);
+                }
                 this.input = '';
             }
         }, 0);
