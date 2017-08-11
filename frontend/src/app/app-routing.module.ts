@@ -16,6 +16,7 @@ import { ForAdminGuard } from './guards/for-admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
     {
@@ -75,6 +76,12 @@ const routes: Routes = [
     }, {
         path: 'sidebar', // for testing
         component: SidebarViewComponent
+    }, {
+        path: 'notfound',
+        component: PageNotFoundComponent
+    }, {
+        path: '**',
+        redirectTo: 'notfound'
     }
 ];
 
