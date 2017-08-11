@@ -3,7 +3,9 @@ import { ImportModule } from './import.module';
 import { NgModule } from '@angular/core';
 
 // other components
-import { IsLoggedGuard } from './guards/is-logged.guard';
+import { IsLoggedInGuard } from './guards/is-logged-in.guard';
+import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
+import { ForAdminGuard } from './guards/for-admin.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
@@ -67,7 +69,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     providers: [
         HttpService,
         WindowObj,
-        IsLoggedGuard,
+        IsLoggedInGuard,
+        IsLoggedOutGuard,
+        ForAdminGuard,
         EncryptService,
         ToastrService,
         ExerciseTypeService
