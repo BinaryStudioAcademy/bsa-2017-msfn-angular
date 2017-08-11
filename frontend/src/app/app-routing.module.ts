@@ -17,8 +17,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
-import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 
 const routes: Routes = [
     {
@@ -61,7 +62,6 @@ const routes: Routes = [
     },
     {
         path: 'test-socket', // for testing socket.io
-        children: [],
         component: TestSocketsComponent
     },
     // {
@@ -102,6 +102,11 @@ const routes: Routes = [
         children: [],
         component: AdminComponent,
         // canActivate: [ForAdminGuard]
+    },
+    {
+        path: 'test-markdown',
+        component: TestMarkdownComponent
+
     }
 ];
 

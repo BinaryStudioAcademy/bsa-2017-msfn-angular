@@ -1,0 +1,5 @@
+<div class="markdown-container">
+    <textarea class="markdown" (keyup)="updateOutput($event.target.value)">{{rawText}}</textarea>
+    <div class="output" [innerHtml]="convertedText"></div>
+</div>
+
