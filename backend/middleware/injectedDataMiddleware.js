@@ -19,6 +19,7 @@ module.exports = function (req, res, obj, error) {
                obj.role = 'usual'
            }
             obj.currentProject = user.currentProject;
+            obj.userPhoto = user.userPhoto;
         } else {
             obj.isLoggedIn = false;
         }

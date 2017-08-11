@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import {MdDialog} from '@angular/material';
 import {ConfirmPasswordDialogComponent} from '../confirm-password-dialog/confirm-password-dialog.component';
+import {WindowObj} from './../../services/window.service';
 
 @Component({
   selector: 'app-profile',
@@ -26,8 +27,8 @@ export class ProfileComponent implements OnInit {
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   hideCropper = true;
-  image: string;
-
+  image = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
+  userId =  (this.window.data._injectedData as any).userId;
 
   user = {
     name: 'John',
@@ -49,7 +50,8 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private dialog: MdDialog
+    private dialog: MdDialog,
+    private window: WindowObj
   ) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.noFileInput = true;
@@ -64,7 +66,7 @@ export class ProfileComponent implements OnInit {
     this.cropperSettings.touchRadius = 10;
 
     this.data = {
-      image: 'http://via.placeholder.com/150x150'
+      image: this.image
     };
   }
 
@@ -108,6 +110,7 @@ export class ProfileComponent implements OnInit {
     this.hideCropper = false;
     const image: any = new Image();
     const file: File = $event.target.files[0];
+    if ($event.target.files === 0) { return; }
     const myReader: FileReader = new FileReader();
     myReader.onloadend = (loadEvent: any) => {
       image.src = loadEvent.target.result;
@@ -120,14 +123,21 @@ export class ProfileComponent implements OnInit {
   saveImg(event) {
     if (event === 'save') {
       if (!this.hideCropper) {
-        this.image = this.data.image;
+        this.profileService.savePhoto(this.data.image, this.userId, 'img', result => {
+          if (result.statusCode === 201) {
+            this.image = this.data.image;
+          } else {
+            this.data.image = this.image;
+          }
+          this.hideCropper = true;
+        });
+
+      } else if (event === 'cancel') {
+        this.data = {
+          image: this.image
+        };
         this.hideCropper = true;
       }
-    } else if (event === 'cancel') {
-      this.data = {
-        image: this.image || 'http://via.placeholder.com/150x150'
-      };
-      this.hideCropper = true;
     }
   }
 

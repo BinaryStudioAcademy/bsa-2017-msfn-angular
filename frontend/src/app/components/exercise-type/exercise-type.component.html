@@ -1,5 +1,5 @@
 <div class="main-container" #container>
-
+<button md-button disableRipple class="btn" id="btn-add" (click)="addRow(table)">Add new exercise type</button>
     <md-table #table [dataSource]="dataSource" [ngClass]="{'hiding' : !loaded}">
 
         <ng-container cdkColumnDef="exerciseCode">
@@ -39,5 +39,5 @@
         <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
     </md-table>
 
-    <button md-button disableRipple class="btn" id="btn-add" (click)="addRow(table)">Add new exercise type</button>
+    
 </div>

@@ -6,7 +6,6 @@ import { IHttpReq } from '../../models/http-req';
 @Injectable()
 export class ProfileService {
 
-
   constructor(private httpService: HttpService) { }
 
   getMonth() {
@@ -42,6 +41,16 @@ export class ProfileService {
       daysOutput.push(i);
     }
     return daysOutput;
+  }
+
+  savePhoto(image, userId, fileType, callback) {
+    const sendData: IHttpReq = {
+      url: '/api/file',
+      method: 'POST',
+      body: { data: image, userId: userId, fileType: fileType},
+    };
+
+    this.httpService.sendRequest(sendData).then(data => { callback(data); });
   }
 
   updateProfile(userData, callback, errorCallback) {

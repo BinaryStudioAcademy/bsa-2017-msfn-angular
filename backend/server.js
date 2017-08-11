@@ -41,6 +41,7 @@ app.use('/profile/*', isLogged);
 const staticPath = path.resolve(__dirname + '/../dist');
 app.use(express.static(staticPath));
 app.use(express.static(path.resolve(__dirname + '/static')));
+app.use('/resources', express.static(path.resolve(__dirname + '/../resources')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
