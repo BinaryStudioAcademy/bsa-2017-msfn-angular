@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
-import { ProfileComponent } from '../profile/profile.component';
+import { ProfileComponent } from '../user/user.components/profile/profile.component';
 import { TestSocketsComponent } from '../test-sockets/test-sockets.component';
 
 const adminRoutes: Routes = [

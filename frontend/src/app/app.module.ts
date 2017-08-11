@@ -18,7 +18,6 @@ import { TestHttpComponent } from './components/test-http/test-http.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { WindowObj } from './services/window.service';
-import { ProfileComponent } from './components/profile/profile.component';
 import { ConfirmPasswordDialogComponent } from './components/confirm-password-dialog/confirm-password-dialog.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { ToastrService } from './services/toastr.service';
@@ -48,7 +47,6 @@ import { UserModule } from './components/user/user.module';
         ListComponent,
         ExerciseTypeComponent,
         AutocompletePipe,
-        ProfileComponent,
         ConfirmPasswordDialogComponent,
         ExerciseListComponent,
         TestToastrComponent,

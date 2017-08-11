@@ -13,7 +13,6 @@ import { IsLoggedGuard } from './guards/is-logged.guard';
 import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { ForAdminGuard } from './guards/for-admin.guard';
-import { ProfileComponent } from './components/profile/profile.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
@@ -70,10 +69,6 @@ const routes: Routes = [
     //     component: ExerciseTypeComponent
     // },
     {
-        path: 'profile',
-        children: [],
-        component: ProfileComponent
-    }, {
         path: 'test-toastr', // for testing, can be removed
         children: [],
         component: TestToastrComponent
