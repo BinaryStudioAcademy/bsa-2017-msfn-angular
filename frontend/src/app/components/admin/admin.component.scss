@@ -82,7 +82,8 @@ aside {
 .childComponent {
     float: right;
     width: 75%;
-    max-height: 1000px;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
 }
 
 @media screen and (max-width: 990px) {
