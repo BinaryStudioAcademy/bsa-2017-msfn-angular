@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
+import { IHttpReq } from '../../models/http-req';
+import { HttpService } from '../../services/http.service';
+import {ToastrService} from '../../services/toastr.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -11,14 +13,27 @@ export class ForgetPasswordComponent implements OnInit {
 
   email: string;
 
-  constructor() { }
+  constructor(
+    private httpHandler: HttpService,
+    private toastrService: ToastrService
+  ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   sendLetter(form: NgForm) {
     if (form.valid) {
-      console.log('OK ' + this.email);
+      const sendData: IHttpReq = {
+        url: '/api/password',
+        method: 'POST',
+        body: {email: this.email}
+      };
+
+    this.httpHandler.sendRequest(sendData)
+      .then((res) => {
+        if (res.access) {
+          this.toastrService.showMessage('success', 'Check your email');
+        }
+      });
       // send message()
     } else {
       console.log('ER ' + this.email);

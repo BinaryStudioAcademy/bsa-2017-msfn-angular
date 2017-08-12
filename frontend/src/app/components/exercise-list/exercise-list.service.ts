@@ -4,7 +4,6 @@ import { IHttpReq } from '../../models/http-req';
 
 @Injectable()
 export class ExerciseListService {
-
   constructor(private httpService: HttpService) { }
 
   getExercises(callback): void {
@@ -50,9 +49,11 @@ export class ExerciseListService {
       let propB = '';
 
       switch (column) {
-        case 'name': [propA, propB] = [a.name, b.name];
+        case 'name':
+          [propA, propB] = [a.name, b.name];
           break;
-        case 'type': [propA, propB] = [a.type, b.type];
+        case 'type':
+          [propA, propB] = [a.type, b.type];
           break;
       }
 

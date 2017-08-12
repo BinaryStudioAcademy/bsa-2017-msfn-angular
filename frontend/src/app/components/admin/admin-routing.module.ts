@@ -1,3 +1,7 @@
+import { ExerciseCreateComponent } from './../exercise-create/exercise-create.component';
+import { ExerciseListComponent } from './../exercise-list/exercise-list.component';
+import { ExerciseTypeComponent } from './../exercise-type/exercise-type.component';
+import { ForAdminGuard } from './../../guards/for-admin.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -9,12 +13,32 @@ const adminRoutes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [ForAdminGuard],
     children: [
       {
         path: '',
         children: [
-          { path: 'test1', component: ProfileComponent },
-          { path: 'test2', component: TestSocketsComponent }
+          {
+            path: '',
+            redirectTo: 'exercise-list',
+            pathMatch: 'full'
+          },
+          {
+            path: 'exercise-type',
+            component: ExerciseTypeComponent
+          },
+          {
+            path: 'exercise-list',
+            component: ExerciseListComponent
+          },
+          {
+            path: 'exercises',
+            component: ExerciseCreateComponent
+          },
+          {
+            path: 'exercises/:id',
+            component: ExerciseCreateComponent
+          },
         ]
       }
     ]
@@ -25,6 +49,7 @@ const adminRoutes: Routes = [
   imports: [
     RouterModule.forChild(adminRoutes)
   ],
+  providers: [ForAdminGuard],
   exports: [
     RouterModule
   ]

@@ -1,0 +1,49 @@
+@import "./../../../globalStyles/variables";
+@import "./../../../globalStyles/materialTheme";
+@import "./../../../globalStyles/indentations";
+@import '../../../globalStyles/text.scss';
+
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
+
+.not-found-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    background-color: $bg-color;
+    height: 100vh;
+    font-family: $font-general;
+}
+
+.not-found-block {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 350px;
+    height: 150px;
+    font-size: 16px;
+    margin-top: $header-top-margin;
+    padding: 10px;
+    border: 2px #2A2A2A solid;
+    background-image: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
+}
+
+.back-button {
+    border: none;
+    margin-top: $content-between-margin;
+    width: 90%;
+    background-color: $btn-color;
+    padding: 15px;
+    color: $text-main-color;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+}
+

@@ -8,11 +8,18 @@ module.exports = function (req, res, obj, error) {
         if (req.session && req.user) {
             const user = req.user;
             obj.isLoggedIn = true;
-            obj.userId = req.user._id;
+            obj.userId = user._id;
             obj.userFirstName = user.firstName;
             obj.userLastName = user.lastName;
-            obj.role = user.role;
+            if(user.isAdmin) {
+               obj.role = 'admin';
+           } else if(user.iSCoach) {
+               obj.role = 'coach';
+           } else {
+               obj.role = 'usual'
+           }
             obj.currentProject = user.currentProject;
+            obj.userPhoto = user.userPhoto;
         } else {
             obj.isLoggedIn = false;
         }

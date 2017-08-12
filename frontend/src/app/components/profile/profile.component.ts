@@ -3,8 +3,10 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ProfileService } from './profile.service';
 import { HttpClient } from '@angular/common/http';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
-import {MdDialog} from '@angular/material';
-import {ConfirmPasswordDialogComponent} from '../confirm-password-dialog/confirm-password-dialog.component';
+import { MdDialog } from '@angular/material';
+import { ConfirmPasswordDialogComponent } from '../confirm-password-dialog/confirm-password-dialog.component';
+import { WindowObj } from './../../services/window.service';
+import { IUser } from '../../models/user';
 
 @Component({
   selector: 'app-profile',
@@ -26,29 +28,19 @@ export class ProfileComponent implements OnInit {
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   hideCropper = true;
-  image: string;
+  image = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
+  userId = (this.window.data._injectedData as any).userId;
 
-
-  user = {
-    name: 'John',
-    lastname: 'Smith',
-    email: 'john.smith@gmail.com',
-    birthday: {
-      day: 25,
-      month: 'March',
-      year: 1996
-    },
-    weight: 85,
-    height: 180,
-    password: '123456'
-  };
+  user: IUser;
 
   requestForCoaching = false;
+  coachingMessage: string;
 
   constructor(private profileService: ProfileService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private dialog: MdDialog
+    private dialog: MdDialog,
+    private window: WindowObj
   ) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.noFileInput = true;
@@ -63,28 +55,25 @@ export class ProfileComponent implements OnInit {
     this.cropperSettings.touchRadius = 10;
 
     this.data = {
-      image: 'http://via.placeholder.com/150x150'
+      image: this.image
     };
   }
 
   ngOnInit() {
-    this.buildForm();
-    this.months = this.profileService.getMonth();
-    this.days = this.profileService.getDays(this.user.birthday.month, this.user.birthday.year);
-    this.years = this.profileService.getYears();
-
-    // this.profileService.getProfile(data => {
-    //   this.user = data;
-    //   this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
-    // });
-
-    this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
+    this.profileService.getUser(this.userId, res => {
+      this.user = res;
+      this.months = this.profileService.getMonth();
+      this.days = this.profileService.getDays(this.user.month, this.user.year);
+      this.years = this.profileService.getYears();
+      this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
+      this.buildForm();
+    });
   }
 
   buildForm() {
     this.profileForm = this.formBuilder.group({
-      'name': [this.user.name, Validators.compose([Validators.required, Validators.minLength(2)])],
-      'lastname': [this.user.lastname, Validators.compose([Validators.required, Validators.minLength(2)])],
+      'firstName': [this.user.firstName, Validators.compose([Validators.required, Validators.minLength(2)])],
+      'lastName': [this.user.lastName, Validators.compose([Validators.required, Validators.minLength(2)])],
       'email': new FormControl({ value: this.user.email, disabled: this.isDisabledEmail }),
       'weight': [this.user.weight, Validators.compose([Validators.required, Validators.min(30), Validators.max(300)])],
       'height': [this.user.height, Validators.compose([Validators.required, Validators.min(100), Validators.max(300)])],
@@ -95,13 +84,11 @@ export class ProfileComponent implements OnInit {
     this.days = this.profileService.getDays(month, year);
   }
 
-  onSubmit(userModel) {
-    userModel.birthday = this.user.birthday;
-    const req = this.http.put('/api/user', userModel);
-    req.subscribe(
-      data => { },
-      err => this.userError = err.statusText
-    );
+  onSubmit(user) {
+    user.day = this.user.day;
+    user.year = this.user.year;
+    user.month = this.user.month;
+    this.profileService.updateUser(user, this.user._id);
   }
 
   openConfirmPasswordDoalog() {
@@ -113,6 +100,7 @@ export class ProfileComponent implements OnInit {
     this.hideCropper = false;
     const image: any = new Image();
     const file: File = $event.target.files[0];
+    if ($event.target.files === 0) { return; }
     const myReader: FileReader = new FileReader();
     myReader.onloadend = (loadEvent: any) => {
       image.src = loadEvent.target.result;
@@ -125,26 +113,36 @@ export class ProfileComponent implements OnInit {
   saveImg(event) {
     if (event === 'save') {
       if (!this.hideCropper) {
-        this.image = this.data.image;
-        this.hideCropper = true;
+        this.profileService.savePhoto(this.data.image, this.userId, 'img', result => {
+          if (result.statusCode === 201) {
+            this.image = this.data.image;
+          } else {
+            this.data.image = this.image;
+          }
+          this.hideCropper = true;
+        });
       }
     } else if (event === 'cancel') {
       this.data = {
-        image: this.image || 'http://via.placeholder.com/150x150'
+        image: this.image
       };
       this.hideCropper = true;
     }
   }
 
   applyForCoaching() {
-    // this.requestForCoaching = true;
     const userData = {
       requestForCoaching: true
     };
+    this.requestForCoaching = true;
 
-    this.profileService.updateProfile(userData, () => {
-      this.user['requestForCoaching'] = true;
-      this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
-    });
+    this.profileService.updateProfile(
+      userData,
+      () => {
+        this.coachingMessage = 'We\'ll moderate your request in 24 hours. You\'ll get a notification when it would be done.';
+      },
+      () => {
+        this.coachingMessage = 'Request was unsuccessful. Please try again.';
+      });
   }
 }

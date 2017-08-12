@@ -15,9 +15,11 @@
 
     <div id="general-error" class="error" *ngIf="userError">{{ userError }}</div>
 
-    <div id="gender" class="input-row">Male
-      <md-slide-toggle (change)="setGender($event)"></md-slide-toggle>
-      Female
+    <div id="gender" class="input-row">
+        <input [(ngModel)]="user.gender" id="Male" type="radio" value="Male" name="gender">
+        <label for="Male">Male</label>
+        <input [(ngModel)]="user.gender" id="Female" type="radio" value="Female" name="gender">
+        <label for="Female">Female</label>
     </div>
 
     <md-input-container class="input-row">

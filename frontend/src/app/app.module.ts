@@ -3,7 +3,9 @@ import { ImportModule } from './import.module';
 import { NgModule } from '@angular/core';
 
 // other components
-import { IsLoggedGuard } from './guards/is-logged.guard';
+import { IsLoggedInGuard } from './guards/is-logged-in.guard';
+import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
+import { ForAdminGuard } from './guards/for-admin.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
@@ -32,6 +34,8 @@ import { NotificationDialogComponent } from './components/notification-dialog/no
 import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
 import { AdminModule } from './components/admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import {UserListComponent} from './components/user-list/user-list.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +59,9 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
         SidebarViewComponent,
         NotificationDialogComponent,
         ExerciseCreateComponent,
-        TestMarkdownComponent
+        TestMarkdownComponent,
+        PageNotFoundComponent,
+        UserListComponent,
     ],
     imports: [
         ImportModule,
@@ -65,7 +71,9 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
     providers: [
         HttpService,
         WindowObj,
-        IsLoggedGuard,
+        IsLoggedInGuard,
+        IsLoggedOutGuard,
+        ForAdminGuard,
         EncryptService,
         ToastrService,
         ExerciseTypeService
