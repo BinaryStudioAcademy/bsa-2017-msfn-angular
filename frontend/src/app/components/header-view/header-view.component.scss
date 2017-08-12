@@ -1,4 +1,4 @@
-@import '../../../../src/globalStyles/variables';
+@import '../../../globalStyles/variables.scss';
 @import '../../../globalStyles/text.scss';
 @import '../../../globalStyles/indentations.scss';
 
@@ -82,13 +82,14 @@ md-menu {
     display: none;
 }
 
-@media screen and (max-width: 390px) {
-    header {
-        .logo__title {
-            display: none;
-        }
 
-        .settings__photo {
+$large-screen: 960px;
+$medium-screen: 600px;
+$small-screen: 440px;
+
+@media screen and (max-width: $small-screen) {
+    header {
+        .settings__photo, .settings__name, .logo__title {
             display: none;
         }
     }

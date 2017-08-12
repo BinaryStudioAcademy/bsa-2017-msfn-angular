@@ -68,7 +68,11 @@ aside {
     aside {
         width: 180px;
     }
+    .childComponent {
+        width: calc(100vw - 180px);
+    }
 }
+
 
 @media screen and (max-width: $small-screen) {
     aside {
@@ -77,5 +81,8 @@ aside {
         .navigation__title, .navigation__subheader {
             display: none;
         }
+    }
+    .childComponent {
+        width: calc(100vw - 55px);
     }
 }
