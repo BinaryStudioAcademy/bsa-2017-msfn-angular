@@ -12,6 +12,7 @@ const User = new Schema({
       required: true,
       unique: true
     },
+    secondaryEmails: [String],
     password: {
       type: String,
       required: true

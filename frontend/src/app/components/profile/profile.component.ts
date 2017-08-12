@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import {MdDialog} from '@angular/material';
 import {ConfirmPasswordDialogComponent} from '../confirm-password-dialog/confirm-password-dialog.component';
+import { AddNewEmailDialogComponent } from '../add-new-email-dialog/add-new-email-dialog.component';
+import { WindowObj } from '../../services/window.service';
+import { Router } from '@angular/router/src';
 
 @Component({
   selector: 'app-profile',
@@ -48,7 +51,8 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private dialog: MdDialog
+    private dialog: MdDialog,
+    private window: WindowObj,
   ) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.noFileInput = true;
@@ -106,6 +110,26 @@ export class ProfileComponent implements OnInit {
 
   openConfirmPasswordDoalog() {
     this.dialog.open(ConfirmPasswordDialogComponent);
+  }
+
+  openAddNewEmailDialog() {
+    const userData = this.window.data._injectedData;
+    const dialogRef = this.dialog.open(AddNewEmailDialogComponent, {
+    });
+    dialogRef.afterClosed().subscribe(email => {
+      if (email) {
+        const body = {
+          $addToSet: {secondaryEmails: email}
+        };
+        // const req = this.http.put(`/api/user/${userData}`, body);
+        // req.subscribe(
+        //   data => {
+        //     console.log(data);
+        //   },
+        //   err => this.userError = err.error.error
+        // );
+      }
+    });
   }
 
   // for cropperImg:

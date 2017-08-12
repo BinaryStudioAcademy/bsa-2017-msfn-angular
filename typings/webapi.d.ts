@@ -4,5 +4,9 @@ declare module WebApi {
     }
     export interface IInjectedData {
         isLoggedIn: boolean;
+        userId: string;
+        userFirstName: string;
+        userLastName: string;
+        role: string;
     }
 }
