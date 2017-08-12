@@ -39,6 +39,7 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
 
     ngAfterContentChecked() {
         this.userPhotoUrl = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
+        this.displayName = `${this.window.data._injectedData.userFirstName} ${this.window.data._injectedData.userLastName}`;
     }
 
     openDialog() {
