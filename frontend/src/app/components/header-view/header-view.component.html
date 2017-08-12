@@ -17,7 +17,7 @@
         <span class="notifications__count">2</span>
     </div>
     <div class="settings header__navigation-panel" *ngIf="thereIsLoggedInUser">
-        <md-icon>data_usage</md-icon>
+        <img class="settings__photo" [src]="userPhotoUrl">
         <span class="settings__name">{{displayName}}</span>
         <md-icon [mdMenuTriggerFor]="appMenu">menu</md-icon>
     </div>

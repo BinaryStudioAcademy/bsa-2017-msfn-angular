@@ -23,6 +23,7 @@ export class HeaderViewComponent implements OnInit {
             top: '45px',
         }
     };
+    public userPhotoUrl = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
 
     constructor(public dialog: MdDialog,
                 private httpHandler: HttpService,

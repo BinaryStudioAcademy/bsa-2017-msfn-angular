@@ -48,14 +48,23 @@ header {
     }
 
     .settings {
+        display: flex;
+        align-items: center;
     
         .settings__name {
             margin: 0 $header-icons-intendation;
             vertical-align: super;
             font-size: 17px;
         }
-        
-        cursor: pointer;
+
+        .settings__photo {
+            width: 35px;
+            border-radius: 50%;
+        }
+
+        md-icon {
+            cursor: pointer;
+        }
     }
 
     .header__navigation-panel {
@@ -76,6 +85,10 @@ md-menu {
 @media screen and (max-width: 390px) {
     header {
         .logo__title {
+            display: none;
+        }
+
+        .settings__photo {
             display: none;
         }
     }
