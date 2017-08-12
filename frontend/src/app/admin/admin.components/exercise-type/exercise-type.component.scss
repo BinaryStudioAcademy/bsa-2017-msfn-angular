@@ -1,10 +1,12 @@
-@import "../../../../../globalStyles/variables";
-@import "../../../../../globalStyles/indentations";
-@import '../../../../../globalStyles/text.scss';
+@import "../../../../globalStyles/variables";
+@import "../../../../globalStyles/indentations";
+@import '../../../../globalStyles/text.scss';
+
 .main-container {
     margin: 0 auto;
     width: 60%;
     text-align: center;
+    font-family: $font-general;
 }
 
 .btn {
@@ -32,9 +34,6 @@ button:focus {
     overflow-y: auto;
 }
 
-
-
-
 .input-container {
     margin: 10px;
     width: 200px;
@@ -43,9 +42,7 @@ button:focus {
 #btn-add {
     width: 40%;
     height: 40px;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 40px;
+    margin: 40px auto 0 auto;
 }
 
 .row-text:hover {
@@ -90,16 +87,15 @@ button:focus {
     cursor: pointer;
 }
 
-@media only screen and (max-width: $medium-screen) {
+.hiding{
+    display: none !important;
+}
+
+@media only screen and (max-width: $small-screen) {
     .main-container {
-        width: 100%;
-        margin: 0;
+        width: 80%;
     }
     #btn-add{
         width: auto;
     }
-}
-
-.hiding{
-    display: none !important;
 }

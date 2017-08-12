@@ -1,6 +1,6 @@
-import { HttpService } from '../../../../services/http.service';
-import { IHttpReq } from '../../../../models/http-req';
-import { ExerciseTypeService } from '../../../../services/exercise-type.service';
+import { HttpService } from '../../../services/http.service';
+import { IHttpReq } from '../../../models/http-req';
+import { ExerciseTypeService } from '../../../services/exercise-type.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataSource } from '@angular/cdk';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';

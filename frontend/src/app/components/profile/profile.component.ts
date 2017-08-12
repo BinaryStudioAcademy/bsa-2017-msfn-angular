@@ -89,6 +89,8 @@ export class ProfileComponent implements OnInit {
     user.year = this.user.year;
     user.month = this.user.month;
     this.profileService.updateUser(user, this.user._id);
+    this.window.data._injectedData.userFirstName = user.firstName;
+    this.window.data._injectedData.userLastName = user.lastName;
   }
 
   openConfirmPasswordDoalog() {
