@@ -1,26 +1,6 @@
 @import '../../../../../globalStyles/variables.scss';
 @import '../../../../../globalStyles/indentations.scss';
 @import '../../../../../globalStyles/text.scss';
-// margins
-$header-top-margin: 45px;
-$close-top-margin: 15px;
-
-$content-tb-margin: 20px;
-$content-between-margin: 15px;
-$content-lr-margin: 40px;
-
-$submit-top-margin: 25px;
-
-// paddings
-$input-padding: 5px;
-
-$font-general:  'Roboto', sans-serif;
-
-$header-text: 25px;
-$main-text: 16px;
-$usual-text: 14px;
-$minor-text: 12px;
-$button-text: 20px;
 
 .container {
     display: flex;
