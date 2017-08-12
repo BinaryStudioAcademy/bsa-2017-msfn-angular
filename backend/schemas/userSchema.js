@@ -35,13 +35,13 @@ const User = new Schema({
     year: Number,
     height: Number,
     weight: Number,
-    token: String
+    activateToken: String
 });
 
 User.pre('save', function(next) {
     const userData = this;
 
-    userData.token = activateService.makeid();
+    userData.activateToken = activateService.makeid();
 
     if (!userData.isModified('password')) return next();
 
@@ -87,5 +87,9 @@ User.methods.encryptPassword = function(password, callback){
         callback(err, hash);
     });
 };
+
+User.methods.checkToken = function(token, callback){
+    callback(this.activateToken === token);
+}
 
 module.exports = mongoose.model('User', User);
