@@ -50,7 +50,7 @@ header {
     .settings {
     
         .settings__name {
-            margin-left: $header-icons-intendation;
+            margin: 0 $header-icons-intendation;
             vertical-align: super;
             font-size: 17px;
         }
@@ -69,16 +69,8 @@ header {
         }
     }
 }
-.user_menu {
-    background-color: $gradient-to-color;
-    position: absolute;
-    width: 300px;
-    top: 70px;
-    right: 0;
-
-    button {
-        width: 100%;
-    }
+md-menu {
+    display: none;
 }
 
 @media screen and (max-width: 390px) {
