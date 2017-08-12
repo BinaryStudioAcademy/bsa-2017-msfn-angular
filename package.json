@@ -51,6 +51,8 @@
     "express-useragent": "^1.0.7",
     "hammerjs": "^2.0.8",
     "marked": "^0.3.6",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "mongoose": "^4.11.5",
     "mongoose-ttl": "0.0.3",
     "ng2-img-cropper": "^0.9.0",
