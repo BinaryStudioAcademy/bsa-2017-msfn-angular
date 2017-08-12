@@ -4,8 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { ImportModule } from '../../import.module';
 import { AdminComponent } from './admin.component';
-import { Test1Component } from './admin.components/test1/test1.component';
-import { Test2Component } from './admin.components/test2/test2.component';
+import { UserListComponent } from './admin.components/user-list/user-list.component';
+import { ExerciseCreateComponent } from './admin.components/exercise-create/exercise-create.component';
+import { ExerciseListComponent } from './admin.components/exercise-list/exercise-list.component';
+import { ExerciseTypeComponent } from './admin.components/exercise-type/exercise-type.component';
+// import { ListComponent } from '../../components/list/list.component';
+// import { AutocompletePipe } from '../../components/list/autocomplete.pipe';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -18,9 +22,13 @@ import { AdminRoutingModule } from './admin-routing.module';
   ],
   declarations: [
     AdminComponent,
-    Test1Component,
-    Test2Component
+    // ListComponent,
+    // AutocompletePipe,
+    UserListComponent,
+    ExerciseCreateComponent,
+    ExerciseListComponent,
+    ExerciseTypeComponent
   ],
-  providers: [ ]
+  providers: []
 })
 export class AdminModule {}
