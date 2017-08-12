@@ -87,4 +87,16 @@ export class ProfileService {
     };
     this.httpService.sendRequest(request);
   }
+
+  addNewEmail(email, id) {
+    // user.$addToSet
+    const request: IHttpReq = {
+      url: '/api/user/' + id + '/email',
+      method: 'POST',
+      body: {
+        $addToSet: {secondaryEmails: 'test@gmail.com'}
+      }
+    };
+    this.httpService.sendRequest(request);
+  }
 }

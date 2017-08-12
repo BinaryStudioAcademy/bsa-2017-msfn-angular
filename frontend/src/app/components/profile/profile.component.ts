@@ -102,16 +102,13 @@ export class ProfileComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(email => {
       if (email) {
-        const body = {
-          $addToSet: {secondaryEmails: email}
-        };
-        // const req = this.http.put(`/api/user/${userData}`, body);
-        // req.subscribe(
-        //   data => {
-        //     console.log(data);
-        //   },
-        //   err => this.userError = err.error.error
-        // );
+        // const user.$addToSet = {secondaryEmails: email};
+        // const user = {
+        //   secondaryEmails: $addToSet [
+        //     email
+        //   ]
+        // };
+        this.profileService.addNewEmail(email, this.user._id);
       }
     });
   }
