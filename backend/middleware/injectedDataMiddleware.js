@@ -13,7 +13,7 @@ module.exports = function (req, res, obj, error) {
             obj.userLastName = user.lastName;
             if(user.isAdmin) {
                obj.role = 'admin';
-           } else if(user.iSCoach) {
+           } else if(user.isCoach) {
                obj.role = 'coach';
            } else {
                obj.role = 'usual'
