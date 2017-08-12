@@ -31,7 +31,9 @@ import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.com
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 import { AdminModule } from './components/admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { AddNewEmailDialogComponent } from './components/add-new-email-dialog/add-new-email-dialog.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UserListComponent } from './components/admin/admin.components/user-list/user-list.component';
 
 @NgModule({
     declarations: [
@@ -53,6 +55,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
         SidebarViewComponent,
         NotificationDialogComponent,
         TestMarkdownComponent,
+        AddNewEmailDialogComponent,
         PageNotFoundComponent,
     ],
     imports: [
@@ -72,7 +75,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,
-        NotificationDialogComponent
+        NotificationDialogComponent,
+        AddNewEmailDialogComponent
     ],
     bootstrap: [AppComponent]
 

@@ -7,6 +7,7 @@ import { MdDialog } from '@angular/material';
 import { ConfirmPasswordDialogComponent } from '../confirm-password-dialog/confirm-password-dialog.component';
 import { WindowObj } from './../../services/window.service';
 import { IUser } from '../../models/user';
+import { AddNewEmailDialogComponent } from '../add-new-email-dialog/add-new-email-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -93,6 +94,23 @@ export class ProfileComponent implements OnInit {
 
   openConfirmPasswordDoalog() {
     this.dialog.open(ConfirmPasswordDialogComponent);
+  }
+
+  openAddNewEmailDialog() {
+    const userData = this.window.data._injectedData;
+    const dialogRef = this.dialog.open(AddNewEmailDialogComponent, {
+    });
+    dialogRef.afterClosed().subscribe(email => {
+      if (email) {
+        // const user.$addToSet = {secondaryEmails: email};
+        // const user = {
+        //   secondaryEmails: $addToSet [
+        //     email
+        //   ]
+        // };
+        this.profileService.addNewEmail(email, this.user._id);
+      }
+    });
   }
 
   // for cropperImg:

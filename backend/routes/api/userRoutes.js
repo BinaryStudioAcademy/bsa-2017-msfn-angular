@@ -35,6 +35,14 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+    app.post(baseUrl + ':id/' + 'email', function (req, res, next) {
+        userService.addEmailToItem(req.params.id, req.body, function (err, data) {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.put(baseUrl + ':id', function (req, res, next) {
         userService.updateItem(req.params.id, req.body, function (err, data) {
             res.data = data;
