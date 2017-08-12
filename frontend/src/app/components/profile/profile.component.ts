@@ -72,8 +72,8 @@ export class ProfileComponent implements OnInit {
 
   buildForm() {
     this.profileForm = this.formBuilder.group({
-      'firstName': [this.user.firstName, Validators.compose([Validators.required, Validators.minLength(2)])],
-      'lastName': [this.user.lastName, Validators.compose([Validators.required, Validators.minLength(2)])],
+      'firstName': [this.user.firstName, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(20)])],
+      'lastName': [this.user.lastName, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(20)])],
       'email': new FormControl({ value: this.user.email, disabled: this.isDisabledEmail }),
       'weight': [this.user.weight, Validators.compose([Validators.required, Validators.min(30), Validators.max(300)])],
       'height': [this.user.height, Validators.compose([Validators.required, Validators.min(100), Validators.max(300)])],
