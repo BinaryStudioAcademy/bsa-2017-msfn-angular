@@ -11,7 +11,7 @@ $height: calc(100vh - 70px);
 }
 
 aside {
-    width: 20vw;
+    width: 20%;
     min-height: $height;
     font-family: $font-general;
     font-weight: 600;
@@ -61,7 +61,7 @@ aside {
 
 .childComponent {
     float: right;
-    width: 80vw;
+    width: 80%;
 }
 
 @media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
