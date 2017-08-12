@@ -18,7 +18,7 @@ export class HttpService {
 
     private handleError = (error: any): Promise<any> => {
         if (error && error.status === 401) {
-            this._router.navigate(['/login']);
+            this._router.navigate(['/']);
         }
         this.toastrService.showMessage('error', error.message, this.failMessage);
         return error;
