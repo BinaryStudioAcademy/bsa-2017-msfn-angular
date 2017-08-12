@@ -96,7 +96,7 @@ aside {
 
 @media screen and (max-width: 810px) and (min-width: 600px) {
     aside {
-        min-width: 205px;
+        width: 205px;
     }
     
 }
@@ -109,8 +109,11 @@ aside {
             width: 50px;
         }
 
-        .navigation__title {
+        .navigation__title, .navigation__subheader {
             display: none;
         }
+    }
+    .childComponent {
+        width: calc(100% - 85px);
     }
 }
