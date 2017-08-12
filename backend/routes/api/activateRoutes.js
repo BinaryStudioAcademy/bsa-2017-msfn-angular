@@ -4,7 +4,7 @@ const
     router = express.Router();
 
 router.get('/:id', function (req, res, next) {
-    activateService.getToken(req.body, function (err, data) {
+    activateService.createActivateCode(req.body, function (err, data) {
         res.data = data;
         res.err = err;
         next();
@@ -12,7 +12,7 @@ router.get('/:id', function (req, res, next) {
 }, apiResponse);
 
 router.post('/:id', function (req, res, next) {
-    activateService.sendToken(req.body, function (err, data) {
+    activateService.checkActivateCode(req.body, function (err, data) {
         res.data = data;
         res.err = err;
         next();
