@@ -6,6 +6,7 @@ import { ImportModule } from '../../import.module';
 import { UserComponent } from './user.component';
 import { SidebarViewComponent } from '../sidebar-view/sidebar-view.component';
 import { ProfileComponent } from './user.components/profile/profile.component';
+import { ForAllUserGuard } from '../../guards/for-all-user.guard';
 
 @NgModule({
     imports: [
@@ -18,6 +19,9 @@ import { ProfileComponent } from './user.components/profile/profile.component';
         SidebarViewComponent,
         UserComponent,
         ProfileComponent,
+    ],
+    providers: [
+        ForAllUserGuard,
     ]
 })
 export class UserModule {}
