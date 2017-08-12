@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
+import { ProfileComponent } from '../profile/profile.component';
+import { TestSocketsComponent } from '../test-sockets/test-sockets.component';
+import { AdminRootProfileComponent } from './admin.components/admin-root-profile/admin-root-profile.component';
 import { UserListComponent } from './admin.components/user-list/user-list.component';
 import { ExerciseCreateComponent } from './admin.components/exercise-create/exercise-create.component';
 import { ExerciseListComponent } from './admin.components/exercise-list/exercise-list.component';
@@ -15,30 +18,28 @@ const adminRoutes: Routes = [
         canActivate: [ForAdminGuard],
         children: [
             {
-                path: '',
-                children: [
-                    {
-                        path: 'exercise-type',
-                        component: ExerciseTypeComponent
-                    },
-                    {
-                        path: 'exercise-list',
-                        component: ExerciseListComponent
-                    },
-                    {
-                        path: 'exercises',
-                        component: ExerciseCreateComponent
-                    },
-                    {
-                        path: 'exercises/:id',
-                        component: ExerciseCreateComponent
-                    },
-                    {
-                        path: 'user-list',
-                        component: UserListComponent
-                    },
-                ]
-            }
+                path: 'admin-root-profile/:id',
+                component: AdminRootProfileComponent },
+            {
+                path: 'exercise-type',
+                component: ExerciseTypeComponent
+            },
+            {
+                path: 'exercise-list',
+                component: ExerciseListComponent
+            },
+            {
+                path: 'exercises',
+                component: ExerciseCreateComponent
+            },
+            {
+                path: 'exercises/:id',
+                component: ExerciseCreateComponent
+            },
+            {
+                path: 'user-list',
+                component: UserListComponent
+            },
         ]
     }
 ];
