@@ -27,8 +27,17 @@ function getUserByQuery(query, callback) {
     innerQuery.exec(callback);
 }
 
-function addEmail(id, body, callback) {
-    let query = this.model.update({_id:id}, body);
+function addEmail(id, email, callback) {
+    debugger;
+    const query = this
+        .model
+        .update({
+            _id: id
+        }, {
+            $addToSet: {
+                secondaryEmails: email
+            }
+        });
     query.exec(callback);
 }
 

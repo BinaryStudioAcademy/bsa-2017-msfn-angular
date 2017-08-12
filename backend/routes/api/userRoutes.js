@@ -35,7 +35,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.post(baseUrl + ':id/' + 'email', function (req, res, next) {
+    app.put(baseUrl + ':id/' + 'email', function (req, res, next) {
         userService.addEmailToItem(req.params.id, req.body, function (err, data) {
             res.data = data;
             res.err = err;

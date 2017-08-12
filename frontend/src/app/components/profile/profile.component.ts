@@ -102,12 +102,6 @@ export class ProfileComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(email => {
       if (email) {
-        // const user.$addToSet = {secondaryEmails: email};
-        // const user = {
-        //   secondaryEmails: $addToSet [
-        //     email
-        //   ]
-        // };
         this.profileService.addNewEmail(email, this.user._id);
       }
     });

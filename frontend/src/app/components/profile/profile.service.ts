@@ -89,12 +89,11 @@ export class ProfileService {
   }
 
   addNewEmail(email, id) {
-    // user.$addToSet
     const request: IHttpReq = {
       url: '/api/user/' + id + '/email',
-      method: 'POST',
+      method: 'PUT',
       body: {
-        $addToSet: {secondaryEmails: 'test@gmail.com'}
+        email: email
       }
     };
     this.httpService.sendRequest(request);
