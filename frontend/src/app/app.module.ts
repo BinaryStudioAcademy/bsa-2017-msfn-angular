@@ -31,6 +31,7 @@ import { NotificationDialogComponent } from './components/notification-dialog/no
 import { AdminModule } from './components/admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 
 @NgModule({
     imports: [
@@ -57,6 +58,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
         NotificationDialogComponent,
         TestMarkdownComponent,
         PageNotFoundComponent,
+        LoginDialogComponent,
     ],
     providers: [
         ToasterService,
@@ -70,7 +72,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,
-        NotificationDialogComponent
+        NotificationDialogComponent,
+        LoginDialogComponent
     ],
     bootstrap: [AppComponent]
 
