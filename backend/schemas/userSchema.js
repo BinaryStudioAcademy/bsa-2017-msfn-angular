@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const bcrypt = require('bcrypt-nodejs');
+const activateService = require('../services/activateService');
 
 
 const User = new Schema({
@@ -35,10 +36,13 @@ const User = new Schema({
     year: Number,
     height: Number,
     weight: Number,
+    token: String
 });
 
 User.pre('save', function(next) {
     const userData = this;
+
+    userData.token = activateService.makeid();
 
     if (!userData.isModified('password')) return next();
 
