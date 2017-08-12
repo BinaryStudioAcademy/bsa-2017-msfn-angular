@@ -1,4 +1,4 @@
-import { ForAdminGuard } from './../../guards/for-admin.guard';
+import { ForAdminGuard } from './../guards/for-admin.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

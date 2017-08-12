@@ -15,7 +15,7 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
 
     public thereIsLoggedInUser: boolean;
     public displayName: string;
-    public notificationCount: number = 1;
+    public notificationCount = 1;
     private notificationsDialogConfig = {
         height: '300px',
         width: '200px',

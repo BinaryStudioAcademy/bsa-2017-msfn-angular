@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminComponent } from './components/admin/admin.component';
+import { AdminComponent } from './admin/admin.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { TestHttpComponent } from './components/test-http/test-http.component';

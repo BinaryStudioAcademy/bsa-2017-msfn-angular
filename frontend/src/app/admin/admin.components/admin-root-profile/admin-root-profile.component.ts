@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdminRootProfileService } from './admin-root-profile.service';
 import { Subscription } from 'rxjs/Subscription';
-import { HttpService } from '../../../../services/http.service';
+import { HttpService } from '../../../services/http.service';
 
 @Component({
     selector: 'app-admin-root-profile',
