@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import {Component, OnInit, AfterContentChecked} from '@angular/core';
+import {MdDialog} from '@angular/material';
 import { Router } from '@angular/router';
 import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
 import { HttpService } from '../../services/http.service';
@@ -11,7 +11,7 @@ import { WindowObj } from '../../services/window.service';
     templateUrl: './header-view.component.html',
     styleUrls: ['./header-view.component.scss']
 })
-export class HeaderViewComponent implements OnInit {
+export class HeaderViewComponent implements OnInit, AfterContentChecked  {
 
     public thereIsLoggedInUser: boolean;
     public displayName: string;
@@ -35,6 +35,10 @@ export class HeaderViewComponent implements OnInit {
         const userData = this.window.data._injectedData;
         this.thereIsLoggedInUser = userData.isLoggedIn;
         this.displayName = `${userData.userFirstName} ${userData.userLastName}`;
+    }
+
+    ngAfterContentChecked() {
+        this.userPhotoUrl = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
     }
 
     openDialog() {

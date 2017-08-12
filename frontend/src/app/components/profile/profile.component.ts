@@ -120,6 +120,7 @@ export class ProfileComponent implements OnInit {
             this.data.image = this.image;
           }
           this.hideCropper = true;
+          this.window.data._injectedData.userPhoto = this.image;
         });
       }
     } else if (event === 'cancel') {
