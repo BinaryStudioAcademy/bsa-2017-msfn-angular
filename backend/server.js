@@ -38,17 +38,12 @@ app.use(passport.session());
 //middleware for checking authorized user (if auth { next() } else { redirect to '/'})
 app.use('/profile/*', isLogged);
 
-const staticPath = path.resolve(__dirname + '/../dist');
-app.use(express.static(staticPath));
-app.use(express.static(path.resolve(__dirname + '/static')));
+app.use('/dist', express.static(path.resolve(__dirname + '/../dist')));
+app.use('/resources', express.static(path.resolve(__dirname + '/../resources')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(function(req, res, next) {
-    // console.log(req.session.user);
-    next();
-});
 
 const apiRoutes = require('./routes/api/routes')(app);
 const viewRoutes = require('./routes/view/routes')(app);

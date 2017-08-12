@@ -91,8 +91,23 @@ svg {
 }
 
 #gender {
+  display: flex;
+  justify-content: space-around;
   margin: 0 0 $content-between-margin;
-  text-align: center;
+  font-size: $main-text;
+
+  input{
+      display: none;
+  }
+
+  label {
+      color: $text-second-color;
+      cursor: pointer;
+  }
+
+  input:checked + label {
+      color: $text-main-color;
+  }
 }
 
 md-slide-toggle {

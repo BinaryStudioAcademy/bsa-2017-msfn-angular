@@ -19,6 +19,8 @@ const User = new Schema({
     },
     isCoach: Boolean,
     isAdmin: Boolean,
+    requestForCoaching: Boolean,
+    gender: String,
     position: Number,
     salt: {
         type: String,
@@ -27,7 +29,13 @@ const User = new Schema({
     facebookID: String,
     twitterID: String,
     follow: [ObjectId],
-
+    userPhoto: String,
+    gender: String,
+    month: String,
+    day: Number,
+    year: Number,
+    height: Number,
+    weight: Number,
 });
 
 User.pre('save', function(next) {
