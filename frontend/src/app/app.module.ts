@@ -32,6 +32,11 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
+    imports: [
+        ImportModule,
+        AdminModule,
+        AppRoutingModule
+    ],
     declarations: [
         AppComponent,
         RegistrationComponent,
@@ -50,11 +55,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
         NotificationDialogComponent,
         TestMarkdownComponent,
         PageNotFoundComponent,
-    ],
-    imports: [
-        ImportModule,
-        AdminModule,
-        AppRoutingModule
     ],
     providers: [
         HttpService,

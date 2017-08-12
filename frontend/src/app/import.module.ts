@@ -64,8 +64,7 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
         MdSortModule,
         MdTooltipModule,
         MdMenuModule
-    ],
-    bootstrap: [ ]
+    ]
 })
 
 export class ImportModule {
