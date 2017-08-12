@@ -5,7 +5,7 @@
 
   <div id="inputs">
     <md-input-container>
-      <input mdInput type="text" #filter placeholder="search by name" [(ngModel)]="name">
+      <input mdInput type="text" #filter placeholder="search by name, email or role" [(ngModel)]="searchInput">
     </md-input-container>
   </div>
 
@@ -23,7 +23,7 @@
       <md-header-cell *cdkHeaderCellDef md-sort-header>
         Last Name
       </md-header-cell>
-      <md-cell *cdkCellDef="let row">
+      <md-cell *cdkCellDef="let row" routerLink="/admin-root-profile/{{ row._id }}">
         {{ row.lastName }}
       </md-cell>
     </ng-container>
@@ -32,7 +32,7 @@
       <md-header-cell *cdkHeaderCellDef md-sort-header>
         Email
       </md-header-cell>
-      <md-cell *cdkCellDef="let row">
+      <md-cell *cdkCellDef="let row" routerLink="/admin-root-profile/{{ row._id }}">
         {{ row.email }}
       </md-cell>
     </ng-container>
@@ -41,7 +41,7 @@
       <md-header-cell *cdkHeaderCellDef md-sort-header>
         Role
       </md-header-cell>
-      <md-cell *cdkCellDef="let row">
+      <md-cell *cdkCellDef="let row" routerLink="/admin-root-profile/{{ row._id }}">
         {{ row.role }}
       </md-cell>
     </ng-container>
@@ -50,7 +50,7 @@
       <md-header-cell *cdkHeaderCellDef md-sort-header>
         Birthday
       </md-header-cell>
-      <md-cell *cdkCellDef="let row">
+      <md-cell *cdkCellDef="let row" routerLink="/admin-root-profile/{{ row._id }}">
         {{ row.birthday }}
       </md-cell>
     </ng-container>
@@ -59,7 +59,7 @@
       <md-header-cell *cdkHeaderCellDef md-sort-header>
         Gender
       </md-header-cell>
-      <md-cell *cdkCellDef="let row">
+      <md-cell *cdkCellDef="let row" routerLink="/admin-root-profile/{{ row._id }}">
         {{ row.gender }}
       </md-cell>
     </ng-container>

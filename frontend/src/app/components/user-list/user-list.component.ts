@@ -19,7 +19,7 @@ import 'rxjs/add/observable/fromEvent';
 })
 
 export class UserListComponent implements OnInit {
-  name = '';
+  searchInput = '';
   displayedColumns = [
     'firstName',
     'lastName',

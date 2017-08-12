@@ -14,7 +14,6 @@ export class UserListService {
       body: {}
     };
     this.httpService.sendRequest(request).then(data => {
-      console.log(data);
       for (let i = 0; i < data.length; i++) {
         let role = 'user';
 
@@ -27,6 +26,7 @@ export class UserListService {
 
         data[i].role = role;
       }
+      console.log(data);
       callback(data);
     });
   }
@@ -37,9 +37,20 @@ export class UserListService {
       let propB = '';
 
       switch (column) {
-        case 'name': [propA, propB] = [a.name, b.name];
+        case 'firstName':
+          [propA, propB] = [a.firstName.toLowerCase(), b.firstName.toLowerCase()];
           break;
-        case 'type': [propA, propB] = [a.type, b.type];
+        case 'lastName':
+          [propA, propB] = [a.lastName.toLowerCase(), b.lastName.toLowerCase()];
+          break;
+        case 'email':
+          [propA, propB] = [a.email.toLowerCase(), b.email.toLowerCase()];
+          break;
+        case 'role':
+          [propA, propB] = [a.role, b.role];
+          break;
+        case 'gender':
+          [propA, propB] = [a.gender, b.gender];
           break;
       }
 

@@ -49,9 +49,11 @@ export class ExerciseListService {
       let propB = '';
 
       switch (column) {
-        case 'name': [propA, propB] = [a.name, b.name];
+        case 'name':
+          [propA, propB] = [a.name, b.name];
           break;
-        case 'type': [propA, propB] = [a.type, b.type];
+        case 'type':
+          [propA, propB] = [a.type, b.type];
           break;
       }
 
