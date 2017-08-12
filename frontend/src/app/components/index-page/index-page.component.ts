@@ -8,7 +8,10 @@ import { WindowObj } from '../../services/window.service';
 })
 export class IndexPageComponent implements OnInit {
 
+    public isLoggedIn: boolean;
+
     constructor(public window: WindowObj) {
+        this.isLoggedIn = window.data._injectedData.isLoggedIn;
     }
 
     ngOnInit() {
