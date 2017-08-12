@@ -54,24 +54,26 @@ export class RegistrationComponent implements OnInit {
 
     firstNameFormControl = new FormControl('', [
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(2),
+        Validators.maxLength(20)
     ]);
 
     lastNameFormControl = new FormControl('', [
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(2),
+        Validators.maxLength(20)
     ]);
 
     heightFormControl = new FormControl('', [
         Validators.required,
-        Validators.min(50),
-        Validators.max(270)
+        Validators.min(100),
+        Validators.max(300)
     ]);
 
     weightFormControl = new FormControl('', [
         Validators.required,
-        Validators.min(5),
-        Validators.max(500)
+        Validators.min(30),
+        Validators.max(300)
     ]);
 
     passwordFormControl = new FormControl('', [
