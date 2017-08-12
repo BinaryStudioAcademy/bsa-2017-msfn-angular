@@ -25,32 +25,39 @@ import {
     MdAutocompleteModule,
     MdSortModule,
     MdTooltipModule,
-    MdMenuModule
+    MdMenuModule,
+    MdListModule
 } from '@angular/material';
 import 'hammerjs';
 
-// components
+// // components
 import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
-    declarations: [
-        ListComponent,
-        AutocompletePipe
-    ],
     imports: [
-        BrowserModule,
+        CommonModule,
+        ToastrModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+        MdChipsModule,
+        MdIconModule,
+        MdAutocompleteModule,
+        MdInputModule
+    ],
+    exports: [
+        MdIconModule,
         HttpModule,
         FormsModule,
         ReactiveFormsModule,
+        ToastrModule,
         CdkTableModule,
         HttpClientModule,
         BrowserAnimationsModule,
         ImageCropperModule,
-        ToastrModule,
         MdSnackBarModule,
         MdChipsModule,
-        MdIconModule,
         MdRadioModule,
         MdSelectModule,
         MdCardModule,
@@ -63,8 +70,15 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
         MdAutocompleteModule,
         MdSortModule,
         MdTooltipModule,
-        MdMenuModule
-    ]
+        MdMenuModule,
+        MdListModule,
+        ListComponent,
+        AutocompletePipe
+    ],
+    declarations: [
+        ListComponent,
+        AutocompletePipe
+    ],
 })
 
 export class ImportModule {

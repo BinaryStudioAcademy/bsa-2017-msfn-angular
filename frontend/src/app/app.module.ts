@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 // @angular
 import { ImportModule } from './import.module';
 import { NgModule } from '@angular/core';
@@ -23,7 +24,7 @@ import { WindowObj } from './services/window.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ConfirmPasswordDialogComponent } from './components/confirm-password-dialog/confirm-password-dialog.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
-import { ToastrService } from './services/toastr.service';
+import { ToasterService } from './services/toastr.service';
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
@@ -35,7 +36,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     imports: [
         ImportModule,
         AdminModule,
-        AppRoutingModule
+        AppRoutingModule,
+        CommonModule
     ],
     declarations: [
         AppComponent,
@@ -57,13 +59,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
         PageNotFoundComponent,
     ],
     providers: [
+        ToasterService,
         HttpService,
         WindowObj,
         IsLoggedInGuard,
         IsLoggedOutGuard,
         ForAdminGuard,
         EncryptService,
-        ToastrService,
         ExerciseTypeService
     ],
     entryComponents: [
