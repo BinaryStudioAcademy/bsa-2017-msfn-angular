@@ -1,0 +1,58 @@
+@import '../../../../../globalStyles/indentations.scss';
+@import '../../../../../globalStyles/text.scss';
+@import '../../../../../globalStyles/variables.scss';
+
+#title {
+  margin: $content-lr-margin 0;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+}
+
+#inputs {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+
+  md-input-container {
+    width: 25%;
+    max-width: 200px;
+  }
+}
+
+.mat-table {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.mat-row, .mat-header-row {
+  height: auto;
+  padding: $content-tb-margin 60px;
+}
+
+.mat-header-cell {
+  font-size: $main-text;
+}
+
+md-cell:hover {
+  cursor: pointer;
+}
+
+
+@media only screen and (max-width: $large-screen) {
+
+  .mat-table {
+    width: 95%;
+  }
+
+  .mat-header-row, .mat-row {
+    padding: 20px 30px;
+  }
+
+  md-cell {
+    font-size: 12px;
+  }
+}

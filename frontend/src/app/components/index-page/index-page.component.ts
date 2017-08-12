@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { WindowObj } from '../../services/window.service';
 
 @Component({
     selector: 'app-index-page',
@@ -7,7 +8,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class IndexPageComponent implements OnInit {
 
-    constructor() {
+    public isLoggedIn: boolean;
+
+    constructor(public window: WindowObj) {
+        this.isLoggedIn = window.data._injectedData.isLoggedIn;
     }
 
     ngOnInit() {

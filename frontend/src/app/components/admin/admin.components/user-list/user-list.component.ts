@@ -3,7 +3,7 @@ import { DataSource } from '@angular/cdk';
 import { MdSort } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { ExerciseListService } from './exercise-list.service';
+import { UserListService } from './user-list.service';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
@@ -12,39 +12,39 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 
 @Component({
-  selector: 'app-exercise-list',
-  templateUrl: './exercise-list.component.html',
-  styleUrls: ['./exercise-list.component.scss'],
-  providers: [ExerciseListService]
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.scss'],
+  providers: [UserListService]
 })
 
-export class ExerciseListComponent implements OnInit {
-  options = [];
-  items = [];
-
-  name = '';
+export class UserListComponent implements OnInit {
+  searchInput = '';
   displayedColumns = [
-    'name',
-    'type',
-    'description'
+    'firstName',
+    'lastName',
+    'email',
+    'role',
+    'birthday',
+    'gender'
   ];
   tableDatabase = new TableDatabase();
   dataSource: ExampleDataSource | null;
   @ViewChild(MdSort) sort: MdSort;
   @ViewChild('filter') filter: ElementRef;
 
-  constructor(private cd: ChangeDetectorRef, private exerciseListService: ExerciseListService) { }
+  constructor(private cd: ChangeDetectorRef,
+              private userListService: UserListService) { }
 
   ngOnInit() {
-    this.dataSource = new ExampleDataSource(this.tableDatabase, this.sort, this.exerciseListService);
-    setTimeout(() => this.cd.markForCheck());
-    this.getExercises((result) => {
-      this.tableDatabase.addExercises(result);
-      for (let i = 0; i < result.length; i++) {
-        this.options.push(result[i].type);
-      }
-    });
+    this.dataSource = new ExampleDataSource(this.tableDatabase,
+      this.sort,
+      this.userListService);
 
+    setTimeout(() => this.cd.markForCheck());
+    this.getUsers((result) => {
+      this.tableDatabase.addUsers(result);
+    });
 
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
@@ -55,8 +55,8 @@ export class ExerciseListComponent implements OnInit {
       });
   }
 
-  getExercises(callback) {
-    return this.exerciseListService.getExercises(callback);
+  getUsers(callback) {
+    return this.userListService.getUsers(callback);
   }
 }
 
@@ -68,12 +68,9 @@ export class TableDatabase {
 
   constructor() { }
 
-  addExercises(data) {
-    for (let i = 0; i < data.length; i++) {
-      const copiedData = data.slice();
-      copiedData.push(data[i]);
-      this.dataChange.next(copiedData);
-    }
+  addUsers(data) {
+    const copiedData = [...data];
+    this.dataChange.next(copiedData);
   }
 }
 
@@ -86,7 +83,9 @@ export class ExampleDataSource extends DataSource<any> {
     this._filterChange.next(filter);
   }
 
-  constructor(private _exampleDatabase: TableDatabase, private _sort: MdSort, private service: ExerciseListService) {
+  constructor(private _exampleDatabase: TableDatabase,
+              private _sort: MdSort,
+              private service: UserListService) {
     super();
   }
 
@@ -99,8 +98,12 @@ export class ExampleDataSource extends DataSource<any> {
 
     return Observable.merge(...displayDataChanges).map(() => {
       return this.getSortedData().slice().filter((item) => {
-        const searchStr = (item.name).toLowerCase();
-        return searchStr.includes(this.filter.toLowerCase());
+        const searchFirstName = (item.firstName).toLowerCase();
+        const searchLastName = (item.lastName).toLowerCase();
+        const searchRole = (item.role).toLowerCase();
+        return (searchFirstName.includes(this.filter.toLowerCase()) ||
+                searchLastName.includes(this.filter.toLowerCase()) ||
+                searchRole.includes(this.filter.toLowerCase()));
       });
     });
   }

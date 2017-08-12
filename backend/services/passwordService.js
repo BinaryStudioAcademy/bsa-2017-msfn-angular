@@ -2,6 +2,8 @@ const ApiError = require('./apiErrorService');
 const emailService = require('./emailService');
 const userRepository = require('../repositories/userRepository');
 const confirmCodeRepository = require('../repositories/confirmCodeRepository');
+const decrypt = require('./decryptService');
+
 
 function PasswordService() {
 }
@@ -36,6 +38,7 @@ function createConfirmCode(body, callback) {
                 if (!deleteErr) {
                     confirmCodeRepository.add(confirmData, (err, data) => {
                         const resetLink = "https://msfn.com/password_reset/" + data.confirmCode;
+                        console.log(resetLink);
                         emailService.send(
                             {
                                 to: body.email,
@@ -44,7 +47,7 @@ function createConfirmCode(body, callback) {
                             },
                             (err, data) => {
                                 "use strict";
-                                if (err) return next(err);
+                                if (err) return callback(err);
                                 if (data.rejected.length == 0) {
                                     data.status = 'ok';
                                 }
@@ -61,6 +64,9 @@ function createConfirmCode(body, callback) {
 
 
 function checkConfirmCode(body, callback) {
+
+    body = decrypt(body.data);
+
     userRepository.getUserByEmail(body.email, (err, userData) => {
         "use strict";
 
@@ -91,7 +97,7 @@ function checkConfirmCode(body, callback) {
                                     },
                                     (err, data) => {
                                         "use strict";
-                                        if (err) return next(err);
+                                        if (err) return callback(err);
                                         if (data.rejected.length == 0) {
                                             data.status = 'ok';
                                         }

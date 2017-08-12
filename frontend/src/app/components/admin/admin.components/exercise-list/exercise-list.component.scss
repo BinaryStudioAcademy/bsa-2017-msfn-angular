@@ -1,5 +1,5 @@
-@import '../../../globalStyles/indentations.scss';
-@import '../../../globalStyles/text.scss';
+@import '../../../../../globalStyles/indentations.scss';
+@import '../../../../../globalStyles/text.scss';
 
 #title {
   margin: $content-lr-margin 0;
@@ -15,12 +15,6 @@ h1 {
   justify-content: space-between;
   width: 80%;
   margin: 0 auto;
-}
-
-md-input-container {
-  //position: absolute;
-  //right: 10%;
-  //top: 0;
 }
 
 .mat-table {

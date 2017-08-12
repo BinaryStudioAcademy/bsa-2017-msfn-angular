@@ -15,9 +15,11 @@
 
     <div id="general-error" class="error" *ngIf="userError">{{ userError }}</div>
 
-    <div id="gender" class="input-row">Male
-      <md-slide-toggle (change)="setGender($event)"></md-slide-toggle>
-      Female
+    <div id="gender" class="input-row">
+        <input [(ngModel)]="user.gender" id="Male" type="radio" value="Male" name="gender">
+        <label for="Male">Male</label>
+        <input [(ngModel)]="user.gender" id="Female" type="radio" value="Female" name="gender">
+        <label for="Female">Female</label>
     </div>
 
     <md-input-container class="input-row">
@@ -38,6 +40,9 @@
       <md-error *ngIf="firstNameFormControl.hasError('minlength')">
         First name should contain at least 2 characters
       </md-error>
+      <md-error *ngIf="firstNameFormControl.hasError('maxlength')">
+        First name should contain 20 characters maximum
+      </md-error>
     </md-input-container>
 
     <md-input-container class="input-row">
@@ -47,6 +52,9 @@
       </md-error>
       <md-error *ngIf="lastNameFormControl.hasError('minlength')">
         Last name should contain at least 2 characters
+      </md-error>
+      <md-error *ngIf="lastNameFormControl.hasError('maxlength')">
+        Last name should contain 20 characters maximum
       </md-error>
     </md-input-container>
 
@@ -84,7 +92,7 @@
           Height is required
         </md-error>
         <md-error *ngIf="heightFormControl.hasError('min') || heightFormControl.hasError('max')">
-          Height should be 50-270cm
+          Height should be 100-300cm
         </md-error>
       </md-input-container>
 
@@ -94,7 +102,7 @@
           Weight is required
         </md-error>
         <md-error *ngIf="weightFormControl.hasError('min') || weightFormControl.hasError('max')">
-          Weight should be 5-500kg
+          Weight should be 30-300kg
         </md-error>
       </md-input-container>
     </div>

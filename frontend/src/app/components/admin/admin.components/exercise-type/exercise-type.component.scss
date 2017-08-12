@@ -1,6 +1,6 @@
-@import "./../../../globalStyles/variables";
-@import "./../../../globalStyles/indentations";
-@import '../../../globalStyles/text.scss';
+@import "../../../../../globalStyles/variables";
+@import "../../../../../globalStyles/indentations";
+@import '../../../../../globalStyles/text.scss';
 .main-container {
     margin: 0 auto;
     width: 60%;
@@ -27,7 +27,10 @@ button:focus {
 
 .mat-table {
     margin-top: 40px;
+    margin-bottom: 40px;
 }
+
+
 
 .input-container {
     margin: 10px;
@@ -36,10 +39,10 @@ button:focus {
 
 #btn-add {
     width: 40%;
+    height: 40px;
     margin-left: 30%;
     margin-right: 30%;
     margin-top: 40px;
-    margin-bottom: 40px;
 }
 
 .row-text:hover {
@@ -74,10 +77,13 @@ button:focus {
     cursor: pointer;
 }
 
-@media only screen and (max-width: $small-screen + 15px) {
+@media only screen and (max-width: $medium-screen) {
     .main-container {
         width: 100%;
         margin: 0;
+    }
+    #btn-add{
+        width: auto;
     }
 }
 

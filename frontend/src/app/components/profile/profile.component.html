@@ -1,7 +1,7 @@
 <div class="container">
     <div class="profile">
         <md-card-title class="profile-title">Your profile</md-card-title>
-        <form class="profile-form" [formGroup]="profileForm">
+        <form *ngIf="user" class="profile-form" [formGroup]="profileForm">
             <div class="profile-header">
                 <div class="profile-avatar">
                     <div class="profile-picture">
@@ -18,13 +18,13 @@
                 </div>
                 <div class="profile-fullname">
                     <md-input-container class="profile-name">
-                        <input id="name" class="input" mdInput formControlName="name">
-                        <md-error>Name can`t consist less than two characters</md-error>
+                        <input id="name" class="input" mdInput formControlName="firstName">
+                        <md-error>Name can`t consist less than two characters, and more than 20</md-error>
                     </md-input-container>
 
                     <md-input-container class="profile-lastname">
-                        <input id="lastname" class="input" mdInput formControlName="lastname">
-                        <md-error>Lastname can`t consist less than two characters</md-error>
+                        <input id="lastname" class="input" mdInput formControlName="lastName">
+                        <md-error>Lastname can`t consist less than two characters, and more than 20</md-error>
                     </md-input-container>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="profile-birthday">
                     <div class="birthday-month">
-                        <md-select placeholder="Month" [(ngModel)]="user.birthday.month" (change)="onSelect(user.birthday.month,user.birthday.year)"
+                        <md-select placeholder="Month" [(ngModel)]="user.month" (change)="onSelect(user.month,user.year)"
                             [ngModelOptions]="{standalone: true}">
                             <md-option *ngFor="let month of months" [value]="month.value">
                                 {{ month.value }}
@@ -49,14 +49,14 @@
                         </md-select>
                     </div>
                     <div class="birthday-day">
-                        <md-select placeholder="Day" [(ngModel)]="user.birthday.day" [ngModelOptions]="{standalone: true}">
+                        <md-select placeholder="Day" [(ngModel)]="user.day" [ngModelOptions]="{standalone: true}">
                             <md-option *ngFor="let day of days" [value]="day">
                                 {{ day }}
                             </md-option>
                         </md-select>
                     </div>
                     <div class="birthday-year">
-                        <md-select placeholder="Year" [(ngModel)]="user.birthday.year" (change)="onSelect(user.birthday.month,user.birthday.year)"
+                        <md-select placeholder="Year" [(ngModel)]="user.year" (change)="onSelect(user.month,user.year)"
                             [ngModelOptions]="{standalone: true}">
                             <md-option *ngFor="let year of years" [value]="year">
                                 {{ year }}
@@ -89,7 +89,7 @@
                             Become a coach
                         </button>
                         <div *ngIf="requestForCoaching">
-                            We'll moderate your request in 24 hours. You'll get a notification when it would be done.
+                            {{ coachingMessage }}
                         </div>
                     </div>
                 </div>
