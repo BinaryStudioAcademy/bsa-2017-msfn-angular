@@ -27,6 +27,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.openedDialog.close();
+        if (this.openedDialog) {
+            this.openedDialog.close();
+        }
     }
 }

@@ -40,7 +40,7 @@ button:focus {
 }
 
 #btn-add {
-    width: 40%;
+    width: auto;
     height: 40px;
     margin: 40px auto 0 auto;
 }
@@ -94,8 +94,5 @@ button:focus {
 @media only screen and (max-width: $small-screen) {
     .main-container {
         width: 80%;
-    }
-    #btn-add{
-        width: auto;
     }
 }
