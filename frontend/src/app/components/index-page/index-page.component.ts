@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {GCalendarService} from '../../services/gcalendar.service';
 
 @Component({
     selector: 'app-index-page',
@@ -7,8 +6,6 @@ import {GCalendarService} from '../../services/gcalendar.service';
     styleUrls: ['./index-page.component.scss']
 })
 export class IndexPageComponent implements OnInit {
-
-    public test = new GCalendarService();
 
     constructor() {
     }
