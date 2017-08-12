@@ -28,7 +28,6 @@ function getUserByQuery(query, callback) {
 }
 
 function addEmail(id, email, callback) {
-    debugger;
     const query = this
         .model
         .update({

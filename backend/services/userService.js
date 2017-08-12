@@ -42,10 +42,7 @@ function updateItem(id, body, callback) {
 }
 
 function addEmailToItem(id, body, callback) {
-    userRepository.addEmail(id, body.email, (err, data) => {
-        console.log(data);
-        console.log(err);
-    });
+    userRepository.addEmail(id, body.email, callback);
 }
 
 module.exports = new UserService();
