@@ -56,8 +56,15 @@ export class ExerciseListComponent implements OnInit {
       .subscribe(() => {
         if (!this.dataSource) { return; }
         this.dataSource.filter = this.filter.nativeElement.value;
-        this.dataSource.itemFilter = this.items.toString();
       });
+  }
+
+  updateItems() {
+    setTimeout(() => {
+      this.dataSource.itemFilter = this.items.toString();
+      console.log(this.options, this.items);
+      console.log(this.dataSource.itemFilter);
+    }, 1000);
   }
 
   getExercises(callback) {
