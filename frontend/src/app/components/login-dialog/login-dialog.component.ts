@@ -45,11 +45,10 @@ export class LoginDialogComponent {
 
     this.httpHandler.sendRequest(sendData)
       .then((res) => {
-        /*
         if (res.access === true) {
-
+          location.reload();
+          this.router.navigate(['/profile']);
         }
-        */
       });
   }
 }
