@@ -1,5 +1,11 @@
 <div class="main-container" #container>
-<button md-button disableRipple class="btn" id="btn-add" (click)="addRow(table)">Add new exercise type</button>
+<button md-button 
+disableRipple 
+class="btn"
+id="btn-add" 
+(click)="addRow(table)"
+
+[ngClass]="{'disabled' : wrongInput}">Add new exercise type</button>
     <md-table #table [dataSource]="dataSource" [ngClass]="{'hiding' : !loaded}">
 
         <ng-container cdkColumnDef="exerciseCode">
@@ -14,9 +20,15 @@
                 <div class="row-container">
                     <div></div>
                     <div class="content">
-                        <div class="row-text" *ngIf="(row.code && row.code != focusedRowCode) || row.isRemoved" (click)="clickRow(row.code)" [ngClass]="{'transp' : !row.name || row.isRemoved}">{{row.name ? row.name : "Empty field"}}</div>
+                        <div class="row-text" 
+                        *ngIf="((row.code || !firstShow) && row.code != focusedRowCode) || row.isRemoved" 
+                        (click)="clickRow(row.code)" 
+                        [ngClass]="{'transp' : row.isRemoved, 'error': !row.name}">
+                        {{row.name ? row.name : "Type cannot be empty"}}</div>
 
-                        <md-input-container class="input-container" *ngIf="(!row.code || row.code == focusedRowCode) && !row.isRemoved">
+                        <md-input-container 
+                        class="input-container" 
+                        *ngIf="((!row.code && firstShow) || row.code == focusedRowCode) && !row.isRemoved">
                             <input mdInput #exercise type="text" (blur)="updateRow(row.code, {name: exercise.value})" value="{{row.name}}" [ngClass]="{'input-focused' : !row.code}"
                                 (keyup.enter)="updateRow(row.code, {name: exercise.value})">
                         </md-input-container>

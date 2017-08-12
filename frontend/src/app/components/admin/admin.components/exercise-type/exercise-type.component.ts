@@ -18,7 +18,8 @@ export class ExerciseTypeComponent implements OnInit {
   displayedColumns = ['exerciseCode', 'typeName'];
   tableDatabase: TableDatabase;
   dataSource: ExampleDataSource | null;
-
+  firstShow = true;
+  wrongInput = false;
   addedTemporaryRow = false;
   loaded = false;
 
@@ -47,8 +48,20 @@ export class ExerciseTypeComponent implements OnInit {
   }
 
   updateRow(code: number, body) {
+    this.firstShow = false;
+    if (body.name === '') {
+      if (!code) {
+        this.wrongInput = true;
+      }
+      this.focusedRowCode = -1;
+      return;
+    } else {
+      if (!code) {
+        this.wrongInput = false;
+      }
+    }
     if (code) {
-      this.exerciseTypeService.updateExerciseTypeByCode(code, body, (data) => { // SUDI
+      this.exerciseTypeService.updateExerciseTypeByCode(code, body, (data) => {
         this.loaded = this.tableDatabase.updateRow(code, body) === 0 ? false : true;
         this.cd.markForCheck();
       });
@@ -73,6 +86,11 @@ export class ExerciseTypeComponent implements OnInit {
 
 
   addRow() {
+    if (this.wrongInput) {
+      return;
+    }
+    this.wrongInput = true;
+    this.firstShow = true;
     this.loaded = this.tableDatabase.addTemporaryRow() === 0 ? false : true;
     console.log(this.loaded);
     this.cd.markForCheck();
@@ -104,7 +122,9 @@ export class TableDatabase {
     if (this.data && this.data instanceof Array) {
       copiedData = this.data.slice(0, -1);
     }
-    console.log(code, name);
+    if (name === '') {
+      return copiedData.length;
+    }
     copiedData.push({
       code: code,
       name: name,
@@ -137,11 +157,13 @@ export class TableDatabase {
   }
 
   updateRow(code: number, body) {
-    console.log('Do');
     if (!this.data || !(this.data instanceof Array)) {
       return 0;
     }
     const copiedData = this.data.slice();
+    if (body.name === '') {
+      return copiedData.length;
+    }
     copiedData.some(function (element) {
       if (element.code === code) {
         element = Object.assign(element, body);
