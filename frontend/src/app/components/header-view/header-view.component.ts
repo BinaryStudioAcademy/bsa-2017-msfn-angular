@@ -14,7 +14,6 @@ import { WindowObj } from '../../services/window.service';
 export class HeaderViewComponent implements OnInit {
 
     public thereIsLoggedInUser: boolean;
-    public showUserMenu: boolean;
     public displayName: string;
     private notificationsDialogConfig = {
         height: '300px',
@@ -24,6 +23,7 @@ export class HeaderViewComponent implements OnInit {
             top: '45px',
         }
     };
+    public userPhotoUrl = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
 
     constructor(public dialog: MdDialog,
                 private httpHandler: HttpService,
@@ -35,15 +35,10 @@ export class HeaderViewComponent implements OnInit {
         const userData = this.window.data._injectedData;
         this.thereIsLoggedInUser = userData.isLoggedIn;
         this.displayName = `${userData.userFirstName} ${userData.userLastName}`;
-        this.showUserMenu = false;
     }
 
     openDialog() {
         const dialogRef = this.dialog.open(NotificationDialogComponent, this.notificationsDialogConfig);
-    }
-
-    userMenuDialog() {
-        this.showUserMenu = !this.showUserMenu;
     }
 
     logout() {

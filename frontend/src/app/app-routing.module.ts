@@ -1,8 +1,9 @@
-import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
-import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
-import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { AdminComponent } from './components/admin/admin.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { TestHttpComponent } from './components/test-http/test-http.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -16,12 +17,8 @@ import { TestSocketsComponent } from './components/test-sockets/test-sockets.com
 import { ProfileComponent } from './components/profile/profile.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
-import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { UserListComponent } from './components/user-list/user-list.component';
 
 const routes: Routes = [
     {
@@ -102,10 +99,6 @@ const routes: Routes = [
     {
         path: 'test-markdown',
         component: TestMarkdownComponent
-    },
-    {
-        path: 'user-list',
-        component: UserListComponent
     },
     {
         path: 'notfound',

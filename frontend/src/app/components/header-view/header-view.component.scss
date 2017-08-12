@@ -48,14 +48,23 @@ header {
     }
 
     .settings {
+        display: flex;
+        align-items: center;
     
         .settings__name {
-            margin-left: $header-icons-intendation;
+            margin: 0 $header-icons-intendation;
             vertical-align: super;
             font-size: 17px;
         }
-        
-        cursor: pointer;
+
+        .settings__photo {
+            width: 35px;
+            border-radius: 50%;
+        }
+
+        md-icon {
+            cursor: pointer;
+        }
     }
 
     .header__navigation-panel {
@@ -69,21 +78,17 @@ header {
         }
     }
 }
-.user_menu {
-    background-color: $gradient-to-color;
-    position: absolute;
-    width: 300px;
-    top: 70px;
-    right: 0;
-
-    button {
-        width: 100%;
-    }
+md-menu {
+    display: none;
 }
 
 @media screen and (max-width: 390px) {
     header {
         .logo__title {
+            display: none;
+        }
+
+        .settings__photo {
             display: none;
         }
     }
