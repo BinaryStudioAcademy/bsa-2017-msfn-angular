@@ -34,7 +34,6 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
     ngOnInit() {
         const userData = this.window.data._injectedData;
         this.thereIsLoggedInUser = userData.isLoggedIn;
-        this.displayName = `${userData.userFirstName} ${userData.userLastName}`;
     }
 
     ngAfterContentChecked() {
