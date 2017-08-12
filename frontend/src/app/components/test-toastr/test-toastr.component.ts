@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from '../../services/toastr.service';
+import { ToasterService } from '../../services/toastr.service';
 
 @Component({
     selector: 'app-test-toastr',
@@ -8,7 +8,7 @@ import { ToastrService } from '../../services/toastr.service';
 })
 export class TestToastrComponent implements OnInit {
 
-    constructor(public toastrService: ToastrService) { }
+    constructor(public toastrService: ToasterService) { }
 
     ngOnInit() {
     }

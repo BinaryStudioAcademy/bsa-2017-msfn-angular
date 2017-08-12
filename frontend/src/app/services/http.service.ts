@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { IHttpReq } from '../models/http-req';
-import { ToastrService } from './toastr.service';
+import { ToasterService } from './toastr.service';
 // import { FormsModule } from '@angular/forms';
 // import { Observable } from 'rxjs/Observable';
 // import 'rxjs/add/observable/throw';
@@ -14,7 +14,7 @@ export class HttpService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private failMessage = 'Fail';
 
-    constructor(private _http: Http, private toastrService: ToastrService, private _router: Router) { }
+    constructor(private _http: Http, private toastrService: ToasterService, private _router: Router) { }
 
     private handleError = (error: any): Promise<any> => {
         if (error && error.status === 401) {
