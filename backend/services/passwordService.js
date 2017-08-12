@@ -44,7 +44,7 @@ function createConfirmCode(body, callback) {
                             },
                             (err, data) => {
                                 "use strict";
-                                if (err) return next(err);
+                                if (err) return callback(err);
                                 if (data.rejected.length == 0) {
                                     data.status = 'ok';
                                 }
@@ -91,7 +91,7 @@ function checkConfirmCode(body, callback) {
                                     },
                                     (err, data) => {
                                         "use strict";
-                                        if (err) return next(err);
+                                        if (err) return callback(err);
                                         if (data.rejected.length == 0) {
                                             data.status = 'ok';
                                         }
