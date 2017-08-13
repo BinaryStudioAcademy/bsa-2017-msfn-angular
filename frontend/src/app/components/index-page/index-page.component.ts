@@ -1,4 +1,5 @@
 import { LoginDialogComponent } from './../login-dialog/login-dialog.component';
+import { RegistrationComponent } from './../registration/registration.component';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -34,6 +35,10 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     showLogin() {
         this.openedDialog = this.dialog.open(LoginDialogComponent);
+    }
+
+    showRegistration() {
+        this.openedDialog = this.dialog.open(RegistrationComponent, {height: 'auto'});
     }
 
     ngOnDestroy() {

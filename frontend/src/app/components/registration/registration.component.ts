@@ -42,10 +42,10 @@ export class RegistrationComponent implements OnInit {
     emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
 
     constructor(private registrationService: RegistrationService,
-                private httpService: HttpService,
-                private router: Router,
-                private encryptor: EncryptService) {
-    }
+        private httpService: HttpService,
+        private router: Router,
+        private encryptor: EncryptService
+    ) {}
 
     emailFormControl = new FormControl('', [
         Validators.required,
