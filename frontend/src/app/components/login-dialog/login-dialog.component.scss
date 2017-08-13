@@ -3,13 +3,6 @@
 @import "./../../../globalStyles/indentations";
 @import '../../../globalStyles/text.scss';
 
-@mixin linear-gradient($direction, $color-stops...) {
-    background: nth(nth($color-stops, 1), 1);
-    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
-    background: linear-gradient($direction, $color-stops);
-}
-
-
 .login-block {
     font-family: $font-general;
     width: calc(400px - 24px*2);

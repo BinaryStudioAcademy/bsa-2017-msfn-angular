@@ -4,263 +4,201 @@
 
 /* general */
 
-* {
-  font-family: 'Roboto', sans-serif;
-  color: $text-main-color;
-}
-
 a {
-  color: $text-main-color;
+    color: $text-second-color;
 }
-
-svg {
-  width: 40px;
-  margin: $content-between-margin 0;
+a:hover {
+    color: white;
 }
 
 /* registration form */
 
-#registration {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  min-height: 100%;
-  color: $text-main-color;
-  // background: $bg-color;
-}
-
 #form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  width: 80%;
-  height: 80%;
-  margin-top: 25px;
-  padding: 20px;
-  background: $gradient-from-color;
-  background: -webkit-linear-gradient($gradient-to-color, $gradient-from-color);
-  background: -o-linear-gradient($gradient-to-color, $gradient-from-color);
-  background: -moz-linear-gradient($gradient-to-color, $gradient-from-color);
-  background: linear-gradient($gradient-to-color, $gradient-from-color);
-  box-shadow: 0 0 10px rgba(0, 0, 0, .6);
+    width: calc(400px - 24px*2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
 }
 
-#exit-icon {
-  position: absolute;
-  right: 20px;
-  top: $close-top-margin;
-  width: 25px;
-  height: 25px;
-  font-size: 0;
-
-  div {
-    width: 25px;
-    height: 2px;
-    border-radius: 2px;
-    background-color: $text-main-color;
-  }
-
-  div:first-child {
-    transform: translateY(10px) rotate(-45deg);
-  }
-
-  div:last-child {
-    transform: translateY(8px) rotate(45deg);
-  }
+.close {
+    float: right;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    color: white;
+    font-size: 18px;
 }
 
-#exit-icon:hover {
-  cursor: pointer;
+.close:hover {
+    cursor: pointer;
+    color: $text-second-color;
 }
 
 #social-registration {
-  margin: 0 20px;
-  text-align: left;
-  font-size: $usual-text;
+    margin: -20px auto 20px auto;
+    font-size: $usual-text/1.1;
+    color: $text-second-color;
 }
 
 .input-row {
-  width: 100%;
-  margin: 3px;
+    width: 100%;
+    margin: 0;
 }
 
 #general-error {
-  margin: 0 0 $content-between-margin;
+    margin: 0 0 $content-between-margin 0;
 }
 
 #gender {
-  display: flex;
-  justify-content: space-around;
-  margin: 0 0 $content-between-margin;
-  font-size: $main-text;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 0 $content-between-margin 0;
+    font-size: $main-text;
 
-  input{
-      display: none;
-  }
+    input{
+        display: none;
+    }
 
-  label {
-      color: $text-second-color;
-      cursor: pointer;
-  }
+    label {
+        color: $text-second-color;
+        cursor: pointer;
+    }
 
-  input:checked + label {
-      color: $text-main-color;
-  }
-}
-
-md-slide-toggle {
-  margin: 0 7px 0 15px;
+    input:checked + label {
+        color: $text-main-color;
+    }
 }
 
 .error {
-  display: block;
-  width: 100%;
-  margin: $content-between-margin 0;
-  text-align: left;
-  font-size: $usual-text;
-  font-weight: 600;
-  color: $error-color;
+    display: block;
+    width: 100%;
+    margin: $content-between-margin 0;
+    text-align: left;
+    font-size: $usual-text;
+    font-weight: 600;
+    color: $error-color;
 }
 
 #birthday {
-  div {
-    text-align: left;
-    font-size: $main-text;
-  }
-
-  div:first-child {
-    margin-top: $content-between-margin;
-  }
-
-  #birthday-warning {
-    margin: 5px 0 40px;
-    font-size: $minor-text;
-  }
-
-  #birthday-inputs {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-bottom: $content-between-margin;
-  }
-
-  md-select {
-    width: 45%;
-  }
-
-  .mat-select /deep/ .mat-select-trigger {
-    min-width: 80px;
-  }
-}
-
-#height, #weight {
-  width: 35%;
-}
-
-#height {
-  float: left;
-}
-
-#weight {
-  float: right;
-}
-
-.mat-input-flex {
-  display: inline-flex;
-  align-items: baseline;
-  width: 80%;
-}
-
-#submit-button {
-  margin: $content-between-margin 0 0;
-  text-align: center;
-
-  div {
-    margin-bottom: 20px;
-    text-align: left;
-    font-size: $minor-text;
-  }
-
-  button {
-    width: 90%;
-    height: 45px;
-    border: none;
-    border-radius: 45px;
-    outline: none;
-    font-size: $button-text;
-    font-weight: 600;
-    background: $btn-color;
-  }
-}
-
-
-@media only screen and (min-width: $small-screen) {
-
-  #form {
-    padding: $header-top-margin $content-lr-margin $content-lr-margin;
-  }
-
-  #exit-icon {
-    right: 30px;
-    width: 20px;
-    height: 20px;
-
-    div {
-      width: 20px;
-    }
-
     div:first-child {
-      transform: translateY(8px) rotate(-45deg);
+        margin: $content-between-margin 0;
     }
 
-    div:last-child {
-      transform: translateY(6px) rotate(45deg);
-    }
-  }
-
-  #social-registration {
-    text-align: center;
-  }
-
-  .error {
-    font-size: $minor-text;
-  }
-
-  #birthday {
     #birthday-inputs {
-      flex-wrap: nowrap;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        margin-top: 30px;
+        width: 100%;
+        margin-bottom: $content-between-margin;
     }
 
     md-select {
-      width: 30%;
+        width: 30%;
     }
-  }
 
-  #height, #weight {
-    width: 45%;
-  }
+    .mat-select /deep/ .mat-select-trigger {
+        min-width: 80px;
+    }
+}
+
+#height, #weight {
+    width: 35%;
+}
+
+#height {
+    float: left;
+}
+
+#weight {
+    float: right;
+}
+
+.mat-input-flex {
+    display: inline-flex;
+    align-items: baseline;
+    width: 80%;
+}
+
+#submit-button {
+    margin: $content-between-margin 0 10px 0;
+    text-align: center;
+    width: 100%;
+
+    button {
+        width: 90%;
+        height: 45px;
+        border: none;
+        border-radius: 45px;
+        outline: none;
+        font-size: $button-text;
+        font-weight: 600;
+        background: $btn-color;
+    }
+}
+
+.additional-info {
+    text-align: center;
+    font-size: $minor-text/1.2;
+    color: $text-second-color;
+}
+
+@media only screen and (max-width: $small-screen) {
+    #form {
+        width: 90%;
+        padding: 0;
+    }
+
+    #social-registration {
+        text-align: center;
+    }
+
+    .error {
+        font-size: $minor-text;
+    }
+
+    #birthday {
+        #birthday-inputs {
+            flex-wrap: wrap;
+        }
+
+        md-select {
+            width: 100%;
+            margin: $content-between-margin 0;
+        }
+        .additional-info {
+            font-size: 10px;
+            margin-bottom: $content-tb-margin;
+        }
+    }
+
+    #height, #weight {
+        width: 45%;
+    }
 }
 
 
-@media only screen and (min-width: $medium-screen) {
+@media only screen and (min-width: $small-screen + 1) and (max-width: $medium-screen) {
 
-  #form {
-    width: 400px;
-    height: 80%;
-  }
-
-  #birthday {
-    #birthday-warning {
-      font-size: $minor-text;
+    #form {
+        width: 80%;
     }
-  }
 
-  #submit-button {
-    button {
-      width: 100%;
+    #birthday {
+        .additional-info {
+            font-size: $minor-text;
+        }
     }
-  }
+
+    #submit-button {
+        button {
+            width: 100%;
+        }
+    }
 }
