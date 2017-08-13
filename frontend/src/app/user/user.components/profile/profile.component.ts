@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ProfileService } from './profile.service';
-import { DateService } from '../../services/date.service';
+import { DateService } from '../../../services/date.service';
 import { HttpClient } from '@angular/common/http';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { MdDialog } from '@angular/material';
-import { ConfirmPasswordDialogComponent } from '../confirm-password-dialog/confirm-password-dialog.component';
-import { WindowObj } from '../../services/window.service';
-import { IUser } from '../../models/user';
+import { ConfirmPasswordDialogComponent } from '../../../components/confirm-password-dialog/confirm-password-dialog.component';
+import { WindowObj } from '../../../services/window.service';
+import { IUser } from '../../../models/user';
+
 
 @Component({
     selector: 'app-profile',
@@ -42,12 +43,11 @@ export class ProfileComponent implements OnInit {
     coachingMessage: string;
 
     constructor(private profileService: ProfileService,
-        private formBuilder: FormBuilder,
-        private http: HttpClient,
-        private dialog: MdDialog,
-        private window: WindowObj,
-        private dateService: DateService
-    ) {
+                private formBuilder: FormBuilder,
+                private http: HttpClient,
+                private dialog: MdDialog,
+                private window: WindowObj,
+                private dateService: DateService) {
         this.cropperSettings = profileService.getCropperSettings();
         this.data = {
             image: this.image
@@ -57,13 +57,11 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
         this.profileService.getUser(this.userId, res => {
             this.user = res;
-
             this.birthday = this.dateService.convertDateFromIso(this.user.birthday);
             this.months = this.dateService.generateMonths();
             this.days = this.dateService.generateDays(this.birthday.month, this.birthday.year);
             this.years = this.dateService.generateYears();
             this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
-
             this.buildForm();
         });
     }
@@ -73,7 +71,7 @@ export class ProfileComponent implements OnInit {
             'firstName': [this.user.firstName, Validators.compose([
                 Validators.required,
                 Validators.minLength(2),
-                Validators.maxLength(20)
+                Validators.maxLength(20),
             ])],
             'lastName': [this.user.lastName, Validators.compose([
                 Validators.required,
@@ -81,20 +79,20 @@ export class ProfileComponent implements OnInit {
                 Validators.maxLength(20)
             ])],
             'email': new FormControl({
-                value: this.user.email,
-                disabled: this.isDisabledEmail
+                    value: this.user.email,
+                    disabled: this.isDisabledEmail
             }),
             'weight': [this.user.weight, Validators.compose([
-                Validators.required,
-                Validators.min(30),
-                Validators.max(300)
+                    Validators.required,
+                    Validators.min(30),
+                    Validators.max(300)
             ])],
             'height': [this.user.height, Validators.compose([
-                Validators.required,
-                Validators.min(100),
-                Validators.max(300)
+                    Validators.required,
+                    Validators.min(100),
+                    Validators.max(300)
             ])],
-        });
+    });
     }
 
     onSelect(month: string, year: number) {
@@ -106,9 +104,8 @@ export class ProfileComponent implements OnInit {
         const birthday = this.dateService.convertDateToIso({
             year: this.birthday.year,
             month: monthNumber,
-            day: this.birthday.day
+            day: this.birthday.day,
         });
-
         user.birthday = birthday;
         this.profileService.updateUser(user, this.user._id);
         this.window.data._injectedData.userFirstName = user.firstName;

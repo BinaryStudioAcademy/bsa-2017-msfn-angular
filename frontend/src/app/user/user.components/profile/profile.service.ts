@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../../services/http.service';
-import { IHttpReq } from '../../models/http-req';
-import { CropperSettings } from 'ng2-img-cropper';
+import { HttpService } from '../../../services/http.service';
+import { IHttpReq } from '../../../models/http-req';
+import {CropperSettings} from 'ng2-img-cropper';
 
 @Injectable()
 export class ProfileService {
 
-    constructor(private httpService: HttpService) {
-    }
+
+  constructor(private httpService: HttpService) { }
 
     savePhoto(image, userId, fileType, callback) {
         const sendData: IHttpReq = {

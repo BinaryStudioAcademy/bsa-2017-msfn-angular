@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IHttpReq } from '../models/http-req';
-import { HttpService } from './http.service';
-
+import { IHttpReq } from '../../../models/http-req';
+import { HttpService } from '../../../services/http.service';
 @Injectable()
 export class ExerciseTypeService {
 
@@ -17,7 +16,7 @@ export class ExerciseTypeService {
         name: name
       }
     };
-    this.httpService.sendRequest(request).then(data => {
+    this.httpService.sendRequest(request, true).then(data => {
       callback(data);
     });
   }
@@ -31,7 +30,7 @@ export class ExerciseTypeService {
       method: 'GET',
       body: {}
     };
-    this.httpService.sendRequest(request).then(data => {
+    this.httpService.sendRequest(request, true).then(data => {
       callback(data);
     });
   }
@@ -47,7 +46,7 @@ export class ExerciseTypeService {
       body: {}
     };
 
-    this.httpService.sendRequest(request).then(data => {
+    this.httpService.sendRequest(request, true).then(data => {
       callback(data);
     });
   }
@@ -64,7 +63,7 @@ export class ExerciseTypeService {
       method: 'PUT',
       body: body
     };
-    this.httpService.sendRequest(request).then(data => {
+    this.httpService.sendRequest(request, true).then(data => {
       callback(data);
       // UPDATE COL AFTER UPDATING
     });

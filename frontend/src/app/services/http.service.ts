@@ -26,8 +26,9 @@ export class HttpService {
         return error;
     }
 
-    public sendRequest(options: IHttpReq): Promise<any> {
+    public sendRequest(options: IHttpReq, needNotif = false): Promise<any> {
         let url: string;
+
         if (!options.url) {
             return Promise.reject('Url required');
         } else {
@@ -43,7 +44,9 @@ export class HttpService {
             return this._http.get(url)
                 .toPromise()
                 .then(response => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (needNotif) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return response.json();
                 })
                 .catch(this.handleError);
@@ -52,7 +55,9 @@ export class HttpService {
                 .post(url, body, { headers: headers })
                 .toPromise()
                 .then(response => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (needNotif) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return response.json();
                 })
                 .catch(this.handleError);
@@ -61,7 +66,9 @@ export class HttpService {
                 .put(url, body, { headers: headers })
                 .toPromise()
                 .then(() => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (needNotif) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return body;
                 })
                 .catch(this.handleError);
@@ -69,7 +76,9 @@ export class HttpService {
             return this._http.delete(url, { headers: headers })
                 .toPromise()
                 .then(() => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (needNotif) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return null;
                 })
                 .catch(this.handleError);

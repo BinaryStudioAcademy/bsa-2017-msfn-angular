@@ -25,10 +25,10 @@ export class UserListComponent implements OnInit {
     'lastName',
     'email',
     'role',
-    'birthday',
+    'age',
     'gender'
   ];
-  tableDatabase = new TableDatabase();
+  tableDatabase = new TableDatabase(this.userListService);
   dataSource: ExampleDataSource | null;
   @ViewChild(MdSort) sort: MdSort;
   @ViewChild('filter') filter: ElementRef;
@@ -66,10 +66,14 @@ export class TableDatabase {
     return this.dataChange.value;
   }
 
-  constructor() { }
+  constructor(private userListService: UserListService) { }
 
   addUsers(data) {
     const copiedData = [...data];
+    for (let i = 0; i < copiedData.length; i++) {
+      const age = this.userListService.getAge(copiedData[i].birthday);
+      copiedData[i].age = age;
+    }
     this.dataChange.next(copiedData);
   }
 }
@@ -98,12 +102,16 @@ export class ExampleDataSource extends DataSource<any> {
 
     return Observable.merge(...displayDataChanges).map(() => {
       return this.getSortedData().slice().filter((item) => {
-        const searchFirstName = (item.firstName).toLowerCase();
-        const searchLastName = (item.lastName).toLowerCase();
-        const searchRole = (item.role).toLowerCase();
-        return (searchFirstName.includes(this.filter.toLowerCase()) ||
-                searchLastName.includes(this.filter.toLowerCase()) ||
-                searchRole.includes(this.filter.toLowerCase()));
+        const query = this.filter.toLowerCase(),
+          searchFirstName = (item.firstName).toLowerCase(),
+          searchLastName = (item.lastName).toLowerCase(),
+          searchEmail = (item.email).toLowerCase(),
+          searchRole = (item.role).toLowerCase();
+
+        return (searchFirstName.includes(query) ||
+                searchLastName.includes(query) ||
+                searchEmail.includes(query) ||
+                searchRole.includes(query));
       });
     });
   }

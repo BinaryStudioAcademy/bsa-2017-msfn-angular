@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EncryptService } from '../../services/encrypt.service';
 import { IHttpReq } from '../../models/http-req';
 import { HttpService } from '../../services/http.service';
+import { WindowObj } from '../../services/window.service';
 
 @Component({
   selector: 'app-login-dialog',
@@ -28,7 +29,8 @@ export class LoginDialogComponent {
   constructor(
     private encryptor: EncryptService,
     private httpHandler: HttpService,
-    private router: Router
+    private router: Router,
+    private window: WindowObj
   ) { }
 
   login() {

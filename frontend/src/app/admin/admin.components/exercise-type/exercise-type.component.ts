@@ -1,6 +1,6 @@
 import { HttpService } from '../../../services/http.service';
 import { IHttpReq } from '../../../models/http-req';
-import { ExerciseTypeService } from '../../../services/exercise-type.service';
+import { ExerciseTypeService } from './exercise-type.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataSource } from '@angular/cdk';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -9,7 +9,8 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-exercise-type',
   templateUrl: './exercise-type.component.html',
-  styleUrls: ['./exercise-type.component.scss']
+  styleUrls: ['./exercise-type.component.scss'],
+  providers: [ExerciseTypeService]
 })
 export class ExerciseTypeComponent implements OnInit {
 
