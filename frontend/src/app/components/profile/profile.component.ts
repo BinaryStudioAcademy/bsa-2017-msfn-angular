@@ -8,6 +8,7 @@ import { ConfirmPasswordDialogComponent } from '../confirm-password-dialog/confi
 import { WindowObj } from './../../services/window.service';
 import { IUser } from '../../models/user';
 import { AddNewEmailDialogComponent } from '../add-new-email-dialog/add-new-email-dialog.component';
+import { ChangeRootEmailDialogComponent } from '../change-root-email-dialog/change-root-email-dialog.component';
 
 @Component({
     selector: 'app-profile',
@@ -16,8 +17,6 @@ import { AddNewEmailDialogComponent } from '../add-new-email-dialog/add-new-emai
     providers: [ProfileService]
 })
 export class ProfileComponent implements OnInit {
-    email: string;
-    secondaryEmails: string[];
     public profileForm;
     months = [];
     days = [];
@@ -54,8 +53,6 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
         this.profileService.getUser(this.userId, res => {
             this.user = res;
-            // this.email = res.email;
-            // this.secondaryEmails = res.secondaryEmails;
             this.months = this.profileService.getMonth();
             this.days = this.profileService.getDays(this.user.month, this.user.year);
             this.years = this.profileService.getYears();
@@ -74,7 +71,7 @@ export class ProfileComponent implements OnInit {
                 ]
             )],
             'lastName': [this.user.lastName, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(20)])],
-            'email': new FormControl({value: this.user.email, disabled: this.isDisabledEmail}),
+            // 'email': new FormControl({value: this.user.email, disabled: this.isDisabledEmail}),
             'weight': [this.user.weight, Validators.compose([Validators.required, Validators.min(30), Validators.max(300)])],
             'height': [this.user.height, Validators.compose([Validators.required, Validators.min(100), Validators.max(300)])],
         });
@@ -89,16 +86,18 @@ export class ProfileComponent implements OnInit {
         const dialogRef = this.dialog.open(AddNewEmailDialogComponent, {
         });
         dialogRef.afterClosed().subscribe(email => {
-            if (email) {
-            this.profileService.addNewEmail(email, this.user._id, res => {
-                console.log(res);
-            });
+            if (email && email !== this.user.email) {
+                this.profileService.addNewEmail(email, this.user._id, res => {
+                    this.user.secondaryEmails.push(res.email);
+                });
             }
         });
     }
 
     makeRoot(email: string) {
         console.log(email);
+        const dialogRef = this.dialog.open(ChangeRootEmailDialogComponent, {
+        });
     }
     onSubmit(user) {
         user.day = this.user.day;

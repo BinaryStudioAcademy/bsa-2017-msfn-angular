@@ -95,16 +95,18 @@ export class ProfileService {
     this.httpService.sendRequest(request);
   }
 
-  addNewEmail(email, id, callback) {
-    const request: IHttpReq = {
-      url: '/api/user/' + id + '/email',
-      method: 'PUT',
-      body: {
-        email: email
-      }
-    };
-    this.httpService.sendRequest(request).then(res => { callback(res); });
-  }
+    addNewEmail(email, id, callback) {
+        const request: IHttpReq = {
+            url: '/api/user/' + id + '/email',
+            method: 'PUT',
+            body: {
+            email: email
+            }
+        };
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
+        });
+    }
     getCropperSettings(): CropperSettings {
         const cropperSettings = new CropperSettings();
         cropperSettings.noFileInput = true;

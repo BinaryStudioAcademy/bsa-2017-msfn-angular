@@ -33,6 +33,7 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
 import { AddNewEmailDialogComponent } from './components/add-new-email-dialog/add-new-email-dialog.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserListComponent } from './components/admin/admin.components/user-list/user-list.component';
+import { ChangeRootEmailDialogComponent } from './components/change-root-email-dialog/change-root-email-dialog.component';
 
 @NgModule({
     imports: [
@@ -60,6 +61,7 @@ import { UserListComponent } from './components/admin/admin.components/user-list
         TestMarkdownComponent,
         AddNewEmailDialogComponent,
         PageNotFoundComponent,
+        ChangeRootEmailDialogComponent,
     ],
     providers: [
         ToasterService,
@@ -74,7 +76,8 @@ import { UserListComponent } from './components/admin/admin.components/user-list
     entryComponents: [
         ConfirmPasswordDialogComponent,
         NotificationDialogComponent,
-        AddNewEmailDialogComponent
+        AddNewEmailDialogComponent,
+        ChangeRootEmailDialogComponent,
     ],
     bootstrap: [AppComponent]
 

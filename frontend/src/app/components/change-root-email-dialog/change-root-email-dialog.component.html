@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="confirmation-info">A confirmation code has been sent to your mailing address. Put 
+      this string in the field below
+    </div>
+    <!-- <h2 class="title" md-dialog-title>Put the string</h2> -->
+
+    <div class="confirmation-container">
+         <md-dialog-actions>
+            <md-input-container class="input-row">
+                <input mdInput type="text" name="confirmation" placeholder="confirmation" required [(ngModel)]="confirmation">
+            </md-input-container>
+            <div class="btn-container">
+                <button md-button md-dialog-close>Cancel</button> 
+                <button md-button class="confrim-btn" [md-dialog-close]="confirmation">Confirm</button>
+                <button md-button class="resend-btn" (click)="resend()">Resend code</button> 
+            </div>
+        </md-dialog-actions> 
+    </div>
+
+
+</div>

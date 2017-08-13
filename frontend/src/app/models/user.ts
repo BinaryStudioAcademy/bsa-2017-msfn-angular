@@ -21,5 +21,6 @@ export class IUser {
         public follow?: any[],
         public userPhoto?: string,
         public requestForCoaching?: boolean,
+        public secondaryEmails?: string[]
     ) { }
 }
