@@ -19,7 +19,7 @@ export class ForAdminGuard implements CanActivate {
     }
     // without "as any" TS show error, when role doesn't excist in _injectedDate
 
-    this.router.navigate(['/login']);   // can be change to main page or special-forbidden-page
+    this.router.navigate(['/']);   // can be change to main page or special-forbidden-page
     return false;
   }
 }

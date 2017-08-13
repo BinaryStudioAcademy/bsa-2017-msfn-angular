@@ -46,7 +46,6 @@ export class LoginDialogComponent {
       .then((res) => {
         if (res.access === true) {
           location.reload();
-          this.router.navigate(['/profile']);
         }
       });
   }

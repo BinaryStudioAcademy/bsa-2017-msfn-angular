@@ -1,5 +1,6 @@
 import { LoginDialogComponent } from './../login-dialog/login-dialog.component';
 import { MdDialog, MdDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WindowObj } from '../../services/window.service';
 
@@ -14,12 +15,21 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     private openedDialog: MdDialogRef<any> | null;
 
     constructor(public window: WindowObj,
-                private dialog: MdDialog) {
+        private dialog: MdDialog,
+        private router: Router
+            ) {
         this.isLoggedIn = window.data._injectedData.isLoggedIn;
         this.openedDialog = null;
     }
 
     ngOnInit() {
+        if (this.window.data._injectedData.isLoggedIn) {
+        if (this.window.data._injectedData.role === 'admin') {
+            this.router.navigate(['/admin']);
+        } else {
+            this.router.navigate(['/profile']);
+        }
+        }
     }
 
     showLogin() {
