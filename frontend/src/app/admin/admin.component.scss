@@ -1,6 +1,6 @@
-@import "../../../globalStyles/variables.scss";
-@import '../../../globalStyles/text.scss';
-@import '../../../globalStyles/indentations.scss';
+@import "../../globalStyles/variables.scss";
+@import '../../globalStyles/text.scss';
+@import '../../globalStyles/indentations.scss';
 
 $header-gradient-from: #353535;
 $header-gradient-to: #252525;
@@ -11,7 +11,7 @@ $height: calc(100vh - 70px);
 }
 
 aside {
-    width: 20vw;
+    width: 20%;
     min-height: $height;
     font-family: $font-general;
     font-weight: 600;
@@ -28,10 +28,6 @@ aside {
             line-height: $header-text;
             text-decoration: none;
             color: #aaa;
-        }
-
-        .navigation__your-section {
-            margin-top: $content-between-margin;
         }
 
         .navigation__icon {
@@ -63,11 +59,20 @@ aside {
     }
 }
 
+.childComponent {
+    float: right;
+    width: 80%;
+}
+
 @media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
     aside {
         width: 180px;
     }
+    .childComponent {
+        width: calc(100vw - 180px);
+    }
 }
+
 
 @media screen and (max-width: $small-screen) {
     aside {
@@ -76,5 +81,8 @@ aside {
         .navigation__title, .navigation__subheader {
             display: none;
         }
+    }
+    .childComponent {
+        width: calc(100vw - 55px);
     }
 }

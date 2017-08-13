@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminComponent } from './components/admin/admin.component';
+import { AdminComponent } from './admin/admin.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { TestHttpComponent } from './components/test-http/test-http.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { LoginComponent } from './components/login/login.component';
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { IsLoggedInGuard } from './guards/is-logged-in.guard';
 import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
@@ -24,12 +23,6 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         component: IndexPageComponent,
-    },
-    {
-        path: 'login',
-        children: [],
-        component: LoginComponent,
-        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'register',

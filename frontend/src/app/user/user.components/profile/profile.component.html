@@ -1,0 +1,123 @@
+<div class="container">
+    <div class="profile">
+        <md-card-title class="profile-title">Your profile</md-card-title>
+        <form *ngIf="user" class="profile-form" [formGroup]="profileForm">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <div class="profile-picture">
+                        <img [src]="data.image" alt="user picture" class="profile-picture-img">
+                        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data"
+                                     [settings]="cropperSettings"></img-cropper>
+                    </div>
+                    <div class="profile-upload">
+                        <div class="profile-upload-container upload-btn" (click)="saveImg('save')">
+                            <span>{{hideCropper ? 'Upload new picture' : 'Save'}}</span>
+                            <input type="file" accept="image/*" *ngIf="hideCropper" class="upload"
+                                   (change)="fileChangeListener($event)"/>
+                        </div>
+                        <div class="profile-upload-container upload-btn" *ngIf="!hideCropper"
+                             (click)="saveImg('cancel')">Cancel
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-fullname">
+                    <md-input-container class="profile-name">
+                        <input id="name" class="input" mdInput formControlName="firstName">
+                        <md-error>Name can`t consist less than two characters, and more than 20</md-error>
+                    </md-input-container>
+
+                    <md-input-container class="profile-lastname">
+                        <input id="lastname" class="input" mdInput formControlName="lastName">
+                        <md-error>Lastname can`t consist less than two characters, and more than 20</md-error>
+                    </md-input-container>
+                </div>
+            </div>
+            <div class="profile-content">
+                <div class="profile-email">
+                    <div class="profile-current-email">
+                        <md-input-container>
+                            <input mdInput class="profile-email-input input" formControlName="email">
+                        </md-input-container>
+                    </div>
+                    <div class=profile-email-btn>
+                        <button md-raised-button>Add Email Address</button>
+                    </div>
+                </div>
+                <div class="profile-birthday">
+                    <div class="birthday-month">
+                        <md-select placeholder="Month" [(ngModel)]="user.month"
+                                   (change)="onSelect(user.month,user.year)"
+                                   [ngModelOptions]="{standalone: true}">
+                            <md-option *ngFor="let month of months" [value]="month.value">
+                                {{ month.value }}
+                            </md-option>
+                        </md-select>
+                    </div>
+                    <div class="birthday-day">
+                        <md-select placeholder="Day" [(ngModel)]="user.day" [ngModelOptions]="{standalone: true}">
+                            <md-option *ngFor="let day of days" [value]="day">
+                                {{ day }}
+                            </md-option>
+                        </md-select>
+                    </div>
+                    <div class="birthday-year">
+                        <md-select placeholder="Year" [(ngModel)]="user.year" (change)="onSelect(user.month,user.year)"
+                                   [ngModelOptions]="{standalone: true}">
+                            <md-option *ngFor="let year of years" [value]="year">
+                                {{ year }}
+                            </md-option>
+                        </md-select>
+                    </div>
+                </div>
+                <div class="profile-physparam">
+                    <div class="weight-container">
+                        <label for='weight' class="label">Weight, kg</label>
+                        <md-input-container class="ph-input">
+                            <input type="number" id="weight" class="input" mdInput formControlName="weight">
+                            <md-error>Weight should be 30-300 kgs</md-error>
+                        </md-input-container>
+                    </div>
+                    <div class="height-container">
+                        <label for='height' class="label">Height, cm</label>
+                        <md-input-container class="ph-input">
+                            <input type="number" id="height" class="input" mdInput formControlName="height">
+                            <md-error>Height should be 100-300 cm</md-error>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div class="button-wrapper">
+                    <div class="profile-password">
+                        <button md-raised-button (click)="openConfirmPasswordDialog()" class="">Change password</button>
+                    </div>
+                    <div id="coach-button">
+                        <button md-raised-button type="submit" *ngIf="!requestForCoaching" (click)="applyForCoaching()">
+                            Become a coach
+                        </button>
+                        <div *ngIf="requestForCoaching">
+                            {{ coachingMessage }}
+                        </div>
+                    </div>
+                </div>
+                <div class="social-wrapper">
+                    <div class="addition-info">
+                        Link your account with social networks for a simple login
+                    </div>
+                    <div class="social-buttons">
+                        <a md-raised-button [disabled]="user.facebookID" href="/auth/facebook">
+                            <md-icon *ngIf="user.facebookID">done</md-icon>
+                            Facebook</a>
+                        <a md-raised-button [disabled]="user.googleID" href="/auth/google">
+                            <md-icon *ngIf="user.googleID">done</md-icon>
+                            Google+</a>
+                        <a md-raised-button [disabled]="user.twitterID" href="/auth/twitter">
+                            <md-icon *ngIf="user.twitterID">done</md-icon>
+                            Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-footer">
+                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)">Save changes</button>
+            </div>
+        </form>
+    </div>
+</div>

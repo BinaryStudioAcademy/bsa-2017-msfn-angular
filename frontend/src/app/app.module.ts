@@ -13,7 +13,6 @@ import { HttpService } from './services/http.service';
 import { ExerciseTypeService } from './services/exercise-type.service';
 import { EncryptService } from './services/encrypt.service';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { LoginComponent } from './components/login/login.component';
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
@@ -21,14 +20,20 @@ import { TestHttpComponent } from './components/test-http/test-http.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { WindowObj } from './services/window.service';
+import { ProfileComponent } from './components/profile/profile.component';
 import { ConfirmPasswordDialogComponent } from './components/confirm-password-dialog/confirm-password-dialog.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { ToasterService } from './services/toastr.service';
 import { IndexPageComponent } from './components/index-page/index-page.component';
+import { ListComponent } from './components/list/list.component';
+import { AutocompletePipe } from './components/list/autocomplete.pipe';
+import { GoogleTestComponent } from './components/google-test/google-test.component';
+import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
-import { AdminModule } from './components/admin/admin.module';
+import { AdminModule } from './admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { UserModule } from './components/user/user.module';
 
 @NgModule({
@@ -42,7 +47,6 @@ import { UserModule } from './components/user/user.module';
     declarations: [
         AppComponent,
         RegistrationComponent,
-        LoginComponent,
         ForgetPasswordComponent,
         TestHttpComponent,
         HeaderViewComponent,
@@ -50,12 +54,14 @@ import { UserModule } from './components/user/user.module';
         IndexPageComponent,
         ForgotPasswordMailComponent,
         TestSocketsComponent,
+        ProfileComponent,
+        GoogleTestComponent,
         ConfirmPasswordDialogComponent,
         TestToastrComponent,
         NotificationDialogComponent,
         TestMarkdownComponent,
         PageNotFoundComponent,
-        TestMarkdownComponent
+        LoginDialogComponent,
     ],
     providers: [
         ToasterService,
@@ -69,7 +75,8 @@ import { UserModule } from './components/user/user.module';
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,
-        NotificationDialogComponent
+        NotificationDialogComponent,
+        LoginDialogComponent
     ],
     bootstrap: [AppComponent]
 
