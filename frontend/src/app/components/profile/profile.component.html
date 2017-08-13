@@ -30,10 +30,15 @@
             </div>
             <div class="profile-content">
                 <div class="profile-email">
-                    <div class="profile-current-email">
-                        <md-input-container>
-                            <input mdInput class="profile-email-input input" formControlName="email">
-                        </md-input-container>
+                    <div class="profile-current-emails">
+                        <div class="email-item" >
+                             <span class="email">{{ user.email }}</span>
+                             <span class="root-title">root</span>
+                        </div>
+                        <div class="email-item" *ngFor="let email of user.secondaryEmails" >
+                             <span class="email">{{ email }}</span>
+                             <span class="root-btn" (click)="makeRoot(email)">make root</span>
+                        </div>
                     </div>
                     <div class=profile-email-btn>
                         <button (click)="openAddNewEmailDialog()" md-raised-button>Add Email Address</button>

@@ -177,16 +177,63 @@ label {
 
 .profile-email {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     padding: 10px 0 10px;
 }
 
-.profile-current-email {
+.profile-current-emails {
     display: flex;
-    flex: 1 1 180px;
+    flex-direction: column;
+    flex: 1 1 233px;
     color: $usual-text;
+}
+
+.email-item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    border: 2px solid #424242;
+    padding: 6px 10px;
+}
+
+.email {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+}
+
+.root-title {
+    color: $btn-color;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.root-btn {
+    display: none;
+    cursor: pointer;
+    font-style: italic;
+    opacity: 0.5;
+}
+
+.root-btn:hover {
+    text-decoration: underline;
+}
+
+.email-item:hover {
+    .root-btn {
+        display: inline;
+    }
+
+    .email {
+        max-width: 70%;
+    }
+
+    .root-btn {
+        // width: 98%;
+        margin-left: -10px;
+    }
 }
 
 .profile-email-btn {
@@ -194,6 +241,8 @@ label {
     flex: 1 1 185px;
     justify-content: flex-end;
 }
+
+
 
 .profile-email-input {
     text-align: center;
@@ -258,6 +307,10 @@ label {
     .profile-current-email {
         justify-content: center;
         margin: 0 15px 15px;
+    }
+
+    .profile-email {
+        flex-wrap: wrap;
     }
     .profile-email-btn {
         flex: 0;

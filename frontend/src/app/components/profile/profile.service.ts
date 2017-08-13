@@ -88,7 +88,7 @@ export class ProfileService {
     this.httpService.sendRequest(request);
   }
 
-  addNewEmail(email, id) {
+  addNewEmail(email, id, callback) {
     const request: IHttpReq = {
       url: '/api/user/' + id + '/email',
       method: 'PUT',
@@ -96,6 +96,6 @@ export class ProfileService {
         email: email
       }
     };
-    this.httpService.sendRequest(request);
+    this.httpService.sendRequest(request).then(res => { callback(res); });
   }
 }
