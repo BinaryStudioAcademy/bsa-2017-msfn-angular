@@ -1,18 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ProfileService } from './profile.service';
+import { DateService } from '../../../services/date.service';
 import { HttpClient } from '@angular/common/http';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
-import {MdDialog} from '@angular/material';
-import {ConfirmPasswordDialogComponent} from '../../../components/confirm-password-dialog/confirm-password-dialog.component';
-import {WindowObj} from '../../../services/window.service';
-import {IUser} from '../../../models/user';
+import { MdDialog } from '@angular/material';
+import { ConfirmPasswordDialogComponent } from '../../../components/confirm-password-dialog/confirm-password-dialog.component';
+import { WindowObj } from '../../../services/window.service';
+import { IUser } from '../../../models/user';
+
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss'],
-    providers: [ProfileService]
+    providers: [
+        ProfileService,
+        DateService
+    ]
 })
 export class ProfileComponent implements OnInit {
     public profileForm;
@@ -32,6 +37,7 @@ export class ProfileComponent implements OnInit {
     userId = (this.window.data._injectedData as any).userId;
 
     user: IUser;
+    birthday;
 
     requestForCoaching = false;
     coachingMessage: string;
@@ -40,7 +46,8 @@ export class ProfileComponent implements OnInit {
                 private formBuilder: FormBuilder,
                 private http: HttpClient,
                 private dialog: MdDialog,
-                private window: WindowObj) {
+                private window: WindowObj,
+                private dateService: DateService) {
         this.cropperSettings = profileService.getCropperSettings();
         this.data = {
             image: this.image
@@ -50,9 +57,10 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
         this.profileService.getUser(this.userId, res => {
             this.user = res;
-            this.months = this.profileService.getMonth();
-            this.days = this.profileService.getDays(this.user.month, this.user.year);
-            this.years = this.profileService.getYears();
+            this.birthday = this.dateService.convertDateFromIso(this.user.birthday);
+            this.months = this.dateService.generateMonths();
+            this.days = this.dateService.generateDays(this.birthday.month, this.birthday.year);
+            this.years = this.dateService.generateYears();
             this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
             this.buildForm();
         });
@@ -60,28 +68,45 @@ export class ProfileComponent implements OnInit {
 
     buildForm() {
         this.profileForm = this.formBuilder.group({
-            'firstName': [this.user.firstName, Validators.compose(
-                [
+            'firstName': [this.user.firstName, Validators.compose([
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(20),
+            ])],
+            'lastName': [this.user.lastName, Validators.compose([
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(20)
+            ])],
+            'email': new FormControl({
+                    value: this.user.email,
+                    disabled: this.isDisabledEmail
+            }),
+            'weight': [this.user.weight, Validators.compose([
                     Validators.required,
-                    Validators.minLength(2),
-                    Validators.maxLength(20)
-                ]
-            )],
-            'lastName': [this.user.lastName, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(20)])],
-            'email': new FormControl({value: this.user.email, disabled: this.isDisabledEmail}),
-            'weight': [this.user.weight, Validators.compose([Validators.required, Validators.min(30), Validators.max(300)])],
-            'height': [this.user.height, Validators.compose([Validators.required, Validators.min(100), Validators.max(300)])],
-        });
+                    Validators.min(30),
+                    Validators.max(300)
+            ])],
+            'height': [this.user.height, Validators.compose([
+                    Validators.required,
+                    Validators.min(100),
+                    Validators.max(300)
+            ])],
+    });
     }
 
     onSelect(month: string, year: number) {
-        this.days = this.profileService.getDays(month, year);
+        this.days = this.dateService.generateDays(month, year);
     }
 
     onSubmit(user) {
-        user.day = this.user.day;
-        user.year = this.user.year;
-        user.month = this.user.month;
+        const monthNumber = this.months.indexOf(this.birthday.month) + 1;
+        const birthday = this.dateService.convertDateToIso({
+            year: this.birthday.year,
+            month: monthNumber,
+            day: this.birthday.day,
+        });
+        user.birthday = birthday;
         this.profileService.updateUser(user, this.user._id);
         this.window.data._injectedData.userFirstName = user.firstName;
         this.window.data._injectedData.userLastName = user.lastName;
