@@ -134,7 +134,7 @@ export class RegistrationComponent implements OnInit {
                         body: {data: encData}
                     };
 
-                this.httpService.sendRequest(loginReq)
+                this.httpService.sendRequest(loginReq, true)
                     .then((res) => {
                         if (res.access) {
                             location.reload();

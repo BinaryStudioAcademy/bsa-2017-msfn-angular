@@ -10,7 +10,6 @@ import { ForAdminGuard } from './guards/for-admin.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
-import { ExerciseTypeService } from './services/exercise-type.service';
 import { EncryptService } from './services/encrypt.service';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
@@ -69,8 +68,7 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
         IsLoggedInGuard,
         IsLoggedOutGuard,
         ForAdminGuard,
-        EncryptService,
-        ExerciseTypeService
+        EncryptService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,
