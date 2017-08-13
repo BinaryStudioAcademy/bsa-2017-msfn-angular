@@ -102,12 +102,16 @@ export class ExampleDataSource extends DataSource<any> {
 
     return Observable.merge(...displayDataChanges).map(() => {
       return this.getSortedData().slice().filter((item) => {
-        const searchFirstName = (item.firstName).toLowerCase();
-        const searchLastName = (item.lastName).toLowerCase();
-        const searchRole = (item.role).toLowerCase();
-        return (searchFirstName.includes(this.filter.toLowerCase()) ||
-                searchLastName.includes(this.filter.toLowerCase()) ||
-                searchRole.includes(this.filter.toLowerCase()));
+        const query = this.filter.toLowerCase(),
+          searchFirstName = (item.firstName).toLowerCase(),
+          searchLastName = (item.lastName).toLowerCase(),
+          searchEmail = (item.email).toLowerCase(),
+          searchRole = (item.role).toLowerCase();
+
+        return (searchFirstName.includes(query) ||
+                searchLastName.includes(query) ||
+                searchEmail.includes(query) ||
+                searchRole.includes(query));
       });
     });
   }
