@@ -46,12 +46,12 @@
       </md-cell>
     </ng-container>
 
-    <ng-container cdkColumnDef="birthday">
+    <ng-container cdkColumnDef="age">
       <md-header-cell *cdkHeaderCellDef md-sort-header>
-        Birthday
+        Age
       </md-header-cell>
       <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
-        {{ row.birthday }}
+        {{ row.age }}
       </md-cell>
     </ng-container>
 

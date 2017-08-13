@@ -25,10 +25,10 @@ export class UserListComponent implements OnInit {
     'lastName',
     'email',
     'role',
-    'birthday',
+    'age',
     'gender'
   ];
-  tableDatabase = new TableDatabase();
+  tableDatabase = new TableDatabase(this.userListService);
   dataSource: ExampleDataSource | null;
   @ViewChild(MdSort) sort: MdSort;
   @ViewChild('filter') filter: ElementRef;
@@ -66,10 +66,14 @@ export class TableDatabase {
     return this.dataChange.value;
   }
 
-  constructor() { }
+  constructor(private userListService: UserListService) { }
 
   addUsers(data) {
     const copiedData = [...data];
+    for (let i = 0; i < copiedData.length; i++) {
+      const age = this.userListService.getAge(copiedData[i].birthday);
+      copiedData[i].age = age;
+    }
     this.dataChange.next(copiedData);
   }
 }

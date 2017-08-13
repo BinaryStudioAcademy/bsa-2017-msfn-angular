@@ -13,6 +13,7 @@ export class UserListService {
       method: 'GET',
       body: {}
     };
+
     this.httpService.sendRequest(request).then(data => {
       for (let i = 0; i < data.length; i++) {
         let role = 'user';
@@ -26,15 +27,23 @@ export class UserListService {
 
         data[i].role = role;
       }
-      console.log(data);
       callback(data);
     });
   }
 
+  getAge(birthday: string): number {
+    const dateOfBirth = new Date(birthday),
+      timeDiff = Date.now() - dateOfBirth.getTime(),
+      timeDiffDate = new Date(timeDiff),
+      age = timeDiffDate.getFullYear() - 1970;
+
+    return age;
+  }
+
   sortData(data, column, direction) {
     return data.sort((a, b) => {
-      let propA = '';
-      let propB = '';
+      let propA = '',
+          propB = '';
 
       switch (column) {
         case 'firstName':
@@ -48,6 +57,9 @@ export class UserListService {
           break;
         case 'role':
           [propA, propB] = [a.role, b.role];
+          break;
+        case 'age':
+          [propA, propB] = [a.age, b.age];
           break;
         case 'gender':
           [propA, propB] = [a.gender, b.gender];
