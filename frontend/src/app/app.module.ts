@@ -13,7 +13,6 @@ import { HttpService } from './services/http.service';
 import { ExerciseTypeService } from './services/exercise-type.service';
 import { EncryptService } from './services/encrypt.service';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { LoginComponent } from './components/login/login.component';
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
@@ -46,7 +45,6 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
     declarations: [
         AppComponent,
         RegistrationComponent,
-        LoginComponent,
         ForgetPasswordComponent,
         TestHttpComponent,
         HeaderViewComponent,
