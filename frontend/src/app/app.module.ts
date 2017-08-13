@@ -28,9 +28,10 @@ import { ToasterService } from './services/toastr.service';
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
-import { AdminModule } from './components/admin/admin.module';
+import { AdminModule } from './admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 
 @NgModule({
     imports: [
@@ -57,6 +58,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
         NotificationDialogComponent,
         TestMarkdownComponent,
         PageNotFoundComponent,
+        LoginDialogComponent,
     ],
     providers: [
         ToasterService,
@@ -70,7 +72,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,
-        NotificationDialogComponent
+        NotificationDialogComponent,
+        LoginDialogComponent
     ],
     bootstrap: [AppComponent]
 

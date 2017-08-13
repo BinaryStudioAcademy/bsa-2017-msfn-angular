@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="profile">
+        <md-card-title class="profile-title">User profile</md-card-title>
+
+        <div class="blockHeader">Special:</div>
+        <div class="textField">
+          <span class="property">User ID: </span><span class="value">{{id}}</span>
+        </div>
+        <div class="textField">
+          <span class="property">Status: </span><span [class.online]="false" class="value status">{{status}}</span>
+        </div>
+        <div class="textField">
+          <span class="property">Role: </span><span class="value">{{role}}</span>
+        </div>
+
+        <div class="blockHeader">General info:</div>
+        <div class="textField">
+          <span class="property">First name: </span><span class="value">{{fName}}</span>
+        </div>
+        <div class="textField">
+          <span class="property">Last name: </span><span class="value">{{lName}}</span>
+        </div>
+        <div class="textField">
+          <span class="property">Email: </span>
+          <div class="value emails">
+            <ul>
+              <li *ngFor="let mail of email">{{mail}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="blockHeader">Characteristics:</div>
+        <div class="textField">
+          <span class="property">Height: </span><span class="value">{{height}} cm</span>
+        </div>
+        <div class="textField">
+          <span class="property">Weight: </span><span class="value">{{weight}} kg</span>
+        </div>
+        <div class="textField">
+          <span class="property">Age: </span><span class="value">{{age}}</span>
+        </div>
+        <div class="textField">
+          <span class="property">Gender: </span><span class="value">{{gender}}</span>
+        </div>
+    </div>
+</div>

@@ -1,10 +1,12 @@
-@import "../../../../../globalStyles/variables";
-@import "../../../../../globalStyles/indentations";
-@import '../../../../../globalStyles/text.scss';
+@import "../../../../globalStyles/variables";
+@import "../../../../globalStyles/indentations";
+@import '../../../../globalStyles/text.scss';
+
 .main-container {
     margin: 0 auto;
     width: 60%;
     text-align: center;
+    font-family: $font-general;
 }
 
 .btn {
@@ -28,9 +30,9 @@ button:focus {
 .mat-table {
     margin-top: 40px;
     margin-bottom: 40px;
+    max-height: calc(100vh - 230px);
+    overflow-y: auto;
 }
-
-
 
 .input-container {
     margin: 10px;
@@ -38,11 +40,9 @@ button:focus {
 }
 
 #btn-add {
-    width: 40%;
+    width: auto;
     height: 40px;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 40px;
+    margin: 40px auto 0 auto;
 }
 
 .row-text:hover {
@@ -65,8 +65,18 @@ button:focus {
 
 .transp {
     font-style: italic;
-    color: $text-second-color;
+    color: $text-second-color !important;
     cursor: default !important;
+}
+.error {
+    font-style: italic;
+    color: $error-color;
+    cursor: pointer;
+}
+
+.disabled {
+    background-color: $text-second-color;
+    cursor: default;
 }
 
 .ico {
@@ -77,16 +87,12 @@ button:focus {
     cursor: pointer;
 }
 
-@media only screen and (max-width: $medium-screen) {
-    .main-container {
-        width: 100%;
-        margin: 0;
-    }
-    #btn-add{
-        width: auto;
-    }
-}
-
 .hiding{
     display: none !important;
+}
+
+@media only screen and (max-width: $small-screen) {
+    .main-container {
+        width: 80%;
+    }
 }

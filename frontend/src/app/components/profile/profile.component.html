@@ -6,14 +6,18 @@
                 <div class="profile-avatar">
                     <div class="profile-picture">
                         <img [src]="data.image" alt="user picture" class="profile-picture-img">
-                        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
+                        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data"
+                                     [settings]="cropperSettings"></img-cropper>
                     </div>
                     <div class="profile-upload">
                         <div class="profile-upload-container upload-btn" (click)="saveImg('save')">
-               <span>{{hideCropper ? 'Upload new picture' : 'Save'}}</span>
-               <input type="file" accept="image/*" *ngIf="hideCropper" class="upload" (change)="fileChangeListener($event)"/>
-             </div>
-            <div class="profile-upload-container upload-btn" *ngIf="!hideCropper" (click)="saveImg('cancel')">Cancel</div>
+                            <span>{{hideCropper ? 'Upload new picture' : 'Save'}}</span>
+                            <input type="file" accept="image/*" *ngIf="hideCropper" class="upload"
+                                   (change)="fileChangeListener($event)"/>
+                        </div>
+                        <div class="profile-upload-container upload-btn" *ngIf="!hideCropper"
+                             (click)="saveImg('cancel')">Cancel
+                        </div>
                     </div>
                 </div>
                 <div class="profile-fullname">
@@ -41,8 +45,9 @@
                 </div>
                 <div class="profile-birthday">
                     <div class="birthday-month">
-                        <md-select placeholder="Month" [(ngModel)]="user.month" (change)="onSelect(user.month,user.year)"
-                            [ngModelOptions]="{standalone: true}">
+                        <md-select placeholder="Month" [(ngModel)]="user.month"
+                                   (change)="onSelect(user.month,user.year)"
+                                   [ngModelOptions]="{standalone: true}">
                             <md-option *ngFor="let month of months" [value]="month.value">
                                 {{ month.value }}
                             </md-option>
@@ -57,7 +62,7 @@
                     </div>
                     <div class="birthday-year">
                         <md-select placeholder="Year" [(ngModel)]="user.year" (change)="onSelect(user.month,user.year)"
-                            [ngModelOptions]="{standalone: true}">
+                                   [ngModelOptions]="{standalone: true}">
                             <md-option *ngFor="let year of years" [value]="year">
                                 {{ year }}
                             </md-option>
@@ -82,10 +87,10 @@
                 </div>
                 <div class="button-wrapper">
                     <div class="profile-password">
-                        <button md-raised-button (click)="openConfirmPasswordDoalog()" class="">Change password</button>
+                        <button md-raised-button (click)="openConfirmPasswordDialog()" class="">Change password</button>
                     </div>
                     <div id="coach-button">
-                        <button md-raised-button type="submit"  *ngIf="!requestForCoaching" (click)="applyForCoaching()">
+                        <button md-raised-button type="submit" *ngIf="!requestForCoaching" (click)="applyForCoaching()">
                             Become a coach
                         </button>
                         <div *ngIf="requestForCoaching">
@@ -93,9 +98,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="social-wrapper">
+                    <div class="addition-info">
+                        Link your account with social networks for a simple login
+                    </div>
+                    <div class="social-buttons">
+                        <a md-raised-button [disabled]="user.facebookID" href="/auth/facebook">
+                            <md-icon *ngIf="user.facebookID">done</md-icon>
+                            Facebook</a>
+                        <a md-raised-button [disabled]="user.googleID" href="/auth/google">
+                            <md-icon *ngIf="user.googleID">done</md-icon>
+                            Google+</a>
+                        <a md-raised-button [disabled]="user.twitterID" href="/auth/twitter">
+                            <md-icon *ngIf="user.twitterID">done</md-icon>
+                            Twitter</a>
+                    </div>
+                </div>
             </div>
             <div class="profile-footer">
-                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
+                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)">Save changes</button>
             </div>
         </form>
     </div>

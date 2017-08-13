@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../../../../services/http.service';
-import { IHttpReq } from '../../../../models/http-req';
+import { HttpService } from '../../../services/http.service';
+import { IHttpReq } from '../../../models/http-req';
 
 @Injectable()
 export class ExerciseListService {
