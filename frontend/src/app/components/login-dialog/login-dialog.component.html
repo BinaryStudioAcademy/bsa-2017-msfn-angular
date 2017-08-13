@@ -1,7 +1,8 @@
-<h2 md-dialog-title>Login</h2>
 <md-dialog-content>
-<form class="login-block">
-
+  <h2 md-dialog-title>Login
+    <button md-dialog-close class="material-icons close">close</button>
+  </h2>
+  <form class="login-block">
     <md-input-container class="login-imput-container">
       <input mdInput type="email" placeholder="Email" [(ngModel)]="email" [formControl]="emailFormControl">
       <md-error *ngIf="emailFormControl.hasError('pattern')">
