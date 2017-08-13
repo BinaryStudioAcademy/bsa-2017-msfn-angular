@@ -29,7 +29,6 @@ import { IndexPageComponent } from './components/index-page/index-page.component
 import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
 import { GoogleTestComponent } from './components/google-test/google-test.component';
-import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 import { AdminModule } from './admin/admin.module';
