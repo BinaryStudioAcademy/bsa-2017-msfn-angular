@@ -3,49 +3,51 @@ const
     userService = require('../../services/userService'),
     userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/user/',
-    subscribeRoutes = require('./subscribeRoutes');
-    activateRoutes = require('./activateRoutes');
+    subscribeRoutes = require('./subscribeRoutes'),
+    decrypt = require('../../services/decryptService');
 
-module.exports = function (app) {
-    app.get(baseUrl+'me', function (req, res, next) {
+    module.exports = function(app) {
+    app.get(baseUrl + 'me', function(req, res, next) {
         res.data = req.session.user;
         next();
     }, apiResponse);
 
-    app.get(baseUrl, function (req, res, next) {
-        userRepository.getAll(function (err, data) {
+    app.get(baseUrl, function(req, res, next) {
+        userRepository.getAll(function(err, data) {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.get(baseUrl + ':id', function (req, res, next) {
-        userRepository.getById(req.params.id, function (err, data) {
+    app.get(baseUrl + ':id', function(req, res, next) {
+        userRepository.getById(req.params.id, function(err, data) {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.post(baseUrl, function (req, res, next) {
-        userService.addItem(req.body, function (err, data) {
+    app.post(baseUrl, function(req, res, next) {
+        req.body.password = decrypt(req.body.password).password;
+        req.body.email = decrypt(req.body.email).email;
+        userService.addItem(req.body, function(err, data) {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.put(baseUrl + ':id', function (req, res, next) {
-        userService.updateItem(req.params.id, req.body, function (err, data) {
+    app.put(baseUrl + ':id', function(req, res, next) {
+        userService.updateItem(req.params.id, req.body, function(err, data) {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.delete(baseUrl + ':id', function (req, res, next) {
-        userRepository.deleteById(req.params.id, function (err, data) {
+    app.delete(baseUrl + ':id', function(req, res, next) {
+        userRepository.deleteById(req.params.id, function(err, data) {
             res.data = data;
             res.err = err;
             next();

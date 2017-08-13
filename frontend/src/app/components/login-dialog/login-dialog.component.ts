@@ -6,12 +6,11 @@ import { IHttpReq } from '../../models/http-req';
 import { HttpService } from '../../services/http.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-login-dialog',
+  templateUrl: './login-dialog.component.html',
+  styleUrls: ['./login-dialog.component.scss']
 })
-export class LoginComponent {
-
+export class LoginDialogComponent {
   EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
   email: string;
   password: string;
@@ -45,9 +44,8 @@ export class LoginComponent {
 
     this.httpHandler.sendRequest(sendData)
       .then((res) => {
-        if (res.access) {
+        if (res.access === true) {
           location.reload();
-          this.router.navigate(['/profile']);
         }
       });
   }

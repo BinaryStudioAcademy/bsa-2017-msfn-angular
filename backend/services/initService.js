@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
         firstName: 'Arnold',
         lastName: 'Schwarzenegger',
         email: 'admin@msfn.com',
-        password: 'bsa2017Angular',
+        password: 'qwerty',
         isCoach: true,
         isAdmin: true,
         position: 1

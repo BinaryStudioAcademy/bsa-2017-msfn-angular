@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { IHttpReq } from '../models/http-req';
-import { ToastrService } from './toastr.service';
+import { ToasterService } from './toastr.service';
 // import { FormsModule } from '@angular/forms';
 // import { Observable } from 'rxjs/Observable';
 // import 'rxjs/add/observable/throw';
@@ -14,18 +14,19 @@ export class HttpService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private failMessage = 'Fail';
 
-    constructor(private _http: Http, private toastrService: ToastrService, private _router: Router) { }
+    constructor(private _http: Http, private toastrService: ToasterService, private _router: Router) { }
 
     private handleError = (error: any): Promise<any> => {
         if (error && error.status === 401) {
-            this._router.navigate(['/login']);
+            this._router.navigate(['/']);
         }
         this.toastrService.showMessage('error', error.message, this.failMessage);
         return error;
     }
 
-    public sendRequest(options: IHttpReq): Promise<any> {
+    public sendRequest(options: IHttpReq, needNotif = false): Promise<any> {
         let url: string;
+
         if (!options.url) {
             return Promise.reject('Url required');
         } else {
@@ -41,7 +42,9 @@ export class HttpService {
             return this._http.get(url)
                 .toPromise()
                 .then(response => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (needNotif) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return response.json();
                 })
                 .catch(this.handleError);
@@ -50,7 +53,9 @@ export class HttpService {
                 .post(url, body, { headers: headers })
                 .toPromise()
                 .then(response => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (needNotif) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return response.json();
                 })
                 .catch(this.handleError);
@@ -59,7 +64,9 @@ export class HttpService {
                 .put(url, body, { headers: headers })
                 .toPromise()
                 .then(() => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (needNotif) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return body;
                 })
                 .catch(this.handleError);
@@ -67,7 +74,9 @@ export class HttpService {
             return this._http.delete(url, { headers: headers })
                 .toPromise()
                 .then(() => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (needNotif) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return null;
                 })
                 .catch(this.handleError);

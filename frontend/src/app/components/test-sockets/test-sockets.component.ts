@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import * as io from 'socket.io-client';
-import {ToastrService} from '../../services/toastr.service';
+import {ToasterService} from '../../services/toastr.service';
 
 @Component({
     selector: 'app-test-sockets',
-    providers: [ToastrService],
+    providers: [ToasterService],
     templateUrl: './test-sockets.component.html',
     styleUrls: ['./test-sockets.component.scss']
 })
 export class TestSocketsComponent implements OnInit {
     socket = io.connect('http://localhost:3060');
 
-    constructor(private toastrService: ToastrService) {
+    constructor(private toastrService: ToasterService) {
 
     }
 

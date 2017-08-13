@@ -1,6 +1,6 @@
 <md-input-container floatPlaceholder="always" class="items-list">
     <md-chip-list>
-        <md-chip class="chip" *ngFor="let item of items; index as i;">{{item}}
+        <md-chip class="chip" *ngFor="let item of items; let i =index;">{{item}}
             <md-icon class="icon" (click)="deleteItem(i)">clear</md-icon>
         </md-chip>
         <input mdInput [(ngModel)]="input" [placeholder]="placeholder" type="text" class="list-input" name="item"

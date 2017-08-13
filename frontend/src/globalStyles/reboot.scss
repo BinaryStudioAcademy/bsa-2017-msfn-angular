@@ -51,7 +51,9 @@ body {
     font-weight: 300;
     line-height: 1.15;
     -webkit-font-smoothing: antialiased;
-    color: #fff;
+    color: #fff;    
+    background: url('./img/floor.png') center;
+    background-attachment: fixed;
     background-color: #333; // 2
 }
 

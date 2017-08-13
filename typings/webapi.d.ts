@@ -8,6 +8,7 @@ declare module WebApi {
         userFirstName: string;
         userLastName: string;
         role: string;
+        userPhoto: string;
     }
 }
 

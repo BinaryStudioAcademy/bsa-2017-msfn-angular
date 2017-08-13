@@ -30,9 +30,7 @@ const User = new Schema({
     follow: [ObjectId],
     userPhoto: String,
     gender: String,
-    month: String,
-    day: Number,
-    year: Number,
+    birthday: String,
     height: Number,
     weight: Number,
     activateToken: String
