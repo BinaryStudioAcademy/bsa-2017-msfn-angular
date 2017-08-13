@@ -4,11 +4,6 @@
 
 /* general */
 
-* {
-    font-family: 'Roboto', sans-serif;
-    color: $text-main-color;
-}
-
 a {
     color: $text-second-color;
 }
@@ -27,6 +22,8 @@ a:hover {
     position: relative;
     padding: 10px;
     margin: auto;
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
 }
 
 .close {
@@ -36,7 +33,6 @@ a:hover {
     padding: 0;
     color: white;
     font-size: 18px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .close:hover {
@@ -91,7 +87,7 @@ a:hover {
 
 #birthday {
     div:first-child {
-        margin-top: $content-between-margin;
+        margin: $content-between-margin 0;
     }
 
     #birthday-inputs {
