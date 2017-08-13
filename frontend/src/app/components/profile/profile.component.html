@@ -45,24 +45,29 @@
                 </div>
                 <div class="profile-birthday">
                     <div class="birthday-month">
-                        <md-select placeholder="Month" [(ngModel)]="user.month"
-                                   (change)="onSelect(user.month,user.year)"
-                                   [ngModelOptions]="{standalone: true}">
-                            <md-option *ngFor="let month of months" [value]="month.value">
-                                {{ month.value }}
-                            </md-option>
+                        <md-select
+                            placeholder="Month"
+                            [(ngModel)]="birthday.month"
+                            (change)="onSelect(birthday.month,birthday.year)"
+                            [ngModelOptions]="{standalone: true}">
+                                <md-option *ngFor="let month of months" [value]="month">
+                                    {{ month }}
+                                </md-option>
                         </md-select>
                     </div>
                     <div class="birthday-day">
-                        <md-select placeholder="Day" [(ngModel)]="user.day" [ngModelOptions]="{standalone: true}">
-                            <md-option *ngFor="let day of days" [value]="day">
-                                {{ day }}
-                            </md-option>
+                        <md-select
+                            placeholder="Day"
+                            [(ngModel)]="birthday.day"
+                            [ngModelOptions]="{standalone: true}">
+                                <md-option *ngFor="let day of days" [value]="day">
+                                    {{ day }}
+                                </md-option>
                         </md-select>
                     </div>
                     <div class="birthday-year">
-                        <md-select placeholder="Year" [(ngModel)]="user.year" (change)="onSelect(user.month,user.year)"
-                                   [ngModelOptions]="{standalone: true}">
+                        <md-select placeholder="Year" [(ngModel)]="birthday.year" (change)="onSelect(birthday.month, birthday.year)"
+                            [ngModelOptions]="{standalone: true}">
                             <md-option *ngFor="let year of years" [value]="year">
                                 {{ year }}
                             </md-option>
