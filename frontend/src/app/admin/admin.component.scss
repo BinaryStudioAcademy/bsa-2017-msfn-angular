@@ -69,7 +69,7 @@ aside {
         width: 180px;
     }
     .childComponent {
-        width: calc(100vw - 180px);
+        width: calc(100vw - 200px);
     }
 }
 
@@ -83,6 +83,6 @@ aside {
         }
     }
     .childComponent {
-        width: calc(100vw - 55px);
+        width: calc(100vw - 80px);
     }
 }
