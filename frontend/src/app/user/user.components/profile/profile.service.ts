@@ -49,13 +49,15 @@ export class ProfileService {
         });
     }
 
-    updateUser(user, id) {
+    updateUser(user, id, callback) {
         const request: IHttpReq = {
             url: '/api/user/' + id,
             method: 'PUT',
             body: user
         };
-        this.httpService.sendRequest(request);
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
+        });
     }
 
     getCropperSettings(): CropperSettings {

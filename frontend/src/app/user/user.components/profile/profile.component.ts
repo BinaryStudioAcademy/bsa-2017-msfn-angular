@@ -108,7 +108,13 @@ export class ProfileComponent implements OnInit {
             day: this.birthday.day,
         });
         user.birthday = birthday;
-        this.profileService.updateUser(user, this.user._id);
+        this.profileService.updateUser(user, this.user._id, res => {
+            if (typeof(res) === 'object') {
+                this.toasterService.showMessage('success', null);
+            } else {
+                this.toasterService.showMessage('error', null);
+            }
+        });
         this.window.data._injectedData.userFirstName = user.firstName;
         this.window.data._injectedData.userLastName = user.lastName;
     }
