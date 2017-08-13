@@ -16,28 +16,34 @@ const adminRoutes: Routes = [
         canActivate: [ForAdminGuard],
         children: [
             {
-                path: 'admin-root-profile/:id',
-                component: AdminRootProfileComponent },
-            {
-                path: 'exercise-type',
-                component: ExerciseTypeComponent
-            },
-            {
-                path: 'exercise-list',
-                component: ExerciseListComponent
-            },
-            {
-                path: 'exercises',
-                component: ExerciseCreateComponent
-            },
-            {
-                path: 'exercises/:id',
-                component: ExerciseCreateComponent
-            },
-            {
-                path: 'user-list',
-                component: UserListComponent
-            },
+                path: '',
+                children: [
+                    {
+                        path: 'admin-root-profile/:id',
+                        component: AdminRootProfileComponent
+                    },
+                    {
+                        path: 'exercise-type',
+                        component: ExerciseTypeComponent
+                    },
+                    {
+                        path: 'exercise-list',
+                        component: ExerciseListComponent
+                    },
+                    {
+                        path: 'exercises',
+                        component: ExerciseCreateComponent
+                    },
+                    {
+                        path: 'exercises/:id',
+                        component: ExerciseCreateComponent
+                    },
+                    {
+                        path: 'user-list',
+                        component: UserListComponent
+                    },
+                ]
+            }
         ]
     }
 ];
