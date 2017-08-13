@@ -1,0 +1,86 @@
+@import "./../../../globalStyles/variables";
+@import "./../../../globalStyles/materialTheme";
+@import "./../../../globalStyles/indentations";
+@import '../../../globalStyles/text.scss';
+
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
+
+
+.login-block {
+    font-family: $font-general;
+    width: calc(400px - 24px*2);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin: $header-top-margin auto 0 auto;
+    padding: 10px;
+}
+
+.login-imput-container {
+    width: 90%;
+    color: $text-main-color;
+
+    input {
+        padding: 0 $input-padding;
+    }
+}
+
+.login-button {
+    border: none;
+    margin-top: $content-between-margin;
+    width: calc(90% - 10px*2);
+    padding: 15px;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+}
+
+.login-links {
+    margin-top: $content-between-margin;
+    color: $text-main-color;
+    text-align: center;
+
+    a {
+       color: $text-main-color;
+       margin: 5px;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+}
+
+.close {
+    float: right;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    color: white;
+    font-size: 18px;
+}
+
+.close:hover {
+    cursor: pointer;
+    color: $text-second-color;
+}
+
+@media only screen and (max-width: $small-screen){
+
+    .login-block {
+        width: 90%;
+    }
+
+    .login-links {
+        a {
+            margin: 0;
+        }
+    }
+}

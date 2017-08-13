@@ -15,10 +15,11 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
 
     public thereIsLoggedInUser: boolean;
     public displayName: string;
+    public notificationCount = 1;
     private notificationsDialogConfig = {
         height: '300px',
         width: '200px',
-        data: 'you have N notifications',
+        data: 'you have ' + this.notificationCount + ' notifications',
         position: {
             top: '45px',
         }
@@ -34,11 +35,11 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
     ngOnInit() {
         const userData = this.window.data._injectedData;
         this.thereIsLoggedInUser = userData.isLoggedIn;
-        this.displayName = `${userData.userFirstName} ${userData.userLastName}`;
     }
 
     ngAfterContentChecked() {
         this.userPhotoUrl = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
+        this.displayName = `${this.window.data._injectedData.userFirstName} ${this.window.data._injectedData.userLastName}`;
     }
 
     openDialog() {

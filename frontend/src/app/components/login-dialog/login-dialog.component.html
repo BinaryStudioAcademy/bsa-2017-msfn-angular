@@ -1,6 +1,8 @@
-<div class="login-container">
+<md-dialog-content>
+  <h2 md-dialog-title>Login
+    <button md-dialog-close class="material-icons close">close</button>
+  </h2>
   <form class="login-block">
-
     <md-input-container class="login-imput-container">
       <input mdInput type="email" placeholder="Email" [(ngModel)]="email" [formControl]="emailFormControl">
       <md-error *ngIf="emailFormControl.hasError('pattern')">
@@ -12,7 +14,7 @@
     </md-input-container>
 
     <md-input-container class="login-imput-container">
-      <input type="password" mdInput placeholder="Password" [(ngModel)]="password" [formControl]="passwordFormControl">
+      <input type="password" mdInput placeholder="Password" [(ngModel)]="password" [formControl]="passwordFormControl" (keyup.enter)="login()">
       <md-error *ngIf="passwordFormControl.hasError('minLength')">
         Password should be al least 3 symbols
       </md-error>
@@ -21,7 +23,7 @@
       </md-error>
     </md-input-container>
 
-    <button type="submit" class="login-button" [disabled]="!passwordFormControl.valid && !emailFormControl.valid" (click)="login()">Sign in</button>
+    <button class="login-button" [disabled]="!passwordFormControl.valid && !emailFormControl.valid" (click)="login()">Sign in</button>
     <div class="login-links">Sign in with
       <a href="/auth/facebook">Facebook</a>
       <a href="/auth/google">Google</a>
@@ -31,4 +33,4 @@
       <a routerLink="/forget-password">Forgot password?</a>
     </div>
   </form>
-</div>
+</md-dialog-content>

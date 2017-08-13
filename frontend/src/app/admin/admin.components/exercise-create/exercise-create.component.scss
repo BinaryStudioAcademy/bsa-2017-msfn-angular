@@ -1,13 +1,13 @@
-@import '../../../../../globalStyles/variables.scss';
-@import '../../../../../globalStyles/text.scss';
-@import "../../../../../globalStyles/indentations";
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/text.scss';
+@import "../../../../globalStyles/indentations";
 * {
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
 
 .exercise-create-form {
-    width: 500px;
+    width: 60vw;
     display: flex;
     align-items: center;
     margin: 50px auto;
