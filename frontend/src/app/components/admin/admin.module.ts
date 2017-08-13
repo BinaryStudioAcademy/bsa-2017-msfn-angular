@@ -1,3 +1,4 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,27 +9,25 @@ import { UserListComponent } from './admin.components/user-list/user-list.compon
 import { ExerciseCreateComponent } from './admin.components/exercise-create/exercise-create.component';
 import { ExerciseListComponent } from './admin.components/exercise-list/exercise-list.component';
 import { ExerciseTypeComponent } from './admin.components/exercise-type/exercise-type.component';
-// import { ListComponent } from '../../components/list/list.component';
-// import { AutocompletePipe } from '../../components/list/autocomplete.pipe';
 
 import { AdminRoutingModule } from './admin-routing.module';
+import {ToasterService} from '../../services/toastr.service';
 
 @NgModule({
   imports: [
+    ImportModule,
     CommonModule,
+    // BrowserModule,
     FormsModule,
-    AdminRoutingModule,
-    ImportModule
+    AdminRoutingModule
   ],
   declarations: [
     AdminComponent,
-    // ListComponent,
-    // AutocompletePipe,
     UserListComponent,
     ExerciseCreateComponent,
     ExerciseListComponent,
     ExerciseTypeComponent
   ],
-  providers: []
+  providers: [ToasterService]
 })
 export class AdminModule {}

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 // @angular
 import { ImportModule } from './import.module';
 import { NgModule } from '@angular/core';
@@ -23,10 +24,8 @@ import { WindowObj } from './services/window.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ConfirmPasswordDialogComponent } from './components/confirm-password-dialog/confirm-password-dialog.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
-import { ToastrService } from './services/toastr.service';
+import { ToasterService } from './services/toastr.service';
 import { IndexPageComponent } from './components/index-page/index-page.component';
-import { ListComponent } from './components/list/list.component';
-import { AutocompletePipe } from './components/list/autocomplete.pipe';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 import { AdminModule } from './components/admin/admin.module';
@@ -36,6 +35,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { UserListComponent } from './components/admin/admin.components/user-list/user-list.component';
 
 @NgModule({
+    imports: [
+        ImportModule,
+        AdminModule,
+        AppRoutingModule,
+        CommonModule
+    ],
     declarations: [
         AppComponent,
         RegistrationComponent,
@@ -47,8 +52,6 @@ import { UserListComponent } from './components/admin/admin.components/user-list
         IndexPageComponent,
         ForgotPasswordMailComponent,
         TestSocketsComponent,
-        ListComponent,
-        AutocompletePipe,
         ProfileComponent,
         ConfirmPasswordDialogComponent,
         TestToastrComponent,
@@ -58,19 +61,14 @@ import { UserListComponent } from './components/admin/admin.components/user-list
         AddNewEmailDialogComponent,
         PageNotFoundComponent,
     ],
-    imports: [
-        ImportModule,
-        AdminModule,
-        AppRoutingModule
-    ],
     providers: [
+        ToasterService,
         HttpService,
         WindowObj,
         IsLoggedInGuard,
         IsLoggedOutGuard,
         ForAdminGuard,
         EncryptService,
-        ToastrService,
         ExerciseTypeService
     ],
     entryComponents: [

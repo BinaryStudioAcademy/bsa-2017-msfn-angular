@@ -1,5 +1,6 @@
-@import "../../../../src/globalStyles/variables";
+@import "../../../globalStyles/variables.scss";
 @import '../../../globalStyles/text.scss';
+@import '../../../globalStyles/indentations.scss';
 
 $header-gradient-from: #353535;
 $header-gradient-to: #252525;
@@ -10,107 +11,70 @@ $height: calc(100vh - 70px);
 }
 
 aside {
-    width: 25%;
-    height: $height;
+    width: 20vw;
+    min-height: $height;
     font-family: $font-general;
+    font-weight: 600;
     font-size: $usual-text;
     float: left;
     background: linear-gradient($header-gradient-from 75%, $header-gradient-to);
 
     nav {
         float: right;
-        width: 220px;
-        margin-top: 30px;
+        width: 90%;
         position: relative;
 
         a {
+            line-height: $header-text;
             text-decoration: none;
-            color: #fff;
-        }
-
-        .menu-element {
-            margin-top: 11px;
+            color: #aaa;
         }
 
         .navigation__icon {
-            margin-right: 13px;
-        }
-
-        .navigation__icon {
-            fill: #DCDCDC;
+            float: left;
+            fill: #aaa;
             vertical-align: middle;
             width: 24px;
             height: 24px;
+            margin-right: 13px;
         }
 
-        .selected {
-            fill: #fff !important;
+        .active-link {
+            svg {
+                fill: #fff;
+            }
             color: #fff;
             font-weight: bold;
-            position: relative;
         }
 
-        .selected::before {
+        .active-link::before {
             content: "•";
             position: absolute;
             display: block;
-            margin-right: 10px;
-            left: -20px;
-            font-size: xx-large;
-            top: -6px;
+            font-size: 30px;
+            left: 0;
+            line-height: $header-text;
             color: #82A690;
-        }
-
-
-        .new {
-            position: relative;
-        }
-
-        .new::before {
-            content: "•";
-            position: absolute;
-            display: block;
-            margin-right: 10px;
-            left: -20px;
-            font-size: xx-large;
-            top: -6px;
-            color: #921C24;
         }
     }
 }
 
 .childComponent {
     float: right;
-    width: 75%;
-    height: calc(100vh - 70px);
-    overflow-y: auto;
+    width: 80vw;
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
     aside {
-        nav {
-            width: 180px;
-        }
+        width: 180px;
     }
-    
 }
 
-@media screen and (max-width: 810px) and (min-width: 600px) {
+@media screen and (max-width: $small-screen) {
     aside {
-        min-width: 205px;
-    }
-    
-}
+        width: 55px;
 
-@media screen and (max-width: 600px) {
-    aside {
-        width: 85px;
-
-        nav {
-            width: 50px;
-        }
-
-        .navigation__title {
+        .navigation__title, .navigation__subheader {
             display: none;
         }
     }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import {Component, OnInit, AfterContentChecked} from '@angular/core';
+import {MdDialog} from '@angular/material';
 import { Router } from '@angular/router';
 import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
 import { HttpService } from '../../services/http.service';
@@ -11,10 +11,9 @@ import { WindowObj } from '../../services/window.service';
     templateUrl: './header-view.component.html',
     styleUrls: ['./header-view.component.scss']
 })
-export class HeaderViewComponent implements OnInit {
+export class HeaderViewComponent implements OnInit, AfterContentChecked  {
 
     public thereIsLoggedInUser: boolean;
-    public showUserMenu: boolean;
     public displayName: string;
     private notificationsDialogConfig = {
         height: '300px',
@@ -24,6 +23,7 @@ export class HeaderViewComponent implements OnInit {
             top: '45px',
         }
     };
+    public userPhotoUrl = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
 
     constructor(public dialog: MdDialog,
                 private httpHandler: HttpService,
@@ -34,16 +34,15 @@ export class HeaderViewComponent implements OnInit {
     ngOnInit() {
         const userData = this.window.data._injectedData;
         this.thereIsLoggedInUser = userData.isLoggedIn;
-        this.displayName = `${userData.userFirstName} ${userData.userLastName}`;
-        this.showUserMenu = false;
+    }
+
+    ngAfterContentChecked() {
+        this.userPhotoUrl = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
+        this.displayName = `${this.window.data._injectedData.userFirstName} ${this.window.data._injectedData.userLastName}`;
     }
 
     openDialog() {
         const dialogRef = this.dialog.open(NotificationDialogComponent, this.notificationsDialogConfig);
-    }
-
-    userMenuDialog() {
-        this.showUserMenu = !this.showUserMenu;
     }
 
     logout() {

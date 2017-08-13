@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IHttpReq } from '../../models/http-req';
 import { HttpService } from '../../services/http.service';
-import { ToastrService } from '../../services/toastr.service';
+import { ToasterService } from '../../services/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { EncryptService } from '../../services/encrypt.service';
 
@@ -23,7 +23,7 @@ export class RestorePasswordComponent implements OnInit {
 
   constructor(
     private httpHandler: HttpService,
-    private toastrService: ToastrService,
+    private toastrService: ToasterService,
     public router: ActivatedRoute,
     private encryptor: EncryptService
   ) { }
