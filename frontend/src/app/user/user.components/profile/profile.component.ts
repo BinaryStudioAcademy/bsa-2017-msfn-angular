@@ -8,7 +8,7 @@ import { MdDialog } from '@angular/material';
 import { ConfirmPasswordDialogComponent } from '../../../components/confirm-password-dialog/confirm-password-dialog.component';
 import { WindowObj } from '../../../services/window.service';
 import { IUser } from '../../../models/user';
-
+import { ToasterService } from '../../../services/toastr.service';
 
 @Component({
     selector: 'app-profile',
@@ -47,7 +47,8 @@ export class ProfileComponent implements OnInit {
                 private http: HttpClient,
                 private dialog: MdDialog,
                 private window: WindowObj,
-                private dateService: DateService) {
+                private dateService: DateService,
+                private toasterService: ToasterService) {
         this.cropperSettings = profileService.getCropperSettings();
         this.data = {
             image: this.image
@@ -124,6 +125,11 @@ export class ProfileComponent implements OnInit {
         if ($event.target.files === 0) {
             return;
         }
+        if (file.type.split('/')[0] !== 'image') {
+            this.toasterService.showMessage('error', 'wrong format');
+            this.hideCropper = true;
+            return;
+        }
         const myReader: FileReader = new FileReader();
         myReader.onloadend = (loadEvent: any) => {
             image.src = loadEvent.target.result;
@@ -139,8 +145,10 @@ export class ProfileComponent implements OnInit {
                 this.profileService.savePhoto(this.data.image, this.userId, 'img', result => {
                     if (result.statusCode === 201) {
                         this.image = this.data.image;
+                        this.toasterService.showMessage('success', null);
                     } else {
                         this.data.image = this.image;
+                        this.toasterService.showMessage('error', null);
                     }
                     this.hideCropper = true;
                     this.window.data._injectedData.userPhoto = this.image;

@@ -22,7 +22,7 @@ module.exports = function (req, res, obj, error) {
 
                 // max size is 3mb
                 if (buf.byteLength > 3e+6) {
-                    res.writeHead(500, { 'Status': 'file is too big, max size is 3mb' });
+                    res.writeHead(413, { 'Status': 'file is too big, max size is 3mb' });
                     return res.end();
                 }
 
@@ -52,16 +52,16 @@ module.exports = function (req, res, obj, error) {
                     })
                     .on('close', () => {
                         res.writeHead(201, { 'Status': 'done' });
-                        responseMessage.statusCode = 201
+                        responseMessage.statusCode = 201;
                         responseMessage.statusMessage = 'done';
                         return res.end(JSON.stringify(responseMessage));
                     });
             } else {
-                res.writeHead(400, { 'Status': 'wrong format' });
+                res.writeHead(415, { 'Status': 'wrong format' });
                 return res.end();
             }
         } else {
-            res.writeHead(400, { 'Status': 'empty file' });
+            res.writeHead(422, { 'Status': 'empty file' });
             return res.end();
         }
     });
