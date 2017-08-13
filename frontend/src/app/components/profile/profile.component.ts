@@ -116,7 +116,7 @@ export class ProfileComponent implements OnInit {
     }
 
     openConfirmPasswordDialog() {
-        this.dialog.open(ConfirmPasswordDialogComponent);
+        this.dialog.open(ConfirmPasswordDialogComponent, { data: [this.user.email, this.userId]});
     }
 
     // for cropperImg:

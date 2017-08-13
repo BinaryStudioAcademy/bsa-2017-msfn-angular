@@ -3,8 +3,7 @@ const
     userService = require('../../services/userService'),
     userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/user/',
-    subscribeRoutes = require('./subscribeRoutes'),
-    decrypt = require('../../services/decryptService');
+    subscribeRoutes = require('./subscribeRoutes')
 
     module.exports = function(app) {
     app.get(baseUrl + 'me', function(req, res, next) {
@@ -29,8 +28,6 @@ const
     }, apiResponse);
 
     app.post(baseUrl, function(req, res, next) {
-        req.body.password = decrypt(req.body.password).password;
-        req.body.email = decrypt(req.body.email).email;
         userService.addItem(req.body, function(err, data) {
             res.data = data;
             res.err = err;

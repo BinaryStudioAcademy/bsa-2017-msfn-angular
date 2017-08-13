@@ -9,7 +9,8 @@ var mongoose = require('mongoose'),
         password: 'qwerty',
         isCoach: true,
         isAdmin: true,
-        position: 1
+        position: 1,
+        birthday: '2001-9-11',
     }
 
 module.exports = function () {

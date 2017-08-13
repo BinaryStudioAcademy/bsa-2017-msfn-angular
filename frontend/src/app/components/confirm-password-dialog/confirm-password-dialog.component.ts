@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { EncryptService } from '../../services/encrypt.service';
+import { IHttpReq } from '../../models/http-req';
+import { HttpService } from '../../services/http.service';
+import { MD_DIALOG_DATA } from '@angular/material';
+import { ToasterService } from '../../services/toastr.service';
 
 @Component({
   selector: 'app-confirm-password-dialog',
@@ -8,21 +13,23 @@ import { FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms'
 })
 export class ConfirmPasswordDialogComponent implements OnInit {
   passwordForm: FormGroup;
-  updatedPassword;
-  isDisabled = true;
-  changePassword = false;
+  password: string;
+  email = this.data[0];
+  id = this.data[1];
 
   currentPasswordFormControl = new FormControl('',
     [
-      Validators.required
+      Validators.required,
+      Validators.minLength(6)
     ]
   );
 
-  user = {
-    password: '123456',
-  };
-
-  constructor() { }
+  constructor(
+    @Inject(MD_DIALOG_DATA) public data: string[],
+    private httpService: HttpService,
+    private encryptor: EncryptService,
+    private toastrService: ToasterService
+  ) { }
 
   ngOnInit() {
     this.buildForm();
@@ -30,8 +37,8 @@ export class ConfirmPasswordDialogComponent implements OnInit {
 
   buildForm() {
     this.passwordForm = new FormGroup({
-      newPassword: new FormControl({ value: '', disabled: this.isDisabled }, [Validators.minLength(6), Validators.required]),
-      newPasswordConfirmation: new FormControl({ value: '', disabled: this.isDisabled }, [Validators.minLength(6), Validators.required]),
+      newPassword: new FormControl('', [Validators.minLength(6), Validators.required]),
+      newPasswordConfirmation: new FormControl('', [Validators.minLength(6), Validators.required]),
     }, this.passwordMatchValidator);
   }
 
@@ -43,17 +50,50 @@ export class ConfirmPasswordDialogComponent implements OnInit {
         }
       };
   }
+
   onClick(controls) {
-    this.updatedPassword = controls.newPassword;
-  }
-
-
-  onEnterPasword() {
-    if (this.user.password === this.currentPasswordFormControl.value) {
-      this.changePassword = true;
-      this.isDisabled = false;
-      this.currentPasswordFormControl.disable();
-      this.buildForm();
+    if (controls.newPassword === controls.newPasswordConfirmation) {
+      this.checkCurrentPassword(controls);
+    } else {
+      this.toastrService.showMessage('error', 'Passwords doesn`t match', 'Oh, sorry!');
     }
   }
+
+  checkCurrentPassword(controls) {
+    const encData = this.encryptor.encrypt({
+      'password': this.password,
+      'email': this.email
+    });
+
+    const sendData: IHttpReq = {
+      url: '/api/login',
+      method: 'POST',
+      body: { data: encData }
+    };
+
+    this.httpService.sendRequest(sendData)
+      .then((res) => {
+        if (res.access === true) {
+          this.chengePassword(controls);
+        } else {
+          this.toastrService.showMessage('error', 'incorect current password', 'Oh, sorry!');
+        }
+      });
+  }
+
+  chengePassword(controls) {
+    const password = this.encryptor.encrypt({
+      'password': controls.newPassword
+    });
+
+    const sendData: IHttpReq = {
+      url: '/api/user/' + this.id,
+      method: 'PUT',
+      body: { password: password }
+    };
+
+    this.httpService.sendRequest(sendData);
+  }
+
 }
+

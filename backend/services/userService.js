@@ -1,5 +1,6 @@
 const ApiError = require('./apiErrorService');
 const userRepository = require('../repositories/userRepository');
+const decrypt = require('./decryptService');
 
 function UserService() {
 
@@ -14,6 +15,8 @@ function addItem(body, callback) {
         if (err) return callback(err);
 
         if (data === null) {
+            body.password = decrypt(body.password).password;
+            body.email = decrypt(body.email).email;
             userRepository.add(body, callback);
         } else {
             callback(new ApiError("User with such email already exists"));
@@ -33,6 +36,10 @@ function updateItem(id, body, callback) {
                 if (err) return callback(err);
 
                 if (existingUser && existingUser.id !== id) return callback(new ApiError("User with such email already exists"));
+
+                if (body.password) {
+                    body.password = decrypt(body.password).password;
+                }
 
                 userRepository.update(id, body, callback);
             });
