@@ -11,7 +11,6 @@ import { ForAllUserGuard } from './guards/for-all-user.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
-import { ExerciseTypeService } from './services/exercise-type.service';
 import { EncryptService } from './services/encrypt.service';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
@@ -32,6 +31,7 @@ import { UserModule } from './user/user.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
 
 
 @NgModule({
