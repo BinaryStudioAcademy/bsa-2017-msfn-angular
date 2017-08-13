@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { IsLoggedInGuard } from './guards/is-logged-in.guard';
 import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
 import { ForAdminGuard } from './guards/for-admin.guard';
+import { ForAllUserGuard } from './guards/for-all-user.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
@@ -20,21 +21,18 @@ import { TestHttpComponent } from './components/test-http/test-http.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { WindowObj } from './services/window.service';
-import { ProfileComponent } from './components/profile/profile.component';
 import { ConfirmPasswordDialogComponent } from './components/confirm-password-dialog/confirm-password-dialog.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { ToasterService } from './services/toastr.service';
 import { IndexPageComponent } from './components/index-page/index-page.component';
-import { ListComponent } from './components/list/list.component';
-import { AutocompletePipe } from './components/list/autocomplete.pipe';
 import { GoogleTestComponent } from './components/google-test/google-test.component';
-import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 import { AdminModule } from './admin/admin.module';
+import { UserModule } from './user/user.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
-import { UserModule } from './components/user/user.module';
+
 
 @NgModule({
     imports: [
@@ -54,7 +52,6 @@ import { UserModule } from './components/user/user.module';
         IndexPageComponent,
         ForgotPasswordMailComponent,
         TestSocketsComponent,
-        ProfileComponent,
         GoogleTestComponent,
         ConfirmPasswordDialogComponent,
         TestToastrComponent,
@@ -70,6 +67,7 @@ import { UserModule } from './components/user/user.module';
         IsLoggedInGuard,
         IsLoggedOutGuard,
         ForAdminGuard,
+        ForAllUserGuard,
         EncryptService,
         ExerciseTypeService
     ],

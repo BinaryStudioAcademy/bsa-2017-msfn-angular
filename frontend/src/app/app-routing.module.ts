@@ -8,15 +8,15 @@ import { TestHttpComponent } from './components/test-http/test-http.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { IndexPageComponent } from './components/index-page/index-page.component';
-import { IsLoggedInGuard } from './guards/is-logged-in.guard';
 import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
 import { ForAdminGuard } from './guards/for-admin.guard';
 import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
-import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UserComponent } from './user/user.component';
+import { ForAllUserGuard } from './guards/for-all-user.guard';
 
 const routes: Routes = [
     {
@@ -64,24 +64,22 @@ const routes: Routes = [
         path: 'test-socket', // for testing socket.io
         component: TestSocketsComponent
     },
-    // {
-    //     path: 'exercise-type', // can be removed
-    //     children: [],
-    //     component: ExerciseTypeComponent
-    // },
     {
         path: 'test-toastr', // for testing, can be removed
         children: [],
         component: TestToastrComponent
-    }, {
-        path: 'sidebar', // for testing
-        component: SidebarViewComponent
     },
     {
         path: 'admin',
         children: [],
         component: AdminComponent,
         canActivate: [ForAdminGuard]
+    },
+    {
+        path: 'user',
+        children: [],
+        component: UserComponent,
+        canActivate: [ForAllUserGuard]
     },
     {
         path: 'test-markdown',

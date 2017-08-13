@@ -4,9 +4,9 @@ import { ProfileService } from './profile.service';
 import { HttpClient } from '@angular/common/http';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import {MdDialog} from '@angular/material';
-import {ConfirmPasswordDialogComponent} from '../../../confirm-password-dialog/confirm-password-dialog.component';
-import {WindowObj} from '../../../../services/window.service';
-import {IUser} from '../../../../models/user';
+import {ConfirmPasswordDialogComponent} from '../../../components/confirm-password-dialog/confirm-password-dialog.component';
+import {WindowObj} from '../../../services/window.service';
+import {IUser} from '../../../models/user';
 
 @Component({
     selector: 'app-profile',

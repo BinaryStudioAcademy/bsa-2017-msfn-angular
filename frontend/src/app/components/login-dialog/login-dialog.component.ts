@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { EncryptService } from '../../services/encrypt.service';
 import { IHttpReq } from '../../models/http-req';
 import { HttpService } from '../../services/http.service';
+import { WindowObj } from '../../services/window.service';
 
 @Component({
   selector: 'app-login-dialog',
   templateUrl: './login-dialog.component.html',
   styleUrls: ['./login-dialog.component.scss']
 })
-export class LoginDialogComponent {
+export class LoginDialogComponent implements OnInit {
   EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
   email: string;
   password: string;
@@ -28,8 +29,20 @@ export class LoginDialogComponent {
   constructor(
     private encryptor: EncryptService,
     private httpHandler: HttpService,
-    private router: Router
+    private router: Router,
+    private window: WindowObj
   ) { }
+
+  ngOnInit() {
+      if (this.window.data._injectedData.isLoggedIn) {
+          if (this.window.data._injectedData.role === 'admin') {
+              this.router.navigate(['/admin']);
+          } else {
+              this.router.navigate(['/user']);
+              console.log(this.window.data._injectedData.role);
+          }
+      }
+  }
 
   login() {
     const encData = this.encryptor.encrypt({

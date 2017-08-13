@@ -16,11 +16,9 @@ export class ForAllUserGuard implements CanActivate {
     isUser(): boolean {
         if ((this.window.data._injectedData as any).role === 'usual'
             || (this.window.data._injectedData as any).role === 'coach') {
-            this.router.navigate(['/user']);
-            console.log((this.window.data._injectedData as any).role);
             return true;
         }
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         return false;
     }
 }
