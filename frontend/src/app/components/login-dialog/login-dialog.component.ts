@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EncryptService } from '../../services/encrypt.service';
@@ -11,7 +11,7 @@ import { WindowObj } from '../../services/window.service';
   templateUrl: './login-dialog.component.html',
   styleUrls: ['./login-dialog.component.scss']
 })
-export class LoginDialogComponent implements OnInit {
+export class LoginDialogComponent {
   EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
   email: string;
   password: string;
@@ -32,17 +32,6 @@ export class LoginDialogComponent implements OnInit {
     private router: Router,
     private window: WindowObj
   ) { }
-
-  ngOnInit() {
-      if (this.window.data._injectedData.isLoggedIn) {
-          if (this.window.data._injectedData.role === 'admin') {
-              this.router.navigate(['/admin']);
-          } else {
-              this.router.navigate(['/user']);
-              console.log(this.window.data._injectedData.role);
-          }
-      }
-  }
 
   login() {
     const encData = this.encryptor.encrypt({
