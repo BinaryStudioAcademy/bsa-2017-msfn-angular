@@ -75,6 +75,7 @@ export class ConfirmPasswordDialogComponent implements OnInit {
       .then((res) => {
         if (res.access === true) {
           this.chengePassword(controls);
+          this.toastrService.showMessage('success', 'password has been changed', 'Success!');
         } else {
           this.toastrService.showMessage('error', 'incorect current password', 'Oh, sorry!');
         }
