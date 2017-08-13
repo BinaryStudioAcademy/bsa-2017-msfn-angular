@@ -62,9 +62,7 @@ export class ExerciseListComponent implements OnInit {
   updateItems() {
     setTimeout(() => {
       this.dataSource.itemFilter = this.items.toString();
-      console.log(this.options, this.items);
-      console.log(this.dataSource.itemFilter);
-    }, 1000);
+    }, 200);
   }
 
   getExercises(callback) {
