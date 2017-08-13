@@ -11,11 +11,12 @@
 
 
 .login-block {
-        font-family: $font-general;
+    font-family: $font-general;
+    width: calc(400px - 24px*2);
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    margin-top: $header-top-margin;
+    margin: $header-top-margin auto 0 auto;
     padding: 10px;
 }
 
@@ -31,7 +32,7 @@
 .login-button {
     border: none;
     margin-top: $content-between-margin;
-    width: 90%;
+    width: calc(90% - 10px*2);
     padding: 15px;
     color: $text-main-color;
     background-color: $btn-color;
@@ -45,6 +46,7 @@
 .login-links {
     margin-top: $content-between-margin;
     color: $text-main-color;
+    text-align: center;
 
     a {
        color: $text-main-color;
@@ -56,10 +58,24 @@
     }
 }
 
+.close {
+    float: right;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    color: white;
+    font-size: 18px;
+}
+
+.close:hover {
+    cursor: pointer;
+    color: $text-second-color;
+}
+
 @media only screen and (max-width: $small-screen){
 
     .login-block {
-        width: 300px;
+        width: 90%;
     }
 
     .login-links {

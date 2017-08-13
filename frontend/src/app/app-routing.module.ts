@@ -7,7 +7,6 @@ import { RestorePasswordComponent } from './components/restore-password/restore-
 import { TestHttpComponent } from './components/test-http/test-http.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { LoginComponent } from './components/login/login.component';
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { IsLoggedInGuard } from './guards/is-logged-in.guard';
 import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
@@ -25,12 +24,6 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         component: IndexPageComponent,
-    },
-    {
-        path: 'login',
-        children: [],
-        component: LoginComponent,
-        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'register',
