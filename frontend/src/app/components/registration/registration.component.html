@@ -53,7 +53,6 @@
     </md-input-container>
 
     <div id="birthday" class="input-row">
-      <div>Birthday</div>
       <div id="birthday-inputs">
         <md-select placeholder="Month" [(ngModel)]="birthday.month" (change)="setDayOptions(birthday.month, birthday.year)">
           <md-option *ngFor="let month of monthOptions" [value]="month">
