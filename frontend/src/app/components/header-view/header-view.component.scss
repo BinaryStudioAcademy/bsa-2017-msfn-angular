@@ -1,5 +1,6 @@
-@import "../../../../src/globalStyles/variables";
+@import '../../../globalStyles/variables.scss';
 @import '../../../globalStyles/text.scss';
+@import '../../../globalStyles/indentations.scss';
 
 $header-inner-margin: 5%;
 $header-icons-intendation: 14px;
@@ -47,11 +48,22 @@ header {
     }
 
     .settings {
+        display: flex;
+        align-items: center;
     
         .settings__name {
-            margin-left: $header-icons-intendation;
+            margin: 0 $header-icons-intendation;
             vertical-align: super;
             font-size: 17px;
+        }
+
+        .settings__photo {
+            width: 35px;
+            border-radius: 50%;
+        }
+
+        md-icon {
+            cursor: pointer;
         }
     }
 
@@ -66,10 +78,18 @@ header {
         }
     }
 }
+md-menu {
+    display: none;
+}
 
-@media screen and (max-width: 390px) {
+
+$large-screen: 960px;
+$medium-screen: 600px;
+$small-screen: 440px;
+
+@media screen and (max-width: $small-screen) {
     header {
-        .logo__title {
+        .settings__photo, .settings__name, .logo__title {
             display: none;
         }
     }

@@ -1,9 +1,12 @@
+import { CommonModule } from '@angular/common';
 // @angular
 import { ImportModule } from './import.module';
 import { NgModule } from '@angular/core';
 
 // other components
-import { IsLoggedGuard } from './guards/is-logged.guard';
+import { IsLoggedInGuard } from './guards/is-logged-in.guard';
+import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
+import { ForAdminGuard } from './guards/for-admin.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
@@ -21,8 +24,7 @@ import { WindowObj } from './services/window.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ConfirmPasswordDialogComponent } from './components/confirm-password-dialog/confirm-password-dialog.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
-import { ToastrService } from './services/toastr.service';
-import { ExerciseTypeComponent } from './components/exercise-type/exercise-type.component';
+import { ToasterService } from './services/toastr.service';
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
@@ -30,11 +32,18 @@ import { GoogleTestComponent } from './components/google-test/google-test.compon
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
-import { ExerciseCreateComponent } from './components/exercise-create/exercise-create.component';
-import { AdminModule } from './components/admin/admin.module';
+import { AdminModule } from './admin/admin.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 
 @NgModule({
+    imports: [
+        ImportModule,
+        AdminModule,
+        AppRoutingModule,
+        CommonModule
+    ],
     declarations: [
         AppComponent,
         RegistrationComponent,
@@ -46,34 +55,30 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
         IndexPageComponent,
         ForgotPasswordMailComponent,
         TestSocketsComponent,
-        ListComponent,
-        ExerciseTypeComponent,
-        AutocompletePipe,
         ProfileComponent,
         GoogleTestComponent,
         ConfirmPasswordDialogComponent,
-        ExerciseListComponent,
         TestToastrComponent,
         SidebarViewComponent,
         NotificationDialogComponent,
-        ExerciseCreateComponent,
-        TestMarkdownComponent
-    ],
-    imports: [
-        ImportModule,
-        AdminModule,
-        AppRoutingModule
+        TestMarkdownComponent,
+        PageNotFoundComponent,
+        LoginDialogComponent,
     ],
     providers: [
+        ToasterService,
         HttpService,
         WindowObj,
-        IsLoggedGuard,
+        IsLoggedInGuard,
+        IsLoggedOutGuard,
+        ForAdminGuard,
         EncryptService,
-        ToastrService
+        ExerciseTypeService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,
-        NotificationDialogComponent
+        NotificationDialogComponent,
+        LoginDialogComponent
     ],
     bootstrap: [AppComponent]
 

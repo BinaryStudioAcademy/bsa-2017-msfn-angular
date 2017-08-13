@@ -46,6 +46,7 @@ export class LoginComponent {
     this.httpHandler.sendRequest(sendData)
       .then((res) => {
         if (res.access) {
+          location.reload();
           this.router.navigate(['/profile']);
         }
       });
