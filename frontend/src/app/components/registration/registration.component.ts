@@ -47,8 +47,8 @@ export class RegistrationComponent implements OnInit {
     monthOptions = this.dateService.generateMonths();
     yearOptions = this.dateService.generateYears();
     dayOptions = this.dateService.generateDays(
-      this.birthday.month,
-      this.birthday.year
+        this.birthday.month,
+        this.birthday.year
     );
 
     emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
@@ -115,7 +115,8 @@ export class RegistrationComponent implements OnInit {
 
             this.user.birthday = birthday;
             this.userToPass = Object.assign({}, this.user);
-
+            this.userToPass.password = this.encryptor.encrypt({'password': this.userToPass.password});
+            this.userToPass.email = this.encryptor.encrypt({'email': this.userToPass.email});
             const registerReq: IHttpReq = {
                 url: '/api/user',
                 method: 'POST',
@@ -124,20 +125,19 @@ export class RegistrationComponent implements OnInit {
             };
             this.httpService.sendRequest(registerReq).then(data => {
                 const encData = this.encryptor.encrypt({
-                        'password': this.userToPass.password,
-                        'email': this.userToPass.email
+                        'password': this.user.password,
+                        'email': this.user.email
                     }),
-                    sendData: IHttpReq = {
+                    loginReq: IHttpReq = {
                         url: '/api/login',
                         method: 'POST',
                         body: {data: encData}
                     };
 
-                this.httpService.sendRequest(sendData)
+                this.httpService.sendRequest(loginReq)
                     .then((res) => {
                         if (res.access) {
                             location.reload();
-                            this.router.navigate(['/profile']);
                         }
                     });
             });
