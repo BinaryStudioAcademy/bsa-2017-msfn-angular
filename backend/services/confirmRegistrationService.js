@@ -23,9 +23,7 @@ function sendEmail(code, callback) {
         },
         (err, data) => {
             if (err) return callback(err);
-            if (data.rejected.length == 0) {
-                data.status = 'ok';
-            }
+            
             callback(null, data);
         }
     );

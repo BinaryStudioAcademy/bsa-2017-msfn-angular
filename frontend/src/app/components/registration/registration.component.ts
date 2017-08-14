@@ -132,7 +132,7 @@ export class RegistrationComponent {
                     successMessage: 'Thank you! Check your mailbox, or spam folder',
                     failMessage: 'Fail of sending confirmation link',
                 };
-                this.httpService.sendRequest(sendConfirmLink, true).then(() => {
+                this.httpService.sendRequest(sendConfirmLink).then(() => {
                     console.log('Copy/Paste this link to your browser, to finish your registration:');
                     console.log('localhost:3060/api/confirm-registration/' + cache);
                 });

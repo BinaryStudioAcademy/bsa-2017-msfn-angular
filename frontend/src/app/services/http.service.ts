@@ -26,7 +26,7 @@ export class HttpService {
         return error;
     }
 
-    public sendRequest(options: IHttpReq, needNotif = false): Promise<any> {
+    public sendRequest(options: IHttpReq): Promise<any> {
         let url: string;
 
         if (!options.url) {
@@ -44,7 +44,7 @@ export class HttpService {
             return this._http.get(url)
                 .toPromise()
                 .then(response => {
-                    if (needNotif) {
+                    if (options.successMessage) {
                         this.toastrService.showMessage('success', null, successMessage);
                     }
                     return response.json();

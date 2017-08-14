@@ -15,7 +15,6 @@ module.exports = function (app) {
 
     app.post(baseUrl, function (req, res, next) {
         confirmRegistrationService.sendEmail(req.body.code, function (err, data) {
-            if (data) {res.redirect('..'); res.send({hello: "mansfic"})}
             res.data = data;
             res.err = err;
             next();
