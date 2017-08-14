@@ -29,7 +29,7 @@ const
 
     app.post(baseUrl, function(req, res, next) {
         userService.addItem(req.body, function(err, data) {
-            res.data = data;
+            res.data = {"registered": "true"};
             res.err = err;
             next();
         });

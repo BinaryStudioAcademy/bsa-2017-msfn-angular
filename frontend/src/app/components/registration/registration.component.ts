@@ -124,7 +124,6 @@ export class RegistrationComponent {
                 failMessage: 'You can\'t register now, sorry',
             };
             this.httpService.sendRequest(registerReq).then(data => {
-                console.log(data);
                 let cache;
                 const sendConfirmLink: IHttpReq = {
                     url: '/api/confirm-registration',
