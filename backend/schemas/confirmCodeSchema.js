@@ -6,6 +6,7 @@ var ttl = require('mongoose-ttl');
 const ConfirmCode = new Schema({
     user: String,
     confirmCode: String,
+    newRootMail: String
 });
 
 let makeid = () => {

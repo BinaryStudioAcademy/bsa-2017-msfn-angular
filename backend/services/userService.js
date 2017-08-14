@@ -1,6 +1,7 @@
 const ApiError = require('./apiErrorService');
 const userRepository = require('../repositories/userRepository');
 const decrypt = require('./decryptService');
+const emailService = require('../services/emailService');
 
 function UserService() {
 
@@ -17,6 +18,22 @@ function addItem(body, callback) {
             body.password = decrypt(body.password).password;
             body.email = decrypt(body.email).email;
             userRepository.add(body, callback);
+
+            emailService.send({
+                to: body.email,
+                subject: 'Your MSFN registration',
+                html: '<table><tr><td>Congratulations, ' +
+                    body.firstName +
+                    '!</td></tr> <tr><td>You have become a part of our fantastic fitness network!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
+                    '<a href="http://localhost:3060/api/user/activate?email=' + body.email + '&token=' + body.activateToken + '">' + 'Activate account </a> </td></tr></table>'
+            }, (err, data) => {
+                if (err) return callback(err);
+                if (data.rejected.length == 0) {
+                    data.status = 'ok';
+                }
+                callback(null, data);
+            }
+        );
         } else {
             callback(new ApiError("User with such email already exists"));
         }
