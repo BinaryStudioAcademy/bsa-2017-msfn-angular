@@ -8,6 +8,7 @@ import { UserComponent } from './user.component';
 import { SidebarViewComponent } from '../components/sidebar-view/sidebar-view.component';
 import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
+import { TrainingListComponent } from './user.components/training-list/training-list.component';
 
 @NgModule({
     imports: [
@@ -20,6 +21,7 @@ import { ForAllUserGuard } from '../guards/for-all-user.guard';
         SidebarViewComponent,
         UserComponent,
         ProfileComponent,
+        TrainingListComponent,
     ],
     providers: [
         ForAllUserGuard,

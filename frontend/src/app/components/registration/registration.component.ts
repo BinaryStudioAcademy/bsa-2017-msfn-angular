@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { IHttpReq } from '../../models/http-req';
@@ -21,7 +21,7 @@ import { DateService } from '../../services/date.service';
     ]
 })
 
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
     userError = '';
     yearError = false;
 
@@ -144,12 +144,5 @@ export class RegistrationComponent implements OnInit {
         } else {
             this.userError = 'Please fill in all fields correctly';
         }
-    }
-
-    ngOnInit() {
-        const closeX = document.getElementById('closeReg');
-        closeX.onfocus = function () {
-            closeX.blur();
-        };
     }
 }
