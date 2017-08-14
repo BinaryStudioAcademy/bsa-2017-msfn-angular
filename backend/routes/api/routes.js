@@ -10,6 +10,7 @@ module.exports = function (app) {
         confirmRegistrationRoutes: require('./confirmRegistrationRoutes')(app),
         sportRoutes: require('./sportRoutes')(app),
         fileRoutes: require('./fileRoutes')(app),
-        exerciseRoutes: require('./exerciseRoutes')(app)
+        exerciseRoutes: require('./exerciseRoutes')(app),
+        changePasswordRoutes: require('./changePasswordRoutes')(app),
     };
 };

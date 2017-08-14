@@ -17,12 +17,11 @@ export class HttpService {
     constructor(private _http: Http, private toastrService: ToasterService, private _router: Router) { }
 
     private handleError = (error: any): Promise<any> => {
-        // when user try to change password, and sent wrong current password,
-        // we have the same error.status, but we don't need navigate to main page
-        // if (error && error.status === 401) {
-        //    this._router.navigate(['/']);
-        // }
-        this.toastrService.showMessage('error', error.message, this.failMessage);
+        if (error && error.status === 401) {
+            this._router.navigate(['/']);
+        }
+        const message = JSON.parse(error._body).error;
+        this.toastrService.showMessage('error', message, this.failMessage);
         return error;
     }
 

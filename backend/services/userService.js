@@ -52,10 +52,6 @@ function updateItem(id, body, callback) {
 
                 if (existingUser && existingUser.id !== id) return callback(new ApiError("User with such email already exists"));
 
-                if (body.password) {
-                    body.password = decrypt(body.password).password;
-                }
-
                 userRepository.update(id, body, callback);
             });
         }
