@@ -18,8 +18,7 @@ function sendEmail(code, callback) {
         {
             to: decodedEmail,
             subject: "Welcome to MSFN | Please finish your registration",
-            html: `<h2>Go to link to finish your registration</h2>
-                <a href="${ourHost}${code}"</a>`
+            html: `<h2>Go to <a href="${ourHost}${code}">link</a> to finish your registration</h2>`
         },
         (err, data) => {
             if (err) return callback(err);
