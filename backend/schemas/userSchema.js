@@ -18,6 +18,7 @@ const User = new Schema({
     },
     isCoach: Boolean,
     isAdmin: Boolean,
+    isActivated: Boolean,
     requestForCoaching: Boolean,
     position: Number,
     salt: {

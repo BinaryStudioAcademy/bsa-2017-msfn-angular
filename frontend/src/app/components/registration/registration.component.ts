@@ -124,22 +124,18 @@ export class RegistrationComponent {
                 failMessage: 'You can\'t register now, sorry',
             };
             this.httpService.sendRequest(registerReq).then(data => {
-                const encData = this.encryptor.encrypt({
-                        'password': this.user.password,
-                        'email': this.user.email
-                    }),
-                    loginReq: IHttpReq = {
-                        url: '/api/login',
-                        method: 'POST',
-                        body: {data: encData}
-                    };
-
-                this.httpService.sendRequest(loginReq)
-                    .then((res) => {
-                        if (res.access) {
-                            location.reload();
-                        }
-                    });
+                let cache;
+                const sendConfirmLink: IHttpReq = {
+                    url: '/api/confirm-registration',
+                    method: 'POST',
+                    body: {code: cache = this.encryptor.encrypt(this.user.email)},
+                    successMessage: 'Thank you! Check your mailbox, or spam folder',
+                    failMessage: 'Fail of sending confirmation link',
+                };
+                this.httpService.sendRequest(sendConfirmLink, true).then(() => {
+                    console.log('Copy/Paste this link to your browser, to finish your registration:');
+                    console.log('localhost:3060/api/confirm-registration/' + cache);
+                });
             });
         } else {
             this.userError = 'Please fill in all fields correctly';

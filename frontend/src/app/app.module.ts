@@ -30,6 +30,7 @@ import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ConfirmedPageComponent } from './components/confirmed-page/confirmed-page.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
 
@@ -58,6 +59,7 @@ import { ExerciseTypeService } from './admin/admin.components/exercise-type/exer
         NotificationDialogComponent,
         TestMarkdownComponent,
         PageNotFoundComponent,
+        ConfirmedPageComponent,
         LoginDialogComponent,
     ],
     providers: [

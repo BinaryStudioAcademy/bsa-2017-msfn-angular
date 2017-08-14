@@ -10,6 +10,8 @@ Repository.prototype.deleteById = deleteById;
 Repository.prototype.getAll = getAll;
 Repository.prototype.getById = getById;
 Repository.prototype.findByObject = findByObject;
+Repository.prototype.update = update;
+Repository.prototype.get = get;
 
 function add(data, callback) {
     const model = this.model;
@@ -45,12 +47,12 @@ function findByObject(obj, populate, select, callback) {
     query.exec(callback);
 }
 
-Repository.prototype.update = function(id, body, callback){
+function update(id, body, callback){
     let query = this.model.update({_id:id}, body);
     query.exec(callback);
 };
 
-Repository.prototype.get = function(params, callback){
+function get(params, callback){
     if (params.filter === undefined){
         params.filter = {};
     }

@@ -10,7 +10,7 @@ UserService.prototype.addItem = addItem;
 UserService.prototype.updateItem = updateItem;
 
 function addItem(body, callback) {
-    userRepository.getUserByEmail(body.email, (err, data) => {
+    userRepository.getUserByEmail(decrypt(body.email).email, (err, data) => {
         "use strict";
         if (err) return callback(err);
 
