@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistrationService } from './registration.service';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { IHttpReq } from '../../models/http-req';
 import { Router } from '@angular/router';
 import { EncryptService } from '../../services/encrypt.service';
+import { IUser } from '../../models/user';
+import { RegistrationService } from './registration.service';
+import { DateService } from '../../services/date.service';
 
 @Component({
     selector: 'app-registration',
@@ -14,37 +16,48 @@ import { EncryptService } from '../../services/encrypt.service';
         './registration.component.scss'
     ],
     providers: [
-        RegistrationService
+        RegistrationService,
+        DateService
     ]
 })
 
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
     userError = '';
     yearError = false;
 
+    userToPass: IUser;
+
     user = {
         gender: 'Male',
-        email: null,
-        firstName: null,
-        lastName: null,
-        month: 'January',
-        day: 1,
-        year: 2000,
-        height: null,
-        weight: null,
-        password: null,
+        email: '',
+        firstName: '',
+        lastName: '',
+        height: '',
+        weight: '',
+        password: '',
+        birthday: ''
     };
 
-    monthOptions = this.registrationService.generateMonths();
-    yearOptions = this.registrationService.generateYears();
-    dayOptions = this.registrationService.generateDays(this.user.month, this.user.year);
+    birthday = {
+        year: 2000,
+        month: 'January',
+        day: 1
+    };
+
+    monthOptions = this.dateService.generateMonths();
+    yearOptions = this.dateService.generateYears();
+    dayOptions = this.dateService.generateDays(
+        this.birthday.month,
+        this.birthday.year
+    );
 
     emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
 
-    constructor(private registrationService: RegistrationService,
-                private httpService: HttpService,
+    constructor(private httpService: HttpService,
                 private router: Router,
-                private encryptor: EncryptService) {
+                private encryptor: EncryptService,
+                private registrationService: RegistrationService,
+                private dateService: DateService) {
     }
 
     emailFormControl = new FormControl('', [
@@ -82,7 +95,7 @@ export class RegistrationComponent implements OnInit {
     ]);
 
     setDayOptions(month: string, year: number): void {
-        this.dayOptions = this.registrationService.generateDays(month, year);
+        this.dayOptions = this.dateService.generateDays(month, year);
     }
 
     register(): void {
@@ -92,44 +105,40 @@ export class RegistrationComponent implements OnInit {
             this.heightFormControl.valid &&
             this.weightFormControl.valid &&
             this.passwordFormControl.valid) {
-            this.yearError = this.registrationService.checkYear(this.user.year);
+            this.userError = '';
+            const monthNumber = this.monthOptions.indexOf(this.birthday.month) + 1;
+            const birthday = this.dateService.convertDateToIso({
+                year: this.birthday.year,
+                month: monthNumber,
+                day: this.birthday.day
+            });
 
-            if (!this.yearError) {
-                this.userError = '';
-                const user = this.user;
-                console.log(user);
-                const registerReq: IHttpReq = {
-                    url: '/api/user',
+            this.user.birthday = birthday;
+            this.userToPass = Object.assign({}, this.user);
+            this.userToPass.password = this.encryptor.encrypt({'password': this.userToPass.password});
+            this.userToPass.email = this.encryptor.encrypt({'email': this.userToPass.email});
+            const registerReq: IHttpReq = {
+                url: '/api/user',
+                method: 'POST',
+                body: this.userToPass,
+                failMessage: 'You can\'t register now, sorry',
+            };
+            this.httpService.sendRequest(registerReq).then(data => {
+                let cache;
+                const sendConfirmLink: IHttpReq = {
+                    url: '/api/confirm-registration',
                     method: 'POST',
-                    body: user,
-                    failMessage: 'You can\'t register now, sorry',
+                    body: {code: cache = this.encryptor.encrypt(this.user.email)},
+                    successMessage: 'Thank you! Check your mailbox, or spam folder',
+                    failMessage: 'Fail of sending confirmation link',
                 };
-                this.httpService.sendRequest(registerReq).then(data => {
-                    console.log(data);
-                    const encData = this.encryptor.encrypt({
-                            'password': user.password,
-                            'email': user.email
-                        }),
-                        sendData: IHttpReq = {
-                            url: '/api/login',
-                            method: 'POST',
-                            body: {data: encData}
-                        };
-
-                    this.httpService.sendRequest(sendData)
-                        .then((res) => {
-                            if (res.access) {
-                                location.reload();
-                                this.router.navigate(['/profile']);
-                            }
-                        });
+                this.httpService.sendRequest(sendConfirmLink).then(() => {
+                    console.log('Copy/Paste this link to your browser, to finish your registration:');
+                    console.log('localhost:3060/api/confirm-registration/' + cache);
                 });
-            }
+            });
         } else {
             this.userError = 'Please fill in all fields correctly';
         }
-    }
-
-    ngOnInit() {
     }
 }

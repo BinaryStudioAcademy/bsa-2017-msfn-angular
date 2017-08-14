@@ -1,0 +1,48 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/text.scss';
+@import "../../../../globalStyles/indentations";
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+.exercise-create-form {
+    width: 60vw;
+    display: flex;
+    align-items: center;
+    margin: 50px auto;
+    flex-direction: column;
+    padding: 20px 50px 40px;
+    background: #222222;
+    background: linear-gradient(#424242, #222222);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    .input {
+        width: 100%;
+    }
+    textarea {
+        min-height: 100px;
+    }
+    .select-row {
+        margin: 15px 0;
+        .mat-select-placeholder{
+            font-size: 14px;
+        }
+    }
+    .mat-select-trigger {
+        font-size: 14px;
+    }
+    .btn-save {
+        border: none;
+        margin-top: $content-between-margin;
+        width: 90%;
+        padding: 5px;
+        color: $text-main-color;
+        background-color: $btn-color;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 50px;
+        cursor: pointer;
+        outline: none;
+    }
+}
+

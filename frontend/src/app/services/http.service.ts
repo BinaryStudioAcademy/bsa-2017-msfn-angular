@@ -17,15 +17,18 @@ export class HttpService {
     constructor(private _http: Http, private toastrService: ToasterService, private _router: Router) { }
 
     private handleError = (error: any): Promise<any> => {
-        if (error && error.status === 401) {
-            this._router.navigate(['/login']);
-        }
+        // when user try to change password, and sent wrong current password,
+        // we have the same error.status, but we don't need navigate to main page
+        // if (error && error.status === 401) {
+        //    this._router.navigate(['/']);
+        // }
         this.toastrService.showMessage('error', error.message, this.failMessage);
         return error;
     }
 
     public sendRequest(options: IHttpReq): Promise<any> {
         let url: string;
+
         if (!options.url) {
             return Promise.reject('Url required');
         } else {
@@ -41,7 +44,9 @@ export class HttpService {
             return this._http.get(url)
                 .toPromise()
                 .then(response => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (options.successMessage) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return response.json();
                 })
                 .catch(this.handleError);
@@ -50,7 +55,9 @@ export class HttpService {
                 .post(url, body, { headers: headers })
                 .toPromise()
                 .then(response => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (options.successMessage) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return response.json();
                 })
                 .catch(this.handleError);
@@ -59,7 +66,9 @@ export class HttpService {
                 .put(url, body, { headers: headers })
                 .toPromise()
                 .then(() => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (options.successMessage) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return body;
                 })
                 .catch(this.handleError);
@@ -67,7 +76,9 @@ export class HttpService {
             return this._http.delete(url, { headers: headers })
                 .toPromise()
                 .then(() => {
-                    this.toastrService.showMessage('success', null, successMessage);
+                    if (options.successMessage) {
+                        this.toastrService.showMessage('success', null, successMessage);
+                    }
                     return null;
                 })
                 .catch(this.handleError);

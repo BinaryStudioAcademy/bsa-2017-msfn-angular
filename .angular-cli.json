@@ -1,51 +1,51 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "project": {
-    "name": "msfn",
-    "ejected": true
-  },
-  "apps": [
-    {
-      "root": "./frontend/src",
-      "outDir": "dist",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "tsconfig": "tsconfig.app.json",
-      "prefix": "app",
-      "styles": [
-        "styles.scss"
-      ],
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
-    }
-  ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
-  "lint": [
-    {
-      "project": "src/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
-    }
-  ],
-  "defaults": {
-    "styleExt": "scss",
-    "component": {
-      "spec": false
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "project": {
+        "name": "msfn",
+        "ejected": true
     },
-    "service": {
-      "spec": false
+    "apps": [
+        {
+            "root": "./frontend/src",
+            "outDir": "dist",
+            "assets": [
+                "assets",
+                "favicon.ico"
+            ],
+            "index": "index.html",
+            "main": "main.ts",
+            "polyfills": "polyfills.ts",
+            "tsconfig": "tsconfig.app.json",
+            "prefix": "app",
+            "styles": [
+                "styles.scss"
+            ],
+            "scripts": [],
+            "environmentSource": "environments/environment.ts",
+            "environments": {
+                "dev": "environments/environment.ts",
+                "prod": "environments/environment.prod.ts"
+            }
+        }
+    ],
+    "e2e": {
+        "protractor": {
+            "config": "./protractor.conf.js"
+        }
+    },
+    "lint": [
+        {
+            "project": "src/tsconfig.app.json",
+            "exclude": "**/node_modules/**"
+        }
+    ],
+    "defaults": {
+        "styleExt": "scss",
+        "component": {
+            "spec": false
+        },
+        "service": {
+            "spec": false
+        }
     }
-  }
 }

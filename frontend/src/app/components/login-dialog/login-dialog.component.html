@@ -1,0 +1,35 @@
+
+    <h2 md-dialog-title>Login
+        <button md-dialog-close class="material-icons close" tabindex="-1">close</button>
+    </h2>
+    <form class="login-block">
+        <md-input-container class="login-imput-container">
+            <input autofocus mdInput type="email" placeholder="Email" [(ngModel)]="email" [formControl]="emailFormControl">
+            <md-error *ngIf="emailFormControl.hasError('pattern')">
+                Please enter a valid email address
+            </md-error>
+            <md-error *ngIf="emailFormControl.hasError('required')">
+                Email is <strong>required</strong>
+            </md-error>
+        </md-input-container>
+
+        <md-input-container class="login-imput-container">
+            <input type="password" mdInput placeholder="Password" [(ngModel)]="password" [formControl]="passwordFormControl" (keyup.enter)="login()">
+            <md-error *ngIf="passwordFormControl.hasError('minLength')">
+                Password should be al least 3 symbols
+            </md-error>
+            <md-error *ngIf="passwordFormControl.hasError('required')">
+                Password is <strong>required</strong>
+            </md-error>
+        </md-input-container>
+
+        <button class="login-button" [disabled]="!passwordFormControl.valid && !emailFormControl.valid" (click)="login()">Sign in</button>
+        <div class="login-links">Sign in with
+            <a href="/auth/facebook">Facebook</a>
+            <a href="/auth/google">Google</a>
+            <a href="/auth/twitter">Twitter</a>
+        </div>
+        <div class="login-links">
+            <a routerLink="/forget-password">Forgot password?</a>
+        </div>
+    </form>

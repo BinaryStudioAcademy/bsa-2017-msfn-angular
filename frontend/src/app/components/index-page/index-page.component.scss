@@ -6,6 +6,8 @@
 }
 
 .container {
+    display: flex;
+    align-items: center;
     padding: 0 5%;
     width: 100%;
     height: 100%;
@@ -14,7 +16,8 @@
 .index__banner-wrap {
     width: 100%;
     height: calc(100vh - 70px);
-    background: url(./floor.png) center;
+    background: url('../../../globalStyles/img/floor.png') center;
+    background-attachment: fixed; 
     background-size: cover;
 }
 
@@ -22,7 +25,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
     width: 100%;
 
     .index__heading-image {
@@ -74,6 +76,9 @@
 }
 
 @media screen and (max-width: 768px) {
+    .container {
+        display: block;
+    }
     .index__banner-content {
         .index__auth-wrap {
             margin: 40px 20px;
@@ -92,8 +97,4 @@
             margin: 20px 0;
         }
     }
-}
-
-@media screen and (max-width: 480px) {
-
 }

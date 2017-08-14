@@ -3,33 +3,33 @@ const
     userService = require('../../services/userService'),
     userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/user/',
-    subscribeRoutes = require('./subscribeRoutes');
+    subscribeRoutes = require('./subscribeRoutes')
 
-module.exports = function (app) {
-    app.get(baseUrl+'me', function (req, res, next) {
+    module.exports = function(app) {
+    app.get(baseUrl + 'me', function(req, res, next) {
         res.data = req.session.user;
         next();
     }, apiResponse);
 
-    app.get(baseUrl, function (req, res, next) {
-        userRepository.getAll(function (err, data) {
+    app.get(baseUrl, function(req, res, next) {
+        userRepository.getAll(function(err, data) {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.get(baseUrl + ':id', function (req, res, next) {
-        userRepository.getById(req.params.id, function (err, data) {
+    app.get(baseUrl + ':id', function(req, res, next) {
+        userRepository.getById(req.params.id, function(err, data) {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.post(baseUrl, function (req, res, next) {
-        userService.addItem(req.body, function (err, data) {
-            res.data = data;
+    app.post(baseUrl, function(req, res, next) {
+        userService.addItem(req.body, function(err, data) {
+            res.data = {"registered": "true"};
             res.err = err;
             next();
         });
@@ -43,16 +43,16 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.put(baseUrl + ':id', function (req, res, next) {
-        userService.updateItem(req.params.id, req.body, function (err, data) {
+    app.put(baseUrl + ':id', function(req, res, next) {
+        userService.updateItem(req.params.id, req.body, function(err, data) {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.delete(baseUrl + ':id', function (req, res, next) {
-        userRepository.deleteById(req.params.id, function (err, data) {
+    app.delete(baseUrl + ':id', function(req, res, next) {
+        userRepository.deleteById(req.params.id, function(err, data) {
             res.data = data;
             res.err = err;
             next();

@@ -6,10 +6,11 @@ var mongoose = require('mongoose'),
         firstName: 'Arnold',
         lastName: 'Schwarzenegger',
         email: 'admin@msfn.com',
-        password: 'bsa2017Angular',
+        password: 'qwerty',
         isCoach: true,
         isAdmin: true,
-        position: 1
+        position: 1,
+        birthday: '2001-9-11',
     }
 
 module.exports = function () {

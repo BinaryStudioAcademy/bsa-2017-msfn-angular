@@ -7,13 +7,12 @@ import { NgModule } from '@angular/core';
 import { IsLoggedInGuard } from './guards/is-logged-in.guard';
 import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
 import { ForAdminGuard } from './guards/for-admin.guard';
+import { ForAllUserGuard } from './guards/for-all-user.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
-import { ExerciseTypeService } from './services/exercise-type.service';
 import { EncryptService } from './services/encrypt.service';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { LoginComponent } from './components/login/login.component';
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
@@ -21,31 +20,33 @@ import { TestHttpComponent } from './components/test-http/test-http.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
 import { WindowObj } from './services/window.service';
-import { ProfileComponent } from './components/profile/profile.component';
 import { ConfirmPasswordDialogComponent } from './components/confirm-password-dialog/confirm-password-dialog.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { ToasterService } from './services/toastr.service';
 import { IndexPageComponent } from './components/index-page/index-page.component';
-import { SidebarViewComponent } from './components/sidebar-view/sidebar-view.component';
+import { GoogleTestComponent } from './components/google-test/google-test.component';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
-import { AdminModule } from './components/admin/admin.module';
+import { AdminModule } from './admin/admin.module';
+import { UserModule } from './user/user.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { AddNewEmailDialogComponent } from './components/add-new-email-dialog/add-new-email-dialog.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { UserListComponent } from './components/admin/admin.components/user-list/user-list.component';
 import { ChangeRootEmailDialogComponent } from './components/change-root-email-dialog/change-root-email-dialog.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { ConfirmedPageComponent } from './components/confirmed-page/confirmed-page.component';
+import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
 
 @NgModule({
     imports: [
         ImportModule,
         AdminModule,
+        UserModule,
         AppRoutingModule,
         CommonModule
     ],
     declarations: [
         AppComponent,
         RegistrationComponent,
-        LoginComponent,
         ForgetPasswordComponent,
         TestHttpComponent,
         HeaderViewComponent,
@@ -53,15 +54,16 @@ import { ChangeRootEmailDialogComponent } from './components/change-root-email-d
         IndexPageComponent,
         ForgotPasswordMailComponent,
         TestSocketsComponent,
-        ProfileComponent,
+        GoogleTestComponent,
         ConfirmPasswordDialogComponent,
         TestToastrComponent,
-        SidebarViewComponent,
         NotificationDialogComponent,
         TestMarkdownComponent,
         AddNewEmailDialogComponent,
         PageNotFoundComponent,
         ChangeRootEmailDialogComponent,
+        ConfirmedPageComponent,
+        LoginDialogComponent,
     ],
     providers: [
         ToasterService,
@@ -70,6 +72,7 @@ import { ChangeRootEmailDialogComponent } from './components/change-root-email-d
         IsLoggedInGuard,
         IsLoggedOutGuard,
         ForAdminGuard,
+        ForAllUserGuard,
         EncryptService,
         ExerciseTypeService
     ],
@@ -78,6 +81,8 @@ import { ChangeRootEmailDialogComponent } from './components/change-root-email-d
         NotificationDialogComponent,
         AddNewEmailDialogComponent,
         ChangeRootEmailDialogComponent,
+        LoginDialogComponent,
+        RegistrationComponent
     ],
     bootstrap: [AppComponent]
 

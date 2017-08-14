@@ -8,17 +8,18 @@ const User = new Schema({
     firstName: String,
     lastName: String,
     email: {
-      type: String,
-      required: true,
-      unique: true
+        type: String,
+        required: true,
+        unique: true
     },
     secondaryEmails: [String],
     password: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
     isCoach: Boolean,
     isAdmin: Boolean,
+    isActivated: Boolean,
     requestForCoaching: Boolean,
     position: Number,
     salt: {
@@ -30,9 +31,7 @@ const User = new Schema({
     follow: [ObjectId],
     userPhoto: String,
     gender: String,
-    month: String,
-    day: Number,
-    year: Number,
+    birthday: String,
     height: Number,
     weight: Number,
 });
@@ -45,7 +44,6 @@ console.log('ggg22');
     bcrypt.genSalt(1012, (err, salt) => {
         userData.salt = salt;
         this.encryptPassword(this.password, (err, hash) => {
-            "use strict";
             if (err) return next(err);
 
             userData.password = hash;
@@ -59,18 +57,17 @@ User.pre('update', function(next) {
   
   if (!fields || !fields.password) return next();
   bcrypt.genSalt(1012, (err, salt) => {
-    fields.salt = salt;
-    bcrypt.hash(fields.password, fields.salt, null, (err, hash) => {
-      if (err) return next(err);
+        fields.salt = salt;
+        bcrypt.hash(fields.password, fields.salt, null, (err, hash) => {
+            if (err) return next(err);
 
-      fields.password = hash;
-      next();
+            fields.password = hash;
+            next();
+        });
     });
-  });
 });
 
 User.methods.checkPassword = function(password, callback){
-    "use strict";
     this.encryptPassword(password, (err, hash) => {
         if (err) return callback(err);
         callback(err, (hash === this.password))
@@ -78,7 +75,6 @@ User.methods.checkPassword = function(password, callback){
 };
 
 User.methods.encryptPassword = function(password, callback){
-    "use strict";
     bcrypt.hash(password, this.salt, null, (err, hash) => {
         callback(err, hash);
     });

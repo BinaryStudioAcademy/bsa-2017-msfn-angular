@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/following', function (req, res, next) {
-    subscribeService.getFollowing(req.body, function (err, data) {
+    subscribeService.getFollowing(req, function (err, data) {
         res.data = data;
         res.err = err;
         next();
@@ -13,7 +13,7 @@ router.get('/following', function (req, res, next) {
 }, apiResponse);
 
 router.get('/followers', function (req, res, next) {
-    subscribeService.getFollowers(req.body, function (err, data) {
+    subscribeService.getFollowers(req, function (err, data) {
         res.data = data;
         res.err = err;
         next();
@@ -21,7 +21,7 @@ router.get('/followers', function (req, res, next) {
 }, apiResponse);
 
 router.post('/follow', function (req, res, next) {
-    subscribeService.follow(req.body, function (err, data) {
+    subscribeService.follow(req, function (err, data) {
         res.data = data;
         res.err = err;
         next();
@@ -29,7 +29,7 @@ router.post('/follow', function (req, res, next) {
 }, apiResponse);
 
 router.post('/unfollow', function (req, res, next) {
-    subscribeService.unfollow(req.body, function (err, data) {
+    subscribeService.unfollow(req, function (err, data) {
         res.data = data;
         res.err = err;
         next();
