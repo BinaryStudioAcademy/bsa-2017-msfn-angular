@@ -22,7 +22,8 @@ function makeid() {
 }
 
 function checkActivateCode(body, callback) {
-    const userRepository = require('../repositories/userRepository');
+const userRepository = require('../repositories/userRepository');
+
 
     userRepository.getUserByEmail(body.email, (err, user) => {
         if (err) {
@@ -40,9 +41,11 @@ function checkActivateCode(body, callback) {
 }
 
 function sendRegistrationLetter(user) {
+const userRepository = require('../repositories/userRepository');
+
+    
     // TO CHANGE URL in letter for stable site address
-    emailService.send(
-        {
+    emailService.send({
             to: user.email,
             subject: 'Your MSFN registration',
             html: '<table><tr><td>Congratulations, ' +
@@ -51,7 +54,6 @@ function sendRegistrationLetter(user) {
                 '<a href="http://localhost:3060/api/user/activate?email=' + user.email + '&token=' + user.activateToken + '">' + 'Activate account </a> </td></tr></table>'
         },
         (err, data) => {
-            "use strict";
             if (err) return callback(err);
             if (data.rejected.length == 0) {
                 data.status = 'ok';
@@ -61,7 +63,118 @@ function sendRegistrationLetter(user) {
     );
 }
 
-function genNewRootMail(body, callback) {}
-function checkNewRootMail(body, callback) {}
+function genNewRootMail(body, callback) {
+const userRepository = require('../repositories/userRepository');
+
+    console.log(body);
+
+    userRepository.getUserByEmail(body.email, (err, data) => {
+        "use strict";
+        if (err) return callback(err);
+
+        if (data === null) {
+            callback(new ApiError("User not found"));
+        } else {
+
+            const confirmData = {};
+            confirmData.user = data._id;
+            // Adding new email to be changed as root
+            if (body.newRootMail) {
+                confirmData.newRootMail = body.newRootMail;
+            }
+            confirmCodeRepository.get({
+                user: data._id
+            }, (err, data) => {
+                let deleteErr = false;
+                if (data.length > 0) {
+                    for (let i = 0; i < data.length; i++) {
+                        const confirmCodeId = data[i];
+                        confirmCodeRepository.deleteById(confirmCodeId, (err, data) => {
+                            if (err) {
+                                deleteErr = true;
+                            }
+                        });
+                    }
+                }
+                if (!deleteErr) {
+                    confirmCodeRepository.add(confirmData, (err, data) => {
+                        const newRootMailLink = "http://localhost:3060/api/user/activate/changemail/" + data.confirmCode;
+                        emailService.send({
+                                to: body.email,
+                                subject: "Link to change your main email",
+                                html: "<a href=\"" + newRootMailLink + "\">" + newRootMailLink + "</a>"
+                            },
+                            (err, data) => {
+                                if (err) return callback(err);
+                                if (data.rejected.length == 0) {
+                                    data.status = 'ok';
+                                }
+                                callback(null, data);
+                            }
+                        );
+                    });
+                }
+            });
+
+        }
+    });
+}
+
+function checkNewRootMail(body, callback) {
+const userRepository = require('../repositories/userRepository');
+
+    userRepository.getUserByEmail(body.email, (err, userData) => {
+
+        if (err) return callback(err);
+
+        if (userData === null) {
+            callback(new ApiError("User not found"));
+        } else {
+            const user = userData._id;
+            confirmCodeRepository.get({
+                user: user
+            }, (err, data) => {
+                if (data.length > 0) {
+                    const confirmData = data[0];
+                    if (confirmData && confirmData.confirmCode === body.confirmCode) {
+                        const pass = body.password;
+                        userRepository.update(user, {
+                            password: pass
+                        }, (err, result) => {
+
+                            if (result.ok == 1) {
+
+                                confirmCodeRepository.deleteById(confirmData._id, (err, data) => {
+                                    //need log error deleting
+                                });
+
+                                emailService.send({
+                                        to: body.email,
+                                        subject: "Password changed",
+                                        html: "Hi, " + userData.firstName + ". <br>Your password was changed. <br>If you did not perform this action, you can recover access by entering " + userData.email + " into the form at <a href=\"https://msfn.com/forgot_password\">https://msfn.com/forgot_password</a>."
+                                    },
+                                    (err, data) => {
+                                        "use strict";
+                                        if (err) return callback(err);
+                                        if (data.rejected.length == 0) {
+                                            data.status = 'ok';
+                                        }
+                                        callback(null, data);
+                                    }
+                                );
+                            }
+                        });
+                    } else {
+                        callback(new ApiError("Wrong confirm code, or time expired"));
+                    }
+                    // callback(null, data);
+                } else {
+                    callback(new ApiError("Wrong confirm code, or time expired"));
+                }
+            });
+        }
+    });
+
+}
 
 module.exports = new ActivateService();
