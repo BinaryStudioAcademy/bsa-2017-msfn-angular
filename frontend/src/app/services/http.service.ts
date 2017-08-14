@@ -55,7 +55,7 @@ export class HttpService {
                 .post(url, body, { headers: headers })
                 .toPromise()
                 .then(response => {
-                    if (needNotif) {
+                    if (options.successMessage) {
                         this.toastrService.showMessage('success', null, successMessage);
                     }
                     return response.json();
@@ -66,7 +66,7 @@ export class HttpService {
                 .put(url, body, { headers: headers })
                 .toPromise()
                 .then(() => {
-                    if (needNotif) {
+                    if (options.successMessage) {
                         this.toastrService.showMessage('success', null, successMessage);
                     }
                     return body;
@@ -76,7 +76,7 @@ export class HttpService {
             return this._http.delete(url, { headers: headers })
                 .toPromise()
                 .then(() => {
-                    if (needNotif) {
+                    if (options.successMessage) {
                         this.toastrService.showMessage('success', null, successMessage);
                     }
                     return null;
