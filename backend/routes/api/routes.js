@@ -8,6 +8,7 @@ module.exports = function (app) {
         exerciseTypeRoutes: require('./exerciseTypeRoutes')(app),
         couchRoutes: require('./couchRoutes')(app),
         confirmRegistrationRoutes: require('./confirmRegistrationRoutes')(app),
-        fileRoutes: require('./fileRoutes')(app)
+        fileRoutes: require('./fileRoutes')(app),
+        sportRoutes: require('./sportRoutes')(app)
     };
 };
