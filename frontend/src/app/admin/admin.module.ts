@@ -17,23 +17,23 @@ import { ToasterService } from '../services/toastr.service';
 import { AdminRootProfileService } from './admin.components/admin-root-profile/admin-root-profile.service';
 
 @NgModule({
-  imports: [
-    ImportModule,
-    CommonModule,
-    FormsModule,
-    AdminRoutingModule
-  ],
-  declarations: [
-    AdminComponent,
-    UserListComponent,
-    ExerciseCreateComponent,
-    ExerciseListComponent,
-    ExerciseTypeComponent,
-    AdminRootProfileComponent
-  ],
-  providers: [
-    ToasterService,
-    AdminRootProfileService
-  ]
+    imports: [
+        ImportModule,
+        CommonModule,
+        FormsModule,
+        AdminRoutingModule
+    ],
+    declarations: [
+        AdminComponent,
+        UserListComponent,
+        ExerciseCreateComponent,
+        ExerciseListComponent,
+        ExerciseTypeComponent,
+        AdminRootProfileComponent
+    ],
+    providers: [
+        ToasterService,
+        AdminRootProfileService
+    ]
 })
 export class AdminModule {}

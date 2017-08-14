@@ -1,70 +1,70 @@
 <div id="user-list">
-  <div id="title">
-    <h1>Users</h1>
-  </div>
+    <div id="title">
+        <h1>Users</h1>
+    </div>
 
-  <div id="inputs">
-    <md-input-container>
-      <input mdInput type="text" #filter placeholder="search by name, email or role" [(ngModel)]="searchInput">
-    </md-input-container>
-  </div>
+    <div id="inputs">
+        <md-input-container>
+            <input mdInput type="text" #filter placeholder="search by name, email or role" [(ngModel)]="searchInput">
+        </md-input-container>
+    </div>
 
-  <md-table id="table" #table [dataSource]="dataSource" mdSort>
-    <ng-container cdkColumnDef="firstName">
-      <md-header-cell *cdkHeaderCellDef md-sort-header>
-        First Name
-      </md-header-cell>
-      <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{row._id}}">
-        {{ row.firstName }}
-      </md-cell>
-    </ng-container>
+    <md-table id="table" #table [dataSource]="dataSource" mdSort>
+        <ng-container cdkColumnDef="firstName">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                First Name
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{row._id}}">
+                {{ row.firstName }}
+            </md-cell>
+        </ng-container>
 
-    <ng-container cdkColumnDef="lastName">
-      <md-header-cell *cdkHeaderCellDef md-sort-header>
-        Last Name
-      </md-header-cell>
-      <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
-        {{ row.lastName }}
-      </md-cell>
-    </ng-container>
+        <ng-container cdkColumnDef="lastName">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Last Name
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
+                {{ row.lastName }}
+            </md-cell>
+        </ng-container>
 
-    <ng-container cdkColumnDef="email">
-      <md-header-cell *cdkHeaderCellDef md-sort-header>
-        Email
-      </md-header-cell>
-      <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
-        {{ row.email }}
-      </md-cell>
-    </ng-container>
+        <ng-container cdkColumnDef="email">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Email
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
+                {{ row.email }}
+            </md-cell>
+        </ng-container>
 
-    <ng-container cdkColumnDef="role">
-      <md-header-cell *cdkHeaderCellDef md-sort-header>
-        Role
-      </md-header-cell>
-      <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
-        {{ row.role }}
-      </md-cell>
-    </ng-container>
+        <ng-container cdkColumnDef="role">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Role
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
+                {{ row.role }}
+            </md-cell>
+        </ng-container>
 
-    <ng-container cdkColumnDef="age">
-      <md-header-cell *cdkHeaderCellDef md-sort-header>
-        Age
-      </md-header-cell>
-      <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
-        {{ row.age }}
-      </md-cell>
-    </ng-container>
+        <ng-container cdkColumnDef="age">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Age
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
+                {{ row.age }}
+            </md-cell>
+        </ng-container>
 
-    <ng-container cdkColumnDef="gender">
-      <md-header-cell *cdkHeaderCellDef md-sort-header>
-        Gender
-      </md-header-cell>
-      <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
-        {{ row.gender }}
-      </md-cell>
-    </ng-container>
+        <ng-container cdkColumnDef="gender">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Gender
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
+                {{ row.gender }}
+            </md-cell>
+        </ng-container>
 
-    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *cdkRowDef="let row; columns: displayedColumns;" ></md-row>
-  </md-table>
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;" ></md-row>
+    </md-table>
 </div>

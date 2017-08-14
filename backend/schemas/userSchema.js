@@ -8,13 +8,13 @@ const User = new Schema({
     firstName: String,
     lastName: String,
     email: {
-      type: String,
-      required: true,
-      unique: true
+        type: String,
+        required: true,
+        unique: true
     },
     password: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
     isCoach: Boolean,
     isAdmin: Boolean,
@@ -52,19 +52,19 @@ User.pre('save', function(next) {
 });
 
 User.pre('update', function(next) {
-  const fields = this._update.$set;
+    const fields = this._update.$set;
 
-  if (!fields.password) return next();
+    if (!fields.password) return next();
 
-  bcrypt.genSalt(1012, (err, salt) => {
+    bcrypt.genSalt(1012, (err, salt) => {
     fields.salt = salt;
     bcrypt.hash(fields.password, fields.salt, null, (err, hash) => {
-      if (err) return next(err);
+        if (err) return next(err);
 
-      fields.password = hash;
-      next();
+        fields.password = hash;
+        next();
     });
-  });
+    });
 });
 
 User.methods.checkPassword = function(password, callback){

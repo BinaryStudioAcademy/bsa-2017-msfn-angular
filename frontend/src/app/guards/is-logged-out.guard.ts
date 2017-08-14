@@ -5,15 +5,15 @@ import { WindowObj } from './../services/window.service';
 
 @Injectable()
 export class IsLoggedOutGuard implements CanActivate {
-  constructor(private router: Router, private window: WindowObj) {}
+    constructor(private router: Router, private window: WindowObj) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if (this.window.data._injectedData.isLoggedIn === false || this.window.data._injectedData.isLoggedIn === undefined) {
-          return true;
-      }
-      this.router.navigate(['/']);
-      return false;
-  }
+    canActivate(
+        next: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+            if (this.window.data._injectedData.isLoggedIn === false || this.window.data._injectedData.isLoggedIn === undefined) {
+                return true;
+            }
+            this.router.navigate(['/']);
+            return false;
+    }
 }
