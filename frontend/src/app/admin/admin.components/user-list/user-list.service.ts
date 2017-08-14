@@ -31,7 +31,11 @@ export class UserListService {
         });
     }
 
-    getAge(birthday: string): number {
+    getAge(birthday: string): number| string {
+        if (!birthday) {
+            return 'unknown';
+        }
+
         const dateOfBirth = new Date(birthday),
             timeDiff = Date.now() - dateOfBirth.getTime(),
             timeDiffDate = new Date(timeDiff),

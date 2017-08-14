@@ -20,6 +20,18 @@ export class AdminRootProfileService {
         });
     }
 
+    getAge(birthday: string): number| string {
+        if (!birthday) {
+            return 'unknown';
+        }
+
+        const dateOfBirth = new Date(birthday),
+            timeDiff = Date.now() - dateOfBirth.getTime(),
+            timeDiffDate = new Date(timeDiff),
+            age = timeDiffDate.getFullYear() - 1970;
+
+        return age;
+    }
 //     updateProfile(userData, callback) {
 //         const request: IHttpReq = {
 //             url: '/api/exercise-list',

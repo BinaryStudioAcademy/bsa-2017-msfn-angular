@@ -21,9 +21,6 @@ export class AdminRootProfileComponent implements OnDestroy, OnInit {
     public weight: number | string;
     public age: number | string;
     public gender: string;
-    private ISOtoAge(iso: string): number {
-        return Math.floor(Date.now() - Date.parse(iso));
-    }
 
 
     constructor(
@@ -46,7 +43,7 @@ export class AdminRootProfileComponent implements OnDestroy, OnInit {
             this.weight = (user.weight) ? user.weight : 'unknown';
             this.gender = (user.gender) ? user.gender : 'unknown';
             // here need paste name of date field from DB
-            this.age = (user.date) ? this.ISOtoAge(user.date) : 'unknown';
+            this.age = (user.birthday) ? this.adminRootProfileService.getAge(user.birthday) : 'unknown';
             return true;
         });
     }
