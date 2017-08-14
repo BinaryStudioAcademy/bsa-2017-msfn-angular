@@ -9,7 +9,6 @@ CoachService.prototype.apply = apply;
 
 function apply(id, body, callback) {
     userRepository.getById(id, (err, data) => {
-        'use strict';
         if (err) return callback(err);
 
         if (data === null){
