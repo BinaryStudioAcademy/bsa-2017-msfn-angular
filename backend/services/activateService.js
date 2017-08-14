@@ -1,11 +1,14 @@
 const ApiError = require('./apiErrorService');
 const emailService = require('./emailService');
+const confirmCodeRepository = require('../repositories/confirmCodeRepository');
 
 function ActivateService() {}
 
 ActivateService.prototype.makeid = makeid;
 ActivateService.prototype.checkActivateCode = checkActivateCode;
 ActivateService.prototype.sendRegistrationLetter = sendRegistrationLetter;
+ActivateService.prototype.genNewRootMail = genNewRootMail;
+ActivateService.prototype.checkNewRootMail = checkNewRootMail;
 
 function makeid() {
     let text = "";
@@ -57,5 +60,8 @@ function sendRegistrationLetter(user) {
         }
     );
 }
+
+function genNewRootMail(body, callback) {}
+function checkNewRootMail(body, callback) {}
 
 module.exports = new ActivateService();
