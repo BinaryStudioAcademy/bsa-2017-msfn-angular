@@ -3,10 +3,9 @@ const
     exerciseService = require('../../services/exerciseService'),
     isAdmin = require('../../middleware/isAdminMiddleware'),
     baseUrl = '/api/exercise/';
-
 module.exports = function (app) {
 
-    app.post(baseUrl, function (req, res, next) {
+    app.post(baseUrl, isAdmin, function (req, res, next) {
         exerciseService.createExercise(req.body, function (err, data) {
             res.data = data;
             res.err = err;
@@ -25,7 +24,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.put(baseUrl + ':id', function (req, res, next) {
+    app.put(baseUrl + ':id', isAdmin, function (req, res, next) {
         exerciseService.upadeteExerciseById(req.params.id, req.body, function (err, data) {
             res.data = data;
             res.err = err;
@@ -33,7 +32,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.delete(baseUrl + ':id', function (req, res, next) {
+    app.delete(baseUrl + ':id', isAdmin, function (req, res, next) {
         exerciseService.deleteExerciseById(req.params.id, function (err, data) {
             res.data = data;
             res.err = err;

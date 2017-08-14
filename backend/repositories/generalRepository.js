@@ -24,9 +24,9 @@ function addBatch(batchToInsert, callback) {
 }
 
 function deleteById(id, callback) {
-    const query = this.model.remove({
+    const query = this.model.update({
         _id: id
-    });
+    }, {isRemoved: true});
     query.exec(callback);
 }
 
