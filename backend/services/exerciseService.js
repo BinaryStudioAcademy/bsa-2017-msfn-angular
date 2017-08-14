@@ -19,7 +19,6 @@ function createExercise(body, callback) {
     }
 
     exerciseRepository.add(data, (err, exerciseData) => {
-        "use strict";
 
         if (err) return callback(err);
         if (exerciseData === null) {
@@ -32,7 +31,6 @@ function createExercise(body, callback) {
 
 function getAllExercises(callback) {
     exerciseRepository.getAll((err, exerciseData) => {
-        "use strict";
 
         if (err) return callback(err);
         if (exerciseData === null) {

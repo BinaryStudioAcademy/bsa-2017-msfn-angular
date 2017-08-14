@@ -11,7 +11,6 @@ UserService.prototype.updateItem = updateItem;
 
 function addItem(body, callback) {
     userRepository.getUserByEmail(decrypt(body.email).email, (err, data) => {
-        "use strict";
         if (err) return callback(err);
 
         if (data === null) {
@@ -26,7 +25,6 @@ function addItem(body, callback) {
 
 function updateItem(id, body, callback) {
     userRepository.getById(id, (err, data) => {
-        "use strict";
         if (err) return callback(err);
 
         if (data === null){

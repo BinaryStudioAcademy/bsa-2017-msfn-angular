@@ -43,7 +43,6 @@ User.pre('save', function(next) {
     bcrypt.genSalt(1012, (err, salt) => {
         userData.salt = salt;
         this.encryptPassword(this.password, (err, hash) => {
-            "use strict";
             if (err) return next(err);
 
             userData.password = hash;
@@ -69,7 +68,6 @@ User.pre('update', function(next) {
 });
 
 User.methods.checkPassword = function(password, callback){
-    "use strict";
     this.encryptPassword(password, (err, hash) => {
         if (err) return callback(err);
         callback(err, (hash === this.password))
@@ -77,7 +75,6 @@ User.methods.checkPassword = function(password, callback){
 };
 
 User.methods.encryptPassword = function(password, callback){
-    "use strict";
     bcrypt.hash(password, this.salt, null, (err, hash) => {
         callback(err, hash);
     });
