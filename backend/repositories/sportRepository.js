@@ -22,7 +22,7 @@ function getByCode(code, callback) {
 }
 
 function getByName(name, callback) {
-    const query = this.model.findOne({name : name});
+    const query = this.model.findOne({name: name});
     query.exec(callback);
 }
 

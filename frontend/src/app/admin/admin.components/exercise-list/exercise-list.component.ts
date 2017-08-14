@@ -35,12 +35,12 @@ export class ExerciseListComponent implements OnInit {
     @ViewChild('itemFilter') itemFilter: ElementRef;
 
     constructor(private cd: ChangeDetectorRef,
-                            private exerciseListService: ExerciseListService) { }
+                private exerciseListService: ExerciseListService) { }
 
     ngOnInit() {
         this.dataSource = new ExampleDataSource(this.tableDatabase,
-            this.sort,
-            this.exerciseListService);
+                                                this.sort,
+                                                this.exerciseListService);
 
         setTimeout(() => this.cd.markForCheck());
         this.getExercises((result) => {
@@ -102,8 +102,8 @@ export class ExampleDataSource extends DataSource<any> {
     }
 
     constructor(private _exampleDatabase: TableDatabase,
-                            private _sort: MdSort,
-                            private service: ExerciseListService) {
+                private _sort: MdSort,
+                private service: ExerciseListService) {
         super();
     }
 
