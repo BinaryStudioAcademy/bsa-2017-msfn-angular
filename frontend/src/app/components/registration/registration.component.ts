@@ -147,5 +147,9 @@ export class RegistrationComponent implements OnInit {
     }
 
     ngOnInit() {
+        const closeX = document.getElementById('closeReg');
+        closeX.onfocus = function () {
+            closeX.blur();
+        };
     }
 }

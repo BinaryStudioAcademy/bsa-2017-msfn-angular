@@ -17,7 +17,6 @@
                 <input [(ngModel)]="user.gender" id="Female" type="radio" value="Female" name="gender">
                 <label for="Female">Female</label>
         </div>
-
         <md-input-container class="input-row">
             <input autofocus mdInput type="email" name="email" placeholder="Email" required [(ngModel)]="user.email" [formControl]="emailFormControl">
             <md-error *ngIf="emailFormControl.hasError('required')">
@@ -100,22 +99,22 @@
                 </md-error>
             </md-input-container>
         </div>
-
-        <md-input-container class="input-row">
-            <input type="password" mdInput placeholder="Password" required [(ngModel)]="user.password" [formControl]="passwordFormControl">
-            <md-error *ngIf="passwordFormControl.hasError('required')">
-                Password is required
-            </md-error>
-            <md-error *ngIf="passwordFormControl.hasError('minlength')">
-                Password should contain at least 6 characters
-            </md-error>
-        </md-input-container>
-
-        <div id="submit-button">
-            <button md-icon-button type="submit" (click)="register()">
-                Register
-            </button>
-        </div>
+        <form>
+            <md-input-container class="input-row">
+                <input type="password" mdInput placeholder="Password" required [(ngModel)]="user.password" [formControl]="passwordFormControl">
+                <md-error *ngIf="passwordFormControl.hasError('required')">
+                    Password is required
+                </md-error>
+                <md-error *ngIf="passwordFormControl.hasError('minlength')">
+                    Password should contain at least 6 characters
+                </md-error>
+            </md-input-container>
+            <div id="submit-button">
+                <button md-icon-button type="submit" (click)="register()" [disabled]="!user.password" [style.background-color]="(user.password) ? '' : '#aaa'">
+                    Register
+                </button>
+            </div>
+        </form>
         <div class="additional-info">By pressing "Register" I accept the following terms: Terms of Service, Payment Service Conditions, Confidentiality Policy</div>
     </div>
 </div>
