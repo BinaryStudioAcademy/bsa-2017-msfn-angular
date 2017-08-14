@@ -74,7 +74,8 @@ import { ExerciseTypeService } from './admin/admin.components/exercise-type/exer
     entryComponents: [
         ConfirmPasswordDialogComponent,
         NotificationDialogComponent,
-        LoginDialogComponent
+        LoginDialogComponent,
+        RegistrationComponent
     ],
     bootstrap: [AppComponent]
 

@@ -6,7 +6,6 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { TestHttpComponent } from './components/test-http/test-http.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
-import { RegistrationComponent } from './components/registration/registration.component';
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
 import { ForAdminGuard } from './guards/for-admin.guard';
@@ -23,11 +22,6 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         component: IndexPageComponent,
-    },
-    {
-        path: 'register',
-        component: RegistrationComponent,
-        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'forget-password', // for testing forgetPasswordComponent, can be removed
