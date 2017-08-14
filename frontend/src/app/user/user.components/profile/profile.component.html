@@ -93,6 +93,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="social-wrapper">
+                    <div class="addition-info">
+                        Link your account with social networks for a simple login
+                    </div>
+                    <div class="social-buttons">
+                        <a md-raised-button [disabled]="user.facebookID" href="/auth/facebook">
+                            <md-icon *ngIf="user.facebookID">done</md-icon>
+                            Facebook</a>
+                        <a md-raised-button [disabled]="user.googleID" href="/auth/google">
+                            <md-icon *ngIf="user.googleID">done</md-icon>
+                            Google+</a>
+                        <a md-raised-button [disabled]="user.twitterID" href="/auth/twitter">
+                            <md-icon *ngIf="user.twitterID">done</md-icon>
+                            Twitter</a>
+                    </div>
+                </div>
             </div>
             <div class="profile-footer">
                 <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
