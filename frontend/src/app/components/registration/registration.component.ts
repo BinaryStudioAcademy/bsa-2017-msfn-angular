@@ -21,7 +21,7 @@ import { DateService } from '../../services/date.service';
     ]
 })
 
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
     userError = '';
     yearError = false;
 
@@ -144,12 +144,5 @@ export class RegistrationComponent implements OnInit {
         } else {
             this.userError = 'Please fill in all fields correctly';
         }
-    }
-
-    ngOnInit() {
-        const closeX = document.getElementById('closeReg');
-        closeX.onfocus = function () {
-            closeX.blur();
-        };
     }
 }

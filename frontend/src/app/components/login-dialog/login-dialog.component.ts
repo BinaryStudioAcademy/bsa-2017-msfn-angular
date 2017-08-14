@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { EncryptService } from '../../services/encrypt.service';
 import { IHttpReq } from '../../models/http-req';
@@ -11,7 +11,7 @@ import { WindowObj } from '../../services/window.service';
     templateUrl: './login-dialog.component.html',
     styleUrls: ['./login-dialog.component.scss']
 })
-export class LoginDialogComponent implements OnInit {
+export class LoginDialogComponent {
     EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
     email: string;
     password: string;
@@ -50,11 +50,5 @@ export class LoginDialogComponent implements OnInit {
                     location.reload();
                 }
             });
-    }
-    ngOnInit() {
-        const closeX = document.getElementById('closeLog');
-        closeX.onfocus = function () {
-            closeX.blur();
-        };
     }
 }

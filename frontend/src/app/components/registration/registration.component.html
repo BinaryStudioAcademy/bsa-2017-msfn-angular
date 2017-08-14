@@ -1,11 +1,13 @@
 <md-dialog-content>
     <h2 md-dialog-title>Registration
-        <button id="closeReg" md-dialog-close class="material-icons close">close</button>
+        <button tabindex="-1" md-dialog-close class="material-icons close">close</button>
     </h2>
 <div id="registration">
     <div id="form">
         <div id="social-registration">Register via
-            <a href="/auth/facebook">Facebook</a>, <a href="/auth/google">Google</a> or <a href="/auth/twitter">Twitter</a>
+            <a tabindex="-1" href="/auth/facebook">Facebook</a>
+            <a tabindex="-1" href="/auth/google">Google</a>
+            <a tabindex="-1" href="/auth/twitter">Twitter</a>
         </div>
         <div id="general-error" class="error" *ngIf="userError">{{ userError }}</div>
 
@@ -16,7 +18,7 @@
                 <label for="Female">Female</label>
         </div>
         <md-input-container class="input-row">
-            <input mdInput type="email" name="email" placeholder="Email" required [(ngModel)]="user.email" [formControl]="emailFormControl">
+            <input autofocus mdInput type="email" name="email" placeholder="Email" required [(ngModel)]="user.email" [formControl]="emailFormControl">
             <md-error *ngIf="emailFormControl.hasError('required')">
                 Email is required
             </md-error>
