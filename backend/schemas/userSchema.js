@@ -58,8 +58,6 @@ User.pre('save', function(next) {
 
 User.post('save', function(user) {
     activateService.sendRegistrationLetter(user);
-    console.log(user);
-    console.log('New user created!!!');
 });
 
 User.pre('update', function(next) {
