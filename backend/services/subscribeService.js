@@ -1,7 +1,8 @@
 const ApiError = require('./apiErrorService');
 const userRepository = require('../repositories/userRepository');
 const mongoose = require('mongoose');
-var objID = mongoose.Types;
+const objID = mongoose.Types;
+const socketService = require('./socketService');
 
 class subscribeService {
 
@@ -24,7 +25,7 @@ class subscribeService {
         const currentUserId = data.session.passport.user;
         userRepository.findById(currentUserId, (err, currentUser) => {
             const usnfollowPos = currentUser.follow.findIndex(this.itemInArray, userToFollow);
-            if (usnfollowPos == -1) {
+            if (usnfollowPos === -1) {
                 callback(new ApiError("User wasn't follow yet"));
             }
             currentUser.follow.splice(usnfollowPos, 1);
@@ -50,10 +51,7 @@ class subscribeService {
     }
 
     itemInArray(element, index, array) {
-        if (this == element) {
-            return true;
-        }
-        return false;
+        return (this === element);
     }
 }
 

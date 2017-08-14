@@ -52,6 +52,6 @@ console.log(`app runs on port: ${port}`);
 const server = app.listen(port);
 
 const io = require('socket.io')(server);
-const socketsInit = require('./middleware/testSocketMiddleware')(io);
+const socketService = require('./middleware/socketMiddleware')(io);
 
 module.exports = app;

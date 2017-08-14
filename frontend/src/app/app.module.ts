@@ -32,6 +32,7 @@ import { TestMarkdownComponent } from './components/test-markdown/test-markdown.
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
+import { SocketService } from './services/socket.service';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ExerciseTypeService } from './admin/admin.components/exercise-type/exer
         ForAdminGuard,
         ForAllUserGuard,
         EncryptService,
-        ExerciseTypeService
+        ExerciseTypeService,
+        SocketService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,
