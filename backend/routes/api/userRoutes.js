@@ -4,6 +4,7 @@ const
     userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/user/',
     subscribeRoutes = require('./subscribeRoutes'),
+    activateRoutes = require('./activateRoutes'),
     decrypt = require('../../services/decryptService');
 
     module.exports = function(app) {

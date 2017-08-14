@@ -39,6 +39,7 @@ const User = new Schema({
 User.pre('save', function(next) {
     const userData = this;
 
+    // Create activateToken token for user and be able to send it to email and confirm email after
     userData.activateToken = activateService.makeid();
 
     if (!userData.isModified('password')) return next();
@@ -53,6 +54,12 @@ User.pre('save', function(next) {
             next();
         })
     });
+});
+
+User.post('save', function(user) {
+    activateService.sendRegistrationLetter(user);
+    console.log(user);
+    console.log('New user created!!!');
 });
 
 User.pre('update', function(next) {
