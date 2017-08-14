@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { EncryptService } from '../../services/encrypt.service';
 import { IHttpReq } from '../../models/http-req';

@@ -1,10 +1,10 @@
 
     <h2 md-dialog-title>Login
-        <button md-dialog-close class="material-icons close">close</button>
+        <button md-dialog-close class="material-icons close" tabindex="-1">close</button>
     </h2>
     <form class="login-block">
         <md-input-container class="login-imput-container">
-            <input mdInput type="email" placeholder="Email" [(ngModel)]="email" [formControl]="emailFormControl">
+            <input autofocus mdInput type="email" placeholder="Email" [(ngModel)]="email" [formControl]="emailFormControl">
             <md-error *ngIf="emailFormControl.hasError('pattern')">
                 Please enter a valid email address
             </md-error>
