@@ -3,7 +3,8 @@ const
     userService = require('../../services/userService'),
     userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/user/',
-    subscribeRoutes = require('./subscribeRoutes')
+    subscribeRoutes = require('./subscribeRoutes'),
+    activateRoutes = require('./activateRoutes');
 
     module.exports = function(app) {
     app.get(baseUrl + 'me', function(req, res, next) {
@@ -29,7 +30,7 @@ const
 
     app.post(baseUrl, function(req, res, next) {
         userService.addItem(req.body, function(err, data) {
-            res.data = data;
+            res.data = {"registered": "true"};
             res.err = err;
             next();
         });
@@ -52,4 +53,6 @@ const
     }, apiResponse);
 
     app.use(baseUrl + 'subscribe', subscribeRoutes);
+
+    app.use(baseUrl + 'activate', activateRoutes);
 };

@@ -14,6 +14,7 @@ import { TestSocketsComponent } from './components/test-sockets/test-sockets.com
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ConfirmedPageComponent } from './components/confirmed-page/confirmed-page.component';
 import { UserComponent } from './user/user.component';
 import { ForAllUserGuard } from './guards/for-all-user.guard';
 
@@ -82,7 +83,12 @@ const routes: Routes = [
     {
         path: 'notfound',
         component: PageNotFoundComponent
-    }, {
+    },
+    {
+        path: 'confirm-registration',
+        component: ConfirmedPageComponent
+    },
+    {
         path: '**',
         redirectTo: 'notfound'
     }

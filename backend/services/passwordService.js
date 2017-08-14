@@ -14,7 +14,6 @@ PasswordService.prototype.checkConfirmCode = checkConfirmCode;
 function createConfirmCode(body, callback) {
 
     userRepository.getUserByEmail(body.email, (err, data) => {
-        "use strict";
         if (err) return callback(err);
 
         if (data === null) {
@@ -46,7 +45,6 @@ function createConfirmCode(body, callback) {
                                 html: "<a href=\"" + resetLink + "\">" + resetLink + "</a>"
                             },
                             (err, data) => {
-                                "use strict";
                                 if (err) return callback(err);
                                 if (data.rejected.length == 0) {
                                     data.status = 'ok';
@@ -68,7 +66,6 @@ function checkConfirmCode(body, callback) {
     body = decrypt(body.data);
 
     userRepository.getUserByEmail(body.email, (err, userData) => {
-        "use strict";
 
         if (err) return callback(err);
 
@@ -96,7 +93,6 @@ function checkConfirmCode(body, callback) {
                                         html: "Hi, " + userData.firstName + ". <br>Your password was changed. <br>If you did not perform this action, you can recover access by entering " + userData.email + " into the form at <a href=\"https://msfn.com/forgot_password\">https://msfn.com/forgot_password</a>."
                                     },
                                     (err, data) => {
-                                        "use strict";
                                         if (err) return callback(err);
                                         if (data.rejected.length == 0) {
                                             data.status = 'ok';

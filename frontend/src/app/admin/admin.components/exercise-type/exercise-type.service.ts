@@ -16,7 +16,7 @@ export class ExerciseTypeService {
                 name: name
             }
         };
-        this.httpService.sendRequest(request, true).then(data => {
+        this.httpService.sendRequest(request).then(data => {
             callback(data);
         });
     }
@@ -30,7 +30,7 @@ export class ExerciseTypeService {
             method: 'GET',
             body: {}
         };
-        this.httpService.sendRequest(request, true).then(data => {
+        this.httpService.sendRequest(request).then(data => {
             callback(data);
         });
     }
@@ -46,7 +46,7 @@ export class ExerciseTypeService {
             body: {}
         };
 
-        this.httpService.sendRequest(request, true).then(data => {
+        this.httpService.sendRequest(request).then(data => {
             callback(data);
         });
     }
@@ -63,7 +63,7 @@ export class ExerciseTypeService {
             method: 'PUT',
             body: body
         };
-        this.httpService.sendRequest(request, true).then(data => {
+        this.httpService.sendRequest(request).then(data => {
             callback(data);
             // UPDATE COL AFTER UPDATING
         });
