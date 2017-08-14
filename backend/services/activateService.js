@@ -21,14 +21,14 @@ function makeid() {
 function checkActivateCode(body, callback) {
     const userRepository = require('../repositories/userRepository');
 
-    userRepository.findById(body.id, (err, user) => {
+    userRepository.getUserByEmail(body.email, (err, user) => {
         if (err) {
             return callback(err);
         }
-        user.checkToken(body.activateToken, status => {
+        user.checkToken(body.token, status => {
             if (status) {
                 user.activateToken = '';
-                userRepository.update(body.id, user, callback);
+                userRepository.update(user.id, user, callback);
             } else {
                 callback(new ApiError("Wrong token"));
             }
@@ -37,11 +37,15 @@ function checkActivateCode(body, callback) {
 }
 
 function sendRegistrationLetter(user) {
+    // TO CHANGE URL in letter for stable site address
     emailService.send(
         {
             to: user.email,
-            subject: "Your MSFN registration",
-            html: "Congratulations! You've become a part of our fantastic fitness network! Here is your personal code to activate your account: " + user.activateToken
+            subject: 'Your MSFN registration',
+            html: '<table><tr><td>Congratulations, ' +
+                user.firstName +
+                '!</td></tr> <tr><td>You have become a part of our fantastic fitness network!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
+                '<a href="http://localhost:3060/api/user/activate?email=' + user.email + '&token=' + user.activateToken + '">' + 'Activate account </a> </td></tr></table>'
         },
         (err, data) => {
             "use strict";

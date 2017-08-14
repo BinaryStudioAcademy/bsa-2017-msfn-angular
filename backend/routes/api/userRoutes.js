@@ -13,6 +13,8 @@ const
         next();
     }, apiResponse);
 
+    app.use(baseUrl + 'activate', activateRoutes);
+
     app.get(baseUrl, function(req, res, next) {
         userRepository.getAll(function(err, data) {
             res.data = data;
@@ -57,5 +59,5 @@ const
 
     app.use(baseUrl + 'subscribe', subscribeRoutes);
 
-    app.use(baseUrl + 'activate', activateRoutes);
+    
 };

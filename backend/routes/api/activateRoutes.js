@@ -4,9 +4,11 @@ const
     express = require('express'),
     router = express.Router();
 
-router.post('/', function (req, res, next) {
-    activateService.checkActivateCode(req.body, function (err, data) {
-        res.data = data;
+router.get('/', function (req, res, next) {
+    activateService.checkActivateCode(req.query, function (err, data) {
+        if (!err) {
+            res.redirect('/');
+        }
         res.err = err;
         next();
     });
