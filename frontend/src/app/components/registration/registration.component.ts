@@ -1,3 +1,4 @@
+import { MdDialogRef } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
@@ -57,7 +58,8 @@ export class RegistrationComponent {
                 private router: Router,
                 private encryptor: EncryptService,
                 private registrationService: RegistrationService,
-                private dateService: DateService) {
+                private dateService: DateService,
+                private _dialogRef: MdDialogRef<RegistrationComponent>) {
     }
 
     emailFormControl = new FormControl('', [
@@ -137,6 +139,7 @@ export class RegistrationComponent {
                     console.log('localhost:3060/api/confirm-registration/' + cache);
                 });
             });
+            this._dialogRef.close();
         } else {
             this.userError = 'Please fill in all fields correctly';
         }
