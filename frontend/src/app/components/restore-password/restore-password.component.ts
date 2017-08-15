@@ -15,7 +15,6 @@ import { EncryptService } from '../../services/encrypt.service';
 export class RestorePasswordComponent implements OnInit {
 
     confirmCode: string;
-    email: string;
     newPass: string;
     repeatPass: string;
     passwordMatched: boolean;
@@ -40,7 +39,6 @@ export class RestorePasswordComponent implements OnInit {
         if (form.valid && this.passwordMatched) {
             const encData = this.encryptor.encrypt({
                 'password': this.newPass,
-                'email': this.email,
                 'confirmCode': this.confirmCode
             });
             const sendData: IHttpReq = {
@@ -48,7 +46,8 @@ export class RestorePasswordComponent implements OnInit {
                 method: 'PUT',
                 body: {
                     data: encData
-                }
+                },
+                successMessage: 'Password changed. Go to login page'
             };
 
         this.httpHandler.sendRequest(sendData)

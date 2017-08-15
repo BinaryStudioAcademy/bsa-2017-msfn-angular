@@ -13,7 +13,8 @@ PasswordService.prototype.checkConfirmCode = checkConfirmCode;
 
 function createConfirmCode(body, callback) {
     confirmService.createCode(body, (err, data) => {
-        const resetLink = "https://msfn.com/restore-password/" + data.confirmCode;
+        if (err) {return callback(err); }
+        const resetLink = "http://localhost:3060/restore-password/" + data.confirmCode;
         emailService.send(
             {
                 to: body.email,
@@ -36,32 +37,35 @@ function createConfirmCode(body, callback) {
 function checkConfirmCode(body, callback) {
     body = decrypt(body.data);
     confirmService.checkExistCode(body, (err, data) => {
-        if (err) callback(err);
+        if (err) {return callback(err); }
 
         if (data.status == 'ok') {
             const pass = body.password;
-            userRepository.update(data.user._id, { password: pass }, (err, result) => {
-
+            userRepository.update(data.userId, { password: pass }, (err, result) => {
                 if (result.ok == 1) {
-                    const userData = data.user;
-                    confirmService.deleteCodes(data.user.email, (err, data) => {
-                        //need log error deleting
-                    });
-                    emailService.send(
-                        {
-                            to: body.email,
-                            subject: "Password changed",
-                            html: "Hi, " + userData.firstName + ". <br>Your password was changed. <br>If you did not perform this action, you can recover access by entering " + userData.email + " into the form at <a href=\"https://msfn.com/forgot_password\">https://msfn.com/forgot_password</a>."
-                        },
-                        (err, data) => {
-                            "use strict";
-                            if (err) return callback(err);
-                            if (data.rejected.length == 0) {
-                                data.status = 'ok';
+                    userRepository.findById(data.userId, (err, userData) => {
+                        if (err) { callback(err); }
+                        confirmService.deleteCodes(data.userId, (err, data) => {
+                            //need log error deleting
+                        });
+                        emailService.send(
+                            {
+                                to: userData.email,
+                                subject: "Password changed",
+                                html: "Hi, " + userData.firstName + ". <br>Your password was changed. <br>If you did not perform this action, you can recover access by entering " + userData.email + " into the form at <a href=\"https://msfn.com/forgot_password\">https://msfn.com/forgot_password</a>."
+                            },
+                            (err, data) => {
+                                "use strict";
+                                if (err) return callback(err);
+                                if (data.rejected.length == 0) {
+                                    data.status = 'ok';
+                                }
+                                callback(null, data);
                             }
-                            callback(null, data);
-                        }
-                    );
+                        );
+                    });
+                    // const userData = data.user;
+
                 }
             });
         }
