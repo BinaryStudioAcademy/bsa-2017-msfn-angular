@@ -32,6 +32,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ConfirmedPageComponent } from './components/confirmed-page/confirmed-page.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
+import { NotificationDataDialogComponent } from './components/notification-data-dialog/notification-data-dialog.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { ExerciseTypeService } from './admin/admin.components/exercise-type/exer
         PageNotFoundComponent,
         ConfirmedPageComponent,
         LoginDialogComponent,
+        NotificationDataDialogComponent,
     ],
     providers: [
         ToasterService,
@@ -75,7 +77,8 @@ import { ExerciseTypeService } from './admin/admin.components/exercise-type/exer
         ConfirmPasswordDialogComponent,
         NotificationDialogComponent,
         LoginDialogComponent,
-        RegistrationComponent
+        RegistrationComponent,
+        NotificationDataDialogComponent
     ],
     bootstrap: [AppComponent]
 
