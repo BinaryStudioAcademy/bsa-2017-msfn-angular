@@ -19,19 +19,19 @@ function strategy() {
         function (username, password, done) {
             userRepository.getUserByEmail(username, function (err, user) {
                 if (err) {
-                    return done(err);}
+                    return done(err);
+                }
                 if (!user) {
-                    return done(null, false,  new ApiError('Incorrect email or password'));
+                    return done(null, false,  new ApiError('Incorrect email'));
                 }
                 user.checkPassword(password, (err, result) => {
                     if (err) {return done(err);}
                     if (!result) {
-                        return done(null, false, new ApiError('Incorrect email or password'));
+                        return done(null, false, new ApiError('Incorrect password'));
                     } else {
                         return done(null, user);
                     }
                 })
-
             });
         }
     ));
