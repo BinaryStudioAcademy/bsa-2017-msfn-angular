@@ -1,6 +1,7 @@
 const ApiError = require('./apiErrorService');
 const emailService = require('./emailService');
 const confirmCodeRepository = require('../repositories/confirmCodeRepository');
+const confirmService = require('./confirmService');
 const userRepository = require('../repositories/userRepository')
 
 function ActivateService() {}
@@ -103,8 +104,8 @@ function checkNewRootMail(body, callback) {
 
                         emailService.send({
                                 to: body.email,
-                                subject: "Password changed",
-                                html: "Hi,rm this action, you can recover access by entering into the form at <a href=\"https://msfn.com/forgot_password\">https://msfn.com/forgot_password</a>."
+                                subject: "Change main email on MSFN",
+                                html: "We would like to inform you that you've succesfully set this email as your main one. <a href=\"https://msfn.com\">https://msfn.com</a>."
                             },
                             (err, data) => {
                                 "use strict";
