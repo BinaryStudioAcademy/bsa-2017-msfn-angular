@@ -71,7 +71,8 @@ export class HttpService {
                     return null;
                 })
                 .catch((err) => {
-                    reject();
+                    const json = err && err._body ? JSON.parse(err._body) : {};
+                    reject(err);
                     this.handleError(err);
                 });
         });
