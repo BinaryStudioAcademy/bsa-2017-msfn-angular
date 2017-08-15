@@ -15,7 +15,6 @@ import { EncryptService } from './services/encrypt.service';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RestorePasswordComponent } from './components/restore-password/restore-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
-import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import { TestHttpComponent } from './components/test-http/test-http.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { HeaderViewComponent } from './components/header-view/header-view.component';
@@ -51,7 +50,6 @@ import { ExerciseTypeService } from './admin/admin.components/exercise-type/exer
         HeaderViewComponent,
         RestorePasswordComponent,
         IndexPageComponent,
-        ForgotPasswordMailComponent,
         TestSocketsComponent,
         GoogleTestComponent,
         ConfirmPasswordDialogComponent,
