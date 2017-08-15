@@ -31,6 +31,7 @@ export class HttpService {
 
     public sendRequest(options: IHttpReq): Promise<any> {
         let url: string;
+        let promise = null;
 
         if (!options.url) {
             return Promise.reject('Url required');
@@ -44,47 +45,34 @@ export class HttpService {
         const headers = options.headers || this.headers;
 
         if (method === 'GET') {
-            return this._http.get(url)
-                .toPromise()
-                .then(response => {
-                    if (options.successMessage) {
-                        this.toastrService.showMessage('success', null, successMessage);
-                    }
-                    return response.json();
-                })
-                .catch(this.handleError);
+            promise = this._http.get(url)
+                .toPromise();
         } else if (method === 'POST') {
-            return this._http
+                promise =  this._http
                 .post(url, body, { headers: headers })
-                .toPromise()
-                .then(response => {
-                    if (options.successMessage) {
-                        this.toastrService.showMessage('success', null, successMessage);
-                    }
-                    return response.json();
-                })
-                .catch(this.handleError);
+                .toPromise();
         } else if (method === 'PUT') {
-            return this._http
+            promise =  this._http
                 .put(url, body, { headers: headers })
-                .toPromise()
-                .then(() => {
-                    if (options.successMessage) {
-                        this.toastrService.showMessage('success', null, successMessage);
-                    }
-                    return body;
-                })
-                .catch(this.handleError);
+                .toPromise();
         } else if (method === 'DELETE') {
-            return this._http.delete(url, { headers: headers })
-                .toPromise()
+            promise =  this._http.delete(url, { headers: headers })
+                .toPromise();
+        }
+
+        return new Promise((resolve, reject) => {
+            promise
                 .then(() => {
+                    resolve();
                     if (options.successMessage) {
                         this.toastrService.showMessage('success', null, successMessage);
                     }
                     return null;
                 })
-                .catch(this.handleError);
-        }
+                .catch((err) => {
+                    reject();
+                    this.handleError(err);
+                });
+        });
     }
 }
