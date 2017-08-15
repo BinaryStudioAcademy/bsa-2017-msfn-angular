@@ -9,11 +9,11 @@ import { HeaderViewComponent } from './components/header-view/header-view.compon
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
 import { ForAdminGuard } from './guards/for-admin.guard';
-import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ConfirmedPageComponent } from './components/confirmed-page/confirmed-page.component';
 import { UserComponent } from './user/user.component';
 import { ForAllUserGuard } from './guards/for-all-user.guard';
 
@@ -37,17 +37,6 @@ const routes: Routes = [
     {
         path: 'header', // for testing
         component: HeaderViewComponent
-    },
-    {
-        path: 'forgot-password-mail',
-        component: ForgotPasswordMailComponent,
-        canActivate: [IsLoggedOutGuard]
-    },
-    {
-        path: 'restore-password', // for testing restorePasswordComponent, can be removed
-        children: [],
-        component: RestorePasswordComponent,
-        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'restore-password/:code', // for testing restorePasswordComponent, can be removed
@@ -82,7 +71,12 @@ const routes: Routes = [
     {
         path: 'notfound',
         component: PageNotFoundComponent
-    }, {
+    },
+    {
+        path: 'confirm-registration',
+        component: ConfirmedPageComponent
+    },
+    {
         path: '**',
         redirectTo: 'notfound'
     }

@@ -17,17 +17,21 @@ export class HttpService {
     constructor(private _http: Http, private toastrService: ToasterService, private _router: Router) { }
 
     private handleError = (error: any): Promise<any> => {
-        // when user try to change password, and sent wrong current password,
-        // we have the same error.status, but we don't need navigate to main page
-        // if (error && error.status === 401) {
-        //    this._router.navigate(['/']);
-        // }
-        this.toastrService.showMessage('error', error.message, this.failMessage);
+        if (error && error.status === 401 && error.url.indexOf('/api/login') === -1) {
+            this._router.navigate(['/']);
+        }
+        let message = error && error._body ? JSON.parse(error._body).error : '';
+        if (!message) {
+            message = 'Request failed';
+        }
+
+        this.toastrService.showMessage('error', message, this.failMessage);
         return error;
     }
 
-    public sendRequest(options: IHttpReq, needNotif = false): Promise<any> {
+    public sendRequest(options: IHttpReq): Promise<any> {
         let url: string;
+        let promise = null;
 
         if (!options.url) {
             return Promise.reject('Url required');
@@ -41,47 +45,36 @@ export class HttpService {
         const headers = options.headers || this.headers;
 
         if (method === 'GET') {
-            return this._http.get(url)
-                .toPromise()
-                .then(response => {
-                    if (needNotif) {
-                        this.toastrService.showMessage('success', null, successMessage);
-                    }
-                    return response.json();
-                })
-                .catch(this.handleError);
+            promise = this._http.get(url)
+                .toPromise();
         } else if (method === 'POST') {
-            return this._http
+                promise =  this._http
                 .post(url, body, { headers: headers })
-                .toPromise()
-                .then(response => {
-                    if (needNotif) {
-                        this.toastrService.showMessage('success', null, successMessage);
-                    }
-                    return response.json();
-                })
-                .catch(this.handleError);
+                .toPromise();
         } else if (method === 'PUT') {
-            return this._http
+            promise =  this._http
                 .put(url, body, { headers: headers })
-                .toPromise()
-                .then(() => {
-                    if (needNotif) {
-                        this.toastrService.showMessage('success', null, successMessage);
-                    }
-                    return body;
-                })
-                .catch(this.handleError);
+                .toPromise();
         } else if (method === 'DELETE') {
-            return this._http.delete(url, { headers: headers })
-                .toPromise()
-                .then(() => {
-                    if (needNotif) {
+            promise =  this._http.delete(url, { headers: headers })
+                .toPromise();
+        }
+
+        return new Promise((resolve, reject) => {
+            promise
+                .then((data) => {
+                    const json = data && data._body ? JSON.parse(data._body) : {};
+                    resolve(json);
+                    if (options.successMessage) {
                         this.toastrService.showMessage('success', null, successMessage);
                     }
                     return null;
                 })
-                .catch(this.handleError);
-        }
+                .catch((err) => {
+                    const json = err && err._body ? JSON.parse(err._body) : {};
+                    reject(err);
+                    this.handleError(err);
+                });
+        });
     }
 }

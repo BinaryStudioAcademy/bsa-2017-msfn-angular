@@ -1,3 +1,4 @@
+import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -16,6 +17,10 @@ const userRoutes: Routes = [
             {
                 path: 'profile',
                 component: ProfileComponent,
+            },
+            {
+                path: 'training-list',
+                component: TrainingListComponent,
             }
         ]
     }

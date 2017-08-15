@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms'
 import { EncryptService } from '../../services/encrypt.service';
 import { IHttpReq } from '../../models/http-req';
 import { HttpService } from '../../services/http.service';
-import { MD_DIALOG_DATA } from '@angular/material';
 import { ToasterService } from '../../services/toastr.service';
+import { MdDialogRef } from '@angular/material';
 
 @Component({
     selector: 'app-confirm-password-dialog',
@@ -14,8 +14,6 @@ import { ToasterService } from '../../services/toastr.service';
 export class ConfirmPasswordDialogComponent implements OnInit {
     passwordForm: FormGroup;
     password: string;
-    email = this.data[0];
-    id = this.data[1];
 
     currentPasswordFormControl = new FormControl('',
         [
@@ -25,10 +23,10 @@ export class ConfirmPasswordDialogComponent implements OnInit {
     );
 
     constructor(
-        @Inject(MD_DIALOG_DATA) public data: string[],
         private httpService: HttpService,
         private encryptor: EncryptService,
-        private toastrService: ToasterService
+        private toastrService: ToasterService,
+        public dialogRef: MdDialogRef<any>
     ) { }
 
     ngOnInit() {
@@ -53,48 +51,30 @@ export class ConfirmPasswordDialogComponent implements OnInit {
 
     onClick(controls) {
         if (controls.newPassword === controls.newPasswordConfirmation) {
-            this.checkCurrentPassword(controls);
+            this.chengePassword(controls);
         } else {
             this.toastrService.showMessage('error', 'Passwords doesn`t match', 'Oh, sorry!');
         }
     }
 
-    checkCurrentPassword(controls) {
+    chengePassword(controls) {
         const encData = this.encryptor.encrypt({
             'password': this.password,
-            'email': this.email
+            'newPassword': controls.newPassword
         });
 
         const sendData: IHttpReq = {
-            url: '/api/login',
-            method: 'POST',
-            body: { data: encData }
-        };
-
-        this.httpService.sendRequest(sendData)
-            .then((res) => {
-                if (res.access === true) {
-                    this.chengePassword(controls);
-                    this.toastrService.showMessage('success', 'password has been changed', 'Success!');
-                } else {
-                    this.toastrService.showMessage('error', 'incorect current password', 'Oh, sorry!');
-                }
-            });
-    }
-
-    chengePassword(controls) {
-        const password = this.encryptor.encrypt({
-            'password': controls.newPassword
-        });
-
-        const sendData: IHttpReq = {
-            url: '/api/user/' + this.id,
+            url: '/api/change-password/',
             method: 'PUT',
-            body: { password: password }
+            body: { data: encData },
+            successMessage: 'Password has been changed!'
         };
 
-        this.httpService.sendRequest(sendData);
+        this.httpService.sendRequest(sendData).then(res => {
+            if (res.data) {
+                this.dialogRef.close();
+            }
+        });
     }
-
 }
 

@@ -154,6 +154,14 @@ form {
     color: $text-second-color;
 }
 
+.sening-request {
+    height: 50vh;
+    width: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media only screen and (max-width: $small-screen) {
     #form {
         width: 90%;

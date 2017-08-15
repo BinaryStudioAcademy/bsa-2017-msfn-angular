@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const bcrypt = require('bcrypt-nodejs');
+// const activateService = require('../services/activateService');
 
 
 const User = new Schema({
@@ -10,7 +11,7 @@ const User = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        lowercase: true
     },
     password: {
         type: String,
@@ -32,17 +33,27 @@ const User = new Schema({
     birthday: String,
     height: Number,
     weight: Number,
+    activateToken: String
 });
 
 User.pre('save', function(next) {
     const userData = this;
+
+    // Create activateToken token for user and be able to send it to email and confirm email after
+    let text = "";
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
+
+    for (let i = 0; i < 50; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    userData.activateToken = text;
 
     if (!userData.isModified('password')) return next();
 
     bcrypt.genSalt(1012, (err, salt) => {
         userData.salt = salt;
         this.encryptPassword(this.password, (err, hash) => {
-            "use strict";
             if (err) return next(err);
 
             userData.password = hash;
@@ -67,8 +78,11 @@ User.pre('update', function(next) {
     });
 });
 
+User.post('save', function(user) {
+    // activateService.sendRegistrationLetter(user);
+});
+
 User.methods.checkPassword = function(password, callback){
-    "use strict";
     this.encryptPassword(password, (err, hash) => {
         if (err) return callback(err);
         callback(err, (hash === this.password))
@@ -76,7 +90,6 @@ User.methods.checkPassword = function(password, callback){
 };
 
 User.methods.encryptPassword = function(password, callback){
-    "use strict";
     bcrypt.hash(password, this.salt, null, (err, hash) => {
         callback(err, hash);
     });

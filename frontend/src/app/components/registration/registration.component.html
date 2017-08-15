@@ -2,9 +2,11 @@
     <h2 md-dialog-title>Registration
         <button tabindex="-1" md-dialog-close class="material-icons close">close</button>
     </h2>
-
     <div id="registration">
-        <div id="form">
+        <div class="sening-request" [style.display]="!requestSent ? 'none' : 'flex'">
+            <h2>Sending Request ...</h2>
+        </div>
+        <div id="form" [style.display]="requestSent ? 'none' : 'block'">
             <div id="social-registration">Register via
                 <a tabindex="-1" href="/auth/facebook">Facebook</a>
                 <a tabindex="-1" href="/auth/google">Google</a>
@@ -13,10 +15,10 @@
             <div id="general-error" class="error" *ngIf="userError">{{ userError }}</div>
 
             <div id="gender" class="input-row">
-                    <input [(ngModel)]="user.gender" id="Male" type="radio" value="Male" name="gender">
-                    <label for="Male">Male</label>
-                    <input [(ngModel)]="user.gender" id="Female" type="radio" value="Female" name="gender">
-                    <label for="Female">Female</label>
+                <input [(ngModel)]="user.gender" id="Male" type="radio" value="Male" name="gender">
+                <label for="Male">Male</label>
+                <input [(ngModel)]="user.gender" id="Female" type="radio" value="Female" name="gender">
+                <label for="Female">Female</label>
             </div>
             <md-input-container class="input-row">
                 <input autofocus mdInput type="email" name="email" placeholder="Email" required [(ngModel)]="user.email" [formControl]="emailFormControl">
