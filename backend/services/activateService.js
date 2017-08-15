@@ -5,25 +5,12 @@ const userRepository = require('../repositories/userRepository')
 
 function ActivateService() {}
 
-ActivateService.prototype.makeid = makeid;
 ActivateService.prototype.checkActivateCode = checkActivateCode;
-ActivateService.prototype.sendRegistrationLetter = sendRegistrationLetter;
 ActivateService.prototype.genNewRootMail = genNewRootMail;
 ActivateService.prototype.checkNewRootMail = checkNewRootMail;
 
-function makeid() {
-    let text = "";
-    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
-
-    for (let i = 0; i < 50; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-
-    return text;
-}
 
 function checkActivateCode(body, callback) {
-    const userRepository = require('../repositories/userRepository');
     userRepository.getUserByEmail(body.email, (err, user) => {
         if (err) {
             return callback(err);
@@ -39,30 +26,7 @@ function checkActivateCode(body, callback) {
     })
 }
 
-function sendRegistrationLetter(user) {
-    // TO CHANGE URL in letter for stable site address
-    emailService.send({
-            to: user.email,
-            subject: 'Your MSFN registration',
-            html: '<table><tr><td>Congratulations, ' +
-                user.firstName +
-                '!</td></tr> <tr><td>You have become a part of our fantastic fitness network!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
-                '<a href="http://localhost:3060/api/user/activate?email=' + user.email + '&token=' + user.activateToken + '">' + 'Activate account </a> </td></tr></table>'
-        },
-        (err, data) => {
-            if (err) return callback(err);
-            if (data.rejected.length == 0) {
-                data.status = 'ok';
-            }
-            callback(null, data);
-        }
-    );
-}
-
 function genNewRootMail(body, callback) {
-    const userRepository = require('../repositories/userRepository');
-
-    console.log(body);
 
     userRepository.getUserByEmail(body.email, (err, data) => {
         "use strict";
@@ -118,7 +82,11 @@ function genNewRootMail(body, callback) {
 
 function checkNewRootMail(body, callback) {
 
-    confirmCodeRepository.get({ filter: {confirmCode: body}}, (err, data) => {
+    confirmCodeRepository.get({
+        filter: {
+            confirmCode: body
+        }
+    }, (err, data) => {
         if (data.length > 0) {
             const confirmData = data[0];
             if (confirmData && confirmData.confirmCode === body) {
