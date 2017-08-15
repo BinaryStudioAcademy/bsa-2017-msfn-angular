@@ -38,9 +38,7 @@ const User = new Schema({
 
 User.pre('save', function (next) {
     const userData = this;
-    console.log('ggg333');
     if (!userData.isModified('password')) return next();
-console.log('ggg22');
     bcrypt.genSalt(1012, (err, salt) => {
         userData.salt = salt;
         this.encryptPassword(this.password, (err, hash) => {
@@ -52,11 +50,11 @@ console.log('ggg22');
     });
 });
 
-User.pre('update', function(next) {
-  const fields = this._update.$set;
-  
-  if (!fields || !fields.password) return next();
-  bcrypt.genSalt(1012, (err, salt) => {
+User.pre('update', function (next) {
+    const fields = this._update.$set;
+
+    if (!fields || !fields.password) return next();
+    bcrypt.genSalt(1012, (err, salt) => {
         fields.salt = salt;
         bcrypt.hash(fields.password, fields.salt, null, (err, hash) => {
             if (err) return next(err);
