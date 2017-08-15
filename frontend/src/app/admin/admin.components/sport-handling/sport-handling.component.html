@@ -10,7 +10,7 @@
         </md-error>
     </md-input-container>
 
-    <!--<md-select class="select-row input" name="exercise" placeholder="Sport icon" required [(ngModel)]="icon">-->
+    <!--<md-select class="select-row input" name="sport" placeholder="Sport icon" required [(ngModel)]="icon">-->
         <!--<md-option *ngFor="let icon of icons" [value]="icon">-->
             <!--{{ icon }}-->
         <!--</md-option>-->
@@ -27,7 +27,7 @@
     </md-input-container>
 
     <md-input-container class="example-full-width" class="input">
-        <textarea mdInput type="text" name="description" placeholder="Exercise Description" required [(ngModel)]="sport.description" [formControl]="descriptionFormControl"></textarea>
+        <textarea mdInput type="text" name="description" placeholder="Kind of sport description" required [(ngModel)]="sport.description" [formControl]="descriptionFormControl"></textarea>
         <md-error *ngIf="descriptionFormControl.hasError('required')">
             Description is required
         </md-error>
