@@ -17,18 +17,18 @@ const bodyParser = require('body-parser'),
 
 const app = express();
 
+context.mongoStore = new MongoStore({
+    mongooseConnection: mongooseConnection
+});
+
 app.use(session({
     secret: sessionSecret,
     resave: true,
     saveUninitialized: true,
-    store: new MongoStore({
-        mongooseConnection: mongooseConnection
-    })
+    store: context.mongoStore
 }));
 
-context.mongoStore = new MongoStore({
-    mongooseConnection: mongooseConnection
-});
+
 app.use(useragent.express());
 app.use(blockUserAgentMiddleware);
 
@@ -52,6 +52,6 @@ console.log(`app runs on port: ${port}`);
 const server = app.listen(port);
 
 const io = require('socket.io')(server);
-const socketService = require('./middleware/socketMiddleware')(io);
+const sockets = require('./middleware/socketMiddleware')(io, context.mongoStore);
 
 module.exports = app;

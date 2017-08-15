@@ -33,6 +33,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
 import { SocketService } from './services/socket.service';
+import {NotificationsService} from './services/notifications.service';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { SocketService } from './services/socket.service';
         ForAllUserGuard,
         EncryptService,
         ExerciseTypeService,
-        SocketService
+        SocketService,
+        NotificationsService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,

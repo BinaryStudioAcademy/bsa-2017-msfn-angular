@@ -9,14 +9,29 @@ class subscribeService {
     constructor() {}
 
     follow(data, callback) {
-        const currentUserId = data.session.passport.user;
+        // if (!data.session
+        //     || !data.session.passport
+        //     || !data.session.passport.user)
+        //     return callback(new ApiError("No active user"));
+        const currentUserId = '598c46c32a27742734bd1224';//data.session.passport.user;
         const userToFollow = data.body.user_id;
         userRepository.findById(currentUserId, (err, currentUser) => {
             if (currentUser.follow.find(this.itemInArray, userToFollow)) {
                 callback(new ApiError("User already followed"));
             }
             currentUser.follow.push(objID.ObjectId(userToFollow));
-            userRepository.update(currentUserId, currentUser, callback);
+            userRepository.update(currentUserId, currentUser, (err, res) => {
+                if (err) return callback(err);
+
+                callback(err, res);
+                const userToFollowSocket = socketService.GetUserById(userToFollow);
+                if (userToFollowSocket) {
+                    socketService.EmitTo(userToFollowSocket, 'follow', {
+                        email: currentUser.email,
+                        id: currentUser.id
+                    });
+                }
+            });
         });
     }
 

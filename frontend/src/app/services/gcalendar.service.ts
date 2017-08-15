@@ -17,7 +17,6 @@ export class GCalendarService {
         gapi.load('client:auth2', () => {
             this.initClient();
         });
-        console.log(this);
     }
 
     initClient() {

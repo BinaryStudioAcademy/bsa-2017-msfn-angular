@@ -19,4 +19,10 @@ export class SocketService {
     public send(event: string, message: string) {
         this._socket.emit(event, message);
     }
+
+    public addListener(event: string, callback: any) {
+        this._socket.on(event, (data) => {
+            callback(data);
+        });
+    }
 }

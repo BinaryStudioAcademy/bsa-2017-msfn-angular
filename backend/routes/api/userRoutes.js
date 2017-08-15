@@ -3,7 +3,7 @@ const
     userService = require('../../services/userService'),
     userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/user/',
-    subscribeRoutes = require('./subscribeRoutes')
+    subscribeRoutes = require('./subscribeRoutes');
 
     module.exports = function(app) {
     app.get(baseUrl + 'me', function(req, res, next) {

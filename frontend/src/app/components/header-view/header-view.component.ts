@@ -5,6 +5,7 @@ import { NotificationDialogComponent } from '../notification-dialog/notification
 import { HttpService } from '../../services/http.service';
 import { IHttpReq } from '../../models/http-req';
 import { WindowObj } from '../../services/window.service';
+import { NotificationsService } from '../../services/notifications.service';
 
 @Component({
     selector: 'app-header-view',
@@ -29,7 +30,8 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
     constructor(public dialog: MdDialog,
                 private httpHandler: HttpService,
                 private router: Router,
-                public window: WindowObj) {
+                public window: WindowObj,
+                private Notifications: NotificationsService) {
     }
 
     ngOnInit() {
