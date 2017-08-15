@@ -73,7 +73,7 @@ const routes: Routes = [
         component: PageNotFoundComponent
     },
     {
-        path: 'confirm-registration',
+        path: 'confirm-registration/:type/:token',
         component: ConfirmedPageComponent
     },
     {
