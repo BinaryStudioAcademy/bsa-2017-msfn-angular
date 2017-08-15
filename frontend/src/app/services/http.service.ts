@@ -20,7 +20,11 @@ export class HttpService {
         if (error && error.status === 401) {
             this._router.navigate(['/']);
         }
-        // const message = JSON.parse(error._body).error;
+        let message = error && error._body ? JSON.parse(error._body).error : '';
+        if (!message) {
+            message = 'Request failed';
+        }
+
         this.toastrService.showMessage('error', error.message, this.failMessage);
         return error;
     }
