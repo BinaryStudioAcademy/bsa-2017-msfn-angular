@@ -9,16 +9,33 @@ function UserService() {
 
 UserService.prototype.addItem = addItem;
 UserService.prototype.updateItem = updateItem;
+UserService.prototype.makeid = makeid;
 
+function makeid() {
+    let text = "";
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
+
+    for (let i = 0; i < 50; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return text;
+}
+// Add new user to DB
 function addItem(body, callback) {
     userRepository.getUserByEmail(decrypt(body.email).email.toLowerCase(), (err, data) => {
         if (err) return callback(err);
 
+        // Check user with such email does not exist already
         if (data === null) {
             body.password = decrypt(body.password).password;
             body.email = decrypt(body.email).email;
+            // Generating registration confirmation "TOKEN" for user
+            body.activateToken = makeid();
+            // Add newly created user into DB
             userRepository.add(body, callback);
-
+            // SEND REGISTRATION MAIL
+            // TO CHANGE URL in letter for stable site address
             emailService.send({
                 to: body.email,
                 subject: 'Your MSFN registration',
@@ -32,19 +49,19 @@ function addItem(body, callback) {
                     data.status = 'ok';
                 }
                 callback(null, data);
-            }
-        );
+            });
         } else {
             callback(new ApiError("User with such email already exists"));
         }
     });
 }
 
+// Edit user in DB
 function updateItem(id, body, callback) {
     userRepository.getById(id, (err, data) => {
         if (err) return callback(err);
 
-        if (data === null){
+        if (data === null) {
             callback(new ApiError("User not found"));
         } else {
             userRepository.getUserByEmail(body.email, (err, existingUser) => {

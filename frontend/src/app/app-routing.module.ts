@@ -41,7 +41,8 @@ const routes: Routes = [
     {
         path: 'restore-password/:code', // for testing restorePasswordComponent, can be removed
         children: [],
-        component: RestorePasswordComponent
+        component: RestorePasswordComponent,
+        canActivate: [IsLoggedOutGuard]
     },
     {
         path: 'test-socket', // for testing socket.io
@@ -73,8 +74,9 @@ const routes: Routes = [
         component: PageNotFoundComponent
     },
     {
-        path: 'confirm-registration/:type/:token',
-        component: ConfirmedPageComponent
+        path: 'confirmation/:type/:token',
+        component: ConfirmedPageComponent,
+        canActivate: [IsLoggedOutGuard]
     },
     {
         path: '**',
