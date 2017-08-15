@@ -11,7 +11,7 @@ UserService.prototype.addItem = addItem;
 UserService.prototype.updateItem = updateItem;
 
 function addItem(body, callback) {
-    userRepository.getUserByEmail(decrypt(body.email).email, (err, data) => {
+    userRepository.getUserByEmail(decrypt(body.email).email.toLowerCase(), (err, data) => {
         if (err) return callback(err);
 
         if (data === null) {
