@@ -57,8 +57,7 @@ export class RegistrationComponent {
                 private router: Router,
                 private encryptor: EncryptService,
                 private registrationService: RegistrationService,
-                private dateService: DateService) {
-    }
+                private dateService: DateService) { }
 
     emailFormControl = new FormControl('', [
         Validators.required,
@@ -117,12 +116,14 @@ export class RegistrationComponent {
             this.userToPass = Object.assign({}, this.user);
             this.userToPass.password = this.encryptor.encrypt({'password': this.userToPass.password});
             this.userToPass.email = this.encryptor.encrypt({'email': this.userToPass.email});
+
             const registerReq: IHttpReq = {
                 url: '/api/user',
                 method: 'POST',
                 body: this.userToPass,
                 failMessage: 'You can\'t register now, sorry',
             };
+
             this.httpService.sendRequest(registerReq).then(data => {
                 const encData = this.encryptor.encrypt({
                         'password': this.user.password,

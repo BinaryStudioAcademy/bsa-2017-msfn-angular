@@ -15,6 +15,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 
 import { ToasterService } from '../services/toastr.service';
 import { AdminRootProfileService } from './admin.components/admin-root-profile/admin-root-profile.service';
+import { SportHandlingComponent } from './admin.components/sport-handling/sport-handling.component';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { AdminRootProfileService } from './admin.components/admin-root-profile/a
         ExerciseCreateComponent,
         ExerciseListComponent,
         ExerciseTypeComponent,
-        AdminRootProfileComponent
+        AdminRootProfileComponent,
+        SportHandlingComponent
     ],
     providers: [
         ToasterService,

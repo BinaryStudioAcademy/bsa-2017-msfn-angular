@@ -27,9 +27,7 @@ function getByName(name, callback) {
 }
 
 function updateByCode(code, body, callback) {
-    const query = this.model.update({
-        code: code
-    }, body);
+    const query = this.model.update({code: code}, body);
     query.exec(callback);
 }
 
