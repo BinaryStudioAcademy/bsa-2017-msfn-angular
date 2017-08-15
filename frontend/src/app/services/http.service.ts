@@ -62,15 +62,17 @@ export class HttpService {
 
         return new Promise((resolve, reject) => {
             promise
-                .then(() => {
-                    resolve();
+                .then((data) => {
+                    const json = data && data._body ? JSON.parse(data._body) : {};
+                    resolve(json);
                     if (options.successMessage) {
                         this.toastrService.showMessage('success', null, successMessage);
                     }
                     return null;
                 })
                 .catch((err) => {
-                    reject();
+                    const json = err && err._body ? JSON.parse(err._body) : {};
+                    reject(err);
                     this.handleError(err);
                 });
         });

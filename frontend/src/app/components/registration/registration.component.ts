@@ -116,7 +116,7 @@ export class RegistrationComponent {
                 day: this.birthday.day
             });
 
-             this.requestSent = true;
+            this.requestSent = true;
 
             this.user.birthday = birthday;
             this.userToPass = Object.assign({}, this.user);
@@ -126,24 +126,11 @@ export class RegistrationComponent {
                 url: '/api/user',
                 method: 'POST',
                 body: this.userToPass,
-                failMessage: 'You can\'t register now, sorry',
+                failMessage: 'Registration failed:',
             };
-            this.httpService.sendRequest(registerReq).then(data => {
-                let cache;
-                const sendConfirmLink: IHttpReq = {
-                    url: '/api/confirm-registration',
-                    method: 'POST',
-                    body: {code: cache = this.encryptor.encrypt(this.user.email)},
-                    successMessage: 'Thank you! Check your mailbox, or spam folder',
-                    failMessage: 'Fail of sending confirmation link',
-                };
-                this.httpService.sendRequest(sendConfirmLink).then(() => {
-                    console.log('Copy/Paste this link to your browser, to finish your registration:');
-                    console.log('localhost:3060/api/confirm-registration/' + cache);
-                    this._dialogRef.close();
-                });
-            })
-            .catch(() => {
+            this.httpService.sendRequest(registerReq).then(() => {
+                this._dialogRef.close();
+            }).catch(() => {
                 this.requestSent = false;
             });
         } else {
