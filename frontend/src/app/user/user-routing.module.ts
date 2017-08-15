@@ -1,4 +1,5 @@
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
+import { SettingsComponent } from './user.components/settings/settings.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -21,6 +22,10 @@ const userRoutes: Routes = [
             {
                 path: 'training-list',
                 component: TrainingListComponent,
+            },
+            {
+                path: 'settings',
+                component: SettingsComponent,
             }
         ]
     }

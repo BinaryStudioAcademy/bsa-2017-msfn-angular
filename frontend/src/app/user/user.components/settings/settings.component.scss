@@ -1,0 +1,82 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
+
+md-error {
+    color: $error-color;
+}
+
+.btn {
+    border: none;
+    margin-top: 35px;
+    width: 90%;
+    padding: 15px;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-size: $button-text;
+    font-weight: 600;
+    font-size: 11pt;
+    border-radius: 50px;
+    outline: none;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 500px;
+    font-family: $font-general;
+    color: $text-main-color;
+    justify-content: center;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 460px;
+    padding: 20px;
+    margin: 30px 0;
+    border: 1px #2A2A2A solid;
+    background: $gradient-from-color;
+    background-image: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .6);
+}
+
+.settings-title {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.settings-title-second {
+    margin: 20px;
+    font-size: $main-text;
+}
+
+.row {
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: left;
+    align-items: center;
+}
+
+.row-name {
+    width: 50%;
+    margin-right: 30px;
+    text-align: right;
+}
+
+.input {
+    padding: $input-padding;
+}

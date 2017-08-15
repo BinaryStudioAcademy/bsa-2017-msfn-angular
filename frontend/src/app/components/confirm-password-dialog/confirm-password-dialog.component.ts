@@ -71,7 +71,7 @@ export class ConfirmPasswordDialogComponent implements OnInit {
         };
 
         this.httpService.sendRequest(sendData).then(res => {
-            if (res.data) {
+            if (res) {
                 this.dialogRef.close();
             }
         });
