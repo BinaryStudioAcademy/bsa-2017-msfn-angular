@@ -141,9 +141,9 @@ export class RegistrationComponent {
                     console.log('Copy/Paste this link to your browser, to finish your registration:');
                     console.log('localhost:3060/api/confirm-registration/' + cache);
                     this._dialogRef.close();
-                }).catch(() => {
-                    this.requestSent = false;
                 });
+            }).catch(() => {
+                this.requestSent = false;
             });
         } else {
             this.userError = 'Please fill in all fields correctly';

@@ -25,7 +25,7 @@ export class HttpService {
             message = 'Request failed';
         }
 
-        this.toastrService.showMessage('error', error.message, this.failMessage);
+        this.toastrService.showMessage('error', message, this.failMessage);
         return error;
     }
 
