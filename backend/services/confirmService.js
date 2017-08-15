@@ -28,7 +28,7 @@ class confirmService {
     }
 
     checkExistCode(body, callback) {
-        userRepository.getUserByEmail(body.email, (err, userData) => {
+        userRepository.getUserByEmail(body.email.toLowerCase(), (err, userData) => {
 
             if (err) return callback(err);
 

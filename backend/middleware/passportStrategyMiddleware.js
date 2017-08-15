@@ -1,7 +1,8 @@
 const passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     mongoose = require('mongoose'),
-    userRepository = require('../repositories/userRepository');
+    userRepository = require('../repositories/userRepository'),
+    ApiError = require('../services/apiErrorService');
 
 function PassportStrategy() {
 
@@ -20,12 +21,12 @@ function strategy() {
                 if (err) {
                     return done(err);}
                 if (!user) {
-                    return done(null, false, {message: 'Incorrect email'});
+                    return done(null, false,  new ApiError('Incorrect email or password'));
                 }
                 user.checkPassword(password, (err, result) => {
                     if (err) {return done(err);}
                     if (!result) {
-                        return done(null, false, {message: 'Incorrect password'});
+                        return done(null, false, new ApiError('Incorrect email or password'));
                     } else {
                         return done(null, user);
                     }
