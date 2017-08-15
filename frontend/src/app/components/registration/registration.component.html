@@ -3,7 +3,10 @@
         <button tabindex="-1" md-dialog-close class="material-icons close">close</button>
     </h2>
 <div id="registration">
-    <div id="form">
+    <div class="sening-request" [style.display]="!requestSent ? 'none' : 'flex'">
+        <h2>Sending Request ...</h2>
+    </div>
+    <div id="form" [style.display]="requestSent ? 'none' : 'block'">
         <div id="social-registration">Register via
             <a tabindex="-1" href="/auth/facebook">Facebook</a>
             <a tabindex="-1" href="/auth/google">Google</a>
