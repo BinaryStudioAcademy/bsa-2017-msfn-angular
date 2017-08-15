@@ -1,44 +1,49 @@
 <div id="exercise-list">
-  <div id="title">
-    <h1>Exercises</h1>
-  </div>
+    <div id="title">
+        <h1>Exercises</h1>
+    </div>
 
-  <div id="inputs">
-       <app-list [items]="items" [options]="options" placeholder="types"></app-list>   
-    <md-input-container>
-      <input mdInput type="text" #filter placeholder="search by name" [(ngModel)]="name">
-    </md-input-container>
-  </div>
+    <div id="inputs">
+        <app-list
+            [items]="items"
+            [options]="options"
+            placeholder="types"
+            (change)="updateItems()"
+            (click)="updateItems()"></app-list>
+        <md-input-container>
+            <input mdInput type="text" #filter placeholder="search by name" [(ngModel)]="name">
+        </md-input-container>
+    </div>
 
-  <md-table id="table" #table [dataSource]="dataSource" mdSort>
-    <ng-container cdkColumnDef="name">
-      <md-header-cell *cdkHeaderCellDef md-sort-header>
-        Name
-      </md-header-cell>
-      <md-cell *cdkCellDef="let row">
-        {{ row.name }}
-      </md-cell>
-    </ng-container>
+    <md-table id="table" #table [dataSource]="dataSource" mdSort>
+        <ng-container cdkColumnDef="name">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Name
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                {{ row.name }}
+            </md-cell>
+        </ng-container>
 
-    <ng-container cdkColumnDef="type">
-      <md-header-cell *cdkHeaderCellDef md-sort-header>
-        Type
-      </md-header-cell>
-      <md-cell *cdkCellDef="let row">
-        {{ row.type }}
-      </md-cell>
-    </ng-container>
+        <ng-container cdkColumnDef="type">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Type
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                {{ row.type }}
+            </md-cell>
+        </ng-container>
 
-    <ng-container cdkColumnDef="description">
-      <md-header-cell *cdkHeaderCellDef>
-        Description
-      </md-header-cell>
-      <md-cell *cdkCellDef="let row" md-tooltip="{{ row.description }}">
-        {{ row.description.substring(0, 30) }}...
-      </md-cell>
-    </ng-container>
+        <ng-container cdkColumnDef="description">
+            <md-header-cell *cdkHeaderCellDef>
+                Description
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row" md-tooltip="{{ row.description }}">
+                {{ row.description.substring(0, 30) }}...
+            </md-cell>
+        </ng-container>
 
-    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *cdkRowDef="let row; columns: displayedColumns;" ></md-row>
-  </md-table>
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;" ></md-row>
+    </md-table>
 </div>

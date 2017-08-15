@@ -3,13 +3,12 @@
         <md-chip class="chip" *ngFor="let item of items; let i =index;">{{item}}
             <md-icon class="icon" (click)="deleteItem(i)">clear</md-icon>
         </md-chip>
-        <input mdInput [(ngModel)]="input" [placeholder]="placeholder" type="text" class="list-input" name="item"
-               [mdAutocomplete]="auto">
+        <input mdInput [(ngModel)]="input" [placeholder]="placeholder" type="text" class="list-input" name="item" [mdAutocomplete]="auto">
     </md-chip-list>
 </md-input-container>
 <md-autocomplete #auto="mdAutocomplete">
     <md-option *ngFor="let option of (options | autocompletePipe:input)" [value]="option"
-               (onSelectionChange)="addItem()">{{ option }}
+        (onSelectionChange)="addItem()">{{ option }}
     </md-option>
 </md-autocomplete>
 

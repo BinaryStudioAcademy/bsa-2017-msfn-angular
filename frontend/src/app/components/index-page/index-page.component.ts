@@ -28,7 +28,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         if (this.window.data._injectedData.role === 'admin') {
             this.router.navigate(['/admin']);
         } else {
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/user']);
         }
         }
     }

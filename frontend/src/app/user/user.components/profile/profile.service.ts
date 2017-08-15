@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../../services/http.service';
-import { IHttpReq } from '../../models/http-req';
-import { CropperSettings } from 'ng2-img-cropper';
+import { HttpService } from '../../../services/http.service';
+import { IHttpReq } from '../../../models/http-req';
+import {CropperSettings} from 'ng2-img-cropper';
 
 @Injectable()
 export class ProfileService {
 
-    constructor(private httpService: HttpService) {
-    }
+
+  constructor(private httpService: HttpService) { }
 
     savePhoto(image, userId, fileType, callback) {
         const sendData: IHttpReq = {
@@ -49,13 +49,15 @@ export class ProfileService {
         });
     }
 
-    updateUser(user, id) {
+    updateUser(user, id, callback) {
         const request: IHttpReq = {
             url: '/api/user/' + id,
             method: 'PUT',
             body: user
         };
-        this.httpService.sendRequest(request);
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
+        });
     }
 
     getCropperSettings(): CropperSettings {

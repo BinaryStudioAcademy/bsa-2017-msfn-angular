@@ -1,0 +1,68 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
+
+#train-container {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 260px;
+    height: 180px;
+    margin-right: 20px;
+    margin-top: 20px;
+        color: $btn-color;
+    background-color: $gradient-to-color;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.train-item-text {
+    font-size: $training-item-text;
+    margin: 5px;
+    letter-spacing: 1px;
+}
+.item-container:hover {
+    background-color: #353535;
+    cursor: pointer;
+}
+.material-icons.train-item-ico{
+    font-size: 40px;
+    margin: 5px;
+}
+
+
+.material-icons.add-item-ico{
+    font-size: 40px;
+}
+.add-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 260px;
+    height: 180px;
+    margin-right: 20px;
+    margin-top: 20px;
+    color: #CCCCCC;
+    background-color: #353535;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.add-container:hover {
+    color: $btn-color;
+    cursor: pointer;
+}

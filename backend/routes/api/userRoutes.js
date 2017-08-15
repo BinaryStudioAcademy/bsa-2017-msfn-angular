@@ -4,16 +4,13 @@ const
     userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/user/',
     subscribeRoutes = require('./subscribeRoutes'),
-    activateRoutes = require('./activateRoutes'),
-    decrypt = require('../../services/decryptService');
+    activateRoutes = require('./activateRoutes');
 
     module.exports = function(app) {
     app.get(baseUrl + 'me', function(req, res, next) {
         res.data = req.session.user;
         next();
     }, apiResponse);
-
-    app.use(baseUrl + 'activate', activateRoutes);
 
     app.get(baseUrl, function(req, res, next) {
         userRepository.getAll(function(err, data) {
@@ -32,10 +29,8 @@ const
     }, apiResponse);
 
     app.post(baseUrl, function(req, res, next) {
-        req.body.password = decrypt(req.body.password).password;
-        req.body.email = decrypt(req.body.email).email;
         userService.addItem(req.body, function(err, data) {
-            res.data = data;
+            res.data = {"registered": "true"};
             res.err = err;
             next();
         });
@@ -59,5 +54,5 @@ const
 
     app.use(baseUrl + 'subscribe', subscribeRoutes);
 
-    
+    app.use(baseUrl + 'activate', activateRoutes);
 };

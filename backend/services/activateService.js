@@ -1,6 +1,7 @@
 const ApiError = require('./apiErrorService');
 const emailService = require('./emailService');
 const confirmCodeRepository = require('../repositories/confirmCodeRepository');
+const userRepository = require('../repositories/userRepository')
 
 function ActivateService() {}
 
@@ -22,9 +23,7 @@ function makeid() {
 }
 
 function checkActivateCode(body, callback) {
-const userRepository = require('../repositories/userRepository');
-
-
+    const userRepository = require('../repositories/userRepository');
     userRepository.getUserByEmail(body.email, (err, user) => {
         if (err) {
             return callback(err);
@@ -41,9 +40,6 @@ const userRepository = require('../repositories/userRepository');
 }
 
 function sendRegistrationLetter(user) {
-const userRepository = require('../repositories/userRepository');
-
-    
     // TO CHANGE URL in letter for stable site address
     emailService.send({
             to: user.email,
@@ -64,7 +60,7 @@ const userRepository = require('../repositories/userRepository');
 }
 
 function genNewRootMail(body, callback) {
-const userRepository = require('../repositories/userRepository');
+    const userRepository = require('../repositories/userRepository');
 
     console.log(body);
 
@@ -100,7 +96,7 @@ const userRepository = require('../repositories/userRepository');
                     confirmCodeRepository.add(confirmData, (err, data) => {
                         const newRootMailLink = "http://localhost:3060/api/user/activate/changemail/" + data.confirmCode;
                         emailService.send({
-                                to: body.email,
+                                to: body.newRootMail,
                                 subject: "Link to change your main email",
                                 html: "<a href=\"" + newRootMailLink + "\">" + newRootMailLink + "</a>"
                             },
@@ -121,60 +117,46 @@ const userRepository = require('../repositories/userRepository');
 }
 
 function checkNewRootMail(body, callback) {
-const userRepository = require('../repositories/userRepository');
 
-    userRepository.getUserByEmail(body.email, (err, userData) => {
+    confirmCodeRepository.get({ filter: {confirmCode: body}}, (err, data) => {
+        if (data.length > 0) {
+            const confirmData = data[0];
+            if (confirmData && confirmData.confirmCode === body) {
+                const pass = body.password;
+                userRepository.update(confirmData.user, {
+                    email: confirmData.newRootMail
+                }, (err, result) => {
 
-        if (err) return callback(err);
+                    if (result.ok == 1) {
 
-        if (userData === null) {
-            callback(new ApiError("User not found"));
-        } else {
-            const user = userData._id;
-            confirmCodeRepository.get({
-                user: user
-            }, (err, data) => {
-                if (data.length > 0) {
-                    const confirmData = data[0];
-                    if (confirmData && confirmData.confirmCode === body.confirmCode) {
-                        const pass = body.password;
-                        userRepository.update(user, {
-                            password: pass
-                        }, (err, result) => {
-
-                            if (result.ok == 1) {
-
-                                confirmCodeRepository.deleteById(confirmData._id, (err, data) => {
-                                    //need log error deleting
-                                });
-
-                                emailService.send({
-                                        to: body.email,
-                                        subject: "Password changed",
-                                        html: "Hi, " + userData.firstName + ". <br>Your password was changed. <br>If you did not perform this action, you can recover access by entering " + userData.email + " into the form at <a href=\"https://msfn.com/forgot_password\">https://msfn.com/forgot_password</a>."
-                                    },
-                                    (err, data) => {
-                                        "use strict";
-                                        if (err) return callback(err);
-                                        if (data.rejected.length == 0) {
-                                            data.status = 'ok';
-                                        }
-                                        callback(null, data);
-                                    }
-                                );
-                            }
+                        confirmCodeRepository.deleteById(confirmData._id, (err, data) => {
+                            //need log error deleting
                         });
-                    } else {
-                        callback(new ApiError("Wrong confirm code, or time expired"));
+
+                        emailService.send({
+                                to: body.email,
+                                subject: "Password changed",
+                                html: "Hi,rm this action, you can recover access by entering into the form at <a href=\"https://msfn.com/forgot_password\">https://msfn.com/forgot_password</a>."
+                            },
+                            (err, data) => {
+                                "use strict";
+                                if (err) return callback(err);
+                                if (data.rejected.length == 0) {
+                                    data.status = 'ok';
+                                }
+                                callback(null, data);
+                            }
+                        );
                     }
-                    // callback(null, data);
-                } else {
-                    callback(new ApiError("Wrong confirm code, or time expired"));
-                }
-            });
+                });
+            } else {
+                callback(new ApiError("Wrong confirm code, or time expired"));
+            }
+            // callback(null, data);
+        } else {
+            callback(new ApiError("Wrong confirm code, or time expired"));
         }
     });
-
 }
 
 module.exports = new ActivateService();

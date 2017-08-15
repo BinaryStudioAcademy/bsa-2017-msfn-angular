@@ -14,7 +14,6 @@ ExerciseTypeService.prototype.deleteAllExerciseTypes = deleteAllExerciseTypes;
 function createExerciseType(name, callback) {
 
     exerciseTypeRepository.getAll((err, exerciseTypeData) => {
-        "use strict";
         if (err) return callback(err);
         let max = 0;
         if (exerciseTypeData instanceof Array && exerciseTypeData.length) {
@@ -34,7 +33,6 @@ function createExerciseType(name, callback) {
 
 
         exerciseTypeRepository.add(data, (err, exerciseTypeData) => {
-            "use strict";
 
             if (err) return callback(err);
             if (exerciseTypeData === null) {
@@ -49,7 +47,6 @@ function createExerciseType(name, callback) {
 
 function updateExerciseTypeByCode(code, body, callback) {
     exerciseTypeRepository.updateByCode(code, body, (err, exerciseTypeData)=>{
-        "use strict";
 
         if (err) return callback(err);
         if (exerciseTypeData === null) {
@@ -62,7 +59,6 @@ function updateExerciseTypeByCode(code, body, callback) {
 
 function deleteExerciseTypeByCode(code, callback) {
     exerciseTypeRepository.deleteByCode(code, (err, exerciseTypeData)=>{
-        "use strict";
 
         if (err) return callback(err);
         if (exerciseTypeData === null) {
@@ -76,7 +72,6 @@ function deleteExerciseTypeByCode(code, callback) {
 
 function deleteAllExerciseTypes(callback) {
     exerciseTypeRepository.deleteAll((err, exerciseTypeData) => {
-        "use strict";
 
         if (err) return callback(err);
         if (exerciseTypeData === null) {
@@ -89,7 +84,6 @@ function deleteAllExerciseTypes(callback) {
 
 function getAllExerciseTypes(callback) {
     exerciseTypeRepository.getAll((err, exerciseTypeData) => {
-        "use strict";
 
         if (err) return callback(err);
         if (exerciseTypeData === null) {

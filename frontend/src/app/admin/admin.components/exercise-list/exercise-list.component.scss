@@ -1,32 +1,68 @@
 @import '../../../../globalStyles/indentations.scss';
 @import '../../../../globalStyles/text.scss';
+@import '../../../../globalStyles/variables.scss';
 
 #title {
-  margin: $content-lr-margin 0;
+    margin: $content-lr-margin 0;
 }
 
 h1 {
-  margin: 0;
-  text-align: center;
+    margin: 0;
+    text-align: center;
 }
 
 #inputs {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto 10px;
+    padding: 20px 20px 10px 20px;
+    background: $gradient-to-color;
 }
 
 .mat-table {
-  width: 80%;
-  margin: 0 auto;
+    width: 80%;
+    margin: 0 auto;
 }
 
-.mat-row, .mat-header-row {
-  height: auto;
-  padding: $content-tb-margin 60px;
+.mat-header-row,
+.mat-row {
+    height: auto;
+    padding: $content-tb-margin 60px;
 }
 
 .mat-header-cell {
-  font-size: $main-text;
+    font-size: $main-text;
+}
+
+md-header-cell,
+md-cell {
+    max-width: 28%;
+    margin-left: 4%;
+    word-break: break-all;
+}
+
+md-header-cell:last-child,
+md-cell:last-child {
+    margin-right: 4%;
+}
+
+@media only screen and (max-width: $large-screen) {
+
+    #inputs {
+        width: 95%;
+    }
+
+    .mat-table {
+        width: 95%;
+    }
+
+    .mat-header-row,
+    .mat-row {
+        padding: 20px 10px;
+    }
+
+    md-cell {
+        font-size: 12px;
+    }
 }

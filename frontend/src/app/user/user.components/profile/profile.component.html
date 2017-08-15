@@ -6,18 +6,14 @@
                 <div class="profile-avatar">
                     <div class="profile-picture">
                         <img [src]="data.image" alt="user picture" class="profile-picture-img">
-                        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data"
-                                     [settings]="cropperSettings"></img-cropper>
+                        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
                     </div>
                     <div class="profile-upload">
                         <div class="profile-upload-container upload-btn" (click)="saveImg('save')">
                             <span>{{hideCropper ? 'Upload new picture' : 'Save'}}</span>
-                            <input type="file" accept="image/*" *ngIf="hideCropper" class="upload"
-                                   (change)="fileChangeListener($event)"/>
+                            <input type="file" accept="image/*" *ngIf="hideCropper" class="upload" (change)="fileChangeListener($event)"/>
                         </div>
-                        <div class="profile-upload-container upload-btn" *ngIf="!hideCropper"
-                             (click)="saveImg('cancel')">Cancel
-                        </div>
+                        <div class="profile-upload-container upload-btn" *ngIf="!hideCropper" (click)="saveImg('cancel')">Cancel</div>
                     </div>
                 </div>
                 <div class="profile-fullname">
@@ -45,29 +41,23 @@
                 </div>
                 <div class="profile-birthday">
                     <div class="birthday-month">
-                        <md-select
-                            placeholder="Month"
-                            [(ngModel)]="birthday.month"
-                            (change)="onSelect(birthday.month,birthday.year)"
-                            [ngModelOptions]="{standalone: true}">
-                                <md-option *ngFor="let month of months" [value]="month">
-                                    {{ month }}
-                                </md-option>
+                        <md-select placeholder="Month" [(ngModel)]="birthday.month" (change)="onSelect(birthday.month,birthday.year)"
+                                   [ngModelOptions]="{standalone: true}">
+                            <md-option *ngFor="let month of months" [value]="month">
+                                {{ month }}
+                            </md-option>
                         </md-select>
                     </div>
                     <div class="birthday-day">
-                        <md-select
-                            placeholder="Day"
-                            [(ngModel)]="birthday.day"
-                            [ngModelOptions]="{standalone: true}">
-                                <md-option *ngFor="let day of days" [value]="day">
-                                    {{ day }}
-                                </md-option>
+                        <md-select placeholder="Day" [(ngModel)]="birthday.day" [ngModelOptions]="{standalone: true}">
+                            <md-option *ngFor="let day of days" [value]="day">
+                                {{ day }}
+                            </md-option>
                         </md-select>
                     </div>
                     <div class="birthday-year">
-                        <md-select placeholder="Year" [(ngModel)]="birthday.year" (change)="onSelect(birthday.month, birthday.year)"
-                            [ngModelOptions]="{standalone: true}">
+                        <md-select placeholder="Year" [(ngModel)]="birthday.year" (change)="onSelect(birthday.month,birthday.year)"
+                                   [ngModelOptions]="{standalone: true}">
                             <md-option *ngFor="let year of years" [value]="year">
                                 {{ year }}
                             </md-option>
@@ -95,7 +85,7 @@
                         <button md-raised-button (click)="openConfirmPasswordDialog()" class="">Change password</button>
                     </div>
                     <div id="coach-button">
-                        <button md-raised-button type="submit" *ngIf="!requestForCoaching" (click)="applyForCoaching()">
+                        <button md-raised-button type="submit"  *ngIf="!requestForCoaching" (click)="applyForCoaching()">
                             Become a coach
                         </button>
                         <div *ngIf="requestForCoaching">
@@ -121,7 +111,7 @@
                 </div>
             </div>
             <div class="profile-footer">
-                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)">Save changes</button>
+                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
             </div>
         </form>
     </div>

@@ -12,110 +12,118 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
-  providers: [UserListService]
+    selector: 'app-user-list',
+    templateUrl: './user-list.component.html',
+    styleUrls: ['./user-list.component.scss'],
+    providers: [UserListService]
 })
 
 export class UserListComponent implements OnInit {
-  searchInput = '';
-  displayedColumns = [
-    'firstName',
-    'lastName',
-    'email',
-    'role',
-    'birthday',
-    'gender'
-  ];
-  tableDatabase = new TableDatabase();
-  dataSource: ExampleDataSource | null;
-  @ViewChild(MdSort) sort: MdSort;
-  @ViewChild('filter') filter: ElementRef;
+    searchInput = '';
+    displayedColumns = [
+        'firstName',
+        'lastName',
+        'email',
+        'role',
+        'age',
+        'gender'
+    ];
+    tableDatabase = new TableDatabase(this.userListService);
+    dataSource: ExampleDataSource | null;
+    @ViewChild(MdSort) sort: MdSort;
+    @ViewChild('filter') filter: ElementRef;
 
-  constructor(private cd: ChangeDetectorRef,
-              private userListService: UserListService) { }
+    constructor(private cd: ChangeDetectorRef,
+                            private userListService: UserListService) { }
 
-  ngOnInit() {
-    this.dataSource = new ExampleDataSource(this.tableDatabase,
-      this.sort,
-      this.userListService);
+    ngOnInit() {
+        this.dataSource = new ExampleDataSource(this.tableDatabase,
+            this.sort,
+            this.userListService);
 
-    setTimeout(() => this.cd.markForCheck());
-    this.getUsers((result) => {
-      this.tableDatabase.addUsers(result);
-    });
+        setTimeout(() => this.cd.markForCheck());
+        this.getUsers((result) => {
+            this.tableDatabase.addUsers(result);
+        });
 
-    Observable.fromEvent(this.filter.nativeElement, 'keyup')
-      .debounceTime(150)
-      .distinctUntilChanged()
-      .subscribe(() => {
-        if (!this.dataSource) { return; }
-        this.dataSource.filter = this.filter.nativeElement.value;
-      });
-  }
+        Observable.fromEvent(this.filter.nativeElement, 'keyup')
+            .debounceTime(150)
+            .distinctUntilChanged()
+            .subscribe(() => {
+                if (!this.dataSource) { return; }
+                this.dataSource.filter = this.filter.nativeElement.value;
+            });
+    }
 
-  getUsers(callback) {
-    return this.userListService.getUsers(callback);
-  }
+    getUsers(callback) {
+        return this.userListService.getUsers(callback);
+    }
 }
 
 export class TableDatabase {
-  dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  get data(): any[] {
-    return this.dataChange.value;
-  }
+    dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+    get data(): any[] {
+        return this.dataChange.value;
+    }
 
-  constructor() { }
+    constructor(private userListService: UserListService) { }
 
-  addUsers(data) {
-    const copiedData = [...data];
-    this.dataChange.next(copiedData);
-  }
+    addUsers(data) {
+        const copiedData = [...data];
+        for (let i = 0; i < copiedData.length; i++) {
+            const age = this.userListService.getAge(copiedData[i].birthday);
+            copiedData[i].age = age;
+        }
+        this.dataChange.next(copiedData);
+    }
 }
 
 export class ExampleDataSource extends DataSource<any> {
-  _filterChange = new BehaviorSubject('');
-  get filter(): string {
-    return this._filterChange.value;
-  }
-  set filter(filter: string) {
-    this._filterChange.next(filter);
-  }
-
-  constructor(private _exampleDatabase: TableDatabase,
-              private _sort: MdSort,
-              private service: UserListService) {
-    super();
-  }
-
-  connect(): Observable<any[]> {
-    const displayDataChanges = [
-      this._exampleDatabase.dataChange,
-      this._sort.mdSortChange,
-      this._filterChange
-    ];
-
-    return Observable.merge(...displayDataChanges).map(() => {
-      return this.getSortedData().slice().filter((item) => {
-        const searchFirstName = (item.firstName).toLowerCase();
-        const searchLastName = (item.lastName).toLowerCase();
-        const searchRole = (item.role).toLowerCase();
-        return (searchFirstName.includes(this.filter.toLowerCase()) ||
-                searchLastName.includes(this.filter.toLowerCase()) ||
-                searchRole.includes(this.filter.toLowerCase()));
-      });
-    });
-  }
-
-  disconnect() {}
-
-  getSortedData(): any[] {
-    const data = this._exampleDatabase.data.slice();
-    if (!this._sort.active || this._sort.direction === '') {
-      return data;
+    _filterChange = new BehaviorSubject('');
+    get filter(): string {
+        return this._filterChange.value;
+    }
+    set filter(filter: string) {
+        this._filterChange.next(filter);
     }
 
-    return this.service.sortData(data, this._sort.active, this._sort.direction);
-  }
+    constructor(private _exampleDatabase: TableDatabase,
+                            private _sort: MdSort,
+                            private service: UserListService) {
+        super();
+    }
+
+    connect(): Observable<any[]> {
+        const displayDataChanges = [
+            this._exampleDatabase.dataChange,
+            this._sort.mdSortChange,
+            this._filterChange
+        ];
+
+        return Observable.merge(...displayDataChanges).map(() => {
+            return this.getSortedData().slice().filter((item) => {
+                const query = this.filter.toLowerCase(),
+                    searchFirstName = (item.firstName).toLowerCase(),
+                    searchLastName = (item.lastName).toLowerCase(),
+                    searchEmail = (item.email).toLowerCase(),
+                    searchRole = (item.role).toLowerCase();
+
+                return (searchFirstName.includes(query) ||
+                                searchLastName.includes(query) ||
+                                searchEmail.includes(query) ||
+                                searchRole.includes(query));
+            });
+        });
+    }
+
+    disconnect() {}
+
+    getSortedData(): any[] {
+        const data = this._exampleDatabase.data.slice();
+        if (!this._sort.active || this._sort.direction === '') {
+            return data;
+        }
+
+        return this.service.sortData(data, this._sort.active, this._sort.direction);
+    }
 }

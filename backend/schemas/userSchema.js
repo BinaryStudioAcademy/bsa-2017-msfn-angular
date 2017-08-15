@@ -2,21 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const bcrypt = require('bcrypt-nodejs');
-const activateService = require('../services/activateService');
+// const activateService = require('../services/activateService');
 
 
 const User = new Schema({
     firstName: String,
     lastName: String,
     email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true
+        type: String,
+        required: true,
+        lowercase: true
     },
     password: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
     isCoach: Boolean,
     isAdmin: Boolean,
@@ -41,14 +40,20 @@ User.pre('save', function(next) {
     const userData = this;
 
     // Create activateToken token for user and be able to send it to email and confirm email after
-    userData.activateToken = activateService.makeid();
+    let text = "";
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
+
+    for (let i = 0; i < 50; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    userData.activateToken = text;
 
     if (!userData.isModified('password')) return next();
 
     bcrypt.genSalt(1012, (err, salt) => {
         userData.salt = salt;
         this.encryptPassword(this.password, (err, hash) => {
-            "use strict";
             if (err) return next(err);
 
             userData.password = hash;
@@ -62,23 +67,26 @@ User.post('save', function(user) {
 });
 
 User.pre('update', function(next) {
-  const fields = this._update.$set;
+    const fields = this._update.$set;
 
-  if (!fields.password) return next();
+    if (!fields.password) return next();
 
-  bcrypt.genSalt(1012, (err, salt) => {
+    bcrypt.genSalt(1012, (err, salt) => {
     fields.salt = salt;
     bcrypt.hash(fields.password, fields.salt, null, (err, hash) => {
-      if (err) return next(err);
+        if (err) return next(err);
 
-      fields.password = hash;
-      next();
+        fields.password = hash;
+        next();
     });
-  });
+    });
+});
+
+User.post('save', function(user) {
+    // activateService.sendRegistrationLetter(user);
 });
 
 User.methods.checkPassword = function(password, callback){
-    "use strict";
     this.encryptPassword(password, (err, hash) => {
         if (err) return callback(err);
         callback(err, (hash === this.password))
@@ -86,7 +94,6 @@ User.methods.checkPassword = function(password, callback){
 };
 
 User.methods.encryptPassword = function(password, callback){
-    "use strict";
     bcrypt.hash(password, this.salt, null, (err, hash) => {
         callback(err, hash);
     });
