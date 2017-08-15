@@ -40,16 +40,17 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.put(baseUrl + ':id', function (req, res, next) {
-        userService.updateItem(req.params.id, req.body, function (err, data) {
+    app.put(baseUrl + ':id/' + 'email', function (req, res, next) {
+        userService.addEmailToItem(req.params.id, req.body, function (err, data) {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.delete(baseUrl + ':id', function (req, res, next) {
-        userRepository.deleteById(req.params.id, function (err, data) {
+
+    app.put(baseUrl + ':id', function(req, res, next) {
+        userService.updateItem(req.params.id, req.body, function(err, data) {
             res.data = data;
             res.err = err;
             next();
@@ -57,5 +58,13 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.use(baseUrl + 'subscribe', subscribeRoutes);
+
+    app.delete(baseUrl + ':id', function(req, res, next) {
+        userRepository.deleteById(req.params.id, function(err, data) {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
 
 };

@@ -9,6 +9,8 @@ import { ConfirmPasswordDialogComponent } from '../../../components/confirm-pass
 import { WindowObj } from '../../../services/window.service';
 import { IUser } from '../../../models/user';
 import { ToasterService } from '../../../services/toastr.service';
+import { AddNewEmailDialogComponent } from '../../../components/add-new-email-dialog/add-new-email-dialog.component';
+import { ChangeRootEmailDialogComponent } from '../../../components/change-root-email-dialog/change-root-email-dialog.component';
 
 @Component({
     selector: 'app-profile',
@@ -55,6 +57,7 @@ export class ProfileComponent implements OnInit {
         };
     }
 
+
     ngOnInit() {
         this.profileService.getUser(this.userId, res => {
             this.user = res;
@@ -100,6 +103,24 @@ export class ProfileComponent implements OnInit {
         this.days = this.dateService.generateDays(month, year);
     }
 
+
+    openAddNewEmailDialog() {
+        const dialogRef = this.dialog.open(AddNewEmailDialogComponent, {
+        });
+        dialogRef.afterClosed().subscribe(email => {
+            if (email && email !== this.user.email) {
+                this.profileService.addNewEmail(email, this.user._id, res => {
+                    this.user.secondaryEmails.push(res.email);
+                });
+            }
+        });
+    }
+
+    makeRoot(email: string) {
+        console.log(email);
+        const dialogRef = this.dialog.open(ChangeRootEmailDialogComponent, {
+        });
+    }
     onSubmit(user) {
         const monthNumber = this.months.indexOf(this.birthday.month) + 1;
         const birthday = this.dateService.convertDateToIso({

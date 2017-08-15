@@ -10,6 +10,7 @@ function UserService() {
 UserService.prototype.addItem = addItem;
 UserService.prototype.updateItem = updateItem;
 UserService.prototype.makeid = makeid;
+UserService.prototype.addEmailToItem = addEmailToItem;
 
 function makeid() {
     let text = "";
@@ -80,6 +81,10 @@ function updateItem(id, body, callback) {
             });
         }
     })
+}
+
+function addEmailToItem(id, body, callback) {
+    userRepository.addEmail(id, body.email, callback);
 }
 
 module.exports = new UserService();
