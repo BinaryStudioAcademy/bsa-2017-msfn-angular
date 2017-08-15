@@ -69,7 +69,10 @@ export class TableDatabase {
     constructor(private userListService: UserListService) { }
 
     addUsers(data) {
-        const copiedData = [...data];
+        let copiedData = [...data];
+        copiedData = copiedData.filter((elem) => {
+            return elem.role !== 'admin';
+        });
         for (let i = 0; i < copiedData.length; i++) {
             const age = this.userListService.getAge(copiedData[i].birthday);
             copiedData[i].age = age;

@@ -1,5 +1,4 @@
 const Repository = require('./generalRepository'),
-    UserService = require('../services/exerciseTypeService'),
     ExerciseType = require('../schemas/exerciseTypeSchema');
 
 function ExerciseTypeRepository() {
@@ -16,7 +15,7 @@ ExerciseTypeRepository.prototype.updateByCode = updateByCode;
 
 function findByCode(code, callback) {
     const query = this.model.findOne({
-        id: id
+        code: code
     });
     query.exec(callback);
 };
