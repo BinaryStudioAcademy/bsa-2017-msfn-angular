@@ -36,10 +36,10 @@ class confirmService {
                 callback(new ApiError("User not found"));
             } else {
                 const user = userData._id;
-                confirmCodeRepository.get({ user: user }, (err, data) => {
+                confirmCodeRepository.get({ confirmCode: body.confirmCode }, (err, data) => {
                     if (data.length > 0) {
                         const confirmData = data[0];
-                        if (confirmData && confirmData.confirmCode === body.confirmCode) {
+                        if (confirmData) {
                             callback(false, { status: 'ok', user: userData, codeId: confirmData._id });
                         } else {
                             callback(new ApiError("Wrong confirm code, or time expired"));

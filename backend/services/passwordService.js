@@ -36,6 +36,8 @@ function createConfirmCode(body, callback) {
 function checkConfirmCode(body, callback) {
     body = decrypt(body.data);
     confirmService.checkExistCode(body, (err, data) => {
+        if (err) callback(err);
+
         if (data.status == 'ok') {
             const pass = body.password;
             userRepository.update(data.user._id, { password: pass }, (err, result) => {
