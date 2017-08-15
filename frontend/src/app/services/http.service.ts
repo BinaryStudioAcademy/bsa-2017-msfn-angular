@@ -17,7 +17,7 @@ export class HttpService {
     constructor(private _http: Http, private toastrService: ToasterService, private _router: Router) { }
 
     private handleError = (error: any): Promise<any> => {
-        if (error && error.status === 401) {
+        if (error && error.status === 401 && error.url.indexOf('/api/login') === -1) {
             this._router.navigate(['/']);
         }
         let message = error && error._body ? JSON.parse(error._body).error : '';
