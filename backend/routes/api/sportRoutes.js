@@ -9,6 +9,9 @@ module.exports = function (app) {
 
     app.get(baseUrl, (req, res, next) => {
         sportRepository.getAll((err, data) => {
+            if (!data.length){
+                data = [{}];
+            }
             res.data = data;
             res.err = err;
             next();
@@ -23,15 +26,17 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+    // app.post(baseUrl, (req, res, next) => {
     app.post(baseUrl, isAdmin, (req, res, next) => {
-        sportService.addItem(req.body.name, (err, data) => {
+        sportService.addItem(req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.put(baseUrl, isAdmin, (req, res, next) => {
+    // app.put(baseUrl + ':code', (req, res, next) => {
+    app.put(baseUrl + ':code', isAdmin, (req, res, next) => {
         sportService.updateItem(req.body.code, req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -39,6 +44,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+    // app.delete(baseUrl + ':code', (req, res, next) => {
     app.delete(baseUrl + ':code', isAdmin, (req, res, next) => {
         sportService.deleteItem(req.params.code, (err, data) => {
             res.err = err;

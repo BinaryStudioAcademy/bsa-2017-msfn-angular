@@ -1,0 +1,40 @@
+<form id="sport-handling" #form="ngForm">
+    <h2>Create/Edit kind of sport</h2>
+
+    <div id="general-error" class="error" *ngIf="generalError">{{ generalError }}</div>
+
+    <md-input-container class="input">
+        <input mdInput type="number" name="code" placeholder="Code" [(ngModel)]="code" [formControl]="codeFormControl">
+        <md-error *ngIf="nameFormControl.hasError('min')">
+            Code should be a positive integer
+        </md-error>
+    </md-input-container>
+
+    <!--<md-select class="select-row input" name="sport" placeholder="Sport icon" required [(ngModel)]="icon">-->
+        <!--<md-option *ngFor="let icon of icons" [value]="icon">-->
+            <!--{{ icon }}-->
+        <!--</md-option>-->
+    <!--</md-select>-->
+
+    <md-input-container class="input">
+        <input mdInput type="text" name="title" placeholder="Sport name" required [(ngModel)]="sport.name" [formControl]="nameFormControl">
+        <md-error *ngIf="nameFormControl.hasError('required')">
+            First name is required
+        </md-error>
+        <md-error *ngIf="nameFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')">
+            Name should contain 2-20 characters
+        </md-error>
+    </md-input-container>
+
+    <md-input-container class="example-full-width" class="input">
+        <textarea mdInput type="text" name="description" placeholder="Kind of sport description" required [(ngModel)]="sport.description" [formControl]="descriptionFormControl"></textarea>
+        <md-error *ngIf="descriptionFormControl.hasError('required')">
+            Description is required
+        </md-error>
+        <md-error *ngIf="descriptionFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')">
+            Description should contain 10-300 characters
+        </md-error>
+    </md-input-container>
+
+    <button md-button class="btn btn-save" (click)="save()">Save</button>
+</form>

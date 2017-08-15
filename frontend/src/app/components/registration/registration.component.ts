@@ -108,6 +108,7 @@ export class RegistrationComponent {
             this.heightFormControl.valid &&
             this.weightFormControl.valid &&
             this.passwordFormControl.valid) {
+
             this.userError = '';
             const monthNumber = this.monthOptions.indexOf(this.birthday.month) + 1;
             const birthday = this.dateService.convertDateToIso({
