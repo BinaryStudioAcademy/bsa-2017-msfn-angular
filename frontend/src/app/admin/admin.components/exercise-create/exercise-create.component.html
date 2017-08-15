@@ -2,16 +2,15 @@
 
     <h2>Create/Edit Exercise</h2>
     <md-input-container class="input">
-        <input mdInput placeholder="Exercise Title" [(ngModel)]="title" name="title" required>
+        <input mdInput placeholder="Exercise Title" [(ngModel)]="exercise.name" name="name" required>
     </md-input-container>
-    <md-select placeholder="Exercise type" [(ngModel)]="selectedValue" name="exercise" class="select-row input" required>
-        <md-option *ngFor="let exercise of exercises" [value]="exercise.value">
-            {{exercise.viewValue}}
+    <md-select placeholder="Exercise type" [(ngModel)]="exercise.typeId" name="typeId" class="select-row input" required>
+        <md-option *ngFor="let type of exTypes" [value]="type.code">
+            {{type.name}}
         </md-option>
     </md-select>
     <md-input-container class="example-full-width" class="input">
-        <textarea mdInput placeholder="Exercise Description" [(ngModel)]="description" name="description"></textarea>
+        <textarea mdInput placeholder="Exercise Description" [(ngModel)]="exercise.description" name="description"></textarea>
     </md-input-container>
-
     <button md-button class="btn btn-save" (click)="save(form)">Save</button>
 </form>

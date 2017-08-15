@@ -2,7 +2,18 @@
     <nav class="navigation">
 	<md-list>
 	    <div class="navigation__main-section">
-            <div md-subheader class="navigation__subheader">CREATOR MODE</div>
+            <div md-subheader class="navigation__subheader">EXERCISE MENU</div>
+
+
+			<md-list-item class="menu-element">
+			    <a routerLink="exercises" routerLinkActive="active-link">
+			        <svg class="navigation__icon" viewBox="0 0 5 5">
+			    	    <path  d="M2 1 h1 v1 h1 v1 h-1 v1 h-1 v-1 h-1 v-1 h1 z" />
+              		</svg>
+			        <span md-line class="navigation__title">Create/edit exercise</span>
+			    </a>
+			</md-list-item>
+
 
 		    <md-list-item class="menu-element">
 		        <a routerLink="exercise-list" routerLinkActive="active-link">
@@ -23,15 +34,7 @@
 			</md-list-item>
 
 
-			<md-list-item class="menu-element">
-			    <a routerLink="exercises" routerLinkActive="active-link">
-			        <svg class="navigation__icon" viewBox="0 0 5 5">
-			    	    <path  d="M2 1 h1 v1 h1 v1 h-1 v1 h-1 v-1 h-1 v-1 h1 z" />
-              		</svg>
-			        <span md-line class="navigation__title">Create exercise</span>
-			    </a>
-			</md-list-item>
-
+            <div md-subheader class="navigation__subheader">USER MENU</div>
 			<md-list-item class="menu-element">
 			    <a routerLink="user-list" routerLinkActive="active-link">
 			        <svg class="navigation__icon" viewBox="0 0 24 24">

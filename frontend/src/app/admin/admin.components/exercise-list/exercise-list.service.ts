@@ -23,21 +23,6 @@ export class ExerciseListService {
                 name: 'name1',
                 type: 'type1',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pellentesque vulputate ligula et blandit.'
-            },
-            {
-                name: 'name2',
-                type: 'type2',
-                description: 'Phasellus vitae lorem eu elit elementum ultricies eget ultrices enim. Vivamus id congue mi'
-            },
-            {
-                name: 'name3',
-                type: 'type3',
-                description: 'Donec quis nibh facilisis, feugiat eros porttitor, euismod ligula. Aliquam nec nisl est.'
-            },
-            {
-                name: 'name3',
-                type: 'type4',
-                description: 'Quisque elementum felis non ante mollis, nec fringilla dolor fringilla.'
             }
         ];
         callback(exerciseData);

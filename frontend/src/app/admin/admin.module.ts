@@ -15,6 +15,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 
 import { ToasterService } from '../services/toastr.service';
 import { AdminRootProfileService } from './admin.components/admin-root-profile/admin-root-profile.service';
+import { ExerciseCreateService } from './admin.components/exercise-create/exercise-create.service';
 
 @NgModule({
     imports: [
@@ -33,7 +34,8 @@ import { AdminRootProfileService } from './admin.components/admin-root-profile/a
     ],
     providers: [
         ToasterService,
-        AdminRootProfileService
+        AdminRootProfileService,
+        ExerciseCreateService
     ]
 })
 export class AdminModule {}

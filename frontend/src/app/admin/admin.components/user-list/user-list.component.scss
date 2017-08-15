@@ -15,7 +15,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     width: 80%;
-    margin: 0 auto 10px;
+    margin: 0 auto;
     padding: 20px 20px 10px 20px;
     background: $gradient-to-color;
 
@@ -27,7 +27,9 @@ h1 {
 
 .mat-table {
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
 }
 
 .mat-header-row,
