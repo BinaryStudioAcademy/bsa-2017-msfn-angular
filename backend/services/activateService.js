@@ -11,12 +11,12 @@ ActivateService.prototype.genNewRootMail = genNewRootMail;
 ActivateService.prototype.checkNewRootMail = checkNewRootMail;
 
 
-function checkActivateCode(body, callback) {
-    userRepository.getUserByEmail(body.email, (err, user) => {
+function checkActivateCode(token, callback) {
+    userRepository.getUserByToken(token, (err, user) => {
         if (err) {
             return callback(err);
         }
-        user.checkToken(body.token, status => {
+        user.checkToken(token, status => {
             if (status) {
                 user.activateToken = '';
                 userRepository.update(user.id, user, callback);
@@ -59,6 +59,7 @@ function genNewRootMail(body, callback) {
                 }
                 if (!deleteErr) {
                     confirmCodeRepository.add(confirmData, (err, data) => {
+                        // const newRootMailLink = "http://localhost:3060/api/user/activate/changemail/" + data.confirmCode;
                         const newRootMailLink = "http://localhost:3060/api/user/activate/changemail/" + data.confirmCode;
                         emailService.send({
                                 to: body.newRootMail,

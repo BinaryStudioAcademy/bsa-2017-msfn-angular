@@ -32,6 +32,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ConfirmedPageComponent } from './components/confirmed-page/confirmed-page.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
+import { ConfirmedPageService } from './components/confirmed-page/confirmed-page.service';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ExerciseTypeService } from './admin/admin.components/exercise-type/exer
         ForAdminGuard,
         ForAllUserGuard,
         EncryptService,
-        ExerciseTypeService
+        ExerciseTypeService,
+        ConfirmedPageService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,

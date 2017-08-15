@@ -4,12 +4,13 @@ const
     express = require('express'),
     router = express.Router();
 
-router.get('/', function (req, res, next) {
-    activateService.checkActivateCode(req.query, function (err, data) {
-        if (!err) {
-            // TO CHANGE to valid url of registration-confirmation path
-            res.redirect('http://localhost:3060/confirm-registration');
-        }
+router.get('/:token', function (req, res, next) {
+    activateService.checkActivateCode(req.params.token, function (err, data) {
+        // if (!err) {
+        //     // TO CHANGE to valid url of registration-confirmation path
+        //     res.redirect('http://localhost:3060/confirmation');
+        // }
+        res.data = data;
         res.err = err;
         next();
     });
