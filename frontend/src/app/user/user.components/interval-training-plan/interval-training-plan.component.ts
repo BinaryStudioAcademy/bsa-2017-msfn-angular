@@ -60,9 +60,20 @@ export class IntervalTrainingPlanComponent implements OnInit {
         this.dataSource = new CircleDataSource(this.myInterval.circles[this.currentCircleNumber].exercises);
     }
 
+    deleteCircle(): void {
+        if (this.myInterval.circles.length > 1) {
+            this.myInterval.circles.splice(this.currentCircleNumber, 1);
+        }
+        if (this.currentCircleNumber !== 0) {
+            this.currentCircleNumber--;
+        }
+        this.dataSource = new CircleDataSource(this.myInterval.circles[this.currentCircleNumber].exercises);
+    }
+
     editExerciseName(event, row): void {
         row.name = event.target.value;
     }
+
     editExerciseTime(event, row): void {
         row.time = event.target.value;
     }
@@ -72,7 +83,7 @@ export class IntervalTrainingPlanComponent implements OnInit {
     }
 
     getCircleTime(): number {
-        //return this.myInterval.circles[this.currentCircleNumber].exercises.;
+        // return this.myInterval.circles[this.currentCircleNumber].exercises.;
         return 0;
     }
 }
