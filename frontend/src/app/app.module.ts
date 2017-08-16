@@ -81,7 +81,8 @@ import { HeaderNotificationsComponent } from './components/header-notifications/
         EncryptService,
         ExerciseTypeService,
         SocketService,
-        NotificationsService
+        NotificationsService,
+        ConfirmedPageService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,
