@@ -96,18 +96,26 @@ function checkNewRootMail(body, callback) {
 
                 userRepository.findById(confirmData.user, (err, user) => {
                     if (!err) {
+                        const oldEmail = user.email;
                         // Swap new root email with old one
-                        let newSecondaryEmails = [...user.secondaryEmails];
-                        let newMailIndex = newSecondaryEmails.indexOf(confirmData.newRootMail);
-                        newSecondaryEmails.splice(newMailIndex, 1);
-                        newSecondaryEmails.push(confirmData.newRootMail);
-
+                        console.log(confirmData.user);
+                        console.log(oldEmail.toLowerCase());
+                        console.log(confirmData.newRootMail);
                         userRepository.update(confirmData.user, {
-                            email: confirmData.newRootMail,
-                            secondaryEmails: newSecondaryEmails
+                            $set: {
+                                email: confirmData.newRootMail.toLowerCase()
+                            },
+                            $pull: {
+                                secondaryEmails: confirmData.newRootMail
+                            },
+                            $addToSet: {
+                                secondaryEmails: oldEmail.toLowerCase()
+                            }
                         }, (err, result) => {
+                            console.log(result);
 
-                            if (result.ok == 1) {
+                            // if (result.ok == 1) {
+                            if (!err) {
 
                                 confirmCodeRepository.deleteById(confirmData._id, (err, data) => {
                                     //need log error deleting

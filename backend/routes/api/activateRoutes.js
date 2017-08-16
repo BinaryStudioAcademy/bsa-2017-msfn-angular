@@ -6,10 +6,6 @@ const
 
 router.get('/:token', function (req, res, next) {
     activateService.checkActivateCode(req.params.token, function (err, data) {
-        // if (!err) {
-        //     // TO CHANGE to valid url of registration-confirmation path
-        //     res.redirect('http://localhost:3060/confirmation');
-        // }
         res.data = data;
         res.err = err;
         next();

@@ -84,7 +84,28 @@ function updateItem(id, body, callback) {
 }
 
 function addEmailToItem(id, body, callback) {
-    userRepository.addEmail(id, body.email, callback);
+
+    const newSecondaryEmail = body.newSecondaryEmail;
+
+    userRepository.getById(id, (err, data) => {
+        if (err) {
+            return callback(new ApiError(err));
+        } else if (data.secondaryEmails.indexOf(newSecondaryEmail) >= 0) {
+            return callback(new ApiError("New email is already in list"));
+        } else {
+            userRepository.update(id, {
+                $addToSet: {
+                    secondaryEmails: newSecondaryEmail.toLowerCase()
+                }
+            }, (err, result) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, result);
+            });
+        }
+    });
+
 }
 
 module.exports = new UserService();

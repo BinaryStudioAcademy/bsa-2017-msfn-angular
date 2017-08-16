@@ -131,7 +131,8 @@ export class RegistrationComponent {
                 url: '/api/user',
                 method: 'POST',
                 body: this.userToPass,
-                failMessage: 'Registration failed:',
+                successMessage: 'Check your email',
+                failMessage: 'Registration failed:'
             };
             this.httpService.sendRequest(registerReq).then(() => {
                 this._dialogRef.close();
