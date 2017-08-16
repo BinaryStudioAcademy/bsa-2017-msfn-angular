@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserComponent} from './user.component';
 import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
+import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
 
 
 
@@ -21,6 +22,10 @@ const userRoutes: Routes = [
             {
                 path: 'training-list',
                 component: TrainingListComponent,
+            },
+            {
+                path: 'interval-training-plan',
+                component: IntervalTrainingPlanComponent,
             }
         ]
     }

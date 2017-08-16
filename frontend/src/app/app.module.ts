@@ -35,6 +35,7 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
 import { ConfirmedPageComponent } from './components/confirmed-page/confirmed-page.component';
 import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
 import { ConfirmedPageService } from './components/confirmed-page/confirmed-page.service';
+import { NotificationDataDialogComponent } from './components/notification-data-dialog/notification-data-dialog.component';
 
 @NgModule({
     imports: [
@@ -63,6 +64,7 @@ import { ConfirmedPageService } from './components/confirmed-page/confirmed-page
         ChangeRootEmailDialogComponent,
         ConfirmedPageComponent,
         LoginDialogComponent,
+        NotificationDataDialogComponent,
     ],
     providers: [
         ToasterService,
@@ -82,7 +84,8 @@ import { ConfirmedPageService } from './components/confirmed-page/confirmed-page
         AddNewEmailDialogComponent,
         ChangeRootEmailDialogComponent,
         LoginDialogComponent,
-        RegistrationComponent
+        RegistrationComponent,
+        NotificationDataDialogComponent
     ],
     bootstrap: [AppComponent]
 

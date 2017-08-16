@@ -7,6 +7,16 @@ export class SportHandlingService {
 
     constructor(private httpService: HttpService) { }
 
+    iconBaseUrl = './resources/sport-icons/';
+    icons = [
+        `${this.iconBaseUrl}arrow.png`,
+        `${this.iconBaseUrl}barbell.png`,
+        `${this.iconBaseUrl}coach.png`,
+        `${this.iconBaseUrl}daily.png`,
+        `${this.iconBaseUrl}diet.png`,
+        `${this.iconBaseUrl}man.png`
+    ];
+
     kindsOfSport: any[];
 
     getKindsOfSport(callback): void {
@@ -18,21 +28,11 @@ export class SportHandlingService {
 
         this.httpService.sendRequest(request).then(res => {
             this.kindsOfSport = res;
-            console.log(res);
             callback(res);
         });
     }
 
-    checkExistence(name: string) {
-        const findByName = item => {
-            return item.name === name;
-        };
-
-        return this.kindsOfSport.find(findByName);
-    }
-
     addSport(data, callback) {
-        console.log(data);
         const request: IHttpReq = {
             url: '/api/sport',
             method: 'POST',
@@ -40,7 +40,6 @@ export class SportHandlingService {
         };
 
         this.httpService.sendRequest(request).then(res => {
-            console.log(res);
             callback(res);
         });
     }
@@ -53,7 +52,6 @@ export class SportHandlingService {
         };
 
         this.httpService.sendRequest(request).then(res => {
-            console.log(res);
             callback(res);
         });
     }

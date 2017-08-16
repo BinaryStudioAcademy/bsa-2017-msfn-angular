@@ -2,6 +2,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
+import { WindowObj } from './services/window.service';
 
 @Component({
     selector: 'app-root',
@@ -14,5 +15,8 @@ import { ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-    constructor() { }
+    isLoggedIn = false;
+    constructor(private _windowObj: WindowObj) {
+        this.isLoggedIn = this._windowObj.data._injectedData.isLoggedIn;
+    }
 }
