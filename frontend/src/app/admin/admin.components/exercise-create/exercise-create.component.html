@@ -4,8 +4,8 @@
     <md-input-container class="input">
         <input mdInput placeholder="Exercise Title" [(ngModel)]="exercise.name" name="name" required>
     </md-input-container>
-    <md-select placeholder="Exercise type" [(ngModel)]="exercise.typeId" name="typeId" class="select-row input" required>
-        <md-option *ngFor="let type of exTypes" [value]="type.code">
+    <md-select placeholder="Exercise type" [(ngModel)]="exercise.type" name="typeId" class="select-row input" required>
+        <md-option *ngFor="let type of exTypes" [value]="type._id">
             {{type.name}}
         </md-option>
     </md-select>

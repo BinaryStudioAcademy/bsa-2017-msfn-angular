@@ -28,9 +28,6 @@ export class ExerciseTypeComponent implements OnInit {
     constructor(private cd: ChangeDetectorRef, public exerciseTypeService: ExerciseTypeService) {
     }
 
-
-
-
     ngOnInit() {
         this.focusedRowCode = -1;
         this.tableDatabase = new TableDatabase();
@@ -42,7 +39,6 @@ export class ExerciseTypeComponent implements OnInit {
             this.cd.markForCheck();
         });
     }
-
 
     clickRow(code: number) {
         this.focusedRowCode = code;
@@ -76,15 +72,12 @@ export class ExerciseTypeComponent implements OnInit {
         this.focusedRowCode = -1;
     }
 
-
-
     deleteRow(code: number) {
         this.exerciseTypeService.deleteExerciseTypeByCode(code, (data) => {
             this.loaded = this.tableDatabase.deleteRow(code) === 0 ? false : true;
             this.cd.markForCheck();
         });
     }
-
 
     addRow() {
         if (this.wrongInput) {
@@ -93,12 +86,12 @@ export class ExerciseTypeComponent implements OnInit {
         this.wrongInput = true;
         this.firstShow = true;
         this.loaded = this.tableDatabase.addTemporaryRow() === 0 ? false : true;
-        console.log(this.loaded);
+        // console.log(this.loaded);
         this.cd.markForCheck();
         this.addedTemporaryRow = true;
         setTimeout(() => {
             const elems: any = document.getElementsByClassName('input-focused');
-            console.log(elems);
+            // console.log(elems);
             elems[0].focus();
         });
 

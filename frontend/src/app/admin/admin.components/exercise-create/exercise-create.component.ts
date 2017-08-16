@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { HttpService } from '../../../services/http.service';
 import { IHttpReq } from '../../../models/http-req';
+import { IExercise } from '../../../models/exercise';
+import { IExerciseType } from '../../../models/exerciseType';
 import { ExerciseCreateService } from './exercise-create.service';
 
 @Component({
@@ -11,12 +13,13 @@ import { ExerciseCreateService } from './exercise-create.service';
     styleUrls: ['./exercise-create.component.scss']
 })
 export class ExerciseCreateComponent implements OnInit {
-    exercise: any = {
+    exercise: IExercise = {
         name: '',
-        typeId: '',
+        type: '',
         description: ''
     };
-    exTypes: [any];
+
+    exTypes: [IExerciseType];
 
     constructor(
         public router: ActivatedRoute,
@@ -32,7 +35,7 @@ export class ExerciseCreateComponent implements OnInit {
         }
         this.exerciseCreateService.getExerciseTypes((data) => {
             this.exTypes = data;
-         });
+        });
     }
 
     save(form: NgForm) {

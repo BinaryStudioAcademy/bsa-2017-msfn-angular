@@ -7,25 +7,18 @@ export class ExerciseListService {
     constructor(private httpService: HttpService) { }
 
     getExercises(callback): void {
-        let exerciseData = [];
         const request: IHttpReq = {
-            url: '/api/exercise-list',
+            url: '/api/exercise',
             method: 'GET',
             body: {}
         };
-        // this.httpService.sendRequest(request).then(data => {
-        //     console.log(data);
-        //     callback(data);
-        // });
-
-        exerciseData = [
-            {
-                name: 'name1',
-                type: 'type1',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pellentesque vulputate ligula et blandit.'
-            }
-        ];
-        callback(exerciseData);
+        this.httpService.sendRequest(request)
+            .then(data => {
+                data.forEach(element => {
+                    element.type = element.type.name;
+                });
+                callback(data);
+        });
     }
 
     sortData(data, column, direction) {
