@@ -1,4 +1,4 @@
-import { NgModule  } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -10,6 +10,7 @@ import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { SettingsComponent } from './user.components/settings/settings.component';
+import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
 
 @NgModule({
     imports: [
@@ -24,9 +25,11 @@ import { SettingsComponent } from './user.components/settings/settings.component
         ProfileComponent,
         TrainingListComponent,
         SettingsComponent,
+        IntervalTrainingPlanComponent,
     ],
     providers: [
         ForAllUserGuard,
     ]
 })
-export class UserModule {}
+export class UserModule {
+}

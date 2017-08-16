@@ -11,7 +11,8 @@ export class NotificationsService {
         this.SocketService.addListener('follow', (data) => {
             alert(1);
             const newNotification: INotification = {
-                name: `${data.email} is now following you`,
+                title: 'New follower',
+                message: `${data.email} is now following you`,
                 callback: () => {
                     console.log(data);
                 }
@@ -20,7 +21,8 @@ export class NotificationsService {
             this.addNotification(newNotification);
         });
         const test: INotification = {
-            name: `Test is now following you`,
+            title: 'New follower',
+            message: `Test is now following you`,
             callback: () => {
                 console.log(123);
             }

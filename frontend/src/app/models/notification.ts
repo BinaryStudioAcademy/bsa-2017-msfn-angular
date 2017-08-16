@@ -1,4 +1,5 @@
 export interface INotification {
-    name: String;
+    title: String;
+    message: String;
     callback: Function;
 }

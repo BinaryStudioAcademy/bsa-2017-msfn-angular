@@ -10,25 +10,6 @@ import {INotification} from '../../models/notification';
     styleUrls: ['./notification-dialog.component.scss']
 })
 export class NotificationDialogComponent implements OnInit {
-    notification = [
-        {
-            title: 'first notification',
-            message: '1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quisquam.'
-        },
-        {
-            title: 'second notification',
-            message: '2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quisquam.'
-        },
-        {
-            title: 'third notification',
-            message: '3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quisquam.'
-        },
-        {
-            title: 'fourth notification',
-            message: '4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quisquam.'
-        },
-
-    ];
     constructor( @Inject(MD_DIALOG_DATA) public data: any,
         private dialog: MdDialog) {
     }
@@ -36,14 +17,17 @@ export class NotificationDialogComponent implements OnInit {
     ngOnInit() {
     }
 
-    onClick(noteIndex) {
+    onClick(notificatio: INotification, index) {
         const dialogRef = this.dialog.open(NotificationDataDialogComponent, {
-            data: noteIndex,
+            data: {
+                title: notificatio.title,
+                message: notificatio.message
+            },
             position: {
                 top: '160px'
             }
         });
-        this.notification.splice(this.notification.indexOf(noteIndex), 1);
+        this.data.splice(index, 1);
     }
     callback(notification: INotification) {
         notification.callback();
