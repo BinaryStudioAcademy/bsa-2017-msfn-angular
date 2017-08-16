@@ -17,8 +17,7 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
     public displayName: string;
     public notificationCount = 1;
     private notificationsDialogConfig = {
-        height: '300px',
-        width: '200px',
+        'min-width': '200px',
         data: 'you have ' + this.notificationCount + ' notifications',
         position: {
             top: '45px',

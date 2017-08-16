@@ -3,18 +3,26 @@
 
     <div id="general-error" class="error" *ngIf="generalError">{{ generalError }}</div>
 
-    <md-input-container class="input">
-        <input mdInput type="number" name="code" placeholder="Code" [(ngModel)]="code" [formControl]="codeFormControl">
-        <md-error *ngIf="nameFormControl.hasError('min')">
+    <md-input-container id="code">
+        <input mdInput type="text" name="code" placeholder="Code (set only if you're updating an item)" [(ngModel)]="code" [formControl]="codeFormControl">
+        <md-error *ngIf="codeFormControl.hasError('pattern')">
             Code should be a positive integer
         </md-error>
     </md-input-container>
 
-    <!--<md-select class="select-row input" name="sport" placeholder="Sport icon" required [(ngModel)]="icon">-->
-        <!--<md-option *ngFor="let icon of icons" [value]="icon">-->
-            <!--{{ icon }}-->
-        <!--</md-option>-->
-    <!--</md-select>-->
+    <div id="icon-selection" class="input">
+        <md-select id="icon" class="select-row" name="sport" placeholder="Sport icon" required [(ngModel)]="sport.icon">
+            <md-option *ngFor="let icon of icons" [value]="icon">
+                <div class="icon-image">
+                    <img [src]="icon" alt="sport-icon">
+                </div>
+            </md-option>
+        </md-select>
+
+        <div *ngIf="sport.icon" id="selected-icon">
+            <img [src]="sport.icon" alt="sport-icon">
+        </div>
+    </div>
 
     <md-input-container class="input">
         <input mdInput type="text" name="title" placeholder="Sport name" required [(ngModel)]="sport.name" [formControl]="nameFormControl">
@@ -27,7 +35,7 @@
     </md-input-container>
 
     <md-input-container class="example-full-width" class="input">
-        <textarea mdInput type="text" name="description" placeholder="Kind of sport description" required [(ngModel)]="sport.description" [formControl]="descriptionFormControl"></textarea>
+        <textarea mdInput type="text" name="description" placeholder="Sport description" required [(ngModel)]="sport.description" [formControl]="descriptionFormControl"></textarea>
         <md-error *ngIf="descriptionFormControl.hasError('required')">
             Description is required
         </md-error>
