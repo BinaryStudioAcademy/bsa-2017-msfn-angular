@@ -17,7 +17,7 @@ export class NotificationDialogComponent implements OnInit {
     ngOnInit() {
     }
 
-    onClick(notificatio: INotification, index) {
+    viewNotification(notificatio: INotification, index) {
         const dialogRef = this.dialog.open(NotificationDataDialogComponent, {
             data: {
                 title: notificatio.title,
@@ -28,9 +28,5 @@ export class NotificationDialogComponent implements OnInit {
             }
         });
         this.data.splice(index, 1);
-    }
-    callback(notification: INotification) {
-        notification.callback();
-        this.data.splice(this.data.indexOf(notification), 1);
     }
 }

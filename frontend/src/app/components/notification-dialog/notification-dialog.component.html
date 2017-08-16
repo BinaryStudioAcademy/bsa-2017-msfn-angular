@@ -11,6 +11,6 @@
     <button md-button
             class="notifications__dialog-button"
             *ngFor="let notification of data; let i = index;"
-            (title)="notification.name"
-            (click)="viewNotification(notification, i)">{{notification.name}}</button>
+            (title)="notification.title"
+            (click)="viewNotification(notification, i)">{{notification.message}}</button>
 </md-dialog-content>
