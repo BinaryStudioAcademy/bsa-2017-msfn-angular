@@ -32,7 +32,17 @@ const User = new Schema({
     birthday: String,
     height: Number,
     weight: Number,
-    activateToken: String
+    activateToken: String,
+    settings: {
+        weight: String,
+        trainingWeight: String,
+        distance: String,
+        temperature: String,
+        timeFormat: String,
+        timeZone: String,
+        dateFormat: String,
+        startWeek: String,
+    }
 });
 
 User.pre('save', function (next) {
