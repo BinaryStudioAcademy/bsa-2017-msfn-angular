@@ -1,0 +1,9 @@
+<div id="sports-container" >
+    <div class="item-container" *ngFor="let item of data" routerLink="../sport-handling/{{item.code}}">
+            <i class="material-icons sports-item-ico">face</i>
+            <p class="sports-item-text">{{ item.name }}</p>
+    </div>
+    <div class="add-container">
+            <i class="material-icons add-item-ico" routerLink="../sport-handling">add</i>
+    </div>
+</div>
