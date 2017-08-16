@@ -1,0 +1,31 @@
+@import "../../../../globalStyles/variables";
+@import "../../../../globalStyles/indentations";
+
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+}
+
+button:focus {
+    outline: 0;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    * { margin: $content-tb-margin $content-lr-margin }
+}
+
+.pickers-container {
+    display: flex;
+    justify-content: center;
+}
+
+.data-container {
+    width: 60%;
+    margin: 0 auto;
+}
