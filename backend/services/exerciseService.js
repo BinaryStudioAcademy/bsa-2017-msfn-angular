@@ -1,5 +1,6 @@
 const ApiError = require('./apiErrorService');
 const exerciseRepository = require('../repositories/exerciseRepository');
+const exerciseTypeRepository = require('../repositories/exerciseTypeRepository');
 
 function ExerciseService() {}
 
@@ -7,22 +8,16 @@ ExerciseService.prototype.createExercise = createExercise;
 ExerciseService.prototype.getAllExercises = getAllExercises;
 ExerciseService.prototype.upadeteExerciseById = upadeteExerciseById;deleteExerciseById
 ExerciseService.prototype.deleteExerciseById = deleteExerciseById;
+ExerciseService.prototype.getExerciseById = getExerciseById;
 
 function createExercise(body, callback) {
 
-    data = {
-        name: body.name,
-        typeId: body.typeId,
-        description: body.description,
-        isRemoved: false,
-        sportsId:body.sportsId
-    }
+    body.isRemoved = false
 
-    exerciseRepository.add(data, (err, exerciseData) => {
-
+    exerciseRepository.add(body, (err, exerciseData) => {
         if (err) return callback(err);
         if (exerciseData === null) {
-            callback(null, []);
+            callback(null, new ApiError('Can\'t create exersise'));
         } else {
             callback(null, exerciseData);
         }
@@ -30,11 +25,21 @@ function createExercise(body, callback) {
 }
 
 function getAllExercises(callback) {
-    exerciseRepository.getAll((err, exerciseData) => {
-
+    exerciseRepository.getAllExercises((err, exerciseData) => {
         if (err) return callback(err);
         if (exerciseData === null) {
-            callback(null, []);
+            callback(null, new ApiError('Not found exersises'));
+        } else {
+            callback(null, exerciseData);
+        }
+    });    
+}
+
+function getExerciseById(id, callback) {
+    exerciseRepository.getById(id, (err, exerciseData) => {
+        if (err) return callback(err);
+        if (exerciseData === null) {
+            callback(null, new ApiError('Not found exersise'));
         } else {
             callback(null, exerciseData);
         }

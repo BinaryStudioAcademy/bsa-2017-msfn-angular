@@ -20,7 +20,7 @@
             <md-header-cell *cdkHeaderCellDef md-sort-header>
                 Name
             </md-header-cell>
-            <md-cell *cdkCellDef="let row">
+            <md-cell *cdkCellDef="let row" routerLink="/admin/exercises/{{ row._id }}">
                 {{ row.name }}
             </md-cell>
         </ng-container>
@@ -29,7 +29,7 @@
             <md-header-cell *cdkHeaderCellDef md-sort-header>
                 Type
             </md-header-cell>
-            <md-cell *cdkCellDef="let row">
+            <md-cell *cdkCellDef="let row" routerLink="/admin/exercises/{{ row._id }}">
                 {{ row.type }}
             </md-cell>
         </ng-container>
@@ -38,7 +38,7 @@
             <md-header-cell *cdkHeaderCellDef>
                 Description
             </md-header-cell>
-            <md-cell *cdkCellDef="let row" md-tooltip="{{ row.description }}">
+            <md-cell *cdkCellDef="let row" md-tooltip="{{ row.description }}" routerLink="/admin/exercises/{{ row._id }}">
                 {{ row.description.substring(0, 30) }}...
             </md-cell>
         </ng-container>

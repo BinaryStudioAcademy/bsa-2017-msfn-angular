@@ -20,7 +20,9 @@ h1 {
 
 .mat-table {
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
+    max-height: calc(100vh - 326px);
+    overflow-y: auto;
 }
 
 .mat-header-row,
@@ -35,6 +37,7 @@ h1 {
 
 md-header-cell,
 md-cell {
+    cursor: pointer;
     max-width: 28%;
     margin-left: 4%;
     word-break: break-all;

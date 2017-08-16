@@ -6,8 +6,6 @@ export class ExerciseTypeService {
 
     constructor(public httpService: HttpService) { }
 
-
-
     addExerciseType(name: string, callback) {
         const request: IHttpReq = {
             url: '/api/exercise-type',
@@ -21,9 +19,6 @@ export class ExerciseTypeService {
         });
     }
 
-
-
-
     getAllExerciseTypes(callback) {
         const request: IHttpReq = {
             url: '/api/exercise-type',
@@ -34,10 +29,6 @@ export class ExerciseTypeService {
             callback(data);
         });
     }
-
-
-
-
 
     deleteExerciseTypeByCode(code: number, callback) {
         const request: IHttpReq = {
@@ -50,11 +41,6 @@ export class ExerciseTypeService {
             callback(data);
         });
     }
-
-
-
-
-
 
     updateExerciseTypeByCode(code: number, body, callback) {
         body = Object.assign(body, {code: code});
