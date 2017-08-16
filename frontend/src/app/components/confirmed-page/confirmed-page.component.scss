@@ -9,7 +9,7 @@
     background: linear-gradient($direction, $color-stops);
 }
 
-.container {
+.confirm-container {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -18,7 +18,7 @@
     font-family: $font-general;
 }
 
-.block {
+.confirm-block {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
