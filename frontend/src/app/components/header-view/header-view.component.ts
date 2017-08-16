@@ -15,7 +15,6 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
 
     public thereIsLoggedInUser: boolean;
     public displayName: string;
-    public notificationCount = 1;
     public userPhotoUrl = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
 
     constructor(public dialog: MdDialog,
