@@ -6,7 +6,7 @@ const
 
 module.exports = function (app) {
 
-    app.post(baseUrl, isAdmin, function (req, res, next) {
+    app.post(baseUrl, function (req, res, next) {
        measurementService.createMeasurement(req.body, function(err, data) {
             res.data = data;
             res.err = err;
@@ -14,7 +14,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.put(baseUrl, isAdmin, function (req, res, next) { 
+    app.put(baseUrl, function (req, res, next) { 
         measurementService.updateMeasurement(req.body, function(err, data) {
             res.data = data;
             res.err = err;
@@ -22,7 +22,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.delete(baseUrl + ':code', isAdmin, function (req, res, next) {
+    app.delete(baseUrl + ':code', function (req, res, next) {
         measurementService.deleteMeasurementByCode(req.params.code, function(err, data) {
             res.err = err;
             res.data = data;
@@ -30,7 +30,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.get(baseUrl, isAdmin, function (req, res, next) {
+    app.get(baseUrl, function (req, res, next) {
             measurementService.getAllMeasurements(function(err, data) {
             if (!data.length){
                 data = [];
@@ -41,7 +41,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-        app.get(baseUrl + ':code', isAdmin, function (req, res, next) {
+        app.get(baseUrl + ':code', function (req, res, next) {
             measurementService.getMeasurementByCode(req.params.code, function(err, data) {
             res.data = data;
             res.err = err;
@@ -49,7 +49,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-        app.get(baseUrl + 'by-name/:name', isAdmin, function (req, res, next) {
+        app.get(baseUrl + 'by-name/:name', function (req, res, next) {
             measurementService.getMeasurementByName(req.params.name, function(err, data) {
             res.data = data;
             res.err = err;

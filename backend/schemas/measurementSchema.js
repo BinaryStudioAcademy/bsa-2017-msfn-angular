@@ -3,9 +3,11 @@ const Schema = mongoose.Schema;
 
 const Measurement = new Schema({
     name: String,
-    code: Number,
-    isRemoved: Boolean,
-    values: [String]
+    measureUnits: [{
+        isRemoved: Boolean,
+        conversionFactor: Number,
+        unitName: String
+    }]
 });
 
 
