@@ -9,6 +9,7 @@ import { SidebarViewComponent } from '../components/sidebar-view/sidebar-view.co
 import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
+import { SettingsComponent } from './user.components/settings/settings.component';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { IntervalTrainingPlanComponent } from './user.components/interval-traini
         UserComponent,
         ProfileComponent,
         TrainingListComponent,
+        SettingsComponent,
         IntervalTrainingPlanComponent,
     ],
     providers: [
