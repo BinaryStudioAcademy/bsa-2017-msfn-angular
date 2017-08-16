@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="settings">
+        <md-card-title class="settings-title">Settings</md-card-title>
+        <div class="settings-measurements row">
+            <p class="row-name">Choose measurements:</p>
+            <md-select placeholder="measurements" [(ngModel)]="userSettings.measurements" floatPlaceholder="never">
+                <md-option *ngFor="let item of measurements" [value]="item.code">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <md-card-title class="settings-title-second">Profile preferences</md-card-title>
+        <div class="settings-unit-type row">
+            <p class="row-name">Unit type:</p>
+            <md-select placeholder="unit type" (change)="setUnitFormat()" [(ngModel)]="userSettings.unitType" floatPlaceholder="never">
+                <md-option *ngFor="let item of settings.unitTypes" [value]="item.code">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <div class="settings-weight row">
+            <p class="row-name">Weight unit type:</p>
+            <md-select placeholder="Weight" [(ngModel)]="userSettings.weight" floatPlaceholder="never">
+                <md-option *ngFor="let item of settings.weights" [value]="item.code">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <div class="settings-training-weight row">
+            <p class="row-name">Training weight unit type:</p>
+            <md-select placeholder="Training weight" [(ngModel)]="userSettings.trainingWeight" floatPlaceholder="never">
+                <md-option *ngFor="let item of settings.weights" [value]="item.code">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <div class="settings-distance row">
+            <p class="row-name">Distance unit type:</p>
+            <md-select placeholder="distance" [(ngModel)]="userSettings.distance" floatPlaceholder="never">
+                <md-option *ngFor="let item of settings.distances" [value]="item.code">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <div class="settings-temperature row">
+            <p class="row-name">Temperature unit type:</p>
+            <md-select placeholder="temperature" [(ngModel)]="userSettings.temperature" floatPlaceholder="never">
+                <md-option *ngFor="let item of settings.temperature" [value]="item.code">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <div class="settings-time row">
+            <p class="row-name">Time Format:</p>
+            <md-select placeholder="Time Format" [(ngModel)]="userSettings.timeFormat" floatPlaceholder="never">
+                <md-option *ngFor="let item of settings.timeFormat" [value]="item.code">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <div class="settings-date row">
+            <p class="row-name">Date Format:</p>
+            <md-select placeholder="Date Format" [(ngModel)]="userSettings.dateFormat" floatPlaceholder="never">
+                <md-option *ngFor="let item of settings.dateFormat" [value]="item.code">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <div class="settings-week row">
+            <p class="row-name">Start week:</p>
+            <md-select placeholder="Start week" [(ngModel)]="userSettings.startWeek" floatPlaceholder="never">
+                <md-option *ngFor="let item of settings.startWeek" [value]="item.code">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <md-card-title class="settings-title-second">some other information</md-card-title>
+        <div class="settings-level row">
+            <p class="row-name">Activity level:</p>
+            <md-select placeholder="Activity level" [(ngModel)]="userSettings.activityLevel" floatPlaceholder="never">
+                <md-option *ngFor="let item of settings.activityLevel" [value]="item.code">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <button class="btn" (click)="save()">Save changes</button>
+    </div>
+</div>

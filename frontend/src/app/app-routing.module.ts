@@ -9,7 +9,6 @@ import { HeaderViewComponent } from './components/header-view/header-view.compon
 import { IndexPageComponent } from './components/index-page/index-page.component';
 import { IsLoggedOutGuard } from './guards/is-logged-out.guard';
 import { ForAdminGuard } from './guards/for-admin.guard';
-import { ForgotPasswordMailComponent } from './components/forgot-password-mail/forgot-password-mail.component';
 import { TestSocketsComponent } from './components/test-sockets/test-sockets.component';
 import { TestToastrComponent } from './components/test-toastr/test-toastr.component';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
@@ -40,20 +39,10 @@ const routes: Routes = [
         component: HeaderViewComponent
     },
     {
-        path: 'forgot-password-mail',
-        component: ForgotPasswordMailComponent,
-        canActivate: [IsLoggedOutGuard]
-    },
-    {
-        path: 'restore-password', // for testing restorePasswordComponent, can be removed
+        path: 'restore-password/:code', // for testing restorePasswordComponent, can be removed
         children: [],
         component: RestorePasswordComponent,
         canActivate: [IsLoggedOutGuard]
-    },
-    {
-        path: 'restore-password/:code', // for testing restorePasswordComponent, can be removed
-        children: [],
-        component: RestorePasswordComponent
     },
     {
         path: 'test-socket', // for testing socket.io
@@ -85,8 +74,9 @@ const routes: Routes = [
         component: PageNotFoundComponent
     },
     {
-        path: 'confirm-registration',
-        component: ConfirmedPageComponent
+        path: 'confirmation/:type/:token',
+        component: ConfirmedPageComponent,
+        canActivate: [IsLoggedOutGuard]
     },
     {
         path: '**',

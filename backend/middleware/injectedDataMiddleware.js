@@ -11,15 +11,20 @@ module.exports = function (req, res, obj, error) {
             obj.userId = user._id;
             obj.userFirstName = user.firstName;
             obj.userLastName = user.lastName;
-            if(user.isAdmin) {
-               obj.role = 'admin';
-           } else if(user.isCoach) {
-               obj.role = 'coach';
-           } else {
-               obj.role = 'usual'
-           }
+            if (user.isAdmin) {
+                obj.role = 'admin';
+            } else if (user.isCoach) {
+                obj.role = 'coach';
+            } else {
+                obj.role = 'usual'
+            }
             obj.currentProject = user.currentProject;
             obj.userPhoto = user.userPhoto;
+            // Check if user activated his account
+            obj.isActivated = false;
+            if (!user.activateToken) {
+                obj.isActivated = true;
+            }
         } else {
             obj.isLoggedIn = false;
         }

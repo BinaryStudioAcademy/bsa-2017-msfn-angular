@@ -1,4 +1,4 @@
-import { NgModule  } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -9,6 +9,8 @@ import { SidebarViewComponent } from '../components/sidebar-view/sidebar-view.co
 import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
+import { SettingsComponent } from './user.components/settings/settings.component';
+import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
 
 @NgModule({
     imports: [
@@ -22,9 +24,12 @@ import { TrainingListComponent } from './user.components/training-list/training-
         UserComponent,
         ProfileComponent,
         TrainingListComponent,
+        SettingsComponent,
+        IntervalTrainingPlanComponent,
     ],
     providers: [
         ForAllUserGuard,
     ]
 })
-export class UserModule {}
+export class UserModule {
+}

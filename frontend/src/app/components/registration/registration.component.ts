@@ -1,3 +1,4 @@
+import { MdDialogRef } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
@@ -51,13 +52,15 @@ export class RegistrationComponent {
         this.birthday.year
     );
 
-    emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+    emailPattern = /[\w0-9._%+-]+@[\w0-9.-]+\.[\w]{2,3}$/;
+    requestSent = false;
 
     constructor(private httpService: HttpService,
                 private router: Router,
                 private encryptor: EncryptService,
                 private registrationService: RegistrationService,
-                private dateService: DateService) {
+                private dateService: DateService,
+                private _dialogRef: MdDialogRef<RegistrationComponent>) {
     }
 
     emailFormControl = new FormControl('', [
@@ -105,6 +108,7 @@ export class RegistrationComponent {
             this.heightFormControl.valid &&
             this.weightFormControl.valid &&
             this.passwordFormControl.valid) {
+
             this.userError = '';
             const monthNumber = this.monthOptions.indexOf(this.birthday.month) + 1;
             const birthday = this.dateService.convertDateToIso({
@@ -113,29 +117,27 @@ export class RegistrationComponent {
                 day: this.birthday.day
             });
 
+            this.requestSent = true;
+
             this.user.birthday = birthday;
             this.userToPass = Object.assign({}, this.user);
-            this.userToPass.password = this.encryptor.encrypt({'password': this.userToPass.password});
-            this.userToPass.email = this.encryptor.encrypt({'email': this.userToPass.email});
+            this.userToPass.password = this.encryptor.encrypt({
+                'password': this.userToPass.password
+            });
+            this.userToPass.email = this.encryptor.encrypt({
+                'email': this.userToPass.email
+            });
             const registerReq: IHttpReq = {
                 url: '/api/user',
                 method: 'POST',
                 body: this.userToPass,
-                failMessage: 'You can\'t register now, sorry',
+                successMessage: 'Check your email',
+                failMessage: 'Registration failed:'
             };
-            this.httpService.sendRequest(registerReq).then(data => {
-                let cache;
-                const sendConfirmLink: IHttpReq = {
-                    url: '/api/confirm-registration',
-                    method: 'POST',
-                    body: {code: cache = this.encryptor.encrypt(this.user.email)},
-                    successMessage: 'Thank you! Check your mailbox, or spam folder',
-                    failMessage: 'Fail of sending confirmation link',
-                };
-                this.httpService.sendRequest(sendConfirmLink).then(() => {
-                    console.log('Copy/Paste this link to your browser, to finish your registration:');
-                    console.log('localhost:3060/api/confirm-registration/' + cache);
-                });
+            this.httpService.sendRequest(registerReq).then(() => {
+                this._dialogRef.close();
+            }).catch(() => {
+                this.requestSent = false;
             });
         } else {
             this.userError = 'Please fill in all fields correctly';

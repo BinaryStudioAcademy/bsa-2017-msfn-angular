@@ -4,11 +4,9 @@ const
     express = require('express'),
     router = express.Router();
 
-router.get('/', function (req, res, next) {
-    activateService.checkActivateCode(req.query, function (err, data) {
-        if (!err) {
-            res.redirect('/');
-        }
+router.get('/:token', function (req, res, next) {
+    activateService.checkActivateCode(req.params.token, function (err, data) {
+        res.data = data;
         res.err = err;
         next();
     });

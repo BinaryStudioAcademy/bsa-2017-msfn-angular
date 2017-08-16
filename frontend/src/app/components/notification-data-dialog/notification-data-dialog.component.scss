@@ -1,0 +1,24 @@
+@import '../../../globalStyles/variables.scss';
+@import '../../../globalStyles/text.scss';
+@import '../../../globalStyles/indentations.scss';
+.note-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 250px;
+    max-width: 400px;
+}
+
+.btn {
+    height: 35px;
+    border: none;
+    border-radius: 45px;
+    outline: none;
+    font-size: $usual-text;
+    font-weight: 200;
+    background: $btn-color;
+}
+
+.note-title{
+    max-width: 250px;
+}

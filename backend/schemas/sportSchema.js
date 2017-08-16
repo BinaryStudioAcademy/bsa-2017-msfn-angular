@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const Sport = new Schema({
     code: Number,
     name: String,
-    description: String
+    description: String,
+    icon: String
 });
 
 module.exports = mongoose.model('Sport', Sport);

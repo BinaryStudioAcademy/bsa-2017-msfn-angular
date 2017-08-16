@@ -4,6 +4,7 @@ import { EncryptService } from '../../services/encrypt.service';
 import { IHttpReq } from '../../models/http-req';
 import { HttpService } from '../../services/http.service';
 import { ToasterService } from '../../services/toastr.service';
+import { MdDialogRef } from '@angular/material';
 
 @Component({
     selector: 'app-confirm-password-dialog',
@@ -24,7 +25,8 @@ export class ConfirmPasswordDialogComponent implements OnInit {
     constructor(
         private httpService: HttpService,
         private encryptor: EncryptService,
-        private toastrService: ToasterService
+        private toastrService: ToasterService,
+        public dialogRef: MdDialogRef<any>
     ) { }
 
     ngOnInit() {
@@ -68,7 +70,11 @@ export class ConfirmPasswordDialogComponent implements OnInit {
             successMessage: 'Password has been changed!'
         };
 
-        this.httpService.sendRequest(sendData);
+        this.httpService.sendRequest(sendData).then(res => {
+            if (res) {
+                this.dialogRef.close();
+            }
+        });
     }
 }
 

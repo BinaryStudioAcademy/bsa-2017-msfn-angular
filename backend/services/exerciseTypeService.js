@@ -84,7 +84,6 @@ function deleteAllExerciseTypes(callback) {
 
 function getAllExerciseTypes(callback) {
     exerciseTypeRepository.getAll((err, exerciseTypeData) => {
-
         if (err) return callback(err);
         if (exerciseTypeData === null) {
             callback(null, []);

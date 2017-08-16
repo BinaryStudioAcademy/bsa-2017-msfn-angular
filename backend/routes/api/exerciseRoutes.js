@@ -24,6 +24,15 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+    app.get(baseUrl + ':id', function (req, res, next) {
+        console.log(1)
+        exerciseService.getExerciseById(req.params.id, function (err, data) {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.put(baseUrl + ':id', isAdmin, function (req, res, next) {
         exerciseService.upadeteExerciseById(req.params.id, req.body, function (err, data) {
             res.data = data;

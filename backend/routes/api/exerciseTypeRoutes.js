@@ -25,19 +25,20 @@ module.exports = function (app) {
     app.delete(baseUrl + ':code', isAdmin, function (req, res, next) {
         exerciseTypeService.deleteExerciseTypeByCode(req.params.code, function(err, data) {
             res.err = err;
+            res.data = data;
             next();
        });
     }, apiResponse);
 
     app.get(baseUrl, isAdmin, function (req, res, next) {
-            exerciseTypeService.getAllExerciseTypes(function(err, data) {
-            if (!data.length){
+        exerciseTypeService.getAllExerciseTypes(function(err, data) {
+            if (!data.length) {
                 data = [{}];
             }
             res.data = data;
             res.err = err;
             next();
-       });
+        });
     }, apiResponse);
 
 };

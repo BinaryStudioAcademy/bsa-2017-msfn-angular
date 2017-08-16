@@ -25,7 +25,8 @@ export class ForgetPasswordComponent implements OnInit {
             const sendData: IHttpReq = {
                 url: '/api/password',
                 method: 'POST',
-                body: {email: this.email}
+                body: {email: this.email},
+                successMessage: 'Check your email',
             };
 
         this.httpHandler.sendRequest(sendData)

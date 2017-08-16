@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
-import { MdDialog } from '@angular/material';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { NotificationDataDialogComponent } from '../notification-data-dialog/notification-data-dialog.component';
+import {INotification} from '../../models/notification';
 
 @Component({
     selector: 'app-notification-dialog',
@@ -8,12 +10,23 @@ import { MdDialog } from '@angular/material';
     styleUrls: ['./notification-dialog.component.scss']
 })
 export class NotificationDialogComponent implements OnInit {
-
-    constructor(@Inject(MD_DIALOG_DATA) public data: any) {
-
+    constructor( @Inject(MD_DIALOG_DATA) public data: any,
+        private dialog: MdDialog) {
     }
 
     ngOnInit() {
     }
 
+    viewNotification(notificatio: INotification, index) {
+        const dialogRef = this.dialog.open(NotificationDataDialogComponent, {
+            data: {
+                title: notificatio.title,
+                message: notificatio.message
+            },
+            position: {
+                top: '160px'
+            }
+        });
+        this.data.splice(index, 1);
+    }
 }

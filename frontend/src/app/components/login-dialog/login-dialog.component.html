@@ -14,7 +14,7 @@
         </md-input-container>
 
         <md-input-container class="login-imput-container">
-            <input type="password" mdInput placeholder="Password" [(ngModel)]="password" [formControl]="passwordFormControl" (keyup.enter)="login()">
+            <input type="password" mdInput placeholder="Password" [(ngModel)]="password" [formControl]="passwordFormControl">
             <md-error *ngIf="passwordFormControl.hasError('minLength')">
                 Password should be al least 3 symbols
             </md-error>

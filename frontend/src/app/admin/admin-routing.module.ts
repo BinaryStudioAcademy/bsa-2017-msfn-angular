@@ -1,4 +1,4 @@
-import { ForAdminGuard } from './../guards/for-admin.guard';
+import { ForAdminGuard } from '../guards/for-admin.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -8,6 +8,7 @@ import { AdminRootProfileComponent } from './admin.components/admin-root-profile
 import { ExerciseCreateComponent } from './admin.components/exercise-create/exercise-create.component';
 import { ExerciseListComponent } from './admin.components/exercise-list/exercise-list.component';
 import { ExerciseTypeComponent } from './admin.components/exercise-type/exercise-type.component';
+import { SportHandlingComponent } from './admin.components/sport-handling/sport-handling.component';
 import {MeasureListComponent} from './admin.components/measure-list/measure-list.component';
 
 const adminRoutes: Routes = [
@@ -42,6 +43,10 @@ const adminRoutes: Routes = [
                     {
                         path: 'user-list',
                         component: UserListComponent
+                    },
+                    {
+                        path: 'sport-handling',
+                        component: SportHandlingComponent
                     },
                     {
                         path: 'measure-list',
