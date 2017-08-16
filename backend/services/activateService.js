@@ -61,8 +61,8 @@ function genNewRootMail(body, callback) {
                 }
                 if (!deleteErr) {
                     confirmCodeRepository.add(confirmData, (err, data) => {
-                        // const newRootMailLink = "http://localhost:3060/api/user/activate/changemail/" + data.confirmCode;
-                        const newRootMailLink = "http://localhost:3060/confirmation/rootemail/" + data.confirmCode;
+                        const newRootMailLink = "http://localhost:3060/api/user/activate/changemail/" + data.confirmCode;
+                        // const newRootMailLink = "http://localhost:3060/confirmation/rootemail/" + data.confirmCode;
                         emailService.send({
                                 to: body.newRootMail,
                                 subject: "Link to change your main email",
@@ -101,19 +101,15 @@ function checkNewRootMail(body, callback) {
                     if (!err) {
                         const oldEmail = user.email;
                         // Swap new root email with old one
-                        console.log(confirmData.user);
-                        console.log(oldEmail.toLowerCase());
-                        console.log(confirmData.newRootMail);
+
+                        let newSecondaryEmails = [...user.secondaryEmails];
+                        let newMailIndex = newSecondaryEmails.indexOf(confirmData.newRootMail);
+                        newSecondaryEmails.splice(newMailIndex, 1);
+                        newSecondaryEmails.push(oldEmail);
+
                         userRepository.update(confirmData.user, {
-                            $set: {
-                                email: confirmData.newRootMail.toLowerCase()
-                            },
-                            $pull: {
-                                secondaryEmails: confirmData.newRootMail
-                            },
-                            $addToSet: {
-                                secondaryEmails: oldEmail.toLowerCase()
-                            }
+                                email: confirmData.newRootMail.toLowerCase(),
+                                secondaryEmails: newSecondaryEmails
                         }, (err, result) => {
                             console.log(result);
 
