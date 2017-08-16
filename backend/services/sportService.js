@@ -7,7 +7,7 @@ SportService.prototype.addItem = addItem;
 SportService.prototype.updateItem = updateItem;
 SportService.prototype.deleteItem = deleteItem;
 
-function addItem(name, callback) {
+function addItem(body, callback) {
     sportRepository.getByName(body.name, (err, data) => {
         if (err) return callback(err);
 
@@ -23,13 +23,12 @@ function addItem(name, callback) {
                 }
 
                 let sportData = {
-                    code: maxCode++,
-                    name: name,
-                    description: string
+                    code: ++maxCode,
+                    name: body.name,
+                    description: body.description
                 };
-                SportRepository.add(sportData, callback);
+                sportRepository.add(sportData, callback);
             });
-
         } else {
             callback(new ApiError('The sport name is used already'));
         }

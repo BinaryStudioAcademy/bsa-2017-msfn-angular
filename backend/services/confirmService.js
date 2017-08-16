@@ -7,9 +7,7 @@ class confirmService {
 
     createCode(body, callback) {
         userRepository.getUserByEmail(body.email, (err, data) => {
-            if (err) return callback(err);
-
-            if (data === null) {
+            if (data == null) {
                 callback(new ApiError("User not found"));
             } else {
                 const confirmData = {};
@@ -28,28 +26,17 @@ class confirmService {
     }
 
     checkExistCode(body, callback) {
-        userRepository.getUserByEmail(body.email.toLowerCase(), (err, userData) => {
-
-            if (err) return callback(err);
-
-            if (userData === null) {
-                callback(new ApiError("User not found"));
+        confirmCodeRepository.get({ filter: { confirmCode: body.confirmCode } }, (err, data) => {
+            if (data.length > 0) {
+                const confirmData = data[0];
+                const user = confirmData.user;
+                if (confirmData) {
+                    callback(false, { status: 'ok', userId: user, codeId: confirmData._id });
+                } else {
+                    callback(new ApiError("Wrong confirm code, or time expired"));
+                }
             } else {
-                const user = userData._id;
-                confirmCodeRepository.get({ user: user }, (err, data) => {
-                    if (data.length > 0) {
-                        const confirmData = data[0];
-                        if (confirmData && confirmData.confirmCode === body.confirmCode) {
-                            callback(false, { status: 'ok', user: userData, codeId: confirmData._id });
-                        } else {
-                            callback(new ApiError("Wrong confirm code, or time expired"));
-                        }
-                        //const resetLink = "https://msfn.com/password_reset/" + data.confirmCode;
-
-                    } else {
-                        callback(new ApiError("Wrong confirm code, or time expired"));
-                    }
-                });
+                callback(new ApiError("Wrong confirm code, or time expired"));
             }
         });
     }
@@ -60,14 +47,14 @@ class confirmService {
             if (data.length > 0) {
                 for (let i = 0; i < data.length; i++) {
                     const confirmCodeId = data[i];
-                    confirmCodeRepository.deleteById(confirmCodeId, (err, data) => {
+                    confirmCodeRepository.deleteCode(confirmCodeId._id, (err, data) => {
                         if (err) {
                             deleteErr = true;
                         }
                     });
                 }
             }
-            callback(deleteErr);
+            return callback(deleteErr);
         });
     }
 }

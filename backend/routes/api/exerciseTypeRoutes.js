@@ -25,6 +25,7 @@ module.exports = function (app) {
     app.delete(baseUrl + ':code', isAdmin, function (req, res, next) {
         exerciseTypeService.deleteExerciseTypeByCode(req.params.code, function(err, data) {
             res.err = err;
+            res.data = data;
             next();
        });
     }, apiResponse);

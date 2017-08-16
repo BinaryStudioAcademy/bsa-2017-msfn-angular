@@ -1,0 +1,48 @@
+<form id="sport-handling" #form="ngForm">
+    <h2>Create/Edit kind of sport</h2>
+
+    <div id="general-error" class="error" *ngIf="generalError">{{ generalError }}</div>
+
+    <md-input-container id="code">
+        <input mdInput type="text" name="code" placeholder="Code (set only if you're updating an item)" [(ngModel)]="code" [formControl]="codeFormControl">
+        <md-error *ngIf="codeFormControl.hasError('pattern')">
+            Code should be a positive integer
+        </md-error>
+    </md-input-container>
+
+    <div id="icon-selection" class="input">
+        <md-select id="icon" class="select-row" name="sport" placeholder="Sport icon" required [(ngModel)]="sport.icon">
+            <md-option *ngFor="let icon of icons" [value]="icon">
+                <div class="icon-image">
+                    <img [src]="icon" alt="sport-icon">
+                </div>
+            </md-option>
+        </md-select>
+
+        <div *ngIf="sport.icon" id="selected-icon">
+            <img [src]="sport.icon" alt="sport-icon">
+        </div>
+    </div>
+
+    <md-input-container class="input">
+        <input mdInput type="text" name="title" placeholder="Sport name" required [(ngModel)]="sport.name" [formControl]="nameFormControl">
+        <md-error *ngIf="nameFormControl.hasError('required')">
+            First name is required
+        </md-error>
+        <md-error *ngIf="nameFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')">
+            Name should contain 2-20 characters
+        </md-error>
+    </md-input-container>
+
+    <md-input-container class="example-full-width" class="input">
+        <textarea mdInput type="text" name="description" placeholder="Sport description" required [(ngModel)]="sport.description" [formControl]="descriptionFormControl"></textarea>
+        <md-error *ngIf="descriptionFormControl.hasError('required')">
+            Description is required
+        </md-error>
+        <md-error *ngIf="descriptionFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')">
+            Description should contain 10-300 characters
+        </md-error>
+    </md-input-container>
+
+    <button md-button class="btn btn-save" (click)="save()">Save</button>
+</form>

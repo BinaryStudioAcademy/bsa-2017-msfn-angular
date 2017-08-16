@@ -8,5 +8,13 @@ function ConfirmCodeRepository() {
 }
 
 ConfirmCodeRepository.prototype = new Repository();
+ConfirmCodeRepository.prototype.deleteCode = deleteCode;
+
+function deleteCode(codeId, callback) {
+    const query = this.model.remove({
+        _id: codeId
+    });
+    query.exec(callback);
+}
 
 module.exports = new ConfirmCodeRepository();
