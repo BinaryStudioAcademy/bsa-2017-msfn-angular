@@ -8,43 +8,34 @@ import { ConfirmedPageService } from './confirmed-page.service';
     styleUrls: ['./confirmed-page.component.scss'],
 })
 export class ConfirmedPageComponent implements OnInit {
-    registered = false;
-    changedRoot = false;
-
+    showRegistered = false;
+    showChangedRoot = false;
+    showInfo = false;
 
     constructor(private route: ActivatedRoute, private confirmedPageService: ConfirmedPageService ) { }
 
     ngOnInit() {
         const type = this.route.snapshot.params['type'];
         const token = this.route.snapshot.params['token'];
-
         if (type === 'registration') {
-            let registered = false;
             this.confirmedPageService.checkRegistrationToken(token, (err, res) => {
-                if (!err) {
-                    registered = true;
+                if (res.status === 'ok') {
+                    this.showRegistered = true;
+                } else {
+                    this.showInfo = true;
                 }
             });
-
-            if (registered) {
-                this.registered = true;
-            }
         } else if (type === 'rootemail') {
-            let changedRoot = false;
             this.confirmedPageService.checkRootEmailToken(token, (err, res) => {
-                if (!err) {
-                    changedRoot = true;
+                if (res.status === 'ok') {
+                    this.showChangedRoot = true;
+                } else {
+                    this.showInfo = true;
                 }
             });
-
-            if (changedRoot) {
-                this.changedRoot = true;
-            }
         }
-
     }
 
     resendRegisteredConfirmation() {
-        console.log('resendRegisteredConfirmation');
     }
 }

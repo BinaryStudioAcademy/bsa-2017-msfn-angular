@@ -84,7 +84,7 @@ function updateItem(id, body, callback) {
 }
 
 function addEmailToItem(id, body, callback) {
-
+    console.log(body);
     const newSecondaryEmail = body.newSecondaryEmail;
 
     userRepository.getById(id, (err, data) => {

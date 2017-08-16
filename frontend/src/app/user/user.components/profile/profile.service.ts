@@ -63,10 +63,10 @@ export class ProfileService {
 
     addNewEmail(email, id, callback) {
         const request: IHttpReq = {
-            url: '/api/user/' + id + '/email',
+            url: '/api/user/secondaryEmail/' + id,
             method: 'PUT',
             body: {
-            email: email
+                newSecondaryEmail: email
             }
         };
         this.httpService.sendRequest(request).then(res => {
