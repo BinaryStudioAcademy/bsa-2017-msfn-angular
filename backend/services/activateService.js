@@ -12,16 +12,19 @@ ActivateService.prototype.checkNewRootMail = checkNewRootMail;
 
 
 function checkActivateCode(token, callback) {
+    console.log(token);
     userRepository.getUserByToken(token, (err, user) => {
         if (err) {
             return callback(err);
+        } else if (!user) {
+            return callback(new ApiError("Current token wrong or has expired"));
         }
         user.checkToken(token, status => {
             if (status) {
                 user.activateToken = '';
                 userRepository.update(user.id, user, callback);
             } else {
-                callback(new ApiError("Wrong token"));
+                callback(new ApiError("Current token wrong or has expired"));
             }
         })
     })

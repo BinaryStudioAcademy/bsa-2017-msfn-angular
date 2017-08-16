@@ -8,8 +8,8 @@ import { ConfirmedPageService } from './confirmed-page.service';
     styleUrls: ['./confirmed-page.component.scss'],
 })
 export class ConfirmedPageComponent implements OnInit {
-    registered: boolean;
-    chagedRoot: boolean;
+    registered = false;
+    changedRoot = false;
 
 
     constructor(private route: ActivatedRoute, private confirmedPageService: ConfirmedPageService ) { }
@@ -17,12 +17,11 @@ export class ConfirmedPageComponent implements OnInit {
     ngOnInit() {
         const type = this.route.snapshot.params['type'];
         const token = this.route.snapshot.params['token'];
-        let registered = false;
-        let changedRoot = false;
 
         if (type === 'registration') {
-            this.confirmedPageService.checkRegistrationToken(token, res => {
-                if (res.ok) {
+            let registered = false;
+            this.confirmedPageService.checkRegistrationToken(token, (err, res) => {
+                if (!err) {
                     registered = true;
                 }
             });
@@ -31,16 +30,21 @@ export class ConfirmedPageComponent implements OnInit {
                 this.registered = true;
             }
         } else if (type === 'rootemail') {
-            this.confirmedPageService.checkRootEmailToken(token, res => {
-                if (res.ok) {
+            let changedRoot = false;
+            this.confirmedPageService.checkRootEmailToken(token, (err, res) => {
+                if (!err) {
                     changedRoot = true;
                 }
             });
 
-            if (registered) {
-                this.chagedRoot = true;
+            if (changedRoot) {
+                this.changedRoot = true;
             }
         }
 
+    }
+
+    resendRegisteredConfirmation() {
+        console.log('resendRegisteredConfirmation');
     }
 }

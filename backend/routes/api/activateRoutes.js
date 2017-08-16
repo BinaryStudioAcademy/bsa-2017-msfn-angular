@@ -5,8 +5,12 @@ const
     router = express.Router();
 
 router.get('/:token', function (req, res, next) {
+    // console.log('ggg');
+    // console.log("token: " + req.params.token);
     activateService.checkActivateCode(req.params.token, function (err, data) {
-        res.data = data;
+        res.data = {
+            result: 'valid'
+        };
         res.err = err;
         next();
     });

@@ -1,6 +1,15 @@
 <div class="confirm-container">
-    <div class="confirm-block">
+    <div class="confirm-block" *ngIf="registered" >
         <div class="confirm-heading">Congratulations, you registered in MSFN!</div>
         <a class="confirm-login" routerLink="/login" class="back-button">Login</a>
+    </div>
+    <div class="confirm-block" *ngIf="changedRoot" >
+        <div class="confirm-heading">Main email was changed </div>
+        <a class="confirm-login"  routerLink="/" class="back-button">Go to home page</a>
+    </div>
+
+    <div class="confirm-block" *ngIf="!registered" >
+        <div class="confirm-heading">Current token wrong or has expired</div>
+        <a class="confirm-login" (click)="resendRegisteredConfirmation()" class="back-button">resend token</a>
     </div>
 </div>

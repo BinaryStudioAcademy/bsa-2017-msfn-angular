@@ -9,7 +9,9 @@ function LoginService() {
 LoginService.prototype.login = login;
 
 function login(req, res, next) {
+    console.log(req.body.data);
     req.body = decrypt(req.body.data)
+    console.log(req.body);
     passport.authenticate('local',
         function(err, user, info) {
             if (err) {
