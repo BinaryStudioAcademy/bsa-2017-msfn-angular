@@ -1,0 +1,51 @@
+@import "../../../../globalStyles/variables";
+@import "../../../../globalStyles/indentations";
+@import '../../../../globalStyles/text.scss';
+
+.mat-table {
+    width: 80%;
+    margin: 40px auto;
+}
+.mat-header-row,
+.mat-row {
+    height: auto;
+    padding: $content-tb-margin 60px;
+}
+
+.mat-header-cell {
+    font-size: $main-text;
+}
+
+md-header-cell,
+md-cell {
+    max-width: 28%;
+    margin-left: 4%;
+    word-break: break-all;
+}
+
+md-header-cell:last-child,
+md-cell:last-child {
+    margin-right: 4%;
+}
+
+.measure-list-container {
+    margin: 0 auto;
+    width: 60%;
+    text-align: center;
+    font-family: $font-general;
+}
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    width: auto;
+    height: 40px;
+    margin: 40px auto 0 auto;
+}
+
+button:focus {
+    outline: 0;
+}

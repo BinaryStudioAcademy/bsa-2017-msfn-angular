@@ -10,6 +10,7 @@ import { ExerciseCreateComponent } from './admin.components/exercise-create/exer
 import { ExerciseListComponent } from './admin.components/exercise-list/exercise-list.component';
 import { ExerciseTypeComponent } from './admin.components/exercise-type/exercise-type.component';
 import { AdminRootProfileComponent } from './admin.components/admin-root-profile/admin-root-profile.component';
+import { MeasureListComponent } from './admin.components/measure-list/measure-list.component';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -29,7 +30,8 @@ import { AdminRootProfileService } from './admin.components/admin-root-profile/a
         ExerciseCreateComponent,
         ExerciseListComponent,
         ExerciseTypeComponent,
-        AdminRootProfileComponent
+        AdminRootProfileComponent,
+        MeasureListComponent
     ],
     providers: [
         ToasterService,

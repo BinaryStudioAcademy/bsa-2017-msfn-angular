@@ -9,18 +9,7 @@
     font-family: $font-general;
 }
 
-.btn {
-    border: none;
-    color: $text-main-color;
-    background-color: $btn-color;
-    font-weight: bold;
-    font-size: 14px;
-    border-radius: 50px;
-}
 
-button:focus {
-    outline: 0;
-}
 
 .mat-row {
     height: 50px;

@@ -1,0 +1,53 @@
+<div class="measure-list-container">
+    <button md-button
+            disableRipple
+            class="btn"
+            id="btn-add"
+            (click)="addRow(table)"
+            [ngClass]="{'disabled' : wrongInput}">Add new measure</button>
+    <div>
+        <app-list placeholder="types"
+                  [options]="options"
+                  [items]="items"
+                  (change)="updateTable()"
+                  (click)="updateTable()">
+        </app-list>
+        <md-input-container>
+            <input mdInput
+                   type="text"
+                   #filter
+                   placeholder="search by name"
+                   [(ngModel)]="name">
+        </md-input-container>
+    </div>
+    <md-table class="mat-table"
+              #table
+              [dataSource]="dataSource"
+              mdSort>
+        <ng-container cdkColumnDef="code">
+            <md-header-cell *cdkHeaderCellDef> Code </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <div [ngClass]="{'transp' : row.isRemoved}">{{row.code}}</div>
+            </md-cell>
+        </ng-container>
+        <ng-container cdkColumnDef="name">
+            <md-header-cell *cdkHeaderCellDef
+                            md-sort-header>
+                Name
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                {{row.name}}
+            </md-cell>
+        </ng-container>
+        <ng-container cdkColumnDef="type">
+            <md-header-cell *cdkHeaderCellDef
+                            md-sort-header>
+                Type
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row">{{row.type}}</md-cell>
+        </ng-container>
+
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;" ></md-row>
+    </md-table>
+</div>
