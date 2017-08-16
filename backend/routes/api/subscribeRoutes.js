@@ -1,8 +1,7 @@
-const
-    apiResponse = require('express-api-response'),
+const apiResponse = require('express-api-response'),
     subscribeService = require('../../services/subscribeService');
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 router.get('/following', function (req, res, next) {
     subscribeService.getFollowing(req, function (err, data) {
@@ -21,6 +20,8 @@ router.get('/followers', function (req, res, next) {
 }, apiResponse);
 
 router.post('/follow', function (req, res, next) {
+    console.log(req.session);
+
     subscribeService.follow(req, function (err, data) {
         res.data = data;
         res.err = err;

@@ -49,6 +49,7 @@ export class ProfileService {
         });
     }
 
+
     updateUser(user, id, callback) {
         const request: IHttpReq = {
             url: '/api/user/' + id,
@@ -60,6 +61,18 @@ export class ProfileService {
         });
     }
 
+    addNewEmail(email, id, callback) {
+        const request: IHttpReq = {
+            url: '/api/user/' + id + '/email',
+            method: 'PUT',
+            body: {
+            email: email
+            }
+        };
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
+        });
+    }
     getCropperSettings(): CropperSettings {
         const cropperSettings = new CropperSettings();
         cropperSettings.noFileInput = true;

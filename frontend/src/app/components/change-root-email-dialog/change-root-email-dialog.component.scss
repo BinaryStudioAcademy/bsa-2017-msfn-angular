@@ -1,0 +1,35 @@
+@import '../../../globalStyles/variables.scss';
+@import '../../../globalStyles/indentations.scss';
+@import '../../../globalStyles/text.scss';
+
+.container {
+    width: 300px;
+    font-family: $font-general;
+
+    .confirmation-info {
+        font-style: italic;
+    }
+
+    md-dialog-actions {
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-container {
+        margin-top: 10px;
+
+        .confirm-btn, .resend-btn{
+            background: $btn-color;
+            border-radius: 5px;
+            line-height: 30px;
+            font-weight: bold;
+        }
+    }
+}
+
+
+@media only screen and (max-width: $small-screen) {
+    .container {
+        width: 200px;
+    }
+}

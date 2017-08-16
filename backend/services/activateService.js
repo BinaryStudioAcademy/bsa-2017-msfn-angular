@@ -11,12 +11,12 @@ ActivateService.prototype.genNewRootMail = genNewRootMail;
 ActivateService.prototype.checkNewRootMail = checkNewRootMail;
 
 
-function checkActivateCode(body, callback) {
-    userRepository.getUserByEmail(body.email, (err, user) => {
+function checkActivateCode(token, callback) {
+    userRepository.getUserByToken(token, (err, user) => {
         if (err) {
             return callback(err);
         }
-        user.checkToken(body.token, status => {
+        user.checkToken(token, status => {
             if (status) {
                 user.activateToken = '';
                 userRepository.update(user.id, user, callback);
@@ -36,7 +36,6 @@ function genNewRootMail(body, callback) {
         if (data === null) {
             callback(new ApiError("User not found"));
         } else {
-
             const confirmData = {};
             confirmData.user = data._id;
             // Adding new email to be changed as root
@@ -59,7 +58,8 @@ function genNewRootMail(body, callback) {
                 }
                 if (!deleteErr) {
                     confirmCodeRepository.add(confirmData, (err, data) => {
-                        const newRootMailLink = "http://localhost:3060/api/user/activate/changemail/" + data.confirmCode;
+                        // const newRootMailLink = "http://localhost:3060/api/user/activate/changemail/" + data.confirmCode;
+                        const newRootMailLink = "http://localhost:3060/confirmation/rootemail/" + data.confirmCode;
                         emailService.send({
                                 to: body.newRootMail,
                                 subject: "Link to change your main email",
@@ -82,8 +82,9 @@ function genNewRootMail(body, callback) {
 }
 
 function checkNewRootMail(body, callback) {
-
+    // body has token
     confirmCodeRepository.get({
+        // Find user by received token
         filter: {
             confirmCode: body
         }
@@ -92,32 +93,55 @@ function checkNewRootMail(body, callback) {
             const confirmData = data[0];
             if (confirmData && confirmData.confirmCode === body) {
                 const pass = body.password;
-                userRepository.update(confirmData.user, {
-                    email: confirmData.newRootMail
-                }, (err, result) => {
 
-                    if (result.ok == 1) {
-
-                        confirmCodeRepository.deleteById(confirmData._id, (err, data) => {
-                            //need log error deleting
-                        });
-
-                        emailService.send({
-                                to: body.email,
-                                subject: "Change main email on MSFN",
-                                html: "We would like to inform you that you've succesfully set this email as your main one. <a href=\"https://msfn.com\">https://msfn.com</a>."
+                userRepository.findById(confirmData.user, (err, user) => {
+                    if (!err) {
+                        const oldEmail = user.email;
+                        // Swap new root email with old one
+                        console.log(confirmData.user);
+                        console.log(oldEmail.toLowerCase());
+                        console.log(confirmData.newRootMail);
+                        userRepository.update(confirmData.user, {
+                            $set: {
+                                email: confirmData.newRootMail.toLowerCase()
                             },
-                            (err, data) => {
-                                "use strict";
-                                if (err) return callback(err);
-                                if (data.rejected.length == 0) {
-                                    data.status = 'ok';
-                                }
-                                callback(null, data);
+                            $pull: {
+                                secondaryEmails: confirmData.newRootMail
+                            },
+                            $addToSet: {
+                                secondaryEmails: oldEmail.toLowerCase()
                             }
-                        );
+                        }, (err, result) => {
+                            console.log(result);
+
+                            // if (result.ok == 1) {
+                            if (!err) {
+
+                                confirmCodeRepository.deleteById(confirmData._id, (err, data) => {
+                                    //need log error deleting
+                                });
+
+                                emailService.send({
+                                        to: body.email,
+                                        subject: "Change main email on MSFN",
+                                        html: "We would like to inform you that you've succesfully set this email as your main one. <a href=\"https://msfn.com\">https://msfn.com</a>."
+                                    },
+                                    (err, data) => {
+                                        "use strict";
+                                        if (err) return callback(err);
+                                        if (data.rejected.length == 0) {
+                                            data.status = 'ok';
+                                        }
+                                        callback(null, data);
+                                    }
+                                );
+                            }
+                        });
+                    } else {
+                        callback(new ApiError("Wrong confirm code, or time expired"));
                     }
-                });
+                })
+
             } else {
                 callback(new ApiError("Wrong confirm code, or time expired"));
             }
