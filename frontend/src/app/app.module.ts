@@ -33,6 +33,9 @@ import { ConfirmedPageComponent } from './components/confirmed-page/confirmed-pa
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
 import { NotificationDataDialogComponent } from './components/notification-data-dialog/notification-data-dialog.component';
+import { SocketService } from './services/socket.service';
+import {NotificationsService} from './services/notifications.service';
+import { HeaderNotificationsComponent } from './components/header-notifications/header-notifications.component';
 
 
 @NgModule({
@@ -61,6 +64,7 @@ import { NotificationDataDialogComponent } from './components/notification-data-
         ConfirmedPageComponent,
         LoginDialogComponent,
         NotificationDataDialogComponent,
+        HeaderNotificationsComponent,
     ],
     providers: [
         ToasterService,
@@ -71,7 +75,9 @@ import { NotificationDataDialogComponent } from './components/notification-data-
         ForAdminGuard,
         ForAllUserGuard,
         EncryptService,
-        ExerciseTypeService
+        ExerciseTypeService,
+        SocketService,
+        NotificationsService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,

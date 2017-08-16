@@ -12,8 +12,7 @@
         </a>
     </div>
     <div class="notifications" *ngIf="thereIsLoggedInUser">
-        <md-icon (click)="openDialog()" class="notification__alert">notifications</md-icon>
-        <span class="notifications__count">{{notificationCount}}</span>
+        <app-header-notifications></app-header-notifications>
     </div>
     <div class="settings header__navigation-panel" *ngIf="thereIsLoggedInUser">
         <img class="settings__photo" [src]="userPhotoUrl">

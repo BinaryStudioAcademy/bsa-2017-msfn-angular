@@ -1,21 +1,42 @@
 const ApiError = require('./apiErrorService');
 const userRepository = require('../repositories/userRepository');
 const mongoose = require('mongoose');
-var objID = mongoose.Types;
+const objID = mongoose.Types;
+const socketService = require('./socketService');
 
 class subscribeService {
 
-    constructor() {}
+    constructor() {
+    }
 
     follow(data, callback) {
+        if (!data.session
+            || !data.session.passport
+            || !data.session.passport.user)
+            return callback(new ApiError("Not authorized"));
         const currentUserId = data.session.passport.user;
         const userToFollow = data.body.user_id;
+        if (currentUserId === userToFollow) {
+            return callback(new ApiError("Cant follow yourself"));
+        }
         userRepository.findById(currentUserId, (err, currentUser) => {
-            if (currentUser.follow.find(this.itemInArray, userToFollow)) {
-                callback(new ApiError("User already followed"));
+            if (currentUser.follow.indexOf(userToFollow) !== -1) {
+                return callback(new ApiError("User already followed"));
             }
             currentUser.follow.push(objID.ObjectId(userToFollow));
-            userRepository.update(currentUserId, currentUser, callback);
+            userRepository.update(currentUserId, currentUser, (err, res) => {
+                if (err) return callback(err);
+
+                const userToFollowSocket = socketService.GetUserById(userToFollow);
+                if (userToFollowSocket) {
+                    socketService.EmitTo(userToFollowSocket, 'follow', {
+                        email: currentUser.email,
+                        id: currentUser.id
+                    });
+                }
+
+                callback(err, res);
+            });
         });
     }
 
@@ -24,8 +45,8 @@ class subscribeService {
         const currentUserId = data.session.passport.user;
         userRepository.findById(currentUserId, (err, currentUser) => {
             const usnfollowPos = currentUser.follow.findIndex(this.itemInArray, userToFollow);
-            if (usnfollowPos == -1) {
-                callback(new ApiError("User wasn't follow yet"));
+            if (usnfollowPos === -1) {
+                return callback(new ApiError("User isn't followed"));
             }
             currentUser.follow.splice(usnfollowPos, 1);
 
@@ -35,7 +56,7 @@ class subscribeService {
 
     getFollowing(data, callback) {
         const currentUserId = data.session.passport.user;
-         userRepository.findById(currentUserId, (err, currentUser) => {
+        userRepository.findById(currentUserId, (err, currentUser) => {
             callback(err, currentUser.follow);
         });
     }
@@ -44,16 +65,13 @@ class subscribeService {
         const params = {};
         const currentUserId = data.session.passport.user;
         params.filter = {follow: currentUserId};
-         userRepository.get(params, (err, users) => {
+        userRepository.get(params, (err, users) => {
             callback(err, users);
         });
     }
 
     itemInArray(element, index, array) {
-        if (this == element) {
-            return true;
-        }
-        return false;
+        return (this === element);
     }
 }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { NotificationDataDialogComponent } from '../notification-data-dialog/notification-data-dialog.component';
+import {INotification} from '../../models/notification';
 
 @Component({
     selector: 'app-notification-dialog',
@@ -43,5 +44,9 @@ export class NotificationDialogComponent implements OnInit {
             }
         });
         this.notification.splice(this.notification.indexOf(noteIndex), 1);
+    }
+    callback(notification: INotification) {
+        notification.callback();
+        this.data.splice(this.data.indexOf(notification), 1);
     }
 }
