@@ -34,6 +34,7 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
 import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
 import { SocketService } from './services/socket.service';
 import {NotificationsService} from './services/notifications.service';
+import { HeaderNotificationsComponent } from './components/header-notifications/header-notifications.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import {NotificationsService} from './services/notifications.service';
         TestMarkdownComponent,
         PageNotFoundComponent,
         LoginDialogComponent,
+        HeaderNotificationsComponent,
     ],
     providers: [
         ToasterService,

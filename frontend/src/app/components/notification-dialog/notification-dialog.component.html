@@ -1,2 +1,8 @@
 <h2 md-dialog-title>Notifications: </h2>
-<md-dialog-content>{{ data }}</md-dialog-content>
+<md-dialog-content class="notifications__dialog">
+    <button md-button
+            class="notifications__dialog-button"
+            *ngFor="let notification of data"
+            (title)="notification.name"
+            (click)="callback(notification)">{{notification.name}}</button>
+</md-dialog-content>

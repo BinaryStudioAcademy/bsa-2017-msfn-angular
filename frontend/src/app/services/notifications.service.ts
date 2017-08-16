@@ -1,13 +1,34 @@
 import {Injectable} from '@angular/core';
 import {SocketService} from './socket.service';
+import {INotification} from '../models/notification';
 
 @Injectable()
 export class NotificationsService {
 
+    public notifications: INotification[] = [];
+
     constructor(private SocketService: SocketService) {
         this.SocketService.addListener('follow', (data) => {
-            console.log(data);
             alert(1);
+            const newNotification: INotification = {
+                name: `${data.email} is now following you`,
+                callback: () => {
+                    console.log(data);
+                }
+            };
+            console.log(data);
+            this.addNotification(newNotification);
         });
+        const test: INotification = {
+            name: `Test is now following you`,
+            callback: () => {
+                console.log(123);
+            }
+        };
+        this.addNotification(test);
+    }
+
+    public addNotification(data: INotification) {
+        this.notifications.push(data);
     }
 }

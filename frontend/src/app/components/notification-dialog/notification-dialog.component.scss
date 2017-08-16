@@ -1,0 +1,11 @@
+.notifications__dialog {
+    padding: 0;
+
+    .notifications__dialog-button {
+        width: 100%;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-align: left;
+    }
+}
