@@ -8,12 +8,22 @@
 }
 
 #train-container {
-    width: 100%;
-    height: 100%;
-    padding-bottom: 20px;
-    overflow-y: auto;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+    position: relative;
+    width: 70vw;
+    min-height: 500px;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+
+    h2 {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: $header-text;
+    }
 }
 
 .item-container {
@@ -24,8 +34,7 @@
     text-align: center;
     width: 260px;
     height: 180px;
-    margin-right: 20px;
-    margin-top: 20px;
+    margin: 10px;
         color: $btn-color;
     background-color: $gradient-to-color;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -56,8 +65,7 @@
     text-align: center;
     width: 260px;
     height: 180px;
-    margin-right: 20px;
-    margin-top: 20px;
+    margin: 10px;
     color: #CCCCCC;
     background-color: #353535;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

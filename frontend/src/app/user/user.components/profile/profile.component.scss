@@ -117,6 +117,18 @@ label {
     }
 }
 
+.coach-mark:after {
+    display: block;
+    content: '';
+    background: url('../../../../../../resources/icons/whistle-icon.svg') center;
+    background-size: 170%;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    margin-top: -50px;
+    margin-left: calc(150px - 50px);
+}
+
 .profile-upload {
     display: flex;
     margin: 15px auto 0;
@@ -270,13 +282,16 @@ label {
 
 .button-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 20px;
     padding: 0 40px;
+
+    div {
+        margin: 0 $input-padding;
+    }
 }
 
 #coach-button {
-    flex-basis: 40%;
     text-align: center;
 
     div {

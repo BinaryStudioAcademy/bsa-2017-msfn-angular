@@ -37,7 +37,7 @@ export class ExerciseCreateService {
             method: 'POST',
             body: {
                 name: exerciseForm.name,
-                typeId: exerciseForm.typeId,
+                type: exerciseForm.type,
                 description: exerciseForm.description,
                 // sportsId: exerciseForm.sportsId
             },

@@ -2,19 +2,27 @@
 @import '../../../../globalStyles/text.scss';
 @import '../../../../globalStyles/variables.scss';
 
-#title {
-    margin: $content-lr-margin 0;
-}
+.user-list {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 60vw;
+    min-height: 500px;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
 
-h1 {
-    margin: 0;
-    text-align: center;
+    h2 {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: $header-text;
+    }
 }
 
 #inputs {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
 
     md-input-container {
@@ -24,8 +32,9 @@ h1 {
 }
 
 .mat-table {
-    width: 80%;
+    width: 100%;
     margin: 0 auto 40px auto;
+    min-height: calc(20px*2 + 16px);
     max-height: calc(100vh - 300px);
     overflow-y: auto;
 }
