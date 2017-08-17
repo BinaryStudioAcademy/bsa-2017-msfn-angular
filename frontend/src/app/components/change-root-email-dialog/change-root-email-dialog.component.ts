@@ -25,7 +25,7 @@ export class ChangeRootEmailDialogComponent implements OnInit {
 
   sendMail() {
     const request: IHttpReq = {
-        url: '/api/user/activate/changemail/',
+        url: '/api/user/changemail/',
         method: 'POST',
         body: {
           email: this.data.email,
@@ -38,7 +38,7 @@ export class ChangeRootEmailDialogComponent implements OnInit {
 
   checkCode() {
     const request: IHttpReq = {
-        url: '/api/user/activate/changemail/' + this.token,
+        url: '/api/user/changemail/' + this.token,
         method: 'GET',
         body: ''
     };

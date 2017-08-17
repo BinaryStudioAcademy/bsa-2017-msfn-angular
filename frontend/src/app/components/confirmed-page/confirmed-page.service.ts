@@ -23,9 +23,10 @@ export class ConfirmedPageService {
 
   checkRootEmailToken(token, callback) {
     const request: IHttpReq = {
-        url: '/api/user/activate/changemail/' + token,
+        url: '/api/user/changemail/' + token,
         method: 'GET',
-        body: ''
+        body: '',
+        successMessage: 'Your root mail has changed'
     };
     this.httpService.sendRequest(request).then(res => {
         callback(null, res);
