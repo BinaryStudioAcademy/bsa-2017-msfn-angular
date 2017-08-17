@@ -8,14 +8,16 @@ export class ConfirmedPageService {
   constructor(private httpService: HttpService) { }
 
   checkRegistrationToken(token, callback) {
-    // console.log(token);
     const request: IHttpReq = {
         url: '/api/user/activate/' + token,
         method: 'GET',
         body: ''
     };
     this.httpService.sendRequest(request).then(res => {
-        callback(res);
+        console.log(res);
+        callback(null, res);
+    }).catch(err => {
+        callback(err);
     });
   }
 
@@ -26,7 +28,9 @@ export class ConfirmedPageService {
         body: ''
     };
     this.httpService.sendRequest(request).then(res => {
-        callback(res);
+        callback(null, res);
+    }).catch(err => {
+        callback(err);
     });
   }
 }

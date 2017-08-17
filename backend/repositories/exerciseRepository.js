@@ -1,5 +1,4 @@
 const Repository = require('./generalRepository'),
-    UserService = require('../services/exerciseService'),
     Exercise = require('../schemas/exerciseSchema');
 
 function ExerciseRepository() {
@@ -8,4 +7,11 @@ function ExerciseRepository() {
 };
 
 ExerciseRepository.prototype = new Repository();
+ExerciseRepository.prototype.getAllExercises = getAllExercises;
+
+function getAllExercises(callback) {
+    const query = this.model.find({}).populate('type', 'name')
+    query.exec(callback);
+};
+
 module.exports = new ExerciseRepository();
