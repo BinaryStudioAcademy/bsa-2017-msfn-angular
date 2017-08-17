@@ -1,3 +1,4 @@
+import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
 import { ForAdminGuard } from '../guards/for-admin.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -46,6 +47,14 @@ const adminRoutes: Routes = [
                     {
                         path: 'sport-handling',
                         component: SportHandlingComponent
+                    },
+                    {
+                        path: 'sport-handling/:id',
+                        component: SportHandlingComponent
+                    },
+                    {
+                        path: 'sports-list',
+                        component: SportsListComponent
                     },
                 ]
             }

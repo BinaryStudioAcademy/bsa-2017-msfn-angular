@@ -8,30 +8,17 @@ function MeasurementRepository() {
 
 MeasurementRepository.prototype = new Repository();
 
-MeasurementRepository.prototype.findByCode = findByCode;
-MeasurementRepository.prototype.findByName = findByName;
+
 MeasurementRepository.prototype.deleteAll = deleteAll;
-MeasurementRepository.prototype.deleteByCode = deleteByCode;
-MeasurementRepository.prototype.update = update;
-
-function findByCode(code, callback) {
-    const query = this.model.findOne({
-        code: code
-    });
-    query.exec(callback);
-};
+MeasurementRepository.prototype.deleteSpecific = deleteSpecific;
+MeasurementRepository.prototype.updateSpecific = updateSpecific;
+MeasurementRepository.prototype.getSpecific = getSpecific;
 
 
-function findByName(name, callback) {
-    const query = this.model.findOne({
-        name: name
-    });
-    query.exec(callback);
-};
 
-function deleteByCode(code, callback) {
+function deleteSpecific(id, callback) {
     const query = this.model.update({
-        code: code
+        _id: id,
     }, {
         isRemoved: true
     });
@@ -43,10 +30,23 @@ function deleteAll(callback) {
     query.exec(callback);
 }
 
-function update(body, callback) {
+
+function getSpecific(id, callback){
+    const query = this.model.find({
+        _id: id,
+    });
+    query.exec(callback);
+}
+
+function updateSpecific(id, body, callback) {
     const query = this.model.update({
-        code: body.code
-    }, body);
+        _id: id,
+    }, {
+        $set: {
+			measureName: body.measureName,
+			measureUnits: body.measureUnits
+	    }
+    });
     query.exec(callback);
 };
 

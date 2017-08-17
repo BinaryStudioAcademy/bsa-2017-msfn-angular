@@ -2,10 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Measurement = new Schema({
-    name: String,
-    code: Number,
-    isRemoved: Boolean,
-    values: [String]
+    measureName: String,
+    measureUnits: [{
+        conversionFactor: Number,
+        unitName: String
+    }],
+    isRemoved: { 
+        type: Boolean,
+        default: false 
+    }
 });
 
 

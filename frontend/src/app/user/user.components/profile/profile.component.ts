@@ -206,14 +206,8 @@ export class ProfileComponent implements OnInit {
         };
         this.requestForCoaching = true;
 
-        this.profileService.updateProfile(
-            userData,
-            () => {
-                this.coachingMessage = 'We\'ll moderate your request in 24 hours.' +
-                    ' You\'ll get a notification when it would be done.';
-            },
-            () => {
-                this.coachingMessage = 'Request was unsuccessful. Please try again.';
-            });
+        this.profileService.coachStatusRequest(this.userId, (res) => {
+            this.coachingMessage = 'We\'ll moderate your request in 24 hours.' + ' You\'ll get a notification when it would be done.';
+        });
     }
 }

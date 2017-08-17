@@ -42,6 +42,7 @@ module.exports = function(io, MongoStore) {
         "use strict";
         socketService.SetSocket(socket);
         socketService.AddUser(socket);
+        socketService.InitListeners(socket);
 
         socket.on('disconnect', (data) => {
             "use strict";

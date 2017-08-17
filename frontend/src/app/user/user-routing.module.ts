@@ -7,8 +7,7 @@ import { UserComponent} from './user.component';
 import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
-
-
+import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 
 const userRoutes: Routes = [
     {
@@ -17,8 +16,12 @@ const userRoutes: Routes = [
         canActivate: [ForAllUserGuard],
         children: [
             {
-                path: 'profile',
+                path: 'profile/me',
                 component: ProfileComponent,
+            },
+            {
+                path: 'profile/:id',
+                component: OtherProfilesComponent,
             },
             {
                 path: 'training-list',
