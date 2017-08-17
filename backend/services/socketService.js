@@ -1,5 +1,6 @@
 const ApiError = require('./apiErrorService');
 const decrypt = require('./decryptService');
+const config = require('../routes/socket');
 
 function SocketService() {
     "use strict";
@@ -21,9 +22,6 @@ SocketService.prototype.Emit = function(event, data) {
 };
 SocketService.prototype.EmitTo = function(socket, event, data) {
     "use strict";
-    console.log(event);
-    console.log(data);
-    console.log(socket.user);
     socket.emit(event, data);
 };
 SocketService.prototype.Broadcast = function(event, data) {
@@ -39,7 +37,6 @@ SocketService.prototype.SetSocket = function(socket) {
 SocketService.prototype.AddUser = function(socket) {
     "use strict";
     this.users.push(socket);
-    console.log(this.users.length);
 };
 SocketService.prototype.RemoveUser = function(socket) {
     "use strict";
@@ -58,6 +55,25 @@ SocketService.prototype.GetUserById = function(id) {
         return (socket.user._id.toString() === id);
     });
     return _return.shift();
+};
+SocketService.prototype.InitListeners = function(socket) {
+    "use strict";
+    for (let method in config) {
+        if (config.hasOwnProperty(method)) {
+            socket.on(method, (data) => {
+                config[method](data, (err, result) => {
+                    if (err) {
+                        if (!result) {
+                            result = {};
+                        }
+                        result.error = true;
+                        result.err = err;
+                    }
+                    socket.emit(`${method}:success`, JSON.stringify(result));
+                });
+            });
+        }
+    }
 };
 
 module.exports = new SocketService();
