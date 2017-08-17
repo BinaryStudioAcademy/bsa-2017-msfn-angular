@@ -100,7 +100,7 @@ function checkNewRootMail(body, callback) {
                                 });
                                 emailService.send({
                                         to: confirmData.newRootMail,
-                                        subject: "Change root email on MSFN",
+                                        subject: "Changed root email on MSFN",
                                         html: "We would like to inform you that you've succesfully set this email as your root one. <a href=\"https://msfn.com\">https://msfn.com</a>."
                                     },
                                     (err, data) => {

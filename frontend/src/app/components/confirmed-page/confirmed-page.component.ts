@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ConfirmedPageService} from './confirmed-page.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmedPageService } from './confirmed-page.service';
 
-@Component ({
+@Component({
     selector: 'app-confirmed-page',
     templateUrl: './confirmed-page.component.html',
     styleUrls: ['./confirmed-page.component.scss'],
@@ -20,8 +20,11 @@ export class ConfirmedPageComponent implements OnInit {
         if (type === 'registration') {
             this.confirmedPageService.checkRegistrationToken(token, (err, res) => {
                 if (res.access) {
-                    this.router.navigate(['/']);
-                    location.reload();
+                    // this.router.navigate(['/user/profile']);
+                    // location.reload();
+
+                    // Redirect user to profile page, when he just activated his account
+                    location.href = '/user/profile';
                 }
             });
         } else if (type === 'rootemail') {

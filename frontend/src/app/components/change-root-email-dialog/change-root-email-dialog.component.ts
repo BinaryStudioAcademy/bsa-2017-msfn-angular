@@ -30,7 +30,9 @@ export class ChangeRootEmailDialogComponent implements OnInit {
         body: {
           email: this.data.email,
           newRootMail: this.data.newRootEmail
-        }
+        },
+        successMessage: 'Letter with confirmation sent to email',
+        failMessage: 'Failed to send confirmation letter'
     };
 
     this.httpService.sendRequest(request);
@@ -40,7 +42,9 @@ export class ChangeRootEmailDialogComponent implements OnInit {
     const request: IHttpReq = {
         url: '/api/user/changemail/' + this.token,
         method: 'GET',
-        body: ''
+        body: '',
+        successMessage: 'Root email succesfully changed!',
+        failMessage: 'Failed to change root email'
     };
     this.httpService.sendRequest(request).then(res => {
         if (res.status === 'ok') {

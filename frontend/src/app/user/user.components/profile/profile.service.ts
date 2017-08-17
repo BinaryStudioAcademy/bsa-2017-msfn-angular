@@ -54,7 +54,9 @@ export class ProfileService {
         const request: IHttpReq = {
             url: '/api/user/' + id,
             method: 'PUT',
-            body: user
+            body: user,
+            failMessage: 'Failed to change profile',
+            successMessage: 'Profile changes accepted'
         };
         this.httpService.sendRequest(request).then(res => {
             callback(res);
@@ -67,7 +69,9 @@ export class ProfileService {
             method: 'PUT',
             body: {
                 newSecondaryEmail: email
-            }
+            },
+            failMessage: 'Failed to add email',
+            successMessage: 'Secondary email added'
         };
         this.httpService.sendRequest(request).then(res => {
             callback(res);

@@ -14,7 +14,6 @@ export class ConfirmedPageService {
         body: ''
     };
     this.httpService.sendRequest(request).then(res => {
-        console.log(res);
         callback(null, res);
     }).catch(err => {
         callback(err);
@@ -26,7 +25,7 @@ export class ConfirmedPageService {
         url: '/api/user/changemail/' + token,
         method: 'GET',
         body: '',
-        successMessage: 'Your root mail has changed'
+        successMessage: 'Your root email has changed'
     };
     this.httpService.sendRequest(request).then(res => {
         callback(null, res);
