@@ -20,7 +20,7 @@
         <md-icon [mdMenuTriggerFor]="appMenu">menu</md-icon>
     </div>
     <md-menu class="user_menu" #appMenu="mdMenu" yPosition="below" [overlapTrigger]="false">
-        <button md-menu-item *ngIf="window.data._injectedData.role != 'admin'" routerLink="/user/profile">Edit profile</button>
+        <button md-menu-item *ngIf="window.data._injectedData.role != 'admin'" routerLink="/user/profile/me">Edit profile</button>
         <button md-menu-item *ngIf="window.data._injectedData.role != 'admin'" routerLink="/user/settings">Settings</button>
         <button md-menu-item (click)="logout()">Logout</button>
     </md-menu>

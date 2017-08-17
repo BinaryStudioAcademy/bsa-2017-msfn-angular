@@ -6,6 +6,7 @@ const
     subscribeRoutes = require('./subscribeRoutes'),
     activateRoutes = require('./activateRoutes'),
     coachService = require('../../services/coachService');
+    isUserSessionUser = require('../../middleware/isUserSessionUser.js');
 
 module.exports = function (app) {
     app.get(baseUrl + 'me', function (req, res, next) {
@@ -50,7 +51,7 @@ module.exports = function (app) {
     }, apiResponse);
 
 
-    app.put(baseUrl + ':id', function(req, res, next) {
+    app.put(baseUrl + ':id', isUserSessionUser, function(req, res, next) {
         userService.updateItem(req.params.id, req.body, function(err, data) {
             res.data = data;
             res.err = err;
