@@ -1,2 +1,4 @@
 <app-header-view [style.display]="isLoggedIn ? '' : 'none'"></app-header-view>
-<router-outlet></router-outlet>
+<div [ngClass]="isLoggedIn ? 'login-child' : 'index-child'">
+    <router-outlet></router-outlet>
+</div>
