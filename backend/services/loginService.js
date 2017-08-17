@@ -9,9 +9,12 @@ function LoginService() {
 LoginService.prototype.login = login;
 
 function login(req, res, next) {
-    req.body = decrypt(req.body.data)
+    console.log(req.body.data);
+    req.body = decrypt(req.body.data);
+    console.log(req.body);
     passport.authenticate('local',
         function(err, user, info) {
+            console.log(user);
             if (err) {
                 return next(err)
             } else if (user) {

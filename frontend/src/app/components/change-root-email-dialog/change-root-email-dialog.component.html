@@ -7,11 +7,14 @@
     <div class="confirmation-container">
          <md-dialog-actions>
             <md-input-container class="input-row">
-                <input mdInput type="text" name="confirmation" placeholder="confirmation" required [(ngModel)]="confirmation">
+                <input mdInput type="text" name="token" placeholder="confirmation code" required [(ngModel)]="token">
             </md-input-container>
+            <md-error>
+                {{ info }}
+            </md-error>
             <div class="btn-container">
                 <button md-button md-dialog-close>Cancel</button> 
-                <button md-button class="confrim-btn" [md-dialog-close]="confirmation">Confirm</button>
+                <button md-button class="confirm-btn" (click)="checkCode()" >Confirm</button>
                 <button md-button class="resend-btn" (click)="resend()">Resend code</button> 
             </div>
         </md-dialog-actions> 

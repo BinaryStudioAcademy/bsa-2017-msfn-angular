@@ -42,7 +42,11 @@ module.exports = function (app) {
 
     app.put(baseUrl + 'secondaryEmail/:id', function (req, res, next) {
         userService.addEmailToItem(req.params.id, req.body, function (err, data) {
-            res.data = data;
+
+            res.data = {
+                addedEmail: req.body.newSecondaryEmail,
+                status: 'ok'
+            };
             res.err = err;
             next();
         });

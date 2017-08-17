@@ -110,15 +110,26 @@ export class ProfileComponent implements OnInit {
         dialogRef.afterClosed().subscribe(email => {
             if (email && email !== this.user.email) {
                 this.profileService.addNewEmail(email, this.user._id, res => {
-                    this.user.secondaryEmails.push(res.email);
+                    if (res.status === 'ok') {
+                        this.user.secondaryEmails.push(res.addedEmail);
+                    }
                 });
             }
         });
     }
 
     makeRoot(email: string) {
-        console.log(email);
         const dialogRef = this.dialog.open(ChangeRootEmailDialogComponent, {
+            data: {
+                newRootEmail: email,
+                email: this.user.email
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result.status === 'ok') {
+                this.user.email = result.operationResult.newRootMail;
+                this.user.secondaryEmails = result.operationResult.newSecondaryEmails;
+            }
         });
     }
     onSubmit(user) {

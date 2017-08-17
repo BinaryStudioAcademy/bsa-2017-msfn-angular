@@ -15,20 +15,24 @@ function checkActivateCode(token, callback) {
     userRepository.getUserByToken(token, (err, user) => {
         if (err) {
             return callback(err);
+        } else if (!user) {
+            return callback(new ApiError("Current token wrong or has expired"));
         }
         user.checkToken(token, status => {
             if (status) {
-                user.activateToken = '';
-                userRepository.update(user.id, user, callback);
+                // user.activateToken = '';
+                // userRepository.update(user.id, user, callback);
+                
+                // it works if we don't update user. it's just for demonstration.
+                callback(null, {status: 'ok'});
             } else {
-                callback(new ApiError("Wrong token"));
+                callback(new ApiError("Current token wrong or has expired"));
             }
         })
     })
 }
 
 function genNewRootMail(body, callback) {
-
     userRepository.getUserByEmail(body.email, (err, data) => {
         "use strict";
         if (err) return callback(err);
@@ -58,12 +62,15 @@ function genNewRootMail(body, callback) {
                 }
                 if (!deleteErr) {
                     confirmCodeRepository.add(confirmData, (err, data) => {
-                        // const newRootMailLink = "http://localhost:3060/api/user/activate/changemail/" + data.confirmCode;
                         const newRootMailLink = "http://localhost:3060/confirmation/rootemail/" + data.confirmCode;
+                        // const newRootMailLink = "http://localhost:3060/confirmation/rootemail/" + data.confirmCode;
                         emailService.send({
                                 to: body.newRootMail,
                                 subject: "Link to change your main email",
-                                html: "<a href=\"" + newRootMailLink + "\">" + newRootMailLink + "</a>"
+                                // html: "<a href=\"" + newRootMailLink + "\">" + newRootMailLink + "</a>"
+                                html: '<table><tr><td>You have sent a mail change request' + 
+                                '!</td></tr> <tr><td>Please, follow this link to confirm the changes : <a href="' + newRootMailLink + '">Activate changes </a></td></tr>' + 
+                                '<tr><td>Also you can copy and past this code in the field on the page: ' + data.confirmCode +'</td></tr></table>'
                             },
                             (err, data) => {
                                 if (err) return callback(err);
@@ -98,19 +105,15 @@ function checkNewRootMail(body, callback) {
                     if (!err) {
                         const oldEmail = user.email;
                         // Swap new root email with old one
-                        console.log(confirmData.user);
-                        console.log(oldEmail.toLowerCase());
-                        console.log(confirmData.newRootMail);
+
+                        let newSecondaryEmails = [...user.secondaryEmails];
+                        let newMailIndex = newSecondaryEmails.indexOf(confirmData.newRootMail);
+                        newSecondaryEmails.splice(newMailIndex, 1);
+                        newSecondaryEmails.push(oldEmail);
+
                         userRepository.update(confirmData.user, {
-                            $set: {
-                                email: confirmData.newRootMail.toLowerCase()
-                            },
-                            $pull: {
-                                secondaryEmails: confirmData.newRootMail
-                            },
-                            $addToSet: {
-                                secondaryEmails: oldEmail.toLowerCase()
-                            }
+                                email: confirmData.newRootMail.toLowerCase(),
+                                secondaryEmails: newSecondaryEmails
                         }, (err, result) => {
                             console.log(result);
 
@@ -120,9 +123,9 @@ function checkNewRootMail(body, callback) {
                                 confirmCodeRepository.deleteById(confirmData._id, (err, data) => {
                                     //need log error deleting
                                 });
-
+                                console.log(confirmData.newRootMail);
                                 emailService.send({
-                                        to: body.email,
+                                        to: confirmData.newRootMail,
                                         subject: "Change main email on MSFN",
                                         html: "We would like to inform you that you've succesfully set this email as your main one. <a href=\"https://msfn.com\">https://msfn.com</a>."
                                     },
@@ -131,6 +134,10 @@ function checkNewRootMail(body, callback) {
                                         if (err) return callback(err);
                                         if (data.rejected.length == 0) {
                                             data.status = 'ok';
+                                            data.operationResult = {
+                                                newRootMail: confirmData.newRootMail,
+                                                newSecondaryEmails
+                                            }
                                         }
                                         callback(null, data);
                                     }
