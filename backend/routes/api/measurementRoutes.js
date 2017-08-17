@@ -15,15 +15,15 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.put(baseUrl, function (req, res, next) { 
-        measurementService.updateMeasurement(req.body, function(err, data) {
+        measurementService.updateMeasurement(req.body.id, req.body, function(err, data) {
             res.data = data;
             res.err = err;
             next();
        });
     }, apiResponse);
 
-    app.delete(baseUrl + ':code', function (req, res, next) {
-        measurementService.deleteMeasurementByCode(req.params.code, function(err, data) {
+    app.delete(baseUrl, function (req, res, next) {
+        measurementService.deleteMeasurement(req.body.id, function(err, data) {
             res.err = err;
             res.data = data;
             next();
@@ -41,17 +41,16 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-        app.get(baseUrl + ':code', function (req, res, next) {
-            measurementService.getMeasurementByCode(req.params.code, function(err, data) {
-            res.data = data;
-            res.err = err;
-            next();
-       });
-    }, apiResponse);
-
-        app.get(baseUrl + 'by-name/:name', function (req, res, next) {
-            measurementService.getMeasurementByName(req.params.name, function(err, data) {
-            res.data = data;
+        app.get(baseUrl + ":id/", function (req, res, next) {
+            measurementService.getMeasurement(req.params.id, function(err, data) {
+            if (!data.length){
+                data = [];
+            }
+            if (data instanceof Array && data.length == 1){
+                res.data = data[0];
+            } else{
+                res.data = data;
+            }
             res.err = err;
             next();
        });
