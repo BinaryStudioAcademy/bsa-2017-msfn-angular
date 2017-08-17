@@ -2,22 +2,32 @@
     <div id="title"><h1>Weight Control</h1></div>
 
     <div id="previous-diff">
-        <div id="yesterday">{{ previousDay }}:</div>
+        <div id="yesterday">{{ recentDay }}:</div>
         <div id="current-weight">{{ currentWeight }}kg</div>
-        <div class="diff">{{ previousDiff }}kg</div>
+        <div class="diff" [ngClass]="{'better-result': recentSymbol === '-', 'worse-result': recentSymbol === '+'}">{{ recentSymbol + recentDiff[selectionPrev] }}kg</div>
         <md-radio-group class="selection" [(ngModel)]="selectionPrev">
-            <md-radio-button class="radio-option" *ngFor="let option of weightOptions" [value]="option">
-                {{ option }}
+            <md-radio-button
+                class="radio-option"
+                *ngFor="let option of options"
+                [value]="option.value"
+                [checked]="option.recentChecked"
+                (change)="changeRecentOption(option)">
+                {{ option.value }}
             </md-radio-button>
         </md-radio-group>
     </div>
 
     <div id="per-week-diff">
         <div id="per-week">Per week: </div>
-        <div class="diff">{{ perWeekDiff }}kg</div>
+        <div class="diff" [ngClass]="{'better-result': weeklySymbol === '-', 'worse-result': weeklySymbol === '+'}">{{ weeklySymbol + weeklyDiff[selectionPerWeek] }}kg</div>
         <md-radio-group class="selection" [(ngModel)]="selectionPerWeek">
-            <md-radio-button class="radio-option" *ngFor="let option of weightOptions" [value]="option">
-                {{ option }}
+            <md-radio-button
+                class="radio-option"
+                *ngFor="let option of options"
+                [value]="option.value"
+                [checked]="option.weeklyChecked"
+                (change)="changeWeeklyOption(option)">
+                {{ option.value }}
             </md-radio-button>
         </md-radio-group>
     </div>

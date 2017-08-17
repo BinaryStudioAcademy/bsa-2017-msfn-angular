@@ -46,9 +46,7 @@ h1 {
 #weight-control > div,
 #yesterday > div {
     display: inline-block;
-    //margin: 0 10px;
     padding: 20px;
-    //background: #123456;
 }
 
 #current-weight {
@@ -81,12 +79,6 @@ md-input-container {
 md-input-container:nth-child(2n+1) {
     margin-left: 40px;
 }
-
-//.mat-input-flex {
-//    display: inline-flex;
-//    align-items: baseline;
-//    width: 80%;
-//}
 
 #submit-button {
     margin: $content-lr-margin 0 0;

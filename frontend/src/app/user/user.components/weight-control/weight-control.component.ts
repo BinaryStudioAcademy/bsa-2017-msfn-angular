@@ -14,29 +14,59 @@ import { ToasterService } from '../../../services/toastr.service';
     ]
 })
 export class WeightControlComponent implements OnInit {
-
-    weightItems = [];
-
-    previousDay: string;
-    currentWeight: number;
-    weightOptions = [
-        'we',
-        'wa',
-        'b',
-        'f'
-    ];
-    previousDiff: string;
-    selectionPrev: string;
-    perWeekDiff: string;
-    selectionPerWeek: string;
+    weeklyItems: any[];
 
     newWeight = {
-        weight: null,
-        waterPct: null,
-        boneWeight: null,
-        fatPct: null,
-        date: ''
+        weight: 60,
+        waterPct: 50,
+        boneWeight: 10,
+        fatPct: 10,
+        date: '2017-08-18'
     };
+
+    recentDiff = {
+        we: 0,
+        b: 0,
+        wa: 0,
+        f: 0
+    };
+    weeklyDiff = {
+        we: 0,
+        b: 0,
+        wa: 0,
+        f: 0
+    };
+    recentSymbol = '';
+    weeklySymbol = '';
+
+    recentDay: string;
+    currentWeight: number;
+
+    options = [
+        {
+            value: 'we',
+            recentChecked: true,
+            weeklyChecked: true
+        },
+        {
+            value: 'wa',
+            recentChecked: false,
+            weeklyChecked: false
+        },
+        {
+            value: 'b',
+            recentChecked: false,
+            weeklyChecked: false
+        },
+        {
+            value: 'f',
+            recentChecked: false,
+            weeklyChecked: false
+        }
+    ];
+
+    selectionPrev = 'we';
+    selectionPerWeek = 'we';
 
     constructor(private weightControlService: WeightControlService,
                 private toasterService: ToasterService) { }
@@ -55,8 +85,8 @@ export class WeightControlComponent implements OnInit {
 
     boneFormControl = new FormControl('', [
         Validators.required,
-        Validators.min(10),
-        Validators.max(20)
+        Validators.min(3),
+        Validators.max(60)
     ]);
 
     fatFormControl = new FormControl('', [
@@ -66,32 +96,62 @@ export class WeightControlComponent implements OnInit {
     ]);
 
     addWeight(): void {
-        const dataToPass = this.newWeight;
-        this.weightControlService.addWeight(dataToPass, res => {
-            if (typeof(res) === 'object') {
-                this.toasterService.showMessage('success', null);
-            } else {
-                this.toasterService.showMessage('error', null);
-            }
+        if (this.weightFormControl.valid &&
+            this.waterFormControl.valid &&
+            this.boneFormControl.valid &&
+            this.fatFormControl.valid) {
+
+            const currentDate = new Date();
+            this.newWeight.date = currentDate.toISOString();
+
+            this.weightControlService.addWeight(this.newWeight, res => {
+                if (typeof(res) === 'object') {
+                    this.toasterService.showMessage('success', null);
+                } else {
+                    this.toasterService.showMessage('error', null);
+                }
+            });
+
+            this.updateData();
+        }
+    }
+
+    updateData(): void {
+        this.weightControlService.getWeightItems(res => {
+            this.weeklyItems = this.weightControlService.getWeeklyWeightItems(res);
+            this.recentDiff = this.weightControlService.getRecentDiff(this.weeklyItems);
+            this.weeklyDiff = this.weightControlService.getWeeklyDiff(this.weeklyItems);
+            const recentItem = this.weeklyItems[this.weeklyItems.length - 1];
+            this.recentDay = this.weightControlService.getRecentDay(recentItem);
+            this.currentWeight = this.newWeight.weight;
         });
     }
 
-    ngOnInit() {
-        this.weightControlService.getWeightItems(res => {
-            this.weightItems = res ? res : [];
-            console.log(this.weightItems);
-        });
+    changeRecentOption(option): void {
+        this.selectionPrev = option.value;
 
-        this.newWeight = {
-            weight: 60,
-            waterPct: 50,
-            boneWeight: 10,
-            fatPct: 10,
-            date: '2017-08-16'
-        };
-        this.previousDay = '2017-08-16';
-        this.currentWeight = 60;
-        this.previousDiff = '+3';
-        this.perWeekDiff = '-3';
+        if (this.recentDiff[option.value] > 0) {
+            this.recentSymbol = '+';
+        } else if (this.recentDiff[option.value] < 0) {
+            this.recentSymbol = '-';
+        } else {
+            this.recentSymbol = '';
+        }
+    }
+
+    changeWeeklyOption(option): void {
+        this.selectionPerWeek = option.value;
+
+        if (this.weeklyDiff[option.value] > 0) {
+            this.weeklySymbol = '+';
+        } else if (this.weeklyDiff[option.value] < 0) {
+            this.weeklySymbol = '-';
+        } else {
+            this.weeklySymbol = '';
+        }
+    }
+
+    ngOnInit() {
+        this.updateData();
     }
 }
