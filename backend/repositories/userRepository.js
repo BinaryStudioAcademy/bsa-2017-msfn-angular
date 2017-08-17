@@ -58,7 +58,7 @@ function removeActivationToken(id, callback) {
                 activateToken: ''
             }
         });
-    uery.exec(callback);
+    query.exec(callback);
 }
 
 module.exports = new UserRepository();

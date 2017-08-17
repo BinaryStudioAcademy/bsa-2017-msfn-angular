@@ -14,6 +14,7 @@ export class ConfirmedPageService {
         body: ''
     };
     this.httpService.sendRequest(request).then(res => {
+        console.log(res);
         callback(null, res);
     }).catch(err => {
         callback(err);

@@ -6,9 +6,11 @@ const
 
 router.get('/:token', function (req, res, next) {
     activateService.checkActivateCode(req.params.token, function (err, data) {
+        console.log(data);
+        console.log(err);
         res.data = {
             status: 'ok'
-        };
+        }
         res.err = err;
         next();
     });
