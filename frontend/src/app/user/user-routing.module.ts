@@ -5,8 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserComponent} from './user.component';
 import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
-
-
+import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 
 const userRoutes: Routes = [
     {
@@ -21,6 +20,10 @@ const userRoutes: Routes = [
             {
                 path: 'training-list',
                 component: TrainingListComponent,
+            },
+            {
+                path: 'weight-control',
+                component: WeightControlComponent,
             }
         ]
     }

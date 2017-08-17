@@ -1,0 +1,132 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/indentations.scss';
+@import '../../../../globalStyles/text.scss';
+
+#weight-control {
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
+    max-width: 70%;
+    min-height: 50%;
+    margin: 0 auto;
+}
+
+#title {
+    width: 100%;
+    margin: $content-lr-margin 0;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+}
+
+#previous-diff,
+#per-week-diff {
+    flex-basis: 45%;
+    height: 100px;
+}
+
+#per-week-diff {
+    text-align: right;
+}
+
+#previous-diff > div,
+#per-week-diff > div {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+#yesterday,
+#per-week{
+    font-size: $header-text;
+}
+
+#weight-control > div,
+#yesterday > div {
+    display: inline-block;
+    //margin: 0 10px;
+    padding: 20px;
+    //background: #123456;
+}
+
+#current-weight {
+    font-size: 36px;
+}
+
+.diff {
+    font-size: $header-text;
+}
+
+md-radio-group {
+    display: block;
+    margin: 30px 0 0;
+}
+
+md-radio-button {
+    margin: 0 10px;
+}
+
+#add-new-weight {
+    flex-basis: 100%;
+    margin-top: 100px;
+    text-align: center;
+}
+
+md-input-container {
+    width: 150px;
+}
+
+md-input-container:nth-child(2n+1) {
+    margin-left: 40px;
+}
+
+//.mat-input-flex {
+//    display: inline-flex;
+//    align-items: baseline;
+//    width: 80%;
+//}
+
+#submit-button {
+    margin: $content-lr-margin 0 0;
+    text-align: center;
+
+    div {
+        margin-bottom: 20px;
+        text-align: left;
+        font-size: $minor-text;
+    }
+
+    button {
+        width: 60%;
+        max-width: 400px;
+        height: 45px;
+        border: none;
+        border-radius: 45px;
+        outline: none;
+        font-size: $button-text;
+        font-weight: 600;
+        background: $btn-color;
+    }
+}
+
+.better-result {
+    color: $btn-color;
+}
+
+.worse-result {
+    color: $text-warn-color;
+}
+
+
+@media only screen and (min-width: $small-screen) {
+
+}
+
+
+@media only screen and (min-width: $medium-screen) {
+    md-input-container:nth-child(n+2) {
+        margin-left: 40px;
+    }
+}
