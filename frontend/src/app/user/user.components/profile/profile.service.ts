@@ -21,23 +21,6 @@ export class ProfileService {
         });
     }
 
-    updateProfile(userData, callback, errorCallback) {
-        const request: IHttpReq = {
-            url: '/api/coach/apply/',
-            method: 'PUT',
-            body: userData
-        };
-
-        this.httpService.sendRequest(request)
-            .then(res => {
-                if (res === userData) {
-                    callback();
-                } else {
-                    errorCallback();
-                }
-            });
-    }
-
     getUser(id, callback) {
         const request: IHttpReq = {
             url: '/api/user/' + id,
