@@ -37,7 +37,7 @@ import { ExerciseTypeService } from './admin/admin.components/exercise-type/exer
 import { ConfirmedPageService } from './components/confirmed-page/confirmed-page.service';
 import { NotificationDataDialogComponent } from './components/notification-data-dialog/notification-data-dialog.component';
 import { SocketService } from './services/socket.service';
-import {NotificationsService} from './services/notifications.service';
+import { NotificationsService } from './services/notifications.service';
 import { HeaderNotificationsComponent } from './components/header-notifications/header-notifications.component';
 
 @NgModule({
