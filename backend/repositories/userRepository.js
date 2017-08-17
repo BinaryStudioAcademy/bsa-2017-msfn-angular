@@ -30,7 +30,7 @@ function findById(id, callback) {
     query.exec(callback);
 }
 function getUserByQuery(query, callback) {
-    const query = this.model.findOne(query);
+    query = this.model.findOne(query);
     query.exec(callback);
 }
 
