@@ -5,20 +5,22 @@
 	box-sizing: border-box;
 }
 
+.index__banner-wrap {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: url('../../../globalStyles/img/floor.png') center;
+    background-attachment: fixed; 
+    background-size: cover;
+}
+
 .container {
     display: flex;
     align-items: center;
     padding: 0 5%;
     width: 100%;
     height: 100%;
-}
 
-.index__banner-wrap {
-    width: 100%;
-    height: calc(100vh - 70px);
-    background: url('../../../globalStyles/img/floor.png') center;
-    background-attachment: fixed; 
-    background-size: cover;
 }
 
 .isnt-logedin {
