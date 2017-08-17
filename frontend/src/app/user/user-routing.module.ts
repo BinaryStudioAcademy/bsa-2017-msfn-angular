@@ -3,11 +3,12 @@ import { SettingsComponent } from './user.components/settings/settings.component
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { UserComponent} from './user.component';
+import { UserComponent } from './user.component';
 import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
-
+import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
+import { FollowingListComponent } from './user.components/following-list/following-list.component';
 
 
 const userRoutes: Routes = [
@@ -27,16 +28,26 @@ const userRoutes: Routes = [
             {
                 path: 'settings',
                 component: SettingsComponent
-            }, {
+            },
+            {
                 path: 'interval-training-plan',
                 component: IntervalTrainingPlanComponent,
+            },
+            {
+                path: 'followers',
+                component: FollowersListComponent,
+            },
+            {
+                path: 'following',
+                component: FollowingListComponent,
             }
         ]
     }
 ];
+
 @NgModule({
     imports: [
-        RouterModule.forRoot(userRoutes, { enableTracing: true }),
+        RouterModule.forRoot(userRoutes, {enableTracing: true}),
     ],
     exports: [
         RouterModule
@@ -45,4 +56,5 @@ const userRoutes: Routes = [
         ForAllUserGuard
     ]
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {
+}

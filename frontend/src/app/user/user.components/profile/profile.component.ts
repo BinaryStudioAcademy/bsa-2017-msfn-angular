@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ProfileService } from './profile.service';
 import { DateService } from '../../../services/date.service';
-import { HttpClient } from '@angular/common/http';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { MdDialog } from '@angular/material';
 import { ConfirmPasswordDialogComponent } from '../../../components/confirm-password-dialog/confirm-password-dialog.component';
@@ -44,7 +43,6 @@ export class ProfileComponent implements OnInit {
 
     constructor(private profileService: ProfileService,
                 private formBuilder: FormBuilder,
-                private http: HttpClient,
                 private dialog: MdDialog,
                 private window: WindowObj,
                 private dateService: DateService,

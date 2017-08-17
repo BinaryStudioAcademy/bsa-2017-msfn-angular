@@ -7,6 +7,9 @@
 <button (click)="sendHttp(putReq)" md-raised-button>Send put</button>
 <button (click)="sendHttp(putReq2)" md-raised-button>Send put on user 2</button>
 <button (click)="sendHttp(deleteReq)" md-raised-button>Send delete</button>
+<button (click)="sendHttp(subscribeReq)" md-raised-button>Subscribe</button>
+<button (click)="sendHttp(getFollowingReq)" md-raised-button>getFollowing</button>
+<button (click)="sendHttp(getFollowersReq)" md-raised-button>getFollowers</button>
 <div>
     <h4>Responded data:</h4>
     {{info}}
