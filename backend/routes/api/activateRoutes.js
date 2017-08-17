@@ -12,6 +12,14 @@ router.get('/:token', function (req, res, next) {
     });
 }, apiResponse);
 
+router.post('/resendactivation', function (req, res, next) {
+    activateService.resendActivateCode(req.body, function (err, data) {
+        res.data = data;
+        res.err = err;
+        next();
+    });
+}, apiResponse);
+
 router.post('/changemail', function (req, res, next) {
     activateService.genNewRootMail(req.body, function (err, data) {
         res.data = data;

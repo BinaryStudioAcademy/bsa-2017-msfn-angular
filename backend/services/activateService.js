@@ -6,10 +6,42 @@ const userRepository = require('../repositories/userRepository')
 
 function ActivateService() {}
 
+ActivateService.prototype.resendActivateCode = resendActivateCode;
 ActivateService.prototype.checkActivateCode = checkActivateCode;
 ActivateService.prototype.genNewRootMail = genNewRootMail;
 ActivateService.prototype.checkNewRootMail = checkNewRootMail;
 
+function resendActivateCode(body, callback) {
+
+    userRepository.getUserByEmail(body.email, (err, user) => {
+        if (err) return callback(err);
+
+        if (user === null) {
+            callback(new ApiError("User not found"));
+        } else {
+            confirmCodeRepository.get({
+                user: user._id
+            }, (err, confirmCode) => {
+                if (err) {
+                    return callback(err);
+                }
+                emailService.send({
+                    to: body.email,
+                    subject: 'Your MSFN registration',
+                    html: '<table><tr><td>Additional request for account registration! ' +
+                        '!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
+                        '<a href="http://localhost:3060/confirmation/registration/' + confirmCode.activateToken + '">' + 'Activate account </a> </td></tr></table>'
+                }, (err, data) => {
+                    if (err) return callback(err);
+                    if (data.rejected.length == 0) {
+                        data.status = 'ok';
+                    }
+                    callback(null, data);
+                });
+            })
+        }
+    })
+}
 
 function checkActivateCode(token, callback) {
     userRepository.getUserByToken(token, (err, user) => {
@@ -105,8 +137,8 @@ function checkNewRootMail(body, callback) {
                         newSecondaryEmails.push(oldEmail);
 
                         userRepository.update(confirmData.user, {
-                                email: confirmData.newRootMail.toLowerCase(),
-                                secondaryEmails: newSecondaryEmails
+                            email: confirmData.newRootMail.toLowerCase(),
+                            secondaryEmails: newSecondaryEmails
                         }, (err, result) => {
                             console.log(result);
 
