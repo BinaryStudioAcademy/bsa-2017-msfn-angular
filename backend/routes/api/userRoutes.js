@@ -4,7 +4,8 @@ const
     userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/user/',
     subscribeRoutes = require('./subscribeRoutes'),
-    activateRoutes = require('./activateRoutes');
+    activateRoutes = require('./activateRoutes'),
+    coachService = require('../../services/coachService');
 
 module.exports = function (app) {
     app.get(baseUrl + 'me', function (req, res, next) {
@@ -61,6 +62,14 @@ module.exports = function (app) {
 
     app.delete(baseUrl + ':id', function(req, res, next) {
         userRepository.deleteById(req.params.id, function(err, data) {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(baseUrl + 'coach-status-request/:id', (req, res, next) => {
+        coachService.apply(req.params.id, (err, data) => {
             res.data = data;
             res.err = err;
             next();

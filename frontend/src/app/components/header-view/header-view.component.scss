@@ -51,7 +51,7 @@ header {
     .settings {
         display: flex;
         align-items: center;
-    
+
         .settings__name {
             margin: 0 $header-icons-intendation;
             vertical-align: super;
@@ -79,6 +79,7 @@ header {
         }
     }
 }
+
 md-menu {
     display: none;
 }

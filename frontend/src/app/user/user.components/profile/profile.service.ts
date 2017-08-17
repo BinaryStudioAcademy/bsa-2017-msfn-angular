@@ -7,7 +7,7 @@ import {CropperSettings} from 'ng2-img-cropper';
 export class ProfileService {
 
 
-  constructor(private httpService: HttpService) { }
+    constructor(private httpService: HttpService) { }
 
     savePhoto(image, userId, fileType, callback) {
         const sendData: IHttpReq = {
@@ -71,6 +71,18 @@ export class ProfileService {
         };
         this.httpService.sendRequest(request).then(res => {
             callback(res);
+        });
+    }
+
+    coachStatusRequest(id, callback) {
+        const request: IHttpReq = {
+            url: '/api/user/coach-status-request/' + id,
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then(res => {
+                callback(res);
         });
     }
     getCropperSettings(): CropperSettings {
