@@ -18,6 +18,7 @@ router.get('/:token', function (req, res, next) {
 
 router.post('/changemail', function (req, res, next) {
     activateService.genNewRootMail(req.body, function (err, data) {
+        console.log(data);
         res.data = data;
         res.err = err;
         next();

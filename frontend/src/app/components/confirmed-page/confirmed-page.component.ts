@@ -27,6 +27,7 @@ export class ConfirmedPageComponent implements OnInit {
             });
         } else if (type === 'rootemail') {
             this.confirmedPageService.checkRootEmailToken(token, (err, res) => {
+                console.log(res);
                 if (res.status === 'ok') {
                     this.showChangedRoot = true;
                 } else {
