@@ -38,13 +38,6 @@ function addItem(body, callback) {
             // SEND REGISTRATION MAIL
             // TO CHANGE URL in letter for stable site address
             emailService.send({
-                // to: body.email,
-                // subject: 'Your MSFN registration',
-                // html: '<table><tr><td>Congratulations, ' +
-                //     body.firstName +
-                //     '!</td></tr> <tr><td>You have become a part of our fantastic fitness network!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
-                //     '<a href="http://localhost:3060/api/user/activate?email=' + body.email + '&token=' + body.activateToken + '">' + 'Activate account </a> </td></tr></table>'
-
                 to: body.email,
                 subject: 'Your MSFN registration',
                 html: '<table><tr><td>Congratulations, ' +
@@ -84,7 +77,7 @@ function updateItem(id, body, callback) {
 }
 
 function addEmailToItem(id, body, callback) {
-    console.log(body);
+
     const newSecondaryEmail = body.newSecondaryEmail;
 
     userRepository.getById(id, (err, data) => {

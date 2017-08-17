@@ -4,7 +4,8 @@ const
     userRepository = require('../../repositories/userRepository'),
     baseUrl = '/api/user/',
     subscribeRoutes = require('./subscribeRoutes'),
-    activateRoutes = require('./activateRoutes');
+    activateRoutes = require('./activateRoutes'),
+    changeMailRoutes = require('./changeMailRoutes');
 
 module.exports = function (app) {
     app.get(baseUrl + 'me', function (req, res, next) {
@@ -13,6 +14,8 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.use(baseUrl + 'activate', activateRoutes);
+
+    app.use(baseUrl + 'changemail', changeMailRoutes);
 
     app.get(baseUrl, function (req, res, next) {
         userRepository.getAll(function (err, data) {

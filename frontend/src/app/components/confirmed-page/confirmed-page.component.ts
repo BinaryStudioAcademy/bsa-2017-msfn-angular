@@ -19,6 +19,7 @@ export class ConfirmedPageComponent implements OnInit {
         const token = this.route.snapshot.params['token'];
         if (type === 'registration') {
             this.confirmedPageService.checkRegistrationToken(token, (err, res) => {
+                console.log(res);
                 if (res.status === 'ok') {
                     this.showRegistered = true;
                 } else {
@@ -27,7 +28,6 @@ export class ConfirmedPageComponent implements OnInit {
             });
         } else if (type === 'rootemail') {
             this.confirmedPageService.checkRootEmailToken(token, (err, res) => {
-                console.log(res);
                 if (res.status === 'ok') {
                     this.showChangedRoot = true;
                 } else {
