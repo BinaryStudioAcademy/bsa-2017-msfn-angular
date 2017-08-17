@@ -13,7 +13,7 @@ UserRepository.prototype.findById = findById;
 UserRepository.prototype.getUserByQuery = getUserByQuery;
 UserRepository.prototype.getUserByToken = getUserByToken;
 UserRepository.prototype.addEmail = addEmail;
-UserRepository.prototype.removeActivationToken = removeActivationToken;
+// UserRepository.prototype.removeActivationToken = removeActivationToken;
 
 function getUserByEmail(email, callback) {
     const query = this.model.findOne({email : email});
@@ -48,17 +48,17 @@ function addEmail(id, email, callback) {
     query.exec(callback);
 }
 
-function removeActivationToken(id, callback) {
-    const query = this
-        .model
-        .update({
-            _id: id
-        }, {
-            $unset: {
-                activateToken: ''
-            }
-        });
-    query.exec(callback);
-}
+// function removeActivationToken(id, callback) {
+//     const query = this
+//         .model
+//         .update({
+//             _id: id
+//         }, {
+//             $unset: {
+//                 activateToken: ''
+//             }
+//         });
+//     query.exec(callback);
+// }
 
 module.exports = new UserRepository();

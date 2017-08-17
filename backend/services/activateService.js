@@ -53,7 +53,7 @@ function checkActivateCode(token, callback) {
         user.checkToken(token, status => {
             if (status) {
                 // user.activateToken = '';
-                userRepository.removeActivationToken(user.id, user, callback);
+                userRepository.update(user.id, {activateToken: ''}, callback);
             } else {
                 callback(new ApiError("Current token wrong or has expired"));
             }
