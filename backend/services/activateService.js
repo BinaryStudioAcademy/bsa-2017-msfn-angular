@@ -21,10 +21,7 @@ function checkActivateCode(token, callback) {
         user.checkToken(token, status => {
             if (status) {
                 // user.activateToken = '';
-                // userRepository.update(user.id, user, callback);
-                
-                // it works if we don't update user. it's just for demonstration.
-                callback(null, {status: 'ok'});
+                userRepository.removeActivationToken(user.id, user, callback);
             } else {
                 callback(new ApiError("Current token wrong or has expired"));
             }

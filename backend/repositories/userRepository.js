@@ -47,4 +47,17 @@ function addEmail(id, email, callback) {
     query.exec(callback);
 }
 
+function removeActivationToken(id, callback) {
+    const query = this
+        .model
+        .update({
+            _id: id
+        }, {
+            $unset: {
+                activateToken: ''
+            }
+        });
+    uery.exec(callback);
+}
+
 module.exports = new UserRepository();
