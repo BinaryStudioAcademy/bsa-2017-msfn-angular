@@ -32,18 +32,12 @@ function login(req, res, next) {
 };
 
 function loginConfirmedUser(req, res, next) {
-    console.log(req.body);
     req.body = {
         email: 'shouldactivate',
         password: req.params.token
     };
-    console.log(req.body);
     passport.authenticate('local',
         function(err, user, info) {
-            console.log("err: ");
-            console.log(err);
-            console.log('user');
-            console.log(user);
             if (err) {
                 return next(err)
             } else if (user) {
