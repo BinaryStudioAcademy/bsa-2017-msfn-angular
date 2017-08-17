@@ -1,8 +1,13 @@
 
-    <h2 md-dialog-title>Login
+    <h2 *ngIf="!verified" md-dialog-title>Verify
+        <button md-dialog-close class="material-icons close" tabindex="-1">close</button>
+    </h2>
+    <h2 *ngIf="verified" md-dialog-title>Login
         <button md-dialog-close class="material-icons close" tabindex="-1">close</button>
     </h2>
     <form class="login-block">
+        <p *ngIf="!verified" class="instruct">Before start you need finish the registration. Check your mailbox (or spam folder) to our mail with next instructions. If you don't see this mail, you can re-send.</p>
+        
         <md-input-container class="login-imput-container">
             <input autofocus mdInput type="email" placeholder="Email" [(ngModel)]="email" [formControl]="emailFormControl">
             <md-error *ngIf="emailFormControl.hasError('pattern')">
@@ -13,7 +18,7 @@
             </md-error>
         </md-input-container>
 
-        <md-input-container class="login-imput-container">
+        <md-input-container class="login-imput-container" *ngIf="verified">
             <input type="password" mdInput placeholder="Password" [(ngModel)]="password" [formControl]="passwordFormControl">
             <md-error *ngIf="passwordFormControl.hasError('minLength')">
                 Password should be al least 3 symbols
@@ -23,7 +28,8 @@
             </md-error>
         </md-input-container>
 
-        <button class="login-button" [disabled]="!passwordFormControl.valid && !emailFormControl.valid" (click)="login()">Sign in</button>
+        <button class="verify-button" *ngIf="!verified" [disabled]="!emailFormControl.valid" (click)="verify()">Send email</button>
+        <button class="login-button" *ngIf="verified" [disabled]="!passwordFormControl.valid && !emailFormControl.valid" (click)="login()">Sign in</button>
         <div class="login-links">Sign in with
             <a href="/auth/facebook">Facebook</a>
             <a href="/auth/google">Google</a>

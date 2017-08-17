@@ -36,6 +36,28 @@
     outline: none;
 }
 
+.verify-button {
+    border: none;
+    margin-top: $content-between-margin;
+    width: calc(90% - 10px*2);
+    padding: 15px;
+    color: $text-main-color;
+    background-color: darkorange;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+}
+
+.instruct {
+    color: #999;
+    width: calc(100% - 10px*2);
+    margin: -20px 0 20px 0;
+    text-indent: 15px;
+    text-align: justify;
+}
+
 .login-links {
     margin-top: $content-between-margin;
     color: $text-main-color;
