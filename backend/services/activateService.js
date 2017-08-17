@@ -1,5 +1,6 @@
 const ApiError = require('./apiErrorService');
 const emailService = require('./emailService');
+const decryptService = require('./decryptService');
 const confirmCodeRepository = require('../repositories/confirmCodeRepository');
 const confirmService = require('./confirmService');
 const userRepository = require('../repositories/userRepository')
@@ -10,7 +11,7 @@ ActivateService.prototype.resendActivateCode = resendActivateCode;
 ActivateService.prototype.checkActivateCode = checkActivateCode;
 
 function resendActivateCode(body, callback) {
-
+    body = decryptService(body.data)
     userRepository.getUserByEmail(body.email, (err, user) => {
         if (err) return callback(err);
 

@@ -7,7 +7,6 @@ const
 
 router.get('/:token', function (req, res, next) {
     loginService.loginConfirmedUser(req, res, next, function (err, user) {
-
         res.data = data;
         res.err = err;
         next();
