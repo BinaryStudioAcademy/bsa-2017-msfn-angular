@@ -24,7 +24,7 @@ export class ConfirmedPageComponent implements OnInit {
                     // location.reload();
 
                     // Redirect user to profile page, when he just activated his account
-                    location.href = '/user/profile';
+                    location.href = '/user/profile/me';
                 }
             });
         } else if (type === 'rootemail') {

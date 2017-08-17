@@ -29,8 +29,8 @@ function findById(id, callback) {
     const query = this.model.findOne({_id : id});
     query.exec(callback);
 }
-function getUserByQuery(query, callback) {
-    const query = this.model.findOne(query);
+function getUserByQuery(queryObj, callback) {
+    const query = this.model.findOne(queryObj);
     query.exec(callback);
 }
 

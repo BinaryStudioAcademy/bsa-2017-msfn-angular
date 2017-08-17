@@ -1,6 +1,5 @@
 const passport = require('passport'),
-      decrypt = require('./decryptService'),
-      profilePath = '/profile';
+      decrypt = require('./decryptService');
 
 function LoginService() {
 
