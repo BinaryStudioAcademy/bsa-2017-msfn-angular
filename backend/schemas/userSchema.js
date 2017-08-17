@@ -12,6 +12,7 @@ const User = new Schema({
         required: true,
         lowercase: true
     },
+    secondaryEmails: [String],
     password: {
         type: String,
         required: true
@@ -37,9 +38,7 @@ const User = new Schema({
 
 User.pre('save', function (next) {
     const userData = this;
-
     if (!userData.isModified('password')) return next();
-
     bcrypt.genSalt(1012, (err, salt) => {
         userData.salt = salt;
         this.encryptPassword(this.password, (err, hash) => {
@@ -54,8 +53,7 @@ User.pre('save', function (next) {
 User.pre('update', function (next) {
     const fields = this._update.$set;
 
-    if (!fields.password) return next();
-
+    if (!fields || !fields.password) return next();
     bcrypt.genSalt(1012, (err, salt) => {
         fields.salt = salt;
         bcrypt.hash(fields.password, fields.salt, null, (err, hash) => {

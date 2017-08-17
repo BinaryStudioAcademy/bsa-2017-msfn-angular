@@ -1,15 +1,22 @@
 const
     apiResponse = require('express-api-response'),
     activateService = require('../../services/activateService'),
+    loginService = require('../../services/loginService'),
     express = require('express'),
     router = express.Router();
 
-router.get('/', function (req, res, next) {
-    activateService.checkActivateCode(req.query, function (err, data) {
-        if (!err) {
-            // TO CHANGE to valid url of registration-confirmation path
-            res.redirect('http://localhost:3060/confirm-registration');
-        }
+router.get('/:token', function (req, res, next) {
+    loginService.loginConfirmedUser(req, res, next, function (err, user) {
+
+        res.data = data;
+        res.err = err;
+        next();
+    });
+}, apiResponse);
+
+router.post('/resendactivation', function (req, res, next) {
+    activateService.resendActivateCode(req.body, function (err, data) {
+        res.data = data;
         res.err = err;
         next();
     });

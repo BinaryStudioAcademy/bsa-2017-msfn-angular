@@ -2,8 +2,6 @@
 @import '../../../globalStyles/text.scss';
 @import '../../../globalStyles/indentations.scss';
 
-$header-gradient-from: #353535;
-$header-gradient-to: #252525;
 $height: calc(100vh - 70px);
 
 .menu-element {
@@ -11,13 +9,15 @@ $height: calc(100vh - 70px);
 }
 
 aside {
-    width: 20vw;
+    width: 100%;
+    height: 100%;
     min-height: $height;
     font-family: $font-general;
     font-weight: 600;
     font-size: $usual-text;
     float: left;
-    background: linear-gradient($header-gradient-from 75%, $header-gradient-to);
+    background: linear-gradient($bg-color 75%, $gradient-from-color);
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
 
     nav {
         float: right;

@@ -10,6 +10,7 @@ import { IntervalTrainingPlanComponent } from './user.components/interval-traini
 import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
 import { FollowingListComponent } from './user.components/following-list/following-list.component';
 
+import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 
 const userRoutes: Routes = [
     {
@@ -18,8 +19,12 @@ const userRoutes: Routes = [
         canActivate: [ForAllUserGuard],
         children: [
             {
-                path: 'profile',
+                path: 'profile/me',
                 component: ProfileComponent,
+            },
+            {
+                path: 'profile/:id',
+                component: OtherProfilesComponent,
             },
             {
                 path: 'training-list',
@@ -47,7 +52,7 @@ const userRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(userRoutes, {enableTracing: true}),
+        RouterModule.forRoot(userRoutes, { enableTracing: true }),
     ],
     exports: [
         RouterModule
@@ -56,5 +61,4 @@ const userRoutes: Routes = [
         ForAllUserGuard
     ]
 })
-export class UserRoutingModule {
-}
+export class UserRoutingModule { }

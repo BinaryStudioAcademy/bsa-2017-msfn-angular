@@ -7,7 +7,7 @@ import {CropperSettings} from 'ng2-img-cropper';
 export class ProfileService {
 
 
-  constructor(private httpService: HttpService) { }
+    constructor(private httpService: HttpService) { }
 
     savePhoto(image, userId, fileType, callback) {
         const sendData: IHttpReq = {
@@ -21,23 +21,6 @@ export class ProfileService {
         });
     }
 
-    updateProfile(userData, callback, errorCallback) {
-        const request: IHttpReq = {
-            url: '/api/coach/apply/',
-            method: 'PUT',
-            body: userData
-        };
-
-        this.httpService.sendRequest(request)
-            .then(res => {
-                if (res === userData) {
-                    callback();
-                } else {
-                    errorCallback();
-                }
-            });
-    }
-
     getUser(id, callback) {
         const request: IHttpReq = {
             url: '/api/user/' + id,
@@ -49,17 +32,46 @@ export class ProfileService {
         });
     }
 
+
     updateUser(user, id, callback) {
         const request: IHttpReq = {
             url: '/api/user/' + id,
             method: 'PUT',
-            body: user
+            body: user,
+            failMessage: 'Failed to change profile',
+            successMessage: 'Profile changes accepted'
         };
         this.httpService.sendRequest(request).then(res => {
             callback(res);
         });
     }
 
+    addNewEmail(email, id, callback) {
+        const request: IHttpReq = {
+            url: '/api/user/secondaryEmail/' + id,
+            method: 'PUT',
+            body: {
+                newSecondaryEmail: email
+            },
+            failMessage: 'Failed to add email',
+            successMessage: 'Secondary email added'
+        };
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
+        });
+    }
+
+    coachStatusRequest(id, callback) {
+        const request: IHttpReq = {
+            url: '/api/user/coach-status-request/' + id,
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then(res => {
+                callback(res);
+        });
+    }
     getCropperSettings(): CropperSettings {
         const cropperSettings = new CropperSettings();
         cropperSettings.noFileInput = true;

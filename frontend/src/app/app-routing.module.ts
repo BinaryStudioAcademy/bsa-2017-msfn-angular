@@ -74,9 +74,9 @@ const routes: Routes = [
         component: PageNotFoundComponent
     },
     {
-        path: 'confirm-registration',
+        path: 'confirmation/:type/:token',
         component: ConfirmedPageComponent,
-        canActivate: [IsLoggedOutGuard]
+        // canActivate: [IsLoggedOutGuard]
     },
     {
         path: '**',

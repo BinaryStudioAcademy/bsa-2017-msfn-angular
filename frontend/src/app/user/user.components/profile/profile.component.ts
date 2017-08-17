@@ -8,6 +8,8 @@ import { ConfirmPasswordDialogComponent } from '../../../components/confirm-pass
 import { WindowObj } from '../../../services/window.service';
 import { IUser } from '../../../models/user';
 import { ToasterService } from '../../../services/toastr.service';
+import { AddNewEmailDialogComponent } from '../../../components/add-new-email-dialog/add-new-email-dialog.component';
+import { ChangeRootEmailDialogComponent } from '../../../components/change-root-email-dialog/change-root-email-dialog.component';
 
 @Component({
     selector: 'app-profile',
@@ -52,6 +54,7 @@ export class ProfileComponent implements OnInit {
             image: this.image
         };
     }
+
 
     ngOnInit() {
         this.profileService.getUser(this.userId, res => {
@@ -98,6 +101,35 @@ export class ProfileComponent implements OnInit {
         this.days = this.dateService.generateDays(month, year);
     }
 
+
+    openAddNewEmailDialog() {
+        const dialogRef = this.dialog.open(AddNewEmailDialogComponent, {
+        });
+        dialogRef.afterClosed().subscribe(email => {
+            if (email && email !== this.user.email) {
+                this.profileService.addNewEmail(email, this.user._id, res => {
+                    if (res.status === 'ok') {
+                        this.user.secondaryEmails.push(res.addedEmail);
+                    }
+                });
+            }
+        });
+    }
+
+    makeRoot(email: string) {
+        const dialogRef = this.dialog.open(ChangeRootEmailDialogComponent, {
+            data: {
+                newRootEmail: email,
+                email: this.user.email
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result.status === 'ok') {
+                this.user.email = result.operationResult.newRootMail;
+                this.user.secondaryEmails = result.operationResult.newSecondaryEmails;
+            }
+        });
+    }
     onSubmit(user) {
         const monthNumber = this.months.indexOf(this.birthday.month) + 1;
         const birthday = this.dateService.convertDateToIso({
@@ -147,12 +179,12 @@ export class ProfileComponent implements OnInit {
         if (event === 'save') {
             if (!this.hideCropper) {
                 this.profileService.savePhoto(this.data.image, this.userId, 'img', result => {
-                    if (result.statusCode === 201) {
+                    if (result.err) {
+                        this.data.image = this.image;
+                        this.toasterService.showMessage('error', result.err);
+                    } else {
                         this.image = this.data.image;
                         this.toasterService.showMessage('success', null);
-                    } else {
-                        this.data.image = this.image;
-                        this.toasterService.showMessage('error', null);
                     }
                     this.hideCropper = true;
                     this.window.data._injectedData.userPhoto = this.image;
@@ -172,14 +204,8 @@ export class ProfileComponent implements OnInit {
         };
         this.requestForCoaching = true;
 
-        this.profileService.updateProfile(
-            userData,
-            () => {
-                this.coachingMessage = 'We\'ll moderate your request in 24 hours.' +
-                    ' You\'ll get a notification when it would be done.';
-            },
-            () => {
-                this.coachingMessage = 'Request was unsuccessful. Please try again.';
-            });
+        this.profileService.coachStatusRequest(this.userId, (res) => {
+            this.coachingMessage = 'We\'ll moderate your request in 24 hours.' + ' You\'ll get a notification when it would be done.';
+        });
     }
 }

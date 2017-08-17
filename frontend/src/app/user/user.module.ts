@@ -15,6 +15,7 @@ import { IntervalTrainingPlanComponent } from './user.components/interval-traini
 import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { FollowingListComponent } from './user.components/following-list/following-list.component';
+import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 
 @NgModule({
     imports: [
@@ -33,6 +34,7 @@ import { FollowingListComponent } from './user.components/following-list/followi
         TrainingListComponent,
         SettingsComponent,
         IntervalTrainingPlanComponent,
+        OtherProfilesComponent,
         FollowersListComponent,
         FollowingListComponent,
     ],

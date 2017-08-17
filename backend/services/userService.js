@@ -10,6 +10,7 @@ function UserService() {
 UserService.prototype.addItem = addItem;
 UserService.prototype.updateItem = updateItem;
 UserService.prototype.makeid = makeid;
+UserService.prototype.addEmailToItem = addEmailToItem;
 
 function makeid() {
     let text = "";
@@ -42,7 +43,7 @@ function addItem(body, callback) {
                 html: '<table><tr><td>Congratulations, ' +
                     body.firstName +
                     '!</td></tr> <tr><td>You have become a part of our fantastic fitness network!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
-                    '<a href="http://localhost:3060/api/user/activate?email=' + body.email + '&token=' + body.activateToken + '">' + 'Activate account </a> </td></tr></table>'
+                    '<a href="http://localhost:3060/confirmation/registration/' + body.activateToken + '">' + 'Activate account </a> </td></tr></table>'
             }, (err, data) => {
                 if (err) return callback(err);
                 if (data.rejected.length == 0) {
@@ -73,6 +74,31 @@ function updateItem(id, body, callback) {
             });
         }
     })
+}
+
+function addEmailToItem(id, body, callback) {
+
+    const newSecondaryEmail = body.newSecondaryEmail;
+
+    userRepository.getById(id, (err, data) => {
+        if (err) {
+            return callback(new ApiError(err));
+        } else if (data.secondaryEmails.indexOf(newSecondaryEmail) >= 0) {
+            return callback(new ApiError("New email is already in list"));
+        } else {
+            userRepository.update(id, {
+                $addToSet: {
+                    secondaryEmails: newSecondaryEmail.toLowerCase()
+                }
+            }, (err, result) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, result);
+            });
+        }
+    });
+
 }
 
 module.exports = new UserService();
