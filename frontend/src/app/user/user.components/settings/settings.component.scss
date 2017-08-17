@@ -11,6 +11,24 @@ md-error {
     color: $error-color;
 }
 
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 60vw;
+    min-height: 500px;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+
+    h2 {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: $header-text;
+    }
+}
+
 .btn {
     border: none;
     margin-top: 35px;
@@ -26,29 +44,6 @@ md-error {
     &:hover {
         cursor: pointer;
     }
-}
-
-.container {
-    display: flex;
-    width: 100%;
-    min-height: 500px;
-    font-family: $font-general;
-    color: $text-main-color;
-    justify-content: center;
-}
-
-.settings {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    width: 460px;
-    padding: 20px;
-    margin: 30px 0;
-    border: 1px #2A2A2A solid;
-    background: $gradient-from-color;
-    background-image: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .6);
 }
 
 .settings-title {
