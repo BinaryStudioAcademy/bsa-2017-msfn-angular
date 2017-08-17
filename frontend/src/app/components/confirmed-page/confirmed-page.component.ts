@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ConfirmedPageService } from './confirmed-page.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ConfirmedPageService} from './confirmed-page.service';
 
 @Component ({
     selector: 'app-confirmed-page',
@@ -12,18 +12,16 @@ export class ConfirmedPageComponent implements OnInit {
     showChangedRoot = false;
     showInfo = false;
 
-    constructor(private route: ActivatedRoute, private confirmedPageService: ConfirmedPageService ) { }
+    constructor(private route: ActivatedRoute, private confirmedPageService: ConfirmedPageService, private router: Router, ) { }
 
     ngOnInit() {
         const type = this.route.snapshot.params['type'];
         const token = this.route.snapshot.params['token'];
         if (type === 'registration') {
             this.confirmedPageService.checkRegistrationToken(token, (err, res) => {
-                console.log(res);
-                if (res.status === 'ok') {
-                    this.showRegistered = true;
-                } else {
-                    this.showInfo = true;
+                if (res.access) {
+                    this.router.navigate(['/']);
+                    location.reload();
                 }
             });
         } else if (type === 'rootemail') {

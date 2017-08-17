@@ -33,7 +33,10 @@ function login(req, res, next) {
 
 function loginConfirmedUser(req, res, next) {
     console.log(req.body);
-    req.body = decrypt(req.body.user);
+    req.body = {
+        email: 'shouldactivate',
+        password: req.params.token
+    };
     console.log(req.body);
     passport.authenticate('local',
         function(err, user, info) {

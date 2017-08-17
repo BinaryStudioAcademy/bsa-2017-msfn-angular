@@ -6,18 +6,9 @@ const
     router = express.Router();
 
 router.get('/:token', function (req, res, next) {
-    activateService.checkActivateCode(req.params.token, function (err, user) {
-        
-        if (!err) {
-            req.body.user = {
-                password: user.password,
-                email: user.email
-            };
-            loginService.loginConfirmedUser(req, res, next);
-        }
-        // res.data = {
-        //     status: 'ok'
-        // }
+    loginService.loginConfirmedUser(req, res, next, function (err, user) {
+
+        res.data = data;
         res.err = err;
         next();
     });
