@@ -19,5 +19,12 @@ export class IUser {
         public follow?: any[],
         public userPhoto?: string,
         public requestForCoaching?: boolean,
+        public weightControl?: {
+            weight: number,
+            boneWeight: number,
+            waterPct: number,
+            fatPct: number,
+            date: string
+        }[]
     ) { }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WeightControlService } from './weight-control.service';
 import { DateService } from '../../../services/date.service';
 import { FormControl, Validators } from '@angular/forms';
-import { IWeightControl } from '../../../models/weight-control';
+import { ToasterService } from '../../../services/toastr.service';
 
 @Component({
     selector: 'app-weight-control',
@@ -14,6 +14,8 @@ import { IWeightControl } from '../../../models/weight-control';
     ]
 })
 export class WeightControlComponent implements OnInit {
+
+    weightItems = [];
 
     previousDay: string;
     currentWeight: number;
@@ -35,10 +37,9 @@ export class WeightControlComponent implements OnInit {
         fatPct: null,
         date: ''
     };
-    weightToPass: IWeightControl;
 
     constructor(private weightControlService: WeightControlService,
-                private dateService: DateService) { }
+                private toasterService: ToasterService) { }
 
     weightFormControl = new FormControl('', [
         Validators.required,
@@ -64,13 +65,33 @@ export class WeightControlComponent implements OnInit {
         Validators.max(35)
     ]);
 
-    addWeight(): void { }
+    addWeight(): void {
+        const dataToPass = this.newWeight;
+        this.weightControlService.addWeight(dataToPass, res => {
+            if (typeof(res) === 'object') {
+                this.toasterService.showMessage('success', null);
+            } else {
+                this.toasterService.showMessage('error', null);
+            }
+        });
+    }
 
     ngOnInit() {
+        this.weightControlService.getWeightItems(res => {
+            this.weightItems = res ? res : [];
+            console.log(this.weightItems);
+        });
+
+        this.newWeight = {
+            weight: 60,
+            waterPct: 50,
+            boneWeight: 10,
+            fatPct: 10,
+            date: '2017-08-16'
+        };
         this.previousDay = '2017-08-16';
         this.currentWeight = 60;
         this.previousDiff = '+3';
         this.perWeekDiff = '-3';
     }
-
 }

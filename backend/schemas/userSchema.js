@@ -32,7 +32,16 @@ const User = new Schema({
     birthday: String,
     height: Number,
     weight: Number,
-    activateToken: String
+    activateToken: String,
+    weightControl: [
+        {
+            weight: Number,
+            boneWeight: Number,
+            waterPct: Number,
+            fatPct: Number,
+            date: String
+        }
+    ]
 });
 
 User.pre('save', function (next) {
