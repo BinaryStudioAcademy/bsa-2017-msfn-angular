@@ -13,6 +13,7 @@ UserRepository.prototype.findById = findById;
 UserRepository.prototype.getUserByQuery = getUserByQuery;
 UserRepository.prototype.getUserByToken = getUserByToken;
 UserRepository.prototype.addEmail = addEmail;
+UserRepository.prototype.removeActivationToken = removeActivationToken;
 
 function getUserByEmail(email, callback) {
     const query = this.model.findOne({email : email});
