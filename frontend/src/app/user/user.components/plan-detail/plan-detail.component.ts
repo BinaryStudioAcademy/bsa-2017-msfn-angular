@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PlanDetailComponent implements OnInit {
   title = 'create';
   trainingsCount = 0;
+  exercsesShow = false;
   days = [
     { 'key': 'md', 'value': 'Monday' },
     { 'key': 'tu', 'value': 'Tuesday' },
@@ -64,7 +65,9 @@ export class PlanDetailComponent implements OnInit {
     } else if(operation == 'inc' && this.trainingsCount < 7){
       this.trainingsCount += 1;
     }
-
   }
 
+  getExercises(){
+    this.exercsesShow = true;
+  }
 }

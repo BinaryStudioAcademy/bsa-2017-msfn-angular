@@ -35,13 +35,17 @@
       Sport type
     </div>
     <div class="field-item">
-      <md-select placeholder="Choose type" [(ngModel)]="sportTypeValue" name="type" class="sport-types">
+      <md-select placeholder="Choose type" [(ngModel)]="sportTypeValue" (change)="getExercises()" name="type" class="sport-types" [style.width]="'200px'">
         <md-option *ngFor="let type of types" [value]="type.value">
           {{type.viewValue}}
         </md-option>
       </md-select>
 
-      <div class="exercises-container">
+      <div class="exercises-container" *ngIf="exercsesShow">
+          <div class="field-title">
+            {{sportTypeValue}} exercises
+          </div>
+
         <md-input-container>
           <input mdInput placeholder="Exercise search" value="Coming soon" class="search" [(ngModel)]="searchString">
         </md-input-container>
