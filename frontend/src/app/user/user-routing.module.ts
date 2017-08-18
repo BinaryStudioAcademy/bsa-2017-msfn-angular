@@ -11,6 +11,7 @@ import { FollowersListComponent } from './user.components/followers-list/followe
 import { FollowingListComponent } from './user.components/following-list/following-list.component';
 
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
+import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 
 const userRoutes: Routes = [
     {
@@ -45,6 +46,10 @@ const userRoutes: Routes = [
             {
                 path: 'following',
                 component: FollowingListComponent,
+            },
+            {
+                path: 'weight-control',
+                component: WeightControlComponent
             }
         ]
     }

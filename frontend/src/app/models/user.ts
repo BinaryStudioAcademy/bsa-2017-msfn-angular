@@ -29,6 +29,13 @@ export class IUser {
             timeZone: string,
             dateFormat: string,
             startWeek: string,
-        }
+        },
+        public weightControl?: {
+            weight: number,
+            boneWeight: number,
+            waterPct: number,
+            fatPct: number,
+            date: string
+        }[]
     ) { }
 }

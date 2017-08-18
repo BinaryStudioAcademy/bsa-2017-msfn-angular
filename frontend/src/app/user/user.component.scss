@@ -10,4 +10,7 @@
 .child-container {
     flex: 0 0 80vw;
     min-width: 80vw;
+    width: 70%;
+    float: right;
+    height: calc(100vh - 70px);
 }

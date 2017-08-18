@@ -16,6 +16,7 @@ import { FollowersListComponent } from './user.components/followers-list/followe
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { FollowingListComponent } from './user.components/following-list/following-list.component';
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
+import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ import { OtherProfilesComponent } from './user.components/other-profiles/other-p
         OtherProfilesComponent,
         FollowersListComponent,
         FollowingListComponent,
+        WeightControlComponent,
     ],
     providers: [
         ForAllUserGuard,
