@@ -71,6 +71,7 @@ aside {
 .child-container {
     flex: 0 0 80vw;
     min-width: 80vw;
+    overflow-y: auto;
 }
 
 @media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
