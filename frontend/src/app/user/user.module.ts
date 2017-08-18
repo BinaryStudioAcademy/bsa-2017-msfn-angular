@@ -18,6 +18,7 @@ import { FollowingListComponent } from './user.components/following-list/followi
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
+import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
 
 @NgModule({
     imports: [
@@ -41,6 +42,7 @@ import { LoginSettingsComponent } from './user.components/login-settings/login-s
         FollowingListComponent,
         AccountSettingsComponent,
         LoginSettingsComponent,
+        PlanDetailComponent,
     ],
     providers: [
         ForAllUserGuard,

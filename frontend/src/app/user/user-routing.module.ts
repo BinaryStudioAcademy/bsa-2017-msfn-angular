@@ -13,6 +13,7 @@ import { AccountSettingsComponent } from './user.components/account-settings/acc
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 // import { FriendsComponent } from './user.components/friends/friends.component';
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
+import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
 
 const userRoutes: Routes = [
     {
@@ -57,7 +58,10 @@ const userRoutes: Routes = [
             {
                 path: 'interval-training-plan',
                 component: IntervalTrainingPlanComponent,
-            },
+            }, {
+                path: 'training-plan',
+                component: PlanDetailComponent,
+            }
         ]
     }
 ];
