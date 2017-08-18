@@ -4,7 +4,8 @@ const passport = require('passport'),
     TwitterStrategy = require('passport-twitter').Strategy,
     oauthConfig = require('../config/oauth'),
     userService = require('../services/userService'),
-    userRepository = require('../repositories/userRepository');
+    userRepository = require('../repositories/userRepository'),
+    ApiError = require('../services/apiErrorService');
 
 module.exports = function() {
     passport.use(new GoogleStrategy(oauthConfig.googleOptions,
@@ -22,23 +23,37 @@ module.exports = function() {
                         //If user register already, just login
                         done(null, user)
                     } else {
-                        //else register with google account
-                        const userBody = {
-                            firstName: profile.name.givenName,
-                            lastName: profile.name.familyName,
-                            email: profile.emails[0].value,
-                            password: 'qwerty',
-                            isCoach: false,
-                            isAdmin: false,
-                            googleID: profile.id
-                        };
-                        userService.addItem(userBody, (err, user) => {
+                        //Check if email already in db
+                        userRepository.getUserByEmail(profile.emails[0].value, (err, user) => {
                             if (err) {
-                                return done(err.error);
+                                return done(err);
                             }
-                            //and login
-                            return done(null, user)
-                        })
+                            //no email in db -> register with google account
+                            if (user === null) {
+                                const userBody = {
+                                    firstName: profile.name.givenName,
+                                    lastName: profile.name.familyName,
+                                    email: profile.emails[0].value,
+                                    password: 'qwerty',
+                                    isCoach: false,
+                                    isAdmin: false,
+                                    activateToken: '',
+                                    birthday: '',
+                                    googleID: profile.id
+                                };
+                                userRepository.add(userBody, (err, user) => {
+                                    if (err) {
+                                        return done(err.error);
+                                    }
+                                    //and login
+                                    return done(null, user)
+                                })
+                                // if email in db -> show message to regular login
+                            } else {
+                                return done(null, false, `You already register with associated e-mail.
+                                Please log in using you email and password`)
+                            }
+                        });
                     }
                 });
             } else {
@@ -54,6 +69,7 @@ module.exports = function() {
     ));
     passport.use(new FacebookStrategy(oauthConfig.facebookOptions,
         (req, accessToken, refreshToken, profile, done) => {
+        console.log(profile);
             const queryWithID = {
                 "facebookID": profile.id
             };
@@ -65,21 +81,33 @@ module.exports = function() {
                     if (user) {
                         done(null, user)
                     } else {
-                        const userBody = {
-                            firstName: profile.name.givenName || profile.displayName,
-                            lastName: profile.name.familyName,
-                            email: profile.emails[0].value,
-                            password: 'qwerty',
-                            isCoach: false,
-                            isAdmin: false,
-                            facebookID: profile.id
-                        };
-                        userService.addItem(userBody, (err, user) => {
+                        userRepository.getUserByEmail(profile.emails[0].value, (err, user) => {
                             if (err) {
-                                return done(err.error);
+                                return done(err);
                             }
-                            return done(null, user)
-                        })
+                            if (user === null) {
+                                const userBody = {
+                                    firstName: profile.name.givenName || profile.displayName.split(' ')[0],
+                                    lastName: profile.name.familyName || profile.displayName.split(' ')[1],
+                                    email: profile.emails[0].value,
+                                    password: 'qwerty',
+                                    isCoach: false,
+                                    isAdmin: false,
+                                    activateToken: '',
+                                    birthday: '',
+                                    facebookID: profile.id
+                                };
+                                userRepository.add(userBody, (err, user) => {
+                                    if (err) {
+                                        return done(err.error);
+                                    }
+                                    return done(null, user)
+                                })
+                            } else {
+                                return done(null, false, `You already register with associated e-mail.
+                                Please log in using you email and password`)
+                            }
+                        });
                     }
                 });
             } else {
@@ -94,8 +122,8 @@ module.exports = function() {
     ));
     passport.use(new TwitterStrategy(oauthConfig.twitterOptions,
         (req, accessToken, refreshToken, profile, done) => {
+        console.log(profile);
             console.log(profile);
-
             const queryWithID = {
                 "twitterID": profile.id
             };
@@ -107,20 +135,33 @@ module.exports = function() {
                     if (user) {
                         done(null, user)
                     } else {
-                        const userBody = {
-                            firstName: profile.displayName,
-                            email: profile.emails[0].value || 'default@msfn.com',
-                            password: 'qwerty',
-                            isCoach: false,
-                            isAdmin: false,
-                            twitterID: profile.id
-                        };
-                        userService.addItem(userBody, (err, user) => {
+                        userRepository.getUserByEmail(profile.emails[0].value, (err, user) => {
                             if (err) {
-                                return done(err.error);
+                                return done(err);
                             }
-                            return done(null, user)
-                        })
+                            if (user === null) {
+                                const userBody = {
+                                    firstName: profile.displayName.split(' ')[0],
+                                    lastName: profile.displayName.split(' ')[1],
+                                    email: profile.emails[0].value || 'default@msfn.com',
+                                    password: 'qwerty',
+                                    isCoach: false,
+                                    isAdmin: false,
+                                    activateToken: '',
+                                    birthday: '',
+                                    twitterID: profile.id
+                                };
+                                userRepository.add(userBody, (err, user) => {
+                                    if (err) {
+                                        return done(err.error);
+                                    }
+                                    return done(null, user)
+                                })
+                            } else {
+                                return done(null, false, `You already register with associated e-mail.
+                                Please log in using you email and password`)
+                            }
+                        });
                     }
                 });
             } else {

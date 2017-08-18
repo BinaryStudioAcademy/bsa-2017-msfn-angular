@@ -31,14 +31,14 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl, isAdmin, function (req, res, next) {
-            exerciseTypeService.getAllExerciseTypes(function(err, data) {
-            if (!data.length){
+        exerciseTypeService.getAllExerciseTypes(function(err, data) {
+            if (!data.length) {
                 data = [{}];
             }
             res.data = data;
             res.err = err;
             next();
-       });
+        });
     }, apiResponse);
 
 };

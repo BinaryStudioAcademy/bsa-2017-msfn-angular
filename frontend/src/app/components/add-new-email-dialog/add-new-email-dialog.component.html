@@ -1,0 +1,23 @@
+<div class="container">
+    <h2 class="title" md-dialog-title>Add new Email</h2>
+
+    <div class="email-container">
+        <md-dialog-actions>
+            <md-input-container class="input-row">
+                <input mdInput type="email" name="email" placeholder="Email" required [(ngModel)]="email" [formControl]="emailFormControl">
+                <md-error *ngIf="emailFormControl.hasError('required')">
+                    Email is required
+                </md-error>
+                <md-error *ngIf="emailFormControl.hasError('pattern')">
+                    Email is not valid
+                </md-error>
+            </md-input-container>
+            <div class="btn-container">
+                <button md-button md-dialog-close>Cancel</button>
+                <button md-button class="add-btn" [md-dialog-close]="email">Add</button>
+            </div>
+        </md-dialog-actions>
+    </div>
+
+
+</div>

@@ -1,0 +1,39 @@
+@import '../../../globalStyles/variables.scss';
+@import '../../../globalStyles/text.scss';
+@import '../../../globalStyles/indentations.scss';
+.note-container {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.note-title {
+    margin: 0;
+    font-size: $main-text;
+}
+
+.note-item {
+    font-size: $usual-text;
+    padding: 0 25px;
+      cursor: pointer;
+    &:hover {
+        background: #494949;
+    }
+
+    a{
+        max-width: 200px;
+    }
+}
+// ------------------------------------
+.notifications__dialog {
+    padding: 0;
+
+    .notifications__dialog-button {
+        width: 100%;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-align: left;
+    }
+}

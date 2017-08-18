@@ -1,6 +1,6 @@
 <header (mouseleave)="showUserMenu = false">
     <div class="logo">
-        <a [routerLink]='window.data._injectedData.isLoggedIn ? "/profile":"/"'>
+        <a [routerLink]='"/"'>
             <svg class="logo__icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000"
                 xml:space="preserve">
                 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
@@ -12,8 +12,7 @@
         </a>
     </div>
     <div class="notifications" *ngIf="thereIsLoggedInUser">
-        <md-icon (click)="openDialog()" class="notification__alert">notifications</md-icon>
-        <span class="notifications__count">{{notificationCount}}</span>
+        <app-header-notifications></app-header-notifications>
     </div>
     <div class="settings header__navigation-panel" *ngIf="thereIsLoggedInUser">
         <img class="settings__photo" [src]="userPhotoUrl">
@@ -21,7 +20,9 @@
         <md-icon [mdMenuTriggerFor]="appMenu">menu</md-icon>
     </div>
     <md-menu class="user_menu" #appMenu="mdMenu" yPosition="below" [overlapTrigger]="false">
-        <button md-menu-item *ngIf="window.data._injectedData.role != 'admin'" routerLink="/user/profile">Edit profile</button>
+        <button md-menu-item *ngIf="window.data._injectedData.role != 'admin'" routerLink="/user/profile/me">Edit profile</button>
+        <button md-menu-item *ngIf="window.data._injectedData.role != 'admin'" routerLink="/user/followers">Followers</button>
+        <button md-menu-item *ngIf="window.data._injectedData.role != 'admin'" routerLink="/user/following">Following</button>
         <button md-menu-item *ngIf="window.data._injectedData.role != 'admin'" routerLink="/user/settings">Settings</button>
         <button md-menu-item (click)="logout()">Logout</button>
     </md-menu>

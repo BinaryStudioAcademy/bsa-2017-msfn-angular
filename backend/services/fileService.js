@@ -1,8 +1,8 @@
 const fs = require('fs'),
-    userService = require('./userService');
+    userService = require('./userService'),
+    ApiError = require('./apiErrorService');
 
-module.exports = function (req, res, obj, error) {
-    error = error || false;
+module.exports = function (req, res, callback) {
 
     save(req, function (data) {
         if (req.body.data) {
@@ -16,57 +16,68 @@ module.exports = function (req, res, obj, error) {
                 const filepath = __dirname + userPhotoPath;
                 let responseMessage = {};
 
-                if (!fs.existsSync(folderPath)) {
-                    fs.mkdirSync(folderPath)
-                }
-
                 // max size is 3mb
                 if (buf.byteLength > 3e+6) {
-                    res.writeHead(413, { 'Status': 'file is too big, max size is 3mb' });
-                    return res.end();
+                    // return callback(new ApiError('file is too big, max size is 3mb'));
+                    return callback(null, {'err': 'file is too big, max size is 3mb'});
                 }
 
-                // add/update userPhotoPath in database
-                userService.updateItem(req.body.userId, { userPhoto: userPhotoPath })
+                checkAndCreateFolder(folderPath, () => {
+                    checkAndRemoveDublicatFile(folderPath, () => {
 
-                let writeStream = new fs.WriteStream(filepath, { flags: 'w' });
-                writeStream.write(buf);
+                        let writeStream = fs.createWriteStream(filepath);
+                        writeStream.write(buf);
 
-                // error processing
-                req
-                    .on('close', () => {
-                        writeStream.destroy();
-                        fs.unlink(filepath, err => { });
+                        // error processing
+                        req
+                            .on('close', () => {
+                                writeStream.destroy();
+                                fs.unlink(filepath, err => { });
+                                return callback(new ApiError('error'));
+                            })
+                            .pipe(writeStream);
+                        writeStream
+                            .on('error', err => {
+                                console.error(err);
+                                fs.unlink(filepath, err => { });
+                                return callback(new ApiError('conection close'));
+                            })
+                            .on('close', () => {
+                                // add/update userPhotoPath in database
+                                userService.updateItem(req.body.userId, { userPhoto: userPhotoPath })
+                                return callback(null, 'done')
+                            })
                     })
-                    .pipe(writeStream);
-                writeStream
-                    .on('error', err => {
-                        console.error(err);
-                        if (!res.headersSent) {
-                            res.writeHead(500, { 'Connection': 'close' });
-                            return res.end();
-                        } else {
-                            return res.end();
-                        }
-                        fs.unlink(filepath, err => { });
-                    })
-                    .on('close', () => {
-                        res.writeHead(201, { 'Status': 'done' });
-                        responseMessage.statusCode = 201;
-                        responseMessage.statusMessage = 'done';
-                        return res.end(JSON.stringify(responseMessage));
-                    });
+                });
             } else {
-                res.writeHead(415, { 'Status': 'wrong format' });
-                return res.end();
+                return callback(new ApiError('wrong format'));
             }
         } else {
-            res.writeHead(422, { 'Status': 'empty file' });
-            return res.end();
+            return callback(new ApiError('empty file'));
         }
     });
 
     function save(data, callback_main) {
         callback_main(null, null);
+    }
+
+    function checkAndCreateFolder(folderPath, callback) {
+        if (!fs.existsSync(folderPath)) {
+            fs.mkdirSync(folderPath)
+        }
+        callback();
+    }
+
+    function checkAndRemoveDublicatFile(folderPath, callback) {
+        fs.readdir(folderPath, (err, files) => {
+            files.forEach(el => {
+                if (el.split('.')[0] === req.body.userId) {
+                    fs.unlink(folderPath + el, (err, res) => {
+                        console.log(err, res);
+                    });
+                }
+            })
+            callback();
+        })
     }
 };

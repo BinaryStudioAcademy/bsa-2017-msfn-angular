@@ -102,7 +102,32 @@ export class TestHttpComponent implements OnInit {
         successMessage: 'Instance was deleted'
     };
 
-    constructor(private httpService: HttpService) { }
+    subscribeReq: IHttpReq = {
+        url: '/api/user/subscribe/follow',
+        method: 'POST',
+        body: {
+            'user_id': '5992c406488d052d4cab126a'
+        },
+        failMessage: 'Failed to sbskr',
+        successMessage: 'subscribe!'
+    };
+    getFollowingReq: IHttpReq = {
+        url: '/api/user/subscribe/following',
+        method: 'GET',
+        body: {},
+        failMessage: 'Fail',
+        successMessage: 'go to console!'
+    };
+    getFollowersReq: IHttpReq = {
+        url: '/api/user/subscribe/followers',
+        method: 'GET',
+        body: {},
+        failMessage: 'Fail',
+        successMessage: 'go to console!'
+    };
+
+    constructor(private httpService: HttpService) {
+    }
 
     ngOnInit() {
     }

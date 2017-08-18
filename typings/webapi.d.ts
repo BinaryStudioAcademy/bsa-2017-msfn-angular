@@ -9,6 +9,7 @@ declare module WebApi {
         userLastName: string;
         role: string;
         userPhoto: string;
+        userId: string;
     }
 }
 
@@ -17,5 +18,14 @@ declare module ExerciseApi {
         name?: string;
         code?: string;
         isRemoved?: string;
+    }
+}
+
+declare module SubscribeApi {
+    export interface ISubscribeUser {
+        _id: string;
+        firstName: string;
+        lastName: string;
+        userPhoto?: string;
     }
 }

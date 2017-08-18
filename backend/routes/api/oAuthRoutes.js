@@ -1,10 +1,7 @@
-const apiResponse = require('express-api-response');
-const passport = require('passport');
-module.exports = function (app) {
-    const redirect = {
-        successRedirect: '/user/profile',
-        failureRedirect: '/login'
-    };
+const passport = require('passport'),
+    oauthService = require('../../services/oauthService');
+
+module.exports = function(app) {
 
     //google
     app.get('/auth/google',
@@ -13,8 +10,9 @@ module.exports = function (app) {
         })
     );
     app.get('/auth/google/callback',
-        passport.authenticate('google', redirect)
-    );
+        function(req, res, next) {
+            oauthService.oauthLogin('google', req, res, next)
+        });
 
     //facebook
     app.get('/auth/facebook',
@@ -23,12 +21,14 @@ module.exports = function (app) {
         })
     );
     app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', redirect)
-    );
+        function(req, res, next) {
+            oauthService.oauthLogin('facebook', req, res, next)
+        });
 
     //twitter
     app.get('/auth/twitter', passport.authenticate('twitter'));
     app.get('/auth/twitter/callback',
-        passport.authenticate('twitter', redirect));
-
+        function(req, res, next) {
+            oauthService.oauthLogin('twitter', req, res, next)
+        });
 };

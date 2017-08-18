@@ -7,14 +7,18 @@ function CoachService() {
 
 CoachService.prototype.apply = apply;
 
-function apply(id, body, callback) {
+function apply(id, callback) {
     userRepository.getById(id, (err, data) => {
         if (err) return callback(err);
 
         if (data === null){
             callback(new ApiError('User not found'));
         } else {
-            userRepository.update(id, body, callback);
+            callback(null, data)
+            setTimeout(() => {
+                // here must be a business logic function of adding coach permission
+                userRepository.update(id, {isCoach: true}, (err, data) => {})
+            }, 10000);
         }
     })
 }

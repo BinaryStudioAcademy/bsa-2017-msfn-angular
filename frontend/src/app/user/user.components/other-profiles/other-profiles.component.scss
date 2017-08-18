@@ -1,0 +1,55 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+.container {
+    display: flex;
+    margin: 20px auto;
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
+    justify-content: center;
+}
+
+.profile-photo {
+    img {
+        width: 150px;
+        border-radius: 50%;
+    }
+}
+.profile-info {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0 20px;
+    color: $text-second-color;
+
+    div {
+        margin: 10px;
+    }
+
+    .info-name {
+        margin: 0 10px 10px;
+        font-size: $main-text;
+        color: $text-main-color;
+    }
+
+    .info-value {
+        margin-left: 5px;
+        color: $text-main-color;
+    }
+}
+
+@media only screen and (max-width: $small-screen) {
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-info {
+        margin: 10px 0;
+    }
+
+    .info-name {
+        text-align: center;
+    }
+}

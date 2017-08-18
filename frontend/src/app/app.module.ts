@@ -28,11 +28,17 @@ import { NotificationDialogComponent } from './components/notification-dialog/no
 import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
 import { TestMarkdownComponent } from './components/test-markdown/test-markdown.component';
+import { AddNewEmailDialogComponent } from './components/add-new-email-dialog/add-new-email-dialog.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { ConfirmedPageComponent } from './components/confirmed-page/confirmed-page.component';
+import { ChangeRootEmailDialogComponent } from './components/change-root-email-dialog/change-root-email-dialog.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { ConfirmedPageComponent } from './components/confirmed-page/confirmed-page.component';
 import { ExerciseTypeService } from './admin/admin.components/exercise-type/exercise-type.service';
-
+import { ConfirmedPageService } from './components/confirmed-page/confirmed-page.service';
+import { NotificationDataDialogComponent } from './components/notification-data-dialog/notification-data-dialog.component';
+import { SocketService } from './services/socket.service';
+import { NotificationsService } from './services/notifications.service';
+import { HeaderNotificationsComponent } from './components/header-notifications/header-notifications.component';
 
 @NgModule({
     imports: [
@@ -56,9 +62,13 @@ import { ExerciseTypeService } from './admin/admin.components/exercise-type/exer
         TestToastrComponent,
         NotificationDialogComponent,
         TestMarkdownComponent,
+        AddNewEmailDialogComponent,
         PageNotFoundComponent,
+        ChangeRootEmailDialogComponent,
         ConfirmedPageComponent,
         LoginDialogComponent,
+        NotificationDataDialogComponent,
+        HeaderNotificationsComponent,
     ],
     providers: [
         ToasterService,
@@ -69,13 +79,19 @@ import { ExerciseTypeService } from './admin/admin.components/exercise-type/exer
         ForAdminGuard,
         ForAllUserGuard,
         EncryptService,
-        ExerciseTypeService
+        ExerciseTypeService,
+        SocketService,
+        NotificationsService,
+        ConfirmedPageService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,
         NotificationDialogComponent,
+        AddNewEmailDialogComponent,
+        ChangeRootEmailDialogComponent,
         LoginDialogComponent,
-        RegistrationComponent
+        RegistrationComponent,
+        NotificationDataDialogComponent
     ],
     bootstrap: [AppComponent]
 

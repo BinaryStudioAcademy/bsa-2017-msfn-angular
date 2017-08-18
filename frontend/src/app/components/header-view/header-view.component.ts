@@ -1,10 +1,10 @@
 import {Component, OnInit, AfterContentChecked} from '@angular/core';
 import {MdDialog} from '@angular/material';
 import { Router } from '@angular/router';
-import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
 import { HttpService } from '../../services/http.service';
 import { IHttpReq } from '../../models/http-req';
 import { WindowObj } from '../../services/window.service';
+import { NotificationsService } from '../../services/notifications.service';
 
 @Component({
     selector: 'app-header-view',
@@ -17,8 +17,7 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
     public displayName: string;
     public notificationCount = 1;
     private notificationsDialogConfig = {
-        height: '300px',
-        width: '200px',
+        'min-width': '200px',
         data: 'you have ' + this.notificationCount + ' notifications',
         position: {
             top: '45px',
@@ -40,10 +39,6 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
     ngAfterContentChecked() {
         this.userPhotoUrl = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
         this.displayName = `${this.window.data._injectedData.userFirstName} ${this.window.data._injectedData.userLastName}`;
-    }
-
-    openDialog() {
-        const dialogRef = this.dialog.open(NotificationDialogComponent, this.notificationsDialogConfig);
     }
 
     logout() {

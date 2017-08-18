@@ -121,13 +121,18 @@ export class RegistrationComponent {
 
             this.user.birthday = birthday;
             this.userToPass = Object.assign({}, this.user);
-            this.userToPass.password = this.encryptor.encrypt({'password': this.userToPass.password});
-            this.userToPass.email = this.encryptor.encrypt({'email': this.userToPass.email});
+            this.userToPass.password = this.encryptor.encrypt({
+                'password': this.userToPass.password
+            });
+            this.userToPass.email = this.encryptor.encrypt({
+                'email': this.userToPass.email
+            });
             const registerReq: IHttpReq = {
                 url: '/api/user',
                 method: 'POST',
                 body: this.userToPass,
-                failMessage: 'Registration failed:',
+                successMessage: 'Check your email',
+                failMessage: 'Registration failed:'
             };
             this.httpService.sendRequest(registerReq).then(() => {
                 this._dialogRef.close();

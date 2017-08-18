@@ -2,45 +2,98 @@
 @import '../../../../globalStyles/text.scss';
 @import '../../../../globalStyles/indentations';
 
+// .profile {
+//     display: flex;
+//     flex-direction: column;
+//     position: relative;
+//     width: 60vw;
+//     min-height: 500px;
+//     font-family: $font-general;
+//     font-size: $usual-text;
+//     margin: $content-tb-margin auto;
+
+//     h2 {
+//         margin-bottom: 0;
+//         text-align: center;
+//         font-size: $header-text;
+//     }
+// }
+
 #sport-handling {
     display: flex;
     flex-direction: column;
+    position: relative;
     width: 60vw;
-    margin: 50px auto;
-    padding: 20px 50px 40px;
-    align-items: center;
-    background: $gradient-from-color;
-    background: linear-gradient($gradient-to-color, $gradient-from-color);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-
-    .input {
-        width: 100%;
-    }
-
-    textarea {
-        min-height: 100px;
-    }
-
-    .select-row {
-        margin: $content-between-margin 0;
-    }
-
-    .mat-select-trigger,
-    .mat-select-placeholder {
-        font-size: $usual-text;
-    }
-
-    .btn-save {
-        width: 90%;
-        border: none;
-        margin-top: $content-between-margin;
-        padding: $input-padding;
-        border-radius: 50px;
-        outline: none;
-        font-size: $usual-text;
-        font-weight: bold;
-        color: $text-main-color;
-        background: $btn-color;
+    min-height: 500px;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+    
+    h2 {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: $header-text;
     }
 }
 
+.error {
+    display: block;
+    width: 100%;
+    margin: $content-between-margin 0;
+    text-align: left;
+    font-size: $usual-text;
+    font-weight: 600;
+    color: $error-color;
+}
+
+#code {
+    width: 60%;
+    margin: 0 auto 0 0;
+}
+
+#icon-selection {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#icon {
+    width: 45%;
+}
+
+#selected-icon {
+    margin-left: 20px;
+}
+
+img {
+    width: 40px;
+}
+
+.input {
+    width: 100%;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+.select-row {
+    margin: $content-between-margin 0;
+}
+
+.mat-select-trigger,
+.mat-select-placeholder {
+    font-size: $usual-text;
+}
+
+.btn-save {
+    width: 90%;
+    border: none;
+    margin-top: $content-between-margin;
+    padding: $input-padding;
+    border-radius: 50px;
+    outline: none;
+    font-size: $usual-text;
+    font-weight: bold;
+    color: $text-main-color;
+    background: $btn-color;
+}

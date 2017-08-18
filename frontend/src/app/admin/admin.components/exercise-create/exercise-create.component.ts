@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { HttpService } from '../../../services/http.service';
+import { IHttpReq } from '../../../models/http-req';
+import { IExercise } from '../../../models/exercise';
+import { IExerciseType } from '../../../models/exerciseType';
+import { ExerciseCreateService } from './exercise-create.service';
 
 @Component({
     selector: 'app-exercise-create',
@@ -8,33 +13,38 @@ import { NgForm } from '@angular/forms';
     styleUrls: ['./exercise-create.component.scss']
 })
 export class ExerciseCreateComponent implements OnInit {
-    selectedValue: string;
-    title: string;
-    description: string;
+    exercise: IExercise = {
+        name: '',
+        type: '',
+        description: ''
+    };
 
-    exercises = [
-        { value: 'cardio', viewValue: 'Cardiovascular' },
-        { value: 'strength', viewValue: 'Strength Training' },
-    ];
-    constructor(public router: ActivatedRoute) { }
+    exTypes: [IExerciseType];
+
+    constructor(
+        public router: ActivatedRoute,
+        private httpService: HttpService,
+        private exerciseCreateService: ExerciseCreateService,
+    ) { }
 
     ngOnInit() {
         if (this.router.snapshot.params.id) {
-            // get current exercise info;
-            this.selectedValue = 'strength';
-            this.title = 'New super power exercise';
-            this.description = 'New super power exercise description';
+            this.exerciseCreateService.getExerciseById(this.router.snapshot.params.id, (data) => {
+                this.exercise = data;
+            });
         }
-        // make some request to get exercises types
+        this.exerciseCreateService.getExerciseTypes((data) => {
+            this.exTypes = data;
+        });
     }
 
     save(form: NgForm) {
         if (form.valid) {
-            console.log(this.router.snapshot.params.id);
-            console.log(this.selectedValue);
-            console.log(this.title);
-            console.log(this.description);
+            if (this.router.snapshot.params.id) {
+                this.exerciseCreateService.updateExercise(this.router.snapshot.params.id, this.exercise);
+            } else {
+                this.exerciseCreateService.sendExercise(this.exercise);
+            }
         }
     }
-
 }

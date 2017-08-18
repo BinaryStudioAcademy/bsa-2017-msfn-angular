@@ -4,7 +4,7 @@
         <form *ngIf="user" class="profile-form" [formGroup]="profileForm">
             <div class="profile-header">
                 <div class="profile-avatar">
-                    <div class="profile-picture">
+                    <div class="profile-picture" [ngClass]="(window.data._injectedData.role !== 'coach')? '': 'coach-mark'">
                         <img [src]="data.image" alt="user picture" class="profile-picture-img">
                         <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
                     </div>
@@ -30,13 +30,18 @@
             </div>
             <div class="profile-content">
                 <div class="profile-email">
-                    <div class="profile-current-email">
-                        <md-input-container>
-                            <input mdInput class="profile-email-input input" formControlName="email">
-                        </md-input-container>
+                    <div class="profile-current-emails">
+                        <div class="email-item" >
+                             <span class="email">{{ user.email }}</span>
+                             <span class="root-title">root</span>
+                        </div>
+                        <div class="email-item" *ngFor="let email of user.secondaryEmails" >
+                             <span class="email">{{ email }}</span>
+                             <span class="root-btn" (click)="makeRoot(email)">make root</span>
+                        </div>
                     </div>
                     <div class=profile-email-btn>
-                        <button md-raised-button>Add Email Address</button>
+                        <button (click)="openAddNewEmailDialog()" md-raised-button>Add Email Address</button>
                     </div>
                 </div>
                 <div class="profile-birthday">
@@ -84,7 +89,7 @@
                     <div class="profile-password">
                         <button md-raised-button (click)="openConfirmPasswordDialog()" class="">Change password</button>
                     </div>
-                    <div id="coach-button">
+                    <div *ngIf="window.data._injectedData.role !== 'coach'" id="coach-button">
                         <button md-raised-button type="submit"  *ngIf="!requestForCoaching" (click)="applyForCoaching()">
                             Become a coach
                         </button>

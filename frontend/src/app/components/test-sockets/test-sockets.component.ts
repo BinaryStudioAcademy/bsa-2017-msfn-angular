@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import * as io from 'socket.io-client';
 import {ToasterService} from '../../services/toastr.service';
+import {SocketService} from '../../services/socket.service';
+import {WindowObj} from '../../services/window.service';
 
 @Component({
     selector: 'app-test-sockets',
@@ -9,25 +10,30 @@ import {ToasterService} from '../../services/toastr.service';
     styleUrls: ['./test-sockets.component.scss']
 })
 export class TestSocketsComponent implements OnInit {
-    socket = io.connect('http://localhost:3060');
 
-    constructor(private toastrService: ToasterService) {
-
+    constructor(private socketService: SocketService, private window: WindowObj) {
+        this.socketService.addListener('get_notifications:success', (json) => {
+                let data;
+                try {
+                    data = JSON.parse(json);
+                } catch (err) {
+                    console.error(err);
+                    return;
+                }
+                console.log(data);
+            });
     }
 
     ngOnInit() {
-        this.socket.on('connect', () => {
-            this.toastrService.showMessage('success', 'connected to server');
-        });
-        this.socket.on('disconnect', () => {
-            this.toastrService.showMessage('error', 'server is DOWN');
-        });
-        this.socket.on('feedbackFromServer', (message) => {
-            this.toastrService.showMessage('info', message);
-        });
+
     }
 
-    sendToServer(message: string) {
-        this.socket.emit('messageToServer', message);
+    send(event, message) {
+        this.socketService.send(event, JSON.stringify({
+            title: 'test123',
+            message: 'mesasge321',
+            userId: this.window.data._injectedData.userId,
+            id: message
+        }));
     }
 }

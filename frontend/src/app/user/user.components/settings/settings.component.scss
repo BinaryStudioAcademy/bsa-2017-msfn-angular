@@ -6,6 +6,24 @@ md-error {
     color: $error-color;
 }
 
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 60vw;
+    min-height: 500px;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+
+    h2 {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: $header-text;
+    }
+}
+
 .btn {
     border: none;
     margin-top: 35px;

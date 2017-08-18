@@ -13,6 +13,7 @@ header {
     min-width: 260px;
     height: $header-height;
     background-color: $gradient-to-color;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-family: $font-general;
 
     .logo {
@@ -50,7 +51,7 @@ header {
     .settings {
         display: flex;
         align-items: center;
-    
+
         .settings__name {
             margin: 0 $header-icons-intendation;
             vertical-align: super;
@@ -78,6 +79,7 @@ header {
         }
     }
 }
+
 md-menu {
     display: none;
 }

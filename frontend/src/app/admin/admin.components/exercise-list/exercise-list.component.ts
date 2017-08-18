@@ -43,11 +43,12 @@ export class ExerciseListComponent implements OnInit {
                                                 this.exerciseListService);
 
         setTimeout(() => this.cd.markForCheck());
-        this.getExercises((result) => {
+
+        this.exerciseListService.getExercises((result) => {
             this.tableDatabase.addExercises(result);
-            for (let i = 0; i < result.length; i++) {
-                this.options.push(result[i].type);
-            }
+                for (let i = 0; i < result.length; i++) {
+                    this.options.push(result[i].type);
+                }
         });
 
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
@@ -63,10 +64,6 @@ export class ExerciseListComponent implements OnInit {
         setTimeout(() => {
             this.dataSource.itemFilter = this.items.toString();
         }, 200);
-    }
-
-    getExercises(callback) {
-        return this.exerciseListService.getExercises(callback);
     }
 }
 

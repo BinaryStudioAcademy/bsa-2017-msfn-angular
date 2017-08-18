@@ -117,6 +117,18 @@ label {
     }
 }
 
+.coach-mark:after {
+    display: block;
+    content: '';
+    background: url('../../../../../../resources/icons/whistle-icon.svg') center;
+    background-size: 170%;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    margin-top: -50px;
+    margin-left: calc(150px - 50px);
+}
+
 .profile-upload {
     display: flex;
     margin: 15px auto 0;
@@ -173,16 +185,62 @@ label {
 
 .profile-email {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     padding: 10px 0 10px;
 }
 
-.profile-current-email {
+.profile-current-emails {
     display: flex;
-    flex: 1 1 180px;
+    flex-direction: column;
+    flex: 1 1 233px;
     color: $usual-text;
+}
+
+.email-item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    border: 2px solid #424242;
+    padding: 6px 10px;
+}
+
+.email {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+}
+
+.root-title {
+    color: $btn-color;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.root-btn {
+    display: none;
+    cursor: pointer;
+    font-style: italic;
+    opacity: 0.5;
+}
+
+.root-btn:hover {
+    text-decoration: underline;
+}
+
+.email-item:hover {
+    .root-btn {
+        display: inline;
+    }
+
+    .email {
+        max-width: 70%;
+    }
+
+    .root-btn {
+        margin-left: -10px;
+    }
 }
 
 .profile-email-btn {
@@ -190,6 +248,8 @@ label {
     flex: 1 1 185px;
     justify-content: flex-end;
 }
+
+
 
 .profile-email-input {
     text-align: center;
@@ -222,13 +282,16 @@ label {
 
 .button-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 20px;
     padding: 0 40px;
+
+    div {
+        margin: 0 $input-padding;
+    }
 }
 
 #coach-button {
-    flex-basis: 40%;
     text-align: center;
 
     div {
@@ -267,6 +330,10 @@ label {
     .profile-current-email {
         justify-content: center;
         margin: 0 15px 15px;
+    }
+
+    .profile-email {
+        flex-wrap: wrap;
     }
     .profile-email-btn {
         flex: 0;

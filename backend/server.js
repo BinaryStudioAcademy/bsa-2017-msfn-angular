@@ -13,22 +13,27 @@ const bodyParser = require('body-parser'),
     useragent = require('express-useragent'),
     blockUserAgentMiddleware = require('./middleware/blockUserAgentMiddleware'),
     initService = require('./services/initService')(),
+    apiResponse = require('express-api-response'),
     port = 3060;
 
 const app = express();
+
+context.mongoStore = new MongoStore({
+    mongooseConnection: mongooseConnection
+});
+
+// empty arrays don't throw 404 response error
+apiResponse.options({
+    emptyArrayIsOk: true
+});
 
 app.use(session({
     secret: sessionSecret,
     resave: true,
     saveUninitialized: true,
-    store: new MongoStore({
-        mongooseConnection: mongooseConnection
-    })
+    store: context.mongoStore
 }));
 
-context.mongoStore = new MongoStore({
-    mongooseConnection: mongooseConnection
-});
 app.use(useragent.express());
 app.use(blockUserAgentMiddleware);
 
@@ -52,6 +57,6 @@ console.log(`app runs on port: ${port}`);
 const server = app.listen(port);
 
 const io = require('socket.io')(server);
-const socketsInit = require('./middleware/testSocketMiddleware')(io);
+const sockets = require('./middleware/socketMiddleware')(io, context.mongoStore);
 
 module.exports = app;
