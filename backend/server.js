@@ -54,6 +54,9 @@ const apiRoutes = require('./routes/api/routes')(app);
 const viewRoutes = require('./routes/view/routes')(app);
 
 console.log(`app runs on port: ${port}`);
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+const config = require('./config');
+console.log(`config: ${config}`);
 const server = app.listen(port);
 
 const io = require('socket.io')(server);
