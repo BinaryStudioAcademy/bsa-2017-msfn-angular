@@ -4,6 +4,7 @@ const decryptService = require('./decryptService');
 const confirmCodeRepository = require('../repositories/confirmCodeRepository');
 const confirmService = require('./confirmService');
 const userRepository = require('../repositories/userRepository')
+const config = require('../config');
 
 function ActivateService() {}
 

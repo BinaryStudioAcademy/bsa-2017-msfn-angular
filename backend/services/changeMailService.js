@@ -2,7 +2,8 @@ const ApiError = require('./apiErrorService');
 const emailService = require('./emailService');
 const confirmCodeRepository = require('../repositories/confirmCodeRepository');
 const confirmService = require('./confirmService');
-const userRepository = require('../repositories/userRepository')
+const userRepository = require('../repositories/userRepository');
+const config = require('../config');
 
 function ChangeMailService() {}
 

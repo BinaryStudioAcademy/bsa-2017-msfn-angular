@@ -2,6 +2,7 @@ const ApiError = require('./apiErrorService');
 const userRepository = require('../repositories/userRepository');
 const decrypt = require('./decryptService');
 const emailService = require('../services/emailService');
+const config = require('../config');
 
 function UserService() {
 

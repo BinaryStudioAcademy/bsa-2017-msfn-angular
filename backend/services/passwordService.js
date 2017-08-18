@@ -3,7 +3,7 @@ const emailService = require('./emailService');
 const userRepository = require('../repositories/userRepository');
 const confirmService = require('./confirmService');
 const decrypt = require('./decryptService');
-
+const config = require('../config');
 
 function PasswordService() {
 }
