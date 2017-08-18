@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { TrainingListService } from './training-list.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -73,9 +74,13 @@ export class TrainingListComponent implements OnInit {
     name: 'Jumping'
   }];
 
-  constructor(private trainingListService: TrainingListService) { }
+  constructor(private trainingListService: TrainingListService, private _router: Router) { }
 
   ngOnInit() {
+  }
+
+  createPlan() {
+    this._router.navigate(['/user/training-plan']);
   }
 
 }
