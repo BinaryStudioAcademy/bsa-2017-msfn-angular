@@ -23,7 +23,7 @@ function resendActivateCode(body, callback) {
                 subject: 'Your MSFN registration',
                 html: '<table><tr><td>Additional request for account registration! ' +
                     '!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
-                    '<a href="' + config.host.hostAddress + '/confirmation/registration/' + user.activateToken + '">' + 'Activate account </a> </td></tr></table>'
+                    '<a href="' + config.hostAddress + '/confirmation/registration/' + user.activateToken + '">' + 'Activate account </a> </td></tr></table>'
             }, (err, data) => {
                 if (err) return callback(err);
                 if (data.rejected.length == 0) {

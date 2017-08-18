@@ -43,7 +43,7 @@ function addItem(body, callback) {
                 html: '<table><tr><td>Congratulations, ' +
                     body.firstName +
                     '!</td></tr> <tr><td>You have become a part of our fantastic fitness network!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
-                    '<a href="' + config.host.hostAddress + '/confirmation/registration/' + body.activateToken + '">' + 'Activate account </a> </td></tr></table>'
+                    '<a href="' + config.hostAddress + '/confirmation/registration/' + body.activateToken + '">' + 'Activate account </a> </td></tr></table>'
             }, (err, data) => {
                 if (err) return callback(err);
                 if (data.rejected.length == 0) {
