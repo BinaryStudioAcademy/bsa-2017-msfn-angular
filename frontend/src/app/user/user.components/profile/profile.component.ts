@@ -170,12 +170,12 @@ export class ProfileComponent implements OnInit {
         if (event === 'save') {
             if (!this.hideCropper) {
                 this.profileService.savePhoto(this.data.image, this.userId, 'img', result => {
-                    if (result.statusCode === 201) {
+                    if (result.err) {
+                        this.data.image = this.image;
+                        this.toasterService.showMessage('error', result.err);
+                    } else {
                         this.image = this.data.image;
                         this.toasterService.showMessage('success', null);
-                    } else {
-                        this.data.image = this.image;
-                        this.toasterService.showMessage('error', null);
                     }
                     this.hideCropper = true;
                     this.window.data._injectedData.userPhoto = this.image;
@@ -195,14 +195,8 @@ export class ProfileComponent implements OnInit {
         };
         this.requestForCoaching = true;
 
-        this.profileService.updateProfile(
-            userData,
-            () => {
-                this.coachingMessage = 'We\'ll moderate your request in 24 hours.' +
-                    ' You\'ll get a notification when it would be done.';
-            },
-            () => {
-                this.coachingMessage = 'Request was unsuccessful. Please try again.';
-            });
+        this.profileService.coachStatusRequest(this.userId, (res) => {
+            this.coachingMessage = 'We\'ll moderate your request in 24 hours.' + ' You\'ll get a notification when it would be done.';
+        });
     }
 }

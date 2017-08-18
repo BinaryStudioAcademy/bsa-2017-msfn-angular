@@ -1,5 +1,13 @@
+.body-container {
+    display: flex;
+}
+
+.sidebar-container {
+    flex: 0 0 calc(20vw - 20px);
+    min-width: calc(20vw - 20px);
+}
+    
 .child-container {
-    width: 75%;
-    float: right;
-    height: calc(100vh - 70px);
+    flex: 0 0 80vw;
+    min-width: 80vw;
 }

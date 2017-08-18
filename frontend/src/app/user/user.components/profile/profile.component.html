@@ -4,7 +4,7 @@
         <form *ngIf="user" class="profile-form" [formGroup]="profileForm">
             <div class="profile-header">
                 <div class="profile-avatar">
-                    <div class="profile-picture">
+                    <div class="profile-picture" [ngClass]="(window.data._injectedData.role !== 'coach')? '': 'coach-mark'">
                         <img [src]="data.image" alt="user picture" class="profile-picture-img">
                         <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
                     </div>
@@ -89,7 +89,7 @@
                     <div class="profile-password">
                         <button md-raised-button (click)="openConfirmPasswordDialog()" class="">Change password</button>
                     </div>
-                    <div id="coach-button">
+                    <div *ngIf="window.data._injectedData.role !== 'coach'" id="coach-button">
                         <button md-raised-button type="submit"  *ngIf="!requestForCoaching" (click)="applyForCoaching()">
                             Become a coach
                         </button>
