@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {SocketService} from './socket.service';
-import {INotification} from '../models/notification';
-import {WindowObj} from './window.service';
+import { Injectable } from '@angular/core';
+import { SocketService } from './socket.service';
+import { INotification } from '../models/notification';
+import { WindowObj } from './window.service';
 
 @Injectable()
 export class NotificationsService {
@@ -10,7 +10,7 @@ export class NotificationsService {
     private userId: string;
 
     constructor(private socketService: SocketService,
-                private window: WindowObj) {
+        private window: WindowObj) {
         this.userId = this.window.data._injectedData.userId;
 
         this.socketService.send('get_notifications', JSON.stringify({
