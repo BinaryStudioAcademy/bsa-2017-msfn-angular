@@ -102,15 +102,7 @@ export class TestHttpComponent implements OnInit {
         successMessage: 'Instance was deleted'
     };
 
-    subscribeReq: IHttpReq = {
-        url: '/api/user/subscribe/follow',
-        method: 'POST',
-        body: {
-            'user_id': '5992c406488d052d4cab126a'
-        },
-        failMessage: 'Failed to sbskr',
-        successMessage: 'subscribe!'
-    };
+
     getFollowingReq: IHttpReq = {
         url: '/api/user/subscribe/following',
         method: 'GET',
@@ -138,6 +130,19 @@ export class TestHttpComponent implements OnInit {
             this.info = data;
             console.log(this.info);
         });
+    }
+
+    subscribe(id: string) {
+        const subscribeReq: IHttpReq = {
+            url: '/api/user/subscribe/follow',
+            method: 'POST',
+            body: {
+                'user_id': id
+            },
+            failMessage: 'Failed to sbskr',
+            successMessage: 'subscribe!'
+        };
+        this.sendHttp(subscribeReq);
     }
 
 }

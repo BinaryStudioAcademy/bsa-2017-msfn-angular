@@ -20,12 +20,12 @@ export class FollowingListComponent implements OnInit {
 
     ngOnInit() {
         this.followingListService.getFollowing(data => {
-            this.allFollowing = data;
-            this.filterFollowing = data;
-            this.showFollowing = data.slice(0, this.addCount);
             if (data.length === 0) {
                 this.noFollowing = true;
             }
+            this.allFollowing = data;
+            this.filterFollowing = data;
+            this.showFollowing = data.slice(0, this.addCount);
         });
     }
 
@@ -42,13 +42,14 @@ export class FollowingListComponent implements OnInit {
         this.showFollowing = this.filterFollowing.slice(0, this.addCount);
     }
 
-    unfollow(unfollowBtn: HTMLButtonElement, id: string) {
-        if (unfollowBtn.innerText === 'Unfollow') {
-            this.followingListService.unfollow(id);
-            unfollowBtn.innerText = 'Follow';
+    unfollow(user: ISubscribeUser) {
+        if (user.justUnsubscribe) {
+            this.followingListService.follow(user._id);
+            user.justUnsubscribe = false;
         } else {
-            this.followingListService.follow(id);
-            unfollowBtn.innerText = 'Unfollow';
+            this.followingListService.unfollow(user._id);
+            user.justUnsubscribe = true;
+
         }
     }
 }

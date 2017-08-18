@@ -16,7 +16,6 @@ export class FollowingListService {
             failMessage: 'Can\'t show following'
         };
         this.httpService.sendRequest(getFollowingReq).then(data => {
-            console.log(data);
             callback(data);
         });
     }
