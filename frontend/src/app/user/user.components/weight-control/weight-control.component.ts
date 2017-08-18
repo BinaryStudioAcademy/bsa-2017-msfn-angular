@@ -17,11 +17,11 @@ export class WeightControlComponent implements OnInit {
     weeklyItems: any[];
 
     newWeight = {
-        weight: 60,
-        waterPct: 50,
-        boneWeight: 10,
-        fatPct: 10,
-        date: '2017-08-18'
+        weight: null,
+        waterPct: null,
+        boneWeight: null,
+        fatPct: null,
+        date: ''
     };
 
     recentDiff = {
@@ -36,8 +36,6 @@ export class WeightControlComponent implements OnInit {
         wa: 0,
         f: 0
     };
-    recentSymbol = '';
-    weeklySymbol = '';
 
     recentDay: string;
     currentWeight: number;
@@ -65,10 +63,22 @@ export class WeightControlComponent implements OnInit {
         }
     ];
 
-    selectionPrev = 'we';
-    selectionPerWeek = 'we';
-    recentMeasurement = 'kg';
-    weeklyMeasurement = 'kg';
+    settings = {
+        recent: {
+            symbol: '',
+            betterResult: false,
+            worseResult: false,
+            selection: 'we',
+            measurement: 'kg'
+        },
+        weekly: {
+            symbol: '',
+            betterResult: false,
+            worseResult: false,
+            selection: 'we',
+            measurement: 'kg'
+        }
+    };
 
     constructor(private weightControlService: WeightControlService,
                 private toasterService: ToasterService) { }
@@ -120,29 +130,45 @@ export class WeightControlComponent implements OnInit {
 
     updateData(): void {
         this.weightControlService.getWeightItems(res => {
-            this.weeklyItems = this.weightControlService.getWeeklyWeightItems(res);
-            this.recentDiff = this.weightControlService.getRecentDiff(this.weeklyItems);
-            this.weeklyDiff = this.weightControlService.getWeeklyDiff(this.weeklyItems);
-            const recentItem = this.weeklyItems[this.weeklyItems.length - 1];
-            this.recentDay = this.weightControlService.getRecentDay(recentItem);
-            this.currentWeight = this.newWeight.weight;
+            console.log('RES', res, res[0].hasOwnProperty('weight'));
+
+            if (res[0].hasOwnProperty('weight')) {
+                this.weeklyItems = this.weightControlService.getWeeklyWeightItems(res);
+                console.log('WEEKLY ITEMS', this.weeklyItems);
+                this.recentDiff = this.weightControlService.getRecentDiff(this.weeklyItems);
+                this.weeklyDiff = this.weightControlService.getWeeklyDiff(this.weeklyItems);
+                console.log('DIFF', this.recentDiff, this.weeklyDiff);
+                const recentItem = this.weeklyItems[this.weeklyItems.length - 1];
+                this.recentDay = this.weightControlService.getRecentDay(recentItem);
+                console.log('RECENT ITEM', recentItem, 'RECENT DAY', this.recentDay);
+                this.currentWeight = recentItem.weight;
+                console.log('CURRENT WEIGHT', this.currentWeight);
+
+
+                this.changeRecentOption('we');
+                this.changeWeeklyOption('we');
+            }
         });
     }
 
     changeRecentOption(option): void {
         const settings = this.weightControlService.changeOption(option, this.recentDiff);
 
-        this.selectionPrev = settings.selection;
-        this.recentSymbol = settings.symbol;
-        this.recentMeasurement = settings.measurement;
+        this.settings.recent.betterResult = settings.betterResult;
+        this.settings.recent.worseResult = settings.worseResult;
+        this.settings.recent.selection = settings.selection;
+        this.settings.recent.symbol = settings.symbol;
+        this.settings.recent.measurement = settings.measurement;
     }
 
     changeWeeklyOption(option): void {
         const settings = this.weightControlService.changeOption(option, this.weeklyDiff);
 
-        this.selectionPerWeek = settings.selection;
-        this.weeklySymbol = settings.symbol;
-        this.weeklyMeasurement = settings.measurement;
+        this.settings.weekly.betterResult = settings.betterResult;
+        this.settings.weekly.worseResult = settings.worseResult;
+        this.settings.weekly.selection = settings.selection;
+        this.settings.weekly.symbol = settings.symbol;
+        this.settings.weekly.measurement = settings.measurement;
     }
 
     ngOnInit() {

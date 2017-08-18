@@ -77,27 +77,31 @@ export class WeightControlService {
             waterSum = 0,
             fatSum = 0;
 
-        for (const item of items) {
-            weightSum += item.weight;
-            boneSum += item.boneWeight;
-            waterSum += item.waterPct;
-            fatSum += item.fatPct;
+        for (let i = 0; i < items.length - 1; i++) {
+            weightSum += items[i].weight;
+            boneSum += items[i].boneWeight;
+            waterSum += items[i].waterPct;
+            fatSum += items[i].fatPct;
         }
 
-        const weightAvg = weightSum / items.length,
-            boneAvg = boneSum / items.length,
-            waterAvg = waterSum / items.length,
-            fatAvg = fatSum / items.length;
+        const weightAvg = weightSum / (items.length - 1),
+            boneAvg = boneSum / (items.length - 1),
+            waterAvg = waterSum / (items.length - 1),
+            fatAvg = fatSum / (items.length - 1);
 
         if (numberOfItems > 1) {
             const newestItem = items[numberOfItems - 1],
-                recentDiff = {
-                    we: newestItem.weight - weightAvg,
-                    b: newestItem.boneWeight - boneAvg,
-                    wa: newestItem.waterPct - waterAvg,
-                    f: newestItem.fatPct - fatAvg
-                };
+                weightDiff = (Math.round(newestItem.weight - weightAvg) * 10) / 10,
+                boneDiff = (Math.round(newestItem.boneWeight - boneAvg) * 10) / 10,
+                waterDiff = (Math.round(newestItem.waterPct - waterAvg) * 10) / 10,
+                fatDiff = (Math.round(newestItem.fatPct - fatAvg) * 10) / 10;
 
+            const recentDiff = {
+                we: weightDiff,
+                b: boneDiff,
+                wa: waterDiff,
+                f: fatDiff
+            };
             return recentDiff;
         } else {
             return;
@@ -124,25 +128,28 @@ export class WeightControlService {
     }
 
     changeOption(option, diff) {
-        const selection = option.value;
-        let symbol: string;
-        let measurement: string;
+        const selection = option;
+        let symbol = '',
+            measurement: string,
+            betterResult = false,
+            worseResult = false;
 
-        if (diff[option.value] > 0) {
+        if (diff[option] > 0) {
+            worseResult = true;
             symbol = '+';
-        } else if (diff[option.value] < 0) {
-            symbol = '-';
-        } else {
-            symbol = '';
+        } else if (diff[option] < 0) {
+            betterResult = true;
         }
 
-        if (option.value === 'we' || option.value === 'b') {
+        if (option === 'we' || option === 'b') {
             measurement = 'kg';
         } else {
             measurement = '%';
         }
 
         return {
+            betterResult,
+            worseResult,
             selection,
             symbol,
             measurement
