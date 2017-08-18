@@ -4,8 +4,12 @@
     <div id="previous-diff" *ngIf="currentWeight">
         <div id="yesterday">{{ recentDay }}:</div>
         <div id="current-weight">{{ currentWeight }}kg</div>
-        <div class="diff" [ngClass]="{'better-result': settings.recent.betterResult, 'worse-result': settings.recent.worseResult}">{{ settings.recent.symbol + recentDiff[settings.recent.selection] + settings.recent.measurement}}</div>
-        <md-radio-group class="selection" [(ngModel)]="settings.recent.selection">
+        <div class="diff"
+             *ngIf="weeklyItems.length > 1"
+             [ngClass]="{'better-result': settings.recent.betterResult, 'worse-result': settings.recent.worseResult}">
+            {{ settings.recent.symbol + recentDiff[settings.recent.selection] + settings.recent.measurement}}
+        </div>
+        <md-radio-group class="selection" *ngIf="weeklyItems.length > 1" [(ngModel)]="settings.recent.selection">
             <md-radio-button class="radio-option"
                 *ngFor="let option of options"
                 [value]="option.value"
@@ -16,9 +20,12 @@
         </md-radio-group>
     </div>
 
-    <div id="per-week-diff" *ngIf="currentWeight">
+    <div id="per-week-diff" *ngIf="weeklyItems.length > 1">
         <div id="per-week">per week: </div>
-        <div class="diff" [ngClass]="{'better-result': settings.weekly.betterResult, 'worse-result': settings.weekly.worseResult}">{{ settings.weekly.symbol + weeklyDiff[settings.weekly.selection] + settings.weekly.measurement}}</div>
+        <div class="diff"
+             [ngClass]="{'better-result': settings.weekly.betterResult, 'worse-result': settings.weekly.worseResult}">
+            {{ settings.weekly.symbol + weeklyDiff[settings.weekly.selection] + settings.weekly.measurement}}
+        </div>
         <md-radio-group class="selection" [(ngModel)]="settings.weekly.selection">
             <md-radio-button class="radio-option"
                 *ngFor="let option of options"
@@ -72,7 +79,7 @@
         </md-input-container>
 
         <div id="submit-button">
-            <button md-icon-button type="button" (click)="addWeight()" [disabled]="!newWeight">
+            <button md-icon-button type="button" (click)="addWeight()">
                 Add new weight
             </button>
         </div>

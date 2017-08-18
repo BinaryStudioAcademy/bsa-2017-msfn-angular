@@ -14,7 +14,7 @@ import { ToasterService } from '../../../services/toastr.service';
     ]
 })
 export class WeightControlComponent implements OnInit {
-    weeklyItems: any[];
+    weeklyItems = [];
 
     newWeight = {
         weight: null,
@@ -124,29 +124,33 @@ export class WeightControlComponent implements OnInit {
                 }
             });
 
-            this.updateData();
+            setTimeout(() => this.updateData(), 500);
+
+            // this.newWeight = {
+            //     weight: null,
+            //     waterPct: null,
+            //     boneWeight: null,
+            //     fatPct: null,
+            //     date: ''
+            // };
         }
     }
 
     updateData(): void {
         this.weightControlService.getWeightItems(res => {
-            console.log('RES', res, res[0].hasOwnProperty('weight'));
-
             if (res[0].hasOwnProperty('weight')) {
                 this.weeklyItems = this.weightControlService.getWeeklyWeightItems(res);
-                console.log('WEEKLY ITEMS', this.weeklyItems);
-                this.recentDiff = this.weightControlService.getRecentDiff(this.weeklyItems);
-                this.weeklyDiff = this.weightControlService.getWeeklyDiff(this.weeklyItems);
-                console.log('DIFF', this.recentDiff, this.weeklyDiff);
                 const recentItem = this.weeklyItems[this.weeklyItems.length - 1];
                 this.recentDay = this.weightControlService.getRecentDay(recentItem);
-                console.log('RECENT ITEM', recentItem, 'RECENT DAY', this.recentDay);
                 this.currentWeight = recentItem.weight;
-                console.log('CURRENT WEIGHT', this.currentWeight);
 
+                if (this.weeklyItems.length > 1) {
+                    this.recentDiff = this.weightControlService.getRecentDiff(this.weeklyItems);
+                    this.weeklyDiff = this.weightControlService.getWeeklyDiff(this.weeklyItems);
 
-                this.changeRecentOption('we');
-                this.changeWeeklyOption('we');
+                    this.changeRecentOption('we');
+                    this.changeWeeklyOption('we');
+                }
             }
         });
     }
