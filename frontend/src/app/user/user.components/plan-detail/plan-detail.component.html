@@ -1,27 +1,33 @@
 <div class="container">
   <h1>Training plan {{title}}</h1>
-  <div class="field-container">
-    <md-input-container>
-      <input mdInput placeholder="Plan name" value="New plan">
-    </md-input-container>
-  </div>
-  <div class="period field-container">
+  <div class="about-plan">
+    <div class="field-container">
+      <md-input-container>
+        <input mdInput placeholder="Plan name" value="New plan" class="plan-name">
+      </md-input-container>
+      <md-input-container>
+        <textarea mdInput placeholder="Plan description" class="plan-description"></textarea>
+      </md-input-container>
+    </div>
+    <div class="field-container">
       <div class="field-title">
-          Choose a day or traings count per week
+        Choose a day or traings count per week
+      </div>
+      <div class="field-items">
+        <div class="field-item">
+          <button md-fab class="counter" (click)="changeTrainingCount('dec');">—</button>
+          <input type="text" name="count" class="count" value="{{trainingsCount}}">
+          <button md-fab class="counter" (click)="changeTrainingCount('inc');">+</button>
         </div>
-        <div class="field-items">
-    <div class="field-item days">
-        <div class="item" *ngFor="let day of days">
-          <input type="checkbox" id="day-{{day.key}}" value="{{day.key}}">
-          <label for="day-{{day.key}}">{{day.value}}</label>
+        <div class="field-item days">
+          <div class="item" *ngFor="let day of days">
+            <input type="checkbox" id="day-{{day.key}}" value="{{day.key}}">
+            <label for="day-{{day.key}}">{{day.value}}</label>
+          </div>
         </div>
+
+      </div>
     </div>
-    <div class="field-item">
-        <button md-fab class="counter" (click)="changeTrainingCount('dec');">—</button>
-        <input type="text" name="count" class="count" value="{{trainingsCount}}">
-        <button md-fab class="counter" (click)="changeTrainingCount('inc');">+</button>
-    </div>
-  </div>
   </div>
   <div class="clear"></div>
   <div class="field-container">
@@ -29,13 +35,34 @@
       Sport type
     </div>
     <div class="field-item">
-        <md-select placeholder="Choose type" [(ngModel)]="sportTypeValue" name="type">
-            <md-option *ngFor="let type of types" [value]="type.value">
-              {{type.viewValue}}
-            </md-option>
-          </md-select>
+      <md-select placeholder="Choose type" [(ngModel)]="sportTypeValue" name="type" class="sport-types">
+        <md-option *ngFor="let type of types" [value]="type.value">
+          {{type.viewValue}}
+        </md-option>
+      </md-select>
+
+      <div class="exercises-container">
+        <md-input-container>
+          <input mdInput placeholder="Exercise search" value="Coming soon" class="search" [(ngModel)]="searchString">
+        </md-input-container>
+        <div *ngFor="let exercise of exercisesList" class="exercise-item">
+          <h4 md-line>{{exercise.name}}</h4>
+          <div class="about-exercise">
+          <p md-line>
+            <b>
+            About:
+          </b> {{exercise.description}} </p>
+          <p md-line>
+            <b>
+            How to:
+          </b> {{exercise.how_to}} </p>
+        </div>
+          <button md-fab class="add" title="add to plan">+</button>
+          
+        </div>
+      </div>
     </div>
   </div>
   <button md-button class="btn btn-save" (click)="save(form)">Save</button>
-  
+
 </div>
