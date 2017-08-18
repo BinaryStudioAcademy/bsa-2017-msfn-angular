@@ -122,4 +122,30 @@ export class WeightControlService {
             return this.dateService.convertDateToIso(recentDate);
         }
     }
+
+    changeOption(option, diff) {
+        const selection = option.value;
+        let symbol: string;
+        let measurement: string;
+
+        if (diff[option.value] > 0) {
+            symbol = '+';
+        } else if (diff[option.value] < 0) {
+            symbol = '-';
+        } else {
+            symbol = '';
+        }
+
+        if (option.value === 'we' || option.value === 'b') {
+            measurement = 'kg';
+        } else {
+            measurement = '%';
+        }
+
+        return {
+            selection,
+            symbol,
+            measurement
+        };
+    }
 }

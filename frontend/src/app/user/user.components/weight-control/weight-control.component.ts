@@ -130,39 +130,19 @@ export class WeightControlComponent implements OnInit {
     }
 
     changeRecentOption(option): void {
-        this.selectionPrev = option.value;
+        const settings = this.weightControlService.changeOption(option, this.recentDiff);
 
-        if (this.recentDiff[option.value] > 0) {
-            this.recentSymbol = '+';
-        } else if (this.recentDiff[option.value] < 0) {
-            this.recentSymbol = '-';
-        } else {
-            this.recentSymbol = '';
-        }
-
-        if (option.value === 'we' || option.value === 'b') {
-            this.recentMeasurement = 'kg';
-        } else {
-            this.recentMeasurement = '%';
-        }
+        this.selectionPrev = settings.selection;
+        this.recentSymbol = settings.symbol;
+        this.recentMeasurement = settings.measurement;
     }
 
     changeWeeklyOption(option): void {
-        this.selectionPerWeek = option.value;
+        const settings = this.weightControlService.changeOption(option, this.weeklyDiff);
 
-        if (this.weeklyDiff[option.value] > 0) {
-            this.weeklySymbol = '+';
-        } else if (this.weeklyDiff[option.value] < 0) {
-            this.weeklySymbol = '-';
-        } else {
-            this.weeklySymbol = '';
-        }
-
-        if (option.value === 'we' || option.value === 'b') {
-            this.weeklyMeasurement = 'kg';
-        } else {
-            this.weeklyMeasurement = '%';
-        }
+        this.selectionPerWeek = settings.selection;
+        this.weeklySymbol = settings.symbol;
+        this.weeklyMeasurement = settings.measurement;
     }
 
     ngOnInit() {
