@@ -16,6 +16,7 @@ export class LoginDialogComponent {
     email: string;
     password: string;
     private verified = true;
+    private sendedMail = false;
 
     emailFormControl = new FormControl('', [
         Validators.required,
@@ -68,7 +69,7 @@ export class LoginDialogComponent {
 
         this.httpHandler.sendRequest(sendData)
             .then((res) => {
-                location.reload();
+                this.sendedMail = true;
             });
     }
 }
