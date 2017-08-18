@@ -48,10 +48,14 @@ module.exports = function() {
                                     //and login
                                     return done(null, user)
                                 })
-                                // if email in db -> show message to regular login
+                                // if email in db -> update user
                             } else {
-                                return done(null, false, `You already register with associated e-mail.
-                                Please log in using you email and password`)
+                                userService.updateItem(user._id, queryWithID, (err, cb) => {
+                                    if (err) {
+                                        return done(err);
+                                    }
+                                    return done(null, user);
+                                });
                             }
                         });
                     }
@@ -69,7 +73,6 @@ module.exports = function() {
     ));
     passport.use(new FacebookStrategy(oauthConfig.facebookOptions,
         (req, accessToken, refreshToken, profile, done) => {
-        console.log(profile);
             const queryWithID = {
                 "facebookID": profile.id
             };
@@ -104,8 +107,12 @@ module.exports = function() {
                                     return done(null, user)
                                 })
                             } else {
-                                return done(null, false, `You already register with associated e-mail.
-                                Please log in using you email and password`)
+                                userService.updateItem(user._id, queryWithID, (err, cb) => {
+                                    if (err) {
+                                        return done(err);
+                                    }
+                                    return done(null, user);
+                                });
                             }
                         });
                     }
@@ -122,8 +129,6 @@ module.exports = function() {
     ));
     passport.use(new TwitterStrategy(oauthConfig.twitterOptions,
         (req, accessToken, refreshToken, profile, done) => {
-        console.log(profile);
-            console.log(profile);
             const queryWithID = {
                 "twitterID": profile.id
             };
@@ -158,8 +163,12 @@ module.exports = function() {
                                     return done(null, user)
                                 })
                             } else {
-                                return done(null, false, `You already register with associated e-mail.
-                                Please log in using you email and password`)
+                                userService.updateItem(user._id, queryWithID, (err, cb) => {
+                                    if (err) {
+                                        return done(err);
+                                    }
+                                    return done(null, user);
+                                });
                             }
                         });
                     }
