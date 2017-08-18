@@ -62,7 +62,8 @@ export class LoginDialogComponent {
             sendData: IHttpReq = {
                 url: '/api/user/activate/resendactivation',
                 method: 'POST',
-                body: {data: encData}
+                body: {data: encData},
+                successMessage: 'Check your email'
             };
 
         this.httpHandler.sendRequest(sendData)
