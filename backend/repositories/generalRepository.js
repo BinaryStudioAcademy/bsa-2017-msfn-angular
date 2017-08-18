@@ -12,6 +12,7 @@ Repository.prototype.getById = getById;
 Repository.prototype.findByObject = findByObject;
 Repository.prototype.update = update;
 Repository.prototype.get = get;
+Repository.prototype.getUsersFromArrayID = getUsersFromArrayID;
 
 function add(data, callback) {
     const model = this.model;
@@ -47,27 +48,38 @@ function findByObject(obj, populate, select, callback) {
     query.exec(callback);
 }
 
-function update(id, body, callback){
-    let query = this.model.update({_id:id}, body);
+function update(id, body, callback) {
+    let query = this.model.update({_id: id}, body);
+    query.exec(callback);
+}
+
+function get(params, callback) {
+    if (params.filter === undefined) {
+        params.filter = {};
+    }
+    if (params.sort === undefined) {
+        params.sort = null;
+    }
+    if (params.limit === undefined) {
+        params.limit = null;
+    }
+    if (params.offset === undefined) {
+        params.offset = null;
+    }
+    if (params.fields === undefined) {
+        params.fields = null;
+    }
+    let model = this.model;
+    let query = model.find(params.filter).sort(params.sort).limit(params.limit).skip(params.offset).select(params.fields);
     query.exec(callback);
 };
 
-function get(params, callback){
-    if (params.filter === undefined){
-        params.filter = {};
+function getUsersFromArrayID(array, params, callback) {
+    if (params.fields === undefined) {
+        params.fields = null;
     }
-    if (params.sort === undefined){
-        params.sort = null;
-    }
-    if (params.limit === undefined){
-        params.limit = null;
-    }
-    if (params.offset === undefined){
-        params.offset = null;
-    }
-    let model = this.model;
-    let query = model.find(params.filter).sort(params.sort).limit(params.limit).skip(params.offset);
+    const query = this.model.find().where('_id').in(array).select(params.fields);
     query.exec(callback);
-};
+}
 
 module.exports = Repository;

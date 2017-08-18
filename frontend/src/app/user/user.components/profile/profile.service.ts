@@ -21,23 +21,6 @@ export class ProfileService {
         });
     }
 
-    updateProfile(userData, callback, errorCallback) {
-        const request: IHttpReq = {
-            url: '/api/coach/apply/',
-            method: 'PUT',
-            body: userData
-        };
-
-        this.httpService.sendRequest(request)
-            .then(res => {
-                if (res === userData) {
-                    callback();
-                } else {
-                    errorCallback();
-                }
-            });
-    }
-
     getUser(id, callback) {
         const request: IHttpReq = {
             url: '/api/user/' + id,
@@ -54,7 +37,9 @@ export class ProfileService {
         const request: IHttpReq = {
             url: '/api/user/' + id,
             method: 'PUT',
-            body: user
+            body: user,
+            failMessage: 'Failed to change profile',
+            successMessage: 'Profile changes accepted'
         };
         this.httpService.sendRequest(request).then(res => {
             callback(res);
@@ -63,11 +48,13 @@ export class ProfileService {
 
     addNewEmail(email, id, callback) {
         const request: IHttpReq = {
-            url: '/api/user/' + id + '/email',
+            url: '/api/user/secondaryEmail/' + id,
             method: 'PUT',
             body: {
-            email: email
-            }
+                newSecondaryEmail: email
+            },
+            failMessage: 'Failed to add email',
+            successMessage: 'Secondary email added'
         };
         this.httpService.sendRequest(request).then(res => {
             callback(res);

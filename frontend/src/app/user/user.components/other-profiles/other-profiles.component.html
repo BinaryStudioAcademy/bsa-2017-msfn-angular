@@ -1,0 +1,12 @@
+<div *ngIf="user" class="container">
+    <div class="profile-photo">
+        <img src="{{user.userPhoto}}">
+    </div>
+    <div class="profile-info">
+        <div class="info-name">{{user.firstName}} {{user.lastName}}</div>
+        <div class="info-gender">Gender: <span class="info-value">{{user.gender}}</span></div>
+        <div class="info-birthday">Birthday: <span class="info-value">{{user.birthday}}</span></div>
+        <div class="info-height">Height, cm: <span class="info-value">{{user.height}}</span></div>
+        <div class="info-weight">Weight, kg: <span class="info-value">{{user.weight}}</span></div>
+    </div>
+</div>

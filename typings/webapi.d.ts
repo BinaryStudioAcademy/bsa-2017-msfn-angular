@@ -20,3 +20,12 @@ declare module ExerciseApi {
         isRemoved?: string;
     }
 }
+
+declare module SubscribeApi {
+    export interface ISubscribeUser {
+        _id: string;
+        firstName: string;
+        lastName: string;
+        userPhoto?: string;
+    }
+}

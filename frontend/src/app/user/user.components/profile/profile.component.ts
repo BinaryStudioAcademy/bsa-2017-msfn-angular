@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ProfileService } from './profile.service';
 import { DateService } from '../../../services/date.service';
-import { HttpClient } from '@angular/common/http';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { MdDialog } from '@angular/material';
 import { ConfirmPasswordDialogComponent } from '../../../components/confirm-password-dialog/confirm-password-dialog.component';
@@ -46,7 +45,6 @@ export class ProfileComponent implements OnInit {
 
     constructor(private profileService: ProfileService,
                 private formBuilder: FormBuilder,
-                private http: HttpClient,
                 private dialog: MdDialog,
                 private window: WindowObj,
                 private dateService: DateService,
@@ -110,15 +108,26 @@ export class ProfileComponent implements OnInit {
         dialogRef.afterClosed().subscribe(email => {
             if (email && email !== this.user.email) {
                 this.profileService.addNewEmail(email, this.user._id, res => {
-                    this.user.secondaryEmails.push(res.email);
+                    if (res.status === 'ok') {
+                        this.user.secondaryEmails.push(res.addedEmail);
+                    }
                 });
             }
         });
     }
 
     makeRoot(email: string) {
-        console.log(email);
         const dialogRef = this.dialog.open(ChangeRootEmailDialogComponent, {
+            data: {
+                newRootEmail: email,
+                email: this.user.email
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result.status === 'ok') {
+                this.user.email = result.operationResult.newRootMail;
+                this.user.secondaryEmails = result.operationResult.newSecondaryEmails;
+            }
         });
     }
     onSubmit(user) {

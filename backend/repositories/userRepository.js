@@ -29,9 +29,9 @@ function findById(id, callback) {
     const query = this.model.findOne({_id : id});
     query.exec(callback);
 }
-function getUserByQuery(query, callback) {
-    const innerQuery = this.model.findOne(query);
-    innerQuery.exec(callback);
+function getUserByQuery(queryObj, callback) {
+    const query = this.model.findOne(queryObj);
+    query.exec(callback);
 }
 
 function addEmail(id, email, callback) {

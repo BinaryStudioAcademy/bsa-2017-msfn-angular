@@ -76,7 +76,7 @@ const routes: Routes = [
     {
         path: 'confirmation/:type/:token',
         component: ConfirmedPageComponent,
-        canActivate: [IsLoggedOutGuard]
+        // canActivate: [IsLoggedOutGuard]
     },
     {
         path: '**',

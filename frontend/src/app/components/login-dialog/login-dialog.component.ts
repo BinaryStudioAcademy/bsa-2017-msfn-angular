@@ -15,6 +15,7 @@ export class LoginDialogComponent {
     EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
     email: string;
     password: string;
+    private verified = true;
 
     emailFormControl = new FormControl('', [
         Validators.required,
@@ -31,7 +32,7 @@ export class LoginDialogComponent {
         private httpHandler: HttpService,
         private router: Router,
         private window: WindowObj
-    ) { }
+    ) {}
 
     login() {
         const encData = this.encryptor.encrypt({
@@ -48,7 +49,25 @@ export class LoginDialogComponent {
             .then((res) => {
                 if (res.access === true) {
                     location.reload();
+                } else {
+                    this.verified = false;
                 }
+            });
+    }
+
+    verify() {
+        const encData = this.encryptor.encrypt({
+            'email': this.email
+        }),
+            sendData: IHttpReq = {
+                url: '/api/user/activate/resendactivation',
+                method: 'POST',
+                body: {data: encData}
+            };
+
+        this.httpHandler.sendRequest(sendData)
+            .then((res) => {
+                location.reload();
             });
     }
 }

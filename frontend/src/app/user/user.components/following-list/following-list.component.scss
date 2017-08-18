@@ -1,0 +1,52 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+a {
+    text-decoration: none;
+    color: $text-main-color;
+}
+
+.following-list-wrapper {
+    width: 400px;
+    margin: $content-tb-margin auto 0;
+
+    .following-header {
+        display: flex;
+        justify-content: space-around;
+
+        .following-title {
+            font-size: $usual-text;
+        }
+
+    }
+    .following-search {
+        width: 100%;
+    }
+
+    .no-following-msg {
+        font-size: $usual-text;
+        margin-top: $content-tb-margin;
+        text-align: center;
+    }
+
+    .following-list {
+        height: calc(100vh - 200px);
+        overflow: auto;
+
+        .user-item {
+            display: flex;
+            align-items: center;
+
+            .user-name {
+                margin: 0 14px;
+            }
+
+        }
+        .space {
+            flex: 1 1 auto;
+        }
+
+    }
+}
+

@@ -8,25 +8,29 @@ export class ConfirmedPageService {
   constructor(private httpService: HttpService) { }
 
   checkRegistrationToken(token, callback) {
-    // console.log(token);
     const request: IHttpReq = {
         url: '/api/user/activate/' + token,
         method: 'GET',
         body: ''
     };
     this.httpService.sendRequest(request).then(res => {
-        callback(res);
+        callback(null, res);
+    }).catch(err => {
+        callback(err);
     });
   }
 
   checkRootEmailToken(token, callback) {
     const request: IHttpReq = {
-        url: '/api/user/activate/changemail/' + token,
+        url: '/api/user/changemail/' + token,
         method: 'GET',
-        body: ''
+        body: '',
+        successMessage: 'Your root email has changed'
     };
     this.httpService.sendRequest(request).then(res => {
-        callback(res);
+        callback(null, res);
+    }).catch(err => {
+        callback(err);
     });
   }
 }

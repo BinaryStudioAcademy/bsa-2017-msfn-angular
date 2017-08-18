@@ -1,0 +1,32 @@
+<div class="following-list-wrapper">
+    <div class="following-header">
+        <md-card-title class="profile-title">Following</md-card-title>
+    </div>
+
+    <md-input-container *ngIf="!noFollowing" class="following-search">
+        <input mdInput #search placeholder="Search" (change)="onSearch(search.value)" (keyup)="onSearch(search.value)"
+               autocomplete="off">
+        <md-icon mdSuffix>search</md-icon>
+    </md-input-container>
+    <div *ngIf="noFollowing" class="no-following-msg">You don't follow anyone yet</div>
+    <md-list>
+        <div class="following-list"
+             infinite-scroll
+             [infiniteScrollDistance]="2"
+             [infiniteScrollThrottle]="150"
+             [scrollWindow]="false"
+             (scrolled)="onScroll()">
+            <md-list-item  *ngFor="let follower of showFollowing">
+                <a [routerLink]="'/user/profile/'+follower._id">
+                    <div class="user-item">
+                    <img class="user-avatar" md-list-avatar
+                         [src]="follower.userPhoto || './resources/default.png'">
+                    <span class="user-name">{{follower.firstName + ' ' +follower.lastName}}</span>
+                    </div>
+                </a>
+                <span class="space"></span>
+                <button md-button #unfollowBtn (click)="unfollow(unfollowBtn._elementRef.nativeElement,follower._id)">Unfollow</button>
+            </md-list-item>
+        </div>
+    </md-list>
+</div>

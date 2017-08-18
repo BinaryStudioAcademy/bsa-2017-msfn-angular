@@ -50,6 +50,13 @@ export class DateService {
     }
 
     convertDateFromIso(isoDate: string) {
+        if (isoDate === '') {
+            return {
+                year: '',
+                month: '',
+                day: ''
+            };
+        }
         const date = new Date(isoDate);
         const dateProps = {
             year: date.getFullYear(),

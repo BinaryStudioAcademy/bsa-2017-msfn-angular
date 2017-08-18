@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const objID = mongoose.Types;
 const socketService = require('./socketService');
 
-class subscribeService {
+class subscribeService{
 
     constructor() {
     }
@@ -41,7 +41,7 @@ class subscribeService {
     }
 
     unfollow(data, callback) {
-        const userToFollow = data.user_id;
+        const userToFollow = data.body.user_id;
         const currentUserId = data.session.passport.user;
         userRepository.findById(currentUserId, (err, currentUser) => {
             const usnfollowPos = currentUser.follow.findIndex(this.itemInArray, userToFollow);
@@ -57,13 +57,21 @@ class subscribeService {
     getFollowing(data, callback) {
         const currentUserId = data.session.passport.user;
         userRepository.findById(currentUserId, (err, currentUser) => {
-            callback(err, currentUser.follow);
+            const params = {
+                fields: '_id firstName lastName userPhoto'
+            };
+            userRepository.getUsersFromArrayID(currentUser.follow, params, (err, followingUsers) => {
+                callback(err, followingUsers);
+            });
         });
     }
 
     getFollowers(data, callback) {
-        const params = {};
         const currentUserId = data.session.passport.user;
+        const params = {
+            filter: {follow: currentUserId},
+            fields: '_id firstName lastName userPhoto'
+        };
         params.filter = {follow: currentUserId};
         userRepository.get(params, (err, users) => {
             callback(err, users);
@@ -71,7 +79,7 @@ class subscribeService {
     }
 
     itemInArray(element, index, array) {
-        return (this === element);
+        return (this === element.toHexString());
     }
 }
 

@@ -1,11 +1,20 @@
 const
     apiResponse = require('express-api-response'),
     activateService = require('../../services/activateService'),
+    loginService = require('../../services/loginService'),
     express = require('express'),
     router = express.Router();
 
 router.get('/:token', function (req, res, next) {
-    activateService.checkActivateCode(req.params.token, function (err, data) {
+    loginService.loginConfirmedUser(req, res, next, function (err, user) {
+        res.data = data;
+        res.err = err;
+        next();
+    });
+}, apiResponse);
+
+router.post('/resendactivation', function (req, res, next) {
+    activateService.resendActivateCode(req.body, function (err, data) {
         res.data = data;
         res.err = err;
         next();

@@ -1,46 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmedPageService } from './confirmed-page.service';
 
-@Component ({
+@Component({
     selector: 'app-confirmed-page',
     templateUrl: './confirmed-page.component.html',
     styleUrls: ['./confirmed-page.component.scss'],
 })
 export class ConfirmedPageComponent implements OnInit {
-    registered: boolean;
-    chagedRoot: boolean;
+    showRegistered = false;
+    showChangedRoot = false;
+    showInfo = false;
 
-
-    constructor(private route: ActivatedRoute, private confirmedPageService: ConfirmedPageService ) { }
+    constructor(private route: ActivatedRoute, private confirmedPageService: ConfirmedPageService, private router: Router, ) { }
 
     ngOnInit() {
         const type = this.route.snapshot.params['type'];
         const token = this.route.snapshot.params['token'];
-        let registered = false;
-        let changedRoot = false;
-
         if (type === 'registration') {
-            this.confirmedPageService.checkRegistrationToken(token, res => {
-                if (res.ok) {
-                    registered = true;
+            this.confirmedPageService.checkRegistrationToken(token, (err, res) => {
+                if (res.access) {
+                    // this.router.navigate(['/user/profile']);
+                    // location.reload();
+
+                    // Redirect user to profile page, when he just activated his account
+                    location.href = '/user/profile/me';
                 }
             });
-
-            if (registered) {
-                this.registered = true;
-            }
         } else if (type === 'rootemail') {
-            this.confirmedPageService.checkRootEmailToken(token, res => {
-                if (res.ok) {
-                    changedRoot = true;
+            this.confirmedPageService.checkRootEmailToken(token, (err, res) => {
+                if (res.status === 'ok') {
+                    this.showChangedRoot = true;
+                } else {
+                    this.showInfo = true;
                 }
             });
-
-            if (registered) {
-                this.chagedRoot = true;
-            }
         }
+    }
 
+    resendRegisteredConfirmation() {
     }
 }
