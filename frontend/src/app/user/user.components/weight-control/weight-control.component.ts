@@ -67,6 +67,8 @@ export class WeightControlComponent implements OnInit {
 
     selectionPrev = 'we';
     selectionPerWeek = 'we';
+    recentMeasurement = 'kg';
+    weeklyMeasurement = 'kg';
 
     constructor(private weightControlService: WeightControlService,
                 private toasterService: ToasterService) { }
@@ -137,6 +139,12 @@ export class WeightControlComponent implements OnInit {
         } else {
             this.recentSymbol = '';
         }
+
+        if (option.value === 'we' || option.value === 'b') {
+            this.recentMeasurement = 'kg';
+        } else {
+            this.recentMeasurement = '%';
+        }
     }
 
     changeWeeklyOption(option): void {
@@ -148,6 +156,12 @@ export class WeightControlComponent implements OnInit {
             this.weeklySymbol = '-';
         } else {
             this.weeklySymbol = '';
+        }
+
+        if (option.value === 'we' || option.value === 'b') {
+            this.weeklyMeasurement = 'kg';
+        } else {
+            this.weeklyMeasurement = '%';
         }
     }
 

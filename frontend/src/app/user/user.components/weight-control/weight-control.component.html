@@ -4,7 +4,7 @@
     <div id="previous-diff">
         <div id="yesterday">{{ recentDay }}:</div>
         <div id="current-weight">{{ currentWeight }}kg</div>
-        <div class="diff" [ngClass]="{'better-result': recentSymbol === '-', 'worse-result': recentSymbol === '+'}">{{ recentSymbol + recentDiff[selectionPrev] }}kg</div>
+        <div class="diff" [ngClass]="{'better-result': recentSymbol === '-', 'worse-result': recentSymbol === '+'}">{{ recentSymbol + recentDiff[selectionPrev] + recentMeasurement}}</div>
         <md-radio-group class="selection" [(ngModel)]="selectionPrev">
             <md-radio-button
                 class="radio-option"
@@ -18,8 +18,8 @@
     </div>
 
     <div id="per-week-diff">
-        <div id="per-week">Per week: </div>
-        <div class="diff" [ngClass]="{'better-result': weeklySymbol === '-', 'worse-result': weeklySymbol === '+'}">{{ weeklySymbol + weeklyDiff[selectionPerWeek] }}kg</div>
+        <div id="per-week">per week: </div>
+        <div class="diff" [ngClass]="{'better-result': weeklySymbol === '-', 'worse-result': weeklySymbol === '+'}">{{ weeklySymbol + weeklyDiff[selectionPerWeek] + weeklyMeasurement}}</div>
         <md-radio-group class="selection" [(ngModel)]="selectionPerWeek">
             <md-radio-button
                 class="radio-option"
