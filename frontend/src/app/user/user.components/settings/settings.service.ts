@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
 import { IHttpReq } from '../../../models/http-req';
+import { WindowObj } from '../../../services/window.service';
+import { timeZone } from './timeZones';
 
 @Injectable()
 export class SettingsService {
 
-    constructor(private httpService: HttpService) { }
+    constructor(
+        private httpService: HttpService,
+        private window: WindowObj
+    ) { }
 
-    getMeasurements() {
+    getMeasurements(callback) {
         const request: IHttpReq = {
             url: '/api/measurement/',
             method: 'GET',
@@ -15,7 +20,35 @@ export class SettingsService {
         };
 
         this.httpService.sendRequest(request).then(res => {
-            console.log(res);
+            callback(res);
+        });
+    }
+
+    getUserSettings(callback) {
+        const request: IHttpReq = {
+            url: '/api/user/' + (this.window.data._injectedData as any).userId,
+            method: 'GET',
+            body: ''
+        };
+
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
+        });
+    }
+
+    getTimeZone() {
+        return timeZone;
+    }
+
+    saveSettings(settings, callback) {
+        const request: IHttpReq = {
+            url: '/api/user/' + (this.window.data._injectedData as any).userId,
+            method: 'PUT',
+            body: settings
+        };
+
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
         });
     }
 }

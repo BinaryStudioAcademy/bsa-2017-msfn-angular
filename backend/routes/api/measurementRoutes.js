@@ -48,7 +48,26 @@ module.exports = function (app) {
             }
             if (data instanceof Array && data.length == 1){
                 res.data = data[0];
-            } else{
+            }else if (data instanceof Array && data.length == 0){
+                res.data = {};
+            } else {
+                res.data = data;
+            }
+            res.err = err;
+            next();
+       });
+    }, apiResponse);
+
+    app.get(baseUrl + "by-name/:name/", function (req, res, next) {
+            measurementService.getMeasurementByName(req.params.name, function(err, data) {
+            if (!data.length){
+                data = [];
+            }
+            if (data instanceof Array && data.length == 1){
+                res.data = data[0];
+            }else if (data instanceof Array && data.length == 0){
+                res.data = {};
+            } else {
                 res.data = data;
             }
             res.err = err;

@@ -19,6 +19,16 @@ export class IUser {
         public follow?: any[],
         public userPhoto?: string,
         public requestForCoaching?: boolean,
-        public secondaryEmails?: string[]
+        public secondaryEmails?: string[],
+        public settings?: {
+            weight: string,
+            trainingWeight: string,
+            distance: string,
+            temperature: string,
+            timeFormat: string,
+            timeZone: string,
+            dateFormat: string,
+            startWeek: string,
+        }
     ) { }
 }

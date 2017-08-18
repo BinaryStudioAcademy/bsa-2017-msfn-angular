@@ -13,6 +13,7 @@ MeasurementRepository.prototype.deleteAll = deleteAll;
 MeasurementRepository.prototype.deleteSpecific = deleteSpecific;
 MeasurementRepository.prototype.updateSpecific = updateSpecific;
 MeasurementRepository.prototype.getSpecific = getSpecific;
+MeasurementRepository.prototype.getSpecificByName = getSpecificByName;
 
 
 
@@ -34,6 +35,13 @@ function deleteAll(callback) {
 function getSpecific(id, callback){
     const query = this.model.find({
         _id: id,
+    });
+    query.exec(callback);
+}
+
+function getSpecificByName(measureName, callback){
+    const query = this.model.find({
+        measureName: measureName,
     });
     query.exec(callback);
 }

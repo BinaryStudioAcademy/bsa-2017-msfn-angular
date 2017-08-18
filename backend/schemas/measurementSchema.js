@@ -5,7 +5,8 @@ const Measurement = new Schema({
     measureName: String,
     measureUnits: [{
         conversionFactor: Number,
-        unitName: String
+        unitName: String,
+        unitType: String
     }],
     isRemoved: { 
         type: Boolean,

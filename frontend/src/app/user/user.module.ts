@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MdButtonToggleModule, MdListModule } from '@angular/material';
 
 import { UserRoutingModule } from './user-routing.module';
 import { ImportModule } from '../import.module';
@@ -11,6 +12,10 @@ import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { SettingsComponent } from './user.components/settings/settings.component';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
+import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import { FollowingListComponent } from './user.components/following-list/following-list.component';
+import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 
 @NgModule({
     imports: [
@@ -18,6 +23,9 @@ import { IntervalTrainingPlanComponent } from './user.components/interval-traini
         FormsModule,
         ImportModule,
         UserRoutingModule,
+        MdListModule,
+        MdButtonToggleModule,
+        InfiniteScrollModule
     ],
     declarations: [
         SidebarViewComponent,
@@ -26,6 +34,9 @@ import { IntervalTrainingPlanComponent } from './user.components/interval-traini
         TrainingListComponent,
         SettingsComponent,
         IntervalTrainingPlanComponent,
+        OtherProfilesComponent,
+        FollowersListComponent,
+        FollowingListComponent,
     ],
     providers: [
         ForAllUserGuard,

@@ -5,7 +5,9 @@ const
     baseUrl = '/api/user/',
     subscribeRoutes = require('./subscribeRoutes'),
     activateRoutes = require('./activateRoutes'),
-    coachService = require('../../services/coachService');
+    coachService = require('../../services/coachService'),
+    isUserSessionUser = require('../../middleware/isUserSessionUser.js'),
+    changeMailRoutes = require('./changeMailRoutes');
 
 module.exports = function (app) {
     app.get(baseUrl + 'me', function (req, res, next) {
@@ -14,6 +16,8 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.use(baseUrl + 'activate', activateRoutes);
+
+    app.use(baseUrl + 'changemail', changeMailRoutes);
 
     app.get(baseUrl, function (req, res, next) {
         userRepository.getAll(function (err, data) {
@@ -43,14 +47,18 @@ module.exports = function (app) {
 
     app.put(baseUrl + 'secondaryEmail/:id', function (req, res, next) {
         userService.addEmailToItem(req.params.id, req.body, function (err, data) {
-            res.data = data;
+
+            res.data = {
+                addedEmail: req.body.newSecondaryEmail,
+                status: 'ok'
+            };
             res.err = err;
             next();
         });
     }, apiResponse);
 
 
-    app.put(baseUrl + ':id', function(req, res, next) {
+    app.put(baseUrl + ':id', isUserSessionUser, function(req, res, next) {
         userService.updateItem(req.params.id, req.body, function(err, data) {
             res.data = data;
             res.err = err;
