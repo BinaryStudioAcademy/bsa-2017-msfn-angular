@@ -16,12 +16,11 @@
 .note-item {
     font-size: $usual-text;
     padding: 0 25px;
-      cursor: pointer;
+    cursor: pointer;
     &:hover {
         background: #494949;
     }
-
-    a{
+    a {
         max-width: 200px;
     }
 }
@@ -35,5 +34,31 @@
         text-overflow: ellipsis;
         overflow: hidden;
         text-align: left;
+        padding-right: 30px;
     }
+}
+
+.notification__actions{
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+
+[data-notifications] {
+  position: relative;
+}
+
+[data-notifications]:after {
+
+  content: attr(data-notifications);
+  position: absolute;
+  background: red;
+  border-radius: 50%;
+  display: inline-block;
+  padding: 0.3em;
+  color: #f2f2f2;
+  right: 20px;
+  top: 15px;   
+  width: 10px;
+  height: 10px;
 }
