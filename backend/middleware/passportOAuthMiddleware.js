@@ -89,9 +89,10 @@ module.exports = function() {
                                 return done(err);
                             }
                             if (user === null) {
+                                const names = profile.displayName.trim().split(/\s+/);
                                 const userBody = {
-                                    firstName: profile.name.givenName || profile.displayName.split(' ')[0],
-                                    lastName: profile.name.familyName || profile.displayName.split(' ')[1],
+                                    firstName: profile.name.givenName || names[0],
+                                    lastName: profile.name.familyName || names[1],
                                     email: profile.emails[0].value,
                                     password: 'qwerty',
                                     isCoach: false,
@@ -145,9 +146,10 @@ module.exports = function() {
                                 return done(err);
                             }
                             if (user === null) {
+                                const names = profile.displayName.trim().split(/\s+/);
                                 const userBody = {
-                                    firstName: profile.displayName.split(' ')[0],
-                                    lastName: profile.displayName.split(' ')[1],
+                                    firstName: profile.name.givenName || names[0],
+                                    lastName: profile.name.familyName || names[1],
                                     email: profile.emails[0].value || 'default@msfn.com',
                                     password: 'qwerty',
                                     isCoach: false,
