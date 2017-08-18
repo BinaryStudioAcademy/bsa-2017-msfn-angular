@@ -37,7 +37,15 @@ export class LoginSettingsComponent implements OnInit {
     image = (this.window.data._injectedData as any).userPhoto || './resources/default.png';
     userId = (this.window.data._injectedData as any).userId;
 
-    user: IUser;
+    user: IUser = {
+        password: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        gender: '',
+        birthday: '',
+        secondaryEmails: []
+    };
     birthday;
 
     requestForCoaching = false;
@@ -70,37 +78,12 @@ export class LoginSettingsComponent implements OnInit {
 
     buildForm() {
         this.profileForm = this.formBuilder.group({
-            'firstName': [this.user.firstName, Validators.compose([
-                Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(20),
-            ])],
-            'lastName': [this.user.lastName, Validators.compose([
-                Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(20)
-            ])],
             'email': new FormControl({
                     value: this.user.email,
                     disabled: this.isDisabledEmail
-            }),
-            'weight': [this.user.weight, Validators.compose([
-                    Validators.required,
-                    Validators.min(30),
-                    Validators.max(300)
-            ])],
-            'height': [this.user.height, Validators.compose([
-                    Validators.required,
-                    Validators.min(100),
-                    Validators.max(300)
-            ])],
-    });
+            })
+        });
     }
-
-    onSelect(month: string, year: number) {
-        this.days = this.dateService.generateDays(month, year);
-    }
-
 
     openAddNewEmailDialog() {
         const dialogRef = this.dialog.open(AddNewEmailDialogComponent, {

@@ -1,46 +1,45 @@
-<div class="profile-content">
-    <div class="profile-email">
-        <div class="profile-current-emails">
-            <div class="email-item" >
-                 <span class="email">{{ user.email }}</span>
-                 <span class="root-title">root</span>
-            </div>
-            <div class="email-item" *ngFor="let email of user.secondaryEmails" >
-                 <span class="email">{{ email }}</span>
-                 <span class="root-btn" (click)="makeRoot(email)">make root</span>
+<div class="container">
+    <div class="profile">
+        <div class="profile-content">
+            <h3 class="setting-header">Email</h3>
+            <div class="profile-email">
+                <div class="profile-current-emails">
+                    <div class="email-item" >
+                        <span class="email">{{ user.email }}</span>
+                        <span class="root-title">root</span>
+                    </div>
+                    <div class="email-item" *ngFor="let email of user.secondaryEmails" >
+                        <span class="email">{{ email }}</span>
+                        <span class="root-btn" (click)="makeRoot(email)">make root</span>
+                    </div>
+                </div>
+                <div class=profile-email-btn>
+                    <button (click)="openAddNewEmailDialog()" md-raised-button>Add Email Address</button>
+                </div>
             </div>
         </div>
-        <div class=profile-email-btn>
-            <button (click)="openAddNewEmailDialog()" md-raised-button>Add Email Address</button>
-        </div>
-    </div>
-</div>
-<div class="button-wrapper">
+        
+        <h3 class="setting-header">Password</h3>
         <div class="profile-password">
             <button md-raised-button (click)="openConfirmPasswordDialog()" class="">Change password</button>
         </div>
-        <div *ngIf="window.data._injectedData.role !== 'coach'" id="coach-button">
-            <button md-raised-button type="submit"  *ngIf="!requestForCoaching" (click)="applyForCoaching()">
-                Become a coach
-            </button>
-            <div *ngIf="requestForCoaching">
-                {{ coachingMessage }}
+
+        <h3 class="setting-header">Social account</h3>
+        <div class="social-wrapper">
+            <div class="social-buttons">
+                <a md-raised-button [disabled]="user.facebookID" href="/auth/facebook">
+                    <md-icon *ngIf="user.facebookID">done</md-icon>
+                    Facebook</a>
+                <a md-raised-button [disabled]="user.googleID" href="/auth/google">
+                    <md-icon *ngIf="user.googleID">done</md-icon>
+                    Google+</a>
+                <a md-raised-button [disabled]="user.twitterID" href="/auth/twitter">
+                    <md-icon *ngIf="user.twitterID">done</md-icon>
+                    Twitter</a>
+            </div>
+            <div class="addition-info">
+                Link your account with social networks for a simple login
             </div>
         </div>
     </div>
-    <div class="social-wrapper">
-        <div class="addition-info">
-            Link your account with social networks for a simple login
-        </div>
-        <div class="social-buttons">
-            <a md-raised-button [disabled]="user.facebookID" href="/auth/facebook">
-                <md-icon *ngIf="user.facebookID">done</md-icon>
-                Facebook</a>
-            <a md-raised-button [disabled]="user.googleID" href="/auth/google">
-                <md-icon *ngIf="user.googleID">done</md-icon>
-                Google+</a>
-            <a md-raised-button [disabled]="user.twitterID" href="/auth/twitter">
-                <md-icon *ngIf="user.twitterID">done</md-icon>
-                Twitter</a>
-        </div>
-    </div>
+</div>

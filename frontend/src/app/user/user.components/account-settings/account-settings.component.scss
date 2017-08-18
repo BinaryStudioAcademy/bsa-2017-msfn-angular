@@ -10,17 +10,17 @@ $height: calc(100vh - 70px);
 
 .mainblock {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 60%;
     height: calc(100vh - 70px - 45px*2);
     min-height: 450px;
-    margin: $header-top-margin 0;
-    overflow: scroll;
+    margin: $header-top-margin auto;
+    background-color: $gradient-to-color;
 }
 
 aside {
-    flex: 0 0 20%;
+    flex: 0 0 30%;
     height: 100%;
+    // float: left;
     font-family: $font-general;
     font-weight: 600;
     font-size: $usual-text;
@@ -66,7 +66,9 @@ aside {
 }
 
 .child {
+    flex: 0 0 70%;
     background-color: $gradient-to-color;
+    overflow-y: auto;
 }
 
 @media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {

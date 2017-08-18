@@ -70,7 +70,7 @@
                         </md-select>
                     </div>
                 </div>
-            <!--
+            <!-- // moved to characteristic
                 <div class="profile-physparam">
                     <div class="weight-container">
                         <label for='weight' class="label">Weight, kg</label>
@@ -120,9 +120,7 @@
                 </div>
             </div>
         -->
-            <div class="profile-footer">
-                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
-            </div>
+        <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
         </form>
     </div>
 </div>
