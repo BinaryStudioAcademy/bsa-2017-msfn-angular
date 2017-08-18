@@ -18,26 +18,19 @@ function resendActivateCode(body, callback) {
         if (user === null) {
             callback(new ApiError("User not found"));
         } else {
-            confirmCodeRepository.get({
-                user: user._id
-            }, (err, confirmCode) => {
-                if (err) {
-                    return callback(err);
+            emailService.send({
+                to: user.email,
+                subject: 'Your MSFN registration',
+                html: '<table><tr><td>Additional request for account registration! ' +
+                    '!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
+                    '<a href="http://localhost:3060/confirmation/registration/' + user.activateToken + '">' + 'Activate account </a> </td></tr></table>'
+            }, (err, data) => {
+                if (err) return callback(err);
+                if (data.rejected.length == 0) {
+                    data.status = 'ok';
                 }
-                emailService.send({
-                    to: body.email,
-                    subject: 'Your MSFN registration',
-                    html: '<table><tr><td>Additional request for account registration! ' +
-                        '!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
-                        '<a href="http://localhost:3060/confirmation/registration/' + confirmCode.activateToken + '">' + 'Activate account </a> </td></tr></table>'
-                }, (err, data) => {
-                    if (err) return callback(err);
-                    if (data.rejected.length == 0) {
-                        data.status = 'ok';
-                    }
-                    callback(null, data);
-                });
-            })
+                callback(null, data);
+            });
         }
     })
 }
@@ -52,9 +45,11 @@ function checkActivateCode(token, callback) {
         user.checkToken(token, status => {
             if (status) {
                 // user.activateToken = '';
-                userRepository.update(user.id, {activateToken: ''}, function(err, data) {
+                userRepository.update(user.id, {
+                    activateToken: ''
+                }, function (err, data) {
                     if (!err) {
-                        userRepository.findById(user.id, function(err, user) {
+                        userRepository.findById(user.id, function (err, user) {
                             return callback(null, user);
                         });
                     }
