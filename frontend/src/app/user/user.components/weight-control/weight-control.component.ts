@@ -126,13 +126,10 @@ export class WeightControlComponent implements OnInit {
 
             setTimeout(() => this.updateData(), 500);
 
-            // this.newWeight = {
-            //     weight: null,
-            //     waterPct: null,
-            //     boneWeight: null,
-            //     fatPct: null,
-            //     date: ''
-            // };
+            this.weightFormControl.reset();
+            this.waterFormControl.reset();
+            this.boneFormControl.reset();
+            this.fatFormControl.reset();
         }
     }
 
