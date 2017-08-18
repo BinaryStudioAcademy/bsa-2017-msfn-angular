@@ -1,0 +1,88 @@
+@import "../../../../globalStyles/variables.scss";
+@import '../../../../globalStyles/text.scss';
+@import '../../../../globalStyles/indentations.scss';
+
+$height: calc(100vh - 70px);
+
+.menu-element {
+    display: block;
+}
+
+.mainblock {
+    display: flex;
+    width: 60%;
+    height: calc(100vh - 70px - 45px*2);
+    min-height: 450px;
+    margin: $header-top-margin auto;
+    background-color: $gradient-to-color;
+}
+
+aside {
+    flex: 0 0 30%;
+    height: 100%;
+    // float: left;
+    font-family: $font-general;
+    font-weight: 600;
+    font-size: $usual-text;
+    background: linear-gradient($bg-color 75%, $gradient-from-color);
+
+    nav {
+        width: 90%;
+        float: right;
+        position: relative;
+
+        a {
+            line-height: $header-text;
+            text-decoration: none;
+            color: #aaa;
+        }
+
+        .navigation__your-section {
+            margin-top: $content-between-margin;
+        }
+
+        .navigation__title {
+            font-family: inherit;
+            font-weight: inherit;
+            font-size: inherit;
+        }
+        
+        .navigation__icon {
+            float: left;
+            fill: #aaa;
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            margin-right: 13px;
+        }
+
+        .active-link {
+            display: block;
+            color: #fff;
+            font-weight: bold;
+            background-color: $gradient-to-color;
+        }
+    }
+}
+
+.child {
+    flex: 0 0 70%;
+    background-color: $gradient-to-color;
+    overflow-y: auto;
+}
+
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
+    aside {
+        width: 180px;
+    }
+}
+
+@media screen and (max-width: $small-screen) {
+    aside {
+        width: 55px;
+
+        .navigation__title, .navigation__subheader {
+            display: none;
+        }
+    }
+}

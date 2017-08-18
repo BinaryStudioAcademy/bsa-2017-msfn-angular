@@ -16,6 +16,9 @@ import { FollowersListComponent } from './user.components/followers-list/followe
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { FollowingListComponent } from './user.components/following-list/following-list.component';
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
+import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
+import { FriendsComponent } from './user.components/friends/friends.component';
+import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
 
 @NgModule({
     imports: [
@@ -37,6 +40,9 @@ import { OtherProfilesComponent } from './user.components/other-profiles/other-p
         OtherProfilesComponent,
         FollowersListComponent,
         FollowingListComponent,
+        AccountSettingsComponent,
+        FriendsComponent,
+        LoginSettingsComponent,
     ],
     providers: [
         ForAllUserGuard,
