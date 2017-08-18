@@ -26,6 +26,7 @@ declare module SubscribeApi {
         _id: string;
         firstName: string;
         lastName: string;
+        justUnsubscribe?: boolean;
         userPhoto?: string;
     }
 }

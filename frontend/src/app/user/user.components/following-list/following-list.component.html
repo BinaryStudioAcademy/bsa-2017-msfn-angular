@@ -16,16 +16,16 @@
              [infiniteScrollThrottle]="150"
              [scrollWindow]="false"
              (scrolled)="onScroll()">
-            <md-list-item  *ngFor="let follower of showFollowing">
+            <md-list-item *ngFor="let follower of showFollowing">
                 <a [routerLink]="'/user/profile/'+follower._id">
                     <div class="user-item">
-                    <img class="user-avatar" md-list-avatar
-                         [src]="follower.userPhoto || './resources/default.png'">
-                    <span class="user-name">{{follower.firstName + ' ' +follower.lastName}}</span>
+                        <img class="user-avatar" md-list-avatar
+                             [src]="follower.userPhoto || './resources/default.png'">
+                        <span class="user-name">{{follower.firstName + ' ' +follower.lastName}}</span>
                     </div>
                 </a>
                 <span class="space"></span>
-                <button md-button #unfollowBtn (click)="unfollow(unfollowBtn._elementRef.nativeElement,follower._id)">Unfollow</button>
+                <button md-button (click)="unfollow(follower)">{{follower.justUnsubscribe?'Follow':'Unfollow'}}</button>
             </md-list-item>
         </div>
     </md-list>
