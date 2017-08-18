@@ -6,6 +6,7 @@ function MeasurementService() {}
 MeasurementService.prototype.getAllMeasurements = getAllMeasurements;
 MeasurementService.prototype.deleteAllMeasurements = deleteAllMeasurements;
 MeasurementService.prototype.getMeasurement = getMeasurement;
+MeasurementService.prototype.getMeasurementByName = getMeasurementByName;
 MeasurementService.prototype.createMeasurement = createMeasurement;
 MeasurementService.prototype.updateMeasurement = updateMeasurement;
 MeasurementService.prototype.deleteMeasurement = deleteMeasurement;
@@ -78,6 +79,20 @@ function getAllMeasurements(callback) {
 
 function getMeasurement(id, callback) {
     measurementRepository.getSpecific(id, (err, MeasurementData) => {
+
+        if (err) return callback(err);
+        if (MeasurementData === null) {
+            callback(null, []);
+        } else {
+            callback(null, MeasurementData);
+        }
+    });
+}
+
+
+function getMeasurementByName(measureName, callback) {
+    const measureNameRegExp = new RegExp(measureName, 'i');
+    measurementRepository.getSpecificByName(measureNameRegExp, (err, MeasurementData) => {
 
         if (err) return callback(err);
         if (MeasurementData === null) {

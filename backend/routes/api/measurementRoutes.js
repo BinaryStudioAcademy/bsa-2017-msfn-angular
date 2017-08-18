@@ -56,4 +56,19 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
+    app.get(baseUrl + "by-name/:name/", function (req, res, next) {
+            measurementService.getMeasurementByName(req.params.name, function(err, data) {
+            if (!data.length){
+                data = [];
+            }
+            if (data instanceof Array && data.length > 0){
+                res.data = data[0];
+            } else{
+                res.data = data;
+            }
+            res.err = err;
+            next();
+       });
+    }, apiResponse);
+
 };
