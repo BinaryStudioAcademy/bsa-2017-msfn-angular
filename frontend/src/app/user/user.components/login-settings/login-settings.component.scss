@@ -1,0 +1,151 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
+
+a {
+    display: block;
+    color: $text-main-color;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
+    justify-content: center;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 460px;
+    padding: 20px;
+}
+
+.profile-content {
+    margin-top: 20px;
+    justify-content: center;
+    flex-direction: column;
+
+    .profile-email {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 0;
+    
+        .profile-current-emails {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 233px;
+            color: $usual-text;
+    
+            .email-item {
+                display: flex;
+                justify-content: space-between;
+                border: 2px solid #424242;
+                padding: 6px 10px;
+    
+                .email {
+                    display: inline-block;
+                    overflow: hidden;
+                    text-overflow: ellipsis; 
+                    white-space: nowrap;
+                }
+                
+                .root-title {
+                    color: $btn-color;
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+
+                .root-btn {
+                    display: none;
+                    cursor: pointer;
+                    font-style: italic;
+                    opacity: 0.5;
+                }
+                
+                .root-btn:hover {
+                    text-decoration: underline;
+                }
+            }
+            
+            .email-item:hover {
+                .root-btn {
+                    display: inline;
+                }
+            
+                .email {
+                    max-width: 70%;
+                }
+            
+                .root-btn {
+                    margin-left: -10px;
+                }
+            }
+        }
+
+        .profile-email-btn {
+            display: flex;
+            flex: 1 1 185px;
+            justify-content: flex-end;
+        }
+    }
+}
+
+.profile-password {
+    margin: auto;
+}
+
+.social-wrapper {
+    .addition-info{
+        margin: 10px 0;
+        text-align: center;
+        font-size: $minor-text;
+    }
+    .social-buttons{
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+@media only screen and (max-width: $small-screen) {
+    .profile-current-email {
+        justify-content: center;
+        margin: 0 15px 15px;
+    }
+
+    .profile-email {
+        flex-wrap: wrap;
+    }
+    .profile-email-btn {
+        flex: 0;
+    }
+    .profile-fullname {
+        align-items: center;
+    }
+    .profile-name,
+    .profile-lastname {
+        width: 80%;
+    }
+    .profile-birthday {
+        >div {
+            margin: 20px 0 20px;
+        }
+    }
+    .birthday-year {
+        flex: 0;
+    }
+    .profile-password {
+        margin-top: 15px;
+    }
+    .ph-input {
+        width: 25%;
+    }
+}

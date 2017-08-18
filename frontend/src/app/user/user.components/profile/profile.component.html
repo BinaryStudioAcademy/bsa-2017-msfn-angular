@@ -1,6 +1,5 @@
 <div class="container">
     <div class="profile">
-        <md-card-title class="profile-title">Your profile</md-card-title>
         <form *ngIf="user" class="profile-form" [formGroup]="profileForm">
             <div class="profile-header">
                 <div class="profile-avatar">
@@ -28,6 +27,7 @@
                     </md-input-container>
                 </div>
             </div>
+        <!-- // moved to login-settings
             <div class="profile-content">
                 <div class="profile-email">
                     <div class="profile-current-emails">
@@ -44,6 +44,7 @@
                         <button (click)="openAddNewEmailDialog()" md-raised-button>Add Email Address</button>
                     </div>
                 </div>
+            -->
                 <div class="profile-birthday">
                     <div class="birthday-month">
                         <md-select placeholder="Month" [(ngModel)]="birthday.month" (change)="onSelect(birthday.month,birthday.year)"
@@ -69,6 +70,7 @@
                         </md-select>
                     </div>
                 </div>
+            <!-- // moved to characteristic
                 <div class="profile-physparam">
                     <div class="weight-container">
                         <label for='weight' class="label">Weight, kg</label>
@@ -85,6 +87,8 @@
                         </md-input-container>
                     </div>
                 </div>
+            -->
+            <!-- // moved to login-settings
                 <div class="button-wrapper">
                     <div class="profile-password">
                         <button md-raised-button (click)="openConfirmPasswordDialog()" class="">Change password</button>
@@ -115,9 +119,8 @@
                     </div>
                 </div>
             </div>
-            <div class="profile-footer">
-                <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
-            </div>
+        -->
+        <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
         </form>
     </div>
 </div>
