@@ -19,7 +19,7 @@ module.exports = function () {
         twitterOptions: {
             consumerKey: '73eCrw6PYset3wPCsTtreVEey',
             consumerSecret: '7u8viziKxzeUlNV2BLUT0E2vptUmBYCXxjEv65k8T4Heak9Riq',
-            callbackURL: config.host.hostAddress + 'auth/twitter/callback',
+            callbackURL: config.host.hostAddress + '/auth/twitter/callback',
             includeEmail: true,
             passReqToCallback: true
         }
