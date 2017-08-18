@@ -10,13 +10,20 @@
             {{ settings.recent.symbol + recentDiff[settings.recent.selection] + settings.recent.measurement}}
         </div>
         <md-radio-group class="selection" *ngIf="weeklyItems.length > 1" [(ngModel)]="settings.recent.selection">
-            <md-radio-button class="radio-option"
+            <label for="recent-{{ option.value }}"
+                   *ngFor="let option of options"
+                   [ngClass]="{'label-checked': option.recentChecked, 'label-unchecked': !option.recentChecked}">
+                {{ option.value }}
+            </label>
+            <input id="recent-{{ option.value }}"
+                class="radio-option"
+                type="radio"
+                name="recentOption"
+                value="{{ option.value }}"
                 *ngFor="let option of options"
                 [value]="option.value"
                 [checked]="option.recentChecked"
                 (change)="changeRecentOption(option.value)">
-                {{ option.value }}
-            </md-radio-button>
         </md-radio-group>
     </div>
 
@@ -27,13 +34,20 @@
             {{ settings.weekly.symbol + weeklyDiff[settings.weekly.selection] + settings.weekly.measurement}}
         </div>
         <md-radio-group class="selection" [(ngModel)]="settings.weekly.selection">
-            <md-radio-button class="radio-option"
-                *ngFor="let option of options"
-                [value]="option.value"
-                [checked]="option.weeklyChecked"
-                (change)="changeWeeklyOption(option.value)">
+            <label for="weekly-{{ option.value }}"
+                   *ngFor="let option of options"
+                   [ngClass]="{'label-checked': option.weeklyChecked, 'label-unchecked': !option.weeklyChecked}">
                 {{ option.value }}
-            </md-radio-button>
+            </label>
+            <input id="weekly-{{ option.value }}"
+                   class="radio-option"
+                   type="radio"
+                   name="weeklyOption"
+                   value="{{ option.value }}"
+                   *ngFor="let option of options"
+                   [value]="option.value"
+                   [checked]="option.weeklyChecked"
+                   (change)="changeWeeklyOption(option.value)">
         </md-radio-group>
     </div>
 

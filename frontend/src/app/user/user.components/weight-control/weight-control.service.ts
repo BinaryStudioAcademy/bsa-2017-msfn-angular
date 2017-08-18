@@ -58,10 +58,10 @@ export class WeightControlService {
             const newestItem = items[numberOfItems - 1],
                 recentItem = items[numberOfItems - 2],
                 recentDiff = {
-                    we: newestItem.weight - recentItem.weight,
-                    b: newestItem.boneWeight - recentItem.boneWeight,
-                    wa: newestItem.waterPct - recentItem.waterPct,
-                    f: newestItem.fatPct - recentItem.fatPct
+                    weight: newestItem.weight - recentItem.weight,
+                    bones: newestItem.boneWeight - recentItem.boneWeight,
+                    water: newestItem.waterPct - recentItem.waterPct,
+                    fat: newestItem.fatPct - recentItem.fatPct
                 };
 
             return recentDiff;
@@ -97,10 +97,10 @@ export class WeightControlService {
                 fatDiff = (Math.round(newestItem.fatPct - fatAvg) * 10) / 10;
 
             const recentDiff = {
-                we: weightDiff,
-                b: boneDiff,
-                wa: waterDiff,
-                f: fatDiff
+                weight: weightDiff,
+                bones: boneDiff,
+                water: waterDiff,
+                fat: fatDiff
             };
             return recentDiff;
         } else {
@@ -141,7 +141,7 @@ export class WeightControlService {
             betterResult = true;
         }
 
-        if (option === 'we' || option === 'b') {
+        if (option === 'weight' || option === 'bones') {
             measurement = 'kg';
         } else {
             measurement = '%';

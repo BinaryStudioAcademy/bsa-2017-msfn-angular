@@ -25,16 +25,16 @@ export class WeightControlComponent implements OnInit {
     };
 
     recentDiff = {
-        we: 0,
-        b: 0,
-        wa: 0,
-        f: 0
+        weight: 0,
+        bones: 0,
+        water: 0,
+        fat: 0
     };
     weeklyDiff = {
-        we: 0,
-        b: 0,
-        wa: 0,
-        f: 0
+        weight: 0,
+        bones: 0,
+        water: 0,
+        fat: 0
     };
 
     recentDay: string;
@@ -42,22 +42,22 @@ export class WeightControlComponent implements OnInit {
 
     options = [
         {
-            value: 'we',
+            value: 'weight',
             recentChecked: true,
             weeklyChecked: true
         },
         {
-            value: 'wa',
+            value: 'water',
             recentChecked: false,
             weeklyChecked: false
         },
         {
-            value: 'b',
+            value: 'bones',
             recentChecked: false,
             weeklyChecked: false
         },
         {
-            value: 'f',
+            value: 'fat',
             recentChecked: false,
             weeklyChecked: false
         }
@@ -68,14 +68,14 @@ export class WeightControlComponent implements OnInit {
             symbol: '',
             betterResult: false,
             worseResult: false,
-            selection: 'we',
+            selection: 'weight',
             measurement: 'kg'
         },
         weekly: {
             symbol: '',
             betterResult: false,
             worseResult: false,
-            selection: 'we',
+            selection: 'weight',
             measurement: 'kg'
         }
     };
@@ -145,8 +145,8 @@ export class WeightControlComponent implements OnInit {
                     this.recentDiff = this.weightControlService.getRecentDiff(this.weeklyItems);
                     this.weeklyDiff = this.weightControlService.getWeeklyDiff(this.weeklyItems);
 
-                    this.changeRecentOption('we');
-                    this.changeWeeklyOption('we');
+                    this.changeRecentOption('weight');
+                    this.changeWeeklyOption('weight');
                 }
             }
         });
@@ -160,6 +160,10 @@ export class WeightControlComponent implements OnInit {
         this.settings.recent.selection = settings.selection;
         this.settings.recent.symbol = settings.symbol;
         this.settings.recent.measurement = settings.measurement;
+
+        for (const item of this.options) {
+            item.recentChecked = item.value === option;
+        }
     }
 
     changeWeeklyOption(option): void {
@@ -170,6 +174,10 @@ export class WeightControlComponent implements OnInit {
         this.settings.weekly.selection = settings.selection;
         this.settings.weekly.symbol = settings.symbol;
         this.settings.weekly.measurement = settings.measurement;
+
+        for (const item of this.options) {
+            item.weeklyChecked = item.value === option;
+        }
     }
 
     ngOnInit() {
