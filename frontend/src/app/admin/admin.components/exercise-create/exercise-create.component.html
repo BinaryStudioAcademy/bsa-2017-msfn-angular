@@ -1,6 +1,6 @@
 <form class="exercise-create-form" #form="ngForm">
 
-    <h2>Create/Edit Exercise</h2>
+    <h2>{{titleType}} exercise</h2>
     <md-input-container class="input">
         <input mdInput placeholder="Exercise Title" [(ngModel)]="exercise.name" name="name" required>
     </md-input-container>
