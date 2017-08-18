@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { SportHandlingService } from './sport-handling.service';
-import { ISport } from '../../models/sport';
+import { ISport } from '../../../models/sport';
 import { ToasterService } from '../../../services/toastr.service';
 
 @Component({

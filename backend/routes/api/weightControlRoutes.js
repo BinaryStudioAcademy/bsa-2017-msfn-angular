@@ -1,48 +1,31 @@
 const
     apiResponse = require('express-api-response'),
+    userRepository = require('../../repositories/userRepository'),
     weightControlService = require('../../services/weightControlService'),
-    weightControlRepository = require('../../repositories/weightControlRepository'),
     baseUrl = '/api/weight-control/';
 
 module.exports = function (app) {
-
     app.get(baseUrl, (req, res, next) => {
-        weightControlRepository.getAll((err, data) => {
-            if (!data.length){
-                data = [{}];
+        userRepository.getById(req.user._id, (err, data) => {
+            if (!data.weightControl.length){
+                data.weightControl = [{}];
             }
+            res.data = data.weightControl;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.put(`${baseUrl}add`, (req, res, next) => {
+        weightControlService.addItem(req.user._id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.get(baseUrl + ':id', (req, res, next) => {
-        weightControlRepository.getById(req.params.id, (err, data) => {
-            res.data = data;
-            res.err = err;
-            next();
-        });
-    }, apiResponse);
-
-    app.post(baseUrl, (req, res, next) => {
-        weightControlRepository.add(req.body, (err, data) => {
-            res.data = data;
-            res.err = err;
-            next();
-        });
-    }, apiResponse);
-
-    app.put(baseUrl + ':id', (req, res, next) => {
-        weightControlService.updateItem(req.body.id, req.body, (err, data) => {
-            res.data = data;
-            res.err = err;
-            next();
-        });
-    }, apiResponse);
-
-    app.delete(baseUrl + ':id', (req, res, next) => {
-        weightControlRepository.deleteById(req.params.id, (err, data) => {
+    app.put(`${baseUrl}delete`, (req, res, next) => {
+        weightControlRepository.deleteItem(req, (err, data) => {
             res.data = data;
             res.err = err;
             next();
