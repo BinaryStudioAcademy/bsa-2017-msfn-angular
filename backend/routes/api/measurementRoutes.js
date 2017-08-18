@@ -48,7 +48,9 @@ module.exports = function (app) {
             }
             if (data instanceof Array && data.length == 1){
                 res.data = data[0];
-            } else{
+            }else if (data instanceof Array && data.length == 0){
+                res.data = {};
+            } else {
                 res.data = data;
             }
             res.err = err;
@@ -61,9 +63,11 @@ module.exports = function (app) {
             if (!data.length){
                 data = [];
             }
-            if (data instanceof Array && data.length > 0){
+            if (data instanceof Array && data.length == 1){
                 res.data = data[0];
-            } else{
+            }else if (data instanceof Array && data.length == 0){
+                res.data = {};
+            } else {
                 res.data = data;
             }
             res.err = err;

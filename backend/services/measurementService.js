@@ -91,7 +91,7 @@ function getMeasurement(id, callback) {
 
 
 function getMeasurementByName(measureName, callback) {
-    const measureNameRegExp = new RegExp(measureName, 'i');
+    const measureNameRegExp = new RegExp('^' + measureName + '$', 'i');
     measurementRepository.getSpecificByName(measureNameRegExp, (err, MeasurementData) => {
 
         if (err) return callback(err);
