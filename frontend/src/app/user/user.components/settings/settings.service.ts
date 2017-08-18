@@ -12,7 +12,7 @@ export class SettingsService {
         private window: WindowObj
     ) { }
 
-    getMeasurements() {
+    getMeasurements(callback) {
         const request: IHttpReq = {
             url: '/api/measurement/',
             method: 'GET',
@@ -20,12 +20,11 @@ export class SettingsService {
         };
 
         this.httpService.sendRequest(request).then(res => {
-            console.log(res);
-            return res;
+            callback(res);
         });
     }
 
-    getUserSettings() {
+    getUserSettings(callback) {
         const request: IHttpReq = {
             url: '/api/user/' + (this.window.data._injectedData as any).userId,
             method: 'GET',
@@ -33,7 +32,7 @@ export class SettingsService {
         };
 
         this.httpService.sendRequest(request).then(res => {
-            return res.settings;
+            callback(res);
         });
     }
 
@@ -41,7 +40,7 @@ export class SettingsService {
         return timeZone;
     }
 
-    saveSettings(settings) {
+    saveSettings(settings, callback) {
         const request: IHttpReq = {
             url: '/api/user/' + (this.window.data._injectedData as any).userId,
             method: 'PUT',
@@ -49,7 +48,7 @@ export class SettingsService {
         };
 
         this.httpService.sendRequest(request).then(res => {
-            console.log(res);
+            callback(res);
         });
     }
 }

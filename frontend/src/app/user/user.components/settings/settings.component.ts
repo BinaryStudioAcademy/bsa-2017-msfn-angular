@@ -10,8 +10,17 @@ import { ToasterService } from '../../../services/toastr.service';
     providers: [SettingsService]
 })
 export class SettingsComponent implements OnInit {
+    timeZone;
 
     settings = {
+        weight: [],
+        distances: [],
+        temperature: [],
+        timeFormat: [],
+        dateFormat: [],
+        startWeek: [],
+    };
+   /*  {
         unitTypes: [{ code: 1, name: 'Metric units' }, { code: 2, name: 'Imperial units' }, { code: 3, name: 'mix units' }],
         weights: [{ code: 1, name: 'Kg' }, { code: 2, name: 'Lbs' }],
         distances: [{ code: 1, name: 'M' }, { code: 2, name: 'Inches' }, { code: 3, name: 'Km' }],
@@ -19,7 +28,7 @@ export class SettingsComponent implements OnInit {
         timeFormat: [{ code: 1, name: '24-hour clock' }, { code: 2, name: '12-hour clock' }],
         dateFormat: [{ code: 1, name: 'European (day.month.year)' }, { code: 2, name: 'American (month/day/year)' }],
         startWeek: [{ code: 1, name: 'Monday' }, { code: 2, name: 'Sunday' }],
-    /*     activityLevel: [
+        activityLevel: [
             {
                 code: 1,
                 name: 'Relative inactive'
@@ -40,37 +49,49 @@ export class SettingsComponent implements OnInit {
                 code: 5,
                 name: 'Very active'
             },
-        ] */
-    };
+        ]
+    }; */
 
     userSettings = {
-        unitType: 1,
-        weight: 1,
-        trainingWeight: 1,
-        distance: 1,
-        temperature: 1,
-        timeFormat: 1,
-        dateFormat: 1,
-        startWeek: 1,
-        activityLevel: 5,
+        weight: 'Kg',
+        trainingWeight: 'Kg',
+        distance: 'M',
+        temperature: '°C',
+        timeFormat: '24-hour clock',
+        dateFormat: 'European (day.month.year)',
+        startWeek: 'Monday',
         timeZone: '0'
     };
-
-    timeZone;
 
     constructor(
         private settingsService: SettingsService,
         private toasterService: ToasterService) {
-            this.timeZone = settingsService.getTimeZone();
-            // this.userSettings = this.settingsService.getUserSettings();
-            // this.settingsService.getMeasurements();
     }
 
     ngOnInit() {
+        this.timeZone = this.settingsService.getTimeZone();
+        this.settingsService.getUserSettings((res) => {
+            if (res.settings) {
+                this.userSettings = res.settings;
+            }
+        });
+        this.settingsService.getMeasurements((res) => {
+            res.forEach(el => {
+                el.measureUnits.forEach(unit => {
+                    this.settings[el.measureName].push(unit.unitName);
+                });
+            });
+        });
+    }
+
+    saveSettings() {
+        this.settingsService.saveSettings({'settings': this.userSettings}, (res) => {
+            this.toasterService.showMessage('success', null);
+        });
     }
 
     setUnitFormat() {
-        if (this.userSettings.unitType !== 3) {
+        /* if (this.userSettings.unitType !== 3) {
             for (const key in this.userSettings) {
                 if (this.userSettings.hasOwnProperty(key)) {
                     if (key !== 'timeZone' && key !== 'activityLevel') {
@@ -78,11 +99,11 @@ export class SettingsComponent implements OnInit {
                     }
                 }
             }
-        }
+        } */
     }
 
     checkUnitFormat() {
-        const userSettingsArray = [];
+        /* const userSettingsArray = [];
         for (const key in this.userSettings) {
             if (this.userSettings.hasOwnProperty(key)) {
                 if (key !== 'timeZone' && key !== 'activityLevel' && key !== 'unitType') {
@@ -97,11 +118,6 @@ export class SettingsComponent implements OnInit {
             this.userSettings.unitType = 2;
         } else {
             this.userSettings.unitType = 3;
-        }
+        } */
     }
-
-    saveSettings() {
-        this.settingsService.saveSettings(this.userSettings);
-    }
-
 }
