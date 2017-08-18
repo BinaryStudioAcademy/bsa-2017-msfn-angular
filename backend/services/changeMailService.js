@@ -39,7 +39,7 @@ function genNewRootMail(body, callback) {
                 }
                 if (!deleteErr) {
                     confirmCodeRepository.add(confirmData, (err, data) => {
-                        const newRootMailLink = "http://localhost:3060/confirmation/rootemail/" + data.confirmCode;
+                        const newRootMailLink = config.host.hostAddress + '/confirmation/rootemail/' + data.confirmCode;
                         emailService.send({
                                 to: body.newRootMail,
                                 subject: "Link to change your main email",

@@ -14,7 +14,7 @@ PasswordService.prototype.checkConfirmCode = checkConfirmCode;
 function createConfirmCode(body, callback) {
     confirmService.createCode(body, (err, data) => {
         if (err) {return callback(err); }
-        const resetLink = "http://localhost:3060/restore-password/" + data.confirmCode;
+        const resetLink = config.host.hostAddress + '/restore-password/' + data.confirmCode;
         emailService.send(
             {
                 to: body.email,
