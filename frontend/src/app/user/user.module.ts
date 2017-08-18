@@ -11,6 +11,7 @@ import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { SettingsComponent } from './user.components/settings/settings.component';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
+import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { IntervalTrainingPlanComponent } from './user.components/interval-traini
         TrainingListComponent,
         SettingsComponent,
         IntervalTrainingPlanComponent,
+        PlanDetailComponent,
     ],
     providers: [
         ForAllUserGuard,

@@ -1,0 +1,85 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/text.scss';
+@import "../../../../globalStyles/indentations";
+
+.container{
+    padding: 20px 50px;
+    .field-container{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .period{
+        width: 100%;
+        display: block;
+        .field-items{
+            display: flex;
+        }
+        .field-item{
+            width: 50%;
+            // display: inline-block;
+            padding-right: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .days{
+            display: flex;
+            flex-wrap: wrap;
+            float: left;
+            input[type=checkbox]{
+                display: none;
+            }
+            label{
+                background-color: #5a6b60;
+                height: 40px;
+                width: 100px;
+                margin-right: 10px;
+                font-size: 15px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            input:checked + label {
+                background-color: #82ca9c; 
+            }
+        }
+        .count{
+            height: 40px;
+            width: 40px;
+            margin: 0 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .counter{
+            background-color: #82ca9c; 
+            height: 40px;
+            width: 40px;
+            border-radius: 20px;
+            font-size: 30px;
+            // font-weight: bold;
+            color:#fff;
+        }
+
+    }
+    .field-title{
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .btn-save {
+        border: none;
+        margin-top: $content-between-margin;
+        width: 150px;
+        padding: 5px;
+        color: $text-main-color;
+        background-color: $btn-color;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 50px;
+        cursor: pointer;
+        outline: none;
+    }
+}
+.clear{
+    clear:both;
+}

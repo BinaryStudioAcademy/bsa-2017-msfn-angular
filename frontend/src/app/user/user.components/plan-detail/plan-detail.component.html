@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>Training plan {{title}}</h1>
+  <div class="field-container">
+    <md-input-container>
+      <input mdInput placeholder="Plan name" value="New plan">
+    </md-input-container>
+  </div>
+  <div class="period field-container">
+      <div class="field-title">
+          Choose a day or traings count per week
+        </div>
+        <div class="field-items">
+    <div class="field-item days">
+        <div class="item" *ngFor="let day of days">
+          <input type="checkbox" id="day-{{day.key}}" value="{{day.key}}">
+          <label for="day-{{day.key}}">{{day.value}}</label>
+        </div>
+    </div>
+    <div class="field-item">
+        <button md-fab class="counter" (click)="changeTrainingCount('dec');">—</button>
+        <input type="text" name="count" class="count" value="{{trainingsCount}}">
+        <button md-fab class="counter" (click)="changeTrainingCount('inc');">+</button>
+    </div>
+  </div>
+  </div>
+  <div class="clear"></div>
+  <div class="field-container">
+    <div class="field-title">
+      Sport type
+    </div>
+    <div class="field-item">
+        <md-select placeholder="Choose type" [(ngModel)]="sportTypeValue" name="type">
+            <md-option *ngFor="let type of types" [value]="type.value">
+              {{type.viewValue}}
+            </md-option>
+          </md-select>
+    </div>
+  </div>
+  <button md-button class="btn btn-save" (click)="save(form)">Save</button>
+  
+</div>
