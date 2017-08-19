@@ -6,6 +6,7 @@ const
     subscribeRoutes = require('./subscribeRoutes'),
     activateRoutes = require('./activateRoutes'),
     coachService = require('../../services/coachService'),
+    initFakeService = require('../../services/initFakeService'),
     isUserSessionUser = require('../../middleware/isUserSessionUser.js'),
     changeMailRoutes = require('./changeMailRoutes');
 
@@ -29,6 +30,23 @@ module.exports = function (app) {
 
     app.get(baseUrl + ':id', function (req, res, next) {
         userRepository.getById(req.params.id, function (err, data) {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+    
+    app.get(baseUrl + 'coach-status-request/:id', (req, res, next) => {
+        coachService.apply(req.params.id, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(baseUrl + 'generate-faked-data/true', (req, res, next) => {
+        console.log(1)
+        initFakeService.generate((err, data) => {
             res.data = data;
             res.err = err;
             next();
@@ -70,14 +88,6 @@ module.exports = function (app) {
 
     app.delete(baseUrl + ':id', function(req, res, next) {
         userRepository.deleteById(req.params.id, function(err, data) {
-            res.data = data;
-            res.err = err;
-            next();
-        });
-    }, apiResponse);
-
-    app.get(baseUrl + 'coach-status-request/:id', (req, res, next) => {
-        coachService.apply(req.params.id, (err, data) => {
             res.data = data;
             res.err = err;
             next();
