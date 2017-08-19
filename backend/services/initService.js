@@ -23,7 +23,7 @@ const mongoose = require('mongoose'),
             ]
         },
         {
-            "measureName": "distances",
+            "measureName": "distance",
             "measureUnits": [
                 {"conversionFactor": "1", "unitName": "Km", "unitType": "metric"},
                 {"conversionFactor": "1000", "unitName": "M", "unitType": "default"},
