@@ -6,12 +6,6 @@
             (click)="addMeasure()"
             [ngClass]="{'disabled' : wrongInput}">Add new measure</button>
     <div>
-        <app-list placeholder="types"
-                  [options]="options"
-                  [items]="items"
-                  (change)="updateTable()"
-                  (click)="updateTable()">
-        </app-list>
         <md-input-container>
             <input mdInput
                    type="text"
@@ -43,7 +37,7 @@
         <ng-container cdkColumnDef="delete">
             <md-header-cell *cdkHeaderCellDef></md-header-cell>
             <md-cell *cdkCellDef="let row" >
-                <i  class="material-icons ico" (click)="deleteRow()">delete</i>
+                <i  class="material-icons ico" (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>
             </md-cell>
         </ng-container>
 

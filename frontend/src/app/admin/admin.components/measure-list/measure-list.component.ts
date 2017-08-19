@@ -1,11 +1,10 @@
-import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { MeasureListService } from './measure-list.service';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {DataSource} from '@angular/cdk';
-import {MdSort} from '@angular/material';
-import {Observable} from 'rxjs/Observable';
-import IMeasurementType = MeasurementApi.IMeasurementType;
-import {ActivatedRoute, Router} from "@angular/router";
+import { BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { DataSource } from '@angular/cdk';
+import { MdSort } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-measure-list',
@@ -14,7 +13,6 @@ import {ActivatedRoute, Router} from "@angular/router";
     providers: [MeasureListService]
 })
 export class MeasureListComponent implements OnInit {
-    options = [];
     items = [];
     measureName = '';
     conversionFactor = '';
@@ -46,10 +44,6 @@ export class MeasureListComponent implements OnInit {
         setTimeout(() => this.changeDetectorRef.markForCheck());
         this.measurementService.getAllMeasurements( (response) => {
             this.tableDatabase.addMeasurement(response);
-            for (let i = 0; i < response.length; i++) {
-                this.options.push(response.measureName);
-            }
-            this.options = Array.from((new Set(this.options)));
         });
 
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
@@ -57,17 +51,14 @@ export class MeasureListComponent implements OnInit {
             .distinctUntilChanged()
             .subscribe(() => {
                 if (!this.dataSource) { return; }
+                this.dataSource.filter = this.filter.nativeElement.value;
+
             });
     }
 
     updateTable() {}
-
-    addRow() {
-
-    }
-
-    deleteRow() {
-
+    toggle(row) {
+        this.tableDatabase.toggleRemoved(row);
     }
 
     addMeasure() {
@@ -99,11 +90,21 @@ export class TableDatabase {
             .map( obj => Object.assign(obj, { code: getCode() }))
         );
     }
+
+    toggleRemoved(row) {
+        const index = this.data.indexOf(row);
+        const copiedData = this.data.slice();
+        copiedData[index].isRemoved = !copiedData[index].isRemoved;
+        this.dataChange.next(copiedData);
+    }
 }
 
 export class MeasureTypeDataSource extends DataSource<any> {
+    _filterChange = new BehaviorSubject('');
+    get filter(): string { return this._filterChange.value; }
+    set filter(filter: string) { this._filterChange.next(filter); }
 
-    constructor(private tableDatabase: TableDatabase,
+    constructor(private _tableDatabase: TableDatabase,
                 private _sort: MdSort,
                 private service: MeasureListService) {
         super();
@@ -111,24 +112,27 @@ export class MeasureTypeDataSource extends DataSource<any> {
 
     connect(): Observable<any[]> {
         const displayDataChanges = [
-            this.tableDatabase.dataChange,
+            this._tableDatabase.dataChange,
             this._sort.mdSortChange,
+            this._filterChange,
         ];
-
         return Observable.merge(...displayDataChanges).map(() => {
-            return this.getSortedData();
+            return this.getSortedData().slice().filter((item) => {
+                const searchStr = (item.measureName).toLowerCase();
+                return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+            });
         });
+
     }
 
     disconnect() {
     }
 
     getSortedData(): any[] {
-        const data = this.tableDatabase.data.slice();
+        const data = this._tableDatabase.data.slice();
         if (!this._sort.active || this._sort.direction === '') {
             return data;
         }
-
         return this.service.sortData(data, this._sort.active, this._sort.direction);
     }
 }

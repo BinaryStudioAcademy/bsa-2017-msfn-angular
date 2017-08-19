@@ -78,10 +78,10 @@ const routes: Routes = [
         component: ConfirmedPageComponent,
         // canActivate: [IsLoggedOutGuard]
     },
-    /*{
+    {
         path: '**',
         redirectTo: 'notfound'
-    }*/
+    }
 ];
 
 @NgModule({

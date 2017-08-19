@@ -66,8 +66,8 @@ export class MeasureListService {
             let propA = '';
             let propB = '';
             switch (column) {
-                case 'name': [propA, propB] = [a.name, b.name]; break;
-                case 'type': [propA, propB] = [a.type, b.type]; break;
+                case 'code': [propA, propB] = [a.code, b.code]; break;
+                case 'measureName': [propA, propB] = [a.measureName, b.measureName]; break;
             }
             const valueA = isNaN(+propA) ? propA : +propA;
             const valueB = isNaN(+propA) ? propB : +propB;

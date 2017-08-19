@@ -1,0 +1,90 @@
+<form class="add-measure-container" #form="ngForm" (ngSubmit)="save(form)">
+    <md-card-title>Edit measure type</md-card-title>
+    <md-input-container>
+        <input mdInput
+               #measureName
+               [(ngModel)]="name"
+               name="measureName"
+               pattern="^[a-zA-Z]+$"
+               required
+               minlength="2"
+        >
+        <md-error *ngFor="let message of currentMessages()">
+            {{ message }}
+        </md-error>
+    </md-input-container>
+    <!--<div *ngIf="measureName.invalid && (measureName.dirty || measureName.touched)" class="error">
+        <div *ngIf="measureName.errors.required" >
+            Name is required.
+        </div>
+        <div *ngIf="measureName.errors.minlength">
+            Name must be at least 2 characters long.
+        </div>
+        <div *ngIf="measureName.errors.pattern">
+            Name can contain only latin letters..
+        </div>
+    </div>-->
+    <button class="btn"
+            (click)="addRow(table)">
+        Add measure
+    </button>
+    <md-table #table
+              [dataSource]="dataSource">
+
+        <!-- UnitName Column -->
+        <ng-container cdkColumnDef="unitName">
+            <md-header-cell *cdkHeaderCellDef>Unit</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <md-input-container>
+                    <input mdInput
+                           #unitName
+                           value={{row.unitName}}
+                           name="row.unitName"
+                           type="text"
+                           pattern="^[a-zA-Z]+$"
+                           (blur)="updateRow(row, 'unitName', unitName.value)"
+                           [ngClass]="{'removed': row.isRemoved}"
+                           required
+                    >
+                    <md-error>Incorrect value</md-error>
+                </md-input-container>
+            </md-cell>
+        </ng-container>
+
+        <!-- Conversion factor column -->
+        <ng-container cdkColumnDef="conversionFactor">
+            <md-header-cell *cdkHeaderCellDef>Conversion factor</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <md-input-container>
+                    <input mdInput
+                           #conversionFactor
+                           name="row.conversionFactor"
+                           type="text"
+                           pattern="\d+(\.\d{2})?"
+                           (blur)="updateRow(row, 'conversionFactor', conversionFactor.value)"
+                           value={{row.conversionFactor}}
+                           [ngClass]="{'removed': row.isRemoved}"
+                           class="input-value"
+                           required
+                    >
+                    <md-error>Incorrect value</md-error>
+                </md-input-container>
+            </md-cell>
+        </ng-container>
+
+        <!-- delete-->
+        <ng-container cdkColumnDef="delete" class="delete-col">
+            <md-header-cell *cdkHeaderCellDef></md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <i class="material-icons ico" (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>
+            </md-cell>
+        </ng-container>
+
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns"></md-row>
+    </md-table>
+    <button md-button
+            class="btn btn-save"
+            [disabled]="!form.valid">Save
+    </button>
+</form>

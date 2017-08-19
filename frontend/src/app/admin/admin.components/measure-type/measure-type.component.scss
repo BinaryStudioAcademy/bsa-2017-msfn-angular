@@ -1,0 +1,119 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+.mat-table {
+    width: 100%;
+    min-height: calc(20px*2 + 16px);
+    margin: 20px auto;
+    max-height: calc(100vh - 326px);
+    overflow-y: auto;
+}
+
+md-header-cell, md-cell {
+    text-align: center;
+}
+
+.mat-header-row,
+.mat-row {
+    height: auto;
+}
+.mat-header-row {
+    padding: $content-tb-margin 0;
+}
+
+
+.mat-header-cell {
+    font-size: $main-text;
+}
+
+md-header-cell,
+md-cell {
+    cursor: pointer;
+    max-width: 28%;
+    margin-left: 4%;
+    word-break: break-all;
+}
+
+md-header-cell:last-child,
+md-cell:last-child {
+    margin-right: 4%;
+}
+
+.add-measure-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 60vw;
+    min-height: 500px;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+}
+
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    width: auto;
+    height: 40px;
+    margin: 20px auto 0 auto;
+}
+.removed {
+    color: $text-second-color;
+    cursor: default;
+}
+
+.ico {
+    color: $btn-color;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.mat-input-container  {
+    border-left: none;
+}
+
+.input-value {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.delete-col {
+    width: 10%;
+}
+
+@media only screen and (max-width: $small-screen) {
+    .main-container {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: $large-screen) {
+
+    #inputs {
+        width: 95%;
+    }
+
+    .mat-table {
+        width: 95%;
+    }
+
+    .mat-header-row,
+    .mat-row {
+        padding: 20px 10px;
+    }
+
+    md-cell {
+        font-size: 12px;
+    }
+
+}
