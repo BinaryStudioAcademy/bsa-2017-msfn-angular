@@ -38,7 +38,7 @@
         <md-error *ngIf="descriptionFormControl.hasError('required')">
             Description is required
         </md-error>
-        <md-error *ngIf="descriptionFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')">
+        <md-error *ngIf="descriptionFormControl.hasError('minlength') || descriptionFormControl.hasError('maxlength')">
             Description should contain 10-300 characters
         </md-error>
     </md-input-container>

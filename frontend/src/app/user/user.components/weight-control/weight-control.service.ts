@@ -127,12 +127,14 @@ export class WeightControlService {
         }
     }
 
-    changeOption(option, diff) {
+    getSettings(option, diff) {
         const selection = option;
         let symbol = '',
             measurement: string,
             betterResult = false,
             worseResult = false;
+
+        console.log(diff);
 
         if (diff[option] > 0) {
             worseResult = true;
