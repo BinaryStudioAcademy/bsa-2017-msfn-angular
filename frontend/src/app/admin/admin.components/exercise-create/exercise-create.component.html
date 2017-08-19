@@ -1,11 +1,11 @@
 <form class="exercise-create-form" #form="ngForm">
 
-    <h2>Create/Edit Exercise</h2>
+    <h2>{{titleType}} exercise</h2>
     <md-input-container class="input">
         <input mdInput placeholder="Exercise Title" [(ngModel)]="exercise.name" name="name" required>
     </md-input-container>
     <md-select placeholder="Exercise type" [(ngModel)]="exercise.type" name="type" class="select-row input" required>
-        <md-option *ngFor="let type of exTypes" [value]="type._id">
+        <md-option *ngFor="let type of exTypes" [hidden]="type.isRemoved" [value]="type._id">
             {{type.name}}
         </md-option>
     </md-select>

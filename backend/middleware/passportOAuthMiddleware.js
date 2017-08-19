@@ -2,7 +2,7 @@ const passport = require('passport'),
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     FacebookStrategy = require('passport-facebook').Strategy,
     TwitterStrategy = require('passport-twitter').Strategy,
-    oauthConfig = require('../config/oauth'),
+    oauthConfig = new require('../config/oauth')(),
     userService = require('../services/userService'),
     userRepository = require('../repositories/userRepository'),
     ApiError = require('../services/apiErrorService');
@@ -48,10 +48,14 @@ module.exports = function() {
                                     //and login
                                     return done(null, user)
                                 })
-                                // if email in db -> show message to regular login
+                                // if email in db -> update user
                             } else {
-                                return done(null, false, `You already register with associated e-mail.
-                                Please log in using you email and password`)
+                                userService.updateItem(user._id, queryWithID, (err, cb) => {
+                                    if (err) {
+                                        return done(err);
+                                    }
+                                    return done(null, user);
+                                });
                             }
                         });
                     }
@@ -69,7 +73,6 @@ module.exports = function() {
     ));
     passport.use(new FacebookStrategy(oauthConfig.facebookOptions,
         (req, accessToken, refreshToken, profile, done) => {
-        console.log(profile);
             const queryWithID = {
                 "facebookID": profile.id
             };
@@ -86,9 +89,10 @@ module.exports = function() {
                                 return done(err);
                             }
                             if (user === null) {
+                                const names = profile.displayName.trim().split(/\s+/);
                                 const userBody = {
-                                    firstName: profile.name.givenName || profile.displayName.split(' ')[0],
-                                    lastName: profile.name.familyName || profile.displayName.split(' ')[1],
+                                    firstName: profile.name.givenName || names[0],
+                                    lastName: profile.name.familyName || names[1],
                                     email: profile.emails[0].value,
                                     password: 'qwerty',
                                     isCoach: false,
@@ -104,8 +108,12 @@ module.exports = function() {
                                     return done(null, user)
                                 })
                             } else {
-                                return done(null, false, `You already register with associated e-mail.
-                                Please log in using you email and password`)
+                                userService.updateItem(user._id, queryWithID, (err, cb) => {
+                                    if (err) {
+                                        return done(err);
+                                    }
+                                    return done(null, user);
+                                });
                             }
                         });
                     }
@@ -122,8 +130,6 @@ module.exports = function() {
     ));
     passport.use(new TwitterStrategy(oauthConfig.twitterOptions,
         (req, accessToken, refreshToken, profile, done) => {
-        console.log(profile);
-            console.log(profile);
             const queryWithID = {
                 "twitterID": profile.id
             };
@@ -140,9 +146,10 @@ module.exports = function() {
                                 return done(err);
                             }
                             if (user === null) {
+                                const names = profile.displayName.trim().split(/\s+/);
                                 const userBody = {
-                                    firstName: profile.displayName.split(' ')[0],
-                                    lastName: profile.displayName.split(' ')[1],
+                                    firstName: profile.name.givenName || names[0],
+                                    lastName: profile.name.familyName || names[1],
                                     email: profile.emails[0].value || 'default@msfn.com',
                                     password: 'qwerty',
                                     isCoach: false,
@@ -158,8 +165,12 @@ module.exports = function() {
                                     return done(null, user)
                                 })
                             } else {
-                                return done(null, false, `You already register with associated e-mail.
-                                Please log in using you email and password`)
+                                userService.updateItem(user._id, queryWithID, (err, cb) => {
+                                    if (err) {
+                                        return done(err);
+                                    }
+                                    return done(null, user);
+                                });
                             }
                         });
                     }

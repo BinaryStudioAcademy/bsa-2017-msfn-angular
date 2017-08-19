@@ -1,5 +1,5 @@
 <form id="sport-handling" #form="ngForm">
-    <h2>Create/Edit kind of sport</h2>
+    <h2>{{titleType}} kind of sport</h2>
 
     <div id="general-error" class="error" *ngIf="generalError">{{ generalError }}</div>
 
@@ -18,8 +18,7 @@
                 </div>
             </md-option>
         </md-select>
-
-        <div *ngIf="sport.icon" id="selected-icon">
+        <div id="selected-icon" *ngIf="sport.icon">
             <img [src]="sport.icon" alt="sport-icon">
         </div>
     </div>
@@ -39,7 +38,7 @@
         <md-error *ngIf="descriptionFormControl.hasError('required')">
             Description is required
         </md-error>
-        <md-error *ngIf="descriptionFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')">
+        <md-error *ngIf="descriptionFormControl.hasError('minlength') || descriptionFormControl.hasError('maxlength')">
             Description should contain 10-300 characters
         </md-error>
     </md-input-container>

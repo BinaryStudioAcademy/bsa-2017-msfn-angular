@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { IHttpReq } from '../../models/http-req';
 import { HttpService } from '../../services/http.service';
 import { ToasterService } from '../../services/toastr.service';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EncryptService } from '../../services/encrypt.service';
 
 
@@ -23,14 +23,15 @@ export class RestorePasswordComponent implements OnInit {
     constructor(
         private httpHandler: HttpService,
         private toastrService: ToasterService,
-        public router: ActivatedRoute,
+        public router: Router,
+        public activatedRoute: ActivatedRoute,
         private encryptor: EncryptService
     ) { }
 
     ngOnInit() {
         this.passwordMatched = false;
-        if (this.router.snapshot.params.code) {
-            this.confirmCode = this.router.snapshot.params.code;
+        if (this.activatedRoute.snapshot.params.code) {
+            this.confirmCode = this.activatedRoute.snapshot.params.code;
         }
     }
 
@@ -47,13 +48,14 @@ export class RestorePasswordComponent implements OnInit {
                 body: {
                     data: encData
                 },
-                successMessage: 'Password changed. Go to login page'
+                successMessage: 'Password succesfully changed',
+                failMessage: 'Error occured'
             };
 
         this.httpHandler.sendRequest(sendData)
             .then((res) => {
-                if (res.access) {
-                    this.toastrService.showMessage('success', 'Password changed');
+                if (res.status === 'ok') {
+                    this.router.navigate(['/']);
                 }
             });
             // send message()

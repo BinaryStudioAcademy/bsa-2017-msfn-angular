@@ -5,7 +5,8 @@
     <h2 *ngIf="verified" md-dialog-title>Login
         <button md-dialog-close class="material-icons close" tabindex="-1">close</button>
     </h2>
-    <form class="login-block">
+    <p [style.display]="(sendedMail)? '': 'none'">Check your mailbox.</p>
+    <form class="login-block" [style.display]="(sendedMail)? 'none': ''">
         <p *ngIf="!verified" class="instruct">Before start you need finish the registration. Check your mailbox (or spam folder) to our mail with next instructions. If you don't see this mail, you can re-send.</p>
         
         <md-input-container class="login-imput-container">

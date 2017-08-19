@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { SportHandlingService } from './sport-handling.service';
-import { ISport } from '../../models/sport';
+import { ISport } from '../../../models/sport';
 import { ToasterService } from '../../../services/toastr.service';
 
 @Component({
@@ -27,9 +28,12 @@ export class SportHandlingComponent implements OnInit {
     code;
     sportToPass: ISport;
     codePattern = /^\d+$/;
+    titleType = 'Create';
 
     constructor(private sportHandlingService: SportHandlingService,
-                private toasterService: ToasterService) { }
+                private toasterService: ToasterService,
+                public router: ActivatedRoute
+            ) { }
 
     codeFormControl = new FormControl('', [
         Validators.pattern(this.codePattern)
@@ -48,6 +52,9 @@ export class SportHandlingComponent implements OnInit {
     ]);
 
     ngOnInit() {
+        if (this.router.snapshot.params.id) {
+            this.titleType = 'Edit';
+        }
     }
 
     save(): void {

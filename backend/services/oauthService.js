@@ -14,7 +14,7 @@ function oauthLogin(strategy, req, res, next) {
                 if (err) {
                     return next(err);
                 }
-                return res.redirect('/user/profile/me');
+                return res.redirect('/user');
             })
         } else {
             res.send(info);

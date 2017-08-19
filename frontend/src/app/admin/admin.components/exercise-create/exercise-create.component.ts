@@ -18,6 +18,7 @@ export class ExerciseCreateComponent implements OnInit {
         type: '',
         description: ''
     };
+    titleType = 'Create';
 
     exTypes: [IExerciseType];
 
@@ -29,6 +30,7 @@ export class ExerciseCreateComponent implements OnInit {
 
     ngOnInit() {
         if (this.router.snapshot.params.id) {
+            this.titleType = 'Edit';
             this.exerciseCreateService.getExerciseById(this.router.snapshot.params.id, (data) => {
                 this.exercise = data;
             });

@@ -3,11 +3,15 @@
 }
 
 .sidebar-container {
-    flex: 0 0 calc(20vw - 20px);
-    min-width: calc(20vw - 20px);
+    flex: 0 0 calc(20vw);
+    min-width: calc(20vw);
 }
     
 .child-container {
     flex: 0 0 80vw;
-    min-width: 80vw;
+    min-width: calc(80vw);
+    width: 70%;
+    float: right;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
 }

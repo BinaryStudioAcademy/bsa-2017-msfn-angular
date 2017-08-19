@@ -1,0 +1,29 @@
+<div class="mainblock">
+    <aside>
+        <nav class="navigation">
+            <md-nav-list>
+                <div class="navigation__your-section">
+                    <div md-subheader class="navigation__subheader">SETTINGS</div>
+                    <a routerLink="profile" routerLinkActive="active-link"> 
+                        <md-list-item class="menu-element">
+                            <span md-line class="navigation__title">General info</span>
+                        </md-list-item >
+                    </a>
+                    <a routerLink="login-settings" routerLinkActive="active-link"> 
+                        <md-list-item class="menu-element">
+                            <span md-line class="navigation__title">Login info</span>
+                        </md-list-item >
+                    </a>
+                    <a routerLink="settings" routerLinkActive="active-link"> 
+                        <md-list-item class="menu-element">
+                            <span md-line class="navigation__title">Metrics</span>
+                        </md-list-item >
+                    </a>
+                </div>
+            </md-nav-list>
+        </nav>
+    </aside>
+    <div class="child">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,56 +1,56 @@
-<div class="container" *ngIf="settings">
+<div class="container" *ngIf="userSettings">
     <md-card-title class="settings-title">Settings</md-card-title>
-    <!-- <div class="settings-unit-type row">
+    <div class="settings-unit-type row">
         <p class="row-name">Unit type:</p>
         <md-select placeholder="unit type" (change)="setUnitFormat()" [(ngModel)]="userSettings.unitType" floatPlaceholder="never">
-            <md-option *ngFor="let item of settings.unitTypes" [value]="item.code">
+            <md-option *ngFor="let item of unitTypeData" [value]="item.type">
                 {{ item.name }}
             </md-option>
         </md-select>
-    </div> -->
+    </div>
     <div class="settings-weight row">
         <p class="row-name">Weight unit type:</p>
         <md-select placeholder="Weight" (change)="checkUnitFormat()" [(ngModel)]="userSettings.weight" floatPlaceholder="never">
-            <md-option *ngFor="let item of settings.weight" [value]="item">
-                {{ item }}
+            <md-option *ngFor="let item of settings.weight" [value]="item.name">
+                {{ item.name }}
             </md-option>
         </md-select>
     </div>
     <div class="settings-training-weight row">
         <p class="row-name">Training weight unit type:</p>
         <md-select placeholder="Training weight" (change)="checkUnitFormat()" [(ngModel)]="userSettings.trainingWeight" floatPlaceholder="never">
-            <md-option *ngFor="let item of settings.weight" [value]="item">
-                {{ item }}
+            <md-option *ngFor="let item of settings.weight" [value]="item.name">
+                {{ item.name }}
             </md-option>
         </md-select>
     </div>
     <div class="settings-distance row">
         <p class="row-name">Distance unit type:</p>
         <md-select placeholder="distance" (change)="checkUnitFormat()" [(ngModel)]="userSettings.distance" floatPlaceholder="never">
-            <md-option *ngFor="let item of settings.distances" [value]="item">
-                {{ item }}
+            <md-option *ngFor="let item of settings.distance" [value]="item.name">
+                {{ item.name }}
             </md-option>
         </md-select>
     </div>
     <div class="settings-temperature row">
         <p class="row-name">Temperature unit type:</p>
         <md-select placeholder="temperature" (change)="checkUnitFormat()" [(ngModel)]="userSettings.temperature" floatPlaceholder="never">
-            <md-option *ngFor="let item of settings.temperature" [value]="item">
-                {{ item }}
+            <md-option *ngFor="let item of settings.temperature" [value]="item.name">
+                {{ item.name }}
             </md-option>
         </md-select>
     </div>
     <div class="settings-time row">
         <p class="row-name">Time Format:</p>
         <md-select placeholder="Time Format" (change)="checkUnitFormat()" [(ngModel)]="userSettings.timeFormat" floatPlaceholder="never">
-            <md-option *ngFor="let item of settings.timeFormat" [value]="item">
-                {{ item }}
+            <md-option *ngFor="let item of settings.timeFormat" [value]="item.name">
+                {{ item.name }}
             </md-option>
         </md-select>
     </div>
     <div class="settings-time row">
-        <p class="row-name">Time Zona:</p>
-        <md-select placeholder="Time Zona" [(ngModel)]="userSettings.timeZone" floatPlaceholder="never">
+        <p class="row-name">Time Zone:</p>
+        <md-select placeholder="Time Zone" [(ngModel)]="userSettings.timeZone" floatPlaceholder="never">
             <md-option *ngFor="let item of timeZone" [value]="item.code">
                 {{ item.name }}
             </md-option>
@@ -59,16 +59,16 @@
     <div class="settings-date row">
         <p class="row-name">Date Format:</p>
         <md-select placeholder="Date Format" (change)="checkUnitFormat()" [(ngModel)]="userSettings.dateFormat" floatPlaceholder="never">
-            <md-option *ngFor="let item of settings.dateFormat" [value]="item">
-                {{ item }}
+            <md-option *ngFor="let item of settings.dateFormat" [value]="item.name">
+                {{ item.name }}
             </md-option>
         </md-select>
     </div>
     <div class="settings-week row">
         <p class="row-name">Start week:</p>
         <md-select placeholder="Start week" (change)="checkUnitFormat()" [(ngModel)]="userSettings.startWeek" floatPlaceholder="never">
-            <md-option *ngFor="let item of settings.startWeek" [value]="item">
-                {{ item }}
+            <md-option *ngFor="let item of settings.startWeek" [value]="item.name">
+                {{ item.name }}
             </md-option>
         </md-select>
     </div>

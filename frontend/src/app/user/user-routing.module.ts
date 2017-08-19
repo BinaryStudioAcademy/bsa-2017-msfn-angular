@@ -9,8 +9,12 @@ import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
 import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
 import { FollowingListComponent } from './user.components/following-list/following-list.component';
-
+import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
+// import { FriendsComponent } from './user.components/friends/friends.component';
+import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
+import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
+import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 
 const userRoutes: Routes = [
     {
@@ -19,24 +23,26 @@ const userRoutes: Routes = [
         canActivate: [ForAllUserGuard],
         children: [
             {
-                path: 'profile/me',
-                component: ProfileComponent,
-            },
-            {
-                path: 'profile/:id',
-                component: OtherProfilesComponent,
-            },
-            {
                 path: 'training-list',
                 component: TrainingListComponent,
             },
             {
-                path: 'settings',
-                component: SettingsComponent
-            },
-            {
-                path: 'interval-training-plan',
-                component: IntervalTrainingPlanComponent,
+                path: 'account-settings',
+                component: AccountSettingsComponent,
+                children: [
+                    {
+                        path: 'settings',
+                        component: SettingsComponent
+                    },
+                    {
+                        path: 'profile',
+                        component: ProfileComponent,
+                    },
+                    {
+                        path: 'login-settings',
+                        component: LoginSettingsComponent,
+                    },
+                ]
             },
             {
                 path: 'followers',
@@ -45,6 +51,22 @@ const userRoutes: Routes = [
             {
                 path: 'following',
                 component: FollowingListComponent,
+            },
+            {
+                path: 'profile/:id',
+                component: OtherProfilesComponent,
+            },
+            {
+                path: 'interval-training-plan',
+                component: IntervalTrainingPlanComponent,
+            },
+            {
+                path: 'training-plan',
+                component: PlanDetailComponent,
+            },
+            {
+                path: 'weight-control',
+                component: WeightControlComponent
             }
         ]
     }
