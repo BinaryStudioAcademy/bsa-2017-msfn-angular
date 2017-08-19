@@ -1,55 +1,66 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
 import {IHttpReq} from '../../../models/http-req';
+import IMeasurementType = MeasurementApi.IMeasurementType;
+import IMeasureUnit = MeasurementApi.IMeasureUnit;
 
 @Injectable()
 export class MeasureListService {
+    public measureId;
+    public measureName;
+
     constructor(private httpService: HttpService) { }
 
-    getMeasures(callback): void {
+    getAllMeasurements(callback): void {
         const request: IHttpReq = {
-            url: '/api/measure-list',
+            url: '/api/measurement',
             method: 'GET',
             body: {}
         };
-        const measures = [
-            {
-                code: '1',
-                name: 'm',
-                type: 'length',
-            },
-            {
-                code: '2',
-                name: 'ton',
-                type: 'weight',
-            },
-            {
-                code: '3',
-                name: 'lb',
-                type: 'weight',
-            },
-            {
-                code: '4',
-                name: 'ft',
-                type: 'length',
-            }
-        ];
-        callback(measures);
+        this.httpService.sendRequest(request)
+            .then( data => {
+                callback(data);
+            });
     }
-    /*addMeasure(name: string, type: string, callback): void {
+
+    addMeasurement(measureUnits: IMeasureUnit[], measureName: string, callback): void {
+        const measureBody = this.preproccessData(measureUnits, measureName);
         const request: IHttpReq = {
-            url: '/api/measure-list',
+            url: '/api/measurement',
             method: 'POST',
-            body: {
-                name,
-                type,
-            }
+            body: measureBody,
+            successMessage: 'Added',
+            failMessage: 'Failed to add'
         };
         this.httpService.sendRequest(request)
             .then(
                 data => callback(data)
             );
-    }*/
+    }
+
+    deleteMeasurement(body: IMeasureUnit, callback) {
+        const request: IHttpReq = {
+            url: '/api/measurement',
+            method: 'DELETE',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then(data => callback(data));
+    }
+
+    updateMeasurement(id: string, measureUnits: IMeasureUnit[], measureName: string, callback) {
+        const measureBody = this.preproccessData(measureUnits, measureName, id);
+        const request: IHttpReq = {
+            url: 'api/measurement/',
+            method: 'PUT',
+            body: measureBody,
+            successMessage: 'Updated',
+            failMessage: 'Failed to update'
+        };
+        this.httpService.sendRequest(request)
+            .then( data => callback(data));
+    }
+
     sortData(data, column, direction = 'asc' || 'desc') {
         return data.sort((a, b) => {
             let propA = '';
@@ -63,4 +74,45 @@ export class MeasureListService {
             return (valueA < valueB ? -1 : 1) * (direction === 'asc' ? 1 : -1);
         });
     }
+
+    getMeasurementByName(name: string, callback) {
+        const request: IHttpReq = {
+            url: `/api/measurement/by-name/${name}`,
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then(data => callback(data));
+    }
+
+    getMeasurementById(id, callback): void {
+        const request: IHttpReq = {
+            url: '/api/measurement/' + id,
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then(data => {
+                callback(data);
+            });
+    }
+    getMeasurementId(name: string) {
+        const request: IHttpReq = {
+            url: `/api/measurement/by-name/${name}`,
+            method: 'GET',
+            body: {}
+        };
+        return this.httpService.sendRequest(request)
+            .then( data => data._id);
+    }
+    // inputUnit { unitName, conversionFactor}
+    private preproccessData(inputUnits: IMeasureUnit[], measureName: string, id?: string): IMeasurementType {
+        const measureObj = {
+            measureName: measureName,
+            measureUnits: inputUnits
+        };
+        if (id) { Object.assign(measureObj, { id }); }
+        return measureObj;
+    }
+
 }

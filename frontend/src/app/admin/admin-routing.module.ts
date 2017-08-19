@@ -11,6 +11,7 @@ import { ExerciseListComponent } from './admin.components/exercise-list/exercise
 import { ExerciseTypeComponent } from './admin.components/exercise-type/exercise-type.component';
 import { SportHandlingComponent } from './admin.components/sport-handling/sport-handling.component';
 import { MeasureListComponent } from './admin.components/measure-list/measure-list.component';
+import { MeasureTypeComponent } from './admin.components/measure-type/measure-type.component';
 
 const adminRoutes: Routes = [
     {
@@ -61,6 +62,15 @@ const adminRoutes: Routes = [
                         path: 'measure-list',
                         component: MeasureListComponent
                     },
+                    {
+                        path: 'measure/:id',
+                        component: MeasureTypeComponent
+                    },
+                    {
+                        path: 'measure',
+                        component: MeasureTypeComponent
+                    }
+
                 ]
             }
         ]

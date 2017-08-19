@@ -1,9 +1,11 @@
-import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { MeasureListService } from './measure-list.service';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {DataSource} from '@angular/cdk';
 import {MdSort} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
+import IMeasurementType = MeasurementApi.IMeasurementType;
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-measure-list',
@@ -14,47 +16,69 @@ import {Observable} from 'rxjs/Observable';
 export class MeasureListComponent implements OnInit {
     options = [];
     items = [];
-    name = '';
+    measureName = '';
+    conversionFactor = '';
+    unitName = '';
     displayedColumns = [
         'code',
-        'name',
-        'type'
+        'measureName',
+        'delete'
     ];
     tableDatabase = new TableDatabase();
-    dataSource: ExampleDataSource | null;
+    dataSource: MeasureTypeDataSource | null;
     @ViewChild(MdSort) sort: MdSort;
     @ViewChild('filter') filter: ElementRef;
 
 
     constructor(private changeDetectorRef: ChangeDetectorRef,
-                private measureListService: MeasureListService) { }
+                public measurementService: MeasureListService,
+                private router: Router,
+                private route: ActivatedRoute) {
+
+    }
 
 
     ngOnInit() {
-        this.dataSource = new ExampleDataSource(
+        this.dataSource = new MeasureTypeDataSource(
             this.tableDatabase,
             this.sort,
-            this.measureListService);
+            this.measurementService);
         setTimeout(() => this.changeDetectorRef.markForCheck());
-        this.getMeasures((res) => {
-            this.tableDatabase.addMeasures(res);
-            for (let i = 0; i < res.length; i++) {
-                this.options.push(res[i].type);
+        this.measurementService.getAllMeasurements( (response) => {
+            this.tableDatabase.addMeasurement(response);
+            for (let i = 0; i < response.length; i++) {
+                this.options.push(response.measureName);
             }
+            this.options = Array.from((new Set(this.options)));
         });
+
+        Observable.fromEvent(this.filter.nativeElement, 'keyup')
+            .debounceTime(150)
+            .distinctUntilChanged()
+            .subscribe(() => {
+                if (!this.dataSource) { return; }
+            });
     }
 
-    updateTable() {
-        setTimeout( () => {
-            this.dataSource.itemFilter = this.items.toString();
-        }, 200);
-    }
-    getMeasures(callback) {
-        return this.measureListService.getMeasures(callback);
-    }
+    updateTable() {}
+
     addRow() {
 
     }
+
+    deleteRow() {
+
+    }
+
+    addMeasure() {
+        this.router.navigate(['../measure'], {relativeTo: this.route});
+    }
+    onClickName(measureName: string) {
+        const id = this.tableDatabase.data.find(
+            item => item.measureName === measureName)._id;
+        this.router.navigate(['../measure/', id], {relativeTo: this.route});
+    }
+
 }
 
 export class TableDatabase {
@@ -65,34 +89,21 @@ export class TableDatabase {
 
     constructor() { }
 
-    addMeasures(data) {
+    addMeasurement(data) {
+        const getCode = (() => {
+            let current = 0;
+            return () => current += 1;
+        })();
         const copiedData = [...data];
-        this.dataChange.next(copiedData);
+        this.dataChange.next(copiedData
+            .map( obj => Object.assign(obj, { code: getCode() }))
+        );
     }
 }
 
-export class ExampleDataSource extends DataSource<any> {
-    _filterChange = new BehaviorSubject('');
+export class MeasureTypeDataSource extends DataSource<any> {
 
-    get filter(): string {
-        return this._filterChange.value;
-    }
-
-    set filter(filter: string) {
-        this._filterChange.next(filter);
-    }
-
-    _itemFilterChange = new BehaviorSubject('');
-
-    get itemFilter(): string {
-        return this._itemFilterChange.value;
-    }
-
-    set itemFilter(filter: string) {
-        this._itemFilterChange.next(filter);
-    }
-
-    constructor(private _exampleDatabase: TableDatabase,
+    constructor(private tableDatabase: TableDatabase,
                 private _sort: MdSort,
                 private service: MeasureListService) {
         super();
@@ -100,24 +111,12 @@ export class ExampleDataSource extends DataSource<any> {
 
     connect(): Observable<any[]> {
         const displayDataChanges = [
-            this._exampleDatabase.dataChange,
+            this.tableDatabase.dataChange,
             this._sort.mdSortChange,
-            this._filterChange,
-            this._itemFilterChange
         ];
 
         return Observable.merge(...displayDataChanges).map(() => {
-            return this.getSortedData().slice().filter((item) => {
-                const searchStr = (item.name).toLowerCase();
-                const searchType = (item.type).toLowerCase();
-
-                if (this.itemFilter) {
-                    return this.itemFilter.toLowerCase().includes(searchType) &&
-                        searchStr.includes(this.filter.toLowerCase());
-                } else {
-                    return searchStr.includes(this.filter.toLowerCase());
-                }
-            });
+            return this.getSortedData();
         });
     }
 
@@ -125,7 +124,7 @@ export class ExampleDataSource extends DataSource<any> {
     }
 
     getSortedData(): any[] {
-        const data = this._exampleDatabase.data.slice();
+        const data = this.tableDatabase.data.slice();
         if (!this._sort.active || this._sort.direction === '') {
             return data;
         }
