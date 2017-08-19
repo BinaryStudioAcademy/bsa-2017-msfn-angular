@@ -30,6 +30,8 @@ import {
 } from '@angular/material';
 import 'hammerjs';
 
+import {D3Service} from 'd3-ng2-service';
+
 // // components
 import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
@@ -79,6 +81,7 @@ import {CommonModule} from '@angular/common';
         ListComponent,
         AutocompletePipe
     ],
+    providers: [D3Service]
 })
 
 export class ImportModule {

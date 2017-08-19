@@ -129,6 +129,10 @@ md-input-container:nth-child(2n+1) {
     color: $text-warn-color;
 }
 
+#chart {
+    width: 600px;
+    height: 300px;
+}
 
 @media only screen and (min-width: $small-screen) {
 
