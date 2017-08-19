@@ -31,7 +31,7 @@ export class TestSocketsComponent implements OnInit {
     send(event, message) {
         this.socketService.send(event, JSON.stringify({
             title: 'test123',
-            message: 'mesasge321',
+            message: message,
             userId: this.window.data._injectedData.userId,
             id: message
         }));

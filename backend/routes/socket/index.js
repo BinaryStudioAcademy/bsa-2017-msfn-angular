@@ -5,7 +5,6 @@ module.exports = {
         notificationService.AddNotification(json, callback);
     },
     'read_notification': (json, callback) => {
-        "use strict";
         notificationService.ReadNotification(json, callback);
     },
     'get_notifications': (json, callback) => {

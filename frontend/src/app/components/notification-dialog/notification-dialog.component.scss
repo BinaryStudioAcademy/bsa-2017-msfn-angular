@@ -44,13 +44,12 @@
     flex-flow: row wrap;
 }
 
-[data-notifications] {
+.unread {
   position: relative;
 }
 
-[data-notifications]:after {
-
-  content: attr(data-notifications);
+.unread:after {
+  content: '';
   position: absolute;
   background: red;
   border-radius: 50%;
@@ -58,7 +57,7 @@
   padding: 0.3em;
   color: #f2f2f2;
   right: 20px;
-  top: 15px;   
+  top: 15px;
   width: 10px;
   height: 10px;
 }

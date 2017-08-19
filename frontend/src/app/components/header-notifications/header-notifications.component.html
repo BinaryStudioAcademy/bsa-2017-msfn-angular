@@ -1,2 +1,6 @@
-<md-icon [ngClass]="{'unread-note':notificationsService.notifications.length>0}"(click)="openDialog()" class="notification__alert">notifications</md-icon>
-<span class="notifications__count">{{notificationsService.notifications.length}}</span>
+<md-icon (click)="openDialog()"
+         [class.unread-note]="notificationsService.unreadCount>0"
+         class="notification__alert">notifications
+</md-icon>
+<span class="notifications__count"
+      *ngIf="notificationsService.unreadCount>0">{{notificationsService.unreadCount}}</span>

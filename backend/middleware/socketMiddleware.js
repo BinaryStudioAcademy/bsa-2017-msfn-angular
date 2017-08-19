@@ -7,7 +7,6 @@ module.exports = function(io, MongoStore) {
     const decrypt = require('../services/decryptService');
 
     io.use(function(socket, callback){
-        "use strict";
 
         let handshake = socket.request;
 
@@ -39,13 +38,11 @@ module.exports = function(io, MongoStore) {
     });
 
     io.on('connection', (socket) => {
-        "use strict";
         socketService.SetSocket(socket);
         socketService.AddUser(socket);
         socketService.InitListeners(socket);
 
         socket.on('disconnect', (data) => {
-            "use strict";
             socketService.RemoveUser(socket);
         });
     });
