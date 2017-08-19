@@ -13,8 +13,11 @@ function addItem(userId, body, callback) {
         if (data === null){
             callback(new ApiError('User not found'));
         } else {
-            data.weightControl.push(body);
-            userRepository.update(userId, data, callback);
+            let newWeightControlList = [...data.weightControl];
+            newWeightControlList.push(body);
+            userRepository.update(userId, {
+                weightControl: newWeightControlList
+            }, callback);
         }
     })
 }
@@ -26,12 +29,15 @@ function deleteItem(data, callback) {
         if (data === null){
             callback(new ApiError('User not found'));
         } else {
+            let newWeightControlList = [...data.weightControl];
             const index = data.weightControl.findIndex(
                 item => item._id === data.body._id
             );
-            data.weightControl.splice(index, 1);
+            newWeightControlList.splice(index, 1);
 
-            userRepository.update(data.user._id, data, callback);
+            userRepository.update(data.user._id, {
+                weightControl: newWeightControlList
+            }, callback);
         }
     })
 }
