@@ -8,6 +8,7 @@ import { CdkTableModule } from '@angular/cdk';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageCropperModule } from 'ng2-img-cropper';
+import { SortablejsModule } from 'angular-sortablejs';
 import { ToastrModule } from 'ngx-toastr';
 import {
     MdSnackBarModule,
@@ -44,7 +45,8 @@ import {CommonModule} from '@angular/common';
         MdChipsModule,
         MdIconModule,
         MdAutocompleteModule,
-        MdInputModule
+        MdInputModule,
+        SortablejsModule,
     ],
     exports: [
         MdIconModule,
@@ -73,7 +75,8 @@ import {CommonModule} from '@angular/common';
         MdMenuModule,
         MdListModule,
         ListComponent,
-        AutocompletePipe
+        AutocompletePipe,
+        SortablejsModule,
     ],
     declarations: [
         ListComponent,

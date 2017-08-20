@@ -5,18 +5,18 @@ import { HttpService } from '../../../services/http.service';
 @Injectable()
 export class SportsListService {
 
-  constructor(private httpService: HttpService) { }
+    constructor(private httpService: HttpService) { }
 
 
-  getKindsOfSport(callback): void {
-    const request: IHttpReq = {
-      url: '/api/sport',
-      method: 'GET',
-      body: {}
-    };
-    this.httpService.sendRequest(request).then(res => {
-            callback(res);
-        });
-  }
+    getKindsOfSport(callback): void {
+        const request: IHttpReq = {
+            url: '/api/sport',
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request).then(res => {
+                        callback(res);
+                });
+    }
 
 }
