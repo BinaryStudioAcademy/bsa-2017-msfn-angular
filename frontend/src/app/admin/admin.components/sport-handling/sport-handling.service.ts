@@ -32,6 +32,19 @@ export class SportHandlingService {
         });
     }
 
+
+        getKindsOfSportByCode(code, callback): void {
+        const request: IHttpReq = {
+            url: '/api/sport/' + code.toString(),
+            method: 'GET',
+            body: {}
+        };
+
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
+        });
+    }
+
     addSport(data, callback) {
         const request: IHttpReq = {
             url: '/api/sport',
