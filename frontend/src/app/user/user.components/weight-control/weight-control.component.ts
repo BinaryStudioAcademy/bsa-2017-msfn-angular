@@ -24,17 +24,19 @@ export class WeightControlComponent implements OnInit {
         date: ''
     };
 
-    recentDiff = {
-        weight: 0,
-        bones: 0,
-        water: 0,
-        fat: 0
-    };
-    weeklyDiff = {
-        weight: 0,
-        bones: 0,
-        water: 0,
-        fat: 0
+    diff = {
+        recent: {
+            weight: 0,
+            bones: 0,
+            water: 0,
+            fat: 0
+        },
+        weekly: {
+            weight: 0,
+            bones: 0,
+            water: 0,
+            fat: 0
+        }
     };
 
     recentDay: string;
@@ -124,7 +126,8 @@ export class WeightControlComponent implements OnInit {
                 }
             });
 
-            setTimeout(() => this.updateData(), 500);
+            this.weeklyItems.push(this.newWeight);
+            this.updateData();
 
             this.weightFormControl.reset();
             this.waterFormControl.reset();
@@ -133,54 +136,50 @@ export class WeightControlComponent implements OnInit {
         }
     }
 
-    updateData(): void {
+    getItems(): void {
         this.weightControlService.getWeightItems(res => {
             if (res[0].hasOwnProperty('weight')) {
                 this.weeklyItems = this.weightControlService.getWeeklyWeightItems(res);
-                const recentItem = this.weeklyItems[this.weeklyItems.length - 1];
-                this.recentDay = this.weightControlService.getRecentDay(recentItem);
-                this.currentWeight = recentItem.weight;
-
-                if (this.weeklyItems.length > 1) {
-                    this.recentDiff = this.weightControlService.getRecentDiff(this.weeklyItems);
-                    this.weeklyDiff = this.weightControlService.getWeeklyDiff(this.weeklyItems);
-
-                    this.changeRecentOption('weight');
-                    this.changeWeeklyOption('weight');
-                }
+                this.updateData();
             }
         });
     }
 
-    changeRecentOption(option): void {
-        const settings = this.weightControlService.changeOption(option, this.recentDiff);
+    updateData(): void {
+        const recentItem = this.weeklyItems[this.weeklyItems.length - 1];
+        this.recentDay = this.weightControlService.getRecentDay(recentItem);
+        this.currentWeight = recentItem.weight;
 
-        this.settings.recent.betterResult = settings.betterResult;
-        this.settings.recent.worseResult = settings.worseResult;
-        this.settings.recent.selection = settings.selection;
-        this.settings.recent.symbol = settings.symbol;
-        this.settings.recent.measurement = settings.measurement;
+        if (this.weeklyItems.length > 1) {
+            this.diff.recent = this.weightControlService.getRecentDiff(this.weeklyItems);
+            this.diff.weekly = this.weightControlService.getWeeklyDiff(this.weeklyItems);
 
-        for (const item of this.options) {
-            item.recentChecked = item.value === option;
+            this.changeOption('weight', 'recent');
+            this.changeOption('weight', 'weekly');
         }
     }
 
-    changeWeeklyOption(option): void {
-        const settings = this.weightControlService.changeOption(option, this.weeklyDiff);
+    changeOption(option, type): void {
+        const settings = this.weightControlService.getSettings(option, this.diff[type]);
 
-        this.settings.weekly.betterResult = settings.betterResult;
-        this.settings.weekly.worseResult = settings.worseResult;
-        this.settings.weekly.selection = settings.selection;
-        this.settings.weekly.symbol = settings.symbol;
-        this.settings.weekly.measurement = settings.measurement;
+        this.settings[type].betterResult = settings.betterResult;
+        this.settings[type].worseResult = settings.worseResult;
+        this.settings[type].selection = settings.selection;
+        this.settings[type].symbol = settings.symbol;
+        this.settings[type].measurement = settings.measurement;
 
-        for (const item of this.options) {
-            item.weeklyChecked = item.value === option;
+        if (type === 'recent') {
+            for (const item of this.options) {
+                item.recentChecked = item.value === option;
+            }
+        } else {
+            for (const item of this.options) {
+                item.weeklyChecked = item.value === option;
+            }
         }
     }
 
     ngOnInit() {
-        this.updateData();
+        this.getItems();
     }
 }

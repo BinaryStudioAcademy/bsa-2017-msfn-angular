@@ -15,32 +15,50 @@ MeasurementService.prototype.deleteMeasurement = deleteMeasurement;
 
 function createMeasurement(body, callback) {
 
-        measurementRepository.add(body, (err, MeasurementData) => {
+    this.getMeasurementByName(body.measureName, (err, data) => {
+        if (data instanceof Array && data.length > 0) {
+            callback(new ApiError('This measure name already exists'));
+        } else {
+            measurementRepository.add(body, (err, MeasurementData) => {
 
-            if (err) return callback(err);
-            if (MeasurementData === null) {
-                callback(null, []);
-            } else {
-                callback(null, MeasurementData);
-            }
-        });
+                if (err) return callback(err);
+                if (MeasurementData === null) {
+                    callback(null, []);
+                } else {
+                    callback(null, MeasurementData);
+                }
+            });
+        }
+    });
+
+
 }
 
 
 function updateMeasurement(id, body, callback) {
-    measurementRepository.updateSpecific(id, body, (err, MeasurementData)=>{
 
-        if (err) return callback(err);
-        if (MeasurementData === null) {
-            callback(null, []);
+    this.getMeasurementByName(body.measureName, (err, data) => {
+        if (data instanceof Array && data.length > 0 && data[0]._id != body.id) {
+            callback(new ApiError('This measure name already exists'));
         } else {
-            callback(null, MeasurementData);
+            measurementRepository.updateSpecific(id, body, (err, MeasurementData) => {
+
+                if (err) return callback(err);
+                if (MeasurementData === null) {
+                    callback(null, []);
+                } else {
+                    callback(null, MeasurementData);
+                }
+            });
+
         }
     });
+
+
 }
 
 function deleteMeasurement(id, callback) {
-    measurementRepository.deleteSpecific(id, (err, MeasurementData)=>{
+    measurementRepository.deleteSpecific(id, (err, MeasurementData) => {
 
         if (err) return callback(err);
         if (MeasurementData === null) {

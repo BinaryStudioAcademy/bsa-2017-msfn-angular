@@ -96,13 +96,13 @@ export class WeightControlService {
                 waterDiff = (Math.round(newestItem.waterPct - waterAvg) * 10) / 10,
                 fatDiff = (Math.round(newestItem.fatPct - fatAvg) * 10) / 10;
 
-            const recentDiff = {
+            const weeklyDiff = {
                 weight: weightDiff,
                 bones: boneDiff,
                 water: waterDiff,
                 fat: fatDiff
             };
-            return recentDiff;
+            return weeklyDiff;
         } else {
             return;
         }
@@ -127,12 +127,14 @@ export class WeightControlService {
         }
     }
 
-    changeOption(option, diff) {
+    getSettings(option, diff) {
         const selection = option;
         let symbol = '',
             measurement: string,
             betterResult = false,
             worseResult = false;
+
+        console.log(diff);
 
         if (diff[option] > 0) {
             worseResult = true;
