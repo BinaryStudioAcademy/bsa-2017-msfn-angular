@@ -20,6 +20,9 @@ module.exports = function (app) {
 
     app.get(baseUrl + ':code', (req, res, next) => {
         sportRepository.getByCode(req.params.code, (err, data) => {
+            if (!data){
+                data = [{}];
+            }
             res.data = data;
             res.err = err;
             next();

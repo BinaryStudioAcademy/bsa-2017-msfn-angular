@@ -1,0 +1,30 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+#dashboard-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+
+    div {
+        width: 48%;
+        height: 31%;
+        background: $gradient-to-color;
+
+        h2 {
+            margin: 10px 0 0 10px;
+            font-size: $usual-text;
+            font-weight: 300;
+        }
+    }
+}
+

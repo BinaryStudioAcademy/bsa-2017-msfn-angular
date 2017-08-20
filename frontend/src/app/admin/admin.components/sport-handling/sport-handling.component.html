@@ -3,13 +3,6 @@
 
     <div id="general-error" class="error" *ngIf="generalError">{{ generalError }}</div>
 
-    <md-input-container id="code">
-        <input mdInput type="text" name="code" placeholder="Code (set only if you're updating an item)" [(ngModel)]="code" [formControl]="codeFormControl">
-        <md-error *ngIf="codeFormControl.hasError('pattern')">
-            Code should be a positive integer
-        </md-error>
-    </md-input-container>
-
     <div id="icon-selection" class="input">
         <md-select id="icon" class="select-row" name="sport" placeholder="Sport icon" required [(ngModel)]="sport.icon">
             <md-option *ngFor="let icon of icons" [value]="icon">
