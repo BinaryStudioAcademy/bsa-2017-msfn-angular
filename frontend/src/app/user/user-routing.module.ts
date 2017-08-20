@@ -15,6 +15,7 @@ import { OtherProfilesComponent } from './user.components/other-profiles/other-p
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
 import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
+import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 
 const userRoutes: Routes = [
     {
@@ -22,6 +23,10 @@ const userRoutes: Routes = [
         component: UserComponent,
         canActivate: [ForAllUserGuard],
         children: [
+            {
+                path: '',
+                component: DashboardComponent,
+            },
             {
                 path: 'training-list',
                 component: TrainingListComponent,
