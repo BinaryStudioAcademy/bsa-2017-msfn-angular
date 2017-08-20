@@ -59,10 +59,6 @@ export class MeasureListComponent implements OnInit {
     updateTable() {}
     toggle(row) {
         this.tableDatabase.toggleRemoved(row);
-        this.measurementService.updateMeasurementFull(row, (response) => {
-            this.tableDatabase.updateMeasurement(response);
-        });
-        debugger;
     }
 
     addMeasure() {
@@ -93,13 +89,6 @@ export class TableDatabase {
         this.dataChange.next(copiedData
             .map( obj => Object.assign(obj, { code: getCode() }))
         );
-    }
-
-    updateMeasurement(row) {
-        const index = this.data.indexOf(row);
-        const copiedData = this.data.slice();
-        copiedData[index].isRemoved = !copiedData[index].isRemoved;
-        this.dataChange.next(copiedData);
     }
 
     toggleRemoved(row) {
