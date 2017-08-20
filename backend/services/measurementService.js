@@ -38,7 +38,7 @@ function createMeasurement(body, callback) {
 function updateMeasurement(id, body, callback) {
 
     this.getMeasurementByName(body.measureName, (err, data) => {
-        if (data instanceof Array && data.length > 0) {
+        if (data instanceof Array && data.length > 0 && data[0]._id != body.id) {
             callback(new ApiError('This measure name already exists'));
         } else {
             measurementRepository.updateSpecific(id, body, (err, MeasurementData) => {
