@@ -51,14 +51,11 @@ export class MeasureTypeComponent implements OnInit {
   }
 
   addRow() {
-      this.tableDatabase.addMeasureUnit('', '');
+      this.tableDatabase.addMeasureUnit('', 'metric');
   }
 
   toggle(row) {
       this.tableDatabase.toggleRemoved(row);
-      this.measurementService.updateMeasurementFull(row, (response) => {
-          this.tableDatabase.updateMeasurement(response);
-      });
   }
 
   save()  {
@@ -112,13 +109,6 @@ export class TableDatabase {
     }
 
     toggleRemoved(row) {
-        const index = this.data.indexOf(row);
-        const copiedData = this.data.slice();
-        copiedData[index].isRemoved = !copiedData[index].isRemoved;
-        this.dataChange.next(copiedData);
-    }
-
-    updateMeasurement(row) {
         const index = this.data.indexOf(row);
         const copiedData = this.data.slice();
         copiedData[index].isRemoved = !copiedData[index].isRemoved;

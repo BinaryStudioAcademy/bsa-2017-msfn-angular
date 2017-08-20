@@ -24,13 +24,13 @@
         <ng-container cdkColumnDef="unitName">
             <md-header-cell *cdkHeaderCellDef>Unit</md-header-cell>
             <md-cell *cdkCellDef="let row">
-                <md-input-container>
+                <md-input-container [(ngModel)]="row.unitName">
                     <input mdInput
                            #unitName
                            value={{row.unitName}}
                            name="row.unitName"
                            type="text"
-                           pattern="^[a-zA-Z]+$"
+                           pattern="[^\s]+"
                            (blur)="updateRow(row, 'unitName', unitName.value)"
                            [ngClass]="{'removed': row.isRemoved}"
                            required
@@ -49,7 +49,7 @@
                            #conversionFactor
                            name="row.conversionFactor"
                            type="text"
-                           pattern="\d+(\.\d{2})?"
+                           pattern="^[0-9]{1,2}([,.][0-9]{1,2})?$"
                            (blur)="updateRow(row, 'conversionFactor', conversionFactor.value)"
                            value={{row.conversionFactor}}
                            [ngClass]="{'removed': row.isRemoved}"
@@ -65,10 +65,9 @@
         <ng-container cdkColumnDef="type" class="delete-col">
             <md-header-cell *cdkHeaderCellDef>Type</md-header-cell>
             <md-cell *cdkCellDef="let row">
-               <md-select>
+               <md-select [(ngModel)]="row.unitType">
                    <md-option *ngFor="let type of unitTypeOptions"
                               [value]="type"
-                              selected="row.unitName == type"
                               (onSelectionChange)="updateRow(row, 'unitType', type)"
                    >{{type}}</md-option>
                </md-select>

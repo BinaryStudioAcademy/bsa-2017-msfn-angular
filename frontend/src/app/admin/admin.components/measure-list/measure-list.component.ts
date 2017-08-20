@@ -56,9 +56,11 @@ export class MeasureListComponent implements OnInit {
             });
     }
 
-    updateTable() {}
     toggle(row) {
         this.tableDatabase.toggleRemoved(row);
+        this.measurementService.updateMeasurementFull(row, (response) => {
+            this.tableDatabase.dataChange.next(response);
+        });
     }
 
     addMeasure() {
@@ -97,6 +99,7 @@ export class TableDatabase {
         copiedData[index].isRemoved = !copiedData[index].isRemoved;
         this.dataChange.next(copiedData);
     }
+
 }
 
 export class MeasureTypeDataSource extends DataSource<any> {
