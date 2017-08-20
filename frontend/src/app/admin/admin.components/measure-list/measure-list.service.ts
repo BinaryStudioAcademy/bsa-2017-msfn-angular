@@ -6,7 +6,6 @@ import IMeasureUnit = MeasurementApi.IMeasureUnit;
 
 @Injectable()
 export class MeasureListService {
-    public measureId;
     public measureName;
 
     constructor(private httpService: HttpService) { }
@@ -61,6 +60,18 @@ export class MeasureListService {
             .then( data => callback(data));
     }
 
+    updateMeasurementFull(body, callback) {
+        const request: IHttpReq = {
+            url: 'api/measurement/',
+            method: 'PUT',
+            body,
+            successMessage: 'Updated',
+            failMessage: 'Failed to update'
+        };
+        this.httpService.sendRequest(request)
+            .then( data => callback(data));
+    }
+
     sortData(data, column, direction = 'asc' || 'desc') {
         return data.sort((a, b) => {
             let propA = '';
@@ -95,15 +106,6 @@ export class MeasureListService {
             .then(data => {
                 callback(data);
             });
-    }
-    getMeasurementId(name: string) {
-        const request: IHttpReq = {
-            url: `/api/measurement/by-name/${name}`,
-            method: 'GET',
-            body: {}
-        };
-        return this.httpService.sendRequest(request)
-            .then( data => data._id);
     }
     // inputUnit { unitName, conversionFactor}
     private preproccessData(inputUnits: IMeasureUnit[], measureName: string, id?: string): IMeasurementType {

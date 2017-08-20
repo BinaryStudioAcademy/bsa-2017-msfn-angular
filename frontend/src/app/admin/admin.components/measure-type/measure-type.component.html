@@ -13,17 +13,6 @@
             {{ message }}
         </md-error>
     </md-input-container>
-    <!--<div *ngIf="measureName.invalid && (measureName.dirty || measureName.touched)" class="error">
-        <div *ngIf="measureName.errors.required" >
-            Name is required.
-        </div>
-        <div *ngIf="measureName.errors.minlength">
-            Name must be at least 2 characters long.
-        </div>
-        <div *ngIf="measureName.errors.pattern">
-            Name can contain only latin letters..
-        </div>
-    </div>-->
     <button class="btn"
             (click)="addRow(table)">
         Add measure
@@ -72,6 +61,20 @@
             </md-cell>
         </ng-container>
 
+        <!-- unitType-->
+        <ng-container cdkColumnDef="type" class="delete-col">
+            <md-header-cell *cdkHeaderCellDef>Type</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+               <md-select>
+                   <md-option *ngFor="let type of unitTypeOptions"
+                              [value]="type"
+                              selected="row.unitName == type"
+                              (onSelectionChange)="updateRow(row, 'unitType', type)"
+                   >{{type}}</md-option>
+               </md-select>
+            </md-cell>
+        </ng-container>
+
         <!-- delete-->
         <ng-container cdkColumnDef="delete" class="delete-col">
             <md-header-cell *cdkHeaderCellDef></md-header-cell>
@@ -85,6 +88,6 @@
     </md-table>
     <button md-button
             class="btn btn-save"
-            [disabled]="!form.valid">Save
+            (click)="save()">Save
     </button>
 </form>

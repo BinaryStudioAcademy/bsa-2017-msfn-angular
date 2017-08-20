@@ -14,7 +14,7 @@ import {FormControl, NgForm, Validators} from '@angular/forms';
     providers: [MeasureListService],
 })
 export class MeasureTypeComponent implements OnInit {
-    displayedColumns = [ 'unitName', 'conversionFactor', 'delete'];
+    displayedColumns = [ 'unitName', 'conversionFactor', 'type', 'delete'];
     tableDatabase = new TableDatabase();
     dataSource: MeasurementDataSource | null;
     getId;
@@ -22,6 +22,7 @@ export class MeasureTypeComponent implements OnInit {
     formControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
     renderError = true;
     messages = new Array<CustomError>();
+    unitTypeOptions = ['metric', 'imperial'];
 
 
   constructor( private cd: ChangeDetectorRef,
@@ -33,7 +34,6 @@ export class MeasureTypeComponent implements OnInit {
       })();
       this.messages.push(new CustomError('pattern', 'Wrong format'));
       this.messages.push(new CustomError('minlength', 'Field must be at least 2 characters long'));
-      this.messages.push(new CustomError('required', 'This field is required'));
   }
 
   ngOnInit() {
@@ -51,34 +51,33 @@ export class MeasureTypeComponent implements OnInit {
   }
 
   addRow() {
-      this.tableDatabase.addMeasureUnit('');
+      debugger;
+      this.tableDatabase.addMeasureUnit('', '');
   }
 
   toggle(row) {
       this.tableDatabase.toggleRemoved(row);
   }
 
-  save(form: NgForm) {
-      if (form.valid) {
-          const dataWithoutId: IMeasureUnit[] = this.tableDatabase.data;
-          if (this.route.snapshot.params.id) {
-              this.measurementService.updateMeasurement(
-                  this.route.snapshot.params.id,
-                  dataWithoutId,
-                  this.name,
-                  () => {
-                      this.cd.markForCheck();
-                  }
-              );
-          } else {
-              this.measurementService.addMeasurement(
-                  dataWithoutId,
-                  this.name,
-                  () => {
-                      this.cd.markForCheck();
-                  }
-              );
-          }
+  save()  {
+      const dataWithoutId: IMeasureUnit[] = this.tableDatabase.data;
+      if (this.route.snapshot.params.id) {
+          this.measurementService.updateMeasurement(
+              this.route.snapshot.params.id,
+              dataWithoutId,
+              this.name,
+              () => {
+                  this.cd.markForCheck();
+              }
+          );
+      } else {
+          this.measurementService.addMeasurement(
+              dataWithoutId,
+              this.name,
+              () => {
+                  this.cd.markForCheck();
+              }
+          );
       }
   }
 
@@ -104,9 +103,9 @@ export class TableDatabase {
         this.dataChange.next(copiedData);
     }
 
-    addMeasureUnit(unitName: string, conversionNumber?: number) {
+    addMeasureUnit(unitName: string, unitType?: string, conversionNumber?: number) {
         const copiedData = this.data.slice();
-        copiedData.push(this.createUnit(unitName, conversionNumber));
+        copiedData.push(this.createUnit(unitName, unitType, conversionNumber));
         this.dataChange.next(copiedData);
     }
 
@@ -125,11 +124,13 @@ export class TableDatabase {
     }
 
     private createUnit( unitName: string,
+                        unitType?: string,
                         conversionFactor?: number,
     )  {
         return {
             unitName,
-            conversionFactor: conversionFactor,
+            unitType,
+            conversionFactor,
         };
     }
 

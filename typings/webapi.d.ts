@@ -38,6 +38,7 @@ declare module MeasurementApi  {
         measureUnits?: Array<{
             id?: string
             unitName?: string;
+            unitType?: string;
             conversionFactor?: number;
             isRemoved?: boolean;
         }>;
@@ -46,6 +47,7 @@ declare module MeasurementApi  {
         id?: string;
         measureName?: string;
         unitName: string;
+        unitType?: string;
         conversionFactor?: number;
         isRemoved?: boolean;
     }
