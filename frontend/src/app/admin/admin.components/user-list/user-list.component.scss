@@ -24,12 +24,12 @@
     justify-content: space-between;
     width: 100%;
     margin: 0 auto;
-
-    md-input-container {
-        width: 25%;
-        max-width: 200px;
-    }
 }
+
+.mat-input-element {
+    padding: 4px 12px;
+}
+
 
 .mat-table {
     width: 100%;
