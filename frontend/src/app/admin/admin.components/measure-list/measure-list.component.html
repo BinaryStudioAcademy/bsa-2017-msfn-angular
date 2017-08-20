@@ -22,7 +22,7 @@
         <!-- code -->
         <ng-container cdkColumnDef="code">
             <md-header-cell *cdkHeaderCellDef></md-header-cell>
-            <md-cell *cdkCellDef="let row" #code>{{row.code}}</md-cell>
+            <md-cell *cdkCellDef="let row" #code [ngClass]="{'removed': row.isRemoved}">{{row.code}}</md-cell>
         </ng-container>
 
         <!-- measureName-->
@@ -30,14 +30,18 @@
             <md-header-cell *cdkHeaderCellDef
                             md-sort-header>Measure
             </md-header-cell>
-            <md-cell *cdkCellDef="let row" (click)="onClickName(row.measureName)">{{row.measureName}}</md-cell>
+            <md-cell *cdkCellDef="let row"
+                     (click)="onClickName(row.measureName)"
+                     [ngClass]="{'removed': row.isRemoved}"
+                     class="active">{{row.measureName}}</md-cell>
         </ng-container>
 
         <!-- delete-->
         <ng-container cdkColumnDef="delete">
             <md-header-cell *cdkHeaderCellDef></md-header-cell>
             <md-cell *cdkCellDef="let row" >
-                <i  class="material-icons ico" (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>
+                <i  class="material-icons ico active"
+                    (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>
             </md-cell>
         </ng-container>
 

@@ -44,6 +44,7 @@ export class MeasureListComponent implements OnInit {
         setTimeout(() => this.changeDetectorRef.markForCheck());
         this.measurementService.getAllMeasurements( (response) => {
             this.tableDatabase.addMeasurement(response);
+            console.log(response);
         });
 
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
@@ -58,7 +59,12 @@ export class MeasureListComponent implements OnInit {
 
     toggle(row) {
         this.tableDatabase.toggleRemoved(row);
-        this.measurementService.updateMeasurementFull(row, (response) => {
+        debugger;
+        this.measurementService.updateMeasurement(
+            row._id,
+            row.measureUnits,
+            row.measureName,
+            (response) => {
             this.tableDatabase.dataChange.next(response);
         });
     }

@@ -49,3 +49,19 @@ md-cell:last-child {
 button:focus {
     outline: 0;
 }
+
+.active:hover {
+    cursor: pointer;
+}
+
+.ico {
+    color: $btn-color;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.removed {
+    color: $text-second-color;
+    cursor: default;
+}

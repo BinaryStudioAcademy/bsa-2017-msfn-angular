@@ -19,9 +19,6 @@ export class MeasureTypeComponent implements OnInit {
     dataSource: MeasurementDataSource | null;
     getId;
     name;
-    formControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
-    renderError = true;
-    messages = new Array<CustomError>();
     unitTypeOptions = ['metric', 'imperial'];
 
 
@@ -32,8 +29,6 @@ export class MeasureTypeComponent implements OnInit {
           let current = 0;
           return () => current += 1;
       })();
-      this.messages.push(new CustomError('pattern', 'Wrong format'));
-      this.messages.push(new CustomError('minlength', 'Field must be at least 2 characters long'));
   }
 
   ngOnInit() {
@@ -54,9 +49,9 @@ export class MeasureTypeComponent implements OnInit {
       this.tableDatabase.addMeasureUnit('', 'metric');
   }
 
-  toggle(row) {
+  /*toggle(row) {
       this.tableDatabase.toggleRemoved(row);
-  }
+  }*/
 
   save()  {
       const dataWithoutId: IMeasureUnit[] = this.tableDatabase.data;
@@ -84,11 +79,6 @@ export class MeasureTypeComponent implements OnInit {
       this.tableDatabase.updateMeasureUnit(row, field, value);
       console.log(this.tableDatabase.data);
   }
-  currentMessages(): string[] {
-     return this.messages
-         .filter(m => this.formControl.hasError(m.type))
-         .map(m => m.message);
-    }
 }
 export class TableDatabase {
     dataChange: BehaviorSubject<IMeasureUnit[]> = new BehaviorSubject<IMeasureUnit[]>([]);
@@ -107,13 +97,13 @@ export class TableDatabase {
         copiedData.push(this.createUnit(unitName, unitType, conversionNumber));
         this.dataChange.next(copiedData);
     }
-
-    toggleRemoved(row) {
+    // functionality to mark as removed, works properly
+    /*toggleRemoved(row) {
         const index = this.data.indexOf(row);
         const copiedData = this.data.slice();
         copiedData[index].isRemoved = !copiedData[index].isRemoved;
         this.dataChange.next(copiedData);
-    }
+    }*/
 
     updateMeasureUnit(row, field: string, value) {
         const index = this.data.indexOf(row);
@@ -143,14 +133,4 @@ export class MeasurementDataSource extends DataSource<MeasurementApi.IMeasureUni
         return this._tableDatabase.dataChange;
     }
     disconnect() {}
-}
-
-export class CustomError {
-    type: string;
-    message: string;
-
-    constructor(type: string, message: string) {
-        this.type = type;
-        this.message = message;
-    }
 }

@@ -60,17 +60,7 @@ export class MeasureListService {
             .then( data => callback(data));
     }
 
-    updateMeasurementFull(body, callback) {
-        const request: IHttpReq = {
-            url: 'api/measurement/',
-            method: 'PUT',
-            body,
-            successMessage: 'Updated',
-            failMessage: 'Failed to update'
-        };
-        this.httpService.sendRequest(request)
-            .then( data => callback(data));
-    }
+
 
     sortData(data, column, direction = 'asc' || 'desc') {
         return data.sort((a, b) => {

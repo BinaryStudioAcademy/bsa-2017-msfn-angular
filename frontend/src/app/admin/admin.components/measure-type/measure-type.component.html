@@ -2,16 +2,15 @@
     <md-card-title>Edit measure type</md-card-title>
     <md-input-container>
         <input mdInput
-               #measureName
+               #measureName="ngModel"
                [(ngModel)]="name"
                name="measureName"
                pattern="^[a-zA-Z]+$"
                required
                minlength="2"
         >
-        <md-error *ngFor="let message of currentMessages()">
-            {{ message }}
-        </md-error>
+        <md-error *ngIf="measureName.errors && measureName.errors.pattern">Invalid name</md-error>
+        <md-error *ngIf="measureName.errors && measureName.errors.required">Cannot be blank</md-error>
     </md-input-container>
     <button class="btn"
             (click)="addRow(table)">
@@ -24,10 +23,10 @@
         <ng-container cdkColumnDef="unitName">
             <md-header-cell *cdkHeaderCellDef>Unit</md-header-cell>
             <md-cell *cdkCellDef="let row">
-                <md-input-container [(ngModel)]="row.unitName">
+                <md-input-container>
                     <input mdInput
-                           #unitName
-                           value={{row.unitName}}
+                           #unitName="ngModel"
+                           [(ngModel)]="row.unitName"
                            name="row.unitName"
                            type="text"
                            pattern="[^\s]+"
@@ -35,7 +34,8 @@
                            [ngClass]="{'removed': row.isRemoved}"
                            required
                     >
-                    <md-error>Incorrect value</md-error>
+                    <md-error *ngIf="unitName.errors && unitName.errors.pattern">Invalid name</md-error>
+                    <md-error *ngIf="unitName.errors && unitName.errors.required">Cannot be blank</md-error>
                 </md-input-container>
             </md-cell>
         </ng-container>
@@ -46,17 +46,18 @@
             <md-cell *cdkCellDef="let row">
                 <md-input-container>
                     <input mdInput
-                           #conversionFactor
+                           #conversionFactor="ngModel"
                            name="row.conversionFactor"
                            type="text"
                            pattern="^[0-9]{1,2}([,.][0-9]{1,2})?$"
                            (blur)="updateRow(row, 'conversionFactor', conversionFactor.value)"
-                           value={{row.conversionFactor}}
+                           [(ngModel)]="row.conversionFactor"
                            [ngClass]="{'removed': row.isRemoved}"
                            class="input-value"
                            required
                     >
-                    <md-error>Incorrect value</md-error>
+                    <md-error *ngIf="conversionFactor.errors &&conversionFactor.errors.pattern">Must be number</md-error>
+                    <md-error *ngIf="conversionFactor.errors && conversionFactor.errors.required">Cannot be blank</md-error>
                 </md-input-container>
             </md-cell>
         </ng-container>
@@ -75,10 +76,12 @@
         </ng-container>
 
         <!-- delete-->
+        <!-- insert if delete needed-->
+        <!--<i class="material-icons ico" (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>-->
         <ng-container cdkColumnDef="delete" class="delete-col">
             <md-header-cell *cdkHeaderCellDef></md-header-cell>
             <md-cell *cdkCellDef="let row">
-                <i class="material-icons ico" (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>
+                <i class="material-icons ico">delete</i>
             </md-cell>
         </ng-container>
 
