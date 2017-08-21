@@ -3,6 +3,7 @@ import { WeightControlService } from './weight-control.service';
 import { DateService } from '../../../services/date.service';
 import { FormControl, Validators } from '@angular/forms';
 import { ToasterService } from '../../../services/toastr.service';
+import { D3Service, D3 } from 'd3-ng2-service';
 
 @Component({
     selector: 'app-weight-control',
@@ -14,7 +15,7 @@ import { ToasterService } from '../../../services/toastr.service';
     ]
 })
 export class WeightControlComponent implements OnInit {
-    weeklyItems = [];
+    periodItems = [];
 
     newWeight = {
         weight: null,
@@ -26,15 +27,15 @@ export class WeightControlComponent implements OnInit {
 
     recentDiff = {
         weight: 0,
-        bones: 0,
-        water: 0,
-        fat: 0
+        boneWeight: 0,
+        waterPct: 0,
+        fatPct: 0
     };
-    weeklyDiff = {
+    periodDiff = {
         weight: 0,
-        bones: 0,
-        water: 0,
-        fat: 0
+        boneWeight: 0,
+        waterPct: 0,
+        fatPct: 0
     };
 
     recentDay: string;
@@ -43,45 +44,34 @@ export class WeightControlComponent implements OnInit {
     options = [
         {
             value: 'weight',
-            recentChecked: true,
-            weeklyChecked: true
+            checked: true,
         },
         {
-            value: 'water',
-            recentChecked: false,
-            weeklyChecked: false
+            value: 'waterPct',
+            checked: false,
         },
         {
-            value: 'bones',
-            recentChecked: false,
-            weeklyChecked: false
+            value: 'boneWeight',
+            checked: false,
         },
         {
-            value: 'fat',
-            recentChecked: false,
-            weeklyChecked: false
+            value: 'fatPct',
+            checked: false,
         }
     ];
 
-    settings = {
-        recent: {
-            symbol: '',
-            betterResult: false,
-            worseResult: false,
-            selection: 'weight',
-            measurement: 'kg'
-        },
-        weekly: {
-            symbol: '',
-            betterResult: false,
-            worseResult: false,
-            selection: 'weight',
-            measurement: 'kg'
-        }
+    period = {
+        max: new Date(),
+        min: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 7)
     };
 
-    constructor(private weightControlService: WeightControlService,
-                private toasterService: ToasterService) { }
+    settings = {
+        symbol: '',
+        betterResult: false,
+        worseResult: false,
+        selection: 'weight',
+        measurement: 'kg'
+    };
 
     weightFormControl = new FormControl('', [
         Validators.required,
@@ -106,6 +96,103 @@ export class WeightControlComponent implements OnInit {
         Validators.min(5),
         Validators.max(35)
     ]);
+
+    private _d3: any = null;
+    public chartActive = false;
+
+    constructor(private weightControlService: WeightControlService,
+                private toasterService: ToasterService,
+                private d3Service: D3Service) {
+        this._d3 = d3Service.getD3();
+    }
+
+    renderChart() {
+        if (this.chartActive){
+            this.updateChart();
+            return;
+            // this._d3.select('#chart').selectAll('*').remove();
+        }
+
+        this.chartActive = true;
+
+        const data = this.periodItems.map((item, key) => {
+             return {
+                 value: item[this.settings.selection],
+                 date: new Date(item.date).getTime()
+             };
+        });
+        const svgNode = this._d3.select('#chart');
+        const margin = {
+                top: 10,
+                right: 0,
+                bottom: 20,
+                left: 30
+            },
+            width = +svgNode.node().clientWidth - margin.left - margin.right,
+            height = +svgNode.node().clientHeight - margin.top - margin.bottom,
+            g = svgNode
+                .append('g')
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+                .attr('stroke', 'yellow');
+
+        const x = this._d3.scaleTime().rangeRound([0, width]);
+        const y = this._d3.scaleLinear().rangeRound([height, 0]);
+
+        const xAxis = this._d3.axisBottom().scale(x).ticks(5);
+        const yAxis = this._d3.axisLeft().scale(y).ticks(5);
+
+        x.domain(
+            this._d3.extent(data, function (d) {
+                return d.date;
+            })
+        );
+        y.domain(
+            [
+                0,
+                this._d3.max(data, function (d) {
+                    return d.value;
+                })
+            ]
+        );
+
+        const line = this._d3.line()
+            .x(function (d: any) {
+                return x(d.date);
+            })
+            .y(function (d: any) {
+                return y(d.value);
+            });
+
+        const path = g.select('path');
+
+        g.append('g')
+            .attr('transform', 'translate(0,' + height + ')')
+            .attr('class', 'x_axis')
+            .call(xAxis)
+            .select('.domain')
+            .remove();
+
+        g.append('g')
+            .attr('class', 'y_axis')
+            .call(yAxis)
+            .append('text')
+            .attr('class', 'y_axis_text')
+            .attr('fill', '#000')
+            .attr('transform', 'rotate(-90)')
+            .attr('y', 6)
+            .attr('dy', '0.71em')
+            .attr('text-anchor', 'end')
+            .text('Weight');
+
+        g.append('path')
+            .attr('class', 'line')
+            .attr('fill', 'none')
+            .attr('stroke', 'white')
+            .attr('stroke-linejoin', 'round')
+            .attr('stroke-linecap', 'round')
+            .attr('stroke-width', 1.5)
+            .attr('d', line(data));
+    }
 
     addWeight(): void {
         if (this.weightFormControl.valid &&
@@ -134,53 +221,109 @@ export class WeightControlComponent implements OnInit {
     }
 
     updateData(): void {
+        console.log(this.period);
         this.weightControlService.getWeightItems(res => {
+            console.log(res);
             if (res[0].hasOwnProperty('weight')) {
-                this.weeklyItems = this.weightControlService.getWeeklyWeightItems(res);
-                const recentItem = this.weeklyItems[this.weeklyItems.length - 1];
+                // this.periodItems = this.weightControlService.getWeeklyWeightItems(res);
+                this.periodItems = this.weightControlService.getItemsForPeriod(res, this.period);
+                const recentItem = this.periodItems[this.periodItems.length - 1];
                 this.recentDay = this.weightControlService.getRecentDay(recentItem);
                 this.currentWeight = recentItem.weight;
 
-                if (this.weeklyItems.length > 1) {
-                    this.recentDiff = this.weightControlService.getRecentDiff(this.weeklyItems);
-                    this.weeklyDiff = this.weightControlService.getWeeklyDiff(this.weeklyItems);
+                if (this.periodItems.length > 1) {
+                    this.recentDiff = this.weightControlService.getRecentDiff(this.periodItems);
+                    this.periodDiff = this.weightControlService.getPeriodDiff(this.periodItems);
 
-                    this.changeRecentOption('weight');
-                    this.changeWeeklyOption('weight');
+                    this.changeOption('waterPct');
                 }
             }
         });
     }
 
-    changeRecentOption(option): void {
+    changeOption(option): void {
         const settings = this.weightControlService.changeOption(option, this.recentDiff);
 
-        this.settings.recent.betterResult = settings.betterResult;
-        this.settings.recent.worseResult = settings.worseResult;
-        this.settings.recent.selection = settings.selection;
-        this.settings.recent.symbol = settings.symbol;
-        this.settings.recent.measurement = settings.measurement;
+        this.settings.betterResult = settings.betterResult;
+        this.settings.worseResult = settings.worseResult;
+        this.settings.selection = settings.selection;
+        this.settings.symbol = settings.symbol;
+        this.settings.measurement = settings.measurement;
 
         for (const item of this.options) {
-            item.recentChecked = item.value === option;
+            item.checked = item.value === option;
         }
-    }
-
-    changeWeeklyOption(option): void {
-        const settings = this.weightControlService.changeOption(option, this.weeklyDiff);
-
-        this.settings.weekly.betterResult = settings.betterResult;
-        this.settings.weekly.worseResult = settings.worseResult;
-        this.settings.weekly.selection = settings.selection;
-        this.settings.weekly.symbol = settings.symbol;
-        this.settings.weekly.measurement = settings.measurement;
-
-        for (const item of this.options) {
-            item.weeklyChecked = item.value === option;
-        }
+        this.renderChart();
     }
 
     ngOnInit() {
         this.updateData();
+    }
+
+    updateChart() {
+        const svg = this._d3.select('#chart');
+
+        const data = this.periodItems.map(item => {
+            return {
+                value: item[this.settings.selection],
+                date: new Date(item.date).getTime()
+            };
+        });
+
+        const margin = {
+                top: 10,
+                right: 0,
+                bottom: 20,
+                left: 30
+            },
+            width = +svg.node().clientWidth - margin.left - margin.right,
+            height = +svg.node().clientHeight - margin.top - margin.bottom;
+
+        const x = this._d3.scaleTime().rangeRound([0, width]);
+        const y = this._d3.scaleLinear().rangeRound([height, 0]);
+
+        x.domain(
+            this._d3.extent(data, function (d) {
+                return d.date;
+            })
+        );
+        y.domain(
+            [
+                0,
+                this._d3.max(data, function (d) {
+                    return d.value;
+                })
+            ]
+        );
+
+        const xAxis = this._d3.axisBottom().scale(x);
+        const yAxis = this._d3.axisLeft().scale(y);
+
+        const line = this._d3.line()
+            .x(function (d: any) {
+                return x(d.date);
+            })
+            .y(function (d: any) {
+                return y(d.value);
+            });
+
+        console.log(svg);
+
+        svg.transition()
+            .select('.line')
+            .duration(750)
+            .attr('d', line(data));
+
+        svg.transition()
+            .select('.x_axis')
+            .duration(750)
+            .call(xAxis);
+
+        svg.transition()
+            .select('.y_axis')
+            .duration(750)
+            .call(yAxis)
+            .select('.y_axis_text')
+            .text(this.settings.selection);
     }
 }

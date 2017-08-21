@@ -10,6 +10,7 @@
     max-width: 70%;
     min-height: 50%;
     margin: 0 auto;
+    position: relative;
 }
 
 #title {
@@ -25,7 +26,6 @@ h1 {
 #previous-diff,
 #per-week-diff {
     flex-basis: 45%;
-    height: 100px;
 }
 
 #per-week-diff {
@@ -41,12 +41,6 @@ h1 {
 #yesterday,
 #per-week{
     font-size: $header-text;
-}
-
-#weight-control > div,
-#yesterday > div {
-    display: inline-block;
-    padding: 20px;
 }
 
 #current-weight {
@@ -88,14 +82,15 @@ md-radio-group {
     flex-basis: 100%;
     margin-top: 100px;
     text-align: center;
-}
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-top: #aaa 1px solid;
 
-md-input-container {
-    width: 150px;
-}
-
-md-input-container:nth-child(2n+1) {
-    margin-left: 40px;
+    md-input-container {
+        flex-basis: 50%;
+        padding: 10px 20px;
+    }
 }
 
 #submit-button {
@@ -109,15 +104,16 @@ md-input-container:nth-child(2n+1) {
     }
 
     button {
-        width: 60%;
         max-width: 400px;
         height: 45px;
         border: none;
         border-radius: 45px;
         outline: none;
-        font-size: $button-text;
+        font-size: 20px;
         font-weight: 600;
-        background: $btn-color;
+        background: #82ca9c;
+        width: auto;
+        padding: 0 20px;
     }
 }
 
@@ -129,14 +125,71 @@ md-input-container:nth-child(2n+1) {
     color: $text-warn-color;
 }
 
+.weight-chart {
+    width: 100%;
+    min-height: 300px;
+    margin: 20px 0;
+}
 
-@media only screen and (min-width: $small-screen) {
+.diff-block {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+}
+
+.sort-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.period-wrap {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+@media only screen and (max-width: $small-screen) {
 
 }
 
 
-@media only screen and (min-width: $medium-screen) {
-    md-input-container:nth-child(n+2) {
-        margin-left: 40px;
+@media only screen and (max-width: $medium-screen) {
+    #weight-control {
+        margin: 0 10px;
+        max-width: 100%;
+
+        .diff-wrap {
+            height: auto;
+            flex-basis: 100%;
+            text-align: left;
+            width: 100%;
+            padding: 0;
+            margin: 10px 0;
+
+            md-radio-group {
+                margin: 10px 0 0 0;
+            }
+        }
+
+        #add-new-weight {
+            margin-top: 10px;
+            padding-bottom: 20px;
+
+            md-input-container {
+                margin: 0;
+                padding: 10px;
+                width: 100%;
+            }
+
+            #submit-button {
+                margin: 10px 0 0 0;
+            }
+        }
+    }
+
+    #weight-control > div,
+    #yesterday > div {
+        padding: 0;
     }
 }

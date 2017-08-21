@@ -21,6 +21,14 @@ export class WeightControlService {
         });
     }
 
+    getItemsForPeriod(items: any[], filter: any) {
+        const periodItems = items.filter(item => {
+            const itemDate = new Date(item.date);
+            return (itemDate.getTime() >= filter.min.getTime() && itemDate.getTime() <= filter.max.getTime());
+        });
+        return periodItems;
+    }
+
     addWeight(data, callback) {
         const request: IHttpReq = {
             url: '/api/weight-control/add',
@@ -59,9 +67,9 @@ export class WeightControlService {
                 recentItem = items[numberOfItems - 2],
                 recentDiff = {
                     weight: newestItem.weight - recentItem.weight,
-                    bones: newestItem.boneWeight - recentItem.boneWeight,
-                    water: newestItem.waterPct - recentItem.waterPct,
-                    fat: newestItem.fatPct - recentItem.fatPct
+                    boneWeight: newestItem.boneWeight - recentItem.boneWeight,
+                    waterPct: newestItem.waterPct - recentItem.waterPct,
+                    fatPct: newestItem.fatPct - recentItem.fatPct
                 };
 
             return recentDiff;
@@ -70,7 +78,7 @@ export class WeightControlService {
         }
     }
 
-    getWeeklyDiff(items: any[]) {
+    getPeriodDiff(items: any[]) {
         const numberOfItems = items.length;
         let weightSum = 0,
             boneSum = 0,
@@ -96,16 +104,14 @@ export class WeightControlService {
                 waterDiff = (Math.round(newestItem.waterPct - waterAvg) * 10) / 10,
                 fatDiff = (Math.round(newestItem.fatPct - fatAvg) * 10) / 10;
 
-            const recentDiff = {
+            return {
                 weight: weightDiff,
-                bones: boneDiff,
-                water: waterDiff,
-                fat: fatDiff
+                boneWeight: boneDiff,
+                waterPct: waterDiff,
+                fatPct: fatDiff
             };
-            return recentDiff;
-        } else {
-            return;
         }
+        return;
     }
 
     getRecentDay(recentItem) {
