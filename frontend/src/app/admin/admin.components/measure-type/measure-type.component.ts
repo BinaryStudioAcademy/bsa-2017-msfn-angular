@@ -3,9 +3,8 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {DataSource} from '@angular/cdk';
 import {Observable} from 'rxjs/Observable';
 import {MeasureListService} from '../measure-list/measure-list.service';
-import IMeasureUnit = MeasurementApi.IMeasureUnit;
 import {ActivatedRoute} from '@angular/router';
-import {FormControl, NgForm, Validators} from '@angular/forms';
+import {IMeasureUnit} from '../../../models/measure-unit';
 
 @Component({
     selector: 'app-measure-type',
@@ -14,7 +13,7 @@ import {FormControl, NgForm, Validators} from '@angular/forms';
     providers: [MeasureListService],
 })
 export class MeasureTypeComponent implements OnInit {
-    displayedColumns = [ 'unitName', 'conversionFactor', 'type', 'delete'];
+    displayedColumns = [ 'default', 'unitName', 'conversionFactor', 'type', 'delete'];
     tableDatabase = new TableDatabase();
     dataSource: MeasurementDataSource | null;
     getId;
@@ -49,9 +48,9 @@ export class MeasureTypeComponent implements OnInit {
       this.tableDatabase.addMeasureUnit('', 'metric');
   }
 
-  /*toggle(row) {
+  toggle(row) {
       this.tableDatabase.toggleRemoved(row);
-  }*/
+  }
 
   save()  {
       const dataWithoutId: IMeasureUnit[] = this.tableDatabase.data;
@@ -79,6 +78,10 @@ export class MeasureTypeComponent implements OnInit {
       this.tableDatabase.updateMeasureUnit(row, field, value);
       console.log(this.tableDatabase.data);
   }
+
+  checkForDefault(row) {
+      this.tableDatabase.toggleDefault(row);
+  }
 }
 export class TableDatabase {
     dataChange: BehaviorSubject<IMeasureUnit[]> = new BehaviorSubject<IMeasureUnit[]>([]);
@@ -97,13 +100,23 @@ export class TableDatabase {
         copiedData.push(this.createUnit(unitName, unitType, conversionNumber));
         this.dataChange.next(copiedData);
     }
-    // functionality to mark as removed, works properly
-    /*toggleRemoved(row) {
+
+    toggleRemoved(row) {
         const index = this.data.indexOf(row);
         const copiedData = this.data.slice();
         copiedData[index].isRemoved = !copiedData[index].isRemoved;
         this.dataChange.next(copiedData);
-    }*/
+    }
+
+    toggleDefault(row) {
+        const index = this.data.indexOf(row);
+        const copiedData = this.data.slice();
+        copiedData[index].isDefault = true;
+        for (let item of copiedData.filter( el => el.unitType === copiedData[index].unitType)) {
+            item.isDefault = copiedData.indexOf(item) === index;
+        }
+        this.dataChange.next(copiedData);
+    }
 
     updateMeasureUnit(row, field: string, value) {
         const index = this.data.indexOf(row);
@@ -115,21 +128,23 @@ export class TableDatabase {
     private createUnit( unitName: string,
                         unitType?: string,
                         conversionFactor?: number,
+                        isDefault?: boolean,
     )  {
         return {
             unitName,
             unitType,
             conversionFactor,
+            isDefault
         };
     }
 
 }
 
-export class MeasurementDataSource extends DataSource<MeasurementApi.IMeasureUnit>  {
+export class MeasurementDataSource extends DataSource<IMeasureUnit>  {
     constructor( private _tableDatabase: TableDatabase) {
         super();
     }
-    connect(): Observable<MeasurementApi.IMeasureUnit[]> {
+    connect(): Observable<IMeasureUnit[]> {
         return this._tableDatabase.dataChange;
     }
     disconnect() {}
