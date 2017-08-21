@@ -11,14 +11,19 @@ module.exports = function changePassword(req, callback) {
     userRepository.getById(id, (err, user) => {
         if (err) { return callback(err); }
 
-        user.checkPassword(pass, (err, result) => {
-            if (err) { return callback(err); }
+        if (!pass) {
+            userRepository.update(id, { password: newPass }, callback);
+        } else {
+            user.checkPassword(pass, (err, result) => {
+                if (err) { return callback(err); }
 
-            if (result) {
-                userRepository.update(id, { password: newPass }, callback);
-            } else {
-                return callback(new ApiError("incorect current password"));
-            }
-        })
+                if (result) {
+                    userRepository.update(id, { password: newPass }, callback);
+                } else {
+                    return callback(new ApiError("incorect current password"));
+                }
+            })
+        }
+
     });
 }
