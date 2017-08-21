@@ -2,8 +2,14 @@
     <h2>Users</h2>
 
     <div id="inputs">
+        <app-list
+            [items]="items"
+            [options]="options"
+            placeholder="roles"
+            (change)="updateItems()"
+            (click)="updateItems()"></app-list>
         <md-input-container>
-            <input mdInput type="text" #filter placeholder="search by name, email or role" [(ngModel)]="searchInput">
+            <input mdInput type="text" #filter placeholder="search by name or email" [(ngModel)]="searchInput">
         </md-input-container>
     </div>
 
