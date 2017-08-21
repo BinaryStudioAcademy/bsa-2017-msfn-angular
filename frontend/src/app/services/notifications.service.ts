@@ -1,13 +1,14 @@
-import {Injectable} from '@angular/core';
-import {SocketService} from './socket.service';
-import {INotification} from '../models/notification';
-import {WindowObj} from './window.service';
+import { Injectable } from '@angular/core';
+import { SocketService } from './socket.service';
+import { INotification } from '../models/notification';
+import { WindowObj } from './window.service';
 
 @Injectable()
 export class NotificationsService {
 
     public notifications: INotification[] = [];
     private userId: string;
+    public unreadCount = 0;
 
     constructor(private socketService: SocketService,
                 private window: WindowObj) {
@@ -37,6 +38,7 @@ export class NotificationsService {
                 return;
             }
             this.setNotifications(data);
+            this.updateUnreadCount();
         });
 
         this.socketService.addListener('read_notification:success', (json) => {
@@ -47,6 +49,14 @@ export class NotificationsService {
                 console.error(err);
                 return;
             }
+
+        });
+
+        /// must be removed
+        this.socketService.addListener('add_notification:success', (json) => {
+            this.socketService.send('get_notifications', JSON.stringify({
+                userId: this.userId
+            }));
         });
     }
 
@@ -59,13 +69,16 @@ export class NotificationsService {
 
     public addNotification(data: INotification) {
         this.notifications.push(data);
+        this.updateUnreadCount();
     }
 
-    public markRead(id) {
+    public markRead(data: INotification) {
         this.socketService.send('read_notification', JSON.stringify({
-            id: id,
+            id: data._id,
             userId: this.userId
         }));
+        data.read = true;
+        this.updateUnreadCount();
     }
 
     public getNotificationById(id: string) {
@@ -74,5 +87,11 @@ export class NotificationsService {
             return (item._id === id);
         });
         return _return.shift();
+    }
+
+    private updateUnreadCount() {
+        this.unreadCount = (this.notifications.filter((note) => {
+            return note.read === false;
+        })).length;
     }
 }

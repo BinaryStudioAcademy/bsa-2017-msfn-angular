@@ -11,8 +11,8 @@ import {NotificationsService} from '../../services/notifications.service';
 export class HeaderNotificationsComponent implements OnInit {
 
     private notificationsDialogConfig = {
-        height: '300px',
-        width: '200px',
+        // height: '',
+        width: '300px',
         data: this.notificationsService.notifications,
         position: {
             top: '45px',
