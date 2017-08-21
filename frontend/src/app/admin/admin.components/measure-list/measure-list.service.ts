@@ -47,8 +47,12 @@ export class MeasureListService {
             .then(data => callback(data));
     }
 
-    updateMeasurement(id: string, measureUnits: IMeasureUnit[], measureName: string, callback) {
-        const measureBody = this.preproccessData(measureUnits, measureName, id);
+    updateMeasurement(id: string,
+                      measureUnits: IMeasureUnit[],
+                      measureName: string,
+                      callback,
+                      isRemoved?: boolean) {
+        const measureBody = this.preproccessData(measureUnits, measureName, id, isRemoved);
         const request: IHttpReq = {
             url: 'api/measurement/',
             method: 'PUT',
@@ -98,12 +102,13 @@ export class MeasureListService {
             });
     }
     // inputUnit { unitName, conversionFactor}
-    private preproccessData(inputUnits: IMeasureUnit[], measureName: string, id?: string): IMeasurementType {
+    private preproccessData(inputUnits: IMeasureUnit[], measureName: string, id?: string, isRemoved?: boolean): IMeasurementType {
         const measureObj = {
             measureName: measureName,
             measureUnits: inputUnits
         };
         if (id) { Object.assign(measureObj, { id }); }
+        if (isRemoved) { Object.assign(measureObj, { isRemoved }); }
         return measureObj;
     }
 

@@ -64,4 +64,5 @@ button:focus {
 .removed {
     color: $text-second-color;
     cursor: default;
+    pointer-events: none;
 }

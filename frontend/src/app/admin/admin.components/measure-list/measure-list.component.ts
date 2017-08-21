@@ -28,7 +28,7 @@ export class MeasureListComponent implements OnInit {
     @ViewChild('filter') filter: ElementRef;
 
 
-    constructor(private changeDetectorRef: ChangeDetectorRef,
+    constructor(private cd: ChangeDetectorRef,
                 public measurementService: MeasureListService,
                 private router: Router,
                 private route: ActivatedRoute) {
@@ -41,7 +41,7 @@ export class MeasureListComponent implements OnInit {
             this.tableDatabase,
             this.sort,
             this.measurementService);
-        setTimeout(() => this.changeDetectorRef.markForCheck());
+        setTimeout(() => this.cd.markForCheck());
         this.measurementService.getAllMeasurements( (response) => {
             this.tableDatabase.addMeasurement(response);
             console.log(response);
@@ -59,14 +59,16 @@ export class MeasureListComponent implements OnInit {
 
     toggle(row) {
         this.tableDatabase.toggleRemoved(row);
-        debugger;
         this.measurementService.updateMeasurement(
             row._id,
             row.measureUnits,
             row.measureName,
-            (response) => {
-            this.tableDatabase.dataChange.next(response);
-        });
+            () => {
+                this.cd.markForCheck();
+            },
+            row.isRemoved
+        );
+        console.log(this.tableDatabase.data);
     }
 
     addMeasure() {
