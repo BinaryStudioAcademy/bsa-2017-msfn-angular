@@ -79,6 +79,7 @@ export class SportHandlingComponent implements OnInit {
                 this.sportHandlingService.updateSport(this.code, this.sportToPass, res => {
                     if (typeof (res) === 'object') {
                         this.toasterService.showMessage('success', null);
+                        this.routerNav.navigateByUrl('/admin/sports-list');
                     } else {
                         this.toasterService.showMessage('error', null);
                     }
@@ -87,12 +88,12 @@ export class SportHandlingComponent implements OnInit {
                 this.sportHandlingService.addSport(this.sportToPass, res => {
                     if (typeof (res) === 'object') {
                         this.toasterService.showMessage('success', null);
+                        this.routerNav.navigateByUrl('/admin/sports-list');
                     } else {
                         this.toasterService.showMessage('error', null);
                     }
                 });
             }
-                    this.routerNav.navigateByUrl('/admin/sports-list');
         } else {
             this.generalError = 'Please fill in all fields correctly';
         }
