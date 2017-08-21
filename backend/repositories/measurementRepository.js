@@ -52,7 +52,8 @@ function updateSpecific(id, body, callback) {
     }, {
         $set: {
 			measureName: body.measureName,
-			measureUnits: body.measureUnits
+			measureUnits: body.measureUnits,
+            isRemoved: body.isRemoved
 	    }
     });
     query.exec(callback);

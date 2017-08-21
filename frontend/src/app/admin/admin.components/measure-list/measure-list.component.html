@@ -1,0 +1,52 @@
+<div class="measure-list-container">
+    <button md-button
+            disableRipple
+            class="btn"
+            id="btn-add"
+            (click)="addMeasure()"
+            [ngClass]="{'disabled' : wrongInput}">Add new measure
+    </button>
+    <div>
+        <md-input-container>
+            <input mdInput
+                   type="text"
+                   #filter
+                   placeholder="search by name"
+                   [(ngModel)]="measureName">
+        </md-input-container>
+    </div>
+    <md-table class="mat-table"
+              #table
+              [dataSource]="dataSource"
+              mdSort>
+
+        <!-- code -->
+        <ng-container cdkColumnDef="code">
+            <md-header-cell *cdkHeaderCellDef></md-header-cell>
+            <md-cell *cdkCellDef="let row" #code [ngClass]="{'removed': row.isRemoved}">{{row.code}}</md-cell>
+        </ng-container>
+
+        <!-- measureName-->
+        <ng-container cdkColumnDef="measureName">
+            <md-header-cell *cdkHeaderCellDef
+                            md-sort-header>Measure
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row"
+                     (click)="onClickName(row.measureName)"
+                     [ngClass]="{'removed': row.isRemoved}"
+                     class="active">{{row.measureName}}</md-cell>
+        </ng-container>
+
+        <!-- delete-->
+        <ng-container cdkColumnDef="delete">
+            <md-header-cell *cdkHeaderCellDef></md-header-cell>
+            <md-cell *cdkCellDef="let row" >
+                <i  class="material-icons ico active"
+                    (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>
+            </md-cell>
+        </ng-container>
+
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;" ></md-row>
+    </md-table>
+</div>

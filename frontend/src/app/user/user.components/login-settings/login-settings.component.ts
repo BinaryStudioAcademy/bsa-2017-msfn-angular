@@ -133,7 +133,7 @@ export class LoginSettingsComponent implements OnInit {
     }
 
     openConfirmPasswordDialog() {
-        this.dialog.open(ConfirmPasswordDialogComponent);
+        this.dialog.open(ConfirmPasswordDialogComponent, { data: Boolean(this.user.password) });
     }
 
     // for cropperImg:

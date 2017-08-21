@@ -14,8 +14,7 @@ const User = new Schema({
     },
     secondaryEmails: [String],
     password: {
-        type: String,
-        required: true
+        type: String
     },
     isCoach: Boolean,
     isAdmin: Boolean,

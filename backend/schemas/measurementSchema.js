@@ -6,11 +6,19 @@ const Measurement = new Schema({
     measureUnits: [{
         conversionFactor: Number,
         unitName: String,
-        unitType: String
+        unitType: String,
+        isRemoved: {
+            type: Boolean,
+            default: false
+        },
+        isDefault: {
+            type: Boolean,
+            default: false
+        }
     }],
-    isRemoved: { 
+    isRemoved: {
         type: Boolean,
-        default: false 
+        default: false
     }
 });
 
