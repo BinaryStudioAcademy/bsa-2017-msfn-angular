@@ -40,4 +40,19 @@
     <div class="textField">
         <span class="property">Gender: </span><span class="value">{{gender}}</span>
     </div>
+
+    <div class="buttons" *ngIf="requestForCoaching">
+        <button class="accept-req-btn"
+                md-icon-button
+                type="button"
+                (click)="acceptCoachRequest()">
+            Make a coach
+        </button>
+        <button class="reject-req-btn"
+                md-icon-button
+                type="button"
+                (click)="rejectCoachRequest()">
+            Reject coaching request
+        </button>
+    </div>
 </div>

@@ -39,8 +39,24 @@
             <md-header-cell *cdkHeaderCellDef md-sort-header>
                 Role
             </md-header-cell>
-            <md-cell *cdkCellDef="let row" routerLink="/admin/admin-root-profile/{{ row._id }}">
-                {{ row.role }}
+            <md-cell *cdkCellDef="let row">
+                <div routerLink="/admin/admin-root-profile/{{ row._id }}">
+                    {{ row.role }}
+                </div>
+                <div class="buttons" *ngIf="row.requestForCoaching">
+                    <button class="accept-req-btn"
+                            md-icon-button
+                            type="button"
+                            (click)="acceptCoachRequest(row)">
+                        Make a coach
+                    </button>
+                    <button class="reject-req-btn"
+                            md-icon-button
+                            type="button"
+                            (click)="rejectCoachRequest(row)">
+                        Reject request
+                    </button>
+                </div>
             </md-cell>
         </ng-container>
 
