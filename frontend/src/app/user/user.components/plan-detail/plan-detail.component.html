@@ -1,23 +1,16 @@
 <div class="container">
-  <h1>Training plan {{title}}</h1>
-  <div class="about-plan">
+  <div class="about-container">
+    <h1>{{title}}</h1>
     <div class="field-container">
       <md-input-container>
         <input mdInput placeholder="Plan name" value="New plan" class="plan-name">
       </md-input-container>
-      <md-input-container>
-        <textarea mdInput placeholder="Plan description" class="plan-description"></textarea>
-      </md-input-container>
     </div>
     <div class="field-container">
-      <div class="field-title">
-        Choose a day or traings count per week
-      </div>
+
       <div class="field-items">
-        <div class="field-item">
-          <button md-fab class="counter" (click)="changeTrainingCount('dec');">—</button>
-          <input type="text" name="count" class="count" value="{{trainingsCount}}">
-          <button md-fab class="counter" (click)="changeTrainingCount('inc');">+</button>
+        <div class="field-title">
+          Choose days
         </div>
         <div class="field-item days">
           <div class="item" *ngFor="let day of days">
@@ -25,48 +18,101 @@
             <label for="day-{{day.key}}">{{day.value}}</label>
           </div>
         </div>
+        <div class="field-title">
+          Or trainings count per week</div>
+        <div class="field-item">
+          <button md-fab class="counter" (click)="changeTrainingCount(false, 'dec');">-</button>
+          <input type="text" name="count" (ngModelChange)="changeTrainingCount($event)" class="count" [ngModel]="trainingsCount" value="{{trainingsCount}}">
+          <button md-fab class="counter" (click)="changeTrainingCount(false, 'inc');">+</button>
+        </div>
+
 
       </div>
     </div>
-  </div>
-  <div class="clear"></div>
-  <div class="field-container">
-    <div class="field-title">
-      Sport type
-    </div>
-    <div class="field-item">
-      <md-select placeholder="Choose type" [(ngModel)]="sportTypeValue" (change)="getExercises()" name="type" class="sport-types" [style.width]="'200px'">
-        <md-option *ngFor="let type of types" [value]="type.value">
-          {{type.viewValue}}
-        </md-option>
-      </md-select>
+    <!-- <div class="field-container">
+      <md-input-container>
+        <textarea mdInput placeholder="Plan description" class="plan-description"></textarea>
+      </md-input-container>
+    </div> -->
+    <button md-button class="btn btn-save" (click)="save(form)">Save</button>
 
-      <div class="exercises-container" *ngIf="exercsesShow">
-          <div class="field-title">
-            {{sportTypeValue}} exercises
+  </div>
+  <div class="exercises-container">
+    <button md-raised-button class="button-add">+ Add exercise</button>
+    <div class="exercise-table">
+      <div class="exercise-table-head">
+        <div class="table-title">
+          Exercise list
+        </div>
+        <div class="table-controls">
+          <!-- <md-paginator [length]="10" [pageSize]="3" (page)="pageEvent = $event">
+          </md-paginator> -->
+        </div>
+      </div>
+      <div class="exercise-table-body">
+        <div *ngFor="let exercise of displayExercises" class="exercise-row">
+          <div class="col name">{{exercise.name}}</div>
+          <div class="col edit"><i class="material-icons">mode_edit</i></div>
+          <div class="col del"><i class="material-icons">delete</i></div>
+          <div class="col sets">
+            <div class="set-item">
+              <div class="item-id">1</div>
+              <div class="item-val">30 kg</div>
+              <div class="item-opt-val">x5</div>
+            </div>
+            <div class="set-item">
+              <div class="item-id">2</div>
+              <div class="item-val">35 kg</div>
+              <div class="item-opt-val">x5</div>
+            </div>
+            <div class="set-item">
+              <div class="item-id">3</div>
+              <div class="item-val">40 kg</div>
+              <div class="item-opt-val">x5</div>
+            </div>
+            <div class="set-item">
+              <div class="item-id">4</div>
+              <div class="item-val">45 kg</div>
+              <div class="item-opt-val">--</div>
+            </div>
           </div>
-
-        <md-input-container>
-          <input mdInput placeholder="Exercise search" value="Coming soon" class="search" [(ngModel)]="searchString">
-        </md-input-container>
-        <div *ngFor="let exercise of exercisesList" class="exercise-item">
-          <h4 md-line>{{exercise.name}}</h4>
-          <div class="about-exercise">
-          <p md-line>
-            <b>
-            About:
-          </b> {{exercise.description}} </p>
-          <p md-line>
-            <b>
-            How to:
-          </b> {{exercise.how_to}} </p>
-        </div>
-          <button md-fab class="add" title="add to plan">+</button>
-          
         </div>
       </div>
     </div>
   </div>
-  <button md-button class="btn btn-save" (click)="save(form)">Save</button>
 
 </div>
+
+<!-- <div class="field-item">
+  <md-select placeholder="Choose type" [(ngModel)]="sportTypeValue" (change)="getExercises()" name="type" class="sport-types"
+    [style.width]="'200px'">
+    <md-option *ngFor="let type of types" [value]="type.value">
+      {{type.viewValue}}
+    </md-option>
+  </md-select>
+
+  <div *ngIf="exercsesShow">
+    <div class="field-title">
+      {{sportTypeValue}} exercises
+    </div>
+
+    <md-input-container>
+      <input mdInput placeholder="Exercise search" value="Coming soon" class="search" [(ngModel)]="searchString">
+    </md-input-container>
+    <div *ngFor="let exercise of exercisesList" class="exercise-item">
+      <h4 md-line>{{exercise.name}}</h4>
+      <div class="about-exercise">
+        <p md-line>
+          <b>
+            About:
+          </b> {{exercise.description}} </p>
+        <p md-line>
+          <b>
+            How to:
+          </b> {{exercise.how_to}} </p>
+      </div>
+      <button md-fab class="add" title="add to plan">+</button>
+
+    </div>
+  </div>
+</div> -->
