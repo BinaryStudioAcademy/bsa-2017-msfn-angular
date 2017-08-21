@@ -20,6 +20,7 @@ import { AccountSettingsComponent } from './user.components/account-settings/acc
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
 import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
 import { SearchExerciseComponent } from './user.components/search-exercise/search-exercise.component';
+import { ExerciseEditDialogComponent } from './user.components/exercise-edit-dialog/exercise-edit-dialog.component';
 
 @NgModule({
     imports: [
@@ -45,6 +46,7 @@ import { SearchExerciseComponent } from './user.components/search-exercise/searc
         LoginSettingsComponent,
         PlanDetailComponent,
         SearchExerciseComponent,
+        ExerciseEditDialogComponent,
     ],
     providers: [
         ForAllUserGuard,

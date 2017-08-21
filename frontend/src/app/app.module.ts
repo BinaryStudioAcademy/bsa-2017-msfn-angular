@@ -40,6 +40,7 @@ import { SocketService } from './services/socket.service';
 import { NotificationsService } from './services/notifications.service';
 import { HeaderNotificationsComponent } from './components/header-notifications/header-notifications.component';
 import { SearchExerciseComponent } from './user/user.components/search-exercise/search-exercise.component'
+import { ExerciseEditDialogComponent } from './user/user.components/exercise-edit-dialog/exercise-edit-dialog.component';
 
 @NgModule({
     imports: [
@@ -93,7 +94,9 @@ import { SearchExerciseComponent } from './user/user.components/search-exercise/
         LoginDialogComponent,
         RegistrationComponent,
         NotificationDataDialogComponent,
-        SearchExerciseComponent
+        SearchExerciseComponent,
+        ExerciseEditDialogComponent
+        
     ],
     bootstrap: [AppComponent]
 

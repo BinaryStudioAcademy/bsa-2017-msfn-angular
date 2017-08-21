@@ -52,7 +52,7 @@
       <div class="exercise-table-body">
         <div *ngFor="let exercise of displayExercises" class="exercise-row">
       <div class="col name">{{exercise.name}}</div>
-          <div class="col edit"><i class="material-icons">mode_edit</i></div>
+          <div class="col edit" (click)="editExercise(exercise.id)"><i class="material-icons">mode_edit</i></div>
           <div class="col del" (click)="deleteExercise(exercise.id)"><i class="material-icons">delete</i></div>
           <div class="col sets">
             <div class="set-item">

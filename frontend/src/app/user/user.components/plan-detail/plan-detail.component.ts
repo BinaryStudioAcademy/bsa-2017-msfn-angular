@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material';
-import { SearchExerciseComponent } from './../search-exercise/search-exercise.component'
+import { SearchExerciseComponent } from './../search-exercise/search-exercise.component';
+import { ExerciseEditDialogComponent } from './../exercise-edit-dialog/exercise-edit-dialog.component';
+import { IntervalTrainingPlanComponent } from './../interval-training-plan/interval-training-plan.component';
+
 import { MdDialog, MdDialogRef } from '@angular/material';
 
 @Component({
@@ -50,7 +53,7 @@ export class PlanDetailComponent implements OnInit {
       id: 123,
       order: 1,
       name: 'Braced Squat',
-      type: 'fitness',
+      type: 'run',
       description: 'It\'s one of the simplest yet most effective ways to tighten your tummy. In fact, you\'ll barely have to move a muscle.',
       how_to: 'Assume a pushup position with your arms completely straight, but place your hands on a Swiss ball instead of the floor. Your body should form a straight line from your head to your ankles. Tighten your core and hold it that way for the duration of the exercise [A]. Lift one foot off the floor and slowly raise your knee as close to your chest as you can without changing your lower-back posture. Then repeat with your other leg. Alternate back and forth for 30 seconds. If that\'s too hard, place your hands on the floor or a bench, instead of a Swiss ball.'
     },
@@ -264,12 +267,23 @@ export class PlanDetailComponent implements OnInit {
   }
 
   deleteExercise(id) {
-
     this.exercisesList = this.exercisesList.filter(function (el) {
       return el.id !== id;
     });
 
     this.displayExercises = this.exercisesList.slice(0, 3);
+  }
+  editExercise(id) {
+    const exercise = this.exercisesList.find(function (el) {
+      return el.id === id;
+    });
+    console.log(exercise.type);
+    if (exercise.type == 'run')
+      this.openedDialog = this.dialog.open(IntervalTrainingPlanComponent);
+    else
+      this.openedDialog = this.dialog.open(ExerciseEditDialogComponent);
+
+    // this.displayExercises = this.exercisesList.slice(0, 3);
   }
 
 }
