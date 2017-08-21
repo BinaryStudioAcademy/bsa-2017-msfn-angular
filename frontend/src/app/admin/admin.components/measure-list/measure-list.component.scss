@@ -4,7 +4,8 @@
 
 .mat-table {
     width: 80%;
-    margin: 40px auto;
+    margin: 0 auto 40px auto;
+    overflow-y: auto;
 }
 .mat-header-row,
 .mat-row {
@@ -33,6 +34,9 @@ md-cell:last-child {
     width: 60%;
     text-align: center;
     font-family: $font-general;
+    div {
+        overflow-x: hidden;
+    }
 }
 .btn {
     border: none;

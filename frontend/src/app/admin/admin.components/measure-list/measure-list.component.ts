@@ -44,7 +44,6 @@ export class MeasureListComponent implements OnInit {
         setTimeout(() => this.cd.markForCheck());
         this.measurementService.getAllMeasurements( (response) => {
             this.tableDatabase.addMeasurement(response);
-            console.log(response);
         });
 
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
