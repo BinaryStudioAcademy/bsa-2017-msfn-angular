@@ -19,6 +19,7 @@ import { OtherProfilesComponent } from './user.components/other-profiles/other-p
 import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
 import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
+import { SearchExerciseComponent } from './user.components/search-exercise/search-exercise.component';
 
 @NgModule({
     imports: [
@@ -43,6 +44,7 @@ import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.c
         AccountSettingsComponent,
         LoginSettingsComponent,
         PlanDetailComponent,
+        SearchExerciseComponent,
     ],
     providers: [
         ForAllUserGuard,

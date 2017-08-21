@@ -38,7 +38,7 @@
 
   </div>
   <div class="exercises-container">
-    <button md-raised-button class="button-add">+ Add exercise</button>
+    <button md-raised-button class="button-add" (click)="addExercise()">+ Add exercise</button>
     <div class="exercise-table">
       <div class="exercise-table-head">
         <div class="table-title">
@@ -51,9 +51,9 @@
       </div>
       <div class="exercise-table-body">
         <div *ngFor="let exercise of displayExercises" class="exercise-row">
-          <div class="col name">{{exercise.name}}</div>
+      <div class="col name">{{exercise.name}}</div>
           <div class="col edit"><i class="material-icons">mode_edit</i></div>
-          <div class="col del"><i class="material-icons">delete</i></div>
+          <div class="col del" (click)="deleteExercise(exercise.id)"><i class="material-icons">delete</i></div>
           <div class="col sets">
             <div class="set-item">
               <div class="item-id">1</div>
@@ -96,7 +96,7 @@
       {{sportTypeValue}} exercises
     </div>
 
-    <md-input-container>
+    <md-input-co    <dntainer>
       <input mdInput placeholder="Exercise search" value="Coming soon" class="search" [(ngModel)]="searchString">
     </md-input-container>
     <div *ngFor="let exercise of exercisesList" class="exercise-item">
