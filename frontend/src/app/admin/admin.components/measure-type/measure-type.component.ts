@@ -112,7 +112,7 @@ export class TableDatabase {
         const index = this.data.indexOf(row);
         const copiedData = this.data.slice();
         copiedData[index].isDefault = true;
-        for (let item of copiedData.filter( el => el.unitType === copiedData[index].unitType)) {
+        for (const item of copiedData.filter( el => el.unitType === copiedData[index].unitType)) {
             item.isDefault = copiedData.indexOf(item) === index;
         }
         this.dataChange.next(copiedData);
