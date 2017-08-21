@@ -6,11 +6,25 @@
             <a class="note-link">{{note.title}}</a>
         </md-list-item>
     </md-list> -->
-
+<md-dialog-actions class="notification__actions">
+    <md-button-toggle-group>
+    <md-button-toggle (click)=onClickAll() value="all" [checked]="true">
+            All
+        </md-button-toggle>
+        <md-button-toggle (click)=onClickUnread() value="unread">
+            Unread
+        </md-button-toggle>
+    </md-button-toggle-group>
+    <button md-button (click)="makeRead()">Mark all read</button>
+</md-dialog-actions>
 <md-dialog-content class="notifications__dialog">
-    <button md-button
+    <button md-button mdTooltipClass="tooltips"
             class="notifications__dialog-button"
-            *ngFor="let notification of data; let i = index;"
+            *ngFor="let notification of showedNotifications;"
+            [class.unread]="!notification.read"
             (title)="notification.title"
-            (click)="viewNotification(notification, i)">{{notification.message}}</button>
+            mdTooltip="{{notification.message}}"
+            (click)="viewNotification(notification)">{{notification.message}}
+    </button>
 </md-dialog-content>
+

@@ -21,7 +21,7 @@
         
         <h3 class="setting-header">Password</h3>
         <div class="profile-password">
-            <button md-raised-button (click)="openConfirmPasswordDialog()" class="">Change password</button>
+            <button md-raised-button (click)="openConfirmPasswordDialog()" class="">{{user.password ? 'Change password' : 'Set password'}}</button>
         </div>
 
         <h3 class="setting-header">Social account</h3>

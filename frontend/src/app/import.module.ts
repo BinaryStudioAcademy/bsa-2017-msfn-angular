@@ -27,7 +27,8 @@ import {
     MdSortModule,
     MdTooltipModule,
     MdMenuModule,
-    MdListModule
+    MdListModule,
+    MdButtonToggleModule
 } from '@angular/material';
 import 'hammerjs';
 
@@ -74,6 +75,7 @@ import {CommonModule} from '@angular/common';
         MdTooltipModule,
         MdMenuModule,
         MdListModule,
+        MdButtonToggleModule,
         ListComponent,
         AutocompletePipe,
         SortablejsModule,

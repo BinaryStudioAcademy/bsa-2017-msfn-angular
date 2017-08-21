@@ -20,12 +20,12 @@ export class FollowersListComponent implements OnInit {
 
     ngOnInit() {
         this.followersListService.getFollowers(data => {
-            this.allFollowers = data;
-            this.filterFollowers = data;
-            this.showFollowers = data.slice(0, this.addCount);
             if (data.length === 0) {
                 this.noFollowers = true;
             }
+            this.allFollowers = data;
+            this.filterFollowers = data;
+            this.showFollowers = data.slice(0, this.addCount);
         });
     }
 

@@ -1,4 +1,4 @@
-import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
+// import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
 import { ForAdminGuard } from '../guards/for-admin.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,6 +10,8 @@ import { ExerciseCreateComponent } from './admin.components/exercise-create/exer
 import { ExerciseListComponent } from './admin.components/exercise-list/exercise-list.component';
 import { ExerciseTypeComponent } from './admin.components/exercise-type/exercise-type.component';
 import { SportHandlingComponent } from './admin.components/sport-handling/sport-handling.component';
+import { MeasureListComponent } from './admin.components/measure-list/measure-list.component';
+import { MeasureTypeComponent } from './admin.components/measure-type/measure-type.component';
 
 const adminRoutes: Routes = [
     {
@@ -52,10 +54,23 @@ const adminRoutes: Routes = [
                         path: 'sport-handling/:id',
                         component: SportHandlingComponent
                     },
-                    {
+                   /* {
                         path: 'sports-list',
                         component: SportsListComponent
+                    },*/
+                    {
+                        path: 'measure-list',
+                        component: MeasureListComponent
                     },
+                    {
+                        path: 'measure/:id',
+                        component: MeasureTypeComponent
+                    },
+                    {
+                        path: 'measure',
+                        component: MeasureTypeComponent
+                    }
+
                 ]
             }
         ]

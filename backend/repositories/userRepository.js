@@ -14,6 +14,7 @@ UserRepository.prototype.getUserByQuery = getUserByQuery;
 UserRepository.prototype.getUserByToken = getUserByToken;
 UserRepository.prototype.addEmail = addEmail;
 UserRepository.prototype.processRequest = processRequest;
+UserRepository.prototype.getUsersFromArrayID = getUsersFromArrayID;
 
 function getUserByEmail(email, callback) {
     const query = this.model.findOne({email : email});
@@ -71,6 +72,14 @@ function processRequest(id, body, callback) {
         );
         makeCoachQuery.exec(callback);
     }
+}
+
+function getUsersFromArrayID(array, params, callback) {
+    if (params.fields === undefined) {
+        params.fields = null;
+    }
+    const query = this.model.find().where('_id').in(array).select(params.fields);
+    query.exec(callback);
 }
 
 module.exports = new UserRepository();

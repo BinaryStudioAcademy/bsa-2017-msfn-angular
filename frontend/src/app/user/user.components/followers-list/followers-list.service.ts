@@ -16,7 +16,6 @@ export class FollowersListService {
             failMessage: 'Can\'t show followers'
         };
         this.httpService.sendRequest(getFollowersReq).then(data => {
-            console.log(data);
             callback(data);
         });
     }
