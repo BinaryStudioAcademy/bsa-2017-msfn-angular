@@ -8,6 +8,7 @@ const
     coachService = require('../../services/coachService'),
     initFakeService = require('../../services/initFakeService'),
     isUserSessionUser = require('../../middleware/isUserSessionUser.js'),
+    isAdmin = require('../../middleware/isAdminMiddleware'),
     changeMailRoutes = require('./changeMailRoutes');
 
 module.exports = function (app) {
@@ -35,7 +36,7 @@ module.exports = function (app) {
             next();
         });
     }, apiResponse);
-    
+
     app.get(baseUrl + 'coach-status-request/:id', (req, res, next) => {
         coachService.apply(req.params.id, (err, data) => {
             res.data = data;
@@ -75,6 +76,13 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+    app.put(baseUrl + 'coach-request/:id', isAdmin, (req, res, next) => {
+        userRepository.processRequest(req.params.id, req.body, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
 
     app.put(baseUrl + ':id', isUserSessionUser, function(req, res, next) {
         userService.updateItem(req.params.id, req.body, function(err, data) {

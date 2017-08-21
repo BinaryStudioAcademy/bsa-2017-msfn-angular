@@ -18,7 +18,7 @@ import { ToasterService } from '../services/toastr.service';
 import { AdminRootProfileService } from './admin.components/admin-root-profile/admin-root-profile.service';
 import { ExerciseCreateService } from './admin.components/exercise-create/exercise-create.service';
 import { SportHandlingComponent } from './admin.components/sport-handling/sport-handling.component';
-// import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
+import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
 import { MeasureTypeComponent } from './admin.components/measure-type/measure-type.component';
 
 @NgModule({
@@ -36,7 +36,7 @@ import { MeasureTypeComponent } from './admin.components/measure-type/measure-ty
         ExerciseTypeComponent,
         AdminRootProfileComponent,
         SportHandlingComponent,
-        // SportsListComponent,
+        SportsListComponent,
         MeasureListComponent,
         MeasureTypeComponent
     ],

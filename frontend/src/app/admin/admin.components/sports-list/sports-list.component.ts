@@ -9,11 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SportsListComponent implements OnInit {
 
-    data: any[];
-    dragNdropOptions = {
+    private data: any[];
+    private itemsDropped: any[] = [];
+    private showPlaceholder = false;
+
+    dragOptions = {
         animation: 200,
         ghostClass: 'ghost',
-        filter: '.add-container'
+        filter: '.add-container',
+        group: 'sport',
+        store: {
+            /**
+             * Get the order of elements. Called once during initialization.
+             * @param   {Sortable}  sortable
+             * @returns {Array}
+             */
+            get: (sortable) => {
+                const order = localStorage.getItem(sortable.options.group.name);
+                return order ? order.split('|') : [];
+            },
+            /**
+             * Save the order of elements. Called onEnd (when the item is dropped).
+             * @param {Sortable}  sortable
+             */
+            set: (sortable) => {
+                const order = sortable.toArray();
+                localStorage.setItem(sortable.options.group.name, order.join('|'));
+            }
+        }
     };
 
     constructor(private sportsListService: SportsListService) { }

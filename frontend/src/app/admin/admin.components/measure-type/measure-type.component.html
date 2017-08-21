@@ -19,6 +19,16 @@
     <md-table #table
               [dataSource]="dataSource">
 
+        <!-- Check default-->
+        <ng-container cdkColumnDef="default" class="delete-col">
+            <md-header-cell *cdkHeaderCellDef>Default</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <md-checkbox [(ngModel)]="row.isDefault"
+                             (change)="checkForDefault(row)"
+                ></md-checkbox>
+            </md-cell>
+        </ng-container>
+
         <!-- UnitName Column -->
         <ng-container cdkColumnDef="unitName">
             <md-header-cell *cdkHeaderCellDef>Unit</md-header-cell>
@@ -76,12 +86,10 @@
         </ng-container>
 
         <!-- delete-->
-        <!-- insert if delete needed-->
-        <!--<i class="material-icons ico" (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>-->
         <ng-container cdkColumnDef="delete" class="delete-col">
             <md-header-cell *cdkHeaderCellDef></md-header-cell>
             <md-cell *cdkCellDef="let row">
-                <i class="material-icons ico">delete</i>
+                <i class="material-icons ico" (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>
             </md-cell>
         </ng-container>
 

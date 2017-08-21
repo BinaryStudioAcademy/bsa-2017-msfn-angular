@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpService} from '../../../services/http.service';
-import {IHttpReq} from '../../../models/http-req';
-import IMeasurementType = MeasurementApi.IMeasurementType;
-import IMeasureUnit = MeasurementApi.IMeasureUnit;
+import { Injectable } from '@angular/core';
+import { HttpService } from '../../../services/http.service';
+import { IHttpReq } from '../../../models/http-req';
+import { IMeasureUnit } from '../../../models/measure-unit';
+import { IMeasurementType } from '../../../models/measure-type';
 
 @Injectable()
 export class MeasureListService {
@@ -101,8 +101,11 @@ export class MeasureListService {
                 callback(data);
             });
     }
-    // inputUnit { unitName, conversionFactor}
-    private preproccessData(inputUnits: IMeasureUnit[], measureName: string, id?: string, isRemoved?: boolean): IMeasurementType {
+
+    private preproccessData(inputUnits: IMeasureUnit[],
+                            measureName: string,
+                            id?: string,
+                            isRemoved?: boolean): IMeasurementType {
         const measureObj = {
             measureName: measureName,
             measureUnits: inputUnits
