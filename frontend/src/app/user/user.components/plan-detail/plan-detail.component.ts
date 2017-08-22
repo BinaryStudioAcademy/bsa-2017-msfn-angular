@@ -32,7 +32,16 @@ export class PlanDetailComponent implements OnInit {
   sportTypeValue: string;
   searchString: string = 'Coming soon...';
 
-  types = [];
+  types = [
+    {
+      key: 'general',
+      value: 'General training'
+    },
+    {
+      key: 'interval',
+      value: 'Interval training'
+    },
+  ];
   exercisesList = [];
   displayExercises: Object[];
 
@@ -47,8 +56,10 @@ export class PlanDetailComponent implements OnInit {
 
   trainingPlan = {
     name: 'New plan',
-    days: ['md', 'wd', 'fr'],
-    count: 3,
+    days: [],
+    count: Number,
+    type: 'general' || 'interval',
+
   };
 
   constructor(private dialog: MdDialog, private paginator: MdPaginatorModule) {
@@ -56,11 +67,7 @@ export class PlanDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.types = [
-      { 'value': 'run', 'viewValue': 'Run' },
-      { 'value': 'fitness', 'viewValue': 'Fitness' },
-      { 'value': 'loooong', 'viewValue': 'Tooooo long type name' },
-    ];
+
 
     this.exercisesList = [
       {
@@ -125,8 +132,14 @@ export class PlanDetailComponent implements OnInit {
     this.displayExercises = this.exercisesList.slice(0, 3);
   }
 
-  selectDays(daysForm) {
-    console.log(daysForm);
+  selectDays() {
+    // console.log(this.days);
+    const selectedDays = this.days.filter((el) => {
+      return el.checked;
+    });
+    console.log(selectedDays);
+    this.trainingPlan.days = selectedDays;
+    this.trainingsCount = selectedDays.length;
   }
 
   changeTrainingCount(newValue: string, operation = '') {
@@ -201,13 +214,13 @@ export class PlanDetailComponent implements OnInit {
       let inArray = this.exercisesList.find((el) => {
         return el.id === elem.id;
       });
-      if(!inArray){
+      if (!inArray) {
         this.exercisesList.push(elem);
       }
     });
     console.log(this.pageEvent);
     let page = 0;
-    if(this.pageEvent){
+    if (this.pageEvent) {
       page = this.pageEvent.pageIndex;
     }
     this.showPage(page);

@@ -7,18 +7,25 @@
       </md-input-container>
     </div>
     <div class="field-container">
-
+        <div class="field-title">
+            Type
+          </div>
+      <div class="field-item">
+        <md-radio-group class="radio-group" [(ngModel)]="trainingPlan.type">
+          <md-radio-button class="radio-button" *ngFor="let type of types" [value]="type.key">
+            {{type.value}}
+          </md-radio-button>
+        </md-radio-group>
+      </div>
       <div class="field-items">
         <div class="field-title">
-          Choose days
+          Days
         </div>
         <div class="field-item days">
-          <form #daysForm="ngForm">
           <div class="item" *ngFor="let day of days">
-            <input type="checkbox" id="day-{{day.key}}" value="{{day.key}}" [(ngModel)]="day.key" name="weekdays[]" (change)="selectDays(daysForm)">
+            <input type="checkbox" id="day-{{day.key}}" value="{{day.key}}" [(ngModel)]="day.checked" name="weekdays[]" (change)="selectDays()">
             <label for="day-{{day.key}}">{{day.value}}</label>
           </div>
-        </form>
         </div>
         <div class="field-title">
           Or trainings count per week</div>
@@ -47,11 +54,8 @@
           Exercise list
         </div>
         <div class="table-controls">
-          <md-paginator class="exercise-pagination" 
-              [length]="exercisesList.length" 
-              [(pageIndex)]="pageIndex" 
-              [pageSize]="pageSize" 
-              (page)="pageEvent = $event; showPage(pageEvent.pageIndex)">
+          <md-paginator class="exercise-pagination" [length]="exercisesList.length" [(pageIndex)]="pageIndex" [pageSize]="pageSize"
+            (page)="pageEvent = $event; showPage(pageEvent.pageIndex)">
           </md-paginator>
         </div>
       </div>
@@ -69,31 +73,19 @@
               </div>
             </div>
             <div class="set-item add">
-              <div class="item-id">+</div>
+              <div class="item-id" (click)="setAdd(exercise)">+</div>
               <a class="exercise-add" (click)="setAdd(exercise)">Add</a>
             </div>
             <div class="set-form" *ngIf="exercise.edit">
               <form #form="ngForm">
                 <div class="item-val">
                   <md-input-container>
-                    <input mdInput 
-                    placeholder="Weight" 
-                    value="" 
-                    class="plan-name" 
-                    name="value" 
-                    [(ngModel)]="value" 
-                    (keyup.enter)="saveSetInfo(exercise, form)">
+                    <input mdInput placeholder="Weight" value="" class="plan-name" name="value" [(ngModel)]="value" (keyup.enter)="saveSetInfo(exercise, form)">
                   </md-input-container>
                 </div>
                 <div class="item-opt-val">
                   <md-input-container>
-                    <input mdInput 
-                    placeholder="Count/time" 
-                    value="" 
-                    class="plan-name" 
-                    name="value2" 
-                    [(ngModel)]="value2" 
-                    (keyup.enter)="saveSetInfo(exercise, form)">
+                    <input mdInput placeholder="Count/time" value="" class="plan-name" name="value2" [(ngModel)]="value2" (keyup.enter)="saveSetInfo(exercise, form)">
                   </md-input-container>
                 </div>
               </form>

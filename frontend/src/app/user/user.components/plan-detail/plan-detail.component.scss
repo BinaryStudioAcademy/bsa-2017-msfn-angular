@@ -32,7 +32,15 @@
             display: flex;
             align-items: center;
         }
-        .days form{
+        .radio-group{
+            .radio-button{
+                display: block;
+                .mat-radio-outer-circle, .mat-radio-inner-circle{
+                    background-color: #82ca9c!important;
+                }
+            }
+        }
+        .days{
             display: flex;
             flex-wrap: wrap;
             input[type=checkbox]{
