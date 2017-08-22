@@ -25,8 +25,8 @@
             How to:
           </b> {{exercise.how_to}} </p>
       </div>
-      <button md-fab class="add" title="add to plan">+</button>
-      <md-checkbox [id]="exercise.id" [checked]="exercise.checked" (change)="selectExercise($event)">Add to my plan</md-checkbox>
+      <!-- <button md-fab class="add" title="add to plan">+</button> -->
+      <md-checkbox [id]="exercise.id" [checked]="exercise.checked" (change)="selectExercise($event)" class="add">Add to my plan</md-checkbox>
     </div>
   </div>
 </div>
