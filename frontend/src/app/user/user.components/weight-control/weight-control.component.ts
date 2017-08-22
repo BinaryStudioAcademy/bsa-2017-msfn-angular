@@ -278,7 +278,7 @@ export class WeightControlComponent implements OnInit {
         }
     }
 
-    getItems(): void {
+    updateData(): void {
         this.weightControlService.getWeightItems(res => {
             if (res[0].hasOwnProperty('weight')) {
                 // this.periodItems = this.weightControlService.getWeeklyWeightItems(res);

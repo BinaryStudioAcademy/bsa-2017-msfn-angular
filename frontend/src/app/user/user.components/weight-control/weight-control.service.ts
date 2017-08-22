@@ -129,12 +129,11 @@ export class WeightControlService {
         } else if (dayAmount < 1) {
             return 'yesterday';
         } else {
-            const dateObject = this.dateService.convertDateFromIso(recentDate.toString());
-            return this.dateService.convertDateToIso(dateObject);
+            return this.dateService.convertDateToIso(recentDate);
         }
     }
 
-    getSettings(option, diff) {
+    changeOption(option, diff) {
         const selection = option;
         let symbol = '',
             measurement: string,
