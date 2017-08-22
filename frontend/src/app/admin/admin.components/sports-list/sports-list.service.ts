@@ -14,9 +14,10 @@ export class SportsListService {
             method: 'GET',
             body: {}
         };
-        this.httpService.sendRequest(request).then(res => {
-                        callback(res);
-                });
+        this.httpService.sendRequest(request)
+            .then(res => {
+                callback(res);
+        });
     }
 
 }
