@@ -24,12 +24,15 @@
         <md-datepicker #period_max (selectedChanged)="updateData()"></md-datepicker>
     </div>
 
-    <svg id='chart' #chart class="weight-chart" xmlns="http://www.w3.org/2000/svg">
+    <svg id='chart' #chart class="weight-chart" xmlns="http://www.w3.org/2000/svg" (hidden)="periodItems.length === 0">
         <text class="tooltip"></text>
     </svg>
 
     <div class="diff-block">
-        <div class="diff-wrap" id="previous-diff" *ngIf="currentWeight">
+        <div class="diff-wrap" *ngIf="periodItems.length === 0">
+            No data for this period
+        </div>
+        <div class="diff-wrap" id="previous-diff" *ngIf="currentWeight && periodItems.length > 1">
             <div id="yesterday">{{ recentDay }}:</div>
             <div id="current-weight">{{ currentWeight }}kg</div>
             <div class="diff"

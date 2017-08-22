@@ -118,7 +118,6 @@ export class WeightControlComponent implements OnInit {
     }
 
     renderChart() {
-        console.log('RENER');
         if (this.chartActive) {
             this.updateChart();
             return;
@@ -231,13 +230,6 @@ export class WeightControlComponent implements OnInit {
         tooltip.html(element.value)
             .style('transform', `translate(${coord[0] + this.margin.left - 10}px,${coord[1] + this.margin.top - 20}px)`);
 
-        // const chartTip = this._d3.select('.tip');
-        //
-        // chartTip.style('left', (coord[0] + 15) + 'px');
-        // chartTip.style('top', (coord[1] - 10) + 'px');
-        // chartTip.style('display', 'block');
-        // chartTip.html('test');
-
         this._d3.select(target)
             .transition()
             .duration(200)
@@ -269,32 +261,33 @@ export class WeightControlComponent implements OnInit {
             this.newWeight.date = currentDate.toISOString();
 
             this.weightControlService.addWeight(this.newWeight, res => {
-                console.log(res);
                 if (typeof(res) === 'object') {
                     this.toasterService.showMessage('success', null);
                 } else {
                     this.toasterService.showMessage('error', null);
                 }
-                setTimeout(() => this.updateData(), 500);
+                setTimeout(() => {
+                    this.updateData();
+                    }, 500);
             });
 
-            this.weightFormControl.reset();
-            this.waterFormControl.reset();
-            this.boneFormControl.reset();
-            this.fatFormControl.reset();
+            // this.weightFormControl.reset();
+            // this.waterFormControl.reset();
+            // this.boneFormControl.reset();
+            // this.fatFormControl.reset();
         }
     }
 
     updateData(): void {
-        console.log('UPDATE');
         this.weightControlService.getWeightItems(res => {
             if (res[0].hasOwnProperty('weight')) {
                 // this.periodItems = this.weightControlService.getWeeklyWeightItems(res);
                 this.periodItems = this.weightControlService.getItemsForPeriod(res, this.period);
-                console.log(this.periodItems);
                 const recentItem = this.periodItems[this.periodItems.length - 1];
-                this.recentDay = this.weightControlService.getRecentDay(recentItem);
-                this.currentWeight = recentItem.weight;
+                if (recentItem) {
+                    this.recentDay = this.weightControlService.getRecentDay(recentItem);
+                    this.currentWeight = recentItem.weight;
+                }
 
                 if (this.periodItems.length > 1) {
                     this.recentDiff = this.weightControlService.getRecentDiff(this.periodItems);
@@ -307,7 +300,6 @@ export class WeightControlComponent implements OnInit {
     }
 
     changeOption(option): void {
-        console.log('CHANGE');
         const settings = this.weightControlService.changeOption(option, this.recentDiff);
 
         this.settings.betterResult = settings.betterResult;
