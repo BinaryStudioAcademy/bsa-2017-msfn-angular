@@ -31,7 +31,7 @@ import { MiscComponent } from './user.components/account-settings/misc/misc.comp
         UserRoutingModule,
         MdListModule,
         MdButtonToggleModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
     ],
     declarations: [
         SidebarViewComponent,

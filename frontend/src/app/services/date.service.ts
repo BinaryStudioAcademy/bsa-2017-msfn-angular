@@ -45,7 +45,12 @@ export class DateService {
     constructor() { }
 
     convertDateToIso(dateObject) {
-        const isoDate = `${dateObject.year}-${dateObject.month}-${dateObject.day}`;
+        let isoDate;
+        if (dateObject instanceof Date){
+            isoDate = `${dateObject.getFullYear()}-${dateObject.getMonth()}-${dateObject.getDate()}`;
+        } else {
+            isoDate = `${dateObject.year}-${dateObject.month}-${dateObject.day}`;
+        }
         return isoDate;
     }
 
