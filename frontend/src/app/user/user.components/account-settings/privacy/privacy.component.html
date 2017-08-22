@@ -1,0 +1,26 @@
+<div class="container">
+    <p class="title">
+        You can choose what informations can see other users
+    </p>
+    <div class="checkbox-wrap">
+        <md-slide-toggle class="row" [checked]="email">
+            Email address
+        </md-slide-toggle>
+        <md-slide-toggle class="row" [checked]="birthday">
+            Date of birthday
+        </md-slide-toggle>
+        <md-slide-toggle class="row" [checked]="height">
+            Height
+        </md-slide-toggle>
+        <md-slide-toggle class="row" [checked]="height">
+            Weight
+        </md-slide-toggle>
+        <md-slide-toggle class="row" [checked]="following">
+            Following users
+        </md-slide-toggle>
+        <md-slide-toggle class="row" [checked]="goals">
+            My goals
+        </md-slide-toggle>
+    </div>
+    <button class="btn" (click)="saveSettings()">Save changes</button>
+</div>

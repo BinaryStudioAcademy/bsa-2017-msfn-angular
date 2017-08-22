@@ -22,6 +22,7 @@ import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.c
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
+import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
 
 @NgModule({
     imports: [
@@ -49,6 +50,7 @@ import { MiscComponent } from './user.components/account-settings/misc/misc.comp
         WeightControlComponent,
         DashboardComponent,
         MiscComponent,
+        PrivacyComponent,
     ],
     providers: [
         ForAllUserGuard,
