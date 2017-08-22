@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { HttpService } from '../../../services/http.service';
 
-import { IExerciseType } from '../../../models/exerciseType';
 import { ExerciseCreateService } from './exercise-create.service';
+import { MarkdownService } from '../../../services/markdown.service';
 import IExercise = ExerciseApi.IExercise;
+import IExerciseType = ExerciseApi.IExerciseType;
 
 @Component({
     selector: 'app-exercise-create',
+    providers: [MarkdownService],
     templateUrl: './exercise-create.component.html',
     styleUrls: ['./exercise-create.component.scss']
 })
@@ -22,12 +23,12 @@ export class ExerciseCreateComponent implements OnInit {
         description: ''
     };
     titleType = 'Create';
-
+    convertedDescription: string;
     exTypes: [IExerciseType];
 
     constructor(public router: ActivatedRoute,
-                private httpService: HttpService,
-                private exerciseCreateService: ExerciseCreateService,) {
+                private exerciseCreateService: ExerciseCreateService,
+                private markdownService: MarkdownService) {
     }
 
     ngOnInit() {
@@ -50,5 +51,12 @@ export class ExerciseCreateComponent implements OnInit {
                 this.exerciseCreateService.sendExercise(this.exercise);
             }
         }
+    }
+
+    saveImg() {
+    }
+
+    updateOutput(mdText: string) {
+        this.convertedDescription = this.markdownService.convert(mdText);
     }
 }

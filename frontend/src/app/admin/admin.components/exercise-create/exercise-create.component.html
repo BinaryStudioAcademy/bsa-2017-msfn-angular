@@ -10,7 +10,19 @@
         </md-option>
     </md-select>
     <md-input-container class="example-full-width" class="input">
-        <textarea mdInput placeholder="Exercise Description" [(ngModel)]="exercise.description" name="description"></textarea>
+        <textarea mdInput placeholder="Exercise Description"
+                  [(ngModel)]="exercise.description"
+                  name="description"
+                  (keyup)="updateOutput($event.target.value)"></textarea>
     </md-input-container>
+    <div class="preview-header">Preview</div>
+    <div class="preview">
+            <div class="image-preview">
+                <img [src]='exercise.image'>
+            </div>
+        <div class="description" [innerHtml]="convertedDescription"></div>
+    </div>
     <button md-button class="btn btn-save" (click)="save(form)">Save</button>
+    <button md-button class="btn btn-save" (click)="saveImg()">Load Img</button>
+
 </form>

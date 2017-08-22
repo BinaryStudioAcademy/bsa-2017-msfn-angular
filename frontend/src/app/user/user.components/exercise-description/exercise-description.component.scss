@@ -2,6 +2,10 @@
 @import "./../../../../globalStyles/indentations";
 @import "./../../../../globalStyles/text";
 
+.preview {
+    width: 400px;
+}
+
 .title {
     text-align: center;
 }
@@ -26,10 +30,9 @@
 }
 
 .description {
-    width: 400px;
 }
 
 .description-header {
-    font-size:$minor-text;
+    font-size: $minor-text;
     margin-bottom: 10px;
 }
