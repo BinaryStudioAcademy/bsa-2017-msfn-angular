@@ -46,7 +46,7 @@ export class DateService {
 
     convertDateToIso(dateObject) {
         let isoDate;
-        if (dateObject instanceof Date){
+        if (dateObject instanceof Date) {
             isoDate = `${dateObject.getFullYear()}-${dateObject.getMonth()}-${dateObject.getDate()}`;
         } else {
             isoDate = `${dateObject.year}-${dateObject.month}-${dateObject.day}`;
