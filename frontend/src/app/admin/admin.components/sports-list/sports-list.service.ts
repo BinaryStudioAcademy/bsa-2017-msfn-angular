@@ -20,4 +20,14 @@ export class SportsListService {
         });
     }
 
+    updateOrder(code, order): void {
+        const request: IHttpReq = {
+            url: '/api/sport/order/' + code,
+            method: 'PUT',
+            body: {},
+            failMessage: 'Fail save the order of the elements'
+        };
+        this.httpService.sendRequest(request);
+    }
+
 }

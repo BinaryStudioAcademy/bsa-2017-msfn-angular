@@ -9,66 +9,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SportsListComponent implements OnInit {
 
-    private data = [
-        {
-            position: 0,
-            code: 0
-        },
-        {
-            position: 1,
-            code: 1
-        },
-        {
-            position: 2,
-            code: 2
-        }
-    ];
-    private cach: number;
+    private data: any[] = [];
     private itemsDropped: any[] = [];
-    private showPlaceholder = false;
+    private cach: number;
 
     dragOptions = {
         animation: 200,
         ghostClass: 'ghost',
         filter: '.add-container',
         group: 'sport',
-        onStart: () => {
-            this.cach = this.data.length;
-        },
-        onEnd: (evt) => {
-            if (this.cach === this.data.length) {
-                this.data.forEach((element, index) => {
-                    element.position = index;
-                });
-                // console.log(evt.item.position);
-                // console.log(this.data);
-            }
-        },
-        onSort: function (evt) {
-            console.log('yebani rot');
-        },
+        forceFallback: true,
+        // uncomment this for sorting by position field
+
+        // onStart: () => {
+        //     this.cach = this.data.length;
+        // },
+        // onEnd: (evt) => {
+        //     if (this.cach === this.data.length) {
+        //         this.sportsListService.updateOrder(evt.item.id, evt.newIndex);
+        //     }
+        // }
     };
 
     constructor(private sportsListService: SportsListService) { }
 
     ngOnInit() {
-        this.data.sort(function (a, b) {
-            console.log('sort');
-            return a.position - a.position;
+        this.sportsListService.getKindsOfSport((data) => {
+            if (data.length === 1 && !data[0].code) {
+                this.data = [];
+            } else {
+                // uncomment this for sorting by position field
+
+                // data.sort(function (a, b) {
+                //     return a.position - a.position;
+                // });
+                this.data = data;
+            }
+
         });
-        // this.sportsListService.getKindsOfSport((data) => {
-        //     if (data.length === 1 && !data[0].code) {
-        //         this.data = [];
-        //     } else {
-        //         // uncomment this for sorting by position field
-
-        //         // data.sort(function (a, b) {
-        //         //     return a.position - a.position;
-        //         // });
-        //         this.data = data;
-        //     }
-
-        // });
     }
 
 }
