@@ -26,7 +26,7 @@ import {
     MdSortModule,
     MdTooltipModule,
     MdMenuModule,
-    MdListModule
+    MdListModule,
 } from '@angular/material';
 import 'hammerjs';
 

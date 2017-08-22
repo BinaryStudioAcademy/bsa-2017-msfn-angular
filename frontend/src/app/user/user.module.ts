@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MdButtonToggleModule, MdListModule } from '@angular/material';
+import { MdButtonToggleModule, MdListModule, MdPaginatorModule } from '@angular/material';
 
 import { UserRoutingModule } from './user-routing.module';
 import { ImportModule } from '../import.module';
@@ -28,9 +28,9 @@ import { ExerciseEditDialogComponent } from './user.components/exercise-edit-dia
         FormsModule,
         ImportModule,
         UserRoutingModule,
-        MdListModule,
         MdButtonToggleModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        MdPaginatorModule
     ],
     declarations: [
         SidebarViewComponent,

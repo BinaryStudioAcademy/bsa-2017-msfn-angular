@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MdPaginatorModule } from '@angular/material';
 import { SearchExerciseComponent } from './../search-exercise/search-exercise.component';
 import { ExerciseEditDialogComponent } from './../exercise-edit-dialog/exercise-edit-dialog.component';
 import { IntervalTrainingPlanComponent } from './../interval-training-plan/interval-training-plan.component';
@@ -9,15 +9,16 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 @Component({
   selector: 'app-plan-detail',
   templateUrl: './plan-detail.component.html',
-  styleUrls: ['./plan-detail.component.scss']
+  styleUrls: ['./plan-detail.component.scss'],
+  providers: [MdPaginatorModule]
 })
 export class PlanDetailComponent implements OnInit {
   private openedDialog: MdDialogRef<any> | null;
+  private searchDialog: MdDialogRef<any> | null;
 
   title = 'Training plan create';
   trainingsCount = 0;
   exercsesShow = false;
-
 
   days = [
     { 'key': 'md', 'value': 'Mon' },
@@ -63,18 +64,17 @@ export class PlanDetailComponent implements OnInit {
       type: 'fitness',
       sets: [
         {
-          weight: 30,
-          repeat: 5,
+          value: '30 kg',
+          value2: 'x5',
         },
         {
-          weight: 40,
-          repeat: 5,
+          value: '35 kg',
+          value2: 'x5',
         },
         {
-          weight: 45,
-          repeat: 5,
+          value: '40 kg',
+          value2: 'x5',
         },
-
       ],
       description: 'Holding a weight on just one side of your body increases the demand placed on your core to keep your body stable. The result: Your hips and abs have to work harder, and you\'ll also improve your balance. And better yet, you\'ll burn tons of calories.',
       how_to: '<p>Hold the SZ-bar shoulder-wide, the back is straight, the shoulders slightly back, the arms are streched. Bend the arms, bringing the weight up, with a fast movement. Without pausing, let down the bar with a slow and controlled movement.</p>\n<p>Don\'t allow your body to swing during the exercise, all work is done by the biceps, which are the only mucles that should move (pay attention to the elbows).</p>'
@@ -88,116 +88,9 @@ export class PlanDetailComponent implements OnInit {
       how_to: 'Assume a pushup position with your arms completely straight, but place your hands on a Swiss ball instead of the floor. Your body should form a straight line from your head to your ankles. Tighten your core and hold it that way for the duration of the exercise [A]. Lift one foot off the floor and slowly raise your knee as close to your chest as you can without changing your lower-back posture. Then repeat with your other leg. Alternate back and forth for 30 seconds. If that\'s too hard, place your hands on the floor or a bench, instead of a Swiss ball.'
     },
     {
-      id: 1122,
-      name: 'Biceps Curls With SZ-bar',
-      type: 'fitness',
-      sets: [
-        {
-          weight: 30,
-          repeat: 5,
-        },
-        {
-          weight: 40,
-          repeat: 5,
-        },
-        {
-          weight: 45,
-          repeat: 5,
-        },
-
-      ],
-      description: 'Holding a weight on just one side of your body increases the demand placed on your core to keep your body stable. The result: Your hips and abs have to work harder, and you\'ll also improve your balance. And better yet, you\'ll burn tons of calories.',
-      how_to: '<p>Hold the SZ-bar shoulder-wide, the back is straight, the shoulders slightly back, the arms are streched. Bend the arms, bringing the weight up, with a fast movement. Without pausing, let down the bar with a slow and controlled movement.</p>\n<p>Don\'t allow your body to swing during the exercise, all work is done by the biceps, which are the only mucles that should move (pay attention to the elbows).</p>'
-    },
-    {
-      id: 1253,
-      order: 1,
-      name: 'Braced Squat',
-      type: 'fitness',
-      description: 'It\'s one of the simplest yet most effective ways to tighten your tummy. In fact, you\'ll barely have to move a muscle.',
-      how_to: 'Assume a pushup position with your arms completely straight, but place your hands on a Swiss ball instead of the floor. Your body should form a straight line from your head to your ankles. Tighten your core and hold it that way for the duration of the exercise [A]. Lift one foot off the floor and slowly raise your knee as close to your chest as you can without changing your lower-back posture. Then repeat with your other leg. Alternate back and forth for 30 seconds. If that\'s too hard, place your hands on the floor or a bench, instead of a Swiss ball.'
-    },
-    {
-      id: 1812,
-      name: 'Biceps Curls With SZ-bar',
-      type: 'fitness',
-      sets: [
-        {
-          weight: 30,
-          repeat: 5,
-        },
-        {
-          weight: 40,
-          repeat: 5,
-        },
-        {
-          weight: 45,
-          repeat: 5,
-        },
-
-      ],
-      description: 'Holding a weight on just one side of your body increases the demand placed on your core to keep your body stable. The result: Your hips and abs have to work harder, and you\'ll also improve your balance. And better yet, you\'ll burn tons of calories.',
-      how_to: '<p>Hold the SZ-bar shoulder-wide, the back is straight, the shoulders slightly back, the arms are streched. Bend the arms, bringing the weight up, with a fast movement. Without pausing, let down the bar with a slow and controlled movement.</p>\n<p>Don\'t allow your body to swing during the exercise, all work is done by the biceps, which are the only mucles that should move (pay attention to the elbows).</p>'
-    },
-    {
-      id: 1523,
-      order: 1,
-      name: 'Braced Squat',
-      type: 'fitness',
-      description: 'It\'s one of the simplest yet most effective ways to tighten your tummy. In fact, you\'ll barely have to move a muscle.',
-      how_to: 'Assume a pushup position with your arms completely straight, but place your hands on a Swiss ball instead of the floor. Your body should form a straight line from your head to your ankles. Tighten your core and hold it that way for the duration of the exercise [A]. Lift one foot off the floor and slowly raise your knee as close to your chest as you can without changing your lower-back posture. Then repeat with your other leg. Alternate back and forth for 30 seconds. If that\'s too hard, place your hands on the floor or a bench, instead of a Swiss ball.'
-    },
-    {
-      id: 112,
-      name: 'Biceps Curls With SZ-bar',
-      type: 'fitness',
-      sets: [
-        {
-          weight: 30,
-          repeat: 5,
-        },
-        {
-          weight: 40,
-          repeat: 5,
-        },
-        {
-          weight: 45,
-          repeat: 5,
-        },
-
-      ],
-      description: 'Holding a weight on just one side of your body increases the demand placed on your core to keep your body stable. The result: Your hips and abs have to work harder, and you\'ll also improve your balance. And better yet, you\'ll burn tons of calories.',
-      how_to: '<p>Hold the SZ-bar shoulder-wide, the back is straight, the shoulders slightly back, the arms are streched. Bend the arms, bringing the weight up, with a fast movement. Without pausing, let down the bar with a slow and controlled movement.</p>\n<p>Don\'t allow your body to swing during the exercise, all work is done by the biceps, which are the only mucles that should move (pay attention to the elbows).</p>'
-    },
-    {
-      id: 1283,
-      order: 1,
-      name: 'Braced Squat',
-      type: 'fitness',
-      description: 'It\'s one of the simplest yet most effective ways to tighten your tummy. In fact, you\'ll barely have to move a muscle.',
-      how_to: 'Assume a pushup position with your arms completely straight, but place your hands on a Swiss ball instead of the floor. Your body should form a straight line from your head to your ankles. Tighten your core and hold it that way for the duration of the exercise [A]. Lift one foot off the floor and slowly raise your knee as close to your chest as you can without changing your lower-back posture. Then repeat with your other leg. Alternate back and forth for 30 seconds. If that\'s too hard, place your hands on the floor or a bench, instead of a Swiss ball.'
-    },
-    {
       id: 1102,
       name: 'Biceps Curls With SZ-bar',
       type: 'fitness',
-      sets: [
-        {
-          weight: 30,
-          repeat: 5,
-        },
-        {
-          weight: 40,
-          repeat: 5,
-        },
-        {
-          weight: 45,
-          repeat: 5,
-        },
-
-      ],
-      description: 'Holding a weight on just one side of your body increases the demand placed on your core to keep your body stable. The result: Your hips and abs have to work harder, and you\'ll also improve your balance. And better yet, you\'ll burn tons of calories.',
-      how_to: '<p>Hold the SZ-bar shoulder-wide, the back is straight, the shoulders slightly back, the arms are streched. Bend the arms, bringing the weight up, with a fast movement. Without pausing, let down the bar with a slow and controlled movement.</p>\n<p>Don\'t allow your body to swing during the exercise, all work is done by the biceps, which are the only mucles that should move (pay attention to the elbows).</p>'
     },
     // {
     //   id: 233,
@@ -216,13 +109,21 @@ export class PlanDetailComponent implements OnInit {
     //   how_to: 'Grab a pair of dumbbells with an overhand grip, and hold them at arm\'s length in front your thighs. Stand with your feet shoulder-width apart and knees slightly bent. Now raise one leg off the floor [A]. Without changing the bend in your knee, bend at your hips (keep your lower back arched), and lower your torso until it\'s almost parallel to the floor [B]. Pause, then squeeze your glutes, thrust your hips forward, and raise your torso back to the start. Do all your reps, then repeat with your other leg.'
     // },
   ];
+
+
   pageSize = 3;
-  length = 10;
-  page = 1;
+  paginatorLength = this.exercisesList.length;
+  pageIndex = 0;
   pageEvent: PageEvent;
   displayExercises: Object[];
 
-  constructor(private dialog: MdDialog) {
+
+
+  lastAfterClosedResult: string;
+
+
+
+  constructor(private dialog: MdDialog, private paginator: MdPaginatorModule) {
     this.openedDialog = null;
   }
 
@@ -263,7 +164,20 @@ export class PlanDetailComponent implements OnInit {
   }
 
   addExercise() {
-    this.openedDialog = this.dialog.open(SearchExerciseComponent);
+    this.searchDialog = this.dialog.open(SearchExerciseComponent, {
+      data: {
+        currentExercises: this.exercisesList
+      }
+    });
+    this.searchDialog.afterClosed().subscribe((result: string) => {
+      this.lastAfterClosedResult = result;
+      let selectedExercises = this.searchDialog.componentInstance.selectedExercises;
+
+      this.addExercises(selectedExercises);
+      this.searchDialog = null;
+    });
+
+
   }
 
   deleteExercise(id) {
@@ -277,13 +191,41 @@ export class PlanDetailComponent implements OnInit {
     const exercise = this.exercisesList.find(function (el) {
       return el.id === id;
     });
-    console.log(exercise.type);
+
     if (exercise.type == 'run')
       this.openedDialog = this.dialog.open(IntervalTrainingPlanComponent);
     else
       this.openedDialog = this.dialog.open(ExerciseEditDialogComponent);
-
     // this.displayExercises = this.exercisesList.slice(0, 3);
   }
+  onPaginateChange(event) {
+    console.log(event);
+    const startInd = event.pageIndex * 3;
 
+    this.displayExercises = this.exercisesList.slice(startInd, startInd + 3);
+  }
+
+  addExercises(exercises) {
+    this.exercisesList = this.exercisesList.concat(exercises);
+    this.paginatorLength = this.exercisesList.length;
+    this.pageIndex = 0;
+  }
+
+  setAdd(exercise) {
+    exercise.edit = true;
+    // console.log(exerciseID);
+  }
+
+  saveSetInfo(exercise, form) {
+    const newSet = {
+      value: form.value.value,
+      value2: form.value.value2
+    };
+
+    if(!exercise.sets){
+      exercise.sets = []
+    }
+    exercise.sets.push(newSet);
+    exercise.edit = false;
+  }
 }

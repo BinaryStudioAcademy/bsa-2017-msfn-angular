@@ -7,10 +7,9 @@
   </md-select>
 
   <div *ngIf="exercsesShow">
-    <div class="field-title">
+    <!-- <div class="field-title">
       {{sportTypeValue}} exercises
-    </div>
-
+    </div> -->
     <md-input-container>
       <input mdInput placeholder="Exercise search" value="Coming soon" class="search" [(ngModel)]="searchString">
     </md-input-container>
@@ -27,7 +26,7 @@
           </b> {{exercise.how_to}} </p>
       </div>
       <button md-fab class="add" title="add to plan">+</button>
-
+      <md-checkbox [id]="exercise.id" [checked]="exercise.checked" (change)="selectExercise($event)">Add to my plan</md-checkbox>
     </div>
   </div>
 </div>

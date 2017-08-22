@@ -45,35 +45,51 @@
           Exercise list
         </div>
         <div class="table-controls">
-          <!-- <md-paginator [length]="10" [pageSize]="3" (page)="pageEvent = $event">
-          </md-paginator> -->
+          <md-paginator class="exercise-pagination" [length]="paginatorLength" [pageIndex]="pageIndex" [pageSize]="pageSize" (page)="pageEvent = $event; onPaginateChange(pageEvent)">
+          </md-paginator>
         </div>
       </div>
       <div class="exercise-table-body">
         <div *ngFor="let exercise of displayExercises" class="exercise-row">
-      <div class="col name">{{exercise.name}}</div>
+          <div class="col name">{{exercise.name}}</div>
           <div class="col edit" (click)="editExercise(exercise.id)"><i class="material-icons">mode_edit</i></div>
           <div class="col del" (click)="deleteExercise(exercise.id)"><i class="material-icons">delete</i></div>
           <div class="col sets">
-            <div class="set-item">
-              <div class="item-id">1</div>
-              <div class="item-val">30 kg</div>
-              <div class="item-opt-val">x5</div>
+            <div class="items-conteiner" *ngFor="let set of exercise.sets; let i = index">
+              <div class="set-item">
+                <div class="item-id">{{i+1}}</div>
+                <div class="item-val">{{set.value}}</div>
+                <div class="item-opt-val">{{set.value2}}</div>
+              </div>
             </div>
-            <div class="set-item">
-              <div class="item-id">2</div>
-              <div class="item-val">35 kg</div>
-              <div class="item-opt-val">x5</div>
+            <div class="set-item add">
+              <div class="item-id">+</div>
+              <a class="exercise-add" (click)="setAdd(exercise)">Add</a>
             </div>
-            <div class="set-item">
-              <div class="item-id">3</div>
-              <div class="item-val">40 kg</div>
-              <div class="item-opt-val">x5</div>
-            </div>
-            <div class="set-item">
-              <div class="item-id">4</div>
-              <div class="item-val">45 kg</div>
-              <div class="item-opt-val">--</div>
+            <div class="set-form" *ngIf="exercise.edit">
+              <form #form="ngForm">
+                <div class="item-val">
+                  <md-input-container>
+                    <input mdInput placeholder="Weight" 
+                    value="" 
+                    class="plan-name" 
+                    name="value" 
+                    [(ngModel)]="value"
+                    (keyup.enter)="saveSetInfo(exercise, form)">
+                  </md-input-container>
+                </div>
+                <div class="item-opt-val">
+                  <md-input-container>
+                    <input mdInput 
+                    placeholder="Count/time" 
+                    value="" 
+                    class="plan-name" 
+                    name="value2" 
+                    [(ngModel)]="value2"
+                    (keyup.enter)="saveSetInfo(exercise, form)">
+                  </md-input-container>
+                </div>
+              </form>
             </div>
           </div>
         </div>
