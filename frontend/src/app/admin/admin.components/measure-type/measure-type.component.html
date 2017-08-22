@@ -1,0 +1,103 @@
+<div class="add-measure-container">
+    <md-card-title>Edit measure type</md-card-title>
+    <md-input-container>
+        <input mdInput
+               #measureName="ngModel"
+               [(ngModel)]="name"
+               name="measureName"
+               pattern="^[a-zA-Z]+$"
+               required
+               minlength="2"
+        >
+        <md-error *ngIf="measureName.errors && measureName.errors.pattern">Invalid name</md-error>
+        <md-error *ngIf="measureName.errors && measureName.errors.required">Cannot be blank</md-error>
+    </md-input-container>
+    <button class="btn"
+            (click)="addRow(table)">
+        Add measure
+    </button>
+    <md-table #table
+              [dataSource]="dataSource">
+
+        <!-- Check default-->
+        <ng-container cdkColumnDef="default" class="delete-col">
+            <md-header-cell *cdkHeaderCellDef>Default</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <md-checkbox [(ngModel)]="row.isDefault"
+                             (change)="checkForDefault(row)"
+                ></md-checkbox>
+            </md-cell>
+        </ng-container>
+
+        <!-- UnitName Column -->
+        <ng-container cdkColumnDef="unitName">
+            <md-header-cell *cdkHeaderCellDef>Unit</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <md-input-container>
+                    <input mdInput
+                           #unitName="ngModel"
+                           [(ngModel)]="row.unitName"
+                           name="row.unitName"
+                           type="text"
+                           pattern="[^\s]+"
+                           (blur)="updateRow(row, 'unitName', unitName.value)"
+                           [ngClass]="{'removed': row.isRemoved}"
+                           required
+                    >
+                    <md-error *ngIf="unitName.errors && unitName.errors.pattern">Invalid name</md-error>
+                    <md-error *ngIf="unitName.errors && unitName.errors.required">Cannot be blank</md-error>
+                </md-input-container>
+            </md-cell>
+        </ng-container>
+
+        <!-- Conversion factor column -->
+        <ng-container cdkColumnDef="conversionFactor">
+            <md-header-cell *cdkHeaderCellDef>Conversion factor</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <md-input-container>
+                    <input mdInput
+                           #conversionFactor="ngModel"
+                           name="row.conversionFactor"
+                           type="text"
+                           pattern="^\d+\.?\d+$"
+                           (blur)="updateRow(row, 'conversionFactor', conversionFactor.value)"
+                           [(ngModel)]="row.conversionFactor"
+                           [ngClass]="{'removed': row.isRemoved}"
+                           class="input-value"
+                           required
+                    >
+                    <md-error *ngIf="conversionFactor.errors &&conversionFactor.errors.pattern">Must be number</md-error>
+                    <md-error *ngIf="conversionFactor.errors && conversionFactor.errors.required">Cannot be blank</md-error>
+                </md-input-container>
+            </md-cell>
+        </ng-container>
+
+        <!-- unitType-->
+        <ng-container cdkColumnDef="type" class="delete-col">
+            <md-header-cell *cdkHeaderCellDef>Type</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+               <md-select [(ngModel)]="row.unitType">
+                   <md-option *ngFor="let type of unitTypeOptions"
+                              [value]="type"
+                              (onSelectionChange)="updateRow(row, 'unitType', type)"
+                   >{{type}}</md-option>
+               </md-select>
+            </md-cell>
+        </ng-container>
+
+        <!-- delete-->
+        <ng-container cdkColumnDef="delete" class="delete-col">
+            <md-header-cell *cdkHeaderCellDef></md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <i class="material-icons ico" (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>
+            </md-cell>
+        </ng-container>
+
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns"></md-row>
+    </md-table>
+    <button md-button
+            class="btn btn-save"
+            (click)="save()">Save
+    </button>
+</div>

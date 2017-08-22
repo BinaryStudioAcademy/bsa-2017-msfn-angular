@@ -4,6 +4,7 @@ const decryptService = require('./decryptService');
 const confirmCodeRepository = require('../repositories/confirmCodeRepository');
 const confirmService = require('./confirmService');
 const userRepository = require('../repositories/userRepository')
+const config = require('../config');
 
 function ActivateService() {}
 
@@ -23,7 +24,7 @@ function resendActivateCode(body, callback) {
                 subject: 'Your MSFN registration',
                 html: '<table><tr><td>Additional request for account registration! ' +
                     '!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
-                    '<a href="http://localhost:3060/confirmation/registration/' + user.activateToken + '">' + 'Activate account </a> </td></tr></table>'
+                    '<a href="' + config.host.hostAddress + '/confirmation/registration/' + user.activateToken + '">' + 'Activate account </a> </td></tr></table>'
             }, (err, data) => {
                 if (err) return callback(err);
                 if (data.rejected.length == 0) {

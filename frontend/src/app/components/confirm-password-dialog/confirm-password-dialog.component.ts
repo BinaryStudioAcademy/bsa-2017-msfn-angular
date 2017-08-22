@@ -5,6 +5,7 @@ import { IHttpReq } from '../../models/http-req';
 import { HttpService } from '../../services/http.service';
 import { ToasterService } from '../../services/toastr.service';
 import { MdDialogRef } from '@angular/material';
+import {MD_DIALOG_DATA} from '@angular/material';
 
 @Component({
     selector: 'app-confirm-password-dialog',
@@ -26,7 +27,8 @@ export class ConfirmPasswordDialogComponent implements OnInit {
         private httpService: HttpService,
         private encryptor: EncryptService,
         private toastrService: ToasterService,
-        public dialogRef: MdDialogRef<any>
+        public dialogRef: MdDialogRef<any>,
+        @Inject(MD_DIALOG_DATA) private isPassword: boolean
     ) { }
 
     ngOnInit() {
@@ -59,7 +61,7 @@ export class ConfirmPasswordDialogComponent implements OnInit {
 
     chengePassword(controls) {
         const encData = this.encryptor.encrypt({
-            'password': this.password,
+            'password': this.password || false,
             'newPassword': controls.newPassword
         });
 

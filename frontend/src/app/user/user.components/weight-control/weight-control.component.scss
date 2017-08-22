@@ -1,0 +1,204 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/indentations.scss';
+@import '../../../../globalStyles/text.scss';
+
+#weight-control {
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
+    max-width: 70%;
+    min-height: 50%;
+    margin: 0 auto;
+    position: relative;
+}
+
+#title {
+    width: 100%;
+    margin: $content-lr-margin 0;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+}
+
+#previous-diff,
+#per-week-diff {
+    flex-basis: 45%;
+}
+
+#per-week-diff {
+    text-align: right;
+}
+
+#previous-diff > div,
+#per-week-diff > div {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+#recent-day,
+#per-week{
+    font-size: $header-text;
+}
+
+#current-weight {
+    font-size: 36px;
+}
+
+.diff {
+    font-size: $header-text;
+}
+
+md-radio-group {
+    display: block;
+    margin: 30px 0 0;
+
+    input {
+        display: none;
+    }
+
+    label {
+        margin: 0 10px;
+        cursor: pointer;
+        color: $text-second-color;
+    }
+
+    .label-checked {
+        color: $text-main-color;
+    }
+
+    .label-unchecked {
+        color: $text-second-color;
+    }
+
+    //input:checked + label {
+    //    color: $text-main-color;
+    //}
+}
+
+#add-new-weight {
+    flex-basis: 100%;
+    margin-top: 100px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-top: #aaa 1px solid;
+
+    md-input-container {
+        flex-basis: 50%;
+        padding: 10px 20px;
+    }
+}
+
+#submit-button {
+    margin: $content-lr-margin 0 0;
+    text-align: center;
+
+    div {
+        margin-bottom: 20px;
+        text-align: left;
+        font-size: $minor-text;
+    }
+
+    button {
+        max-width: 400px;
+        height: 45px;
+        border: none;
+        border-radius: 45px;
+        outline: none;
+        font-size: 20px;
+        font-weight: 600;
+        background: #82ca9c;
+        width: auto;
+        padding: 0 20px;
+    }
+}
+
+.better-result {
+    color: $btn-color;
+}
+
+.worse-result {
+    color: $text-warn-color;
+}
+
+.weight-chart {
+    width: 100%;
+    min-height: 300px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.diff-block {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+}
+
+.sort-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.period-wrap {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.tooltip {
+    pointer-events: none;
+    opacity: 0;
+    fill: red;
+    z-index: 100;
+}
+
+
+@media only screen and (max-width: $small-screen) {
+
+}
+
+
+@media only screen and (max-width: $medium-screen) {
+    #weight-control {
+        margin: 0 10px;
+        max-width: 100%;
+
+        .diff-wrap {
+            height: auto;
+            flex-basis: 100%;
+            text-align: left;
+            width: 100%;
+            padding: 0;
+            margin: 10px 0;
+
+            md-radio-group {
+                margin: 10px 0 0 0;
+            }
+        }
+
+        #add-new-weight {
+            margin-top: 10px;
+            padding-bottom: 20px;
+
+            md-input-container {
+                margin: 0;
+                padding: 10px;
+                width: 100%;
+            }
+
+            #submit-button {
+                margin: 10px 0 0 0;
+            }
+        }
+    }
+
+    #weight-control > div,
+    #yesterday > div {
+        padding: 0;
+    }
+}

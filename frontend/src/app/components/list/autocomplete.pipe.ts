@@ -10,7 +10,8 @@ export class AutocompletePipe implements PipeTransform {
             if (!filter) {
                 return false;
             }
-            return item.includes(filter);
+            filter = filter.toLowerCase();
+            return item.toLowerCase().includes(filter);
         });
     }
 

@@ -12,9 +12,8 @@ module.exports = function (req, res, callback) {
                 const file = req.body.data.replace(/^data:image\/\w+;base64,/, "");
                 const buf = new Buffer(file, 'base64');
                 const folderPath = __dirname + '/../../resources/usersImg/';
-                const userPhotoPath = '/../../resources/usersImg/' + req.body.userId + '.' + type;
-                const filepath = __dirname + userPhotoPath;
-                let responseMessage = {};
+                const userPhotoPath = '/resources/usersImg/' + req.body.userId + '.' + type;
+                const filepath = folderPath + req.body.userId + '.' + type;
 
                 // max size is 3mb
                 if (buf.byteLength > 3e+6) {

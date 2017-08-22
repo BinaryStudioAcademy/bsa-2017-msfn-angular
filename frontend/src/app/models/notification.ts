@@ -1,8 +1,8 @@
 export interface INotification {
-    title: String;
-    message: String;
+    title: string;
+    message: string;
     callback?: Function;
-    _id?: String;
-    read?: Boolean;
-    isRemoved?: Boolean;
+    _id?: string;
+    read?: boolean;
+    isRemoved?: boolean;
 }

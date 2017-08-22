@@ -14,8 +14,7 @@ const User = new Schema({
     },
     secondaryEmails: [String],
     password: {
-        type: String,
-        required: true
+        type: String
     },
     isCoach: Boolean,
     isAdmin: Boolean,
@@ -43,7 +42,16 @@ const User = new Schema({
         timeZone: String,
         dateFormat: String,
         startWeek: String,
-    }
+    },
+    weightControl: [
+        {
+            weight: Number,
+            boneWeight: Number,
+            waterPct: Number,
+            fatPct: Number,
+            date: String
+        }
+    ]
 });
 
 User.pre('save', function (next) {

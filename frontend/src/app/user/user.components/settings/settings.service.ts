@@ -36,6 +36,57 @@ export class SettingsService {
         });
     }
 
+    convertSettings(measurement) {
+        const settings = {};
+        measurement.forEach(el => {
+            if (!el.isRemoved) {
+                settings[el.measureName] = [];
+                el.measureUnits.forEach(unit => {
+                    settings[el.measureName].push({ type: unit.unitType, name: unit.unitName });
+                });
+            }
+        });
+        return settings;
+    }
+
+    setUnitFormat(userSettings, settings) {
+        if (userSettings.unitType !== 'default') {
+            for (const key in userSettings) {
+                if (userSettings.hasOwnProperty(key) && settings.hasOwnProperty(key)) {
+                    let value;
+                    settings[key].forEach(el => {
+                        if (el.type === userSettings.unitType) {
+                            value = el.name;
+                        }
+                    });
+                    userSettings[key] = value;
+                }
+            }
+            userSettings.trainingWeight = userSettings.weight;
+        }
+        return userSettings;
+    }
+
+    checkUnitFormat(userSettings, settings) {
+        const typesArray = [];
+        for (const key in userSettings) {
+            if (userSettings.hasOwnProperty(key) && settings.hasOwnProperty(key)) {
+                settings[key].forEach(el => {
+                    if (el.name === userSettings[key]) {
+                        typesArray.push(el.type);
+                    }
+                });
+            }
+        }
+        if (typesArray.every(el => el === 'metric')) {
+            return 'metric';
+        } else if (typesArray.every(el => el === 'imperial')) {
+            return 'imperial';
+        } else {
+            return 'default';
+        }
+    }
+
     getTimeZone() {
         return timeZone;
     }

@@ -16,8 +16,11 @@ export class UserListService {
 
         this.httpService.sendRequest(request).then(data => {
             for (let i = 0; i < data.length; i++) {
-                let role = 'user';
+                let role = 'usual';
 
+                if (data[i].requestForCoaching) {
+                    role = 'requesting for coaching';
+                }
                 if (data[i].isCoach) {
                     role = 'coach';
                 }

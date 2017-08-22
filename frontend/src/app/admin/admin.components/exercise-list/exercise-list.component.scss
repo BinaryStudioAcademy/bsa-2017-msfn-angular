@@ -22,13 +22,13 @@
 #inputs {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
-    margin: 0 auto;
+    margin: 0 auto 10px;
+}
 
-    app-list {
-
-    }
+.mat-input-element {
+    padding: 4px 12px;
 }
 
 .mat-table {

@@ -1,33 +1,47 @@
-const ApiError = require('./apiErrorService');
-const weightControlRepository = require('../repositories/weightControlRepository');
+const ApiError = require('./apiErrorService'),
+    userRepository = require('../repositories/userRepository');
 
 function WeightControlService() {}
 
-WeightControlService.prototype.updateItem = updateItem;
+WeightControlService.prototype.addItem = addItem;
 WeightControlService.prototype.deleteItem = deleteItem;
 
-function updateItem(id, body, callback) {
-    weightControlRepository.getById(id, (err, data) => {
+function addItem(userId, body, callback) {
+    userRepository.getById(userId, (err, data) => {
         if (err) return callback(err);
 
         if (data === null){
-            callback(new ApiError('The weight control item wasn\'t found'));
+            callback(new ApiError('User not found'));
         } else {
-            weightControlRepository.update(id, body, callback);
+            userRepository.update(userId, {
+                $push: {weightControl: {
+                    date: body.date,
+                    fatPct: body.datPct,
+                    boneWeight: body.boneWeight,
+                    waterPct: body.waterPct,
+                    weight: body.weight
+                }}
+            }, callback);
         }
-    });
+    })
 }
 
-function deleteItem(id, callback) {
-    weightControlRepository.getById(id, (err, data) => {
+function deleteItem(data, callback) {
+    userRepository.getById(data.user._id, (err, data) => {
         if (err) return callback(err);
 
         if (data === null){
-            callback(new ApiError('The weight control item wasn\'t found'));
+            callback(new ApiError('User not found'));
         } else {
-            weightControlRepository.update(id, callback);
+            userRepository.update(data.user._id, {
+                $pull: {
+                    weightControl: {
+                        _id: data.body._id
+                    }
+                }
+            }, callback);
         }
-    });
+    })
 }
 
 module.exports = new WeightControlService();

@@ -21,6 +21,9 @@ import { LoginSettingsComponent } from './user.components/login-settings/login-s
 import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
 import { SearchExerciseComponent } from './user.components/search-exercise/search-exercise.component';
 import { ExerciseEditDialogComponent } from './user.components/exercise-edit-dialog/exercise-edit-dialog.component';
+import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
+import { DashboardComponent } from './user.components/dashboard/dashboard.component';
+import { MiscComponent } from './user.components/account-settings/misc/misc.component';
 
 @NgModule({
     imports: [
@@ -47,6 +50,9 @@ import { ExerciseEditDialogComponent } from './user.components/exercise-edit-dia
         PlanDetailComponent,
         SearchExerciseComponent,
         ExerciseEditDialogComponent,
+        WeightControlComponent,
+        DashboardComponent,
+        MiscComponent,
     ],
     providers: [
         ForAllUserGuard,

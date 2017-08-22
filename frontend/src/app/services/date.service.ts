@@ -45,11 +45,16 @@ export class DateService {
     constructor() { }
 
     convertDateToIso(dateObject) {
-        const isoDate = `${dateObject.year}-${dateObject.month}-${dateObject.day}`;
+        let isoDate;
+        if (dateObject instanceof Date) {
+            isoDate = `${dateObject.getFullYear()}-${dateObject.getMonth()}-${dateObject.getDate()}`;
+        } else {
+            isoDate = `${dateObject.year}-${dateObject.month}-${dateObject.day}`;
+        }
         return isoDate;
     }
 
-    convertDateFromIso(isoDate: string) {
+    convertDateFromIso(isoDate: string, stringMonth?: boolean) {
         if (isoDate === '') {
             return {
                 year: '',
@@ -58,12 +63,15 @@ export class DateService {
             };
         }
         const date = new Date(isoDate);
+
+        let month: string | number = date.getMonth() + 1;
+        month = stringMonth ? this.months[date.getMonth()].name : month;
+
         const dateProps = {
             year: date.getFullYear(),
-            month: this.months[date.getMonth()].name,
+            month: month,
             day: date.getDate()
         };
-
         return dateProps;
     }
 

@@ -12,6 +12,7 @@ import { MdDialog, MdDialogRef } from '@angular/material';
   styleUrls: ['./plan-detail.component.scss'],
   providers: [MdPaginatorModule]
 })
+
 export class PlanDetailComponent implements OnInit {
   private openedDialog: MdDialogRef<any> | null;
   private searchDialog: MdDialogRef<any> | null;

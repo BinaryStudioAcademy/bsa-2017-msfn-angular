@@ -12,7 +12,6 @@ Repository.prototype.getById = getById;
 Repository.prototype.findByObject = findByObject;
 Repository.prototype.update = update;
 Repository.prototype.get = get;
-Repository.prototype.getUsersFromArrayID = getUsersFromArrayID;
 
 function add(data, callback) {
     const model = this.model;
@@ -71,14 +70,6 @@ function get(params, callback) {
     }
     let model = this.model;
     let query = model.find(params.filter).sort(params.sort).limit(params.limit).skip(params.offset).select(params.fields);
-    query.exec(callback);
-};
-
-function getUsersFromArrayID(array, params, callback) {
-    if (params.fields === undefined) {
-        params.fields = null;
-    }
-    const query = this.model.find().where('_id').in(array).select(params.fields);
     query.exec(callback);
 }
 

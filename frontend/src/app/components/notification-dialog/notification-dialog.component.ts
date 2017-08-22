@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MD_DIALOG_DATA } from '@angular/material';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MD_DIALOG_DATA, MdDialog } from '@angular/material';
 import { NotificationDataDialogComponent } from '../notification-data-dialog/notification-data-dialog.component';
 import { INotification } from '../../models/notification';
-import {NotificationsService} from '../../services/notifications.service';
+import { NotificationsService } from '../../services/notifications.service';
 
 @Component({
     selector: 'app-notification-dialog',
@@ -11,26 +10,51 @@ import {NotificationsService} from '../../services/notifications.service';
     styleUrls: ['./notification-dialog.component.scss']
 })
 export class NotificationDialogComponent implements OnInit {
-    constructor( @Inject(MD_DIALOG_DATA) public data: any,
-        private dialog: MdDialog,
-        private notificationsService: NotificationsService) {
+    checkedValue = 'unread';
+    showedNotifications: INotification[];
+    unreadNotifications: INotification[];
+
+    constructor(@Inject(MD_DIALOG_DATA) public data: INotification[],
+                private dialog: MdDialog,
+                private notificationsService: NotificationsService) {
     }
 
     ngOnInit() {
-        console.log(this.data);
+        this.showedNotifications = this.data;
+        this.unreadNotifications = this.data.filter((note) => {
+            return note.read === false;
+        });
     }
 
-    viewNotification(notificatio: INotification, index) {
-        const dialogRef = this.dialog.open(NotificationDataDialogComponent, {
+    makeRead() {
+        this.unreadNotifications.forEach(note => {
+                this.notificationsService.markRead(note);
+            });
+        this.updateUnread();
+    }
+
+    viewNotification(notification: INotification) {
+        this.dialog.open(NotificationDataDialogComponent, {
             data: {
-                title: notificatio.title,
-                message: notificatio.message
-            },
-            position: {
-                top: '160px'
-            }
+                title: notification.title,
+                message: notification.message
+            }, position: {top: '160px'}
         });
-        this.data.splice(index, 1);
-        this.notificationsService.markRead(notificatio._id);
+        this.notificationsService.markRead(notification);
+        this.updateUnread();
+    }
+
+    onClickAll() {
+        this.showedNotifications = this.data;
+    }
+
+    onClickUnread() {
+        this.showedNotifications = this.unreadNotifications;
+    }
+
+    updateUnread() {
+        this.unreadNotifications = this.data.filter((note) => {
+            return note.read === false;
+        });
     }
 }

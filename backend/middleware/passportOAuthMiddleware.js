@@ -2,12 +2,13 @@ const passport = require('passport'),
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     FacebookStrategy = require('passport-facebook').Strategy,
     TwitterStrategy = require('passport-twitter').Strategy,
-    oauthConfig = require('../config/oauth'),
+    oauthConfig = new require('../config/oauth')(),
     userService = require('../services/userService'),
+    oauthService = require('../services/oauthService'),
     userRepository = require('../repositories/userRepository'),
     ApiError = require('../services/apiErrorService');
 
-module.exports = function() {
+module.exports = function () {
     passport.use(new GoogleStrategy(oauthConfig.googleOptions,
         (req, accessToken, refreshToken, profile, done) => {
             const queryWithID = {
@@ -34,7 +35,6 @@ module.exports = function() {
                                     firstName: profile.name.givenName,
                                     lastName: profile.name.familyName,
                                     email: profile.emails[0].value,
-                                    password: 'qwerty',
                                     isCoach: false,
                                     isAdmin: false,
                                     activateToken: '',
@@ -61,13 +61,27 @@ module.exports = function() {
                     }
                 });
             } else {
-                //Logged in. Associate google account with user
-                userService.updateItem(req.user._id, queryWithID, (err, cb) => {
-                    if (err) {
-                        return done(err);
-                    }
-                    return done(null, req.user)
-                })
+                //Logged in. Associate google account with user or unlink google account
+                if (!req.user.googleID) {
+                    userService.updateItem(req.user._id, queryWithID, (err, cb) => {
+                        if (err) {
+                            return done(err);
+                        }
+                        return done(null, req.user)
+                    })
+                } else {
+                    oauthService.oauthUnlinkGoogle(accessToken, (err, cb) => {
+                        if (err) {
+                            return done(err);
+                        }
+                        userService.updateItem(req.user._id, { 'googleID': null }, (err, cb) => {
+                            if (err) {
+                                return done(err);
+                            }
+                            return done(null, req.user)
+                        })
+                    })
+                }
             }
         }
     ));
@@ -89,11 +103,11 @@ module.exports = function() {
                                 return done(err);
                             }
                             if (user === null) {
+                                const names = profile.displayName.trim().split(/\s+/);
                                 const userBody = {
-                                    firstName: profile.name.givenName || profile.displayName.split(' ')[0],
-                                    lastName: profile.name.familyName || profile.displayName.split(' ')[1],
+                                    firstName: profile.name.givenName || names[0],
+                                    lastName: profile.name.familyName || names[1],
                                     email: profile.emails[0].value,
-                                    password: 'qwerty',
                                     isCoach: false,
                                     isAdmin: false,
                                     activateToken: '',
@@ -118,12 +132,26 @@ module.exports = function() {
                     }
                 });
             } else {
-                userService.updateItem(req.user._id, queryWithID, (err, cb) => {
-                    if (err) {
-                        return done(err);
-                    }
-                    return done(null, req.user)
-                })
+                if (!req.user.facebookID) {
+                    userService.updateItem(req.user._id, queryWithID, (err, cb) => {
+                        if (err) {
+                            return done(err);
+                        }
+                        return done(null, req.user)
+                    })
+                } else {
+                    oauthService.oauthUnlinkFb(profile.id, oauthConfig.facebookOptions.accessToken, (err, cb) => {
+                        if (err) {
+                            return done(err);
+                        }
+                        userService.updateItem(req.user._id, { 'facebookID': null }, (err, cb) => {
+                            if (err) {
+                                return done(err);
+                            }
+                            return done(null, req.user)
+                        })
+                    })
+                }
             }
         }
     ));
@@ -145,11 +173,11 @@ module.exports = function() {
                                 return done(err);
                             }
                             if (user === null) {
+                                const names = profile.displayName.trim().split(/\s+/);
                                 const userBody = {
-                                    firstName: profile.displayName.split(' ')[0],
-                                    lastName: profile.displayName.split(' ')[1],
+                                    firstName: profile.name.givenName || names[0],
+                                    lastName: profile.name.familyName || names[1],
                                     email: profile.emails[0].value || 'default@msfn.com',
-                                    password: 'qwerty',
                                     isCoach: false,
                                     isAdmin: false,
                                     activateToken: '',
@@ -174,12 +202,21 @@ module.exports = function() {
                     }
                 });
             } else {
-                userService.updateItem(req.user._id, queryWithID, (err, cb) => {
-                    if (err) {
-                        return done(err);
-                    }
-                    return done(null, req.user)
-                })
+                if (!req.user.twitterID) {
+                    userService.updateItem(req.user._id, queryWithID, (err, cb) => {
+                        if (err) {
+                            return done(err);
+                        }
+                        return done(null, req.user)
+                    })
+                } else {
+                    userService.updateItem(req.user._id, { 'twitterID': null }, (err, cb) => {
+                        if (err) {
+                            return done(err);
+                        }
+                        return done(null, req.user)
+                    })
+                }
             }
         }
     ));

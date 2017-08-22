@@ -14,6 +14,9 @@ import { OtherProfilesComponent } from './user.components/other-profiles/other-p
 // import { FriendsComponent } from './user.components/friends/friends.component';
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
 import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
+import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
+import { DashboardComponent } from './user.components/dashboard/dashboard.component';
+import { MiscComponent } from './user.components/account-settings/misc/misc.component';
 
 const userRoutes: Routes = [
     {
@@ -21,6 +24,10 @@ const userRoutes: Routes = [
         component: UserComponent,
         canActivate: [ForAllUserGuard],
         children: [
+            {
+                path: '',
+                component: DashboardComponent,
+            },
             {
                 path: 'training-list',
                 component: TrainingListComponent,
@@ -41,6 +48,10 @@ const userRoutes: Routes = [
                         path: 'login-settings',
                         component: LoginSettingsComponent,
                     },
+                    {
+                        path: 'misc',
+                        component: MiscComponent,
+                    },
                 ]
             },
             {
@@ -58,9 +69,14 @@ const userRoutes: Routes = [
             {
                 path: 'interval-training-plan',
                 component: IntervalTrainingPlanComponent,
-            }, {
+            },
+            {
                 path: 'training-plan',
                 component: PlanDetailComponent,
+            },
+            {
+                path: 'weight-control',
+                component: WeightControlComponent
             }
         ]
     }

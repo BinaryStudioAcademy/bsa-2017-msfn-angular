@@ -12,7 +12,7 @@ import { WindowObj } from '../../services/window.service';
     styleUrls: ['./login-dialog.component.scss']
 })
 export class LoginDialogComponent {
-    EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+    EMAIL_REGEX = /[\w0-9._%+-]+@[\w0-9.-]+\.[\w]{2,3}$/;
     email: string;
     password: string;
     private verified = true;

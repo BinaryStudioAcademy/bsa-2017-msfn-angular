@@ -8,6 +8,7 @@ import { CdkTableModule } from '@angular/cdk';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageCropperModule } from 'ng2-img-cropper';
+import { SortablejsModule } from 'angular-sortablejs';
 import { ToastrModule } from 'ngx-toastr';
 import {
     MdSnackBarModule,
@@ -27,8 +28,12 @@ import {
     MdTooltipModule,
     MdMenuModule,
     MdListModule,
+    MdDatepickerModule,
+    MdNativeDateModule,
+    MdButtonToggleModule
 } from '@angular/material';
 import 'hammerjs';
+import { D3Service } from 'd3-ng2-service';
 
 // // components
 import { ListComponent } from './components/list/list.component';
@@ -44,7 +49,8 @@ import {CommonModule} from '@angular/common';
         MdChipsModule,
         MdIconModule,
         MdAutocompleteModule,
-        MdInputModule
+        MdInputModule,
+        SortablejsModule,
     ],
     exports: [
         MdIconModule,
@@ -72,13 +78,20 @@ import {CommonModule} from '@angular/common';
         MdTooltipModule,
         MdMenuModule,
         MdListModule,
+        MdButtonToggleModule,
         ListComponent,
-        AutocompletePipe
+        AutocompletePipe,
+        MdDatepickerModule,
+        MdNativeDateModule,
+        SortablejsModule,
     ],
     declarations: [
         ListComponent,
         AutocompletePipe
     ],
+    providers: [
+        D3Service
+    ]
 })
 
 export class ImportModule {
