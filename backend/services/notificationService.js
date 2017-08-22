@@ -32,15 +32,10 @@ NotificationService.prototype.ReadNotification = function(json, callback) {
     let id, userId;
     ({id, userId} = data);
     notificationRepository.getById(id, (err, result) => {
-        "use strict";
         if (err) return callback(err);
-
         console.log(result);
-
         if (!result) return callback(new ApiError('Notification not found'));
-
         if (result.userId.toString() !== userId) return callback(new ApiError('Wrong user'));
-
         notificationRepository.update(id, {
             read: true
         }, (err, result) => {
@@ -64,7 +59,7 @@ NotificationService.prototype.GetNotifications = function(json, callback) {
     notificationRepository.get({
         filter: {
             userId: userId,
-            read: false
+    //        read: false
         }
     }, callback);
 };

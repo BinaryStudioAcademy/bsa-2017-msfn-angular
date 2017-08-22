@@ -46,9 +46,11 @@ export class ExerciseListComponent implements OnInit {
 
         this.exerciseListService.getExercises((result) => {
             this.tableDatabase.addExercises(result);
-                for (let i = 0; i < result.length; i++) {
-                    this.options.push(result[i].type);
+            for (const item of result) {
+                if (!this.options.includes(item.type)) {
+                    this.options.push(item.type);
                 }
+            }
         });
 
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
@@ -118,7 +120,8 @@ export class ExampleDataSource extends DataSource<any> {
                 const searchType = (item.type).toLowerCase();
 
                 if (this.itemFilter) {
-                    return this.itemFilter.toLowerCase().includes(searchType) &&
+                    const filterList = this.itemFilter.toLowerCase().split(',');
+                    return filterList.includes(searchType) &&
                         searchStr.includes(this.filter.toLowerCase());
                 } else {
                     return searchStr.includes(this.filter.toLowerCase());

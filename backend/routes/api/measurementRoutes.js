@@ -32,7 +32,7 @@ module.exports = function (app) {
 
     app.get(baseUrl, function (req, res, next) {
             measurementService.getAllMeasurements(function(err, data) {
-            if (!data.length){
+            if (data instanceof Array && !data.length){
                 data = [];
             }
             res.data = data;
@@ -43,9 +43,6 @@ module.exports = function (app) {
 
         app.get(baseUrl + ":id/", function (req, res, next) {
             measurementService.getMeasurement(req.params.id, function(err, data) {
-            if (!data.length){
-                data = [];
-            }
             if (data instanceof Array && data.length == 1){
                 res.data = data[0];
             }else if (data instanceof Array && data.length == 0){
@@ -60,9 +57,6 @@ module.exports = function (app) {
 
     app.get(baseUrl + "by-name/:name/", function (req, res, next) {
             measurementService.getMeasurementByName(req.params.name, function(err, data) {
-            if (!data.length){
-                data = [];
-            }
             if (data instanceof Array && data.length == 1){
                 res.data = data[0];
             }else if (data instanceof Array && data.length == 0){

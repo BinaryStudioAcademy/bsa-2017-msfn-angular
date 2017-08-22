@@ -69,11 +69,11 @@ module.exports = function () {
         if (err) {
             console.log('[InitService] - Error of initialize measurments:');
             console.log(err);
-        } else if (data.length !== measurments.length) {
+        } else if ((data === null) || (data.length !== measurments.length)) {
             measurments.forEach(function(element) {
                 measurementService.createMeasurement(element, (err, data) => {
                     if (err) {
-                        console.log('[InitService] - Error of adding Measurments:');
+                        console.log('[InitService] - Error of adding measurments:');
                         console.log(err);
                     } else {
                         console.log('[InitService] - Measurments added');

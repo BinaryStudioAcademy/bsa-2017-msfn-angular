@@ -271,14 +271,14 @@ export class WeightControlComponent implements OnInit {
                     }, 500);
             });
 
-            // this.weightFormControl.reset();
-            // this.waterFormControl.reset();
-            // this.boneFormControl.reset();
-            // this.fatFormControl.reset();
+            this.weightFormControl.reset();
+            this.waterFormControl.reset();
+            this.boneFormControl.reset();
+            this.fatFormControl.reset();
         }
     }
 
-    updateData(): void {
+    getItems(): void {
         this.weightControlService.getWeightItems(res => {
             if (res[0].hasOwnProperty('weight')) {
                 // this.periodItems = this.weightControlService.getWeeklyWeightItems(res);

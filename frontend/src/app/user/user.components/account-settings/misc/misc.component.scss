@@ -1,0 +1,16 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+
+#misc-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 20px;
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
+
+    div {
+        text-align: center;
+    }
+}

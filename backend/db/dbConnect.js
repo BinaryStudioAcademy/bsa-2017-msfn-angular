@@ -2,7 +2,11 @@ function dbConnectionHandler() {
     const mongoose = require('mongoose'),
         config = require('../config');
 
-    mongoose.connect(config.db.uri, config.db.opts);
+    mongoose.connect(config.db.uri, config.db.opts, function(err) {
+        if (err) {
+            console.log('***** ERROR! Failed to connect to DB. Please, check MONGOD!!! *****')
+        }
+    });
     mongoose.set('debug', true);
 
     this.connection = mongoose.connection;

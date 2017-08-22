@@ -3,13 +3,6 @@
 
     <div id="general-error" class="error" *ngIf="generalError">{{ generalError }}</div>
 
-    <md-input-container id="code">
-        <input mdInput type="text" name="code" placeholder="Code (set only if you're updating an item)" [(ngModel)]="code" [formControl]="codeFormControl">
-        <md-error *ngIf="codeFormControl.hasError('pattern')">
-            Code should be a positive integer
-        </md-error>
-    </md-input-container>
-
     <div id="icon-selection" class="input">
         <md-select id="icon" class="select-row" name="sport" placeholder="Sport icon" required [(ngModel)]="sport.icon">
             <md-option *ngFor="let icon of icons" [value]="icon">
@@ -18,8 +11,7 @@
                 </div>
             </md-option>
         </md-select>
-
-        <div *ngIf="sport.icon" id="selected-icon">
+        <div id="selected-icon" *ngIf="sport.icon">
             <img [src]="sport.icon" alt="sport-icon">
         </div>
     </div>
@@ -39,7 +31,7 @@
         <md-error *ngIf="descriptionFormControl.hasError('required')">
             Description is required
         </md-error>
-        <md-error *ngIf="descriptionFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')">
+        <md-error *ngIf="descriptionFormControl.hasError('minlength') || descriptionFormControl.hasError('maxlength')">
             Description should contain 10-300 characters
         </md-error>
     </md-input-container>

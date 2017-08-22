@@ -20,6 +20,8 @@ import { AccountSettingsComponent } from './user.components/account-settings/acc
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
 import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
+import { DashboardComponent } from './user.components/dashboard/dashboard.component';
+import { MiscComponent } from './user.components/account-settings/misc/misc.component';
 
 @NgModule({
     imports: [
@@ -45,6 +47,8 @@ import { WeightControlComponent } from './user.components/weight-control/weight-
         LoginSettingsComponent,
         PlanDetailComponent,
         WeightControlComponent,
+        DashboardComponent,
+        MiscComponent,
     ],
     providers: [
         ForAllUserGuard,

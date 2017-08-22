@@ -3,11 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { AdminRootProfileService } from './admin-root-profile.service';
 import { Subscription } from 'rxjs/Subscription';
 import { HttpService } from '../../../services/http.service';
+import { ToasterService } from '../../../services/toastr.service';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
     selector: 'app-admin-root-profile',
     templateUrl: './admin-root-profile.component.html',
-    styleUrls: ['./admin-root-profile.component.scss']
+    styleUrls: ['./admin-root-profile.component.scss'],
+    providers: [AdminService]
 })
 export class AdminRootProfileComponent implements OnDestroy, OnInit {
     private subscription: Subscription;
@@ -21,11 +24,13 @@ export class AdminRootProfileComponent implements OnDestroy, OnInit {
     public weight: number | string;
     public age: number | string;
     public gender: string;
-
+    public requestForCoaching: boolean;
 
     constructor(
         private activateRoute: ActivatedRoute,
-        private adminRootProfileService: AdminRootProfileService
+        private adminService: AdminService,
+        private adminRootProfileService: AdminRootProfileService,
+        private toasterService: ToasterService
     ) {
         this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
     }
@@ -42,6 +47,7 @@ export class AdminRootProfileComponent implements OnDestroy, OnInit {
             this.height = (user.height) ? user.height : 'unknown';
             this.weight = (user.weight) ? user.weight : 'unknown';
             this.gender = (user.gender) ? user.gender : 'unknown';
+            this.requestForCoaching = (user.requestForCoaching) ? user.requestForCoaching : false;
             // here need paste name of date field from DB
             this.age = (user.birthday) ? this.adminRootProfileService.getAge(user.birthday) : 'unknown';
             return true;
@@ -50,5 +56,28 @@ export class AdminRootProfileComponent implements OnDestroy, OnInit {
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
+    }
+
+    acceptCoachRequest() {
+        const userData = {
+            isCoach: true
+        };
+        this.sendUserData('coach', userData);
+    }
+
+    rejectCoachRequest() {
+        this.sendUserData('usual');
+    }
+
+    sendUserData(role, data?) {
+        this.adminService.processCoachRequest(this.id, data, res => {
+            if (typeof(res) === 'object') {
+                this.toasterService.showMessage('success', null);
+                this.requestForCoaching = false;
+                this.role = role;
+            } else {
+                this.toasterService.showMessage('error', null);
+            }
+        });
     }
 }

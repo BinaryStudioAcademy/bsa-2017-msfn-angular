@@ -1,0 +1,10 @@
+<div id="misc-container">
+    <div *ngIf="requestForCoaching === true || window.data._injectedData.role !== 'coach'" id="coach-button">
+        <button md-raised-button type="submit"  *ngIf="!requestForCoaching" (click)="applyForCoaching()">
+            Become a coach
+        </button>
+        <div *ngIf="requestForCoaching">
+            {{ coachingMessage }}
+        </div>
+    </div>
+</div>

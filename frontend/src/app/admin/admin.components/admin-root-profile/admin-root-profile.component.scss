@@ -55,8 +55,30 @@
     }
 }
 
+.buttons {
+    margin: 20px auto;
+    text-align: center;
 
+    button {
+        display: inline-block;
+        width: 180px;
+        height: 40px;
+        border-radius: 40px;
+        outline: none;
+        font-size: $usual-text;
+        font-weight: 600;
+        color: $text-main-color;
+    }
 
+    .accept-req-btn {
+        margin-right: 30px;
+        background-color: $btn-color;
+    }
+
+    .reject-req-btn {
+        background-color: $error-color;
+    }
+}
 
 
 @media only screen and (max-width: $small-screen) {

@@ -11,7 +11,7 @@ export class AutocompletePipe implements PipeTransform {
                 return false;
             }
             filter = filter.toLowerCase();
-            return item.includes(filter);
+            return item.toLowerCase().includes(filter);
         });
     }
 
