@@ -12,7 +12,7 @@
                    (change)="updateData()">
             <button mdSuffix [mdDatepickerToggle]="period_min"></button>
         </md-input-container>
-        <md-datepicker #period_min></md-datepicker>
+        <md-datepicker #period_min (selectedChanged)="updateData()"></md-datepicker>
         <md-input-container>
             <input mdInput
                    [(ngModel)]="period.max"
@@ -21,10 +21,12 @@
                    (change)="updateData()">
             <button mdSuffix [mdDatepickerToggle]="period_max"></button>
         </md-input-container>
-        <md-datepicker #period_max></md-datepicker>
+        <md-datepicker #period_max (selectedChanged)="updateData()"></md-datepicker>
     </div>
 
-    <svg id='chart' #chart class="weight-chart" />
+    <svg id='chart' #chart class="weight-chart" xmlns="http://www.w3.org/2000/svg">
+        <text class="tooltip"></text>
+    </svg>
 
     <div class="diff-block">
         <div class="diff-wrap" id="previous-diff" *ngIf="currentWeight">

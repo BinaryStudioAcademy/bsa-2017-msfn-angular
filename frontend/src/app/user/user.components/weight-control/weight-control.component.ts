@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { WeightControlService } from './weight-control.service';
-import { DateService } from '../../../services/date.service';
-import { FormControl, Validators } from '@angular/forms';
-import { ToasterService } from '../../../services/toastr.service';
-import { D3Service, D3 } from 'd3-ng2-service';
+import {Component, OnInit} from '@angular/core';
+import {WeightControlService} from './weight-control.service';
+import {DateService} from '../../../services/date.service';
+import {FormControl, Validators} from '@angular/forms';
+import {ToasterService} from '../../../services/toastr.service';
+import {D3Service, D3} from 'd3-ng2-service';
 
 @Component({
     selector: 'app-weight-control',
@@ -73,6 +73,13 @@ export class WeightControlComponent implements OnInit {
         measurement: 'kg'
     };
 
+    margin = {
+        top: 40,
+        right: 30,
+        bottom: 20,
+        left: 30
+    };
+
     weightFormControl = new FormControl('', [
         Validators.required,
         Validators.min(30),
@@ -106,33 +113,33 @@ export class WeightControlComponent implements OnInit {
         this._d3 = d3Service.getD3();
     }
 
+    ngOnInit() {
+        this.updateData();
+    }
+
     renderChart() {
-        if (this.chartActive){
+        console.log('RENER');
+        if (this.chartActive) {
             this.updateChart();
             return;
-            // this._d3.select('#chart').selectAll('*').remove();
         }
 
         this.chartActive = true;
 
         const data = this.periodItems.map((item, key) => {
-             return {
-                 value: item[this.settings.selection],
-                 date: new Date(item.date).getTime()
-             };
+            return {
+                value: item[this.settings.selection],
+                date: new Date(item.date).getTime()
+            };
         });
         const svgNode = this._d3.select('#chart');
-        const margin = {
-                top: 10,
-                right: 0,
-                bottom: 20,
-                left: 30
-            },
-            width = +svgNode.node().clientWidth - margin.left - margin.right,
-            height = +svgNode.node().clientHeight - margin.top - margin.bottom,
+
+        const width = +svgNode.node().clientWidth - this.margin.left - this.margin.right,
+            height = +svgNode.node().clientHeight - this.margin.top - this.margin.bottom,
             g = svgNode
                 .append('g')
-                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+                .attr('class', 'wrapper')
+                .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
                 .attr('stroke', 'yellow');
 
         const x = this._d3.scaleTime().rangeRound([0, width]);
@@ -192,6 +199,64 @@ export class WeightControlComponent implements OnInit {
             .attr('stroke-linecap', 'round')
             .attr('stroke-width', 1.5)
             .attr('d', line(data));
+
+        g.selectAll('circle')
+            .data(data)
+            .enter().append('circle')
+            .attr('class', 'dot')
+            .attr('r', 5)
+            .attr('cx', d => {
+                return x(new Date(d.date));
+            })
+            .attr('cy', d => {
+                return y(d.value);
+            })
+            .on('mouseover', d => {
+                this.showData(d);
+            })
+            .on('mouseout', d => {
+                this.hideData();
+            });
+    }
+
+    showData(element) {
+        const e = this._d3.event;
+        const target = e.currentTarget;
+        const coord = this._d3.mouse(target);
+
+        const tooltip = this._d3.select('.tooltip');
+        tooltip.transition()
+            .duration(200)
+            .style('opacity', 0.9);
+        tooltip.html(element.value)
+            .style('transform', `translate(${coord[0] + this.margin.left - 10}px,${coord[1] + this.margin.top - 20}px)`);
+
+        // const chartTip = this._d3.select('.tip');
+        //
+        // chartTip.style('left', (coord[0] + 15) + 'px');
+        // chartTip.style('top', (coord[1] - 10) + 'px');
+        // chartTip.style('display', 'block');
+        // chartTip.html('test');
+
+        this._d3.select(target)
+            .transition()
+            .duration(200)
+            .attr('r', 7);
+    }
+
+
+    hideData() {
+        const e = this._d3.event;
+        const target = e.currentTarget;
+        const tooltip = this._d3.select('.tooltip');
+        tooltip.transition()
+            .duration(200)
+            .style('opacity', 0);
+
+        this._d3.select(target)
+            .transition()
+            .duration(200)
+            .attr('r', 5);
     }
 
     addWeight(): void {
@@ -204,14 +269,14 @@ export class WeightControlComponent implements OnInit {
             this.newWeight.date = currentDate.toISOString();
 
             this.weightControlService.addWeight(this.newWeight, res => {
+                console.log(res);
                 if (typeof(res) === 'object') {
                     this.toasterService.showMessage('success', null);
                 } else {
                     this.toasterService.showMessage('error', null);
                 }
+                setTimeout(() => this.updateData(), 500);
             });
-
-            setTimeout(() => this.updateData(), 500);
 
             this.weightFormControl.reset();
             this.waterFormControl.reset();
@@ -221,12 +286,12 @@ export class WeightControlComponent implements OnInit {
     }
 
     updateData(): void {
-        console.log(this.period);
+        console.log('UPDATE');
         this.weightControlService.getWeightItems(res => {
-            console.log(res);
             if (res[0].hasOwnProperty('weight')) {
                 // this.periodItems = this.weightControlService.getWeeklyWeightItems(res);
                 this.periodItems = this.weightControlService.getItemsForPeriod(res, this.period);
+                console.log(this.periodItems);
                 const recentItem = this.periodItems[this.periodItems.length - 1];
                 this.recentDay = this.weightControlService.getRecentDay(recentItem);
                 this.currentWeight = recentItem.weight;
@@ -235,13 +300,14 @@ export class WeightControlComponent implements OnInit {
                     this.recentDiff = this.weightControlService.getRecentDiff(this.periodItems);
                     this.periodDiff = this.weightControlService.getPeriodDiff(this.periodItems);
 
-                    this.changeOption('waterPct');
+                    this.changeOption('weight');
                 }
             }
         });
     }
 
     changeOption(option): void {
+        console.log('CHANGE');
         const settings = this.weightControlService.changeOption(option, this.recentDiff);
 
         this.settings.betterResult = settings.betterResult;
@@ -256,10 +322,6 @@ export class WeightControlComponent implements OnInit {
         this.renderChart();
     }
 
-    ngOnInit() {
-        this.updateData();
-    }
-
     updateChart() {
         const svg = this._d3.select('#chart');
 
@@ -270,14 +332,8 @@ export class WeightControlComponent implements OnInit {
             };
         });
 
-        const margin = {
-                top: 10,
-                right: 0,
-                bottom: 20,
-                left: 30
-            },
-            width = +svg.node().clientWidth - margin.left - margin.right,
-            height = +svg.node().clientHeight - margin.top - margin.bottom;
+        const width = +svg.node().clientWidth - this.margin.left - this.margin.right,
+            height = +svg.node().clientHeight - this.margin.top - this.margin.bottom;
 
         const x = this._d3.scaleTime().rangeRound([0, width]);
         const y = this._d3.scaleLinear().rangeRound([height, 0]);
@@ -307,8 +363,6 @@ export class WeightControlComponent implements OnInit {
                 return y(d.value);
             });
 
-        console.log(svg);
-
         svg.transition()
             .select('.line')
             .duration(750)
@@ -325,5 +379,37 @@ export class WeightControlComponent implements OnInit {
             .call(yAxis)
             .select('.y_axis_text')
             .text(this.settings.selection);
+
+        const wrapper = svg.select('.wrapper');
+        const circles = wrapper.selectAll('circle').data(data);
+
+        circles.exit().remove();
+
+        circles
+            .enter().append('circle')
+            .attr('class', 'dot')
+            .attr('r', 5)
+            .attr('cx', d => {
+                return x(new Date(d.date));
+            })
+            .attr('cy', d => {
+                return y(d.value);
+            })
+            .on('mouseover', d => {
+                this.showData(d);
+            })
+            .on('mouseout', d => {
+                this.hideData();
+            });
+
+        circles
+            .transition()
+            .duration(750)
+            .attr('cx', d => {
+                return x(new Date(d.date));
+            })
+            .attr('cy', d => {
+                return y(d.value);
+            });
     }
 }

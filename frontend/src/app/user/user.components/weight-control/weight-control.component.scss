@@ -129,6 +129,7 @@ md-radio-group {
     width: 100%;
     min-height: 300px;
     margin: 20px 0;
+    position: relative;
 }
 
 .diff-block {
@@ -148,6 +149,14 @@ md-radio-group {
     justify-content: space-around;
     width: 100%;
 }
+
+.tooltip {
+    pointer-events: none;
+    opacity: 0;
+    fill: red;
+    z-index: 100;
+}
+
 
 @media only screen and (max-width: $small-screen) {
 
