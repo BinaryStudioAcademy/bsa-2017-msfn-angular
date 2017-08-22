@@ -1,0 +1,13 @@
+<div class="data-container">
+    <md-table #table [dataSource]="dataSource">
+        <ng-container cdkColumnDef="name">
+            <md-header-cell *cdkHeaderCellDef>Name</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                {{row.name}}
+            </md-cell>
+        </ng-container>
+
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;" (click)="openDescription(row)"></md-row>
+    </md-table>
+</div>

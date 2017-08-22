@@ -22,6 +22,9 @@ import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.c
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
+import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
+import { ExerciseDescriptionComponent } from './user.components/exercise-description/exercise-description.component';
+import { MarkdownService } from '../services/markdown.service';
 
 @NgModule({
     imports: [
@@ -49,9 +52,15 @@ import { MiscComponent } from './user.components/account-settings/misc/misc.comp
         WeightControlComponent,
         DashboardComponent,
         MiscComponent,
+        ExerciseTableComponent,
+        ExerciseDescriptionComponent,
     ],
     providers: [
         ForAllUserGuard,
+        MarkdownService
+    ],
+    entryComponents: [
+        ExerciseDescriptionComponent
     ]
 })
 export class UserModule {

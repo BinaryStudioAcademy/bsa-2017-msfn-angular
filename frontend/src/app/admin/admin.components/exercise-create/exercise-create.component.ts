@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { HttpService } from '../../../services/http.service';
-import { IHttpReq } from '../../../models/http-req';
-import { IExercise } from '../../../models/exercise';
+
 import { IExerciseType } from '../../../models/exerciseType';
 import { ExerciseCreateService } from './exercise-create.service';
+import IExercise = ExerciseApi.IExercise;
 
 @Component({
     selector: 'app-exercise-create',
@@ -16,17 +16,19 @@ export class ExerciseCreateComponent implements OnInit {
     exercise: IExercise = {
         name: '',
         type: '',
+        isRemoved: false,
+        sportsId: [],
+        image: '',
         description: ''
     };
     titleType = 'Create';
 
     exTypes: [IExerciseType];
 
-    constructor(
-        public router: ActivatedRoute,
-        private httpService: HttpService,
-        private exerciseCreateService: ExerciseCreateService,
-    ) { }
+    constructor(public router: ActivatedRoute,
+                private httpService: HttpService,
+                private exerciseCreateService: ExerciseCreateService,) {
+    }
 
     ngOnInit() {
         if (this.router.snapshot.params.id) {

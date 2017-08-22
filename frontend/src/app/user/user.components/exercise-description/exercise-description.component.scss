@@ -1,0 +1,35 @@
+@import "./../../../../globalStyles/variables";
+@import "./../../../../globalStyles/indentations";
+@import "./../../../../globalStyles/text";
+
+.title {
+    text-align: center;
+}
+
+.close {
+    float: right;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    color: white;
+    font-size: 18px;
+}
+
+.close:hover {
+    cursor: pointer;
+    color: $text-second-color;
+}
+
+.image-preview {
+    margin: $content-between-margin;
+    text-align: center;
+}
+
+.description {
+    width: 400px;
+}
+
+.description-header {
+    font-size:$minor-text;
+    margin-bottom: 10px;
+}

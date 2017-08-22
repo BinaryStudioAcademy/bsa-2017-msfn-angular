@@ -3,6 +3,7 @@ const mongoose = require('mongoose'),
     passportOAuthStrategyInit = require('../middleware/passportOAuthMiddleware')(),
     passportStrategyInit = require('../middleware/passportStrategyMiddleware').strategy(),
     measurementService = require('./measurementService'),
+    exerciseRepository = require('./../repositories/exerciseRepository'),
     adminData = {
         firstName: 'Arnold',
         lastName: 'Schwarzenegger',
@@ -40,30 +41,202 @@ const mongoose = require('mongoose'),
         {
             "measureName": "timeFormat",
             "measureUnits": [
-                {"conversionFactor": "1", "unitName": "24-hour clock" ,"unitType": "metric"},
+                {"conversionFactor": "1", "unitName": "24-hour clock", "unitType": "metric"},
                 {"conversionFactor": "0.5", "unitName": "12-hour clock", "unitType": "imperial"}
             ]
         },
         {
             "measureName": "dateFormat",
             "measureUnits": [
-                {"conversionFactor": "1", "unitName": "European (day.month.year)" , "unitType": "metric"},
-                {"conversionFactor": "1", "unitName": "American (month/day/year)",  "unitType": "imperial"}
+                {"conversionFactor": "1", "unitName": "European (day.month.year)", "unitType": "metric"},
+                {"conversionFactor": "1", "unitName": "American (month/day/year)", "unitType": "imperial"}
             ]
         },
         {
             "measureName": "startWeek",
             "measureUnits": [
                 {"conversionFactor": "1", "unitName": "Monday", "unitType": "metric"},
-                {"conversionFactor": "1", "unitName": "Sunday",  "unitType": "imperial"}
+                {"conversionFactor": "1", "unitName": "Sunday", "unitType": "imperial"}
             ]
         }
-    ]
+    ];
+exercises = [
+    {
+        name: 'Flat Chest Presses',
+        isRemoved: false,
+        description: '1. Lying flat on bench, hold the dumbbells directly above chest, arms extended.\n\n\n' +
+        '2. Lower dumbbells to chest in a controlled manner.\n3. Press dumbbells back to starting position and repeat.\n4. Avoid locking elbows',
+        image: './resources/exercise-image/1.gif'
+    },
+    {
+        name: 'Incline Chest Presses',
+        isRemoved: false,
+        description: '1. Adjust bench to an incline of 30 to 45 degrees.\n\n\n2. Repeat as above.',
+        image: './resources/exercise-image/2.gif'
+    },
+    {
+        name: 'Flat Chest Flies',
+        isRemoved: false,
+        description: '1. Lying flat on bench, hold dumbbells directly above chest.\n\n\n' +
+        '2. Bend elbows slightly and maintain throughout the exercise.\n' +
+        '3. Open arms to sides. Elbows should remain \'locked\' in a slightly flexed position.\n' +
+        '4. When upper arms are parallel to floor, return the weights to the starting position and repeat.',
+        image: './resources/exercise-image/3.gif'
+    },
+    {
+        name: 'Incline Chest Flies',
+        isRemoved: false,
+        description: '1. Adjust bench to an incline of 30 to 45 degrees.\n\n' +
+        '2. Repeat as above.',
+        image: './resources/exercise-image/4.gif'
+    },
+    {
+        name: 'Seated Shoulder Presses',
+        isRemoved: false,
+        description: '1. Sit upright on bench with dumbbells over head. Make sure back is flat.\n\n' +
+        '2. Lower dumbbells slowly to shoulders.\n' +
+        '3. When arms are at 90 degrees, press the dumbbells back up and repeat.',
+        image: './resources/exercise-image/5.gif'
+    },
+    {
+        name: 'Lateral Raises',
+        isRemoved: false,
+        description: '1. Stand upright, knees slightly bent, shoulder width apart, holding dumbbells at sides.\n' +
+        '2. Bend elbows slightly and raise the dumbbells out to sides. Keep elbows slightly bent throughout.\n' +
+        '3. When arms are parallel to floor, slowly lower back and repeat.',
+        image: './resources/exercise-image/6.gif'
+    },
+    {
+        name: 'Reverse Flies',
+        isRemoved: false,
+        description: '1. Sit on edge of bench, feet flat on the floor. Bend over so chest is almost resting on thighs.\n' +
+        '2. Hold dumbbells next to feet and bend arms slightly. Open arms out keeping elbows bent.\n' +
+        '3. When arms are parallel to floor, slowly lower dumbbells back.',
+        image: './resources/exercise-image/7.gif'
+    },
+    {
+        name: 'Front Raises',
+        isRemoved: false,
+        description: '1. Stand upright, knees slightly bent, shoulder width apart. Palms should be towards thighs.\n' +
+        '2. Raise one dumbbell directly in front of you.\n' +
+        '3. When arm is parallel to ground lower dumbbell slowly back. Repeat with the other arm.',
+        image: './resources/exercise-image/8.gif'
+    },
+    {
+        name: 'Dead Lifts',
+        isRemoved: false,
+        description: '1. Stand upright, feet shoulder width apart, knees slightly bent.\n' +
+        '2. Bend lower back and knees to lower the weights down your legs. Back must remain flat, lower back should be arched inwards slightly. Keep head up throughout exercise.\n' +
+        '3. Stand upright using lower back and legs, maintaining flat back and keeping your head up.',
+        image: './resources/exercise-image/9.gif'
+    },
+    {
+        name: 'Single Arm Row',
+        isRemoved: false,
+        description: '1. Stand upright next to bench. Place one knee and hand on bench. Upper body should be parallel to floor.\n' +
+        '2. Hold one dumbbell with arm extended.\n' +
+        '3. Raise dumbbell up to your midsection keeping back still throughout movement.\n' +
+        '4. Slowly lower dumbbell to start position and repeat. After desired number of reps repeat for other arm.',
+        image: './resources/exercise-image/10.gif'
+    },
+    {
+        name: 'Lying Bent Over Rows',
+        isRemoved: false,
+        description: '1. Lie face down on a flat or slightly inclined bench. Hold two dumbbells and let arms hang down.\n' +
+        '2. Pull dumbbells up towards chest.\n' +
+        '3. Slowly lower dumbbells back down and repeat.',
+        image: './resources/exercise-image/11.gif'
+    },
+    {
+        name: 'Upright Rows',
+        isRemoved: false,
+        description: '1. Stand upright, feet shoulder width apart, knees slightly bent. \n' +
+        '2. Keeping dumbbells close to body, raise them to chin.\n' +
+        '3. Hold for a count of 2 and slowly lower to start position and repeat. ',
+        image: './resources/exercise-image/12.gif'
+    },
+    {
+        name: 'Shrugs',
+        isRemoved: false,
+        description: '1. Stand upright, feet shoulder width apart, knees slightly bent.\n' +
+        '2. Keeping arms straight \'shrug\' shoulders as high as possible and hold for a count of 3.\n' +
+        '3. Relax and repeat.\n' +
+        '4. Do not roll shoulders backwards as you shrug up.',
+        image: './resources/exercise-image/13.gif'
+    },
+    {
+        name: 'Decline Seated Bicep Curls',
+        isRemoved: false,
+        description: '1. Adjust bench to a 45 degree incline.\n' +
+        '2. Hold dumbbells at sides. Arms should be fully extended.\n' +
+        '3. Keep elbows close to body and curl weight up by bending elblows.\n' +
+        '4. Slowly lower dumbbells and repeat. ',
+        image: './resources/exercise-image/14.gif'
+    },
+    {
+        name: 'Hammer curls',
+        isRemoved: false,
+        description: '1. Stand upright with dumbells at sides.\n' +
+        '2. Turn palms inward so they face body. \n' +
+        '3. Curl dumbbells up slowly keeping your elbows close to sides. ',
+        image: './resources/exercise-image/15.gif'
+    },
+    {
+        name: 'Preacher Curls',
+        isRemoved: false,
+        description: '1. Set bench so back rest is approx 45 degrees.\n' +
+        '2. Stand behind the bench. Holding dumbbell rest back of upper arm on back rest, arm fully extended.\n' +
+        '3. Keep back of upper arm against back rest and curl dumbbell up towards face.\n' +
+        '4. Slowly lower dumbbell until arm is not quite fully extended and repeat for desired number of reps before switching arms.',
+        image: './resources/exercise-image/16.gif'
+    },
+    {
+        name: 'Concentration Curls',
+        isRemoved: false,
+        description: '1. Sit on edge of bench with feet flat on the floor.\n' +
+        '2. Holding dumbbell place elbow on inside of thigh, just above knee.\n' +
+        '3. Curl dumbbell up towards your face. Do not swing back as you lift the weight.\n' +
+        '4. Slowly lower the weight and repeat for desired number of reps before switching arms.',
+        image: './resources/exercise-image/17.gif'
+    },
+    {
+        name: 'Overhead Triceps Extensions',
+        isRemoved: false,
+        description: '1. Stand upright, feet shoulder width apart.\n' +
+        '2. Hold dumbbell directly above head with arm fully extended. Clasp elbow with free hand for support.\n' +
+        '3. Slowly let elbow fold so dumbbell is lowered behind head.\n' +
+        '4. Extend arm back to starting position. Repeat for the desired number of reps and switch arms.',
+        image: './resources/exercise-image/18.gif'
+    },
+    {
+        name: 'French Presses',
+        isRemoved: false,
+        description: '1. Lie flat on bench. Hold dumbbells directly above chest with palms facing each other. Dumbbells should be just about touching each other.\n' +
+        '2. Keeping your shoulders locked, let your elbows fold so dumbbells are lowered down to either side of head.\n' +
+        '3. Extend both your arms back to start position and repeat.',
+        image: './resources/exercise-image/19.gif'
+    },
+    {
+        name: 'Triceps Kickbacks',
+        isRemoved: false,
+        description: '1. Stand upright next to bench. Place one arm and leg on bench. Upper body should be parallel to ground.\n' +
+        '2. Holding dumbbell raise elbow so upper arm is parallel to ground. Elbow should be bent at right angles.\n' +
+        '3. Extend elbow so entire arm is parallel to ground.\n' +
+        '4. Slowly return to start position and repeat for desired number of reps before changing arms.',
+        image: './resources/exercise-image/20.gif'
+    }
+];
 
-
-
-
-module.exports = function () {
+module.exports = function() {
+    // add exercises.
+    exerciseRepository.get({filter: {name: 'Overhead Triceps Extensions'}}, (err, data) => {
+        if (data.length === 0) {
+            exercises.forEach(exercise => exerciseRepository.add(exercise));
+            console.log('[InitService] - Exercises added');
+        } else {
+            console.log('[InitService] - Exercises are available');
+        }
+    });
     // add measurments
     measurementService.getAllMeasurements((err, data) => {
         if (err) {
@@ -103,5 +276,5 @@ module.exports = function () {
             console.log('[InitService] - Admin are available');
         }
     })
-    
+
 }

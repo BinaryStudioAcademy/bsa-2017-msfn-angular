@@ -82,7 +82,7 @@ import {CommonModule} from '@angular/common';
         ListComponent,
         AutocompletePipe,
         MdDatepickerModule,
-        MdNativeDateModule
+        MdNativeDateModule,
         SortablejsModule,
     ],
     declarations: [

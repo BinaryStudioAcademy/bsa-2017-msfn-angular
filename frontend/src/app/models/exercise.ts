@@ -3,4 +3,5 @@ export interface IExercise {
     type: string;
     description: string;
     _id?: string;
+    image: string;
 }

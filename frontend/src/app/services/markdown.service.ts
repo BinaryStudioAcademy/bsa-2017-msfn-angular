@@ -35,9 +35,11 @@ export class MarkdownService {
         render.link = (href: string, title: string, text: string) => {
             return `<a class="markdown-link" href="${href}" title="${title}">${text}</a>`;
         };
+        render.listitem = (text: string) => {
+            return `<li class="markdown-listitem">${text}</li>`;
+        };
         this.md.setOptions({
-            renderer: render,
-            sanitize: true,
+            renderer: render
         });
     }
 

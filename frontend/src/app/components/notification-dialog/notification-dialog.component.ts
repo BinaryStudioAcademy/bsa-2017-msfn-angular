@@ -10,7 +10,6 @@ import { NotificationsService } from '../../services/notifications.service';
     styleUrls: ['./notification-dialog.component.scss']
 })
 export class NotificationDialogComponent implements OnInit {
-    checkedValue = 'unread';
     showedNotifications: INotification[];
     unreadNotifications: INotification[];
 
