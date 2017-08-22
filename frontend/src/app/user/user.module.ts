@@ -20,7 +20,6 @@ import { AccountSettingsComponent } from './user.components/account-settings/acc
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
 import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
-import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
     imports: [
@@ -31,7 +30,6 @@ import { ChartsModule } from 'ng2-charts';
         MdListModule,
         MdButtonToggleModule,
         InfiniteScrollModule,
-        ChartsModule
     ],
     declarations: [
         SidebarViewComponent,
