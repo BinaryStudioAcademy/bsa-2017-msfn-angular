@@ -22,6 +22,12 @@ import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.c
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
+import { DbWeightControlComponent } from './user.components/dashboard/dashboard.components/db-weight-control/db-weight-control.component';
+import { DbCaloriesComponent } from './user.components/dashboard/dashboard.components/db-calories/db-calories.component';
+import { DbEventsComponent } from './user.components/dashboard/dashboard.components/db-events/db-events.component';
+import { DbFoodPlanComponent } from './user.components/dashboard/dashboard.components/db-food-plan/db-food-plan.component';
+import { DbNewsComponent } from './user.components/dashboard/dashboard.components/db-news/db-news.component';
+import { DbGoalsComponent } from './user.components/dashboard/dashboard.components/db-goals/db-goals.component';
 
 @NgModule({
     imports: [
@@ -49,6 +55,12 @@ import { MiscComponent } from './user.components/account-settings/misc/misc.comp
         WeightControlComponent,
         DashboardComponent,
         MiscComponent,
+        DbWeightControlComponent,
+        DbCaloriesComponent,
+        DbEventsComponent,
+        DbFoodPlanComponent,
+        DbNewsComponent,
+        DbGoalsComponent,
     ],
     providers: [
         ForAllUserGuard,

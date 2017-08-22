@@ -19,12 +19,19 @@
         width: 48%;
         height: 31%;
         background: $gradient-to-color;
-
-        h2 {
-            margin: 10px 0 0 10px;
-            font-size: $usual-text;
-            font-weight: 300;
-        }
     }
 }
 
+.inner-container {
+    h2 {
+        margin: 10px 0 0 10px;
+        font-size: $usual-text;
+        font-weight: 300;
+    }
+
+    .content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
