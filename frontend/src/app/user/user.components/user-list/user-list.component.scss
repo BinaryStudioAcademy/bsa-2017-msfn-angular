@@ -1,0 +1,66 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
+
+.search-box {
+    display: flex;
+    margin: $content-tb-margin;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 90%;
+    h2 {
+        font-family: $font-general;
+        font-size: $header-text;
+    }
+
+}
+
+.all-user-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    width: 70vw;
+    min-height: 500px;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 120px;
+    height: 180px;
+    margin: 10px;
+    color: $btn-color;
+    background-color: $gradient-to-color;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    .round {
+        border-radius: 50%;
+        overflow: hidden;
+        width: 70px;
+        height: 70px;
+    }
+    p {
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 0;
+        -webkit-margin-start: 0;
+        -webkit-margin-end: 0;
+    }
+    .role-text {
+        font-size: $minor-text;
+    }
+    .user-name-text {
+        font-size: $usual-text;
+    }
+}

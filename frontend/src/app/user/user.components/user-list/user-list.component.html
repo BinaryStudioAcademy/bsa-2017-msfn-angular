@@ -1,0 +1,18 @@
+<div class="search-box">
+    <h2>All users</h2>
+    <md-input-container>
+        <input mdInput
+               type="text"
+               placeholder="Search"
+               [(ngModel)]="name">
+    </md-input-container>
+</div>
+<div class="all-user-container">
+    <div *ngFor="let user of users">
+        <div class="item-container" *ngIf="matchSearch(user)">
+            <div class="round"><img src={{user.photoUrl}}></div>
+            <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+            <p class="role-text">{{user.role}}</p>
+            </div>
+    </div>
+</div>
