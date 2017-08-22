@@ -123,7 +123,8 @@ export class WeightControlService {
         } else if (dayAmount < 1) {
             return 'yesterday';
         } else {
-            return this.dateService.convertDateToIso(recentDate);
+            const dateObject = this.dateService.convertDateFromIso(recentDate.toString());
+            return this.dateService.convertDateToIso(dateObject);
         }
     }
 
@@ -133,8 +134,6 @@ export class WeightControlService {
             measurement: string,
             betterResult = false,
             worseResult = false;
-
-        console.log(diff);
 
         if (diff[option] > 0) {
             worseResult = true;

@@ -2,7 +2,7 @@
     <div id="title"><h1>Weight Control</h1></div>
 
     <div id="previous-diff" *ngIf="currentWeight">
-        <div id="yesterday">{{ recentDay }}:</div>
+        <div id="recent-day">{{ recentDay }}:</div>
         <div id="current-weight">{{ currentWeight }}kg</div>
         <div class="diff"
              *ngIf="weeklyItems.length > 1"

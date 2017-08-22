@@ -49,7 +49,7 @@ export class DateService {
         return isoDate;
     }
 
-    convertDateFromIso(isoDate: string) {
+    convertDateFromIso(isoDate: string, stringMonth?: boolean) {
         if (isoDate === '') {
             return {
                 year: '',
@@ -58,12 +58,15 @@ export class DateService {
             };
         }
         const date = new Date(isoDate);
+
+        let month: string | number = date.getMonth() + 1;
+        month = stringMonth ? this.months[date.getMonth()].name : month;
+
         const dateProps = {
             year: date.getFullYear(),
-            month: this.months[date.getMonth()].name,
+            month: month,
             day: date.getDate()
         };
-
         return dateProps;
     }
 
