@@ -1,0 +1,17 @@
+.wrap {
+    margin: auto;
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#resultField:nth-child(2n-1) {
+    background-color: lightgrey;
+    width: 300px;
+}
+#resultField {
+    text-align: center;
+}
+#resultField span {
+    font-weight: bold;
+}

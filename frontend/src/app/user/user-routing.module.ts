@@ -17,6 +17,7 @@ import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.c
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
+import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 
 const userRoutes: Routes = [
     {
@@ -77,6 +78,10 @@ const userRoutes: Routes = [
             {
                 path: 'weight-control',
                 component: WeightControlComponent
+            },
+            {
+                path: 'start-training',
+                component: ActiveTrainingComponent
             }
         ]
     }
