@@ -17,7 +17,7 @@ export class GoalListService {
         };
         this.httpService.sendRequest(request).then(data => {
             callback(data);
-        });
+        }).catch(() => {});
     }
 
     getGoals(callback) {
@@ -64,6 +64,6 @@ export class GoalListService {
         };
         this.httpService.sendRequest(request).then(data => {
             callback(data);
-        });
+        }).catch(() => {});
     }
 }
