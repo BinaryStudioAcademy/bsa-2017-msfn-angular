@@ -16,7 +16,17 @@ export class DbEventsComponent implements OnInit {
         title: 'Planned Events'
     };
 
+    startDate: string;
+    endDate: string;
+    selEvent: string;
+
+    events = [
+        {
+            date: '',
+            value: ''
+        }
+    ];
+
     ngOnInit() {
     }
-
 }

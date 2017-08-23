@@ -31,7 +31,7 @@ import {
     MdDatepickerModule,
     MdNativeDateModule,
     MdButtonToggleModule,
-    MdPaginatorModule
+    MdSliderModule
 } from '@angular/material';
 import 'hammerjs';
 import { D3Service } from 'd3-ng2-service';
@@ -80,12 +80,12 @@ import {CommonModule} from '@angular/common';
         MdMenuModule,
         MdListModule,
         MdButtonToggleModule,
-        MdPaginatorModule,
         ListComponent,
         AutocompletePipe,
         MdDatepickerModule,
         MdNativeDateModule,
-        SortablejsModule
+        SortablejsModule,
+        MdSliderModule
     ],
     declarations: [
         ListComponent,

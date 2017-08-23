@@ -1,0 +1,32 @@
+@import '../../../../../../globalStyles/variables.scss';
+@import '../../../../../../globalStyles/indentations.scss';
+@import '../../../../../../globalStyles/text.scss';
+
+.events > .content {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: 70%;
+
+    div {
+        display: inline-block;
+    }
+}
+
+md-slider {
+    width: 100%;
+}
+
+.start-date {
+    width: 50%;
+    font-size: $main-text;
+}
+
+.end-date {
+    width: 50%;
+    text-align: right;
+}
+
+.event-output {
+    flex-basis: 100%;
+    margin-top: 20px;
+}

@@ -1,6 +1,41 @@
 <div class="events inner-container">
     <h2>{{ dataToDisplay.title }}</h2>
     <div class="content">
+        <md-slider
+            class="example-margin"
+            [min]="0"
+            [max]="3"
+            [step]="1"
+            [tick-interval]="1"
+            [value]="selEvent">
+        </md-slider>
 
+        <div class="start-date">
+            <md-input-container>
+                <input
+                    mdInput
+                    value="startDate"
+                    [mdDatepicker]="startPicker"
+                    placeholder="Choose a date">
+                <button mdSuffix [mdDatepickerToggle]="startPicker"></button>
+            </md-input-container>
+            <md-datepicker #startPicker></md-datepicker>
+        </div>
+
+        <div class="end-date">
+            <md-input-container>
+                <input
+                    mdInput
+                    value="endDate"
+                    [mdDatepicker]="endPicker"
+                    placeholder="Choose a date">
+                <button mdSuffix [mdDatepickerToggle]="endPicker"></button>
+            </md-input-container>
+            <md-datepicker #endPicker></md-datepicker>
+        </div>
+
+        <div class="event-output">
+
+        </div>
     </div>
 </div>
