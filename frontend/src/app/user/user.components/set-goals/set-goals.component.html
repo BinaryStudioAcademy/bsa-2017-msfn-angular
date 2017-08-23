@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="current-goals">
+        <h1>Current goals</h1>
+        <ul class="goal__list">
+            <li class="goal__item" *ngFor="let goal of goalsArr">
+                <span class="goal__item-title">{{goal.name}}</span>
+                <span class="goal__item-deadline">Deadline: 20.05.2019</span>
+                <span>I want to lose my weight to 80 kg</span>
+            </li>
+        </ul>
+        <div class="goal__add-new" (click)="addGoal()">
+            <i class="material-icons">add</i>
+        </div>
+    </div>
+    <div *ngIf="addNewGoal" class="new-goal">
+
+        <div class="goal__selector">
+            <span class="goal_selector-text">Choose your goal :</span>
+            <md-select floatPlaceholder="never" placeholder="Your goal" [(ngModel)]="selectedGoal" [ngModelOptions]="{standalone: true}" (change)="onSelectAim()">
+                <md-option *ngFor="let goal of goals" [value]="goal.name" #option>
+                    {{goal.name}}
+                </md-option>
+            </md-select>
+        </div>
+
+        <div [ngSwitch]="selectedGoal">
+            <ng-container *ngSwitchCase="'Lose weight'">
+                <form class="weight-form">
+                    <div class="weight-form__weight">
+                        <md-input-container  class="example-full-width" class="weight-input">
+                            <input mdInput type="number" placeholder="Current weight" [(ngModel)]="goal.currentWeight"  [ngModelOptions]="{standalone: true}">
+                        </md-input-container>
+                        <md-input-container mdTooltip="Expected weight" class="weight-input">
+                            <input mdInput  type="number" placeholder="Aim weight" [(ngModel)]="goal.aimWeight" [ngModelOptions]="{standalone: true}">
+                        </md-input-container>
+                    </div>
+                    <md-input-container floatPlaceholder="never" class="example-full-width" class="input">
+                        <textarea mdInput placeholder="Goal Description" [(ngModel)]="goal.description" [ngModelOptions]="{standalone: true}"></textarea>
+                    </md-input-container>
+                    <ng-container class="weight-form__date">
+                        <md-input-container>
+                            <input mdInput [mdDatepicker]="picker" placeholder="Enter deadline" [(ngModel)]="goal.deadline" [ngModelOptions]="{standalone: true}">
+                            <button mdSuffix [mdDatepickerToggle]="picker"></button>
+                        </md-input-container>
+                        <md-datepicker #picker></md-datepicker>
+                    </ng-container>
+
+                    <button md-button class="btn" (click)="saveGoal(selectedGoal)">Set goal</button>
+                </form>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Increase Biceps'">
+                <p>some text</p>
+            </ng-container>
+        </div>
+    </div>
+</div>

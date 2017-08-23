@@ -1,0 +1,123 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+.container {
+    margin: $header-top-margin;
+    display: flex;
+    justify-content: space-around;
+    h1 {
+        margin: 0;
+    }
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.current-goals {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .goal__list {
+        display: flex;
+        flex-direction: column;
+        .goal__item {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            width: 300px;
+            min-height: 130px;
+            margin: 10px;
+            padding: 5px;
+            color: $text-main-color;
+            background-color: $gradient-to-color;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            .goal__item-header{
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+            
+            }
+
+            .goal__item-title{
+                font-size: 18px;
+            }
+            >span {
+                padding: 10px 0;
+            }
+            
+            &:hover {
+                background-color: #353535;
+                cursor: pointer;
+            }
+        }
+    }
+    .goal__add-new {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 300px;
+        height: 130px;
+        margin: 10px;
+        color: #CCCCCC;
+        background-color: #353535;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        >i {
+            font-size: 40px;
+        }
+        &:hover {
+            color: $btn-color;
+            cursor: pointer;
+        }
+    }
+}
+.new-goal{
+    display: flex;
+    align-self: flex-start;
+    order:-1;
+    flex-direction: column;
+    margin-bottom: 30px;
+
+}
+
+.goal__selector {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    margin-bottom: 20px;
+    >span {
+        margin-right: 18px;
+    }
+}
+
+.weight-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .weight-form__weight{
+        display: flex;
+        flex-wrap: row wrap;
+        justify-content: space-between;
+
+        .weight-input{
+          width: 30%;
+        }
+
+    }
+}
+
+
+
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+}

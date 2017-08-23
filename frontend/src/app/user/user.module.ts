@@ -29,6 +29,7 @@ import { ExerciseDescriptionComponent } from './user.components/exercise-descrip
 import { MarkdownService } from '../services/markdown.service';
 import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
 import { ExerciseListComponent } from './user.components/exercise-list/exercise-list.component';
+import { SetGoalsComponent } from './user.components/set-goals/set-goals.component';
 
 @NgModule({
     imports: [
@@ -62,6 +63,7 @@ import { ExerciseListComponent } from './user.components/exercise-list/exercise-
         ExerciseTableComponent,
         ExerciseDescriptionComponent,
         ExerciseListComponent,
+        SetGoalsComponent,
     ],
     providers: [
         ForAllUserGuard,
