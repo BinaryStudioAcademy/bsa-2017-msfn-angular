@@ -23,6 +23,7 @@ import { WeightControlComponent } from './user.components/weight-control/weight-
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
 import { SecundomerComponent } from './user.components/active-training/active-training.components/secundomer/secundomer.component';
+import { FinishDialogComponent } from './user.components/active-training/active-training.components/finish-dialog/finish-dialog.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 
 
@@ -53,10 +54,14 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
         DashboardComponent,
         MiscComponent,
         SecundomerComponent,
+        FinishDialogComponent,
         ActiveTrainingComponent
     ],
     providers: [
         ForAllUserGuard,
+    ],
+    entryComponents: [
+        FinishDialogComponent
     ]
 })
 export class UserModule {

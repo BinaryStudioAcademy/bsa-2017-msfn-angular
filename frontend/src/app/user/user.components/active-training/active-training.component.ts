@@ -5,9 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: 'active-training.component.html',
     styleUrls: ['active-training.component.scss']
 })
-export class ActiveTrainingComponent {
-    mode: string = 'secundomer';
-    chooseMode(mode: string): void {
-        this.mode = mode;
-    }
-}
+export class ActiveTrainingComponent {}

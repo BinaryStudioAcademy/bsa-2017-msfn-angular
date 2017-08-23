@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FinishDialogComponent } from '../finish-dialog/finish-dialog.component';
+import { MdDialog } from '@angular/material';
 
 @Component({
     selector: 'app-secundomer',
@@ -9,9 +11,9 @@ import { Component, OnInit } from '@angular/core';
 
 
 export class SecundomerComponent implements OnInit {
-    laps = [];
+    warmOuts = [];
     runned: boolean;
-    lapRunned: boolean;
+    warming: boolean;
     intervalID: number;
     intervalLapID: number;
     secndomerNum: number = 0;
@@ -22,6 +24,10 @@ export class SecundomerComponent implements OnInit {
     cacheTime: number;
     pauseTime: number;
     resStyle: string;
+
+    constructor (
+        private dialog: MdDialog
+    ) {}
     beautifierTime(millisecnods: number): string {
         const formatter = new Intl.DateTimeFormat('ru', {
             hour: '2-digit',
@@ -32,7 +38,7 @@ export class SecundomerComponent implements OnInit {
     }
     run(id: string): void {
         this.runned = true;
-        if (this.secndomerLapNum) { this.lap(false); }
+        if (this.warming) { this.warmingUp(); }
         const start = this.cacheTime = (this.cacheTime) ? (Date.now() - (this.pauseTime - this.cacheTime)) : Date.now();
         this.intervalID = setInterval ( () => {
             this.secndomerNum = (Date.now() - start);
@@ -45,8 +51,9 @@ export class SecundomerComponent implements OnInit {
         clearInterval(this.intervalID);
         clearInterval(this.intervalLapID);
     }
-    clear(): void {
+    finish(): void {
         this.pause();
+        this.warming = false;
         this.secndomerNum = 0;
         this.pauseTime = 0;
         this.cacheTime = 0;
@@ -54,29 +61,33 @@ export class SecundomerComponent implements OnInit {
         this.lapPauseTime = 0;
         this.secndomerLapNum = 0;
         this.secndomerPreviousLapNum = 0;
-        this.laps = [];
+        this.warmOuts = [];
     }
-    lap(continueLap): void {
-        if (continueLap) {
-            clearInterval(this.intervalLapID);
-            this.lapCacheTime = 0;
-            this.lapPauseTime = 0;
-            this.laps.push({
-                total: this.beautifierTime(this.secndomerNum),
-                lap: this.beautifierTime(this.secndomerLapNum),
-                res: (this.secndomerLapNum - this.secndomerPreviousLapNum),
-                color: (this.secndomerLapNum - this.secndomerPreviousLapNum <= 0) ? 'green' : 'red'
-            });
-            this.secndomerPreviousLapNum = this.secndomerLapNum;
-        }
-        this.lapRunned = true;
+
+    warmingUp(): void {
+        this.warming = true;
         const startLap = this.lapCacheTime = (this.lapCacheTime) ? (Date.now() - (this.lapPauseTime - this.lapCacheTime)) : Date.now();
         this.intervalLapID = setInterval ( () => {
             this.secndomerLapNum = (Date.now() - startLap);
         }, 52);
     }
 
+    endWarmingUp(): void {
+        this.warming = false;
+        clearInterval(this.intervalLapID);
+        this.lapCacheTime = 0;
+        this.lapPauseTime = 0;
+        this.warmOuts.push({
+            total: this.beautifierTime(this.secndomerNum),
+            lap: this.beautifierTime(this.secndomerLapNum),
+        });
+        this.secndomerPreviousLapNum = this.secndomerLapNum;
+    }
 
     ngOnInit() {}
+
+    openFinishDialog() {
+        this.dialog.open(FinishDialogComponent, { data: true });
+    }
 
 }

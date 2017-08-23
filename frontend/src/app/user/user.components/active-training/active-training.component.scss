@@ -2,47 +2,48 @@
 @import '../../../../globalStyles/text.scss';
 @import '../../../../globalStyles/indentations.scss';
 
+.centerContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .container {
     width: 100%;
     height: 100%;
 }
 
-.centerContent {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
-}
 .timers {
-    :host /deep/ button {
-        border: none;
-        margin: 35px auto 0 auto;
-        width: 90%;
-        padding: 15px;
-        color: $text-main-color;
-        background-color: $btn-color;
-        font-size: $button-text;
-        font-weight: 600;
-        font-size: 11pt;
-        border-radius: 50px;
-        outline: none;
-        &:hover {
-            cursor: pointer;
-        }
+    width: 20%;
+    height: 90%;
+    background-color: $gradient-to-color;
+}
+
+.child {
+    width: 70%;
+    height: 90%;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+
+@media screen and (max-width: $small-screen) {
+    .timers, .child {
+        width: 100%;
+        height: 100%;
     }
-    // :host /deep/ .run {
-    //     background-color: green;
-    // }
-    // :host /deep/ .pause {
-    //     background-color: yellow;
-    // }
-    // :host /deep/ .clear {
-    //     background-color: red;
-    // }
-    :host /deep/ .numbers {
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 40px;
-        width: 420px;
-        text-align: center;
+}
+
+@media screen and (min-width: $small-screen + 1) and (max-width: $medium-screen) {
+    .timers, .child {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
+    .timers, .child {
+        width: 100%;
+        height: 100%;
     }
 }

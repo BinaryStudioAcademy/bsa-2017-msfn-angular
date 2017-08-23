@@ -1,14 +1,9 @@
  <div class="wrap"> 
-    <div id="lapscndmr" class="numbers" *ngIf="laps.length">{{beautifierTime(secndomerLapNum)}}</div>
+    <button (click)="run('scndmr')" *ngIf="!runned"  class="general start">START</button>
+    <button (click)="openFinishDialog()" *ngIf="runned" class="general finish">FINISH</button>
+    <button (click)="pause()" *ngIf="runned" class="general pause">PAUSE</button>
     <div id="scndmr" class="numbers">{{beautifierTime(secndomerNum)}}</div>
-    <button (click)="run('scndmr')" *ngIf="!runned"  class="run">RUN</button>
-    <button (click)="pause()" *ngIf="runned"  class="pause">PAUSE</button>
-    <button (click)="lap(true)" *ngIf="runned"  class="pause">LAP</button>
-    <button (click)="clear()" *ngIf="!runned" class="clear">CLEAR</button>
-
-    <div id="resultField" *ngFor="let lap of laps">
-        <span>TOTAL=</span>{{lap.total}}<br>
-        <span>LAP=</span>{{lap.lap}}<br>
-        <span [ngStyle]="{color: lap.color}">RESULT=</span>{{lap.res}}
-    </div>
+    <button md-raised-button (click)="warmingUp()" *ngIf="runned&&!warming" class="controll">WARMING UP</button>
+    <button md-raised-button (click)="endWarmingUp()" *ngIf="runned&&warming" class="controll">END WARMING UP</button>
+    <div id="lapscndmr" class="numbers" *ngIf="warming">{{beautifierTime(secndomerLapNum)}}</div>
  </div>
