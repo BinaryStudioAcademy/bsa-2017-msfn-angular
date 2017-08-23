@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MdButtonToggleModule, MdListModule } from '@angular/material';
+import { MdButtonToggleModule, MdListModule, MdPaginatorModule } from '@angular/material';
 
 import { UserRoutingModule } from './user-routing.module';
 import { ImportModule } from '../import.module';
@@ -19,6 +19,8 @@ import { OtherProfilesComponent } from './user.components/other-profiles/other-p
 import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
 import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
+import { SearchExerciseComponent } from './user.components/search-exercise/search-exercise.component';
+import { ExerciseEditDialogComponent } from './user.components/exercise-edit-dialog/exercise-edit-dialog.component';
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
@@ -26,6 +28,7 @@ import { ExerciseTableComponent } from './user.components/exercise-table/exercis
 import { ExerciseDescriptionComponent } from './user.components/exercise-description/exercise-description.component';
 import { MarkdownService } from '../services/markdown.service';
 import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
+import { ExerciseListComponent } from './user.components/exercise-list/exercise-list.component';
 
 @NgModule({
     imports: [
@@ -33,9 +36,9 @@ import { PrivacyComponent } from './user.components/account-settings/privacy/pri
         FormsModule,
         ImportModule,
         UserRoutingModule,
-        MdListModule,
         MdButtonToggleModule,
         InfiniteScrollModule,
+        MdPaginatorModule
     ],
     declarations: [
         SidebarViewComponent,
@@ -50,12 +53,15 @@ import { PrivacyComponent } from './user.components/account-settings/privacy/pri
         AccountSettingsComponent,
         LoginSettingsComponent,
         PlanDetailComponent,
+        SearchExerciseComponent,
+        ExerciseEditDialogComponent,
         WeightControlComponent,
         DashboardComponent,
         MiscComponent,
         PrivacyComponent,
         ExerciseTableComponent,
         ExerciseDescriptionComponent,
+        ExerciseListComponent,
     ],
     providers: [
         ForAllUserGuard,
