@@ -11,9 +11,32 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 
 
 export class SecundomerComponent implements OnInit {
+    exercises = [
+        {
+            name: 'Pumping',
+            count: 5
+        },
+        {
+            name: 'Sit-ups',
+            count: 2
+        },
+        {
+            name: 'Push ups',
+            count: 15
+        },
+        {
+            name: 'Jumping rope',
+            count: 40
+        },
+    ];
+    burnedCallories = 1445;
+
+
+
     warmOuts = [];
     runned: boolean;
     warming: boolean;
+    warmingTime: number = 0;
     intervalID: number;
     intervalLapID: number;
     secndomerNum: number = 0;
@@ -82,6 +105,7 @@ export class SecundomerComponent implements OnInit {
             total: this.beautifierTime(this.secndomerNum),
             lap: this.beautifierTime(this.secndomerLapNum),
         });
+        this.warmingTime += this.secndomerLapNum;
         this.secndomerPreviousLapNum = this.secndomerLapNum;
     }
 
@@ -92,14 +116,17 @@ export class SecundomerComponent implements OnInit {
     openFinishDialog() {
         this.dialogRef = this.dialog.open(FinishDialogComponent, {
             data: {
-            total: this.beautifierTime(this.secndomerNum),
-            calories: 328,
+                time: {
+                    total: this.beautifierTime(this.secndomerNum),
+                    warming: this.beautifierTime(this.warmingTime)
+                },
+                calories: this.burnedCallories,
+                remainExercises: this.exercises,
             }
     });
         this.dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                console.log('Finish');
-                this.endWarmingUp();
+                this.finish();
             }
         });
     }
