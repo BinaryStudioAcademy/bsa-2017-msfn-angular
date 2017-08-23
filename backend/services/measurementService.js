@@ -30,8 +30,6 @@ function createMeasurement(body, callback) {
             });
         }
     });
-
-
 }
 
 

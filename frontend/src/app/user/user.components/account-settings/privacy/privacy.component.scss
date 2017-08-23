@@ -1,0 +1,41 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+
+.container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: center;
+
+    .title {
+        margin: $header-top-margin auto $content-between-margin;
+        font-size: $main-text;
+    }
+
+    .checkbox-wrap {
+        display: flex;
+        padding-left: 40%;
+        flex-flow: column nowrap;
+    }
+
+    .row {
+        margin-bottom: $content-between-margin;
+    }
+
+    .btn {
+        border: none;
+        margin: 35px auto 0 auto;
+        width: 250px;
+        padding: 15px;
+        color: $text-main-color;
+        background-color: $btn-color;
+        font-size: $button-text;
+        font-weight: 600;
+        font-size: 11pt;
+        border-radius: 50px;
+        outline: none;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

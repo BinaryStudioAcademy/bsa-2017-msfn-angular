@@ -1,9 +1,7 @@
-export class ISport {
-    constructor(
-        public name: string,
-        public description: string,
-        public icon: string,
-        public code?: number,
-        public id?: string
-    ) { }
+export interface ISport {
+    name: string;
+    description: string;
+    icon?: string;
+    code?: number;
+    id?: string;
 }

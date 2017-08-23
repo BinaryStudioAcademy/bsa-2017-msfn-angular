@@ -13,6 +13,7 @@ UserRepository.prototype.findById = findById;
 UserRepository.prototype.getUserByQuery = getUserByQuery;
 UserRepository.prototype.getUserByToken = getUserByToken;
 UserRepository.prototype.addEmail = addEmail;
+UserRepository.prototype.processRequest = processRequest;
 UserRepository.prototype.getUsersFromArrayID = getUsersFromArrayID;
 
 function getUserByEmail(email, callback) {
@@ -46,6 +47,31 @@ function addEmail(id, email, callback) {
             }
         });
     query.exec(callback);
+}
+
+function processRequest(id, body, callback) {
+    const removeRequestQuery = this.model.update(
+        {
+            _id: id
+        }, {
+            $unset: {
+                requestForCoaching: false
+            }
+        });
+    removeRequestQuery.exec(callback);
+
+    if (body.isCoach) {
+        const makeCoachQuery = this.model.update(
+            {
+                _id: id
+            }, {
+                $set: {
+                    isCoach: body.isCoach
+                }
+            }
+        );
+        makeCoachQuery.exec(callback);
+    }
 }
 
 function getUsersFromArrayID(array, params, callback) {

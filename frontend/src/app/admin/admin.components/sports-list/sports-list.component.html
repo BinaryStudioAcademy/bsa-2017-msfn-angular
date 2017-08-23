@@ -1,11 +1,17 @@
 <div id="sports-container" >
-    <div class="list" [sortablejs]="data" [sortablejsOptions]="dragNdropOptions">
-        <div class="item-container" *ngFor="let item of data" routerLink="../sport-handling/{{item.code}}">
+    <div class="list" [sortablejs]="data" [sortablejsOptions]="dragOptions">
+        <div class="item-container" *ngFor="let item of data" id="{{item.code}}" routerLink="../sport-handling/{{item.code}}">
             <img src="{{item.icon}}" alt="Icon" class="sports-item-ico">
             <p class="sports-item-text">{{ item.name }}</p>
         </div>
         <div class="add-container" routerLink="../sport-handling">
             <i class="material-icons add-item-ico">add</i>
+        </div>
+    </div>
+    <div class="drop-area list" [sortablejs]="itemsDropped" [sortablejsOptions]="dragOptions">
+        <div class="dropped-item-container" *ngFor="let item of itemsDropped">
+            <img src="{{item.icon}}" alt="Icon" class="sports-item-ico">
+            <p class="sports-item-text">{{ item.name }}</p>
         </div>
     </div>
 </div>

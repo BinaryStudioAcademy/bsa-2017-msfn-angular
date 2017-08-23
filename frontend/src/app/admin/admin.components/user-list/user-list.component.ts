@@ -4,6 +4,8 @@ import { MdSort } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { UserListService } from './user-list.service';
+import { ToasterService } from '../../../services/toastr.service';
+import { AdminService } from '../../services/admin.service';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
@@ -15,10 +17,16 @@ import 'rxjs/add/observable/fromEvent';
     selector: 'app-user-list',
     templateUrl: './user-list.component.html',
     styleUrls: ['./user-list.component.scss'],
-    providers: [UserListService]
+    providers: [
+        UserListService,
+        AdminService
+    ]
 })
 
 export class UserListComponent implements OnInit {
+    options = [];
+    items = [];
+
     searchInput = '';
     displayedColumns = [
         'firstName',
@@ -28,22 +36,32 @@ export class UserListComponent implements OnInit {
         'age',
         'gender'
     ];
+
     tableDatabase = new TableDatabase(this.userListService);
     dataSource: ExampleDataSource | null;
     @ViewChild(MdSort) sort: MdSort;
     @ViewChild('filter') filter: ElementRef;
+    @ViewChild('itemFilter') itemFilter: ElementRef;
 
     constructor(private cd: ChangeDetectorRef,
-                            private userListService: UserListService) { }
+                private adminService: AdminService,
+                private userListService: UserListService,
+                private toasterService: ToasterService) { }
 
     ngOnInit() {
         this.dataSource = new ExampleDataSource(this.tableDatabase,
-            this.sort,
-            this.userListService);
+                                                this.sort,
+                                                this.userListService);
 
         setTimeout(() => this.cd.markForCheck());
-        this.getUsers((result) => {
+
+        this.userListService.getUsers((result) => {
             this.tableDatabase.addUsers(result);
+            for (const item of result) {
+                if (!this.options.includes(item.role)) {
+                    this.options.push(item.role);
+                }
+            }
         });
 
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
@@ -55,8 +73,33 @@ export class UserListComponent implements OnInit {
             });
     }
 
-    getUsers(callback) {
-        return this.userListService.getUsers(callback);
+    updateItems() {
+        setTimeout(() => {
+            this.dataSource.itemFilter = this.items.toString();
+        }, 200);
+    }
+
+    acceptCoachRequest(user) {
+        const userData = {
+            isCoach: true
+        };
+        this.sendUserData(user, 'coach', userData);
+    }
+
+    rejectCoachRequest(user) {
+        this.sendUserData(user, 'usual');
+    }
+
+    sendUserData(user, role, data?) {
+        this.adminService.processCoachRequest(user._id, data, res => {
+            if (typeof(res) === 'object') {
+                this.toasterService.showMessage('success', null);
+                user.requestForCoaching = false;
+                user.role = role;
+            } else {
+                this.toasterService.showMessage('error', null);
+            }
+        });
     }
 }
 
@@ -70,6 +113,7 @@ export class TableDatabase {
 
     addUsers(data) {
         let copiedData = [...data];
+        console.log(copiedData);
         copiedData = copiedData.filter((elem) => {
             return elem.role !== 'admin';
         });
@@ -90,9 +134,17 @@ export class ExampleDataSource extends DataSource<any> {
         this._filterChange.next(filter);
     }
 
+    _itemFilterChange = new BehaviorSubject('');
+    get itemFilter(): string {
+        return this._itemFilterChange.value;
+    }
+    set itemFilter(filter: string) {
+        this._itemFilterChange.next(filter);
+    }
+
     constructor(private _exampleDatabase: TableDatabase,
-                            private _sort: MdSort,
-                            private service: UserListService) {
+                private _sort: MdSort,
+                private service: UserListService) {
         super();
     }
 
@@ -100,7 +152,8 @@ export class ExampleDataSource extends DataSource<any> {
         const displayDataChanges = [
             this._exampleDatabase.dataChange,
             this._sort.mdSortChange,
-            this._filterChange
+            this._filterChange,
+            this._itemFilterChange
         ];
 
         return Observable.merge(...displayDataChanges).map(() => {
@@ -111,10 +164,17 @@ export class ExampleDataSource extends DataSource<any> {
                     searchEmail = (item.email).toLowerCase(),
                     searchRole = (item.role).toLowerCase();
 
-                return (searchFirstName.includes(query) ||
-                                searchLastName.includes(query) ||
-                                searchEmail.includes(query) ||
-                                searchRole.includes(query));
+                if (this.itemFilter) {
+                    const filterList = this.itemFilter.toLowerCase().split(',');
+                    return filterList.includes(searchRole) &&
+                        (searchFirstName.includes(query) ||
+                        searchLastName.includes(query) ||
+                        searchEmail.includes(query));
+                } else {
+                    return searchFirstName.includes(query) ||
+                        searchLastName.includes(query) ||
+                        searchEmail.includes(query);
+                }
             });
         });
     }

@@ -1,5 +1,4 @@
 <form class="exercise-create-form" #form="ngForm">
-
     <h2>{{titleType}} exercise</h2>
     <md-input-container class="input">
         <input mdInput placeholder="Exercise Title" [(ngModel)]="exercise.name" name="name" required>
@@ -10,7 +9,21 @@
         </md-option>
     </md-select>
     <md-input-container class="example-full-width" class="input">
-        <textarea mdInput placeholder="Exercise Description" [(ngModel)]="exercise.description" name="description"></textarea>
+        <textarea mdInput placeholder="Exercise Description"
+                  [(ngModel)]="exercise.description"
+                  name="description"
+                  (keyup)="updateOutput($event.target.value)"></textarea>
     </md-input-container>
-    <button md-button class="btn btn-save" (click)="save(form)">Save</button>
+    <button class="btn upload-container" (click)="saveImg()">
+        <span>Upload exercise image</span>
+        <input type="file" accept="image/*" class="upload" (change)="fileChangeListener($event)"/>
+    </button>
+    <div class="preview-header">Preview</div>
+    <div class="preview">
+        <div class="image-preview">
+            <img [src]='exercise.image'>
+        </div>
+        <div class="description" [innerHtml]="convertedDescription"></div>
+    </div>
+    <button class="btn" (click)="save(form)">Save</button>
 </form>
