@@ -2,10 +2,6 @@
 @import '../../../../globalStyles/indentations';
 @import '../../../../globalStyles/text';
 
-* {
-    font-family: 'Roboto', sans-serif;
-}
-
 #dashboard-container {
     display: flex;
     justify-content: space-around;
@@ -24,11 +20,12 @@
 
 .inner-container {
     height: 100%;
-    padding: 15px;
+    padding: 25px;
 
     h2 {
-        height: 10%;
         margin: 0 0 5% 0;
+        padding: 0 0 10px;
+        border-bottom: 1px solid $text-main-color;
         font-size: $usual-text;
     }
 

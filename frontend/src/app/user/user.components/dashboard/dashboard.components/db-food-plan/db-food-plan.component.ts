@@ -16,7 +16,32 @@ export class DbFoodPlanComponent implements OnInit {
         title: 'Food Plan'
     };
 
+    kcal = {
+        eaten: {
+            title: 'Already eaten',
+            amount: 0
+        },
+        left: {
+            title: 'Left to eat',
+            amount: 0
+        }
+    };
+
+    meal = [
+        {
+            title: 'breakfast',
+            eaten: false
+        },
+        {
+            title: 'lunch',
+            eaten: false
+        },
+        {
+            title: 'dinner',
+            eaten: false
+        }
+    ];
+
     ngOnInit() {
     }
-
 }
