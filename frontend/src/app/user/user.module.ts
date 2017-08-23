@@ -29,6 +29,9 @@ import { ExerciseDescriptionComponent } from './user.components/exercise-descrip
 import { MarkdownService } from '../services/markdown.service';
 import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
 import { ExerciseListComponent } from './user.components/exercise-list/exercise-list.component';
+import { SecundomerComponent } from './user.components/active-training/active-training.components/secundomer/secundomer.component';
+import { FinishDialogComponent } from './user.components/active-training/active-training.components/finish-dialog/finish-dialog.component';
+import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 
 @NgModule({
     imports: [
@@ -62,12 +65,16 @@ import { ExerciseListComponent } from './user.components/exercise-list/exercise-
         ExerciseTableComponent,
         ExerciseDescriptionComponent,
         ExerciseListComponent,
+        SecundomerComponent,
+        FinishDialogComponent,
+        ActiveTrainingComponent
     ],
     providers: [
         ForAllUserGuard,
         MarkdownService
     ],
     entryComponents: [
+        FinishDialogComponent,
         ExerciseDescriptionComponent
     ]
 })

@@ -1,0 +1,9 @@
+ <div class="wrap"> 
+    <button (click)="run('scndmr')" *ngIf="!runned"  class="general start">START</button>
+    <button (click)="openFinishDialog()" *ngIf="runned" class="general finish">FINISH</button>
+    <button (click)="pause()" *ngIf="runned" class="general pause">PAUSE</button>
+    <div id="scndmr" class="numbers">{{beautifierTime(secndomerNum)}}</div>
+    <button md-raised-button (click)="warmingUp()" *ngIf="runned&&!warming" class="controll">WARMING UP</button>
+    <button md-raised-button (click)="endWarmingUp()" *ngIf="runned&&warming" class="controll">END WARMING UP</button>
+    <div id="lapscndmr" class="numbers" *ngIf="warming">{{beautifierTime(secndomerLapNum)}}</div>
+ </div>

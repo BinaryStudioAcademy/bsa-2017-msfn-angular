@@ -1,0 +1,70 @@
+@import '../../../../../../globalStyles/variables.scss';
+@import '../../../../../../globalStyles/indentations.scss';
+@import '../../../../../../globalStyles/text.scss';
+* {
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
+}
+
+md-error {
+    color: $error-color;
+}
+
+md-dialog-actions {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    margin-bottom: 10px;
+}
+
+.container {
+    width: 300px;
+}
+
+.password-container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-password-form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    height: 35px;
+    border: none;
+    border-radius: 45px;
+    outline: none;
+    font-size: $usual-text;
+    font-weight: 200;
+    background: $btn-color;
+}
+
+.match-error {
+    display: none;
+}
+
+.new-password-form {
+    color: #fff
+}
+
+.info{
+    padding: 5 0 10px;
+    margin: 0;
+}
+
+@media only screen and (max-width: $small-screen) {
+    .container {
+        width: 200px;
+    }
+    .title{
+        text-align: center;
+    }
+}
