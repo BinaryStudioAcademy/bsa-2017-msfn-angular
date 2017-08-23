@@ -46,13 +46,13 @@
   </div>
   <div class="exercises-container">
     <button md-raised-button class="button-add" (click)="addExercise()">+ Add exercise</button>
-    <div class="exercise-table">
+    <div class="exercise-table" *ngIf="trainingPlan.exercisesList.length">
       <div class="exercise-table-head">
         <div class="table-title">
           Exercise list
         </div>
         <div class="table-controls">
-          <md-paginator class="exercise-pagination" [length]="exercisesList.length" [(pageIndex)]="pageIndex" [pageSize]="pageSize"
+          <md-paginator class="exercise-pagination" [length]="trainingPlan.exercisesList.length" [(pageIndex)]="pageIndex" [pageSize]="pageSize"
             (page)="pageEvent = $event; showPage(pageEvent.pageIndex)">
           </md-paginator>
         </div>

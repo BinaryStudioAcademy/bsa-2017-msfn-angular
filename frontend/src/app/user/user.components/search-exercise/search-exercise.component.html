@@ -1,8 +1,8 @@
 <div class="dialog-container">
   <md-select placeholder="Choose type" [(ngModel)]="sportTypeValue" (change)="getExercises()" name="type" class="sport-types"
     [style.width]="'200px'">
-    <md-option *ngFor="let type of types" [value]="type.value">
-      {{type.viewValue}}
+    <md-option *ngFor="let type of types" [value]="type._id">
+      {{type.name}}
     </md-option>
   </md-select>
 
@@ -20,13 +20,14 @@
           <b>
             About:
           </b> {{exercise.description}} </p>
-        <p md-line>
+        <!-- <p md-line>
           <b>
             How to:
-          </b> {{exercise.how_to}} </p>
+          </b> {{exercise.how_to}} </p> -->
       </div>
+      {{exercise._id}}
       <!-- <button md-fab class="add" title="add to plan">+</button> -->
-      <md-checkbox [id]="exercise.id" [checked]="exercise.checked" (change)="selectExercise($event)" class="add">Add to my plan</md-checkbox>
+      <md-checkbox [id]="exercise._id" [checked]="exercise.checked" (change)="selectExercise($event)" class="add">Add to my plan</md-checkbox>
     </div>
   </div>
 </div>
