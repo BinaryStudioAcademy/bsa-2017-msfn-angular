@@ -1,6 +1,23 @@
 <div class="news inner-container">
     <h2>{{ dataToDisplay.title }}</h2>
     <div class="content">
+        <div class="news-item">
+            <div class="news-title">
+                {{ news[selIndex].title }}
+            </div>
+            <div class="news-date">
+                {{ news[selIndex].date }}
+            </div>
+            <div class="news-text">
+                {{ news[selIndex].text }}
+            </div>
+        </div>
 
+        <md-radio-group class="selection" [(ngModel)]="selIndex">
+            <md-radio-button class="radio-option"
+                *ngFor="let index of indexes"
+                [value]="index">
+            </md-radio-button>
+        </md-radio-group>
     </div>
 </div>

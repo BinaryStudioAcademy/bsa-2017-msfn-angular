@@ -30,7 +30,8 @@ import {
     MdListModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    MdButtonToggleModule
+    MdButtonToggleModule,
+    MdPaginatorModule
 } from '@angular/material';
 import 'hammerjs';
 import { D3Service } from 'd3-ng2-service';
@@ -50,7 +51,7 @@ import {CommonModule} from '@angular/common';
         MdIconModule,
         MdAutocompleteModule,
         MdInputModule,
-        SortablejsModule,
+        SortablejsModule
     ],
     exports: [
         MdIconModule,
@@ -79,11 +80,12 @@ import {CommonModule} from '@angular/common';
         MdMenuModule,
         MdListModule,
         MdButtonToggleModule,
+        MdPaginatorModule,
         ListComponent,
         AutocompletePipe,
         MdDatepickerModule,
         MdNativeDateModule,
-        SortablejsModule,
+        SortablejsModule
     ],
     declarations: [
         ListComponent,

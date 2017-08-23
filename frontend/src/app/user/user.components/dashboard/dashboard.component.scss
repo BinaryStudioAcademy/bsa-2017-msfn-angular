@@ -23,8 +23,12 @@
 }
 
 .inner-container {
+    height: 100%;
+    padding: 15px;
+
     h2 {
-        margin: 10px 0 20px 10px;
+        height: 10%;
+        margin: 0 0 5% 0;
         font-size: $usual-text;
     }
 
