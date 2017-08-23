@@ -1,4 +1,5 @@
 const notificationService = require('../../services/notificationService');
+const socketService = require('../../services/socketService');
 
 module.exports = {
     'add_notification': (json, callback) => {
@@ -10,4 +11,7 @@ module.exports = {
     'get_notifications': (json, callback) => {
         notificationService.GetNotifications(json, callback);
     },
+    'join_room': (json, callback) => {
+        socketService.JoinRoom(json, callback);
+    }
 };

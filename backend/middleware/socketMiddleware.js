@@ -41,6 +41,9 @@ module.exports = function(io, MongoStore) {
         socketService.SetSocket(socket);
         socketService.AddUser(socket);
         socketService.InitListeners(socket);
+        if (socket.user.isAdmin) {
+            socketService.JoinRoom('admin', () => {});
+        }
 
         socket.on('disconnect', (data) => {
             socketService.RemoveUser(socket);
