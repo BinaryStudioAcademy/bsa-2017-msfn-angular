@@ -59,4 +59,20 @@ export class ExerciseCreateComponent implements OnInit {
     updateOutput(mdText: string) {
         this.convertedDescription = this.markdownService.convert(mdText);
     }
+
+    fileChangeListener($event) {
+        let image: any = new Image();
+        const file: File = $event.target.files[0];
+        const myReader: FileReader = new FileReader();
+        myReader.readAsDataURL(file);
+        myReader.onloadend = (loadEvent: any) => {
+            image = myReader.result;
+            console.log(1);
+            // this.profileService.saveTest(image, this.userId, 'img', result => {
+            //     console.log(result);
+            // });
+
+        };
+
+    }
 }

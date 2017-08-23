@@ -4,62 +4,64 @@ const mongoose = require('mongoose'),
     passportStrategyInit = require('../middleware/passportStrategyMiddleware').strategy(),
     measurementService = require('./measurementService'),
     exerciseRepository = require('./../repositories/exerciseRepository'),
-    adminData = {
-        firstName: 'Arnold',
-        lastName: 'Schwarzenegger',
-        email: 'admin@msfn.com',
-        password: 'qwerty',
-        activateToken: '',
-        isCoach: true,
-        isAdmin: true,
-        position: 1,
-        birthday: '2001-9-11',
+    exerciseTypeRepository = require('./../repositories/exerciseTypeRepository');
+
+adminData = {
+    firstName: 'Arnold',
+    lastName: 'Schwarzenegger',
+    email: 'admin@msfn.com',
+    password: 'qwerty',
+    activateToken: '',
+    isCoach: true,
+    isAdmin: true,
+    position: 1,
+    birthday: '2001-9-11',
+};
+measurments = [
+    {
+        "measureName": "weight",
+        "measureUnits": [
+            {"conversionFactor": "1", "unitName": "Kg", "unitType": "metric"},
+            {"conversionFactor": "2.20462", "unitName": "Lbs", "unitType": "imperial"}
+        ]
     },
-    measurments = [
-        {
-            "measureName": "weight",
-            "measureUnits": [
-                {"conversionFactor": "1", "unitName": "Kg", "unitType": "metric"},
-                {"conversionFactor": "2.20462", "unitName": "Lbs", "unitType": "imperial"}
-            ]
-        },
-        {
-            "measureName": "distance",
-            "measureUnits": [
-                {"conversionFactor": "1", "unitName": "Km", "unitType": "metric"},
-                {"conversionFactor": "1000", "unitName": "M", "unitType": "default"},
-                {"conversionFactor": "39370.1", "unitName": "inches", "unitType": "imperial"}
-            ]
-        },
-        {
-            "measureName": "temperature",
-            "measureUnits": [
-                {"conversionFactor": "1", "unitName": "°C", "unitType": "metric"},
-                {"conversionFactor": "32", "unitName": "°F", "unitType": "imperial"}
-            ]
-        },
-        {
-            "measureName": "timeFormat",
-            "measureUnits": [
-                {"conversionFactor": "1", "unitName": "24-hour clock", "unitType": "metric"},
-                {"conversionFactor": "0.5", "unitName": "12-hour clock", "unitType": "imperial"}
-            ]
-        },
-        {
-            "measureName": "dateFormat",
-            "measureUnits": [
-                {"conversionFactor": "1", "unitName": "European (day.month.year)", "unitType": "metric"},
-                {"conversionFactor": "1", "unitName": "American (month/day/year)", "unitType": "imperial"}
-            ]
-        },
-        {
-            "measureName": "startWeek",
-            "measureUnits": [
-                {"conversionFactor": "1", "unitName": "Monday", "unitType": "metric"},
-                {"conversionFactor": "1", "unitName": "Sunday", "unitType": "imperial"}
-            ]
-        }
-    ];
+    {
+        "measureName": "distance",
+        "measureUnits": [
+            {"conversionFactor": "1", "unitName": "Km", "unitType": "metric"},
+            {"conversionFactor": "1000", "unitName": "M", "unitType": "default"},
+            {"conversionFactor": "39370.1", "unitName": "inches", "unitType": "imperial"}
+        ]
+    },
+    {
+        "measureName": "temperature",
+        "measureUnits": [
+            {"conversionFactor": "1", "unitName": "°C", "unitType": "metric"},
+            {"conversionFactor": "32", "unitName": "°F", "unitType": "imperial"}
+        ]
+    },
+    {
+        "measureName": "timeFormat",
+        "measureUnits": [
+            {"conversionFactor": "1", "unitName": "24-hour clock", "unitType": "metric"},
+            {"conversionFactor": "0.5", "unitName": "12-hour clock", "unitType": "imperial"}
+        ]
+    },
+    {
+        "measureName": "dateFormat",
+        "measureUnits": [
+            {"conversionFactor": "1", "unitName": "European (day.month.year)", "unitType": "metric"},
+            {"conversionFactor": "1", "unitName": "American (month/day/year)", "unitType": "imperial"}
+        ]
+    },
+    {
+        "measureName": "startWeek",
+        "measureUnits": [
+            {"conversionFactor": "1", "unitName": "Monday", "unitType": "metric"},
+            {"conversionFactor": "1", "unitName": "Sunday", "unitType": "imperial"}
+        ]
+    }
+];
 exercises = [
     {
         name: 'Flat Chest Presses',
@@ -227,15 +229,28 @@ exercises = [
     }
 ];
 
+exerciseTypeExample = {
+    code: 22,
+    name: 'Dumbbell Exercises',
+    isRemoved: false
+};
+
 module.exports = function() {
-    // add exercises.
-    exerciseRepository.get({filter: {name: 'Overhead Triceps Extensions'}}, (err, data) => {
-        if (data.length === 0) {
-            exercises.forEach(exercise => exerciseRepository.add(exercise));
-            console.log('[InitService] - Exercises added');
+    // add exercises
+    exerciseTypeRepository.findByCode(exerciseTypeExample.code, (err, data) => {
+        if (data === null) {
+            exerciseTypeRepository.add(exerciseTypeExample, (err, data) => {
+                const typeId = data._id;
+                exercises.forEach(exercise => {
+                    exercise.type = typeId;
+                    exerciseRepository.add(exercise);
+                });
+                console.log('[InitService] - Exercises added');
+            });
         } else {
             console.log('[InitService] - Exercises are available');
         }
+
     });
     // add measurments
     measurementService.getAllMeasurements((err, data) => {
