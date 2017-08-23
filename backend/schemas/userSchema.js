@@ -51,7 +51,8 @@ const User = new Schema({
             fatPct: Number,
             date: String
         }
-    ]
+    ],
+    privacyHideFields: [String],
 });
 
 User.pre('save', function (next) {

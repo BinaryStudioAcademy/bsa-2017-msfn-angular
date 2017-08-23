@@ -14,6 +14,14 @@ import { ToasterService } from '../../../../services/toastr.service';
 })
 
 export class PrivacyComponent implements OnInit {
+    privacy = {
+        email: true,
+        birthday: true,
+        height: true,
+        weight: true,
+        following: true
+    };
+    userId = (this.window.data._injectedData as any).userId;
 
     constructor(
         private profileService: ProfileService,
@@ -21,10 +29,27 @@ export class PrivacyComponent implements OnInit {
         private toasterService: ToasterService
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.profileService.getUser(this.userId, res => {
+            res.privacyHideFields.forEach(el => {
+                this.privacy[el] = false;
+            });
+        });
+    }
 
     saveSettings() {
+        const privacyHideFields = [];
+        for (const key in this.privacy) {
+            if (this.privacy.hasOwnProperty(key)) {
+                if (this.privacy[key] === false) {
+                    privacyHideFields.push(key);
+                }
+            }
+        }
 
+        this.profileService.updateUser({privacyHideFields: privacyHideFields}, this.userId, res => {
+            console.log(res);
+        });
     }
 
 }
