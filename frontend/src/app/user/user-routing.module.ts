@@ -17,6 +17,7 @@ import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.c
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
+import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
 import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
 
 const userRoutes: Routes = [
@@ -52,6 +53,10 @@ const userRoutes: Routes = [
                     {
                         path: 'misc',
                         component: MiscComponent,
+                    },
+                    {
+                        path: 'privacy',
+                        component: PrivacyComponent,
                     },
                 ]
             },

@@ -25,6 +25,7 @@ import { MiscComponent } from './user.components/account-settings/misc/misc.comp
 import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
 import { ExerciseDescriptionComponent } from './user.components/exercise-description/exercise-description.component';
 import { MarkdownService } from '../services/markdown.service';
+import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
 
 @NgModule({
     imports: [
@@ -52,6 +53,7 @@ import { MarkdownService } from '../services/markdown.service';
         WeightControlComponent,
         DashboardComponent,
         MiscComponent,
+        PrivacyComponent,
         ExerciseTableComponent,
         ExerciseDescriptionComponent,
     ],
