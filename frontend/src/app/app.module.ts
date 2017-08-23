@@ -39,6 +39,8 @@ import { NotificationDataDialogComponent } from './components/notification-data-
 import { SocketService } from './services/socket.service';
 import { NotificationsService } from './services/notifications.service';
 import { HeaderNotificationsComponent } from './components/header-notifications/header-notifications.component';
+import { SearchExerciseComponent } from './user/user.components/search-exercise/search-exercise.component'
+import { ExerciseEditDialogComponent } from './user/user.components/exercise-edit-dialog/exercise-edit-dialog.component';
 
 @NgModule({
     imports: [
@@ -91,7 +93,10 @@ import { HeaderNotificationsComponent } from './components/header-notifications/
         ChangeRootEmailDialogComponent,
         LoginDialogComponent,
         RegistrationComponent,
-        NotificationDataDialogComponent
+        NotificationDataDialogComponent,
+        SearchExerciseComponent,
+        ExerciseEditDialogComponent
+        
     ],
     bootstrap: [AppComponent]
 
