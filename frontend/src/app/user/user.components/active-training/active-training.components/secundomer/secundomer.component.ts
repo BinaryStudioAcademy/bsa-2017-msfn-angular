@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FinishDialogComponent } from '../finish-dialog/finish-dialog.component';
-import { MdDialog } from '@angular/material';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
 @Component({
     selector: 'app-secundomer',
@@ -24,10 +24,11 @@ export class SecundomerComponent implements OnInit {
     cacheTime: number;
     pauseTime: number;
     resStyle: string;
+    dialogRef: MdDialogRef<any>;
 
-    constructor (
+    constructor(
         private dialog: MdDialog
-    ) {}
+    ) { }
     beautifierTime(millisecnods: number): string {
         const formatter = new Intl.DateTimeFormat('ru', {
             hour: '2-digit',
@@ -40,7 +41,7 @@ export class SecundomerComponent implements OnInit {
         this.runned = true;
         if (this.warming) { this.warmingUp(); }
         const start = this.cacheTime = (this.cacheTime) ? (Date.now() - (this.pauseTime - this.cacheTime)) : Date.now();
-        this.intervalID = setInterval ( () => {
+        this.intervalID = setInterval(() => {
             this.secndomerNum = (Date.now() - start);
         }, 52);
     }
@@ -67,7 +68,7 @@ export class SecundomerComponent implements OnInit {
     warmingUp(): void {
         this.warming = true;
         const startLap = this.lapCacheTime = (this.lapCacheTime) ? (Date.now() - (this.lapPauseTime - this.lapCacheTime)) : Date.now();
-        this.intervalLapID = setInterval ( () => {
+        this.intervalLapID = setInterval(() => {
             this.secndomerLapNum = (Date.now() - startLap);
         }, 52);
     }
@@ -84,10 +85,23 @@ export class SecundomerComponent implements OnInit {
         this.secndomerPreviousLapNum = this.secndomerLapNum;
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+
+    }
 
     openFinishDialog() {
-        this.dialog.open(FinishDialogComponent, { data: true });
+        this.dialogRef = this.dialog.open(FinishDialogComponent, {
+            data: {
+            total: this.beautifierTime(this.secndomerNum),
+            calories: 328,
+            }
+    });
+        this.dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                console.log('Finish');
+                this.endWarmingUp();
+            }
+        });
     }
 
 }

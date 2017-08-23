@@ -9,12 +9,14 @@ import {MD_DIALOG_DATA} from '@angular/material';
     styleUrls: ['./finish-dialog.component.scss'],
 })
 export class FinishDialogComponent implements OnInit {
-
+    done = false;
     constructor(
-        public dialogRef: MdDialogRef<any>,
+        @Inject(MD_DIALOG_DATA) public data: any
     ) { }
 
-    ngOnInit() {}
+    ngOnInit() {
+        console.log(this.data);
+    }
 
 }
 

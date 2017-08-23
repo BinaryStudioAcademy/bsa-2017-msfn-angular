@@ -6,65 +6,33 @@
     color: $text-main-color;
 }
 
-md-error {
-    color: $error-color;
-}
-
-md-dialog-actions {
-    display: flex;
-    justify-content: center;
-}
-
-form {
-    margin-bottom: 10px;
-}
 
 .container {
     width: 300px;
-}
-
-.password-container {
     display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.new-password-form {
+.done {
+    color: $btn-color;
+    font-size: 18px;
+}
+
+.not-done {
+    color: $text-warn-color;
+    font-size: 18px;
+}
+
+.text {
+    margin-top: 10px;
+    font-family: $font-general;
+    font-size: 16px;
+    text-align: center;
+}
+.btn-container {
+    margin-top: 15px;
     display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn {
-    height: 35px;
-    border: none;
-    border-radius: 45px;
-    outline: none;
-    font-size: $usual-text;
-    font-weight: 200;
-    background: $btn-color;
-}
-
-.match-error {
-    display: none;
-}
-
-.new-password-form {
-    color: #fff
-}
-
-.info{
-    padding: 5 0 10px;
-    margin: 0;
-}
-
-@media only screen and (max-width: $small-screen) {
-    .container {
-        width: 200px;
-    }
-    .title{
-        text-align: center;
-    }
+    justify-content: space-between;
+    width: 100%;
 }
