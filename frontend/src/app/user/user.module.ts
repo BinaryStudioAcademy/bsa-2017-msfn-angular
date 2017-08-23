@@ -24,6 +24,8 @@ import { ExerciseEditDialogComponent } from './user.components/exercise-edit-dia
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
+import { ExerciseComponent } from './user.components/exercise/exercise.component';
+import { ExerciseListComponent } from './user.components/exercise-list/exercise-list.component';
 
 @NgModule({
     imports: [
@@ -53,6 +55,8 @@ import { MiscComponent } from './user.components/account-settings/misc/misc.comp
         WeightControlComponent,
         DashboardComponent,
         MiscComponent,
+        ExerciseComponent,
+        ExerciseListComponent,
     ],
     providers: [
         ForAllUserGuard,

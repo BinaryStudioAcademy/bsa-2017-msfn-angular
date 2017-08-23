@@ -3,14 +3,13 @@ import { PageEvent, MdPaginatorModule } from '@angular/material';
 import { SearchExerciseComponent } from './../search-exercise/search-exercise.component';
 import { ExerciseEditDialogComponent } from './../exercise-edit-dialog/exercise-edit-dialog.component';
 import { IntervalTrainingPlanComponent } from './../interval-training-plan/interval-training-plan.component';
-
 import { MdDialog, MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-plan-detail',
   templateUrl: './plan-detail.component.html',
   styleUrls: ['./plan-detail.component.scss'],
-  providers: [MdPaginatorModule]
+  providers: [MdPaginatorModule],
 })
 
 export class PlanDetailComponent implements OnInit {
@@ -199,10 +198,10 @@ export class PlanDetailComponent implements OnInit {
       return el.id === id;
     });
 
-    if (exercise.type == 'run')
-      this.openedDialog = this.dialog.open(IntervalTrainingPlanComponent);
-    else
-      this.openedDialog = this.dialog.open(ExerciseEditDialogComponent);
+    // if (exercise.type == 'run')
+    //   this.openedDialog = this.dialog.open(IntervalTrainingPlanComponent);
+    // else
+    //   this.openedDialog = this.dialog.open(ExerciseEditDialogComponent);
   }
   showPage(currentPage) {
     console.log(currentPage);
@@ -228,10 +227,19 @@ export class PlanDetailComponent implements OnInit {
   }
 
   setAdd(exercise) {
+    this.displayExercises.forEach((item: any) => {
+      item.edit = false;
+    });
+    this.exercisesList.forEach((item: any) => {
+      item.edit = false;
+    });
     exercise.edit = true;
   }
 
-  saveSetInfo(exercise, form) {
+  setSaveInfo(exercise, form, i) {
+
+    console.log(form);
+    console.log(i);
     const newSet = {
       value: form.value.value,
       value2: form.value.value2
@@ -241,6 +249,8 @@ export class PlanDetailComponent implements OnInit {
       exercise.sets = []
     }
     exercise.sets.push(newSet);
+    form.value.value = '';
+    form.value.value2 = '';
     exercise.edit = false;
   }
 }
