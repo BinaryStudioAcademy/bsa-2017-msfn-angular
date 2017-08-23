@@ -1,0 +1,51 @@
+<div class="main-container" #container>
+    <h2>Goal list</h2>
+    <button md-button disableRipple class="btn" id="btn-add" (click)="addRow(table)" [ngClass]="{'disabled' : wrongInput}">Add new goal</button>
+    <md-table #table [dataSource]="dataSource" [ngClass]="{'hiding' : !loaded}">
+
+        <ng-container cdkColumnDef="Type">
+            <md-header-cell *cdkHeaderCellDef> Type </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <div class="row-center-container">
+                    <md-select placeholder="Goal type" [(ngModel)]="row.type" name="-elem" [hidden]="row.isRemoved" (change)="updateRow(row._id, {name: row.name, type: row.type})">
+                        <md-option *ngFor="let type of goalTypes" [value]="type.name">
+                            {{type.name}}
+                        </md-option>
+                    </md-select>
+                </div>
+            </md-cell>
+        </ng-container>
+        <ng-container cdkColumnDef="Name">
+            <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <div class="row-container">
+                    <div></div>
+                    <div class="content">
+                        <div class="row-text" *ngIf="((row._id || !firstShow) && row._id != focusedRowId) || row.isRemoved" (click)="clickRow(row._id)"
+                            [ngClass]="{'transp' : row.isRemoved, 'error': !row.name}">
+                            {{row.name ? row.name : "Goal cannot be empty"}}</div>
+
+                        <md-input-container class="input-container" *ngIf="((!row._id && firstShow) || row._id == focusedRowId) && !row.isRemoved">
+                            <input mdInput #goal type="text" (blur)="updateRow(row._id, {name: goal.value, type: row.type})" value="{{row.name}}" [ngClass]="{'input-focused' : !row._id}"
+                                (keyup.enter)="updateRow(row._id, {name: goal.value, type: row.type})">
+                        </md-input-container>
+                    </div>
+                    <div *ngIf="!row.isRemoved">
+                        <i class="material-icons ico" (click)="updateRow(row._id, {isRemoved: true, name: row.name, type: row.type})">
+                                delete
+                            </i>
+                    </div>
+                    <div *ngIf="row.isRemoved">
+                        <i class="material-icons ico" (click)="updateRow(row._id, {isRemoved: false, name: row.name, type: row.type})">
+                                add
+                            </i>
+                    </div>
+                </div>
+            </md-cell>
+        </ng-container>
+
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+
+</div>

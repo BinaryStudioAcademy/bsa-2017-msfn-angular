@@ -4,11 +4,11 @@
             <h3 class="setting-header">Email</h3>
             <div class="profile-email">
                 <div class="profile-current-emails">
-                    <div class="email-item" >
+                    <div class="email-item">
                         <span class="email">{{ user.email }}</span>
                         <span class="root-title">root</span>
                     </div>
-                    <div class="email-item" *ngFor="let email of user.secondaryEmails" >
+                    <div class="email-item" *ngFor="let email of user.secondaryEmails">
                         <span class="email">{{ email }}</span>
                         <span class="root-btn" (click)="makeRoot(email)">make root</span>
                     </div>
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        
+
         <h3 class="setting-header">Password</h3>
         <div class="profile-password">
             <button md-raised-button (click)="openConfirmPasswordDialog()" class="">{{user.password ? 'Change password' : 'Set password'}}</button>
@@ -27,14 +27,19 @@
         <h3 class="setting-header">Social account</h3>
         <div class="social-wrapper">
             <div class="social-buttons">
-                <a md-raised-button [disabled]="user.facebookID" href="/auth/facebook">
-                    <md-icon *ngIf="user.facebookID">done</md-icon>
+                <a md-raised-button (mouseover)="hoverFb = true" (mouseout)="hoverFb = false"  [mdTooltip]="user.facebookID ? 'unlink account' : 'add account'" mdTooltipPosition="above" href="/auth/facebook">
+                    <md-icon *ngIf="user.facebookID && !hoverFb">done</md-icon>
+                    <md-icon *ngIf="user.facebookID && hoverFb">remove</md-icon>
                     Facebook</a>
-                <a md-raised-button [disabled]="user.googleID" href="/auth/google">
-                    <md-icon *ngIf="user.googleID">done</md-icon>
+                <a md-raised-button (mouseover)="hoverGoogle = true" (mouseout)="hoverGoogle = false" [mdTooltip]="user.googleID ? 'unlink account' : 'add account'"
+                    mdTooltipPosition="above" href="/auth/google">
+                    <md-icon *ngIf="user.googleID && !hoverGoogle">done</md-icon>
+                    <md-icon *ngIf="user.googleID && hoverGoogle">remove</md-icon>
                     Google+</a>
-                <a md-raised-button [disabled]="user.twitterID" href="/auth/twitter">
-                    <md-icon *ngIf="user.twitterID">done</md-icon>
+                <a md-raised-button (mouseover)="hoverTwitt = true" (mouseout)="hoverTwitt = false" [mdTooltip]="user.twitterID ? 'unlink account' : 'add account'"
+                    mdTooltipPosition="above" href="/auth/twitter">
+                    <md-icon *ngIf="user.twitterID && !hoverTwitt">done</md-icon>
+                    <md-icon *ngIf="user.twitterID && hoverTwitt">remove</md-icon>
                     Twitter</a>
             </div>
             <div class="addition-info">

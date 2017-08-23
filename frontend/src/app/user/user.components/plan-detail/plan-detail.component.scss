@@ -1,62 +1,77 @@
 @import '../../../../globalStyles/variables.scss';
 @import '../../../../globalStyles/text.scss';
 @import "../../../../globalStyles/indentations";
-
-.container{
-    padding: 20px 50px;
-    .field-container{
+.container {
+    padding: 20px 15px;
+    display: flex;
+    .field-container {
         width: 100%;
         margin-bottom: 20px;
     }
-    
-    .about-plan{
-        width: 100%;
-        display: flex;
-        .plan-name{
-            width: 300px;
+    .about-container {
+        width: 35%;
+        padding: 0 15px;
+        h1 {
+            margin-top: 0;
         }
-        .plan-description{
-            width: 300px;
+        .plan-name {
+            width: 200px;
+        }
+        .plan-description {
+            width: 200px;
             min-height: 100px;
         }
-        .sport-types{
-            width: 300px;
-        }
-        .field-items{
+        .field-items {
             display: flex;
             flex-direction: column;
         }
-        .field-item{
+        .field-item {
             // display: inline-block;
             margin-bottom: 20px;
             display: flex;
-            // justify-content: center;
+            align-items: center;
         }
-        .days{
+        .radio-group {
+            .radio-button {
+                display: block;
+                margin-bottom: 10px;
+                .mat-radio-outer-circle,
+                .mat-radio-inner-circle {
+                    background-color: #82ca9c!important;
+                }
+            }
+        }
+        .days {
             display: flex;
             flex-wrap: wrap;
-            input[type=checkbox]{
+            input[type=checkbox] {
                 display: none;
             }
-            label{
+            label {
                 background-color: #5a6b60;
                 opacity: 0.8;
                 height: 40px;
-                width: 100px;
+                width: 40px;
+                border-radius: 23px;
                 margin-right: 10px;
-                font-size: 15px;
+                margin-bottom: 10px;
+                font-size: 14px;
                 font-weight: bold;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
+            .item:nth-last-child(-n+2) label {
+                background-color: #92ad9b;
+            }
             label:hover,
-            input:checked + label {
-                background-color: #82ca9c; 
+            input:checked+label {
+                cursor: pointer;
+                background-color: #82ca9c!important;
                 opacity: 1;
             }
         }
-        .count{
+        .count {
             height: 40px;
             width: 40px;
             margin: 0 10px;
@@ -64,17 +79,18 @@
             font-size: 16px;
             font-weight: bold;
         }
-        .counter{
-            background-color: #82ca9c; 
-            height: 40px;
-            width: 40px;
+        .counter {
+            background-color: #82ca9c;
+            height: 30px;
+            width: 30px;
             border-radius: 20px;
-            font-size: 30px;
-            // font-weight: bold;
-            color:#fff;
+            font-size: 20px;
+            line-height: 20px; // font-weight: bold;
+            outline: none;
+            color: #fff;
         }
     }
-    .field-title{
+    .field-title {
         font-size: 20px;
         margin-bottom: 20px;
         font-weight: bold;
@@ -92,43 +108,157 @@
         cursor: pointer;
         outline: none;
     }
-
-    .exercises-container{
-        margin-top: 20px;
-        input{
-            width: 300px;
+    .exercises-container {
+        // width: 65%;
+        margin-top: 35px;
+        padding: 0 15px;
+        .button-add {
+            margin-bottom: 20px;
         }
-        .exercise-item{
-            display: block;
-            position: relative;
-            padding: 10px 20px;
-            &:hover{
-                background-color:$gradient-to-color; 
+        .exercise-table {
+            background: linear-gradient($gradient-to-color 75%, $bg-color);
+            box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
+            .exercise-table-head {
+                height: 50px;
+                display: flex;
+                padding: 20px;
+                align-items: center;
+                justify-content: space-between;
+                background-color: $gradient-to-color;
+                z-index: 2;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                .table-title {
+                    font-size: 16px;
+                    text-transform: uppercase;
+                }
+                .exercise-pagination {
+                    height: 50px!important;
+                    min-height: unset;
+                    .mat-paginator-page-size {
+                        display: none;
+                    }
+                }
+            }
+            .exercise-table-body {
+                display: flex;
+                flex-direction: row;
+                z-index: 1;
+                .exercise-row {
+                    display: flex;
+                    position: relative;
+                    flex-direction: column;
+                    padding: 20px 25px;
+                    width: 220px;
+                    align-items: flex-start;
+                    &:hover {
+                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                        .col.name {
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
+                        }
+                        .col.del,
+                        .col.edit {
+                            display: block;
+                        }
+                    }
+                    .col.del,
+                    .col.edit {
+                        position: absolute;
+                        height: 20px;
+                        width: 20px;
+                        display: none;
+                        cursor: pointer;
+                        i {
+                            line-height: 20px;
+                            font-size: 18px;
+                            text-align: center;
+                            width: 21px;
+                            &:hover {
+                                color: $btn-color;
+                            }
+                        }
+                    }
+                    .col.del {
+                        right: 5px;
+                    }
+                    .col.edit {
+                        right: 25px;
+                    }
+                    .col.name {
+                        margin-bottom: 10px;
+                        max-width: 180px;
+                    }
+                    .col.sets {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        .set-item {
+                            display: flex;
+                            flex-direction: row;
+                            position: relative;
+                            margin-bottom: 10px;
+                            font-size: 12px;
+                            font-weight: bold;
+                            .item-id {
+                                position: absolute;
+                                height: 18px;
+                                width: 18px;
+                                text-align: center;
+                                border-radius: 18px;
+                                line-height: 18px;
+                                background-color: #646464;
+                            }
+                            .item-val {
+                                width: 110px;
+                                background-color: #222;
+                                border-radius: 15px;
+                                height: 18px;
+                                padding-left: 25px;
+                                line-height: 18px;
+                            }
+                            .item-opt-val {
+                                margin-left: 10px;
+                                line-height: 18px;
+                            }
+                            .exercise-add {
+                                height: 18px;
+                                margin-left: 25px;
+                                line-height: 18px;
+                                cursor: pointer;
+                            }
+                        }
+                        .set-form form {
+                            display: flex;
+                            .item-save {
+                                align-items: center;
+                                display: flex;
+                                margin-left: 5px;
+                                cursor: pointer;
+                                i {
+                                    line-height: 20px;
+                                    font-size: 18px;
+                                    text-align: center;
+                                    width: 21px;
+                                    &:hover {
+                                        color: $btn-color;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-        .about-exercise{
-            width:80%;
-        }
-        .add{
-            background-color: #82ca9c; 
-            height: 40px;
-            width: 40px;
-            border-radius: 20px;
-            font-size: 30px;
-            // font-weight: bold;
-            color:#fff;
-            position: absolute;
-            right: 10%;
-            top: 40%;
-        }
-    }
+    }   
 }
-.clear{
-    clear:both;
+
+.clear {
+    clear: both;
 }
 
 @media only screen and (max-width: $large-screen) {
-    .about-plan{
+    .container {
         flex-direction: column;
     }
 }

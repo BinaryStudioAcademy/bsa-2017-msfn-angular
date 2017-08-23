@@ -18,6 +18,8 @@ import { WeightControlComponent } from './user.components/weight-control/weight-
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
+import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
+import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
 
 const userRoutes: Routes = [
     {
@@ -53,6 +55,10 @@ const userRoutes: Routes = [
                         path: 'misc',
                         component: MiscComponent,
                     },
+                    {
+                        path: 'privacy',
+                        component: PrivacyComponent,
+                    },
                 ]
             },
             {
@@ -82,6 +88,10 @@ const userRoutes: Routes = [
             {
                 path: 'start-training',
                 component: ActiveTrainingComponent
+            },
+            {
+                path: 'exercise-table',
+                component: ExerciseTableComponent
             }
         ]
     }

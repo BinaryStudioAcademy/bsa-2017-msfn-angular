@@ -87,6 +87,7 @@ export class SecundomerComponent implements OnInit {
     ngOnInit() {}
 
     openFinishDialog() {
+        this.pause();
         this.dialog.open(FinishDialogComponent, { data: true });
     }
 
