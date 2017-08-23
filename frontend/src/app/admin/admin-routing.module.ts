@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { GoalListComponent } from './admin.components/goal-list/goal-list.component';
-import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
-=======
->>>>>>> 93dd47ba4792e814db78391d467fcadd0f7c7d78
 import { ForAdminGuard } from '../guards/for-admin.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
