@@ -11,8 +11,7 @@ export class AdminComponent implements OnInit {
     constructor(private socketService: SocketService) { }
 
     ngOnInit() {
-        alert(123);
-        this.socketService.send('join_room', 'message', 'admin');
+        this.socketService.send('join_room', JSON.stringify({room: 'admin'}));
     }
 
 }

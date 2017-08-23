@@ -16,12 +16,8 @@ export class SocketService {
         });
     }
 
-    public send(event: string, message: string, room?: string) {
-        if (room) {
-            this._socket.to(room).emit(event, message);
-        } else {
-            this._socket.emit(event, message);
-        }
+    public send(event: string, message: string) {
+        this._socket.emit(event, message);
     }
 
     public addListener(event: string, callback: any) {

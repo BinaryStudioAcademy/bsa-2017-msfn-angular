@@ -14,14 +14,9 @@ SocketService.prototype.addListener = function(event, callback) {
     }
 };
 
-SocketService.prototype.Emit = function(event, data, room) {
+SocketService.prototype.Emit = function(event, data) {
     if (this.socket){
-        if (room) {
-            console.log(this.socket);
-            this.socket.to(room).emit(event, data);
-        } else {
-            this.socket.emit(event, data);
-        }
+        this.socket.emit(event, data);
     }
 };
 
@@ -33,6 +28,16 @@ SocketService.prototype.Broadcast = function(event, data) {
     if (this.socket){
         this.socket.broadcast(event, data);
     }
+};
+
+SocketService.prototype.BroadcastRoom = function(event, room, data) {
+    if (this.socket) {
+        this.io.sockets.in(room).emit(event, data);
+    }
+};
+
+SocketService.prototype.SetIO = function(io) {
+    this.io = io;
 };
 
 SocketService.prototype.SetSocket = function(socket) {
@@ -61,26 +66,6 @@ SocketService.prototype.GetUserById = function(id) {
     return _return.shift();
 };
 
-SocketService.prototype.InitListeners = function(socket) {
-    for (let method in config) {
-        if (config.hasOwnProperty(method)) {
-            socket.on(method, (data) => {
-                config[method](data, (err, result) => {
-                    if (err) {
-                        if (!result) {
-                            result = {};
-                        }
-                        result.error = true;
-                        result.err = err;
-                    }
-                    console.log(method);
-                    socket.emit(`${method}:success`, JSON.stringify(result));
-                });
-            });
-        }
-    }
-};
-
 SocketService.prototype.JoinRoom = function(json, callback) {
     let data;
     try {
@@ -93,6 +78,26 @@ SocketService.prototype.JoinRoom = function(json, callback) {
     if (!room) return callback(new ApiError('No room specified'));
 
     this.socket.join(room);
+    callback(null, 'ok');
+};
+
+SocketService.prototype.InitListeners = function(socket) {
+    for (let method in config) {
+        if (config.hasOwnProperty(method)) {
+            socket.on(method, (data) => {
+                config[method](data, (err, result) => {
+                    if (err) {
+                        if (!result) {
+                            result = {};
+                        }
+                        result.error = true;
+                        result.err = err;
+                    }
+                    socket.emit(`${method}:success`, JSON.stringify(result));
+                });
+            });
+        }
+    }
 };
 
 module.exports = new SocketService();

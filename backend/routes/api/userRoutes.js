@@ -38,7 +38,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl + 'coach-status-request/:id', (req, res, next) => {
-        coachService.apply(req.params.id, (err, data) => {
+         coachService.apply(req.params.id, (err, data) => {
             res.data = data;
             res.err = err;
             next();
@@ -46,7 +46,6 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl + 'generate-faked-data/true', (req, res, next) => {
-        console.log(1)
         initFakeService.generate((err, data) => {
             res.data = data;
             res.err = err;

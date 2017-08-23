@@ -1,5 +1,5 @@
 const Repository = require('./generalRepository'),
-        User = require('../schemas/userSchema');
+    User = require('../schemas/userSchema');
 
 function UserRepository() {
     Repository.prototype.constructor.call(this);
@@ -17,18 +17,18 @@ UserRepository.prototype.processRequest = processRequest;
 UserRepository.prototype.getUsersFromArrayID = getUsersFromArrayID;
 
 function getUserByEmail(email, callback) {
-    const query = this.model.findOne({email : email});
+    const query = this.model.findOne({email: email});
     query.exec(callback);
 }
 
 function getUserByToken(token, callback) {
-    const query = this.model.findOne({activateToken : token});
+    const query = this.model.findOne({activateToken: token});
     query.exec(callback);
 }
 
 
 function findById(id, callback) {
-    const query = this.model.findOne({_id : id});
+    const query = this.model.findOne({_id: id});
     query.exec(callback);
 }
 function getUserByQuery(queryObj, callback) {

@@ -32,7 +32,7 @@ export class MiscComponent implements OnInit {
         };
         this.requestForCoaching = true;
 
-        this.profileService.updateUser(userData, this.user._id, res => {
+        this.profileService.coachStatusRequest(this.user._id, res => {
             if (typeof(res) === 'object') {
                 this.toasterService.showMessage('success', null);
                 this.coachingMessage = 'We\'ll moderate your request in 24 hours.' +
