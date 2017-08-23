@@ -10,6 +10,7 @@ const
     isUserSessionUser = require('../../middleware/isUserSessionUser.js'),
     isAdmin = require('../../middleware/isAdminMiddleware'),
     changeMailRoutes = require('./changeMailRoutes');
+    usersGoalRoutes = require('./usersGoalRoutes');
 
 module.exports = function (app) {
     app.get(baseUrl + 'me', function (req, res, next) {
@@ -101,5 +102,7 @@ module.exports = function (app) {
             next();
         });
     }, apiResponse);
+
+    app.use(baseUrl + 'goal', usersGoalRoutes);
 
 };

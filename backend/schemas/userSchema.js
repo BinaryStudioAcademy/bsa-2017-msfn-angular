@@ -53,6 +53,20 @@ const User = new Schema({
         }
     ],
     privacyHideFields: [String],
+    goals: [{
+        goal: {
+            type: Schema.Types.ObjectId,
+            ref: 'Goal'
+        },
+        startPoint: Number,
+        startDate: String,
+        endPoint: Number,
+        endDate: String,
+        isRemoved: { 
+            type: Boolean,
+            default: false 
+        }
+    }], 
 });
 
 User.pre('save', function (next) {
