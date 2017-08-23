@@ -27,6 +27,11 @@
         padding: 0 0 10px;
         border-bottom: 1px solid $text-main-color;
         font-size: $usual-text;
+
+        a {
+            text-decoration: none;
+            color: $text-main-color;
+        }
     }
 
     .content {

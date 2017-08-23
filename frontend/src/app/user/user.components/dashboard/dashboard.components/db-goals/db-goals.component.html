@@ -1,6 +1,20 @@
 <div class="goals inner-container">
     <h2>{{ dataToDisplay.title }}</h2>
     <div class="content">
+        <div class="goal-item" *ngFor="let goal of goals">
+            <md-checkbox [(ngModel)]="goal.achieved"></md-checkbox>
 
+            <div class="goal-body">
+                <div class="goal-start-date">
+                    start: {{ goal.startDate }}
+                </div>
+                <div class="goal-end-date">
+                    end: {{ goal.endDate }}
+                </div>
+                <div class="goal-value">
+                    {{ goal.value }}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
