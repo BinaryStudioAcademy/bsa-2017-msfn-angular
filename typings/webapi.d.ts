@@ -21,6 +21,14 @@ declare module ExerciseApi {
     }
 }
 
+declare module GoalApi{
+    export interface IGoal {
+        name?: string;
+        type?: string;
+        isRemoved?: string;
+    }
+}
+
 declare module SubscribeApi {
     export interface ISubscribeUser {
         _id: string;

@@ -1,3 +1,4 @@
+import { GoalListComponent } from './admin.components/goal-list/goal-list.component';
 import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
 import { ForAdminGuard } from '../guards/for-admin.guard';
 import { NgModule } from '@angular/core';
@@ -55,6 +56,10 @@ const adminRoutes: Routes = [
                     {
                         path: 'sports-list',
                         component: SportsListComponent
+                    },
+                    {
+                        path: 'goal-list',
+                        component: GoalListComponent
                     },
                 ]
             }

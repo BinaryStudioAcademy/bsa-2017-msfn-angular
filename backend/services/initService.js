@@ -1,5 +1,6 @@
 const mongoose = require('mongoose'),
     userRepository = require('../repositories/userRepository'),
+    goalTypeService = require('../services/goalTypeService'),
     passportOAuthStrategyInit = require('../middleware/passportOAuthMiddleware')(),
     passportStrategyInit = require('../middleware/passportStrategyMiddleware').strategy(),
     measurementService = require('./measurementService'),
@@ -14,6 +15,14 @@ const mongoose = require('mongoose'),
         position: 1,
         birthday: '2001-9-11',
     },
+    goalTypes = [
+        'Weight',
+        'Activity',
+        'Food',
+        'Appearance',
+        'Improve results',
+        'Others',
+    ]
     measurments = [
         {
             "measureName": "weight",
@@ -102,6 +111,11 @@ module.exports = function () {
         } else {
             console.log('[InitService] - Admin are available');
         }
-    })
+    });
+
+    goalTypes.forEach((elem) => {
+        goalTypeService.addGoalType(elem, () => {});
+    });
+    console.log('[InitService] - Goal types are available');
     
 }
