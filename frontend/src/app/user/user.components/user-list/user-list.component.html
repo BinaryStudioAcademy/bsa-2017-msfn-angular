@@ -1,18 +1,108 @@
-<div class="search-box">
-    <h2>All users</h2>
-    <md-input-container>
-        <input mdInput
-               type="text"
-               placeholder="Search"
-               [(ngModel)]="name">
-    </md-input-container>
-</div>
-<div class="all-user-container">
-    <div *ngFor="let user of users">
-        <div class="item-container" *ngIf="matchSearch(user)">
-            <div class="round"><img src={{user.photoUrl}}></div>
-            <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
-            <p class="role-text">{{user.role}}</p>
+<md-list class="list-container">
+
+    <!-- Followers -->
+    <div (click)="toggleExpand('followers')" class="header-container">
+        <div class="title">
+            <md-icon>{{ followers.hidden ? 'expand_more': 'expand_less'}}</md-icon>
+            <h2 md-subheader>Followers</h2>
             </div>
+        <md-input-container class="search-box"
+                            [hidden]="followers.hidden">
+            <input mdInput
+                   #search
+                   placeholder="Search"
+                   (change)="onSearch('followers', search.value)"
+                   (keyup)="onSearch('followers',search.value)"
+                   autocomplete="off">
+            <md-icon mdSuffix>search</md-icon>
+        </md-input-container>
     </div>
-</div>
+    <div class="user-list"
+         infinite-scroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="150"
+         [scrollWindow]="false"
+         (scrolled)="onScroll('followers')"
+         [hidden]="followers.hidden">
+        <md-list-item *ngFor="let user of followers.show" >
+            <img md-line
+                 md-list-avatar
+                 [src]="user.userPhoto || './resources/default.png'"
+            >
+            <a [routerLink]="'/user/profile/'+user._id">
+                <p md-line class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+            </a>
+        </md-list-item>
+    </div>
+    <md-divider></md-divider>
+
+    <!-- Following-->
+    <div (click)="toggleExpand('following')" class="header-container">
+        <div class="title">
+            <md-icon>{{ following.hidden ? 'expand_more': 'expand_less'}}</md-icon>
+            <h2 md-subheader>Followers</h2>
+        </div>
+        <md-input-container class="search-box"
+                            [hidden]="following.hidden">
+            <input mdInput
+                   #search
+                   placeholder="Search"
+                   (change)="onSearch('following', search.value)"
+                   autocomplete="off">
+            <md-icon mdSuffix>search</md-icon>
+        </md-input-container>
+    </div>
+    <div class="user-list"
+         infinite-scroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="150"
+         [scrollWindow]="false"
+         (scrolled)="onScroll('following')"
+         [hidden]="following.hidden">
+        <md-list-item *ngFor="let user of following.show" >
+            <img md-line
+                 md-list-avatar
+                 [src]="user.userPhoto || './resources/default.png'"
+            >
+            <a [routerLink]="'/user/profile/'+user._id">
+                <p md-line class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+            </a>
+        </md-list-item>
+    </div>
+    <md-divider></md-divider>
+
+    <!-- All -->
+    <div (click)="toggleExpand('users')" class="header-container">
+        <div class="title">
+            <md-icon>{{ users.hidden ? 'expand_more': 'expand_less'}}</md-icon>
+            <h2 md-subheader>All</h2>
+        </div>
+        <md-input-container class="search-box"
+                            [hidden]="users.hidden">
+            <input mdInput
+                   #search
+                   placeholder="Search"
+                   (keyup)="onSearch('users',search.value)"
+                   (change)="onSearch('users', search.value)"
+                   autocomplete="off">
+            <md-icon mdSuffix>search</md-icon>
+        </md-input-container>
+    </div>
+    <div class="user-list"
+         infinite-scroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="150"
+         [scrollWindow]="false"
+         (scrolled)="onScroll('users')"
+         [hidden]="users.hidden">
+        <md-list-item *ngFor="let user of users.show" >
+            <img md-line
+                 md-list-avatar
+                 [src]="user.userPhoto || './resources/default.png'"
+            >
+            <a [routerLink]="'/user/profile/'+user._id">
+                <p md-line class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+            </a>
+        </md-list-item>
+    </div>
+</md-list>
