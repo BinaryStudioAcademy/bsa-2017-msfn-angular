@@ -7,14 +7,13 @@
 }
 
 .sidebar-container {
-    flex: 0 0 calc(20vw);
-    min-width: calc(20vw);
+    flex: 0 0 20vw;
+    width: calc(20vw - 20px);
 }
 
 .child-container {
     flex: 0 0 80vw;
     min-width: calc(80vw);
-    width: 70%;
     float: right;
     height: calc(100vh - 70px);
     overflow-y: auto;
@@ -22,12 +21,11 @@
 
 @media only screen and (max-width: $small-screen) {
     .sidebar-container {
-        flex: initial;
-        min-width: initial;
+        flex: 0 0 55px;
+        width: 55px;
     }
     .child-container {
         flex: initial;
-        min-width: calc(100% - 55px);
-        width: auto;
+        min-width: calc(100vw - 55px);
     }
 }

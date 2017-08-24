@@ -19,6 +19,7 @@ import { DashboardComponent } from './user.components/dashboard/dashboard.compon
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
 import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
 import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
+import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 
 const userRoutes: Routes = [
     {
@@ -87,6 +88,11 @@ const userRoutes: Routes = [
             {
                 path: 'exercise-table',
                 component: ExerciseTableComponent
+            },
+            {
+                path: 'start-training',
+                component: ActiveTrainingComponent
+
             }
         ]
     }

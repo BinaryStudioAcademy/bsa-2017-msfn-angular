@@ -1,0 +1,22 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { MdDialogRef } from '@angular/material';
+import {MD_DIALOG_DATA} from '@angular/material';
+
+@Component({
+    selector: 'app-finish-dialog',
+    templateUrl: './finish-dialog.component.html',
+    styleUrls: ['./finish-dialog.component.scss'],
+})
+export class FinishDialogComponent implements OnInit {
+    done = false;
+    constructor(
+        @Inject(MD_DIALOG_DATA) public data: any
+    ) { }
+
+    ngOnInit() {
+        console.log(this.data);
+    }
+
+}
+
