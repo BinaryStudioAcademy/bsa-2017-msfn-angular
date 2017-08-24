@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { PageEvent, MdPaginatorModule } from '@angular/material';
 import { SearchExerciseComponent } from './../search-exercise/search-exercise.component';
@@ -12,6 +12,8 @@ import { SearchExerciseComponent } from './../search-exercise/search-exercise.co
 export class ExerciseListComponent implements OnInit {
     private openedDialog: MdDialogRef<any> | null;
     private searchDialog: MdDialogRef<any> | null;
+    @ViewChild('container')
+    container: ElementRef;
 
     @Input() exercisesList = [];
     displayExercises: Object[];
@@ -22,12 +24,25 @@ export class ExerciseListComponent implements OnInit {
     pageEvent: PageEvent;
     lastAfterClosedResult: string;
 
-    constructor(private dialog: MdDialog, private paginator: MdPaginatorModule) {
+    constructor(
+      private dialog: MdDialog,
+      private paginator: MdPaginatorModule,
+    ) {
         this.openedDialog = null;
     }
 
     ngOnInit() {
-      this.displayExercises = this.exercisesList.slice(0, 3);
+      this.displayExercises = this.exercisesList.slice(0, this.pageSize);
+      this.onResize();
+    }
+
+    onResize() {
+      if (window.innerWidth > 610) {
+        this.pageSize = Math.floor((this.container.nativeElement.offsetWidth - 30) / 220);
+      } else {
+        this.pageSize = 3;
+      }
+      this.showPage(0);
     }
 
     addExercise() {
@@ -51,7 +66,7 @@ export class ExerciseListComponent implements OnInit {
         return el.id !== id;
       });
 
-      this.displayExercises = this.exercisesList.slice(0, 3);
+      this.displayExercises = this.exercisesList.slice(0, this.pageSize);
     }
 
     editExercise(id) {
@@ -66,8 +81,8 @@ export class ExerciseListComponent implements OnInit {
     }
 
     showPage(currentPage) {
-      const startInd = currentPage * 3;
-      this.displayExercises = this.exercisesList.slice(startInd, startInd + 3);
+      const startInd = currentPage * this.pageSize;
+      this.displayExercises = this.exercisesList.slice(startInd, startInd + this.pageSize);
     }
 
     addExercises(exercises) {

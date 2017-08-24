@@ -1,4 +1,4 @@
-<div class="exercises-container">
+<div #container (window:resize)="onResize()" class="exercises-container">
     <button md-raised-button class="button-add" (click)="addExercise()">+ Add exercise</button>
     <div class="exercise-table">
       <div class="exercise-table-head">
