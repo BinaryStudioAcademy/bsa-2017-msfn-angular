@@ -5,14 +5,13 @@ goalRepository = require('../repositories/goalRepository');
 function UsersGoalService() {}
 
 UsersGoalService.prototype.addItem = addItem;
-// UsersGoalService.prototype.deleteItem = deleteItem;
+UsersGoalService.prototype.deleteItem = deleteItem;
+UsersGoalService.prototype.getAllItems = getAllItems;
 
 function addItem(data, callback) {
     // const currentUserId = data.session.passport.user;
-    const currentUserId = '599dcbe405f5056114542641';
+    const currentUserId = '599e11078b603e291160bba3';
     const name = 'lose weigh';
-    // console.log(currentUserId);
-    // console.log(body);
     
     goalRepository.findByName(name, (err, goal) => {
         if (err) return callback(err);
@@ -37,36 +36,39 @@ function addItem(data, callback) {
                 }
                 callback(null, result);
             });
-            // userRepository.update(userId, {
-            //     $push: {weightControl: {
-            //         date: body.date,
-            //         fatPct: body.datPct,
-            //         boneWeight: body.boneWeight,
-            //         waterPct: body.waterPct,
-            //         weight: body.weight
-            //     }}
-            // }, callback);
-
         }
     });
 }
 
-// function deleteItem(data, callback) {
-// userRepository.getById(data.user._id, (err, data) => {
-//     if (err) return callback(err);
+function deleteItem(goalId, callback) {
+    userRepository.deleteGoal(goalId, (err, result) => {
+        console.log('in delete goal');
 
-//     if (data === null){
-//         callback(new ApiError('User not found'));
-//     } else {
-//         userRepository.update(data.user._id, {
-//             $pull: {
-//                 weightControl: {
-//                     _id: data.body._id
-//                 }
-//             }
-//         }, callback);
-//     }
-// })
-// }
+        if (err) {
+            return callback(err);
+        }
+        callback(null, result);
+    }); 
+}
+
+function getAllItems(data, callback) {
+    // const currentUserId = data.session.passport.user;
+    const currentUserId = '599e11078b603e291160bba3';
+
+    userRepository.getAllGoals(currentUserId, (err, user) => {
+        console.log('in get goals');
+
+        if (err) {
+            return callback(err);
+        }
+
+        const result = user.goals;
+        console.log(result);
+        callback(null, result);
+    });
+}
+
+
+
 
 module.exports = new UsersGoalService();

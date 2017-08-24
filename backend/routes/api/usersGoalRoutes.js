@@ -1,44 +1,47 @@
 const
 apiResponse = require('express-api-response'),
 usersGoalService = require('../../services/usersGoalService'),
+userRepository = require('../../repositories/userRepository'),
 // loginService = require('../../services/loginService'),
 
 express = require('express'),
 router = express.Router();
 
-// router.get('/:token', function (req, res, next) {
-//     loginService.loginConfirmedUser(req, res, next, function (err, user) {
-//         res.data = data;
-//         res.err = err;
-//         next();
-//     });
-// }, apiResponse);
+router.get('/all', function (req, res, next) {
+    console.log('g');
+    usersGoalService.getAllItems(req, (err, data) => {
+        console.log(data);
+        res.data = data;
+        res.err = err;
+        next();
+    });
+    // loginService.loginConfirmedUser(req, res, next, function (err, user) {
+    //     res.data = data;
+    //     res.err = err;
+    //     next();
+    // });
+}, apiResponse);
 
 router.post('', function (req, res, next) {
     // console.log('router');
     // console.log(req);
     usersGoalService.addItem(req, (err, data) => {
-        // res.data = {test: 'test'};
-        // res.err = err;
-        // next();
+        console.log(data);
+        res.data = {
+            status: 'ok',
+        };
+        res.err = err;
+        next();
     });
 }, apiResponse);
 
-// router.post('/changemail', function (req, res, next) {
-// activateService.genNewRootMail(req.body, function (err, data) {
-//     res.data = data;
-//     res.err = err;
-//     next();
-// });
-// }, apiResponse);
-
-// router.get('/changemail/:code', function (req, res, next) {
-// activateService.checkNewRootMail(req.params.code, function (err, data) {
-//     res.data = data;
-//     res.err = err;
-//     next();
-// });
-// }, apiResponse);
+router.delete('/:id', function (req, res, next) {
+    usersGoalService.deleteItem(req.params.id, function (err, data) {
+        res.data = data;
+        res.err = err;
+        next();
+    });
+}, apiResponse);
 
 
 module.exports = router;

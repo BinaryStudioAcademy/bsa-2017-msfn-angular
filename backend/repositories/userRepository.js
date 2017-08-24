@@ -1,5 +1,7 @@
 const Repository = require('./generalRepository'),
         User = require('../schemas/userSchema');
+        mongoose = require('mongoose');
+        Schema = mongoose.Schema;
 
 function UserRepository() {
     Repository.prototype.constructor.call(this);
@@ -16,6 +18,8 @@ UserRepository.prototype.addEmail = addEmail;
 UserRepository.prototype.processRequest = processRequest;
 UserRepository.prototype.getUsersFromArrayID = getUsersFromArrayID;
 UserRepository.prototype.addGoal = addGoal;
+UserRepository.prototype.deleteGoal = deleteGoal;
+UserRepository.prototype.getAllGoals = getAllGoals;
 
 function getUserByEmail(email, callback) {
     const query = this.model.findOne({email : email});
@@ -94,6 +98,32 @@ function addGoal(id, goal, callback) {
             goals: goal
         }
     });
+    query.exec(callback);
+}
+
+function deleteGoal(id, callback) {
+    console.log(id);
+    console.log('in update');
+    const query = this
+    .model
+    .update({
+        'goals._id': mongoose.Types.ObjectId(id)
+    }, {
+        $set: {
+            'goals.$.isRemoved': true
+        }
+    });
+    query.exec(callback);
+}
+
+function getAllGoals(id, callback) {
+    const query = this.model.findOne(
+        {
+            _id: id
+        }, {
+            'goals': 1
+        }
+    );
     query.exec(callback);
 }
 
