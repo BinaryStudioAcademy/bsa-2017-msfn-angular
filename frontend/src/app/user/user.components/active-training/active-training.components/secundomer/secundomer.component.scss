@@ -59,6 +59,11 @@ button {
             width: 35vw;
             height: 35vw;
             border-radius: 50%;
+
+            &.start {
+                width: 50vw;
+                height: 50vw;
+            }
         }
     }
 }

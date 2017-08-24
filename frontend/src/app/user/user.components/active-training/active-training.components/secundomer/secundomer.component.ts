@@ -10,11 +10,10 @@ import { SecundomerService } from './secundomer.service';
     ]
 })
 
-
-
 export class SecundomerComponent implements OnInit, OnChanges {
 
     @Input() finishTrain: boolean;
+    @Input() intervalTrain: boolean;
     @Output() onFinish = new EventEmitter();
 
     constructor(
@@ -49,7 +48,6 @@ export class SecundomerComponent implements OnInit, OnChanges {
         };
         this.onFinish.emit(data);
     }
-
     ngOnChanges(changes) {
         if (changes.finishTrain.currentValue) {
             this.secundomerService.stopTimers();

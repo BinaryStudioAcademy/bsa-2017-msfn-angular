@@ -1,0 +1,8 @@
+<div class="container">
+    <h2 class="title" md-dialog-title>Finish training?</h2>
+    <div *ngIf="done" class="done">You done all your exercises</div>
+    <div class="btn-container">
+        <button md-raised-button [md-dialog-close]="true" class="controll">Finish</button>
+        <button md-raised-button [md-dialog-close]="false" class="controll" *ngIf="!done">Continue</button>
+    </div>
+</div>
