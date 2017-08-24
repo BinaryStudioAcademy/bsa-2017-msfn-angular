@@ -25,4 +25,8 @@ export class SocketService {
             callback(data);
         });
     }
+
+    public joinRoom(roomName: string) {
+        this.send('join_room', JSON.stringify({'room': roomName}));
+    }
 }
