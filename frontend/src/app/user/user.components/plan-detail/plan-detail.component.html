@@ -44,66 +44,19 @@
     <button md-button class="btn btn-save" (click)="save(form)">Save</button>
 
   </div>
-  <div class="exercises-container">
-    <button md-raised-button class="button-add" (click)="addExercise()">+ Add exercise</button>
-    <div class="exercise-table">
-      <div class="exercise-table-head">
-        <div class="table-title">
-          Exercise list
-        </div>
-        <div class="table-controls">
-          <md-paginator class="exercise-pagination" [length]="exercisesList.length" [(pageIndex)]="pageIndex" [pageSize]="pageSize"
-            (page)="pageEvent = $event; showPage(pageEvent.pageIndex)">
-          </md-paginator>
-        </div>
-      </div>
-      <div class="exercise-table-body">
-        <div *ngFor="let exercise of displayExercises" class="exercise-row">
-          <div class="col name">{{exercise.name}}</div>
-          <div class="col edit" (click)="editExercise(exercise.id)"><i class="material-icons">mode_edit</i></div>
-          <div class="col del" (click)="deleteExercise(exercise.id)"><i class="material-icons">delete</i></div>
-          <div class="col sets">
-            <div class="items-conteiner" *ngFor="let set of exercise.sets; let i = index">
-              <div class="set-item" (dblclick)="setEdit(exercise, set)">
-                <div class="item-id">{{i+1}}</div>
-                <div class="item-val">{{set.value}}</div>
-                <div class="item-opt-val">{{set.value2}}</div>
-              </div>
-            </div>
-            <div class="set-item add">
-              <div class="item-id" (click)="setAdd(exercise)">+</div>
-              <a class="exercise-add" (click)="setAdd(exercise)">Add</a>
-            </div>
-            <div class="set-form" *ngIf="exercise.edit">
-              <form #form="ngForm">
-                <div class="item-val">
-                  <md-input-container>
-                    <input mdInput placeholder="Weight" value="" 
-                    class="plan-name" 
-                    name="value" 
-                    [(ngModel)]="value" 
-                    (keyup.enter)="setSaveInfo(exercise, form)">
-                  </md-input-container>
-                </div>
-                <div class="item-opt-val">
-                  <md-input-container>
-                    <input mdInput placeholder="Count/time" value="" 
-                    class="plan-name" 
-                    name="value2" 
-                    [(ngModel)]="value2"                     
-                    (keyup.enter)="setSaveInfo(exercise, form)">
-                  </md-input-container>
-                </div>
-                <div class="item-save" (click)="setSaveInfo(exercise, form)"><i class="material-icons">done</i></div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="interval" *ngIf="trainingPlan.type === 'interval'">
-        <app-interval-training-plan></app-interval-training-plan>      
-    </div>
-  </div>
-  
+  <app-exercise-list
+      [addExercise]='addExercise'
+      [exercisesList]='exercisesList'
+      [displayExercises]='displayExercises'
+      [deleteExercise]='deleteExercise'
+      [(pageIndex)]='pageIndex'
+      [pageSize]='pageSize'
+      [showPage]='showPage'
+      [exercise]='exercise'
+      [editExercise]='editExercise'
+      [setEdit]='setEdit'
+      [setAdd]='setAdd'
+      [setSaveInfo]='setSaveInfo'
+  >
+  </app-exercise-list>
 </div>
