@@ -12,28 +12,28 @@ class trainingPlanService {
         const params = {
             filter: {
                 isRemoved: false,
-                // userID: objID.ObjectId(data.session.passport.user)
             },
         };
 
         if(data){
            params.filter = Object.assign(params.filter, data);
         }
-console.log(params.filter);
         trainingPlanRepository.get(params, (err, exerciseData) => {
             if (err) return callback(err);
             if (exerciseData === null) {
-                callback(null, new ApiError('Not found exersises'));
+                callback(null, new ApiError('Not found plan'));
             } else {
                 callback(null, exerciseData);
             }
         });
     }
 
-    add(data, callback){
-        data.isRemoved = false
-        console.log(data);
-        console.log('-------------------------');
+    add(req, callback){
+        let data = req.body;
+        data.isRemoved = false;
+        // console.log(data.session);
+        data.userID = req.session.passport.user;
+
         trainingPlanRepository.add(data, (err, planData) => {
                 if (err) return callback(err);
                 if (planData === null) {
@@ -44,13 +44,16 @@ console.log(params.filter);
             });
     }
 
-    update(){
-
+    update(id, body, callback) {
+        console.log(id);
+        console.log(body);
+        exerciseRepository.update(id, body, callback);
     }
 
-    delete(){
-
+    delete(id, callback) {
+        exerciseRepository.deleteById(id, callback);
     }
+
 }
 
 module.exports = new trainingPlanService();

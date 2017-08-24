@@ -7,12 +7,23 @@ const TrainingPlan = new Schema({
     name: String,
     count: Number,
     days: Array,
-    exerciseList: Array,
+    exercisesList: [
+        {
+            name: String,
+            sets: [{
+                value: String,
+                value2: String
+            }],
+            id: String,
+            exerciseType: String,
+            description: String,
+        }
+    ],
     intervals: Array,
-    type: 'general'|'interval',
-    userID: ObjectId,
+    trainingType: 'general' | 'interval',
+    userID: String,
     isRemoved: Boolean,
-    
+
 });
 
 module.exports = mongoose.model('TrainingPlan', TrainingPlan);

@@ -6,6 +6,9 @@ import { IntervalTrainingPlanComponent } from './../interval-training-plan/inter
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { IHttpReq } from './../../../models/http-req';
 import { HttpService } from '../../../services/http.service';
+import { ActivatedRoute } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-plan-detail',
@@ -37,11 +40,13 @@ export class PlanDetailComponent implements OnInit {
   types = [
     {
       key: 'general',
-      value: 'General training'
+      value: 'General training',
+      checked: false
     },
     {
       key: 'interval',
-      value: 'Interval training'
+      value: 'Interval training',
+      checked: false
     },
   ];
 
@@ -57,30 +62,64 @@ export class PlanDetailComponent implements OnInit {
   lastAfterClosedResult: string;
 
   trainingPlan = {
+    _id: '',
     name: 'New plan',
     days: [],
     count: 0,
-    type: 'general' || 'interval',
+    trainingType: 'general' || 'interval',
     exercisesList: [],
-    intervals: []
+    intervals: [],
   };
 
-  constructor(private dialog: MdDialog, private paginator: MdPaginatorModule, private httpHandler: HttpService) {
+  constructor(
+    private dialog: MdDialog,
+    private paginator: MdPaginatorModule,
+    private httpHandler: HttpService,
+    public activatedRoute: ActivatedRoute) {
     this.openedDialog = null;
+
   }
 
   ngOnInit() {
-    if (this.trainingPlan.exercisesList.length) {
-      this.paginatorLength = this.trainingPlan.exercisesList.length;
-      this.displayExercises = this.trainingPlan.exercisesList.slice(0, 3);
+
+    if (this.activatedRoute.snapshot.params.id) {
+      const planID = this.activatedRoute.snapshot.params.id;
+      const sendData: IHttpReq = {
+        url: `/api/training-plan/` + planID,
+        method: 'GET',
+        body: '',
+        successMessage: '',
+      };
+
+      this.httpHandler.sendRequest(sendData)
+        .then((res) => {
+          if (res) {
+            this.trainingPlan = res[0];
+            this.trainingPlan.days.forEach((el) => {
+              this.days.forEach((day) => {
+                if (day.key == el.key) {
+                  day.checked = true;
+                }
+              });
+            });
+            this.types.forEach((type) => {
+              if (type.key == this.trainingPlan.trainingType) {
+                type.checked = true;
+              }
+            });
+            this.showPage(0);
+            // console.log(this.types);
+            this.paginatorLength = this.trainingPlan.exercisesList.length;
+          }
+        });
     }
+
   }
 
   selectDays() {
     const selectedDays = this.days.filter((el) => {
       return el.checked;
     });
-    console.log(selectedDays);
     this.trainingPlan.days = selectedDays;
     this.trainingPlan.count = selectedDays.length;
   }
@@ -110,7 +149,7 @@ export class PlanDetailComponent implements OnInit {
     } else if (this.trainingPlan.count < 0) {
       this.trainingPlan.count = 0;
     }
-    console.log(this.trainingPlan.count);
+    // console.log(this.trainingPlan.count);
   }
 
   addExercise() {
@@ -191,15 +230,21 @@ export class PlanDetailComponent implements OnInit {
     exercise.edit = false;
   }
 
-  savePlan(){
-    console.log(this.trainingPlan);
+  savePlan() {
+    this.trainingPlan.exercisesList.forEach((item: any) => {
+      item.id = item._id;
+      // delete item._id;
+    });
     const sendData: IHttpReq = {
       url: `/api/training-plan`,
       method: 'POST',
       body: this.trainingPlan,
       successMessage: '',
     };
-
+    if (this.trainingPlan._id.length) {
+      sendData.method = 'PUT';
+      sendData.url += '/' + this.trainingPlan._id;
+    }
     this.httpHandler.sendRequest(sendData)
       .then((res) => {
         if (res) {

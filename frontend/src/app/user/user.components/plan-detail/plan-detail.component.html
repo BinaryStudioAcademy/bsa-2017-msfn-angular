@@ -3,7 +3,7 @@
     <h1>{{title}}</h1>
     <div class="field-container">
       <md-input-container>
-        <input mdInput placeholder="Plan name" value="New plan" class="plan-name">
+        <input mdInput placeholder="Plan name" value="New plan" class="plan-name" [(ngModel)]="trainingPlan.name">
       </md-input-container>
     </div>
     <div class="field-container">
@@ -11,8 +11,8 @@
             Type
           </div>
       <div class="field-item">
-        <md-radio-group class="radio-group" [(ngModel)]="trainingPlan.type">
-          <md-radio-button class="radio-button" *ngFor="let type of types" [value]="type.key">
+        <md-radio-group class="radio-group" [(ngModel)]="trainingPlan.trainingType">
+          <md-radio-button class="radio-button" *ngFor="let type of types" [checked]="type.checked" [value]="type.key">
             {{type.value}}
           </md-radio-button>
         </md-radio-group>
