@@ -1,39 +1,52 @@
-import { Component } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
-
-import { FinishDialogComponent } from './active-training.components/finish-dialog/finish-dialog.component';
+import { Component, OnInit } from '@angular/core';
+import { ActiveTrainingService } from './active-training.service';
 
 @Component({
     selector: 'app-active-training',
     templateUrl: 'active-training.component.html',
-    styleUrls: ['active-training.component.scss']
+    styleUrls: ['active-training.component.scss'],
+    providers: [
+        ActiveTrainingService
+    ]
 })
-export class ActiveTrainingComponent {
-    finishTrain: boolean;
-    burnedCallories = 1445;
-    time: any = {
-        total: '00:00:00:000',
-        warming: '00:00:00:000'
+
+export class ActiveTrainingComponent implements OnInit {
+    loaded: boolean = false;
+    typeTrain = 'General';
+    secundomerBind = {
+        intervalTrain: false,
+        finishTrain: false
     };
-    dialogRef: MdDialogRef<any>;
+
+    burnedCallories = 1445;
 
     constructor(
-        private dialog: MdDialog
+        private activeTrainingService: ActiveTrainingService
     ) {}
 
-    onFinish(timeData, callback) {
-        this.dialogRef = this.dialog.open(FinishDialogComponent, {
-            data: {
-                time: timeData,
-                calories: this.burnedCallories,
-            }
-        });
+    ngOnInit() {
 
-        this.dialogRef.afterClosed().subscribe(result => {
+        this.activeTrainingService.getPlans((data) => {
+
+        });
+    }
+
+
+
+
+
+
+
+    onFinish(timeData) {
+        const data = {
+            time: timeData,
+            calories: this.burnedCallories,
+        };
+        this.activeTrainingService.showFinishDialog(data, result => {
             if (result) {
-                this.finishTrain = true;
+                this.secundomerBind.finishTrain = true;
             }
-            setTimeout(() => { this.finishTrain = false; }, 1000);
+            setTimeout(() => { this.secundomerBind.finishTrain = false; }, 1000);
         });
     }
 

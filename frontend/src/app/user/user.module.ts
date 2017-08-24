@@ -31,6 +31,7 @@ import { PrivacyComponent } from './user.components/account-settings/privacy/pri
 import { ExerciseListComponent } from './user.components/exercise-list/exercise-list.component';
 import { SecundomerComponent } from './user.components/active-training/active-training.components/secundomer/secundomer.component';
 import { FinishDialogComponent } from './user.components/active-training/active-training.components/finish-dialog/finish-dialog.component';
+import { ChooseTrainDialogComponent } from './user.components/active-training/active-training.components/choose-train-dialog/choose-train-dialog.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 
 @NgModule({
@@ -67,6 +68,7 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
         ExerciseListComponent,
         SecundomerComponent,
         FinishDialogComponent,
+        ChooseTrainDialogComponent,
         ActiveTrainingComponent
     ],
     providers: [
@@ -75,6 +77,7 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
     ],
     entryComponents: [
         FinishDialogComponent,
+        ChooseTrainDialogComponent,
         ExerciseDescriptionComponent
     ]
 })
