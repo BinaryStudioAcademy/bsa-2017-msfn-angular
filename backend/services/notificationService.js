@@ -5,12 +5,16 @@ function NotificationService() {}
 
 NotificationService.prototype.AddNotification = function(json, callback) {
     let data;
-    try {
-        data = JSON.parse(json);
-    } catch (err) {
-        return callback(err);
+    if (typeof json === 'string') {
+        try {
+            data = JSON.parse(json);
+        } catch (err) {
+            return callback(err);
+        }
+    } else {
+        data = json;
     }
-    let title, message, user;
+    let title, message, userId;
     ({title, message, userId} = data);
     notificationRepository.add({
         title: title,
