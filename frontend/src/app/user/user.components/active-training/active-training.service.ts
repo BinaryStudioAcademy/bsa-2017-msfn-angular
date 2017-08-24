@@ -11,10 +11,12 @@ export class ActiveTrainingService {
 
     dialogRef: MdDialogRef<any>;
     fakeData = [{
+        _id: 'firstIDduisvh98s4',
         name: 'Intensive gym',
         days: [{key: 0, value: 'Sun', checked: true}, {key: 3, value: 'Wed', checked: true}]
     },
     {
+        _id: 'secondIDduisvh98s4',
         name: 'Crossing',
         days: [{key: 1, value: 'Mon', checked: true}]
     }];

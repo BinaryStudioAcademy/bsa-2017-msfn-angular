@@ -1,8 +1,8 @@
 <div class="container">
     <h2 class="title" md-dialog-title>Choose today training plan</h2>
-    <div *ngIf="done" class="done">Cooming soon...</div>
+    <div class="done" *ngIf="matchedTrain">Recomended training plan for today: {{matchedTrain.name}}</div>
     <div class="btn-container">
-        <button md-raised-button [md-dialog-close]="false" class="controll" *ngIf="!done">Close</button>
+        <button md-raised-button [md-dialog-close]="false" class="controll">Close</button>
         <button md-raised-button [md-dialog-close]="true" class="controll">Confirm</button>
     </div>
 </div>

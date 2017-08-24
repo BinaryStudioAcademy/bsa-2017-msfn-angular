@@ -9,12 +9,20 @@ import { MD_DIALOG_DATA } from '@angular/material';
     styleUrls: ['./choose-train-dialog.component.scss'],
 })
 export class ChooseTrainDialogComponent implements OnInit {
-    done = false;
+
+    matchedTrain: any;
     constructor(
         @Inject(MD_DIALOG_DATA) public data: any
     ) { }
 
-    ngOnInit() {}
+    ngOnInit() {
+        const day = new Date().getDay();
+        this.data.forEach(element => {
+            if (element.key = day) {
+                this.matchedTrain = element;
+            }
+        });
+    }
 
 }
 
