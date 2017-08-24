@@ -73,6 +73,7 @@ export class ActiveTrainingService {
         }
     ];
 
+
     constructor(
         private dialog: MdDialog,
         private httpService: HttpService

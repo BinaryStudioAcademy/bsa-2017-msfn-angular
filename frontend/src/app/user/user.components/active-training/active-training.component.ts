@@ -20,6 +20,28 @@ export class ActiveTrainingComponent implements OnInit {
 
     burnedCallories = 1445;
 
+    exerciseList = [
+        {
+            description: '',
+            edit: false,
+            isRemoved: false,
+            name: 'Bicyps',
+            sets: [
+                {
+                    value: '3 kg',
+                    value2: 'x3'
+                },
+                {
+                    value: '3 km',
+                    value2: '10min'
+                },
+            ],
+            sportsId: [],
+            type: 'someIDofType',
+            _id: 'exerciseID'
+        }
+    ];
+
     constructor(
         private activeTrainingService: ActiveTrainingService
     ) {}
