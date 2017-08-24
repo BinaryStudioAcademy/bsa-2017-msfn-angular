@@ -12,12 +12,29 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    .recomendation {
+        width: 100%;
+        span {
+            display: block;
+            &.train {
+                text-align: center;
+                color: $btn-color;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .listTrain {
+        width: 100%;
+        .list {
+            text-align: center;
+            font-size: 18px;
+        }
+    }
 }
 
-.done {
-    color: $btn-color;
-    font-size: 18px;
-}
+
 
 .not-done {
     color: $text-warn-color;

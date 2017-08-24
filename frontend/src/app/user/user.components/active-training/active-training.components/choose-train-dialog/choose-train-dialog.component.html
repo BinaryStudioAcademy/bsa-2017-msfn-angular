@@ -1,6 +1,15 @@
 <div class="container">
     <h2 class="title" md-dialog-title>Choose today training plan</h2>
-    <div class="done" *ngIf="matchedTrain">Recomended training plan for today: {{matchedTrain.name}}</div>
+    <div class="recomendation" *ngIf="matchedTrain">
+        <span>Recomended training plan for today:</span>
+        <span class="train">{{matchedTrain.name}}</span>
+    </div>
+    <div class="listTrain">
+        <span>List:</span>
+        <div class="list" *ngFor="let item of data">
+            {{item.name}}
+        </div>
+    </div>
     <div class="btn-container">
         <button md-raised-button [md-dialog-close]="false" class="controll">Close</button>
         <button md-raised-button [md-dialog-close]="true" class="controll">Confirm</button>

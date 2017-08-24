@@ -18,8 +18,12 @@ export class ChooseTrainDialogComponent implements OnInit {
     ngOnInit() {
         const day = new Date().getDay();
         this.data.forEach(element => {
-            if (element.key = day) {
-                this.matchedTrain = element;
+            if (element.days && element.days.length) {
+                element.days.forEach(el => {
+                    if (el.key === day) {
+                        this.matchedTrain = element;
+                    }
+                });
             }
         });
     }
