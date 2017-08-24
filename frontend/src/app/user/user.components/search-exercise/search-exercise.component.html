@@ -16,7 +16,7 @@
     <div *ngFor="let exercise of exercisesList" class="exercise-item">
       <h4 md-line>{{exercise.name}}</h4>
       <div class="about-exercise">
-        <p md-line>
+        <p md-line *ngIf="exercise.description">
           <b>
             About:
           </b> {{exercise.description}} </p>
@@ -25,7 +25,6 @@
             How to:
           </b> {{exercise.how_to}} </p> -->
       </div>
-      {{exercise._id}}
       <!-- <button md-fab class="add" title="add to plan">+</button> -->
       <md-checkbox [id]="exercise._id" [checked]="exercise.checked" (change)="selectExercise($event)" class="add">Add to my plan</md-checkbox>
     </div>

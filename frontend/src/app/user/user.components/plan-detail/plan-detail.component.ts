@@ -4,6 +4,8 @@ import { SearchExerciseComponent } from './../search-exercise/search-exercise.co
 import { ExerciseEditDialogComponent } from './../exercise-edit-dialog/exercise-edit-dialog.component';
 import { IntervalTrainingPlanComponent } from './../interval-training-plan/interval-training-plan.component';
 import { MdDialog, MdDialogRef } from '@angular/material';
+import { IHttpReq } from './../../../models/http-req';
+import { HttpService } from '../../../services/http.service';
 
 @Component({
   selector: 'app-plan-detail',
@@ -20,13 +22,13 @@ export class PlanDetailComponent implements OnInit {
   trainingsCount = 0;
 
   days = [
-    { 'key': 'md', 'value': 'Mon', 'checked': false },
-    { 'key': 'tu', 'value': 'Tue', 'checked': false },
-    { 'key': 'wd', 'value': 'Wed', 'checked': false },
-    { 'key': 'th', 'value': 'Thu', 'checked': false },
-    { 'key': 'fr', 'value': 'Fri', 'checked': false },
-    { 'key': 'sa', 'value': 'Sat', 'checked': false },
-    { 'key': 'su', 'value': 'Sun', 'checked': false }
+    { 'key': '1', 'value': 'Mon', 'checked': false },
+    { 'key': '2', 'value': 'Tue', 'checked': false },
+    { 'key': '3', 'value': 'Wed', 'checked': false },
+    { 'key': '4', 'value': 'Thu', 'checked': false },
+    { 'key': '5', 'value': 'Fri', 'checked': false },
+    { 'key': '6', 'value': 'Sat', 'checked': false },
+    { 'key': '0', 'value': 'Sun', 'checked': false }
   ];
 
   sportTypeValue: string;
@@ -57,12 +59,13 @@ export class PlanDetailComponent implements OnInit {
   trainingPlan = {
     name: 'New plan',
     days: [],
-    count: Number,
+    count: 0,
     type: 'general' || 'interval',
     exercisesList: [],
+    intervals: []
   };
 
-  constructor(private dialog: MdDialog, private paginator: MdPaginatorModule) {
+  constructor(private dialog: MdDialog, private paginator: MdPaginatorModule, private httpHandler: HttpService) {
     this.openedDialog = null;
   }
 
@@ -79,35 +82,35 @@ export class PlanDetailComponent implements OnInit {
     });
     console.log(selectedDays);
     this.trainingPlan.days = selectedDays;
-    this.trainingsCount = selectedDays.length;
+    this.trainingPlan.count = selectedDays.length;
   }
 
   changeTrainingCount(newValue: string, operation = '') {
     if (!newValue) {
       switch (operation) {
         case 'dec':
-          if (this.trainingsCount > 0) {
-            this.trainingsCount -= 1;
+          if (this.trainingPlan.count > 0) {
+            this.trainingPlan.count -= 1;
           }
           break;
         case 'inc':
-          if (this.trainingsCount < 7) {
-            this.trainingsCount += 1;
+          if (this.trainingPlan.count < 7) {
+            this.trainingPlan.count += 1;
           }
           break;
       }
     } else {
       if (parseInt(newValue)) {
-        this.trainingsCount = parseInt(newValue);
+        this.trainingPlan.count = parseInt(newValue);
       }
     }
 
-    if (this.trainingsCount > 7) {
-      this.trainingsCount = 7;
-    } else if (this.trainingsCount < 0) {
-      this.trainingsCount = 0;
+    if (this.trainingPlan.count > 7) {
+      this.trainingPlan.count = 7;
+    } else if (this.trainingPlan.count < 0) {
+      this.trainingPlan.count = 0;
     }
-    console.log(this.trainingsCount);
+    console.log(this.trainingPlan.count);
   }
 
   addExercise() {
@@ -144,13 +147,11 @@ export class PlanDetailComponent implements OnInit {
     //   this.openedDialog = this.dialog.open(ExerciseEditDialogComponent);
   }
   showPage(currentPage) {
-    console.log(currentPage);
     const startInd = currentPage * 3;
     this.displayExercises = this.trainingPlan.exercisesList.slice(startInd, startInd + 3);
   }
 
   addExercises(exercises) {
-    console.log(exercises);
     exercises.forEach((elem, ind) => {
       let inArray = this.trainingPlan.exercisesList.find((el) => {
         return el._id === elem.id;
@@ -159,7 +160,6 @@ export class PlanDetailComponent implements OnInit {
         this.trainingPlan.exercisesList.push(elem);
       }
     });
-    console.log(this.pageEvent);
     let page = 0;
     if (this.pageEvent) {
       page = this.pageEvent.pageIndex;
@@ -178,14 +178,10 @@ export class PlanDetailComponent implements OnInit {
   }
 
   setSaveInfo(exercise, form, i) {
-
-    console.log(form);
-    console.log(i);
     const newSet = {
       value: form.value.value,
       value2: form.value.value2
     };
-
     if (!exercise.sets) {
       exercise.sets = []
     }
@@ -193,5 +189,22 @@ export class PlanDetailComponent implements OnInit {
     form.value.value = '';
     form.value.value2 = '';
     exercise.edit = false;
+  }
+
+  savePlan(){
+    console.log(this.trainingPlan);
+    const sendData: IHttpReq = {
+      url: `/api/training-plan`,
+      method: 'POST',
+      body: this.trainingPlan,
+      successMessage: '',
+    };
+
+    this.httpHandler.sendRequest(sendData)
+      .then((res) => {
+        if (res) {
+          console.log(res);
+        }
+      });
   }
 }

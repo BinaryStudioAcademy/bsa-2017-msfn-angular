@@ -21,9 +21,7 @@ export class SearchExerciseComponent implements OnInit {
   constructor(
     private dialogRef: MdDialogRef<SearchExerciseComponent>,
     @Inject(MD_DIALOG_DATA) public data: any,
-    private httpHandler: HttpService) {
-    console.log(data);
-  }
+    private httpHandler: HttpService) { }
 
   ngOnInit() {
     // get sport types
