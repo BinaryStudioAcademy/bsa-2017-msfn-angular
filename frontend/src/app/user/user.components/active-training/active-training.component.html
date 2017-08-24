@@ -4,6 +4,11 @@
         <app-secundomer *ngIf="loaded" [finishTrain]="secundomerBind.finishTrain" [intervalTrain]="secundomerBind.intervalTrain" (onFinish)="onFinish($event)"></app-secundomer>
     </div>
     <div class="child">
-        <router-outlet></router-outlet>
+        <div class="exlist">
+            Exercise list here
+        </div>
+        <div class="intmenu">
+            Interval menu (optional) here
+        </div>
     </div>
 </div>
