@@ -10,7 +10,9 @@ const TrainingPlan = new Schema({
     exerciseList: Array,
     intervals: Array,
     type: 'general'|'interval',
-    userID: ObjectId
+    userID: ObjectId,
+    isRemoved: Boolean,
+    
 });
 
 module.exports = mongoose.model('TrainingPlan', TrainingPlan);

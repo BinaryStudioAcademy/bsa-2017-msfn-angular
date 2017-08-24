@@ -11,15 +11,15 @@ class trainingPlanService {
     get(data, callback){
         const params = {
             filter: {
-                removed: false,
-                userID: objID.ObjectId(data.session.passport.user)
+                isRemoved: false,
+                // userID: objID.ObjectId(data.session.passport.user)
             },
         };
 
         if(data){
            params.filter = Object.assign(params.filter, data);
         }
-
+console.log(params.filter);
         trainingPlanRepository.get(params, (err, exerciseData) => {
             if (err) return callback(err);
             if (exerciseData === null) {
