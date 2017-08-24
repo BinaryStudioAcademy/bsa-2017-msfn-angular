@@ -35,7 +35,7 @@ export class ExerciseTableComponent implements OnInit {
     openDescription(exercise: IExercise) {
         this.dialog.open(ExerciseDescriptionComponent, {
             data: exercise
-            //, position: {top: '160px'}
+            // position: {top: '160px'}
         });
     }
 }

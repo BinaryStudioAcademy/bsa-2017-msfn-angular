@@ -44,19 +44,5 @@
     <button md-button class="btn btn-save" (click)="save(form)">Save</button>
 
   </div>
-  <app-exercise-list
-      [addExercise]='addExercise'
-      [exercisesList]='exercisesList'
-      [displayExercises]='displayExercises'
-      [deleteExercise]='deleteExercise'
-      [(pageIndex)]='pageIndex'
-      [pageSize]='pageSize'
-      [showPage]='showPage'
-      [exercise]='exercise'
-      [editExercise]='editExercise'
-      [setEdit]='setEdit'
-      [setAdd]='setAdd'
-      [setSaveInfo]='setSaveInfo'
-  >
-  </app-exercise-list>
+  <app-exercise-list [exercisesList]="exercisesList"></app-exercise-list>
 </div>

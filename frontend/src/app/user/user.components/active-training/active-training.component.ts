@@ -20,7 +20,7 @@ export class ActiveTrainingComponent implements OnInit {
 
     burnedCallories = 1445;
 
-    exerciseList = [
+    exercisesList = [
         {
             description: '',
             edit: false,
