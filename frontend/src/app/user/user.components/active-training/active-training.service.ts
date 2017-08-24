@@ -35,9 +35,7 @@ export class ActiveTrainingService {
         //     .then(data => {
         //         callback(data);
                 this.dialogRef = this.dialog.open(ChooseTrainDialogComponent, { data: this.fakeData });
-                this.dialogRef.afterClosed().subscribe(() => {
-                    console.log('closed');
-                });
+                this.dialogRef.afterClosed().subscribe();
         // });
     }
 
