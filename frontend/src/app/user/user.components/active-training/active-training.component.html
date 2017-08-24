@@ -1,6 +1,6 @@
 <div class="container centerContent">
     <div class="timers">
-        <app-secundomer></app-secundomer>
+        <app-secundomer [(finishTrain)]="finishTrain" (onFinish)="onFinish($event)"></app-secundomer>
     </div>
     <div class="child">
         <router-outlet></router-outlet>

@@ -2,7 +2,8 @@
     <h2 class="title" md-dialog-title>Finish training?</h2>
     <div *ngIf="done" class="done">You done all your exercises</div>
     <div *ngIf="!done" class="not-done">You didn`t finish selected exercise:</div>
-    <div class="text">Total time: {{data.total}}</div>
+    <div class="text">Total time: {{data.time.total}}</div>
+    <div class="text">Warming time: {{data.time.warming}}</div>
     <div class="text">Calories burnt: {{data.calories}}</div>
     <div class="btn-container">
         <button md-raised-button [md-dialog-close]="true" class="controll">Finish</button>

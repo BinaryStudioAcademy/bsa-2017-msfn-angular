@@ -16,12 +16,13 @@
 
 .timers {
     width: 20%;
+    min-width: 250px;
     height: 90%;
     background-color: $gradient-to-color;
 }
 
 .child {
-    width: 70%;
+    width: calc(80% - 250px);
     height: 90%;
     background-color: rgba(255, 0, 0, 0.1);
 }
