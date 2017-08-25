@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExerciseEditDialogComponent } from './../exercise-edit-dialog/exercise-edit-dialog.component';
 import { IntervalTrainingPlanComponent } from './../interval-training-plan/interval-training-plan.component';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { IHttpReq } from './../../../models/http-req';
 import { HttpService } from '../../../services/http.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { ExerciseListComponent } from './../exercise-list/exercise-list.component';
 
 
 @Component({
@@ -15,6 +15,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class PlanDetailComponent implements OnInit {
+
+  @ViewChild(ExerciseListComponent) exercisesListComponent: ExerciseListComponent;
 
   title = 'Training plan create';
   trainingsCount = 0;
@@ -105,7 +107,9 @@ export class PlanDetailComponent implements OnInit {
                 type.checked = true;
               }
             });
-            this.showPage(0);
+            this.exercisesListComponent.exercisesList = this.trainingPlan.exercisesList;
+            this.exercisesListComponent.showPage(0);
+            
             // console.log(this.types);
             // this.paginatorLength = this.trainingPlan.exercisesList.length;
           }
