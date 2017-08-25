@@ -7,8 +7,6 @@ import { UserComponent } from './user.component';
 import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
-import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
-import { FollowingListComponent } from './user.components/following-list/following-list.component';
 import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 // import { FriendsComponent } from './user.components/friends/friends.component';
@@ -17,9 +15,11 @@ import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.c
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
+import { UserListComponent } from './user.components/user-list/user-list.component';
 import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
 import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
+
 
 const userRoutes: Routes = [
     {
@@ -62,14 +62,6 @@ const userRoutes: Routes = [
                 ]
             },
             {
-                path: 'followers',
-                component: FollowersListComponent,
-            },
-            {
-                path: 'following',
-                component: FollowingListComponent,
-            },
-            {
                 path: 'profile/:id',
                 component: OtherProfilesComponent,
             },
@@ -90,13 +82,16 @@ const userRoutes: Routes = [
                 component: WeightControlComponent
             },
             {
+                path: 'all-users',
+                component: UserListComponent
+            },
+            {
                 path: 'exercise-table',
                 component: ExerciseTableComponent
             },
             {
                 path: 'start-training',
                 component: ActiveTrainingComponent
-
             }
         ]
     }

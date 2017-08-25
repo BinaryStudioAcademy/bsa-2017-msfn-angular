@@ -80,7 +80,7 @@ export class TrainingListComponent implements OnInit {
   }
 
   createPlan() {
-    this._router.navigate(['/user/training-plan']);
+    this._router.navigate(['/user/training-plan/add']);
   }
 
 }
