@@ -66,7 +66,11 @@ export class ExerciseListComponent implements OnInit {
 
     deleteExercise(id) {
       this.exercisesList = this.exercisesList.filter(function (el) {
-        return el.id !== id;
+        if (el.id) {
+          return el.id !== id;
+        } else if (el._id) {
+          return el._id !== id;
+        }
       });
 
       this.displayExercises = this.exercisesList.slice(0, this.pageSize);
