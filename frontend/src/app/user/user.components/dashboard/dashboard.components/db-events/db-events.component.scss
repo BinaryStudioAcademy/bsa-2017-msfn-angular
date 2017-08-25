@@ -6,27 +6,34 @@
     justify-content: space-between;
     flex-wrap: wrap;
     height: 70%;
+}
 
-    div {
-        display: inline-block;
-    }
+.content > div {
+    display: inline-block;
 }
 
 md-slider {
     width: 100%;
 }
 
-.start-date {
+.start-date,
+.end-date {
     width: 50%;
-    font-size: $main-text;
 }
 
 .end-date {
-    width: 50%;
     text-align: right;
 }
 
 .event-output {
     flex-basis: 100%;
     margin-top: 20px;
+
+    .event {
+        display: block;
+
+        div {
+            display: inline-block;
+        }
+    }
 }

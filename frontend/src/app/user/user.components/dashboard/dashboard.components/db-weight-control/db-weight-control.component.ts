@@ -86,7 +86,6 @@ export class DbWeightControlComponent implements OnInit {
         this.weightControlService.getWeightItems(res => {
             if (res[0].hasOwnProperty('weight')) {
                 this.weeklyItems = this.weightControlService.getWeeklyWeightItems(res);
-                console.log(this.weeklyItems);
                 this.updateData();
             }
         });
@@ -100,7 +99,6 @@ export class DbWeightControlComponent implements OnInit {
         if (this.weeklyItems.length > 1) {
             this.diff.recent = this.weightControlService.getRecentDiff(this.weeklyItems);
             this.diff.weekly = this.weightControlService.getPeriodDiff(this.weeklyItems);
-            console.log(this.diff);
 
             this.changeOption('weight', 'recent');
             this.changeOption('weight', 'weekly');
