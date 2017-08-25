@@ -27,6 +27,5 @@ export class ChooseTrainDialogComponent implements OnInit {
             }
         });
     }
-
 }
 

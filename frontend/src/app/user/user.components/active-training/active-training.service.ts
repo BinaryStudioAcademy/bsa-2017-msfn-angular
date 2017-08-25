@@ -26,9 +26,8 @@ export class ActiveTrainingService {
 
         this.httpService.sendRequest(sendData)
             .then(data => {
-                console.log(data);
                 this.dialogRef = this.dialog.open(ChooseTrainDialogComponent, { data: data });
-                this.dialogRef.afterClosed().subscribe(callback(data));
+                this.dialogRef.afterClosed().subscribe(callback);
         });
     }
 
