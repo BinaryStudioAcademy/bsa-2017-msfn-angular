@@ -14,6 +14,9 @@ export class ExerciseListComponent implements OnInit {
     private searchDialog: MdDialogRef<any> | null;
     @ViewChild('container')
     container: ElementRef;
+    value;
+    value2;
+    setItemEdit;
 
     @Input() exercisesList = [];
     displayExercises: Object[];
@@ -69,17 +72,6 @@ export class ExerciseListComponent implements OnInit {
       this.displayExercises = this.exercisesList.slice(0, this.pageSize);
     }
 
-    editExercise(id) {
-      const exercise = this.exercisesList.find(function (el) {
-        return el.id === id;
-      });
-
-      // if (exercise.type == 'run')
-      //   this.openedDialog = this.dialog.open(IntervalTrainingPlanComponent);
-      // else
-      //   this.openedDialog = this.dialog.open(ExerciseEditDialogComponent);
-    }
-
     showPage(currentPage) {
       const startInd = currentPage * this.pageSize;
       this.displayExercises = this.exercisesList.slice(startInd, startInd + this.pageSize);
@@ -94,7 +86,6 @@ export class ExerciseListComponent implements OnInit {
           this.exercisesList.push(elem);
         }
       });
-      console.log(this.pageEvent);
       let page = 0;
       if (this.pageEvent) {
         page = this.pageEvent.pageIndex;
@@ -112,22 +103,39 @@ export class ExerciseListComponent implements OnInit {
       exercise.edit = true;
     }
 
-    setSaveInfo(exercise, form, i) {
+    setSaveInfo(exercise, form) {
+        if (form.value.value && form.value.value2) {
+            if (this.setItemEdit || this.setItemEdit === 0) {
+                exercise.sets[this.setItemEdit].value = this.value;
+                exercise.sets[this.setItemEdit].value2 = this.value2;
+                this.setItemEdit = null;
+            } else {
+                  const newSet = {
+                      value: form.value.value,
+                      value2: form.value.value2
+                  };
 
-        console.log(form);
-        console.log(i);
-        const newSet = {
-            value: form.value.value,
-            value2: form.value.value2
-        };
+                  if (!exercise.sets) {
+                      exercise.sets = [];
+                  }
 
-        if (!exercise.sets) {
-            exercise.sets = [];
+                  exercise.sets.push(newSet);
+              }
         }
-        exercise.sets.push(newSet);
-        form.value.value = '';
-        form.value.value2 = '';
+        this.value = '';
+        this.value2 = '';
         exercise.edit = false;
+    }
+
+    setEdit(exercise, set, index) {
+        this.setItemEdit = index;
+        this.value = set.value;
+        this.value2 = set.value2;
+        exercise.edit = true;
+    }
+
+    setDelete(exercise, index) {
+       exercise.sets.splice(index, 1);
     }
 
 }
