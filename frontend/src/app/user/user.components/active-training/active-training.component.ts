@@ -20,27 +20,7 @@ export class ActiveTrainingComponent implements OnInit {
 
     burnedCallories = 1445;
 
-    exercisesList = [
-        {
-            description: '',
-            edit: false,
-            isRemoved: false,
-            name: 'Bicyps',
-            sets: [
-                {
-                    value: '3 kg',
-                    value2: 'x3'
-                },
-                {
-                    value: '3 km',
-                    value2: '10min'
-                },
-            ],
-            sportsId: [],
-            type: 'someIDofType',
-            _id: 'exerciseID'
-        }
-    ];
+    exercisesList: [any] = [{}];
 
     constructor(
         private activeTrainingService: ActiveTrainingService
@@ -48,8 +28,11 @@ export class ActiveTrainingComponent implements OnInit {
 
     ngOnInit() {
 
-        this.activeTrainingService.getPlans((data) => {
-            // console.log(data);
+        this.activeTrainingService.getPlans((plan) => {
+            this.exercisesList = plan.exercisesList;
+            this.typeTrain = plan.trainingType;
+            this.secundomerBind.intervalTrain = !!plan.intervals.length;
+            this.loaded = true;
         });
     }
 
