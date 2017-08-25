@@ -249,7 +249,9 @@ export class PlanDetailComponent implements OnInit {
     this.httpHandler.sendRequest(sendData)
       .then((res) => {
         if (res) {
-          console.log(res);
+          if(!res.nModified){
+            this.trainingPlan._id = res._id;
+          }
         }
       });
   }
