@@ -13,7 +13,7 @@ export class ProfileService {
         const sendData: IHttpReq = {
             url: '/api/file',
             method: 'POST',
-            body: {data: image, userId: userId, fileType: fileType},
+            body: {data: image, fileName: userId, fileType: fileType, folder: 'usersImg'},
         };
 
         this.httpService.sendRequest(sendData).then(data => {

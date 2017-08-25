@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { HttpService } from '../../../services/http.service';
-import { IHttpReq } from '../../../models/http-req';
-import { IExercise } from '../../../models/exercise';
-import { IExerciseType } from '../../../models/exerciseType';
+
 import { ExerciseCreateService } from './exercise-create.service';
+import { MarkdownService } from '../../../services/markdown.service';
+import IExercise = ExerciseApi.IExercise;
+import IExerciseType = ExerciseApi.IExerciseType;
 
 @Component({
     selector: 'app-exercise-create',
+    providers: [MarkdownService],
     templateUrl: './exercise-create.component.html',
     styleUrls: ['./exercise-create.component.scss']
 })
@@ -16,17 +17,19 @@ export class ExerciseCreateComponent implements OnInit {
     exercise: IExercise = {
         name: '',
         type: '',
+        isRemoved: false,
+        sportsId: [],
+        image: '',
         description: ''
     };
     titleType = 'Create';
-
+    convertedDescription: string;
     exTypes: [IExerciseType];
 
-    constructor(
-        public router: ActivatedRoute,
-        private httpService: HttpService,
-        private exerciseCreateService: ExerciseCreateService,
-    ) { }
+    constructor(public router: ActivatedRoute,
+                private exerciseCreateService: ExerciseCreateService,
+                private markdownService: MarkdownService) {
+    }
 
     ngOnInit() {
         if (this.router.snapshot.params.id) {
@@ -48,5 +51,28 @@ export class ExerciseCreateComponent implements OnInit {
                 this.exerciseCreateService.sendExercise(this.exercise);
             }
         }
+    }
+
+    saveImg() {
+    }
+
+    updateOutput(mdText: string) {
+        this.convertedDescription = this.markdownService.convert(mdText);
+    }
+
+    fileChangeListener($event) {
+        let image: any = new Image();
+        const file: File = $event.target.files[0];
+        const myReader: FileReader = new FileReader();
+        myReader.readAsDataURL(file);
+        myReader.onloadend = (loadEvent: any) => {
+            image = myReader.result;
+            console.log(1);
+            // this.profileService.saveTest(image, this.userId, 'img', result => {
+            //     console.log(result);
+            // });
+
+        };
+
     }
 }

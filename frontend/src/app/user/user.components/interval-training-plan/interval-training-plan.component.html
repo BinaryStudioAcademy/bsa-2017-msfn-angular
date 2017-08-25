@@ -5,8 +5,8 @@
     </button>
     <button md-button disableRipple class="btn" (click)="deleteCircle()">Delete circle
     </button>
-    <button md-button disableRipple class="btn" (click)="addExercise()">Add exersice
-    </button>
+    <!-- <button md-button disableRipple class="btn" (click)="addExercise()">Add exersice
+    </button> -->
 </div>
 <div class="pickers-container">
     <md-radio-group [(ngModel)]="currentCircleNumber">
@@ -17,7 +17,7 @@
     </md-radio-group>
 </div>
 <div class="data-container">
-    <md-table #table [dataSource]="dataSource">
+    <!-- <md-table #table [dataSource]="dataSource">
         <ng-container cdkColumnDef="name">
             <md-header-cell *cdkHeaderCellDef> Name</md-header-cell>
             <md-cell *cdkCellDef="let row">
@@ -37,7 +37,7 @@
 
         <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
         <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
-    </md-table>
+    </md-table> -->
     <div class="circle-time">
     Circle time:
         <md-input-container>

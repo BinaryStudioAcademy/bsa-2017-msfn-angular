@@ -1,0 +1,19 @@
+<div class="container">
+    <h2 class="title" md-dialog-title>Today training plan</h2>
+    <div class="recomendation" *ngIf="matchedTrain">
+        <span>Recomended plan:</span>
+        <span class="train">{{matchedTrain.name}}</span>
+    </div>
+    <div class="listTrain">
+        <span>List:</span>
+        <div class="plan-container">
+            <div class="list" *ngFor="let item of data">
+                {{item.name}}
+            </div>
+        </div>
+    </div>
+    <div class="btn-container">
+        <button md-raised-button [md-dialog-close]="false" class="controll">Close</button>
+        <!-- <button md-raised-button [md-dialog-close]="true" class="controll">Confirm</button> -->
+    </div>
+</div>

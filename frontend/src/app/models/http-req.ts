@@ -1,10 +1,8 @@
-export class IHttpReq {
-    constructor(
-        public url: string,
-        public method: 'GET' | 'POST' | 'PUT' | 'DELETE',
-        public body: any,
-        public failMessage?: string,
-        public successMessage?: string,
-        public headers?: any,
-    ) { }
+export interface IHttpReq {
+    url: string;
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+    body: any;
+    failMessage?: string;
+    successMessage?: string;
+    headers?: any;
 }

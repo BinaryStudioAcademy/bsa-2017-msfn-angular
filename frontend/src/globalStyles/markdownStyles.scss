@@ -3,12 +3,15 @@
     padding: 0 15px;
     color: #777777;
 }
+
 .markdown-quote > :first-child {
     margin-top: 0;
 }
+
 .markdown-quote > :last-child {
     margin-bottom: 0;
 }
+
 .markdown-table {
     padding: 0;
     tr {
@@ -40,6 +43,19 @@
         background-color: $gradient-to-color;
     }
 }
+
 .markdown-link {
     color: #d1c501;
+}
+
+.markdown-listitem {
+    margin: 15px 0;
+}
+
+.markdown-listitem:first-child {
+    margin-top: 0;
+}
+
+.markdown-listitem:last-child {
+    margin-bottom: 0;
 }

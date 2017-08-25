@@ -30,7 +30,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl + ':id', function (req, res, next) {
-        userRepository.getById(req.params.id, function (err, data) {
+        userService.getUserById(req, function (err, data) {
             res.data = data;
             res.err = err;
             next();
@@ -38,7 +38,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl + 'coach-status-request/:id', (req, res, next) => {
-        coachService.apply(req.params.id, (err, data) => {
+         coachService.apply(req.params.id, (err, data) => {
             res.data = data;
             res.err = err;
             next();
@@ -46,7 +46,6 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl + 'generate-faked-data/true', (req, res, next) => {
-        console.log(1)
         initFakeService.generate((err, data) => {
             res.data = data;
             res.err = err;
@@ -84,8 +83,8 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.put(baseUrl + ':id', isUserSessionUser, function(req, res, next) {
-        userService.updateItem(req.params.id, req.body, function(err, data) {
+    app.put(baseUrl + ':id', isUserSessionUser, function (req, res, next) {
+        userService.updateItem(req.params.id, req.body, function (err, data) {
             res.data = data;
             res.err = err;
             next();
@@ -94,8 +93,8 @@ module.exports = function (app) {
 
     app.use(baseUrl + 'subscribe', subscribeRoutes);
 
-    app.delete(baseUrl + ':id', function(req, res, next) {
-        userRepository.deleteById(req.params.id, function(err, data) {
+    app.delete(baseUrl + ':id', function (req, res, next) {
+        userRepository.deleteById(req.params.id, function (err, data) {
             res.data = data;
             res.err = err;
             next();

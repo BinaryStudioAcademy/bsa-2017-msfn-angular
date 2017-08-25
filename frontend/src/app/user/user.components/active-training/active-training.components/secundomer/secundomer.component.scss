@@ -1,0 +1,85 @@
+@import "../../../../../../globalStyles/variables.scss";
+@import '../../../../../../globalStyles/text.scss';
+@import '../../../../../../globalStyles/indentations.scss';
+
+.wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+button {
+    &.general {
+        border: none;
+        margin: 35px auto 0 auto;
+        width: 90%;
+        padding: 15px;
+        color: $text-main-color;
+        font-size: $button-text;
+        font-weight: 600;
+        font-size: 11pt;
+        border-radius: 50px;
+        outline: none;
+
+        &.start {
+            background-color: $btn-color;
+        }
+        &.finish {
+            background-color: darkred;
+        }
+        &.pause {
+            background-color: darkorange;
+        }
+    }
+    &.controll {
+        margin: auto;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.numbers {
+    font-family: $font-general;
+    font-size: 40px;
+    width: 80%;
+    margin: $content-between-margin auto;
+    text-align: center;
+    border-bottom: 1px solid $text-second-color;
+}
+
+@media screen and (max-width: $small-screen) {
+    .timers, .child {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+    button {
+        &.general {
+            width: 35vw;
+            height: 35vw;
+            border-radius: 50%;
+
+            &.start {
+                width: 50vw;
+                height: 50vw;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: $small-screen + 1) and (max-width: $medium-screen) {
+    .timers, .child {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+}
+
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
+    .timers, .child {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+}

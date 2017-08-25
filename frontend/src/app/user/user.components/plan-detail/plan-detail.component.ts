@@ -1,117 +1,254 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ExerciseEditDialogComponent } from './../exercise-edit-dialog/exercise-edit-dialog.component';
+import { IntervalTrainingPlanComponent } from './../interval-training-plan/interval-training-plan.component';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { IHttpReq } from './../../../models/http-req';
+import { HttpService } from '../../../services/http.service';
+import { ActivatedRoute } from '@angular/router';
 
-@Component({selector: 'app-plan-detail', templateUrl: './plan-detail.component.html', styleUrls: ['./plan-detail.component.scss']})
+
+
+@Component({
+  selector: 'app-plan-detail',
+  templateUrl: './plan-detail.component.html',
+  styleUrls: ['./plan-detail.component.scss']
+})
+
 export class PlanDetailComponent implements OnInit {
-  title = 'create';
+
+  title = 'Training plan create';
   trainingsCount = 0;
-  exercsesShow = false;
+  exercisesList = [];
+
   days = [
-    {
-      'key': 'md',
-      'value': 'Monday'
-    }, {
-      'key': 'tu',
-      'value': 'Tuesday'
-    }, {
-      'key': 'wd',
-      'value': 'Wednesday'
-    }, {
-      'key': 'th',
-      'value': 'Thursday'
-    }, {
-      'key': 'fr',
-      'value': 'Friday'
-    }, {
-      'key': 'sa',
-      'value': 'Saturday'
-    }, {
-      'key': 'su',
-      'value': 'Sunday'
-    }
+    { 'key': '1', 'value': 'Mon', 'checked': false },
+    { 'key': '2', 'value': 'Tue', 'checked': false },
+    { 'key': '3', 'value': 'Wed', 'checked': false },
+    { 'key': '4', 'value': 'Thu', 'checked': false },
+    { 'key': '5', 'value': 'Fri', 'checked': false },
+    { 'key': '6', 'value': 'Sat', 'checked': false },
+    { 'key': '0', 'value': 'Sun', 'checked': false }
   ];
 
+  // sportTypeValue doesn't use.. ?
   sportTypeValue: string;
   searchString: string = 'Coming soon...';
 
   types = [
     {
-      'value': 'run',
-      'viewValue': 'Run'
-    }, {
-      'value': 'fitness',
-      'viewValue': 'Fitness'
-    }, {
-      'value': 'loooong',
-      'viewValue': 'Tooooo long type name'
-    }
-  ];
-
-  exercisesList = [
+      key: 'general',
+      value: 'General training',
+      checked: false
+    },
     {
-      id: 123,
-      name: 'ABS: MOUNTAIN CLIMBER WITH HANDS ON SWISS BALL',
-      description: 'It\'s one of the simplest yet most effective ways to tighten your tummy. In fact' +
-          ', you\'ll barely have to move a muscle.',
-      how_to: 'Assume a pushup position with your arms completely straight, but place your hand' +
-          's on a Swiss ball instead of the floor. Your body should form a straight line fr' +
-          'om your head to your ankles. Tighten your core and hold it that way for the dura' +
-          'tion of the exercise [A]. Lift one foot off the floor and slowly raise your knee' +
-          ' as close to your chest as you can without changing your lower-back posture. The' +
-          'n repeat with your other leg. Alternate back and forth for 30 seconds. If that\'' +
-          's too hard, place your hands on the floor or a bench, instead of a Swiss ball.'
-    }, {
-      id: 233,
-      name: 'GLUTES: HIP RAISE',
-      description: ' It targets the muscles of your rear end, which can help make your belly flatter' +
-          '. The reason: When your glutes are weak—as they are in most women—the top of you' +
-          'r pelvis tilts forward. This not only places stress on your lower back, but it c' +
-          'auses your tummy to stick out—even if you don\'t have an ounce of fat. Your fix:' +
-          ' the hip raise.',
-      how_to: 'Lie on your back on the floor with your knees bent and your feet flat on the flo' +
-          'or [A]. Now brace your core, squeeze your glutes, and raise your hips so your bo' +
-          'dy forms a straight line from your shoulders to your knees [B]. Pause for 3 to 5' +
-          ' seconds—squeezing your glutes tightly the entire time—then lower back to the st' +
-          'art.'
-    }, {
-      id: 112,
-      name: 'QUADRICEPS: OFFSET DUMBBELL LUNGE',
-      description: 'Holding a weight on just one side of your body increases the demand placed on yo' +
-          'ur core to keep your body stable. The result: Your hips and abs have to work har' +
-          'der, and you\'ll also improve your balance. And better yet, you\'ll burn tons of' +
-          ' calories.',
-      how_to: 'Hold a dumbbell in your right hand next to your shoulder, with your arm bent [A]' +
-          '. Step forward with your right leg and lower your body until your right knee is ' +
-          'bent at least 90 degrees and your left knee nearly touches the floor [B]. Push y' +
-          'ourself back to the starting position. That\'s 1 rep. Do all your reps, then rep' +
-          'eat with your left leg, while holding the weight in your left hand.'
-    }, {
-      id: 443,
-      name: 'HAMSTRINGS: SINGLE-LEG DUMBBELL STRAIGHT-LEG DEADLIFT',
-      description: 'Besides targeting your hamstrings, this exercise works your glutes and core. It ' +
-          'also helps eliminate muscle imbalances between your legs, reducing your risk of ' +
-          'injury. And as a bonus, it can even improve the flexibility of your hamstrings.',
-      how_to: 'Grab a pair of dumbbells with an overhand grip, and hold them at arm\'s length i' +
-          'n front your thighs. Stand with your feet shoulder-width apart and knees slightl' +
-          'y bent. Now raise one leg off the floor [A]. Without changing the bend in your k' +
-          'nee, bend at your hips (keep your lower back arched), and lower your torso until' +
-          ' it\'s almost parallel to the floor [B]. Pause, then squeeze your glutes, thrust' +
-          ' your hips forward, and raise your torso back to the start. Do all your reps, th' +
-          'en repeat with your other leg.'
-    }
+      key: 'interval',
+      value: 'Interval training',
+      checked: false
+    },
   ];
 
-  constructor() {}
+  displayExercises: Object[];
 
-  ngOnInit() {}
-  changeTrainingCount(operation) {
-    if (operation === 'dec' && this.trainingsCount > 0) {
-      this.trainingsCount -= 1;
-    } else if (operation === 'inc' && this.trainingsCount < 7) {
-      this.trainingsCount += 1;
-    }
+  // pager props
+  // pageSize = 3;
+  // pageIndex = 0;
+  // paginatorLength: Number;
+  // pageEvent: PageEvent;
+
+
+  lastAfterClosedResult: string;
+
+  trainingPlan = {
+    _id: '',
+    name: 'New plan',
+    days: [],
+    count: 0,
+    trainingType: 'general' || 'interval',
+    exercisesList: [],
+    intervals: [],
+  };
+
+
+  constructor(
+    private dialog: MdDialog,
+    // private paginator: MdPaginatorModule,
+    private httpHandler: HttpService,
+    public activatedRoute: ActivatedRoute) {
+    // this.openedDialog = null;
+
   }
 
-  getExercises() {
-    this.exercsesShow = true;
+  ngOnInit() {
+
+    if (this.activatedRoute.snapshot.params.id) {
+      const planID = this.activatedRoute.snapshot.params.id;
+      const sendData: IHttpReq = {
+        url: `/api/training-plan/` + planID,
+        method: 'GET',
+        body: '',
+        successMessage: '',
+      };
+
+      this.httpHandler.sendRequest(sendData)
+        .then((res) => {
+          if (res) {
+            this.trainingPlan = res[0];
+            this.trainingPlan.days.forEach((el) => {
+              this.days.forEach((day) => {
+                if (day.key === el.key) {
+                  day.checked = true;
+                }
+              });
+            });
+            this.types.forEach((type) => {
+              if (type.key === this.trainingPlan.trainingType) {
+                type.checked = true;
+              }
+            });
+            this.showPage(0);
+            // console.log(this.types);
+            // this.paginatorLength = this.trainingPlan.exercisesList.length;
+          }
+        });
+    }
+
+  }
+
+  selectDays() {
+    const selectedDays = this.days.filter((el) => {
+      return el.checked;
+    });
+    this.trainingPlan.days = selectedDays;
+    this.trainingPlan.count = selectedDays.length;
+  }
+
+  changeTrainingCount(newValue: string, operation = '') {
+    if (!newValue) {
+      switch (operation) {
+        case 'dec':
+          if (this.trainingPlan.count > 0) {
+            this.trainingPlan.count -= 1;
+          }
+          break;
+        case 'inc':
+          if (this.trainingPlan.count < 7) {
+            this.trainingPlan.count += 1;
+          }
+          break;
+      }
+    } else {
+      if (parseInt(newValue, 10)) {
+
+        this.trainingPlan.count = parseInt(newValue, 10);
+      }
+    }
+
+    if (this.trainingPlan.count > 7) {
+      this.trainingPlan.count = 7;
+    } else if (this.trainingPlan.count < 0) {
+      this.trainingPlan.count = 0;
+    }
+    // console.log(this.trainingPlan.count);
+  }
+
+  // addExercise() {
+  //   this.searchDialog = this.dialog.open(SearchExerciseComponent, {
+  //     data: {
+  //       currentExercises: this.trainingPlan.exercisesList
+  //     }
+  //   });
+  //   this.searchDialog.afterClosed().subscribe((result: string) => {
+  //     this.lastAfterClosedResult = result;
+  //     let selectedExercises = this.searchDialog.componentInstance.selectedExercises;
+
+  //     this.addExercises(selectedExercises);
+  //     this.searchDialog = null;
+  //   });
+
+  // }
+
+  deleteExercise(id) {
+    this.trainingPlan.exercisesList = this.trainingPlan.exercisesList.filter(function (el) {
+      return el._id !== id;
+    });
+
+    this.displayExercises = this.trainingPlan.exercisesList.slice(0, 3);
+  }
+  editExercise(id) {
+    const exercise = this.trainingPlan.exercisesList.find(function (el) {
+      return el._id === id;
+    });
+
+    // if (exercise.type == 'run')
+    //   this.openedDialog = this.dialog.open(IntervalTrainingPlanComponent);
+    // else
+    //   this.openedDialog = this.dialog.open(ExerciseEditDialogComponent);
+  }
+  showPage(currentPage) {
+    const startInd = currentPage * 3;
+    this.displayExercises = this.trainingPlan.exercisesList.slice(startInd, startInd + 3);
+  }
+
+  // addExercises(exercises) {
+  //   exercises.forEach((elem, ind) => {
+  //     let inArray = this.trainingPlan.exercisesList.find((el) => {
+  //       return el._id === elem.id;
+  //     });
+  //     if (!inArray) {
+  //       this.trainingPlan.exercisesList.push(elem);
+  //     }
+  //   });
+  //   let page = 0;
+  //   if (this.pageEvent) {
+  //     page = this.pageEvent.pageIndex;
+  //   }
+  //   this.showPage(page);
+  // }
+
+  setAdd(exercise) {
+    this.displayExercises.forEach((item: any) => {
+      item.edit = false;
+    });
+    this.trainingPlan.exercisesList.forEach((item: any) => {
+      item.edit = false;
+    });
+    exercise.edit = true;
+  }
+
+  setSaveInfo(exercise, form, i) {
+    const newSet = {
+      value: form.value.value,
+      value2: form.value.value2
+    };
+    if (!exercise.sets) {
+      exercise.sets = [];
+    }
+    exercise.sets.push(newSet);
+    form.value.value = '';
+    form.value.value2 = '';
+    exercise.edit = false;
+  }
+
+  savePlan() {
+    this.trainingPlan.exercisesList.forEach((item: any) => {
+      item.id = item._id;
+      // delete item._id;
+    });
+    const sendData: IHttpReq = {
+      url: `/api/training-plan`,
+      method: 'POST',
+      body: this.trainingPlan,
+      successMessage: '',
+    };
+    if (this.trainingPlan._id.length) {
+      sendData.method = 'PUT';
+      sendData.url += '/' + this.trainingPlan._id;
+    }
+    this.httpHandler.sendRequest(sendData)
+      .then((res) => {
+        if (res) {
+          console.log(res);
+        }
+      });
   }
 }

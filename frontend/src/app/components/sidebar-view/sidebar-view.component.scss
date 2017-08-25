@@ -7,7 +7,9 @@ $height: calc(100vh - 70px);
 .menu-element {
     display: block;
 }
-
+md-list {
+    padding-top: 0;
+}
 aside {
     width: 100%;
     height: 100%;
@@ -28,10 +30,6 @@ aside {
             line-height: $header-text;
             text-decoration: none;
             color: #aaa;
-        }
-
-        .navigation__your-section {
-            margin-top: $content-between-margin;
         }
 
         .navigation__icon {
@@ -63,16 +61,10 @@ aside {
     }
 }
 
-@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
-    aside {
-        width: 180px;
-    }
-}
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {}
 
 @media screen and (max-width: $small-screen) {
     aside {
-        width: 55px;
-
         .navigation__title, .navigation__subheader {
             display: none;
         }

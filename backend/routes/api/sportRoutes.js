@@ -5,7 +5,7 @@ const
     isAdmin = require('../../middleware/isAdminMiddleware'),
     baseUrl = '/api/sport/';
 
-module.exports = function (app) {
+module.exports = app => {
 
     app.get(baseUrl, (req, res, next) => {
         sportRepository.getAll((err, data) => {

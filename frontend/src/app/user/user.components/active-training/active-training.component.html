@@ -1,0 +1,14 @@
+<div class="container centerContent">
+    <div class="timers">
+        <h2>{{typeTrain}} mode</h2>
+        <app-secundomer [finishTrain]="secundomerBind.finishTrain" [intervalTrain]="secundomerBind.intervalTrain" (onFinish)="onFinish($event)"></app-secundomer>
+    </div>
+    <div class="child">
+        <div class="exlist">
+            <app-exercise-list [exercisesList]="exercisesList"></app-exercise-list>
+        </div>
+        <div class="intmenu">
+            Interval menu (optional) here
+        </div>
+    </div>
+</div>

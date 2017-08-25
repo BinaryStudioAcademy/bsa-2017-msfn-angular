@@ -9,34 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SportsListComponent implements OnInit {
 
-    private data: any[];
+    private data: any[] = [];
     private itemsDropped: any[] = [];
-    private showPlaceholder = false;
+    private cach: number;
 
     dragOptions = {
         animation: 200,
         ghostClass: 'ghost',
         filter: '.add-container',
         group: 'sport',
-        store: {
-            /**
-             * Get the order of elements. Called once during initialization.
-             * @param   {Sortable}  sortable
-             * @returns {Array}
-             */
-            get: (sortable) => {
-                const order = localStorage.getItem(sortable.options.group.name);
-                return order ? order.split('|') : [];
-            },
-            /**
-             * Save the order of elements. Called onEnd (when the item is dropped).
-             * @param {Sortable}  sortable
-             */
-            set: (sortable) => {
-                const order = sortable.toArray();
-                localStorage.setItem(sortable.options.group.name, order.join('|'));
-            }
-        }
+        forceFallback: true,
+        // uncomment this for sorting by position field
+
+        // onStart: () => {
+        //     this.cach = this.data.length;
+        // },
+        // onEnd: (evt) => {
+        //     if (this.cach === this.data.length) {
+        //         this.sportsListService.updateOrder(evt.item.id, evt.newIndex);
+        //     }
+        // }
     };
 
     constructor(private sportsListService: SportsListService) { }
@@ -46,6 +38,11 @@ export class SportsListComponent implements OnInit {
             if (data.length === 1 && !data[0].code) {
                 this.data = [];
             } else {
+                // uncomment this for sorting by position field
+
+                // data.sort(function (a, b) {
+                //     return a.position - a.position;
+                // });
                 this.data = data;
             }
 

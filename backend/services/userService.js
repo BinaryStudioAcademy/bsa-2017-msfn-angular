@@ -12,6 +12,7 @@ UserService.prototype.addItem = addItem;
 UserService.prototype.updateItem = updateItem;
 UserService.prototype.makeid = makeid;
 UserService.prototype.addEmailToItem = addEmailToItem;
+UserService.prototype.getUserById = getUserById;
 
 function makeid() {
     let text = "";
@@ -42,9 +43,9 @@ function addItem(body, callback) {
                 to: body.email,
                 subject: 'Your MSFN registration',
                 html: '<table><tr><td>Congratulations, ' +
-                    body.firstName +
-                    '!</td></tr> <tr><td>You have become a part of our fantastic fitness network!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
-                    '<a href="' + config.host.hostAddress + '/confirmation/registration/' + body.activateToken + '">' + 'Activate account </a> </td></tr></table>'
+                body.firstName +
+                '!</td></tr> <tr><td>You have become a part of our fantastic fitness network!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
+                '<a href="' + config.host.hostAddress + '/confirmation/registration/' + body.activateToken + '">' + 'Activate account </a> </td></tr></table>'
             }, (err, data) => {
                 if (err) return callback(err);
                 if (data.rejected.length == 0) {
@@ -100,6 +101,19 @@ function addEmailToItem(id, body, callback) {
         }
     });
 
+}
+
+function getUserById(req, callback) {
+    userRepository.getById(req.params.id, function (err, data) {
+        if (req.params.id === req.session.passport.user) {
+            callback(err, data);
+        } else {
+            data.privacyHideFields.forEach(el => {
+                data[el] = null;
+            })
+            callback(err, data);
+        }
+    });
 }
 
 module.exports = new UserService();

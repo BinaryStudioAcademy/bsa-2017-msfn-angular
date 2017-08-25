@@ -1,42 +1,59 @@
 <div id="weight-control">
-    <div id="title"><h1>Weight Control</h1></div>
-
-    <div id="previous-diff" *ngIf="currentWeight">
-        <div id="yesterday">{{ recentDay }}:</div>
-        <div id="current-weight">{{ currentWeight }}kg</div>
-        <div class="diff"
-             *ngIf="weeklyItems.length > 1"
-             [ngClass]="{'better-result': settings.recent.betterResult, 'worse-result': settings.recent.worseResult}">
-            {{ settings.recent.symbol + diff.recent[settings.recent.selection] + settings.recent.measurement}}
-        </div>
-        <md-radio-group class="selection" *ngIf="weeklyItems.length > 1" [(ngModel)]="settings.recent.selection">
-            <label for="recent-{{ option.value }}"
-                   *ngFor="let option of options"
-                   [ngClass]="{'label-checked': option.recentChecked, 'label-unchecked': !option.recentChecked}">
-                {{ option.value }}
-            </label>
-            <input id="recent-{{ option.value }}"
-                class="radio-option"
-                type="radio"
-                name="recentOption"
-                value="{{ option.value }}"
-                *ngFor="let option of options"
-                [value]="option.value"
-                [checked]="option.recentChecked"
-                (change)="changeOption(option.value, 'recent')">
-        </md-radio-group>
+    <div id="title">
+        <h1>Weight Control</h1>
     </div>
 
-    <div id="per-week-diff" *ngIf="weeklyItems.length > 1">
-        <div id="per-week">per week: </div>
-        <div class="diff"
-             [ngClass]="{'better-result': settings.weekly.betterResult, 'worse-result': settings.weekly.worseResult}">
-            {{ settings.weekly.symbol + diff.weekly[settings.weekly.selection] + settings.weekly.measurement}}
+    <div class="period-wrap">
+        <md-input-container>
+            <input mdInput
+                   [(ngModel)]="period.min"
+                   [mdDatepicker]="period_min"
+                   placeholder="Period start"
+                   (change)="updateData()">
+            <button mdSuffix [mdDatepickerToggle]="period_min"></button>
+        </md-input-container>
+        <md-datepicker #period_min (selectedChanged)="updateData()"></md-datepicker>
+        <md-input-container>
+            <input mdInput
+                   [(ngModel)]="period.max"
+                   [mdDatepicker]="period_max"
+                   placeholder="Period end"
+                   (change)="updateData()">
+            <button mdSuffix [mdDatepickerToggle]="period_max"></button>
+        </md-input-container>
+        <md-datepicker #period_max (selectedChanged)="updateData()"></md-datepicker>
+    </div>
+
+    <svg id='chart' #chart class="weight-chart" xmlns="http://www.w3.org/2000/svg" (hidden)="periodItems.length === 0">
+        <text class="tooltip"></text>
+    </svg>
+
+    <div class="diff-block">
+        <div class="diff-wrap" *ngIf="periodItems.length === 0">
+            No data for this period
         </div>
-        <md-radio-group class="selection" [(ngModel)]="settings.weekly.selection">
+        <div class="diff-wrap" id="previous-diff" *ngIf="currentWeight && periodItems.length > 1">
+            <div id="yesterday">{{ recentDay }}:</div>
+            <div id="current-weight">{{ currentWeight }}kg</div>
+            <div class="diff"
+                 *ngIf="periodItems.length > 1"
+                 [ngClass]="{'better-result': settings.betterResult, 'worse-result': settings.worseResult}">
+                {{ settings.symbol + recentDiff[settings.selection] + settings.measurement}}
+            </div>
+        </div>
+        <div class="diff-wrap" id="per-week-diff" *ngIf="periodItems.length > 1">
+            <div id="per-week">Period: </div>
+            <div class="diff"
+                 [ngClass]="{'better-result': settings.betterResult, 'worse-result': settings.worseResult}">
+                {{ settings.symbol + periodDiff[settings.selection] + settings.measurement}}
+            </div>
+        </div>
+    </div>
+    <div class="sort-wrap">
+        <md-radio-group class="selection" [(ngModel)]="settings.selection">
             <label for="weekly-{{ option.value }}"
                    *ngFor="let option of options"
-                   [ngClass]="{'label-checked': option.weeklyChecked, 'label-unchecked': !option.weeklyChecked}">
+                   [ngClass]="{'label-checked': option.checked, 'label-unchecked': !option.checked}">
                 {{ option.value }}
             </label>
             <input id="weekly-{{ option.value }}"
@@ -46,8 +63,8 @@
                    value="{{ option.value }}"
                    *ngFor="let option of options"
                    [value]="option.value"
-                   [checked]="option.weeklyChecked"
-                   (change)="changeOption(option.value, 'weekly')">
+                   [checked]="option.checked"
+                   (change)="changeOption(option.value)">
         </md-radio-group>
     </div>
 
