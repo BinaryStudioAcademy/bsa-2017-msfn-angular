@@ -6,6 +6,8 @@ module.exports = function(io, MongoStore) {
     const cookie = require("cookie");
     const decrypt = require('../services/decryptService');
 
+    socketService.SetIO(io);
+
     io.use(function(socket, callback){
 
         let handshake = socket.request;
@@ -41,6 +43,9 @@ module.exports = function(io, MongoStore) {
         socketService.SetSocket(socket);
         socketService.AddUser(socket);
         socketService.InitListeners(socket);
+        if (socket.user.isAdmin) {
+            socketService.JoinRoom('admin', () => {});
+        }
 
         socket.on('disconnect', (data) => {
             socketService.RemoveUser(socket);

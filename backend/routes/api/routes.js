@@ -12,5 +12,8 @@ module.exports = function (app) {
         changePasswordRoutes: require('./changePasswordRoutes')(app),
         measurementRoutes: require('./measurementRoutes')(app),
         weightControlRoutes: require('./weightControlRoutes')(app),
+        goalRoutes: require('./goalRoutes')(app),
+        goalTypeRoutes: require('./goalTypeRoutes')(app),
+        trainingPlanRoutes: require('./trainingPlanRoutes')(app),
     };
 };

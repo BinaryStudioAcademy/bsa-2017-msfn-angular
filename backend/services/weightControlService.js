@@ -13,10 +13,14 @@ function addItem(userId, body, callback) {
         if (data === null){
             callback(new ApiError('User not found'));
         } else {
-            let newWeightControlList = [...data.weightControl];
-            newWeightControlList.push(body);
             userRepository.update(userId, {
-                weightControl: newWeightControlList
+                $push: {weightControl: {
+                    date: body.date,
+                    fatPct: body.datPct,
+                    boneWeight: body.boneWeight,
+                    waterPct: body.waterPct,
+                    weight: body.weight
+                }}
             }, callback);
         }
     })
@@ -29,14 +33,12 @@ function deleteItem(data, callback) {
         if (data === null){
             callback(new ApiError('User not found'));
         } else {
-            let newWeightControlList = [...data.weightControl];
-            const index = data.weightControl.findIndex(
-                item => item._id === data.body._id
-            );
-            newWeightControlList.splice(index, 1);
-
             userRepository.update(data.user._id, {
-                weightControl: newWeightControlList
+                $pull: {
+                    weightControl: {
+                        _id: data.body._id
+                    }
+                }
             }, callback);
         }
     })

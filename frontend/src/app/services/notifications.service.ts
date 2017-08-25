@@ -58,6 +58,20 @@ export class NotificationsService {
                 userId: this.userId
             }));
         });
+
+        this.socketService.addListener('join_room:success', (json) => {
+            console.log(json);
+        });
+
+        this.socketService.addListener('new_coach_request', (json) => {
+            let data;
+            try {
+                data = JSON.parse(json);
+            } catch (err) {
+                return;
+            }
+            this.addNotification(data);
+        });
     }
 
     public setNotifications(data: INotification[]) {

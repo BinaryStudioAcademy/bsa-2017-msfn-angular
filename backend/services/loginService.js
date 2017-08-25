@@ -10,6 +10,7 @@ LoginService.prototype.loginConfirmedUser = loginConfirmedUser;
 
 function login(req, res, next) {
     req.body = decrypt(req.body.data);
+    console.log(req.body);
     passport.authenticate('local',
         function(err, user, info) {
             if (err) {

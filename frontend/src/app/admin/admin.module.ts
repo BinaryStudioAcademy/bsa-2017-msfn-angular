@@ -19,6 +19,7 @@ import { AdminRootProfileService } from './admin.components/admin-root-profile/a
 import { ExerciseCreateService } from './admin.components/exercise-create/exercise-create.service';
 import { SportHandlingComponent } from './admin.components/sport-handling/sport-handling.component';
 import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
+import { GoalListComponent } from './admin.components/goal-list/goal-list.component';
 import { MeasureTypeComponent } from './admin.components/measure-type/measure-type.component';
 
 @NgModule({
@@ -37,6 +38,7 @@ import { MeasureTypeComponent } from './admin.components/measure-type/measure-ty
         AdminRootProfileComponent,
         SportHandlingComponent,
         SportsListComponent,
+        GoalListComponent,
         MeasureListComponent,
         MeasureTypeComponent
     ],

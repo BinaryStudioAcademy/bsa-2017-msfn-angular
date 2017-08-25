@@ -1,6 +1,7 @@
 const ApiError = require('./apiErrorService');
 const decrypt = require('./decryptService');
 const config = require('../routes/socket');
+const rooms = require('../routes/socket/rooms');
 
 function SocketService() {
     this.users = [];
@@ -29,6 +30,16 @@ SocketService.prototype.Broadcast = function(event, data) {
     }
 };
 
+SocketService.prototype.BroadcastRoom = function(event, room, data) {
+    if (this.socket) {
+        this.io.sockets.in(room).emit(event, data);
+    }
+};
+
+SocketService.prototype.SetIO = function(io) {
+    this.io = io;
+};
+
 SocketService.prototype.SetSocket = function(socket) {
     this.socket = socket;
 };
@@ -53,6 +64,21 @@ SocketService.prototype.GetUserById = function(id) {
         return (socket.user._id.toString() === id);
     });
     return _return.shift();
+};
+
+SocketService.prototype.JoinRoom = function(json, callback) {
+    let data;
+    try {
+        data = JSON.parse(json);
+    } catch (err) {
+        return callback(err);
+    }
+    let room;
+    ({room} = data);
+    if (!room) return callback(new ApiError('No room specified'));
+
+    this.socket.join(room);
+    callback(null, 'ok');
 };
 
 SocketService.prototype.InitListeners = function(socket) {

@@ -17,6 +17,9 @@ import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.c
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
+import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
+import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
+import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 
 const userRoutes: Routes = [
     {
@@ -52,6 +55,10 @@ const userRoutes: Routes = [
                         path: 'misc',
                         component: MiscComponent,
                     },
+                    {
+                        path: 'privacy',
+                        component: PrivacyComponent,
+                    },
                 ]
             },
             {
@@ -71,12 +78,25 @@ const userRoutes: Routes = [
                 component: IntervalTrainingPlanComponent,
             },
             {
-                path: 'training-plan',
+                path: 'training-plan/add',
+                component: PlanDetailComponent,
+            },
+            {
+                path: 'training-plan/:id',
                 component: PlanDetailComponent,
             },
             {
                 path: 'weight-control',
                 component: WeightControlComponent
+            },
+            {
+                path: 'exercise-table',
+                component: ExerciseTableComponent
+            },
+            {
+                path: 'start-training',
+                component: ActiveTrainingComponent
+
             }
         ]
     }

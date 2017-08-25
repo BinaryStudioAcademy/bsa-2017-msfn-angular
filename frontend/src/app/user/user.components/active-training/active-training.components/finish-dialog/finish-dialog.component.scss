@@ -1,0 +1,68 @@
+@import '../../../../../../globalStyles/variables.scss';
+@import '../../../../../../globalStyles/indentations.scss';
+@import '../../../../../../globalStyles/text.scss';
+* {
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
+}
+
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.done {
+    color: $btn-color;
+    font-size: 18px;
+}
+
+.not-done {
+    color: $text-warn-color;
+    font-size: 18px;
+}
+
+.item-container {
+    display: flex;
+    margin-top: 10px;
+    font-family: $font-general;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ex-container {
+    margin-top: 10px;
+    background-color: $bg-color;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    max-height: 128px;
+    overflow-y: auto;
+}
+
+.first {
+    margin-top: 25px !important;
+}
+
+.ex {
+    padding: 8px;
+    font-size: 16px;
+}
+
+.text {
+    font-size: 16px;
+}
+
+.bigger {
+    font-size: 26px;
+    letter-spacing: 2px;
+    margin-left: 10px;
+}
+.btn-container {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

@@ -1,6 +1,6 @@
 <div id="sports-container" >
     <div class="list" [sortablejs]="data" [sortablejsOptions]="dragOptions">
-        <div class="item-container" *ngFor="let item of data" routerLink="../sport-handling/{{item.code}}">
+        <div class="item-container" *ngFor="let item of data" id="{{item.code}}" routerLink="../sport-handling/{{item.code}}">
             <img src="{{item.icon}}" alt="Icon" class="sports-item-ico">
             <p class="sports-item-text">{{ item.name }}</p>
         </div>

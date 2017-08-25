@@ -67,7 +67,7 @@ export class LoginSettingsComponent implements OnInit {
     ngOnInit() {
         this.profileService.getUser(this.userId, res => {
             this.user = res;
-            this.birthday = this.dateService.convertDateFromIso(this.user.birthday);
+            this.birthday = this.dateService.convertDateFromIso(this.user.birthday, true);
             this.months = this.dateService.generateMonths();
             this.days = this.dateService.generateDays(this.birthday.month, this.birthday.year);
             this.years = this.dateService.generateYears();

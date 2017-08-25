@@ -1,0 +1,23 @@
+<div class="container">
+    <p class="title">
+        Select what information other users can see
+    </p>
+    <div class="checkbox-wrap">
+        <md-slide-toggle class="row" [(ngModel)]="privacy.email">
+            Email address
+        </md-slide-toggle>
+        <md-slide-toggle class="row" [(ngModel)]="privacy.birthday">
+            Date of birthday
+        </md-slide-toggle>
+        <md-slide-toggle class="row" [(ngModel)]="privacy.height">
+            Height
+        </md-slide-toggle>
+        <md-slide-toggle class="row" [(ngModel)]="privacy.weight">
+            Weight
+        </md-slide-toggle>
+        <md-slide-toggle class="row" [(ngModel)]="privacy.following">
+            Following users
+        </md-slide-toggle>
+    </div>
+    <button class="btn" (click)="saveSettings()">Save changes</button>
+</div>
