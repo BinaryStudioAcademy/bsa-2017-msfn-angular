@@ -1,8 +1,8 @@
 <div class="container">
     <h2 class="title" md-dialog-title>Today training plan</h2>
-    <div class="recomendation" *ngIf="matchedTrain">
+    <div class="recomendation" *ngIf="matchedTrain.length">
         <span>Recomended plan:</span>
-        <span class="train">{{matchedTrain.name}}</span>
+        <span class="train" *ngFor="let item of matchedTrain">{{item.name}}</span>
     </div>
     <div class="listTrain">
         <span>List:</span>

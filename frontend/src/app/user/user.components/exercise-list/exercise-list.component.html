@@ -24,10 +24,6 @@
                 <div class="item-opt-val">{{set.value2}}</div>
               </div>
             </div>
-            <div class="set-item add">
-              <div class="item-id" (click)="setAdd(exercise)">+</div>
-              <a class="exercise-add" (click)="setAdd(exercise)">Add</a>
-            </div>
             <div class="set-form" *ngIf="exercise.edit">
               <form #form="ngForm">
                 <div class="item-val">
@@ -48,7 +44,15 @@
                     (keyup.enter)="setSaveInfo(exercise, form)">
                   </md-input-container>
                 </div>
+                <div class="set-item add">
+                  <div class="item-id" (click)="setSaveInfo(exercise, form)">+</div>
+                  <a class="exercise-add" (click)="setSaveInfo(exercise, form)">Save</a>
+                </div>
               </form>
+            </div>
+            <div class="set-item add" *ngIf="!exercise.edit">
+              <div class="item-id" (click)="setAdd(exercise)">+</div>
+              <a class="exercise-add" (click)="setAdd(exercise)">Add</a>
             </div>
           </div>
         </div>

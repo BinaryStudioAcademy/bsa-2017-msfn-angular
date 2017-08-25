@@ -238,16 +238,20 @@ export class PlanDetailComponent implements OnInit {
       url: `/api/training-plan`,
       method: 'POST',
       body: this.trainingPlan,
-      successMessage: '',
+      successMessage: 'Plan created',
     };
     if (this.trainingPlan._id.length) {
       sendData.method = 'PUT';
+      sendData.successMessage = 'Plan saved';
       sendData.url += '/' + this.trainingPlan._id;
+    } else {
     }
     this.httpHandler.sendRequest(sendData)
       .then((res) => {
         if (res) {
-          console.log(res);
+          if(!res.nModified){
+            this.trainingPlan._id = res._id;
+          }
         }
       });
   }
