@@ -1,5 +1,6 @@
 <div class="all-user-container">
     <md-tab-group>
+
         <!-- All -->
         <md-tab label="All">
             <md-input-container class="search-box">
@@ -101,7 +102,6 @@
                                     <p md-line class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
                                 </a>
                             </div>
-                            <button md-button (click)="unfollow(user)">{{user.justUnsubscribe?'Follow':'Unfollow'}}</button>
                             <button md-button (click)="unfollow(user)">{{user.justUnsubscribe?'Follow':'Unfollow'}}</button>
                         </md-list-item>
                     </md-list>
