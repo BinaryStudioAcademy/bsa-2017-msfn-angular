@@ -1,0 +1,39 @@
+@import '../../../../../../globalStyles/variables.scss';
+@import '../../../../../../globalStyles/indentations.scss';
+@import '../../../../../../globalStyles/text.scss';
+
+.food-plan > .content {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 70%;
+}
+
+#eaten {
+    width: 30%;
+}
+
+#eaten > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: $main-text;
+}
+
+.kcal-amount {
+    margin-top: -9px;
+    font-size: $header-text;
+
+    span {
+        font-size: $main-text;
+    }
+}
+
+#meal-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 50%;
+}
