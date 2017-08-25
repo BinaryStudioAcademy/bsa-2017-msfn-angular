@@ -1,18 +1,5 @@
 <div class="container">
     <h2 class="title" md-dialog-title>Finish training?</h2>
-    <div *ngIf="done" class="done">You finish all exercises!</div>
-    <div *ngIf="!done" class="not-done">You didn`t finish selected exercise:</div>
-    <div class="ex-container" *ngIf="!done">
-        <div class="ex">Bodybuilding</div>
-        <div class="ex">Push ups</div>
-        <div class="ex">Running</div>
-        <div class="ex">Bodybuilding</div>
-        <div class="ex">Push ups</div>
-        <div class="ex">Running</div>
-        <div class="ex">Bodybuilding</div>
-        <div class="ex">Push ups</div>
-        <div class="ex">Running</div>
-    </div>
     <div class="item-container first">
         <div class="text">Total time: </div>
         <div class="bigger">{{data.time.total}}</div>
