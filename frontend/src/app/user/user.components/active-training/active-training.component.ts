@@ -15,7 +15,7 @@ export class ActiveTrainingComponent implements OnInit {
     typeTrain = 'General';
     secundomerBind = {
         intervalTrain: false,
-        finishTrain: false
+        finishTrain: <boolean | string>false
     };
 
     burnedCallories = 1445;
@@ -53,12 +53,6 @@ export class ActiveTrainingComponent implements OnInit {
         });
     }
 
-
-
-
-
-
-
     onFinish(timeData) {
         const data = {
             time: timeData,
@@ -67,6 +61,8 @@ export class ActiveTrainingComponent implements OnInit {
         this.activeTrainingService.showFinishDialog(data, result => {
             if (result) {
                 this.secundomerBind.finishTrain = true;
+            } else {
+                this.secundomerBind.finishTrain = 'continue';
             }
             setTimeout(() => { this.secundomerBind.finishTrain = false; }, 1000);
         });
