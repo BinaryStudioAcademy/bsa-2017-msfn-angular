@@ -4,6 +4,7 @@
 
 .exercises-container {
     // width: 65%;
+    height: 100%;
     padding: 0 15px;
     .button-add {
         margin-bottom: 20px;
@@ -11,6 +12,7 @@
     .exercise-table {
         background: linear-gradient($gradient-to-color 75%, $bg-color);
         box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
+        height: 80%;
         .exercise-table-head {
             height: 50px;
             display: flex;
@@ -34,11 +36,14 @@
         }
         .exercise-table-body {
             display: flex;
+            height: 90%;
             flex-flow: row wrap;
             justify-content: center;
             z-index: 1;
             .exercise-row {
                 display: flex;
+                max-height: 80%;
+                overflow-y: auto;
                 position: relative;
                 flex-direction: column;
                 margin-bottom: 10px;
@@ -79,7 +84,7 @@
                     margin-bottom: 10px;
                     max-width: 180px;
                     text-overflow: ellipsis;
-                    overflow: hidden;
+                    /* overflow: hidden; */
                     white-space: nowrap;
                 }
                 .col.sets {
@@ -123,6 +128,13 @@
                     }
                     .set-form form {
                         display: flex;
+                        flex-flow: row wrap;
+                        .item-val {
+                            flex: 50%;
+                        }
+                        .item-opt-val {
+                            flex: 50%;
+                        }
                         .item-save {
                             align-items: center;
                             display: flex;
