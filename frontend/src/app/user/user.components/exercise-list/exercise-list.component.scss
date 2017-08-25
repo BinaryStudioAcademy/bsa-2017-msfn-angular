@@ -3,15 +3,11 @@
 @import "../../../../globalStyles/indentations";
 
 .exercises-container {
-    // width: 65%;
     height: 100%;
     padding: 0 15px;
-    .button-add {
-        margin-bottom: 20px;
-    }
     .exercise-table {
-        background: linear-gradient($gradient-to-color 75%, $bg-color);
-        box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
+       /*  background: linear-gradient($gradient-to-color 75%, $bg-color);
+        box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19); */
         height: 80%;
         .exercise-table-head {
             height: 50px;
@@ -19,26 +15,33 @@
             padding: 20px;
             align-items: center;
             justify-content: space-between;
-            background-color: $gradient-to-color;
+            /* background-color: $gradient-to-color; */
             z-index: 2;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+           /*  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
             .table-title {
                 font-size: 16px;
                 text-transform: uppercase;
+                position: relative;
+
+                .button-add {
+                    position: absolute;
+                    right: -33px;
+                    top: -7px;
+                    font-size: 30px;
+                    cursor: pointer;
+                }
             }
             .exercise-pagination {
-                height: 50px!important;
+                height: 50px;
+                background: none;
                 min-height: unset;
-                .mat-paginator-page-size {
-                    display: none;
-                }
             }
         }
         .exercise-table-body {
             display: flex;
             height: 90%;
             flex-flow: row wrap;
-            justify-content: space-around;
+            justify-content: flex-start;
             z-index: 1;
             .exercise-row {
                 display: flex;
@@ -46,10 +49,11 @@
                 overflow-y: auto;
                 position: relative;
                 flex-direction: column;
-                margin: 10px 0;
+                margin: 10px;
                 padding: 20px 25px;
                 width: 220px;
                 align-items: flex-start;
+                background: linear-gradient($gradient-to-color 75%, $bg-color);
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 &:hover {
                     .col.del,
@@ -86,6 +90,7 @@
                     text-overflow: ellipsis;
                     /* overflow: hidden; */
                     white-space: nowrap;
+                    cursor: pointer;
                 }
                 .col.sets {
                     display: flex;

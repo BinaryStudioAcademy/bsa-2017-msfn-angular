@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { PageEvent, MdPaginatorModule } from '@angular/material';
 import { SearchExerciseComponent } from './../search-exercise/search-exercise.component';
+import { ExerciseDescriptionComponent } from '../exercise-description/exercise-description.component';
 
 @Component({
     selector: 'app-exercise-list',
@@ -41,7 +42,7 @@ export class ExerciseListComponent implements OnInit {
 
     onResize() {
         if (window.innerWidth > 610) {
-            this.pageSize = Math.floor((this.container.nativeElement.offsetWidth - 30) / 220);
+            this.pageSize = Math.floor((this.container.nativeElement.offsetWidth - 30) / 240);
         } else {
             this.pageSize = 3;
         }
@@ -140,6 +141,14 @@ export class ExerciseListComponent implements OnInit {
 
     setDelete(exercise, index) {
         exercise.sets.splice(index, 1);
+    }
+
+    showDescription(exercise) {
+        console.log(exercise);
+        this.dialog.open(ExerciseDescriptionComponent, {
+            data: exercise
+            // position: {top: '160px'}
+        });
     }
 
 }
