@@ -34,6 +34,7 @@ import { FinishDialogComponent } from './user.components/active-training/active-
 import { ChooseTrainDialogComponent } from './user.components/active-training/active-training.components/choose-train-dialog/choose-train-dialog.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 
+
 @NgModule({
     imports: [
         CommonModule,
@@ -60,6 +61,7 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
         WeightControlComponent,
         DashboardComponent,
         MiscComponent,
+        UserListComponent,
         PrivacyComponent,
         ExerciseTableComponent,
         ExerciseDescriptionComponent,
@@ -67,8 +69,7 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
         SecundomerComponent,
         FinishDialogComponent,
         ChooseTrainDialogComponent,
-        ActiveTrainingComponent,
-        UserListComponent
+        ActiveTrainingComponent
     ],
     providers: [
         ForAllUserGuard,

@@ -28,10 +28,11 @@ import {
     MdTooltipModule,
     MdMenuModule,
     MdListModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
     MdButtonToggleModule,
-    MdTabsModule
+    MdTabsModule,
+    MdDatepickerModule,
+    MdNativeDateModule
+
 } from '@angular/material';
 import 'hammerjs';
 import { D3Service } from 'd3-ng2-service';

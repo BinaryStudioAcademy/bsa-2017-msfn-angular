@@ -62,7 +62,7 @@ export class SearchExerciseComponent implements OnInit {
               sets: [],
               id: element._id,
               description: element.description,
-            }
+            };
           });
           console.log(this.exercisesList);
         }
