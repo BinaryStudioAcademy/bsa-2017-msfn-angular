@@ -144,10 +144,8 @@ export class ExerciseListComponent implements OnInit {
     }
 
     showDescription(exercise) {
-        console.log(exercise);
         this.dialog.open(ExerciseDescriptionComponent, {
             data: exercise
-            // position: {top: '160px'}
         });
     }
 
