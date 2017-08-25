@@ -31,9 +31,8 @@ class trainingPlanService {
     add(req, callback){
         let data = req.body;
         data.isRemoved = false;
-        // console.log(data.session);
         data.userID = req.session.passport.user;
-
+        delete data._id;
         trainingPlanRepository.add(data, (err, planData) => {
                 if (err) return callback(err);
                 if (planData === null) {
