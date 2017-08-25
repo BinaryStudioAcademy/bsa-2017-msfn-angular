@@ -34,6 +34,12 @@ import { FinishDialogComponent } from './user.components/active-training/active-
 import { ChooseTrainDialogComponent } from './user.components/active-training/active-training.components/choose-train-dialog/choose-train-dialog.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 
+import { DbWeightControlComponent } from './user.components/dashboard/dashboard.components/db-weight-control/db-weight-control.component';
+import { DbCaloriesComponent } from './user.components/dashboard/dashboard.components/db-calories/db-calories.component';
+import { DbEventsComponent } from './user.components/dashboard/dashboard.components/db-events/db-events.component';
+import { DbFoodPlanComponent } from './user.components/dashboard/dashboard.components/db-food-plan/db-food-plan.component';
+import { DbNewsComponent } from './user.components/dashboard/dashboard.components/db-news/db-news.component';
+import { DbGoalsComponent } from './user.components/dashboard/dashboard.components/db-goals/db-goals.component';
 
 @NgModule({
     imports: [
@@ -69,7 +75,13 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
         SecundomerComponent,
         FinishDialogComponent,
         ChooseTrainDialogComponent,
-        ActiveTrainingComponent
+        ActiveTrainingComponent,
+        DbWeightControlComponent,
+        DbCaloriesComponent,
+        DbEventsComponent,
+        DbFoodPlanComponent,
+        DbNewsComponent,
+        DbGoalsComponent,
     ],
     providers: [
         ForAllUserGuard,

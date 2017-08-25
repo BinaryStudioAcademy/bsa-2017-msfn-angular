@@ -1,0 +1,34 @@
+@import '../../../../../../globalStyles/variables.scss';
+@import '../../../../../../globalStyles/indentations.scss';
+@import '../../../../../../globalStyles/text.scss';
+
+.news > .content {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 70%;
+}
+
+.news-item {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    div {
+        display: inline-block;
+    }
+}
+
+.news-title {
+    width: 50%;
+    font-size: $main-text;
+}
+
+.news-date {
+    width: 50%;
+    text-align: right;
+}
+
+.news-text {
+    flex-basis: 100%;
+    margin-top: 20px;
+}
