@@ -95,13 +95,13 @@ export class PlanDetailComponent implements OnInit {
             this.trainingPlan = res[0];
             this.trainingPlan.days.forEach((el) => {
               this.days.forEach((day) => {
-                if (day.key == el.key) {
+                if (day.key === el.key) {
                   day.checked = true;
                 }
               });
             });
             this.types.forEach((type) => {
-              if (type.key == this.trainingPlan.trainingType) {
+              if (type.key === this.trainingPlan.trainingType) {
                 type.checked = true;
               }
             });
@@ -137,9 +137,9 @@ export class PlanDetailComponent implements OnInit {
           break;
       }
     } else {
-      if (parseInt(newValue)) {
+      if (parseInt(newValue, 10)) {
 
-        this.trainingPlan.count = parseInt(newValue);
+        this.trainingPlan.count = parseInt(newValue, 10);
       }
     }
 
@@ -221,7 +221,7 @@ export class PlanDetailComponent implements OnInit {
       value2: form.value.value2
     };
     if (!exercise.sets) {
-      exercise.sets = []
+      exercise.sets = [];
     }
     exercise.sets.push(newSet);
     form.value.value = '';
