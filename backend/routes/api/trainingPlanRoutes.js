@@ -25,7 +25,6 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.post(baseUrl, function (req, res, next) {
-        // console.log(req.session.passport.user);
         trainingPlanService.add(req, function (err, data) {
             res.data = data;
             res.err = err;
