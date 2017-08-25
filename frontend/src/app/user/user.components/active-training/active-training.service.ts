@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MdDialog,
-                MdDialogRef } from '@angular/material';
+import { MdDialog, MdDialogRef } from '@angular/material';
 import { HttpService } from '../../../services/http.service';
 import { IHttpReq } from '../../../models/http-req';
 import { FinishDialogComponent } from './active-training.components/finish-dialog/finish-dialog.component';
