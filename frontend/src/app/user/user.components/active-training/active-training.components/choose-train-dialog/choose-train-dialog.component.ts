@@ -10,7 +10,7 @@ import { MD_DIALOG_DATA } from '@angular/material';
 })
 export class ChooseTrainDialogComponent implements OnInit {
 
-    matchedTrain: any;
+    matchedTrain = [];
     constructor(
         @Inject(MD_DIALOG_DATA) public data: any
     ) { }
@@ -20,8 +20,8 @@ export class ChooseTrainDialogComponent implements OnInit {
         this.data.forEach(element => {
             if (element.days && element.days.length) {
                 element.days.forEach(el => {
-                    if (el.key === day) {
-                        this.matchedTrain = element;
+                    if (+el.key === day) {
+                        this.matchedTrain.push(element);
                     }
                 });
             }

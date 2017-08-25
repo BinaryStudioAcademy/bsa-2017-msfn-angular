@@ -49,7 +49,7 @@ export class ActiveTrainingComponent implements OnInit {
     ngOnInit() {
 
         this.activeTrainingService.getPlans((data) => {
-
+            // console.log(data);
         });
     }
 

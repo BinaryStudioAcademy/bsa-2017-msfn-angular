@@ -11,68 +11,6 @@ import { ChooseTrainDialogComponent } from './active-training.components/choose-
 export class ActiveTrainingService {
 
     dialogRef: MdDialogRef<any>;
-    fakeData = [
-        {
-            _id: 'firstIDduisvh98s4',
-            name: 'Intensive gym',
-            days: [
-                {
-                    key: 0,
-                    value: 'Sun',
-                    checked: true
-                },
-                {
-                    key: 4,
-                    value: 'Wed',
-                    checked: true
-                }
-            ]
-        },
-        {
-            _id: 'secondIDduisvh98s4',
-            name: 'Crossing',
-            days: [
-                {
-                    key: 1,
-                    value: 'Mon',
-                    checked: true
-                }
-            ]
-        },
-        {
-            _id: 'thirdIDduisvh98s4',
-            name: 'Light gym',
-            days: [
-                {
-                    key: 2,
-                    value: 'Tue',
-                    checked: true
-                },
-                {
-                    key: 5,
-                    value: 'Fri',
-                    checked: true
-                },
-                {
-                    key: 6,
-                    value: 'Sat',
-                    checked: true
-                }
-            ]
-        },
-        {
-            _id: 'fourthIDduisvh98s4',
-            name: 'Crossfit',
-            days: [
-                {
-                    key: 1,
-                    value: 'Mon',
-                    checked: true
-                }
-            ]
-        }
-    ];
-
 
     constructor(
         private dialog: MdDialog,
@@ -86,18 +24,16 @@ export class ActiveTrainingService {
             body: {},
         };
 
-        // this.httpService.sendRequest(sendData)
-        //     .then(data => {
-        //         callback(data);
-                this.dialogRef = this.dialog.open(ChooseTrainDialogComponent,
-                { data: this.fakeData });
-                this.dialogRef.afterClosed().subscribe();
-        // });
+        this.httpService.sendRequest(sendData)
+            .then(data => {
+                console.log(data);
+                this.dialogRef = this.dialog.open(ChooseTrainDialogComponent, { data: data });
+                this.dialogRef.afterClosed().subscribe(callback(data));
+        });
     }
 
     showFinishDialog(data, callback) {
-        this.dialogRef = this.dialog.open(FinishDialogComponent,
-                { data: data });
+        this.dialogRef = this.dialog.open(FinishDialogComponent, { data: data });
         this.dialogRef.afterClosed().subscribe(callback);
     }
 }
