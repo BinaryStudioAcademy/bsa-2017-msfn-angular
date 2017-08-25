@@ -12,9 +12,7 @@ import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { SettingsComponent } from './user.components/settings/settings.component';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
-import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
-import { FollowingListComponent } from './user.components/following-list/following-list.component';
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
@@ -24,6 +22,7 @@ import { ExerciseEditDialogComponent } from './user.components/exercise-edit-dia
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
+import { UserListComponent } from './user.components/user-list/user-list.component';
 import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
 import { ExerciseDescriptionComponent } from './user.components/exercise-description/exercise-description.component';
 import { MarkdownService } from '../services/markdown.service';
@@ -53,8 +52,6 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
         SettingsComponent,
         IntervalTrainingPlanComponent,
         OtherProfilesComponent,
-        FollowersListComponent,
-        FollowingListComponent,
         AccountSettingsComponent,
         LoginSettingsComponent,
         PlanDetailComponent,
@@ -70,7 +67,8 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
         SecundomerComponent,
         FinishDialogComponent,
         ChooseTrainDialogComponent,
-        ActiveTrainingComponent
+        ActiveTrainingComponent,
+        UserListComponent
     ],
     providers: [
         ForAllUserGuard,

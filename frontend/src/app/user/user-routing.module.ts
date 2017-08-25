@@ -7,8 +7,6 @@ import { UserComponent } from './user.component';
 import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
-import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
-import { FollowingListComponent } from './user.components/following-list/following-list.component';
 import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 // import { FriendsComponent } from './user.components/friends/friends.component';
@@ -20,6 +18,7 @@ import { MiscComponent } from './user.components/account-settings/misc/misc.comp
 import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
 import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
+import { UserListComponent } from './user.components/user-list/user-list.component';
 
 const userRoutes: Routes = [
     {
@@ -62,14 +61,6 @@ const userRoutes: Routes = [
                 ]
             },
             {
-                path: 'followers',
-                component: FollowersListComponent,
-            },
-            {
-                path: 'following',
-                component: FollowingListComponent,
-            },
-            {
                 path: 'profile/:id',
                 component: OtherProfilesComponent,
             },
@@ -88,6 +79,10 @@ const userRoutes: Routes = [
             {
                 path: 'weight-control',
                 component: WeightControlComponent
+            },
+            {
+                path: 'all-users',
+                component: UserListComponent
             },
             {
                 path: 'exercise-table',
