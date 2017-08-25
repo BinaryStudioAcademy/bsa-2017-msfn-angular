@@ -28,83 +28,83 @@ export class ExerciseListComponent implements OnInit {
     lastAfterClosedResult: string;
 
     constructor(
-      private dialog: MdDialog,
-      private paginator: MdPaginatorModule,
+        private dialog: MdDialog,
+        private paginator: MdPaginatorModule,
     ) {
         this.openedDialog = null;
     }
 
     ngOnInit() {
-      this.displayExercises = this.exercisesList.slice(0, this.pageSize);
-      this.onResize();
+        this.displayExercises = this.exercisesList.slice(0, this.pageSize);
+        this.onResize();
     }
 
     onResize() {
-      if (window.innerWidth > 610) {
-        this.pageSize = Math.floor((this.container.nativeElement.offsetWidth - 30) / 220);
-      } else {
-        this.pageSize = 3;
-      }
-      this.showPage(0);
+        if (window.innerWidth > 610) {
+            this.pageSize = Math.floor((this.container.nativeElement.offsetWidth - 30) / 220);
+        } else {
+            this.pageSize = 3;
+        }
+        this.showPage(0);
     }
 
     addExercise() {
-      this.searchDialog = this.dialog.open(SearchExerciseComponent, {
-        data: {
-          currentExercises: this.exercisesList
-        }
-      });
-      this.searchDialog.afterClosed().subscribe((result: string) => {
-        this.lastAfterClosedResult = result;
-        const selectedExercises = this.searchDialog.componentInstance.selectedExercises;
+        this.searchDialog = this.dialog.open(SearchExerciseComponent, {
+            data: {
+                currentExercises: this.exercisesList
+            }
+        });
+        this.searchDialog.afterClosed().subscribe((result: string) => {
+            this.lastAfterClosedResult = result;
+            const selectedExercises = this.searchDialog.componentInstance.selectedExercises;
 
-        this.addExercises(selectedExercises);
-        this.searchDialog = null;
-      });
+            this.addExercises(selectedExercises);
+            this.searchDialog = null;
+        });
 
     }
 
     deleteExercise(id) {
-      this.exercisesList = this.exercisesList.filter(function (el) {
-        if (el.id) {
-          return el.id !== id;
-        } else if (el._id) {
-          return el._id !== id;
-        }
-      });
+        this.exercisesList = this.exercisesList.filter(function (el) {
+            if (el.id) {
+                return el.id !== id;
+            } else if (el._id) {
+                return el._id !== id;
+            }
+        });
 
-      this.displayExercises = this.exercisesList.slice(0, this.pageSize);
+        this.displayExercises = this.exercisesList.slice(0, this.pageSize);
     }
 
     showPage(currentPage) {
-      const startInd = currentPage * this.pageSize;
-      this.displayExercises = this.exercisesList.slice(startInd, startInd + this.pageSize);
+        const startInd = currentPage * this.pageSize;
+        this.displayExercises = this.exercisesList.slice(startInd, startInd + this.pageSize);
     }
 
     addExercises(exercises) {
-      exercises.forEach((elem, ind) => {
-        const inArray = this.exercisesList.find((el) => {
-          return el.id === elem.id;
+        exercises.forEach((elem, ind) => {
+            const inArray = this.exercisesList.find((el) => {
+                return el.id === elem.id;
+            });
+            if (!inArray) {
+                this.exercisesList.push(elem);
+            }
         });
-        if (!inArray) {
-          this.exercisesList.push(elem);
+        let page = 0;
+        if (this.pageEvent) {
+            page = this.pageEvent.pageIndex;
         }
-      });
-      let page = 0;
-      if (this.pageEvent) {
-        page = this.pageEvent.pageIndex;
-      }
-      this.showPage(page);
+        this.showPage(page);
     }
 
     setAdd(exercise) {
-      this.displayExercises.forEach((item: any) => {
-        item.edit = false;
-      });
-      this.exercisesList.forEach((item: any) => {
-        item.edit = false;
-      });
-      exercise.edit = true;
+        this.displayExercises.forEach((item: any) => {
+            item.edit = false;
+        });
+        this.exercisesList.forEach((item: any) => {
+            item.edit = false;
+        });
+        exercise.edit = true;
     }
 
     setSaveInfo(exercise, form) {
@@ -114,17 +114,17 @@ export class ExerciseListComponent implements OnInit {
                 exercise.sets[this.setItemEdit].value2 = this.value2;
                 this.setItemEdit = null;
             } else {
-                  const newSet = {
-                      value: form.value.value,
-                      value2: form.value.value2
-                  };
+                const newSet = {
+                    value: form.value.value,
+                    value2: form.value.value2
+                };
 
-                  if (!exercise.sets) {
-                      exercise.sets = [];
-                  }
+                if (!exercise.sets) {
+                    exercise.sets = [];
+                }
 
-                  exercise.sets.push(newSet);
-              }
+                exercise.sets.push(newSet);
+            }
         }
         this.value = '';
         this.value2 = '';
@@ -139,7 +139,7 @@ export class ExerciseListComponent implements OnInit {
     }
 
     setDelete(exercise, index) {
-       exercise.sets.splice(index, 1);
+        exercise.sets.splice(index, 1);
     }
 
 }

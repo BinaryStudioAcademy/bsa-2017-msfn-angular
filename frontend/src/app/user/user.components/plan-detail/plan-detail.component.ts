@@ -106,7 +106,7 @@ export class PlanDetailComponent implements OnInit {
                                 type.checked = true;
                             }
                         });
-                        this.exercisesListComponent.exercisesList = this.trainingPlan.exercisesList;
+                        // this.exercisesListComponent.exercisesList = this.trainingPlan.exercisesList;
                         this.exercisesListComponent.showPage(0);
                         // console.log(this.types);
                         // this.paginatorLength = this.trainingPlan.exercisesList.length;
@@ -232,6 +232,7 @@ export class PlanDetailComponent implements OnInit {
     }
 
     savePlan() {
+      this.trainingPlan.exercisesList = this.exercisesListComponent.exercisesList;
         this.trainingPlan.exercisesList.forEach((item: any) => {
             item.id = item._id;
             // delete item._id;
