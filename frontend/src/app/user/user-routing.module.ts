@@ -78,7 +78,11 @@ const userRoutes: Routes = [
                 component: IntervalTrainingPlanComponent,
             },
             {
-                path: 'training-plan',
+                path: 'training-plan/add',
+                component: PlanDetailComponent,
+            },
+            {
+                path: 'training-plan/:id',
                 component: PlanDetailComponent,
             },
             {
