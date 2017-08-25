@@ -5,8 +5,19 @@
     font-family: 'Roboto', sans-serif;
     color: $text-main-color;
 }
-span {
+
+button {
+    width: 50%;
+    margin: auto;
     cursor: pointer;
+    display: block;
+    background-color: transparent;
+    border: 0;
+    font-size: 18px;
+
+    &.train {
+        color: $btn-color;
+    }
 }
 
 .container {
@@ -20,11 +31,6 @@ span {
         width: 100%;
         span {
             display: block;
-            &.train {
-                text-align: center;
-                color: $btn-color;
-                font-size: 18px;
-            }
         }
     }
 

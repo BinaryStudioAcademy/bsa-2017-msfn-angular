@@ -27,7 +27,7 @@ export class SecundomerService {
         const start = this.cacheTime = (this.cacheTime) ? (Date.now() - (this.pauseTime - this.cacheTime)) : Date.now();
         this.intervalID = setInterval(() => {
             this.secndomerNum = (Date.now() - start);
-        }, 52);
+        }, 250);
     }
     pause(): void {
         this.pauseTime = Date.now();
@@ -54,7 +54,7 @@ export class SecundomerService {
         const startLap = this.lapCacheTime = (this.lapCacheTime) ? (Date.now() - (this.lapPauseTime - this.lapCacheTime)) : Date.now();
         this.intervalLapID = setInterval(() => {
             this.secndomerLapNum = (Date.now() - startLap);
-        }, 52);
+        }, 250);
     }
 
     stopWarm(): void {

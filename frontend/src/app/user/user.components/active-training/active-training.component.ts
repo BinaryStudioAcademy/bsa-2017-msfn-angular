@@ -15,32 +15,12 @@ export class ActiveTrainingComponent implements OnInit {
     typeTrain = 'General';
     secundomerBind = {
         intervalTrain: false,
-        finishTrain: false
+        finishTrain: <boolean | string>false
     };
 
     burnedCallories = 1445;
 
-    exercisesList = [
-        {
-            description: '',
-            edit: false,
-            isRemoved: false,
-            name: 'Bicyps',
-            sets: [
-                {
-                    value: '3 kg',
-                    value2: 'x3'
-                },
-                {
-                    value: '3 km',
-                    value2: '10min'
-                },
-            ],
-            sportsId: [],
-            type: 'someIDofType',
-            _id: 'exerciseID'
-        }
-    ];
+    exercisesList: [any] = [{}];
 
     constructor(
         private activeTrainingService: ActiveTrainingService
@@ -48,16 +28,13 @@ export class ActiveTrainingComponent implements OnInit {
 
     ngOnInit() {
 
-        this.activeTrainingService.getPlans((data) => {
-            // console.log(data);
+        this.activeTrainingService.getPlans((plan) => {
+            this.exercisesList = plan.exercisesList;
+            this.typeTrain = plan.trainingType;
+            this.secundomerBind.intervalTrain = !!plan.intervals.length;
+            this.loaded = true;
         });
     }
-
-
-
-
-
-
 
     onFinish(timeData) {
         const data = {
@@ -67,6 +44,8 @@ export class ActiveTrainingComponent implements OnInit {
         this.activeTrainingService.showFinishDialog(data, result => {
             if (result) {
                 this.secundomerBind.finishTrain = true;
+            } else {
+                this.secundomerBind.finishTrain = 'continue';
             }
             setTimeout(() => { this.secundomerBind.finishTrain = false; }, 1000);
         });
