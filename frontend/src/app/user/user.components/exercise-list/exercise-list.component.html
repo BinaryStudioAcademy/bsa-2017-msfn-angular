@@ -14,7 +14,7 @@
       <div class="exercise-table-body">
         <div *ngFor="let exercise of displayExercises" class="exercise-row">
           <div class="col name">{{exercise.name}}</div>
-          <div class="col del" (click)="deleteExercise(exercise.id)"><i class="material-icons">delete</i></div>
+          <div class="col del" (click)="deleteExercise(exercise.id || exercise._id)"><i class="material-icons">delete</i></div>
           <div class="col sets">
             <div class="items-conteiner" *ngFor="let set of exercise.sets; let i = index">
               <div class="set-item" (dblclick)="setEdit(exercise, set)">
