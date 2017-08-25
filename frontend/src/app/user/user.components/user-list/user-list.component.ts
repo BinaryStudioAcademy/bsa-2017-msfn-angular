@@ -1,17 +1,14 @@
 import { Component, OnInit} from '@angular/core';
 import { UserListService } from './user-list.service';
 import ISubscribeUser = SubscribeApi.ISubscribeUser;
-import {FollowingListService} from '../following-list/following-list.service';
-import {FollowersListService} from '../followers-list/followers-list.service';
+import { WindowObj } from '../../../services/window.service';
 
 @Component ({
     selector: 'app-user-list',
     templateUrl: './user-list.component.html',
     styleUrls: ['./user-list.component.scss'],
     providers: [
-        UserListService,
-        FollowersListService,
-        FollowingListService
+        UserListService
     ],
 })
 export class UserListComponent implements OnInit {
@@ -20,59 +17,54 @@ export class UserListComponent implements OnInit {
         filtered: ISubscribeUser[],
         show: ISubscribeUser[],
         filter: '',
-        hidden: false
     };
     followers: {
         all: ISubscribeUser[],
         filtered: ISubscribeUser[],
         show: ISubscribeUser[],
         filter: '',
-        hidden: true,
-        empty: true
     };
     following: {
         all: ISubscribeUser[],
         filtered: ISubscribeUser[],
         show: ISubscribeUser[],
         filter: '',
-        hidden: true,
-        empty: true
     };
     userPerPage = 20;
 
     constructor(private userListService: UserListService,
-                private followingListService: FollowingListService,
-                private followersListService: FollowersListService
+                private window: WindowObj
                 ) {
         this.users = {
             all: [],
             filtered: [],
             show: [],
-            filter: '',
-            hidden: false
+            filter: ''
         };
         this.followers = {
             all: [],
             filtered: [],
             show: [],
-            filter: '',
-            hidden: true,
-            empty: true
+            filter: ''
         };
         this.following = {
             all: [],
             filtered: [],
             show: [],
-            filter: '',
-            hidden: true,
-            empty: true
+            filter: ''
         };
     }
 
     ngOnInit() {
         this.userListService.getAllUsers(data => {
+            const currentUser = {
+                id: (this.window.data._injectedData as any).userId,
+                follow: []
+            };
+            currentUser.follow = data[data.findIndex( item => item._id === currentUser.id)].follow;
             for (const user of data) {
-                if (user.role !== 'admin') {
+                if (!(user.role === 'admin' || user._id === currentUser.id)) {
+                    user.isFollowed = currentUser.follow.includes(user._id);
                     this.users.all.push(user);
                     this.users.filtered.push(user);
                     if (this.users.show.length < this.userPerPage) {
@@ -80,25 +72,16 @@ export class UserListComponent implements OnInit {
                     }
                 }
             }
-            console.log(this.users.show);
         });
-        this.followersListService.getFollowers(data => {
-            if (data.length === 0) {
-                this.followers.empty = true;
-            }
+        this.userListService.getFollowers(data => {
             this.followers.all = data;
             this.followers.filtered = data;
             this.followers.show = data.slice(0, this.userPerPage);
-            console.log(this.followers.show);
         });
-        this.followingListService.getFollowing(data => {
-            if (data.length === 0) {
-                this.following.empty = true;
-            }
+        this.userListService.getFollowing(data => {
             this.following.all = data;
             this.following.filtered = data;
             this.following.show = data.slice(0, this.userPerPage);
-            console.log(this.following.show);
         });
     }
 
@@ -117,7 +100,22 @@ export class UserListComponent implements OnInit {
         }
     }
 
-    toggleExpand(type: string) {
-        this[type].hidden = !this[type].hidden;
+
+    unfollow(user: ISubscribeUser) {
+        if (user.justUnsubscribe) {
+            this.userListService.follow(user._id);
+            user.justUnsubscribe = false;
+        } else {
+            this.userListService.unfollow(user._id);
+            user.justUnsubscribe = true;
+
+        }
+    }
+
+    followNew(user: ISubscribeUser) {
+        user.isFollowed = true;
+        this.userListService.follow(user._id);
+        this.following.all.push(user);
+        this.following.show.push(user);
     }
 }

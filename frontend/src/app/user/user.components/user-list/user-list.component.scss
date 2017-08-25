@@ -95,3 +95,17 @@ a {
     color: $text-main-color;
     padding-left: $input-padding;
 }
+
+.no-followers-msg {
+    font-size: $usual-text;
+    margin-top: $content-tb-margin;
+    text-align: center;
+}
+
+.user-container {
+    display: flex;
+    justify-content: space-between;
+    div {
+        display: flex;
+    }
+}

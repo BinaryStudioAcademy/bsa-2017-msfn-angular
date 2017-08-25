@@ -12,9 +12,7 @@ import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { SettingsComponent } from './user.components/settings/settings.component';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
-import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
-import { FollowingListComponent } from './user.components/following-list/following-list.component';
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
@@ -42,8 +40,6 @@ import { UserListComponent } from './user.components/user-list/user-list.compone
         SettingsComponent,
         IntervalTrainingPlanComponent,
         OtherProfilesComponent,
-        FollowersListComponent,
-        FollowingListComponent,
         AccountSettingsComponent,
         LoginSettingsComponent,
         PlanDetailComponent,

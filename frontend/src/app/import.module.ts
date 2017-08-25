@@ -28,7 +28,8 @@ import {
     MdTooltipModule,
     MdMenuModule,
     MdListModule,
-    MdButtonToggleModule
+    MdButtonToggleModule,
+    MdTabsModule
 } from '@angular/material';
 import 'hammerjs';
 
@@ -47,6 +48,7 @@ import {CommonModule} from '@angular/common';
         MdIconModule,
         MdAutocompleteModule,
         MdInputModule,
+        MdTabsModule,
         SortablejsModule,
     ],
     exports: [
@@ -65,6 +67,7 @@ import {CommonModule} from '@angular/common';
         MdSelectModule,
         MdCardModule,
         MdInputModule,
+        MdTabsModule,
         MdCheckboxModule,
         MdButtonModule,
         MdDialogModule,

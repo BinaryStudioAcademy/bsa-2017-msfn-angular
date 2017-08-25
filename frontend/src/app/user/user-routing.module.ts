@@ -7,8 +7,6 @@ import { UserComponent } from './user.component';
 import { ProfileComponent } from './user.components/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
-import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
-import { FollowingListComponent } from './user.components/following-list/following-list.component';
 import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 // import { FriendsComponent } from './user.components/friends/friends.component';
@@ -54,14 +52,6 @@ const userRoutes: Routes = [
                         component: MiscComponent,
                     },
                 ]
-            },
-            {
-                path: 'followers',
-                component: FollowersListComponent,
-            },
-            {
-                path: 'following',
-                component: FollowingListComponent,
             },
             {
                 path: 'profile/:id',
