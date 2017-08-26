@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { PageEvent, MdPaginatorModule } from '@angular/material';
 import { SearchExerciseComponent } from './../search-exercise/search-exercise.component';
@@ -20,6 +20,7 @@ export class ExerciseListComponent implements OnInit {
     setItemEdit;
 
     @Input() exercisesList = [];
+    @Output() onChangeList = new EventEmitter();
     displayExercises: Object[];
     // pager props
     pageSize = 3;
@@ -61,8 +62,8 @@ export class ExerciseListComponent implements OnInit {
 
             this.addExercises(selectedExercises);
             this.searchDialog = null;
+            this.onChangeList.emit(this.exercisesList);
         });
-
     }
 
     deleteExercise(id) {
@@ -73,8 +74,8 @@ export class ExerciseListComponent implements OnInit {
                 return el._id !== id;
             }
         });
-
         this.displayExercises = this.exercisesList.slice(0, this.pageSize);
+        this.onChangeList.emit(this.exercisesList);
     }
 
     showPage(currentPage) {
@@ -130,6 +131,7 @@ export class ExerciseListComponent implements OnInit {
         this.value = '';
         this.value2 = '';
         exercise.edit = false;
+        this.onChangeList.emit(this.exercisesList);
     }
 
     setEdit(exercise, set, index) {

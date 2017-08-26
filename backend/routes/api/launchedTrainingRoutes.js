@@ -14,7 +14,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.put(baseUrl, function (req, res, next) {
-        launchedTrainingService.updateLaunchedTraining(req.body.id, req.body, (err, data) => {
+        launchedTrainingService.updateLaunchedTraining(req.body._id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();
@@ -22,7 +22,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.delete(baseUrl, function (req, res, next) {
-        launchedTrainingService.deleteLaunchedTraining(req.body.id, (err, data) => {
+        launchedTrainingService.deleteLaunchedTraining(req.body._id, (err, data) => {
             res.err = err;
             res.data = data;
             next();

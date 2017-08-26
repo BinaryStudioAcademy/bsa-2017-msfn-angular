@@ -4,8 +4,15 @@ const mongoose = require('mongoose'),
 
 const LaunchedTraining = new Schema({
     name: String,
-    count: Number,
-    days: Array,
+    startDate: String,
+    results: {
+        required: false,
+        time: {
+            total: String,
+            warming: String,
+        },
+        calories: Number
+    },
     exercisesList: [{
         name: String,
         sets: [{
