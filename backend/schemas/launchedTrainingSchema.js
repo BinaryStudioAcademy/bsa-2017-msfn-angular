@@ -4,14 +4,25 @@ const mongoose = require('mongoose'),
 
 const LaunchedTraining = new Schema({
     name: String,
-    userId: ObjectId,
-    plan: ObjectId,
+    count: Number,
+    days: Array,
+    exercisesList: [{
+        name: String,
+        sets: [{
+            value: String,
+            value2: String
+        }],
+        id: String,
+        exerciseType: String,
+        description: String,
+    }],
+    intervals: Array,
+    trainingType: 'general' | 'interval',
+    userID: String,
     isRemoved: {
         type: Boolean,
         default: false
-    },
-    isCircled: Boolean,
-    exercises: Array
+    }
 });
 
 module.exports = mongoose.model('LaunchedTraining', LaunchedTraining);

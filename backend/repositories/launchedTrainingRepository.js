@@ -11,7 +11,7 @@ LaunchedTrainingRepository.prototype.getLaunchedTrainingsByUserId = getLaunchedT
 
 function getLaunchedTrainingsByUserId(id, callback) {
     const query = this.model.find({
-        userId: id
+        userID: id
     });
     query.exec(callback);
 };

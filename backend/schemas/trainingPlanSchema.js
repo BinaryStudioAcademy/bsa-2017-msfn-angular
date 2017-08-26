@@ -22,7 +22,10 @@ const TrainingPlan = new Schema({
     intervals: Array,
     trainingType: 'general' | 'interval',
     userID: String,
-    isRemoved: Boolean,
+    isRemoved: {
+        type: Boolean,
+        default: false
+    }
 
 });
 

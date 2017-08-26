@@ -36,7 +36,8 @@ function createLaunchedTraining(body, callback) {
         if (trainingData === null) {
             callback(null, new ApiError('Can\'t create training'));
         } else {
-            callback(null, trainingData);
+            // Response with just an id of created launchedTraining
+            callback(null, trainingData._id);
         }
     });
 }
