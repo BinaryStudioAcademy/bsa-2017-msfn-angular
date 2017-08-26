@@ -19,12 +19,14 @@ export class ExerciseCreateComponent implements OnInit {
         type: '',
         isRemoved: false,
         sportsId: [],
+        measure: '',
         image: '',
         description: ''
     };
     titleType = 'Create';
     convertedDescription: string;
     exTypes: [IExerciseType];
+    exMeasures: [any];
 
     constructor(public router: ActivatedRoute,
                 private exerciseCreateService: ExerciseCreateService,
@@ -41,6 +43,9 @@ export class ExerciseCreateComponent implements OnInit {
         this.exerciseCreateService.getExerciseTypes((data) => {
             this.exTypes = data;
         });
+        this.exerciseCreateService.getMeasures((data) => {
+            this.exMeasures = data;
+        });
     }
 
     save(form: NgForm) {
@@ -48,6 +53,7 @@ export class ExerciseCreateComponent implements OnInit {
             if (this.router.snapshot.params.id) {
                 this.exerciseCreateService.updateExercise(this.router.snapshot.params.id, this.exercise);
             } else {
+                console.log(this.exercise);
                 this.exerciseCreateService.sendExercise(this.exercise);
             }
         }
