@@ -65,7 +65,7 @@ aside {
 
 .sidebar-container {
     flex: 0 0 calc(20vw);
-    min-width: calc(20vw); /*need -20px for scrollbar*/
+    min-width: 20vw; /*need -20px for scrollbar*/
 }
     
 .child-container {
@@ -78,7 +78,7 @@ aside {
     aside {
         width: 180px;
     }
-    .childComponent {
+    .child-container {
         width: calc(100vw - 200px);
     }
 }
@@ -92,7 +92,7 @@ aside {
             display: none;
         }
     }
-    .childComponent {
+    .child-container {
         width: calc(100vw - 80px);
     }
 }

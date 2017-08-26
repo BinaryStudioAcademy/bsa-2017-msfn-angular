@@ -9,7 +9,7 @@
         margin-bottom: 20px;
     }
     .about-container {
-        width: 35%;
+        flex: 35%;
         padding: 0 15px;
         h1 {
             margin-top: 0;
@@ -107,150 +107,11 @@
         border-radius: 50px;
         cursor: pointer;
         outline: none;
-    }
-    .exercises-container {
-        // width: 65%;
-        margin-top: 35px;
-        padding: 0 15px;
-        .button-add {
-            margin-bottom: 20px;
-        }
-        .exercise-table {
-            background: linear-gradient($gradient-to-color 75%, $bg-color);
-            box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
-            .exercise-table-head {
-                height: 50px;
-                display: flex;
-                padding: 20px;
-                align-items: center;
-                justify-content: space-between;
-                background-color: $gradient-to-color;
-                z-index: 2;
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                .table-title {
-                    font-size: 16px;
-                    text-transform: uppercase;
-                }
-                .exercise-pagination {
-                    height: 50px!important;
-                    min-height: unset;
-                    .mat-paginator-page-size {
-                        display: none;
-                    }
-                }
-            }
-            .exercise-table-body {
-                display: flex;
-                flex-direction: row;
-                z-index: 1;
-                .exercise-row {
-                    display: flex;
-                    position: relative;
-                    flex-direction: column;
-                    padding: 20px 25px;
-                    width: 220px;
-                    align-items: flex-start;
-                    &:hover {
-                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                        .col.name {
-                            text-overflow: ellipsis;
-                            overflow: hidden;
-                            white-space: nowrap;
-                        }
-                        .col.del,
-                        .col.edit {
-                            display: block;
-                        }
-                    }
-                    .col.del,
-                    .col.edit {
-                        position: absolute;
-                        height: 20px;
-                        width: 20px;
-                        display: none;
-                        cursor: pointer;
-                        i {
-                            line-height: 20px;
-                            font-size: 18px;
-                            text-align: center;
-                            width: 21px;
-                            &:hover {
-                                color: $btn-color;
-                            }
-                        }
-                    }
-                    .col.del {
-                        right: 5px;
-                    }
-                    .col.edit {
-                        right: 25px;
-                    }
-                    .col.name {
-                        margin-bottom: 10px;
-                        max-width: 180px;
-                    }
-                    .col.sets {
-                        display: flex;
-                        flex-direction: column;
-                        width: 100%;
-                        .set-item {
-                            display: flex;
-                            flex-direction: row;
-                            position: relative;
-                            margin-bottom: 10px;
-                            font-size: 12px;
-                            font-weight: bold;
-                            .item-id {
-                                position: absolute;
-                                height: 18px;
-                                width: 18px;
-                                text-align: center;
-                                border-radius: 18px;
-                                line-height: 18px;
-                                background-color: #646464;
-                            }
-                            .item-val {
-                                width: 110px;
-                                background-color: #222;
-                                border-radius: 15px;
-                                height: 18px;
-                                padding-left: 25px;
-                                line-height: 18px;
-                            }
-                            .item-opt-val {
-                                margin-left: 10px;
-                                line-height: 18px;
-                            }
-                            .exercise-add {
-                                height: 18px;
-                                margin-left: 25px;
-                                line-height: 18px;
-                                cursor: pointer;
-                            }
-                        }
-                        .set-form form {
-                            display: flex;
-                            .item-save {
-                                align-items: center;
-                                display: flex;
-                                margin-left: 5px;
-                                cursor: pointer;
-                                i {
-                                    line-height: 20px;
-                                    font-size: 18px;
-                                    text-align: center;
-                                    width: 21px;
-                                    &:hover {
-                                        color: $btn-color;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }   
+}
+
+app-exercise-list {
+    flex: 65%;
 }
 
 .clear {

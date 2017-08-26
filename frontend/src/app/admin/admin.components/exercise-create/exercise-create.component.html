@@ -9,10 +9,7 @@
         </md-option>
     </md-select>
     <md-input-container class="example-full-width" class="input">
-        <textarea mdInput placeholder="Exercise Description"
-                  [(ngModel)]="exercise.description"
-                  name="description"
-                  (keyup)="updateOutput($event.target.value)"></textarea>
+        <textarea mdInput placeholder="Exercise Description" [(ngModel)]="exercise.description" name="description" (keyup)="updateOutput($event.target.value)"></textarea>
     </md-input-container>
     <button class="btn upload-container" (click)="saveImg()">
         <span>Upload exercise image</span>

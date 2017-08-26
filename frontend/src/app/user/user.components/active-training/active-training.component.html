@@ -1,0 +1,14 @@
+<div class="container centerContent">
+    <div class="timers">
+        <h2 *ngIf="loaded">{{typeTrain}} mode</h2>
+        <app-secundomer *ngIf="loaded" [finishTrain]="secundomerBind.finishTrain" [intervalTrain]="secundomerBind.intervalTrain" (onFinish)="onFinish($event)"></app-secundomer>
+    </div>
+    <div class="child">
+        <div class="exlist centerContent">
+            <app-exercise-list *ngIf="loaded" [(exercisesList)]="exercisesList"></app-exercise-list>
+        </div>
+        <div class="intmenu centerContent">
+            Interval menu (optional) here
+        </div>
+    </div>
+</div>

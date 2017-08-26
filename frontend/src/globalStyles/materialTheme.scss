@@ -17,3 +17,13 @@ $theme: mat-dark-theme($primary, $accent, $warn);
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($theme);
+
+app-exercise-list {
+    .mat-paginator-page-size {
+        display: none;
+    }
+
+    .mat-paginator-range-label {
+        white-space: nowrap;
+    }
+}
