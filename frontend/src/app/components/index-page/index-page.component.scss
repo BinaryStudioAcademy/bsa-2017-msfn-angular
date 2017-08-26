@@ -1,4 +1,9 @@
 @import '../../../globalStyles/variables.scss';
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
 
 * {
 	font-family: 'Roboto', sans-serif;
@@ -7,8 +12,8 @@
 
 .index__banner-wrap {
     width: 100%;
-    background: url('../../../globalStyles/img/floor.jpg') center;
-    background-attachment: fixed; 
+    background: url('../../../globalStyles/img/banner.png');
+    background-attachment: fixed;
     background-size: cover;
 }
 
@@ -35,17 +40,15 @@
         padding: 10px 0;
     }
     .index__heading-text {
-        font-size: 40px;
-        padding: 10px 0;
+        text-indent: 20px;
+        font-size: 30px;
         font-weight: 700;
-        color: $text-dark-color;
-        text-shadow: 1px 1px 4px $text-main-color;
+        color: $text-second-color;
     }
     .index__heading-description {
-        font-size: 32px;
-        color: $text-dark-color;
-        font-weight: 600;
-        text-shadow: 1px 1px 4px $text-main-color;
+        font-size: 20px;
+        color: $text-second-color;
+        font-weight: 500;
     }
 
     .index__auth-wrap {
