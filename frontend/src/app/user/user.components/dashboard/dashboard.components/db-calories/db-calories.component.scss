@@ -1,0 +1,9 @@
+@import '../../../../../../globalStyles/variables.scss';
+@import '../../../../../../globalStyles/indentations.scss';
+@import '../../../../../../globalStyles/text.scss';
+
+.calories > .content {
+    align-items: center;
+    height: 70%;
+    font-size: $main-text;
+}
