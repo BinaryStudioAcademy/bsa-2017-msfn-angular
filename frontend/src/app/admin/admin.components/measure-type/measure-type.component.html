@@ -59,7 +59,7 @@
                            #conversionFactor="ngModel"
                            name="row.conversionFactor"
                            type="text"
-                           pattern="^\d+\.?\d+$"
+                           pattern="^(\d+\.?\d+|\d+)$"
                            (blur)="updateRow(row, 'conversionFactor', conversionFactor.value)"
                            [(ngModel)]="row.conversionFactor"
                            [ngClass]="{'removed': row.isRemoved}"

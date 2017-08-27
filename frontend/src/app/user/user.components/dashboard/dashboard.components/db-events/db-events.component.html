@@ -1,0 +1,54 @@
+<div class="events inner-container">
+    <h2>{{ dataToDisplay.title }}</h2>
+    <div class="content">
+        <div class="start-date">
+            <md-input-container>
+                <input
+                    mdInput
+                    value="startDate"
+                    [mdDatepicker]="startPicker"
+                    placeholder="Start Date"
+                    [(ngModel)]="startDate"
+                    (ngModelChange)="processDates()">
+                <button mdSuffix [mdDatepickerToggle]="startPicker"></button>
+            </md-input-container>
+            <md-datepicker #startPicker></md-datepicker>
+        </div>
+
+        <div class="end-date">
+            <md-input-container>
+                <input
+                    mdInput
+                    value="endDate"
+                    [mdDatepicker]="endPicker"
+                    placeholder="End Date"
+                    [(ngModel)]="endDate"
+                    (ngModelChange)="processDates()">
+                <button mdSuffix [mdDatepickerToggle]="endPicker"></button>
+            </md-input-container>
+            <md-datepicker #endPicker></md-datepicker>
+        </div>
+
+        <!--<md-slider-->
+            <!--class="example-margin"-->
+            <!--*ngIf="startDate && endDate"-->
+            <!--thumbLabel-->
+            <!--[min]="1"-->
+            <!--[max]="selectedEvents.length"-->
+            <!--[step]="1"-->
+            <!--[tickInterval]="1"-->
+            <!--[value]="selEvent">-->
+        <!--</md-slider>-->
+
+        <div class="event-output">
+            <div class="event" *ngFor="let event of selectedEvents">
+                <div class="event-date">
+                    {{ event.dateOutput }}
+                </div>
+                <div class="event-value">
+                    {{ event.value }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

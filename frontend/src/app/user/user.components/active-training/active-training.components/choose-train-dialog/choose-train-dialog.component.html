@@ -1,19 +1,24 @@
-<div class="container">
+<div *ngIf="!emptyList" class="container">
     <h2 class="title" md-dialog-title>Today training plan</h2>
     <div class="recomendation" *ngIf="matchedTrain.length">
         <span>Recomended plan:</span>
-        <span class="train" *ngFor="let item of matchedTrain">{{item.name}}</span>
+        <button [md-dialog-close]="item" class="train" *ngFor="let item of matchedTrain">{{item.name}}</button>
     </div>
     <div class="listTrain">
         <span>List:</span>
         <div class="plan-container">
-            <div class="list" *ngFor="let item of data">
-                {{item.name}}
-            </div>
+            <button [md-dialog-close]="item" *ngFor="let item of data">{{item.name}}</button>
         </div>
     </div>
     <div class="btn-container">
         <button md-raised-button [md-dialog-close]="false" class="controll">Close</button>
         <!-- <button md-raised-button [md-dialog-close]="true" class="controll">Confirm</button> -->
+    </div>
+</div>
+
+<div *ngIf="emptyList" class="container">
+    <h2 class="title" md-dialog-title>You don't have plans?</h2>
+    <div class="btn-container">
+        <button md-raised-button (click)="createPlan()" [md-dialog-close]="true" class="controll">Create now</button>
     </div>
 </div>

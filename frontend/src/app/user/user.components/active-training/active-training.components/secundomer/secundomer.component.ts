@@ -14,6 +14,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
 
     @Input() finishTrain: boolean;
     @Input() intervalTrain: boolean;
+    @Output() onStart = new EventEmitter();
     @Output() onFinish = new EventEmitter();
 
     constructor(
@@ -26,11 +27,12 @@ export class SecundomerComponent implements OnInit, OnChanges {
             minute: '2-digit',
             second: '2-digit'
         });
-        return formatter.format(millisecnods - 3000 * 60 * 60) + ':' + String(millisecnods).slice(-3);
+        return formatter.format(millisecnods - 3000 * 60 * 60);
     }
 
-    run(id: string): void {
+    run(): void {
         this.secundomerService.run();
+        this.onStart.emit();
     }
     pause(): void {
         this.secundomerService.pause();
@@ -46,11 +48,14 @@ export class SecundomerComponent implements OnInit, OnChanges {
             total: this.beautifierTime(this.secundomerService.secndomerNum),
             warming: this.beautifierTime(this.secundomerService.warmingTime)
         };
+        this.pause();
         this.onFinish.emit(data);
     }
     ngOnChanges(changes) {
-        if (changes.finishTrain.currentValue) {
+        if (changes.finishTrain.currentValue === true) {
             this.secundomerService.stopTimers();
+        } else if (changes.finishTrain.currentValue === 'continue') {
+            this.run();
         }
     }
 

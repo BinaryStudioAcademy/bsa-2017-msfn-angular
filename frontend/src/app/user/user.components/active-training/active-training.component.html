@@ -1,14 +1,17 @@
-<div class="container centerContent">
+<div *ngIf="loaded" class="container centerContent">
     <div class="timers">
-        <h2>{{typeTrain}} mode</h2>
-        <app-secundomer [finishTrain]="secundomerBind.finishTrain" [intervalTrain]="secundomerBind.intervalTrain" (onFinish)="onFinish($event)"></app-secundomer>
+        <h2>{{trainingPlan.name}}</h2>
+        <app-secundomer [finishTrain]="secundomerBind.finishTrain" [intervalTrain]="secundomerBind.intervalTrain" (onStart)="onStart()" (onFinish)="onFinish($event)"></app-secundomer>
     </div>
     <div class="child">
-        <div class="exlist">
-            <app-exercise-list [exercisesList]="exercisesList"></app-exercise-list>
+        <div class="exlist centerContent">
+            <app-exercise-list [exercisesList]="trainingPlan.exercisesList" (onChangeList)="onChangeList($event)"></app-exercise-list>
         </div>
-        <div class="intmenu">
+        <div class="intmenu centerContent">
             Interval menu (optional) here
         </div>
     </div>
+</div>
+<div *ngIf="loaded === false" class="container centerContent">
+    <button md-raised-button (click)="choosePlan()">Choose training plan</button>
 </div>

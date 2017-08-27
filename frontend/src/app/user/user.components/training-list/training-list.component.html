@@ -1,9 +1,9 @@
 <div id="train-container" >
-    <div class="item-container" *ngFor="let item of data">
+    <div class="item-container" *ngFor="let item of data" (click)="openPlan(item._id)">
             <i class="material-icons train-item-ico">face</i>
             <p class="train-item-text">{{ item.name }}</p>
     </div>
-    <div (click)="createPlan()" class="add-container">
+    <div class="add-container" (click)="createPlan()">
             <i class="material-icons add-item-ico">add</i>
     </div>
 </div>

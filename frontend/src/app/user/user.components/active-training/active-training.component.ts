@@ -11,65 +11,71 @@ import { ActiveTrainingService } from './active-training.service';
 })
 
 export class ActiveTrainingComponent implements OnInit {
-    loaded: boolean = false;
-    typeTrain = 'General';
+    // global
+    loaded: boolean;
     secundomerBind = {
         intervalTrain: false,
-        finishTrain: false
+        finishTrain: <boolean | string>false
     };
 
-    burnedCallories = 1445;
 
-    exercisesList = [
-        {
-            description: '',
-            edit: false,
-            isRemoved: false,
-            name: 'Bicyps',
-            sets: [
-                {
-                    value: '3 kg',
-                    value2: 'x3'
-                },
-                {
-                    value: '3 km',
-                    value2: '10min'
-                },
-            ],
-            sportsId: [],
-            type: 'someIDofType',
-            _id: 'exerciseID'
-        }
-    ];
+    trainingPlan: any;
+
+    // child bind
+    burnedCallories = 1445;
 
     constructor(
         private activeTrainingService: ActiveTrainingService
     ) {}
 
     ngOnInit() {
-
-        this.activeTrainingService.getPlans((data) => {
-            // console.log(data);
+        this.activeTrainingService.getPlans((plan) => {
+            if (!plan) {
+                this.loaded = false;
+                return;
+            }
+            this.trainingPlan = plan;
+            this.loaded = true;
         });
     }
 
-
-
-
-
-
+    choosePlan() {
+        this.activeTrainingService.getPlans((plan) => {
+            if (plan === undefined) {
+                return;
+            }
+            this.trainingPlan = plan;
+            this.loaded = true;
+        });
+    }
+    onStart() {
+        this.activeTrainingService.addTraining(this.trainingPlan, (result) => {
+            if (result) {
+                this.trainingPlan._id = result;
+                console.log(this.trainingPlan);
+            }
+        });
+    }
 
     onFinish(timeData) {
         const data = {
             time: timeData,
             calories: this.burnedCallories,
         };
-        this.activeTrainingService.showFinishDialog(data, result => {
+        this.activeTrainingService.showFinishDialog(data, this.trainingPlan, result => {
             if (result) {
                 this.secundomerBind.finishTrain = true;
+            } else {
+                this.secundomerBind.finishTrain = 'continue';
             }
             setTimeout(() => { this.secundomerBind.finishTrain = false; }, 1000);
         });
     }
 
+    onChangeList(updatedList) {
+        this.trainingPlan.exercisesList = updatedList;
+        if (this.trainingPlan._id) {
+            this.activeTrainingService.updateTraining(this.trainingPlan);
+        }
+    }
 }

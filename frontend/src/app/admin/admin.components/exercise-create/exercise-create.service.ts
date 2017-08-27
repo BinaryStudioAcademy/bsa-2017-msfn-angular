@@ -19,6 +19,17 @@ export class ExerciseCreateService {
         });
     }
 
+    getMeasures(callback) {
+        const request: IHttpReq = {
+            url: '/api/measurement/',
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then(data => {
+                callback(data);
+        });
+    }
     getExerciseById(id, callback): void {
         const request: IHttpReq = {
             url: '/api/exercise/' + id,
@@ -35,12 +46,7 @@ export class ExerciseCreateService {
         const request: IHttpReq = {
             url: '/api/exercise/',
             method: 'POST',
-            body: {
-                name: exerciseForm.name,
-                type: exerciseForm.type,
-                description: exerciseForm.description,
-                // sportsId: exerciseForm.sportsId
-            },
+            body: exerciseForm,
             successMessage: 'Added'
         };
         this.httpService.sendRequest(request);
