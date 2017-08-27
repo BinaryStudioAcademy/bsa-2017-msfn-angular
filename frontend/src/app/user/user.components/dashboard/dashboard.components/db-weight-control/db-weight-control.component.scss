@@ -29,19 +29,8 @@
     margin: 0 10px;
 }
 
-#recent-day,
 #per-week{
     font-size: $main-text;
-}
-
-#weight-control > div,
-#recent-day > div {
-    display: inline-block;
-    padding: 20px;
-}
-
-#current-weight {
-    font-size: $header-text;
 }
 
 .diff {

@@ -147,7 +147,7 @@ export class WeightControlService {
             betterResult = true;
         }
 
-        if (option === 'weight' || option === 'bones') {
+        if (option === 'weight' || option === 'boneWeight') {
             measurement = 'kg';
         } else {
             measurement = '%';

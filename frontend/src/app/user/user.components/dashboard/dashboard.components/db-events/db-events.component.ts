@@ -14,12 +14,12 @@ export class DbEventsComponent implements OnInit {
 
     constructor(private dateService: DateService) { }
 
-    dataToDisplay = {
-        title: 'Planned Events'
+    title = 'Planned Events';
+    interval = {
+        startDate: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 7),
+        endDate: new Date()
     };
 
-    startDate: string;
-    endDate: string;
     selEvent: string;
 
     events = [
@@ -65,6 +65,7 @@ export class DbEventsComponent implements OnInit {
     selectedEvents: any[];
 
     ngOnInit() {
+        this.processDates();
     }
 
     initProcessDates() {
@@ -74,8 +75,8 @@ export class DbEventsComponent implements OnInit {
         }
 
         return () => {
-            const startDateObject = new Date(this.startDate),
-                endDateObject = new Date(this.endDate);
+            const startDateObject = new Date(this.interval.startDate),
+                endDateObject = new Date(this.interval.endDate);
 
             if (startDateObject && endDateObject) {
                 const startTimeStamp = startDateObject.getTime(),
