@@ -28,15 +28,15 @@ const mongoose = require('mongoose'),
         {
             "measureName": "weight",
             "measureUnits": [
-                {"conversionFactor": "1", "unitName": "Kg", "unitType": "metric"},
-                {"conversionFactor": "2.20462", "unitName": "Lbs", "unitType": "imperial"}
+                {"conversionFactor": "1", "unitName": "kg", "unitType": "metric"},
+                {"conversionFactor": "2.20462", "unitName": "lbs", "unitType": "imperial"}
             ]
         },
         {
             "measureName": "distance",
             "measureUnits": [
-                {"conversionFactor": "1", "unitName": "Km", "unitType": "metric"},
-                {"conversionFactor": "1000", "unitName": "M", "unitType": "default"},
+                {"conversionFactor": "1", "unitName": "km", "unitType": "metric"},
+                {"conversionFactor": "1000", "unitName": "m", "unitType": "default"},
                 {"conversionFactor": "39370.1", "unitName": "inches", "unitType": "imperial"}
             ]
         },
@@ -75,6 +75,7 @@ const mongoose = require('mongoose'),
     exercises = [
         {
             name: 'Flat Chest Presses',
+            measure: weight,
             isRemoved: false,
             description: '1. Lying flat on bench, hold the dumbbells directly above chest, arms extended.\n\n\n' +
             '2. Lower dumbbells to chest in a controlled manner.\n3. Press dumbbells back to starting position and repeat.\n4. Avoid locking elbows',
@@ -82,12 +83,14 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Incline Chest Presses',
+            measure: weight,
             isRemoved: false,
             description: '1. Adjust bench to an incline of 30 to 45 degrees.\n\n\n2. Repeat as above.',
             image: './resources/exercise-image/2.gif'
         },
         {
             name: 'Flat Chest Flies',
+            measure: weight,
             isRemoved: false,
             description: '1. Lying flat on bench, hold dumbbells directly above chest.\n\n\n' +
             '2. Bend elbows slightly and maintain throughout the exercise.\n' +
@@ -97,6 +100,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Incline Chest Flies',
+            measure: weight,
             isRemoved: false,
             description: '1. Adjust bench to an incline of 30 to 45 degrees.\n\n' +
             '2. Repeat as above.',
@@ -104,6 +108,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Seated Shoulder Presses',
+            measure: weight,
             isRemoved: false,
             description: '1. Sit upright on bench with dumbbells over head. Make sure back is flat.\n\n' +
             '2. Lower dumbbells slowly to shoulders.\n' +
@@ -112,6 +117,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Lateral Raises',
+            measure: weight,
             isRemoved: false,
             description: '1. Stand upright, knees slightly bent, shoulder width apart, holding dumbbells at sides.\n' +
             '2. Bend elbows slightly and raise the dumbbells out to sides. Keep elbows slightly bent throughout.\n' +
@@ -120,6 +126,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Reverse Flies',
+            measure: weight,
             isRemoved: false,
             description: '1. Sit on edge of bench, feet flat on the floor. Bend over so chest is almost resting on thighs.\n' +
             '2. Hold dumbbells next to feet and bend arms slightly. Open arms out keeping elbows bent.\n' +
@@ -128,6 +135,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Front Raises',
+            measure: weight,
             isRemoved: false,
             description: '1. Stand upright, knees slightly bent, shoulder width apart. Palms should be towards thighs.\n' +
             '2. Raise one dumbbell directly in front of you.\n' +
@@ -136,6 +144,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Dead Lifts',
+            measure: weight,
             isRemoved: false,
             description: '1. Stand upright, feet shoulder width apart, knees slightly bent.\n' +
             '2. Bend lower back and knees to lower the weights down your legs. Back must remain flat, lower back should be arched inwards slightly. Keep head up throughout exercise.\n' +
@@ -144,6 +153,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Single Arm Row',
+            measure: weight,
             isRemoved: false,
             description: '1. Stand upright next to bench. Place one knee and hand on bench. Upper body should be parallel to floor.\n' +
             '2. Hold one dumbbell with arm extended.\n' +
@@ -153,6 +163,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Lying Bent Over Rows',
+            measure: weight,
             isRemoved: false,
             description: '1. Lie face down on a flat or slightly inclined bench. Hold two dumbbells and let arms hang down.\n' +
             '2. Pull dumbbells up towards chest.\n' +
@@ -161,6 +172,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Upright Rows',
+            measure: weight,
             isRemoved: false,
             description: '1. Stand upright, feet shoulder width apart, knees slightly bent. \n' +
             '2. Keeping dumbbells close to body, raise them to chin.\n' +
@@ -169,6 +181,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Shrugs',
+            measure: weight,
             isRemoved: false,
             description: '1. Stand upright, feet shoulder width apart, knees slightly bent.\n' +
             '2. Keeping arms straight \'shrug\' shoulders as high as possible and hold for a count of 3.\n' +
@@ -178,6 +191,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Decline Seated Bicep Curls',
+            measure: weight,
             isRemoved: false,
             description: '1. Adjust bench to a 45 degree incline.\n' +
             '2. Hold dumbbells at sides. Arms should be fully extended.\n' +
@@ -187,6 +201,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Hammer curls',
+            measure: weight,
             isRemoved: false,
             description: '1. Stand upright with dumbells at sides.\n' +
             '2. Turn palms inward so they face body. \n' +
@@ -195,6 +210,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Preacher Curls',
+            measure: weight,
             isRemoved: false,
             description: '1. Set bench so back rest is approx 45 degrees.\n' +
             '2. Stand behind the bench. Holding dumbbell rest back of upper arm on back rest, arm fully extended.\n' +
@@ -204,6 +220,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Concentration Curls',
+            measure: weight,
             isRemoved: false,
             description: '1. Sit on edge of bench with feet flat on the floor.\n' +
             '2. Holding dumbbell place elbow on inside of thigh, just above knee.\n' +
@@ -213,6 +230,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Overhead Triceps Extensions',
+            measure: weight,
             isRemoved: false,
             description: '1. Stand upright, feet shoulder width apart.\n' +
             '2. Hold dumbbell directly above head with arm fully extended. Clasp elbow with free hand for support.\n' +
@@ -222,6 +240,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'French Presses',
+            measure: weight,
             isRemoved: false,
             description: '1. Lie flat on bench. Hold dumbbells directly above chest with palms facing each other. Dumbbells should be just about touching each other.\n' +
             '2. Keeping your shoulders locked, let your elbows fold so dumbbells are lowered down to either side of head.\n' +
@@ -230,6 +249,7 @@ const mongoose = require('mongoose'),
         },
         {
             name: 'Triceps Kickbacks',
+            measure: weight,
             isRemoved: false,
             description: '1. Stand upright next to bench. Place one arm and leg on bench. Upper body should be parallel to ground.\n' +
             '2. Holding dumbbell raise elbow so upper arm is parallel to ground. Elbow should be bent at right angles.\n' +
