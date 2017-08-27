@@ -7,11 +7,5 @@ function TrainingPlanRepository() {
 }
 
 TrainingPlanRepository.prototype = new Repository();
-TrainingPlanRepository.prototype.get = get;
-
-function get(callback) {
-    const query = this.model.find({}).populate('type', 'name')
-    query.exec(callback);
-};
 
 module.exports = new TrainingPlanRepository();

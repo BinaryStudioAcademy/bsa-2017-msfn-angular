@@ -69,10 +69,10 @@ export class ExerciseListComponent implements OnInit {
 
     deleteExercise(id) {
         this.exercisesList = this.exercisesList.filter(function (el) {
-            if (el.id) {
-                return el.id !== id;
-            } else if (el._id) {
-                return el._id !== id;
+            if (el.exercise.id) {
+                return el.exercise.id !== id;
+            } else if (el.exercise._id) {
+                return el.exercise._id !== id;
             }
         });
         this.displayExercises = this.exercisesList.slice(0, this.pageSize);
@@ -87,10 +87,13 @@ export class ExerciseListComponent implements OnInit {
     addExercises(exercises) {
         exercises.forEach((elem, ind) => {
             const inArray = this.exercisesList.find((el) => {
-                return el.id === elem.id;
+                return el.exercise._id === elem._id;
             });
             if (!inArray) {
-                this.exercisesList.push(elem);
+                const newExercise = {
+                    exercise: elem
+                };
+                this.exercisesList.push(newExercise);
             }
         });
         let page = 0;
@@ -146,9 +149,9 @@ export class ExerciseListComponent implements OnInit {
         exercise.sets.splice(index, 1);
     }
 
-    showDescription(exercise) {
+    showDescription(exerciseObj) {
         this.dialog.open(ExerciseDescriptionComponent, {
-            data: exercise
+            data: exerciseObj.exercise
         });
     }
 
