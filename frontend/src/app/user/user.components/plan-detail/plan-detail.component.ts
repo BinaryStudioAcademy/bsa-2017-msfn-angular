@@ -147,7 +147,7 @@ export class PlanDetailComponent implements OnInit {
 
     savePlan() {
       this.trainingPlan.exercisesList = this.exercisesListComponent.exercisesList;
-    
+
         const sendData: IHttpReq = {
             url: `/api/training-plan`,
             method: 'POST',

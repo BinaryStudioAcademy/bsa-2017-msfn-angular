@@ -24,7 +24,7 @@ export class ExerciseListComponent implements OnInit {
     @Output() onChangeList = new EventEmitter();
     displayExercises: Object[];
     // pager props
-    pageSize = 3;
+    pageSize = 1;
     paginatorLength = this.exercisesList.length;
     pageIndex = 0;
     pageEvent: PageEvent;
@@ -46,7 +46,7 @@ export class ExerciseListComponent implements OnInit {
         if (window.innerWidth > 610) {
             this.pageSize = Math.floor((this.container.nativeElement.offsetWidth - 30) / 240);
         } else {
-            this.pageSize = 3;
+            this.pageSize = 1;
         }
         this.showPage(0);
     }
