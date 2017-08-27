@@ -50,13 +50,6 @@ export class PlanDetailComponent implements OnInit {
 
     displayExercises: Object[];
 
-    // pager props
-    // pageSize = 3;
-    // pageIndex = 0;
-    // paginatorLength: Number;
-    // pageEvent: PageEvent;
-
-
     lastAfterClosedResult: string;
 
     trainingPlan = {
@@ -106,7 +99,7 @@ export class PlanDetailComponent implements OnInit {
                                 type.checked = true;
                             }
                         });
-                        // this.exercisesListComponent.exercisesList = this.trainingPlan.exercisesList;
+                        this.exercisesListComponent.exercisesList = this.trainingPlan.exercisesList;
                         this.exercisesListComponent.showPage(0);
                         // console.log(this.types);
                         // this.paginatorLength = this.trainingPlan.exercisesList.length;
@@ -150,93 +143,11 @@ export class PlanDetailComponent implements OnInit {
         } else if (this.trainingPlan.count < 0) {
             this.trainingPlan.count = 0;
         }
-        // console.log(this.trainingPlan.count);
-    }
-
-    // addExercise() {
-    //     this.searchDialog = this.dialog.open(SearchExerciseComponent, {
-    //         data: {
-    //             currentExercises: this.trainingPlan.exercisesList
-    //         }
-    //     });
-    //     this.searchDialog.afterClosed().subscribe((result: string) => {
-    //         this.lastAfterClosedResult = result;
-    //         let selectedExercises = this.searchDialog.componentInstance.selectedExercises;
-
-    //         this.addExercises(selectedExercises);
-    //         this.searchDialog = null;
-    //     });
-
-    // }
-
-    deleteExercise(id) {
-        this.trainingPlan.exercisesList = this.trainingPlan.exercisesList.filter(function (el) {
-            return el._id !== id;
-        });
-
-        this.displayExercises = this.trainingPlan.exercisesList.slice(0, 3);
-    }
-    editExercise(id) {
-        const exercise = this.trainingPlan.exercisesList.find(function (el) {
-            return el._id === id;
-        });
-
-        // if (exercise.type == 'run')
-        //     this.openedDialog = this.dialog.open(IntervalTrainingPlanComponent);
-        // else
-        //     this.openedDialog = this.dialog.open(ExerciseEditDialogComponent);
-    }
-    showPage(currentPage) {
-        const startInd = currentPage * 3;
-        this.displayExercises = this.trainingPlan.exercisesList.slice(startInd, startInd + 3);
-    }
-
-    // addExercises(exercises) {
-    //     exercises.forEach((elem, ind) => {
-    //         let inArray = this.trainingPlan.exercisesList.find((el) => {
-    //             return el._id === elem.id;
-    //         });
-    //         if (!inArray) {
-    //             this.trainingPlan.exercisesList.push(elem);
-    //         }
-    //     });
-    //     let page = 0;
-    //     if (this.pageEvent) {
-    //         page = this.pageEvent.pageIndex;
-    //     }
-    //     this.showPage(page);
-    // }
-
-    setAdd(exercise) {
-        this.displayExercises.forEach((item: any) => {
-            item.edit = false;
-        });
-        this.trainingPlan.exercisesList.forEach((item: any) => {
-            item.edit = false;
-        });
-        exercise.edit = true;
-    }
-
-    setSaveInfo(exercise, form, i) {
-        const newSet = {
-            value: form.value.value,
-            value2: form.value.value2
-        };
-        if (!exercise.sets) {
-            exercise.sets = [];
-        }
-        exercise.sets.push(newSet);
-        form.value.value = '';
-        form.value.value2 = '';
-        exercise.edit = false;
     }
 
     savePlan() {
       this.trainingPlan.exercisesList = this.exercisesListComponent.exercisesList;
-        this.trainingPlan.exercisesList.forEach((item: any) => {
-            item.id = item._id;
-            // delete item._id;
-        });
+    
         const sendData: IHttpReq = {
             url: `/api/training-plan`,
             method: 'POST',

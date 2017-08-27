@@ -69,8 +69,11 @@ function get(params, callback) {
     if (params.fields === undefined) {
         params.fields = null;
     }
+    if (params.populate === undefined) {
+        params.populate = null;
+    }
     let model = this.model;
-    let query = model.find(params.filter).sort(params.sort).limit(params.limit).skip(params.offset).select(params.fields);
+    let query = model.find(params.filter).sort(params.sort).limit(params.limit).skip(params.offset).select(params.fields).populate(params.populate);
     query.exec(callback);
 }
 
