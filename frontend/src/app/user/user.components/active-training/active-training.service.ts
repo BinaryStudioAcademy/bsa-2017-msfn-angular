@@ -30,6 +30,18 @@ export class ActiveTrainingService {
         });
     }
 
+    getMeasures(callback) {
+        const sendData: IHttpReq = {
+            url: '/api/user/me',
+            method: 'GET',
+            body: {},
+        };
+
+        this.httpService.sendRequest(sendData).then(data => {
+            callback(data.settings);
+        });
+    }
+
 
     addTraining(plan, callback) {
         delete plan._id;

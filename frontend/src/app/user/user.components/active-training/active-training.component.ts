@@ -17,6 +17,7 @@ export class ActiveTrainingComponent implements OnInit {
         intervalTrain: false,
         finishTrain: <boolean | string>false
     };
+    userMeasures: any;
 
 
     trainingPlan: any;
@@ -29,6 +30,10 @@ export class ActiveTrainingComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.activeTrainingService.getMeasures((data) => {
+            this.userMeasures = data;
+        });
+
         this.activeTrainingService.getPlans((plan) => {
             if (!plan) {
                 this.loaded = false;

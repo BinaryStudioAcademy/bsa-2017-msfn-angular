@@ -20,6 +20,7 @@ export class ExerciseListComponent implements OnInit {
     setItemEdit;
 
     @Input() exercisesList = [];
+    @Input() userMeasures;
     @Output() onChangeList = new EventEmitter();
     displayExercises: Object[];
     // pager props

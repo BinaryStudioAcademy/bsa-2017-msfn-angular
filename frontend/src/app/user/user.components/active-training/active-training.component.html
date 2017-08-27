@@ -5,7 +5,7 @@
     </div>
     <div class="child">
         <div class="exlist centerContent">
-            <app-exercise-list [exercisesList]="trainingPlan.exercisesList" (onChangeList)="onChangeList($event)"></app-exercise-list>
+            <app-exercise-list [exercisesList]="trainingPlan.exercisesList" [userMeasures]="userMeasures" (onChangeList)="onChangeList($event)"></app-exercise-list>
         </div>
         <div class="intmenu centerContent">
             Interval menu (optional) here
