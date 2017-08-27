@@ -113,7 +113,8 @@
                             background-color: #646464;
                         }
                         .item-val {
-                            width: 110px;
+                            width: 40%;
+                            float: left;
                             background-color: #222;
                             border-radius: 15px;
                             height: 18px;
@@ -121,8 +122,14 @@
                             line-height: 18px;
                         }
                         .item-opt-val {
+                            width: 10%;
+                            float: right;
                             margin-left: 10px;
                             line-height: 18px;
+
+                            &:before {
+                                content: 'x'
+                            }
                         }
                         .exercise-add {
                             height: 18px;

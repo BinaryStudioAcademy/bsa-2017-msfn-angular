@@ -30,7 +30,7 @@
                             <div class="item-val">
                                 <md-input-container>
                                     <input
-                                        mdInput placeholder="Weight" 
+                                        mdInput [placeholder]="exerciseObj.exercise.measure + '(' + userMeasures[exerciseObj.exercise.measure] + ')'" 
                                         type="number" class="plan-name" 
                                         name="value" [(ngModel)]="value" 
                                         (keyup.enter)="setSaveInfo(exerciseObj, form)"
@@ -40,7 +40,7 @@
                             <div class="item-opt-val">
                                 <md-input-container>
                                     <input
-                                        mdInput placeholder="Count" 
+                                        mdInput placeholder="count" 
                                         type="number" class="plan-name" 
                                         name="value2" [(ngModel)]="value2" 
                                         (keyup.enter)="setSaveInfo(exerciseObj, form)"
