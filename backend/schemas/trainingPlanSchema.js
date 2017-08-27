@@ -9,14 +9,14 @@ const TrainingPlan = new Schema({
     days: Array,
     exercisesList: [
         {
-            name: String,
             sets: [{
                 value: String,
                 value2: String
             }],
-            id: String,
-            exerciseType: String,
-            description: String,
+            exercise: {
+                type: ObjectId,
+                ref: 'Exercise'
+            },
         }
     ],
     intervals: Array,
