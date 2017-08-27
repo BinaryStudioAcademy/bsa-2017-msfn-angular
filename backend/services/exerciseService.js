@@ -6,6 +6,7 @@ function ExerciseService() {}
 
 ExerciseService.prototype.createExercise = createExercise;
 ExerciseService.prototype.getAllExercises = getAllExercises;
+ExerciseService.prototype.getExercisesByType = getExercisesByType;
 ExerciseService.prototype.upadeteExerciseById = upadeteExerciseById;deleteExerciseById
 ExerciseService.prototype.deleteExerciseById = deleteExerciseById;
 ExerciseService.prototype.getExerciseById = getExerciseById;
@@ -33,6 +34,22 @@ function getAllExercises(callback) {
             callback(null, exerciseData);
         }
     });    
+}
+
+function getExercisesByType(type, callback){
+    const params = {
+        filter: {
+            type: type
+        },
+    };
+    exerciseRepository.get(params, (err, exerciseData) => {
+        if (err) return callback(err);
+        if (exerciseData === null) {
+            callback(null, new ApiError('Not found exersises'));
+        } else {
+            callback(null, exerciseData);
+        }
+    });
 }
 
 function getExerciseById(id, callback) {

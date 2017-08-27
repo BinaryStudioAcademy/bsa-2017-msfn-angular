@@ -23,6 +23,7 @@ declare module ExerciseApi {
     export interface IExercise {
         name: string;
         type: string;
+        measure: string;
         isRemoved: boolean;
         sportsId: string[];
         description: string;
@@ -44,6 +45,7 @@ declare module SubscribeApi {
         firstName: string;
         lastName: string;
         justUnsubscribe?: boolean;
+        isFollowed?: boolean;
         userPhoto?: string;
     }
 }

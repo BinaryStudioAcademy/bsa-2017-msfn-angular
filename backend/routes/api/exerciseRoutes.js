@@ -24,8 +24,18 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+    app.get(baseUrl+'type/:type', function (req, res, next) {
+        exerciseService.getExercisesByType(req.params.type, function (err, data) {
+            if (!data.length) {
+                data = [{}];
+            }
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.get(baseUrl + ':id', function (req, res, next) {
-        console.log(1)
         exerciseService.getExerciseById(req.params.id, function (err, data) {
             res.data = data;
             res.err = err;

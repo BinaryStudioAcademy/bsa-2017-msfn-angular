@@ -1,0 +1,192 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/text.scss';
+@import "../../../../globalStyles/indentations";
+
+.exercises-container {
+    height: 100%;
+    padding: 0 15px;
+    .exercise-table {
+       /*  background: linear-gradient($gradient-to-color 75%, $bg-color);
+        box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19); */
+        height: 80%;
+        .exercise-table-head {
+            height: 50px;
+            display: flex;
+            padding: 20px;
+            align-items: center;
+            justify-content: space-between;
+            /* background-color: $gradient-to-color; */
+            z-index: 2;
+           /*  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+            .table-title {
+                font-size: 16px;
+                text-transform: uppercase;
+                position: relative;
+
+                .button-add {
+                    position: absolute;
+                    right: -33px;
+                    top: -7px;
+                    font-size: 30px;
+                    cursor: pointer;
+                }
+            }
+            .exercise-pagination {
+                height: 50px;
+                background: none;
+                min-height: unset;
+            }
+        }
+        .exercise-table-body {
+            display: flex;
+            height: 90%;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            z-index: 1;
+            .exercise-row {
+                display: flex;
+                max-height: 80%;
+                min-height: 140px;
+                width: 220px;
+                overflow-y: auto;
+                position: relative;
+                flex-direction: column;
+                margin: 10px;
+                padding: 20px 25px;
+                align-items: flex-start;
+                background: linear-gradient($gradient-to-color 75%, $bg-color);
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                &:hover {
+                    .col.del,
+                    .col.edit {
+                        display: block;
+                    }
+                }
+                .col.del,
+                .col.edit {
+                    position: absolute;
+                    height: 20px;
+                    width: 20px;
+                    display: none;
+                    cursor: pointer;
+                    i {
+                        line-height: 20px;
+                        font-size: 18px;
+                        text-align: center;
+                        width: 21px;
+                        &:hover {
+                            color: $btn-color;
+                        }
+                    }
+                }
+                .col.del {
+                    right: 5px;
+                }
+                .col.edit {
+                    right: 25px;
+                }
+                .col.name {
+                    margin-bottom: 10px;
+                    max-width: 180px;
+                    text-overflow: ellipsis;
+                    /* overflow: hidden; */
+                    white-space: nowrap;
+                    cursor: pointer;
+                }
+                .col.sets {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    .set-item {
+                        display: flex;
+                        flex-direction: row;
+                        position: relative;
+                        margin-bottom: 10px;
+                        font-size: 12px;
+                        font-weight: bold;
+                        .item-id {
+                            position: absolute;
+                            height: 18px;
+                            width: 18px;
+                            text-align: center;
+                            border-radius: 18px;
+                            line-height: 18px;
+                            background-color: #646464;
+                        }
+                        .item-val {
+                            width: 40%;
+                            float: left;
+                            background-color: #222;
+                            border-radius: 15px;
+                            height: 18px;
+                            padding-left: 25px;
+                            line-height: 18px;
+                        }
+                        .item-opt-val {
+                            width: 10%;
+                            float: right;
+                            margin-left: 10px;
+                            line-height: 18px;
+
+                            &:before {
+                                content: 'x'
+                            }
+                        }
+                        .exercise-add {
+                            height: 18px;
+                            margin-left: 25px;
+                            line-height: 18px;
+                            cursor: pointer;
+                        }
+                        .col.del {
+                            right: -20px;
+                        }
+                        .col.edit {
+                            right: -2px;
+                        }
+                    }
+                    .set-form form {
+                        display: flex;
+                        flex-flow: row wrap;
+                        .item-val {
+                            flex: 50%;
+                        }
+                        .item-opt-val {
+                            flex: 50%;
+                        }
+                        .item-save {
+                            align-items: center;
+                            display: flex;
+                            margin-left: 5px;
+                            cursor: pointer;
+                            i {
+                                line-height: 20px;
+                                font-size: 18px;
+                                text-align: center;
+                                width: 21px;
+                                &:hover {
+                                    color: $btn-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $small-screen) {
+    .table-title>span {
+        display: none;
+    }
+}
+
+@media screen and (min-width: $small-screen + 1) and (max-width: $medium-screen) {
+    .table-title>span {
+        display: none;
+    }
+}
+
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
+}

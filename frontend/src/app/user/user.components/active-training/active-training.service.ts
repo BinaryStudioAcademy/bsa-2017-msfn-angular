@@ -10,14 +10,6 @@ import { ChooseTrainDialogComponent } from './active-training.components/choose-
 export class ActiveTrainingService {
 
     dialogRef: MdDialogRef<any>;
-    fakeData = [{
-        name: 'Intensive gym',
-        days: [{key: 0, value: 'Sun', checked: true}, {key: 3, value: 'Wed', checked: true}]
-    },
-    {
-        name: 'Crossing',
-        days: [{key: 1, value: 'Mon', checked: true}]
-    }];
 
     constructor(
         private dialog: MdDialog,
@@ -31,16 +23,63 @@ export class ActiveTrainingService {
             body: {},
         };
 
-        // this.httpService.sendRequest(sendData)
-        //     .then(data => {
-        //         callback(data);
-                this.dialogRef = this.dialog.open(ChooseTrainDialogComponent, { data: this.fakeData });
-                this.dialogRef.afterClosed().subscribe();
-        // });
+        this.httpService.sendRequest(sendData)
+            .then(data => {
+                this.dialogRef = this.dialog.open(ChooseTrainDialogComponent, { data: data });
+                this.dialogRef.afterClosed().subscribe(callback);
+        });
     }
 
-    showFinishDialog(data, callback) {
+    getMeasures(callback) {
+        const sendData: IHttpReq = {
+            url: '/api/user/me',
+            method: 'GET',
+            body: {},
+        };
+
+        this.httpService.sendRequest(sendData).then(data => {
+            callback(data.settings);
+        });
+    }
+
+
+    addTraining(plan, callback) {
+        delete plan._id;
+        delete plan.count;
+        delete plan.days;
+        plan.startDate = new Date().toISOString();
+        const sendData: IHttpReq = {
+            url: '/api/launchedtraining',
+            method: 'POST',
+            body: plan,
+        };
+
+        this.httpService.sendRequest(sendData)
+            .then(data => {
+            callback(data);
+        });
+    }
+
+    updateTraining(plan, final?) {
+        if (final) {
+            plan.results = final;
+        }
+        const sendData: IHttpReq = {
+            url: '/api/launchedtraining',
+            method: 'PUT',
+            body: plan,
+        };
+        console.log('update');
+        this.httpService.sendRequest(sendData);
+    }
+
+    showFinishDialog(data, plan, callback) {
         this.dialogRef = this.dialog.open(FinishDialogComponent, { data: data });
-        this.dialogRef.afterClosed().subscribe(callback);
+        this.dialogRef.afterClosed().subscribe((dialogRes) => {
+            if (dialogRes === true) {
+                this.updateTraining(plan, data);
+            }
+            callback(dialogRes);
+        });
     }
 }

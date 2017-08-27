@@ -12,9 +12,7 @@ import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { SettingsComponent } from './user.components/settings/settings.component';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
-import { FollowersListComponent } from './user.components/followers-list/followers-list.component';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
-import { FollowingListComponent } from './user.components/following-list/following-list.component';
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
@@ -24,6 +22,7 @@ import { ExerciseEditDialogComponent } from './user.components/exercise-edit-dia
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
 import { MiscComponent } from './user.components/account-settings/misc/misc.component';
+import { UserListComponent } from './user.components/user-list/user-list.component';
 import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
 import { ExerciseDescriptionComponent } from './user.components/exercise-description/exercise-description.component';
 import { MarkdownService } from '../services/markdown.service';
@@ -31,8 +30,15 @@ import { PrivacyComponent } from './user.components/account-settings/privacy/pri
 import { ExerciseListComponent } from './user.components/exercise-list/exercise-list.component';
 import { SecundomerComponent } from './user.components/active-training/active-training.components/secundomer/secundomer.component';
 import { FinishDialogComponent } from './user.components/active-training/active-training.components/finish-dialog/finish-dialog.component';
+// tslint:disable-next-line:max-line-length
 import { ChooseTrainDialogComponent } from './user.components/active-training/active-training.components/choose-train-dialog/choose-train-dialog.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
+import { DbWeightControlComponent } from './user.components/dashboard/dashboard.components/db-weight-control/db-weight-control.component';
+import { DbCaloriesComponent } from './user.components/dashboard/dashboard.components/db-calories/db-calories.component';
+import { DbEventsComponent } from './user.components/dashboard/dashboard.components/db-events/db-events.component';
+import { DbFoodPlanComponent } from './user.components/dashboard/dashboard.components/db-food-plan/db-food-plan.component';
+import { DbNewsComponent } from './user.components/dashboard/dashboard.components/db-news/db-news.component';
+import { DbGoalsComponent } from './user.components/dashboard/dashboard.components/db-goals/db-goals.component';
 
 @NgModule({
     imports: [
@@ -52,8 +58,6 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
         SettingsComponent,
         IntervalTrainingPlanComponent,
         OtherProfilesComponent,
-        FollowersListComponent,
-        FollowingListComponent,
         AccountSettingsComponent,
         LoginSettingsComponent,
         PlanDetailComponent,
@@ -62,6 +66,7 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
         WeightControlComponent,
         DashboardComponent,
         MiscComponent,
+        UserListComponent,
         PrivacyComponent,
         ExerciseTableComponent,
         ExerciseDescriptionComponent,
@@ -69,7 +74,13 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
         SecundomerComponent,
         FinishDialogComponent,
         ChooseTrainDialogComponent,
-        ActiveTrainingComponent
+        ActiveTrainingComponent,
+        DbWeightControlComponent,
+        DbCaloriesComponent,
+        DbEventsComponent,
+        DbFoodPlanComponent,
+        DbNewsComponent,
+        DbGoalsComponent,
     ],
     providers: [
         ForAllUserGuard,

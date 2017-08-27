@@ -8,6 +8,11 @@
             {{type.name}}
         </md-option>
     </md-select>
+    <md-select placeholder="Exercise measure" [(ngModel)]="exercise.measure" name="measure" class="select-row input" required>
+        <md-option *ngFor="let measure of exMeasures" [hidden]="measure.isRemoved" [value]="measure.measureName">
+            {{measure.measureName}}
+        </md-option>
+    </md-select>
     <md-input-container class="example-full-width" class="input">
         <textarea mdInput placeholder="Exercise Description" [(ngModel)]="exercise.description" name="description" (keyup)="updateOutput($event.target.value)"></textarea>
     </md-input-container>

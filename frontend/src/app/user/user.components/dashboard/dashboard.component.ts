@@ -10,27 +10,8 @@ export class DashboardComponent implements OnInit {
     constructor() { }
 
     dataToDisplay = {
-        weight: {
-            title: 'Weight Control'
-        },
-        calories: {
-            title: 'Burned Calories'
-        },
-        events: {
-            title: 'Planned Events'
-        },
-        food: {
-            title: 'Food Plan'
-        },
-        news: {
-            title: 'News Feed'
-        },
-        aim: {
-            title: 'Goals'
-        }
     };
 
     ngOnInit() {
     }
-
 }
