@@ -2,16 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Food = new Schema({
-    foodType: String,
-    foodUnits: [{
-        conversionFactor: Number,
-        unitName: String,
-        unitType: String,
-        isRemoved: {
-            type: Boolean,
-            default: false
-        }
-    }],
+    name: {
+        type: String,
+        required: true
+    },
+    foodType: {
+        type: String,
+        default: 'Other'
+    },
+    kcal: Number,
+    protein: Number,
+    fat: Number,
+    carbons: Number,
+    vendor: String,
+    description: String,
+    picture: String,
+    customUserId: String,
     isRemoved: {
         type: Boolean,
         default: false
@@ -20,4 +26,4 @@ const Food = new Schema({
 
 
 
-module.exports = mongoose.model('Measurement', Measurement);
+module.exports = mongoose.model('Food', Food);
