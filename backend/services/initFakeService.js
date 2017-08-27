@@ -75,7 +75,7 @@ const mongoose = require('mongoose'),
             gender: 'Male',
             height: 180,
             weight: 70,
-            birthday: '1971-26-12',
+            birthday: '1971-12-26',
             activateToken: '',
             userPhoto: 'https://www.looktothestars.org/photo/392-jared-leto/teaser-1379522441.jpg'
         },

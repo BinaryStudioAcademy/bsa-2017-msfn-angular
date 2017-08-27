@@ -12,7 +12,7 @@ import { ActiveTrainingService } from './active-training.service';
 
 export class ActiveTrainingComponent implements OnInit {
     // global
-    loaded: boolean = false;
+    loaded: boolean;
     secundomerBind = {
         intervalTrain: false,
         finishTrain: <boolean | string>false
@@ -29,14 +29,25 @@ export class ActiveTrainingComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-
         this.activeTrainingService.getPlans((plan) => {
-            // console.log(plan);
+            if (!plan) {
+                this.loaded = false;
+                return;
+            }
             this.trainingPlan = plan;
             this.loaded = true;
         });
     }
 
+    choosePlan() {
+        this.activeTrainingService.getPlans((plan) => {
+            if (plan === undefined) {
+                return;
+            }
+            this.trainingPlan = plan;
+            this.loaded = true;
+        });
+    }
     onStart() {
         this.activeTrainingService.addTraining(this.trainingPlan, (result) => {
             if (result) {
