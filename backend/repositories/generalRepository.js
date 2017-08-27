@@ -73,7 +73,10 @@ function get(params, callback) {
         params.populate = null;
     }
     let model = this.model;
-    let query = model.find(params.filter).sort(params.sort).limit(params.limit).skip(params.offset).select(params.fields).populate(params.populate);
+    let query = model.find(params.filter).sort(params.sort).limit(params.limit).skip(params.offset).select(params.fields);
+    if(params.populate){
+        query.populate(params.populate);
+    }
     query.exec(callback);
 }
 
