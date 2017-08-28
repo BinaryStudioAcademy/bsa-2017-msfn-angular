@@ -4,7 +4,7 @@ const trainingPlanService = require('../../services/trainingPlanService');
 const baseUrl = '/api/fake-data/';
 
 module.exports = function (app) {
-    app.put(baseUrl + 'training-plan', function (req, res, next) {
+    app.get(baseUrl + 'training-plan', function (req, res, next) {
         if (!req.session || !req.session.passport || !req.session.passport.user){
             return next('Auth required');
         }
