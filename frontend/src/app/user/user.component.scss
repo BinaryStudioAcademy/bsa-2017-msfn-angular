@@ -19,7 +19,7 @@
     overflow-y: auto;
 }
 
-@media only screen and (max-width: $small-screen) {
+@media only screen and (max-width: $medium-screen) {
     .sidebar-container {
         flex: 0 0 55px;
         width: 55px;
