@@ -1,6 +1,6 @@
 const ApiError = require('./apiErrorService');
 const goalRepository = require('../repositories/goalRepository');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 function GoalService() {}
 
@@ -28,7 +28,7 @@ function getGoalByName(name, callback) {
 function createGoal(body, callback) {
 
         this.getGoalByName(body.name, (err, data) => {
-        
+
         if (data.name) {
             callback(new ApiError('This goal name already exists'));
         } else {
@@ -48,11 +48,10 @@ function createGoal(body, callback) {
 
 function updateGoal(id, body, callback) {
     this.getGoalByName(body.name, (err, data) => {
-        console.log(body, data._id, id);
-        if (data.name && data._id != id) {
+        if (data.name && data._id !== id) {
             callback(new ApiError('This goal name already exists'));
         } else {
-            
+
             goalRepository.updateById(id, body, (err, goalData) => {
 
                 if (err) return callback(err);
@@ -70,7 +69,7 @@ function updateGoal(id, body, callback) {
 function deleteGoal(id, callback) {
     if(mongoose.Types.ObjectId.isValid(id)) {
 
-    
+
     goalRepository.deleteById(id, (err, goalData)=>{
 
         if (err) return callback(err);
