@@ -7,13 +7,13 @@ function ExerciseService() {}
 ExerciseService.prototype.createExercise = createExercise;
 ExerciseService.prototype.getAllExercises = getAllExercises;
 ExerciseService.prototype.getExercisesByType = getExercisesByType;
-ExerciseService.prototype.upadeteExerciseById = upadeteExerciseById;deleteExerciseById
+ExerciseService.prototype.upadeteExerciseById = upadeteExerciseById;
 ExerciseService.prototype.deleteExerciseById = deleteExerciseById;
 ExerciseService.prototype.getExerciseById = getExerciseById;
 
 function createExercise(body, callback) {
 
-    body.isRemoved = false
+    body.isRemoved = false;
 
     exerciseRepository.add(body, (err, exerciseData) => {
         if (err) return callback(err);
@@ -33,7 +33,7 @@ function getAllExercises(callback) {
         } else {
             callback(null, exerciseData);
         }
-    });    
+    });
 }
 
 function getExercisesByType(type, callback){
