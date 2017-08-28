@@ -204,15 +204,14 @@ export class PlanDetailComponent implements OnInit {
             let action = '';
 
             if (this.trainingPlan.gcalendar_id) {
-                this.gcalendar.getEvent(this.trainingPlan.gcalendar_id,
-                    (err, res) => {
-                    if (err && err === 'Not found') {
+                this.gcalendar.getEvent(this.trainingPlan.gcalendar_id, (error, event) => {
+                    if (error && error === 'Not found') {
                         action = 'add';
                     }
-                    if (!action && err) {
+                    if (!action && error) {
                         action = '';
                     }
-                    if (!action && res.result.status === 'cancelled') {
+                    if (!action && event.result.status === 'cancelled') {
                         action = 'add';
                     }
                     if (!action) {
