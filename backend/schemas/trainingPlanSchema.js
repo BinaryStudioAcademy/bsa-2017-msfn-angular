@@ -19,7 +19,12 @@ const TrainingPlan = new Schema({
             },
         }
     ],
-    intervals: Array,
+    intervals: [
+        {
+            lapTime: Number,
+            warmTime: Number
+        }
+    ],
     trainingType: 'general' | 'interval',
     userID: String,
     gcalendar_id: String,
