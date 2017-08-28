@@ -24,7 +24,6 @@ export class ConstantsService {
 
         this.httpService.sendRequest(request).then(res => {
             this.measurements = res;
-            console.log(this.measurements);
         });
     }
 
