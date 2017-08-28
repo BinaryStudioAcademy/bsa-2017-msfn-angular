@@ -13,9 +13,7 @@ export class DbNewsComponent implements OnInit {
 
     constructor() { }
 
-    dataToDisplay = {
-        title: 'News Feed'
-    };
+    title = 'News Feed';
 
     news = [
         {

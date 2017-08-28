@@ -78,9 +78,7 @@ export class DbWeightControlComponent implements OnInit {
         }
     };
 
-    dataToDisplay = {
-        title: 'Weight Control'
-    };
+    title = 'Weight Control';
 
     getItems(): void {
         this.weightControlService.getWeightItems(res => {

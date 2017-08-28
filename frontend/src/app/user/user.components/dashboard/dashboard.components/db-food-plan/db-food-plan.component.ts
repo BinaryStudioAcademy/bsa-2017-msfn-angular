@@ -12,9 +12,7 @@ export class DbFoodPlanComponent implements OnInit {
 
     constructor() { }
 
-    dataToDisplay = {
-        title: 'Food Plan'
-    };
+    title = 'Food Plan';
 
     kcal = {
         eaten: {

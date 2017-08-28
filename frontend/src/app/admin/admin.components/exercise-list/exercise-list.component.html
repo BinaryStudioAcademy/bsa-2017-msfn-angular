@@ -6,8 +6,7 @@
             [items]="items"
             [options]="options"
             placeholder="types"
-            (change)="updateItems()"
-            (click)="updateItems()"></app-list>
+            (onChangedList)="updateItems()"></app-list>
         <md-input-container>
             <input mdInput type="text" #filter placeholder="search by name" [(ngModel)]="name">
         </md-input-container>
