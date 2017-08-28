@@ -47,7 +47,7 @@ export class PlanDetailComponent implements OnInit {
             checked: false
         },
     ];
-
+    userMeasures: any;
     displayExercises: Object[];
 
     lastAfterClosedResult: string;
@@ -73,6 +73,14 @@ export class PlanDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+        const sdata: IHttpReq = {
+            url: '/api/user/me',
+            method: 'GET',
+            body: {},
+        };
+        this.httpHandler.sendRequest(sdata).then(data => {
+            this.userMeasures = data.settings;
+        });
 
         if (this.activatedRoute.snapshot.params.id) {
             const planID = this.activatedRoute.snapshot.params.id;

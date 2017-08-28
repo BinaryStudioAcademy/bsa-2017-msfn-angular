@@ -3,7 +3,7 @@
         <div class="exercise-table-head">
             <div class="table-title">
                 <span>Exercise list</span>
-                <md-icon (click)="addExercise()" class="button-add">add_circle</md-icon>
+                <md-icon (click)="addExercise()" id="test" class="button-add">add_circle</md-icon>
             </div>
             <div class="table-controls" *ngIf="(exercisesList.length / pageSize) > 1">
                 <md-paginator class="exercise-pagination" [length]="exercisesList.length" [(pageIndex)]="pageIndex" [pageSize]="pageSize"

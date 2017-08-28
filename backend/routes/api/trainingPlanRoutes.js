@@ -40,7 +40,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.delete(baseUrl + ':id', function (req, res, next) {
+    app.delete(baseUrl + '/:id', function (req, res, next) {
         trainingPlanService.delete(req.params.id, function (err, data) {
             res.data = data;
             res.err = err;
