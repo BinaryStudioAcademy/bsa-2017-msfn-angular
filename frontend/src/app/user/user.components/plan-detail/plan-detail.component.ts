@@ -55,7 +55,7 @@ export class PlanDetailComponent implements OnInit {
 
     trainingPlan = {
         _id: '',
-        name: 'New plan',
+        name: '',
         days: [],
         count: 0,
         trainingType: 'general' || 'interval',
@@ -206,8 +206,6 @@ export class PlanDetailComponent implements OnInit {
             if (this.trainingPlan.gcalendar_id) {
                 this.gcalendar.getEvent(this.trainingPlan.gcalendar_id,
                     (err, res) => {
-                    console.log(err);
-                    console.log(res);
                     if (err && err === 'Not found') {
                         action = 'add';
                     }
@@ -220,8 +218,6 @@ export class PlanDetailComponent implements OnInit {
                     if (!action) {
                         action = 'update';
                     }
-
-                    console.log(action);
 
                     switch (action) {
                         case 'add':
