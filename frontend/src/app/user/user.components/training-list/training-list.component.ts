@@ -16,6 +16,7 @@ export class TrainingListComponent implements OnInit {
 
     ngOnInit() {
         this.trainingListService.getPlans((response) => {
+            console.log(response);
             this.data = response;
         });
     }
@@ -26,6 +27,13 @@ export class TrainingListComponent implements OnInit {
 
     openPlan(id) {
         this._router.navigate(['/user/training-plan/' + id]);
+    }
+
+    deletePlan(id, event) {
+        event.preventDefault();
+        if (event.ctrlKey) {
+            this.trainingListService.removePlan(id);
+        }
     }
 
 }

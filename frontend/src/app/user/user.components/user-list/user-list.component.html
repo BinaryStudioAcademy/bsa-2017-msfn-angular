@@ -1,5 +1,6 @@
 <div class="all-user-container">
     <md-tab-group>
+
         <!-- All -->
         <md-tab label="All">
             <md-input-container class="search-box">
@@ -19,15 +20,12 @@
                  (scrolled)="onScroll('users')">
                 <md-list>
                     <md-list-item *ngFor="let user of users.show" class="user-container">
-                        <div>
-                            <img md-line
-                                 md-list-avatar
-                                 [src]="user.userPhoto || './resources/default.png'"
-                            >
-                            <a [routerLink]="'/user/profile/'+user._id">
-                                <p md-line class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
-                            </a>
-                        </div>
+                        <img md-list-avatar
+                             [src]="user.userPhoto || './resources/default.png'"
+                        >
+                        <a [routerLink]="'/user/profile/'+user._id">
+                            <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+                        </a>
                         <button md-button
                                 (click)="followNew(user)"
                                 [hidden]="user.isFollowed"
@@ -58,12 +56,11 @@
                      (scrolled)="onScroll('followers')">
                     <md-list>
                         <md-list-item *ngFor="let user of followers.show" >
-                            <img md-line
-                                 md-list-avatar
+                            <img md-list-avatar
                                  [src]="user.userPhoto || './resources/default.png'"
                             >
                             <a [routerLink]="'/user/profile/'+user._id">
-                                <p md-line class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+                                <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
                             </a>
                         </md-list-item>
                     </md-list>
@@ -92,17 +89,15 @@
                      (scrolled)="onScroll('following')">
                     <md-list>
                         <md-list-item *ngFor="let user of following.show" class="user-container">
-                            <div>
-                                <img md-line
-                                     md-list-avatar
-                                     [src]="user.userPhoto || './resources/default.png'"
-                                >
-                                <a [routerLink]="'/user/profile/'+user._id">
-                                    <p md-line class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
-                                </a>
-                            </div>
-                            <button md-button (click)="unfollow(user)">{{user.justUnsubscribe?'Follow':'Unfollow'}}</button>
-                            <button md-button (click)="unfollow(user)">{{user.justUnsubscribe?'Follow':'Unfollow'}}</button>
+                            <img md-list-avatar
+                                [src]="user.userPhoto || './resources/default.png'"
+                            >
+                            <a [routerLink]="'/user/profile/'+user._id">
+                                <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+                            </a>
+                            <button md-button
+                                    (click)="unfollow(user)"
+                            >{{user.justUnsubscribe?'Follow':'Unfollow'}}</button>
                         </md-list-item>
                     </md-list>
                 </div>

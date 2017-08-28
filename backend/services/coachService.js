@@ -16,7 +16,6 @@ function apply(id, callback) {
         if (user === null){
             callback(new ApiError('User not found'));
         } else {
-            // here must be a business logic function of adding coach permission
             userRepository.update(id, {requestForCoaching: true}, (err, data) => {
                 if (err) return callback(err);
 
@@ -37,7 +36,7 @@ function apply(id, callback) {
                             socketService.BroadcastRoom('new_coach_request', 'admin', JSON.stringify(res));
                         });
                     });
-                    callback(null, true);
+                    callback(null, {requested: true});
                 });
             });
         }

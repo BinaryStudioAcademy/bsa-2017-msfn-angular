@@ -12,10 +12,6 @@
     display: inline-block;
 }
 
-md-slider {
-    width: 100%;
-}
-
 .start-date,
 .end-date {
     width: 50%;
@@ -23,6 +19,55 @@ md-slider {
 
 .end-date {
     text-align: right;
+}
+
+#day-picker {
+    position: relative;
+    width: 100%;
+
+    md-radio-group {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        z-index: +1;
+        top: -40px;
+        width: 100%;
+
+        input {
+            display: none;
+        }
+
+        label {
+            cursor: pointer;
+            font-size: $minor-text;
+            color: $text-second-color;
+
+            div {
+                width: 8px;
+                height: 8px;
+                border-radius: 4px;
+                background-color: $btn-second-color;
+            }
+        }
+
+        .label-checked {
+            color: $text-main-color;
+        }
+
+        .label-unchecked {
+            color: $text-second-color;
+        }
+    }
+
+    svg {
+        position: absolute;
+        width: 100%;
+
+        line {
+            stroke: $text-second-color;
+            stroke-width: 2px;
+        }
+    }
 }
 
 .event-output {

@@ -9,9 +9,9 @@ const Exercise = new Schema({
     },
     measure: String,
     isRemoved: Boolean,
-    sportsId:Array,
-    description:String,
-    image:String
+    sportsId: Array,
+    description: String,
+    image: String
 });
 
 module.exports = mongoose.model('Exercise', Exercise);

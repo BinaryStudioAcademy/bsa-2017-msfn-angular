@@ -22,4 +22,15 @@ export class TrainingListService {
         });
     }
 
+    removePlan(id) {
+        const sendData: IHttpReq = {
+            url: '/api/training-plan/' + id,
+            method: 'DELETE',
+            body: {},
+            successMessage: 'Plan is removed'
+        };
+
+        this.httpService.sendRequest(sendData);
+    }
+
 }

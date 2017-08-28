@@ -13,8 +13,11 @@ const
 
 module.exports = function (app) {
     app.get(baseUrl + 'me', function (req, res, next) {
-        res.data = req.session.user;
-        next();
+        userRepository.getById(req.session.passport.user, function (err, data) {
+            res.data = data;
+            res.err = err;
+            next();
+        });
     }, apiResponse);
 
     app.use(baseUrl + 'activate', activateRoutes);
@@ -39,6 +42,7 @@ module.exports = function (app) {
 
     app.get(baseUrl + 'coach-status-request/:id', (req, res, next) => {
          coachService.apply(req.params.id, (err, data) => {
+            console.log(data);
             res.data = data;
             res.err = err;
             next();

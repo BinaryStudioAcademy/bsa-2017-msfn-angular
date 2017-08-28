@@ -3,6 +3,7 @@ import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { WindowObj } from './services/window.service';
+import {ConstantsService} from './services/constants.service';
 
 @Component({
     selector: 'app-root',
@@ -16,7 +17,8 @@ import { WindowObj } from './services/window.service';
 })
 export class AppComponent {
     isLoggedIn = false;
-    constructor(private _windowObj: WindowObj) {
+    constructor(private _windowObj: WindowObj,
+                public constantsService: ConstantsService) {
         this.isLoggedIn = this._windowObj.data._injectedData.isLoggedIn;
     }
 }

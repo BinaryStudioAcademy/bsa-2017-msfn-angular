@@ -13,6 +13,7 @@ class trainingPlanService {
             filter: {
                 isRemoved: false,
             },
+            populate:'exercisesList.exercise'
         };
 
         if(data){
@@ -29,9 +30,9 @@ class trainingPlanService {
     }
 
     add(req, callback){
-        let data = req.body;
+        let data = req;
         data.isRemoved = false;
-        data.userID = req.session.passport.user;
+        // data.userID = req.session.passport.user;
         delete data._id;
         trainingPlanRepository.add(data, (err, planData) => {
                 if (err) return callback(err);

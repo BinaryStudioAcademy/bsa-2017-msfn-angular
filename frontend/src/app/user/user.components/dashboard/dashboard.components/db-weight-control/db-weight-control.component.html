@@ -1,10 +1,10 @@
 <div class="weight-control inner-container">
-    <h2><a routerLink="weight-control">{{ dataToDisplay.title }}</a></h2>
+    <h2><a routerLink="weight-control">{{ title }}</a></h2>
     <div class="content">
         <div id="diff">
             <div id="previous-diff" *ngIf="currentWeight">
-                <div id="recent-day">{{ recentDay }}:</div>
-                <div id="current-weight">{{ currentWeight }}kg</div>
+                <div class="recent-day">{{ recentDay }}:</div>
+                <div class="recent-value">{{ currentWeight }}kg</div>
                 <div class="diff"
                      *ngIf="weeklyItems.length > 1"
                      [ngClass]="{'better-result': settings.recent.betterResult, 'worse-result': settings.recent.worseResult}">

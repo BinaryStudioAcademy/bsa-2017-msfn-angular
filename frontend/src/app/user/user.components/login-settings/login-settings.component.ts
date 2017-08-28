@@ -180,15 +180,4 @@ export class LoginSettingsComponent implements OnInit {
             this.hideCropper = true;
         }
     }
-
-    applyForCoaching() {
-        const userData = {
-            requestForCoaching: true
-        };
-        this.requestForCoaching = true;
-
-        this.profileService.coachStatusRequest(this.userId, (res) => {
-            this.coachingMessage = 'We\'ll moderate your request in 24 hours.' + ' You\'ll get a notification when it would be done.';
-        });
-    }
 }

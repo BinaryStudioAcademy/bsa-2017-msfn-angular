@@ -61,17 +61,6 @@ export class LoginSettingsService {
         });
     }
 
-    coachStatusRequest(id, callback) {
-        const request: IHttpReq = {
-            url: '/api/user/coach-status-request/' + id,
-            method: 'GET',
-            body: {}
-        };
-        this.httpService.sendRequest(request)
-            .then(res => {
-                callback(res);
-        });
-    }
     getCropperSettings(): CropperSettings {
         const cropperSettings = new CropperSettings();
         cropperSettings.noFileInput = true;

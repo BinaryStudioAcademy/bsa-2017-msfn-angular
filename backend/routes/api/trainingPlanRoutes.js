@@ -16,7 +16,6 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl + '/:id', function (req, res, next) {
-        console.log(req.params);
         trainingPlanService.get({_id: req.params.id, userID: req.session.passport.user}, function (err, data) {
             res.data = data;
             res.err = err;
@@ -25,7 +24,9 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.post(baseUrl, function (req, res, next) {
-        trainingPlanService.add(req, function (err, data) {
+        const newPlan = req.body;
+        newPlan.userID = req.session.passport.user;
+        trainingPlanService.add(newPlan, function (err, data) {
             res.data = data;
             res.err = err;
             next();
@@ -40,7 +41,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.delete(baseUrl + ':id', function (req, res, next) {
+    app.delete(baseUrl + '/:id', function (req, res, next) {
         trainingPlanService.delete(req.params.id, function (err, data) {
             res.data = data;
             res.err = err;
@@ -48,4 +49,4 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-}
+};
