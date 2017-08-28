@@ -1,3 +1,4 @@
+import { GoalComponent } from './user.components/goal/goal.component';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { SettingsComponent } from './user.components/settings/settings.component';
 import { NgModule } from '@angular/core';
@@ -92,6 +93,10 @@ const userRoutes: Routes = [
             {
                 path: 'start-training',
                 component: ActiveTrainingComponent
+            },
+            {
+                path: 'goals',
+                component: GoalComponent
             }
         ]
     }

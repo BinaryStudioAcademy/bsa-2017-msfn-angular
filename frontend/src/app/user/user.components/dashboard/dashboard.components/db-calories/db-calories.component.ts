@@ -19,11 +19,13 @@ export class DbCaloriesComponent implements OnInit {
         this.d3 = d3Service.getD3();
     }
 
-    title: 'Burned Calories';
+    title = 'Burned Calories';
+
     interval = {
         startDate: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 7),
         endDate: new Date()
     };
+
     dayAim = 300;
     todayBurnedKcal = 120.6;
 
@@ -154,14 +156,14 @@ export class DbCaloriesComponent implements OnInit {
 
         const tooltip = this.d3.select('#tooltip');
         tooltip.transition()
-            .duration(200)
+            .duration(100)
             .style('opacity', 0.9);
         tooltip.html(element.amount)
             .style('transform', `translate(${xCoord + 20}px, ${135 - (element.amount / 3)}px)`);
 
         this.d3.select(target)
             .transition()
-            .duration(200)
+            .duration(100)
             .attr('fill', '#82ca9c');
     }
 
@@ -170,12 +172,12 @@ export class DbCaloriesComponent implements OnInit {
         const target = e.currentTarget;
         const tooltip = this.d3.select('#tooltip');
         tooltip.transition()
-            .duration(200)
+            .duration(100)
             .style('opacity', 0);
 
         this.d3.select(target)
             .transition()
-            .duration(200)
+            .duration(100)
             .attr('fill', '#7da7d9');
     }
 }

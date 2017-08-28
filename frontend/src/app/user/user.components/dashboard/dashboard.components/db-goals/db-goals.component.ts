@@ -12,9 +12,7 @@ export class DbGoalsComponent implements OnInit {
 
     constructor() { }
 
-    dataToDisplay = {
-        title: 'Goals'
-    };
+    title = 'Goals';
 
     goals = [
         {

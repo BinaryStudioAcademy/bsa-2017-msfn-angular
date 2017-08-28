@@ -39,6 +39,8 @@ import { DbEventsComponent } from './user.components/dashboard/dashboard.compone
 import { DbFoodPlanComponent } from './user.components/dashboard/dashboard.components/db-food-plan/db-food-plan.component';
 import { DbNewsComponent } from './user.components/dashboard/dashboard.components/db-news/db-news.component';
 import { DbGoalsComponent } from './user.components/dashboard/dashboard.components/db-goals/db-goals.component';
+import { GoalComponent } from './user.components/goal/goal.component';
+import { GoalEditDialogComponent } from './user.components/goal-edit-dialog/goal-edit-dialog.component';
 
 @NgModule({
     imports: [
@@ -81,6 +83,8 @@ import { DbGoalsComponent } from './user.components/dashboard/dashboard.componen
         DbFoodPlanComponent,
         DbNewsComponent,
         DbGoalsComponent,
+        GoalComponent,
+        GoalEditDialogComponent,
     ],
     providers: [
         ForAllUserGuard,
@@ -89,7 +93,8 @@ import { DbGoalsComponent } from './user.components/dashboard/dashboard.componen
     entryComponents: [
         FinishDialogComponent,
         ChooseTrainDialogComponent,
-        ExerciseDescriptionComponent
+        ExerciseDescriptionComponent,
+        GoalEditDialogComponent
     ]
 })
 export class UserModule {
