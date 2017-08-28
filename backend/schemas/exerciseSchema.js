@@ -7,6 +7,7 @@ const Exercise = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'ExerciseType'
     },
+    measure: String,
     isRemoved: Boolean,
     sportsId:Array,
     description:String,

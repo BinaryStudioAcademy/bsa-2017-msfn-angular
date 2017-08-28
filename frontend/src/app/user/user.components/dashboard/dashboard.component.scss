@@ -2,10 +2,6 @@
 @import '../../../../globalStyles/indentations';
 @import '../../../../globalStyles/text';
 
-* {
-    font-family: 'Roboto', sans-serif;
-}
-
 #dashboard-container {
     display: flex;
     justify-content: space-around;
@@ -13,18 +9,42 @@
     flex-wrap: wrap;
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 20px 6%;
 
     div {
         width: 48%;
         height: 31%;
         background: $gradient-to-color;
-
-        h2 {
-            margin: 10px 0 0 10px;
-            font-size: $usual-text;
-            font-weight: 300;
-        }
     }
 }
 
+.inner-container {
+    height: 100%;
+    padding: 25px;
+
+    h2 {
+        margin: 0 0 5% 0;
+        padding: 0 0 10px;
+        border-bottom: 1px solid $text-main-color;
+        font-size: $usual-text;
+
+        a {
+            text-decoration: none;
+            color: $text-main-color;
+        }
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+}
+
+.recent-day {
+    font-size: $main-text;
+}
+
+.recent-value {
+    font-size: $header-text;
+}

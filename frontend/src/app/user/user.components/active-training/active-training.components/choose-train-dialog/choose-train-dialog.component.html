@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!emptyList" class="container">
     <h2 class="title" md-dialog-title>Today training plan</h2>
     <div class="recomendation" *ngIf="matchedTrain.length">
         <span>Recomended plan:</span>
@@ -13,5 +13,12 @@
     <div class="btn-container">
         <button md-raised-button [md-dialog-close]="false" class="controll">Close</button>
         <!-- <button md-raised-button [md-dialog-close]="true" class="controll">Confirm</button> -->
+    </div>
+</div>
+
+<div *ngIf="emptyList" class="container">
+    <h2 class="title" md-dialog-title>You don't have plans?</h2>
+    <div class="btn-container">
+        <button md-raised-button (click)="createPlan()" [md-dialog-close]="true" class="controll">Create now</button>
     </div>
 </div>

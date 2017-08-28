@@ -1,0 +1,30 @@
+<div class="food-plan inner-container">
+    <h2>{{ dataToDisplay.title }}</h2>
+    <div class="content">
+        <div id="eaten">
+            <div>
+                <div class="kcal-title">{{ kcal.eaten.title }}:</div>
+                <div class="kcal-amount">
+                    {{ kcal.eaten.amount }}
+                    <span> kcal</span>
+                </div>
+            </div>
+            <div>
+                <div class="kcal-title">{{ kcal.left.title }}:</div>
+                <div class="kcal-amount">
+                    {{ kcal.left.amount }}
+                    <span> kcal</span>
+                </div>
+            </div>
+        </div>
+        <div id="meal-list">
+            <md-checkbox
+                class="meal"
+                *ngFor = "let item of meal"
+                checked = "item.eaten"
+                [(ngModel)]="item.eaten">
+                {{ item.title }}
+            </md-checkbox>
+        </div>
+    </div>
+</div>

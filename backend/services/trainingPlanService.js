@@ -13,6 +13,7 @@ class trainingPlanService {
             filter: {
                 isRemoved: false,
             },
+            populate:'exercisesList.exercise'
         };
 
         if(data){

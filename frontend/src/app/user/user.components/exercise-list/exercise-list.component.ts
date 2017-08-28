@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { PageEvent, MdPaginatorModule } from '@angular/material';
 import { SearchExerciseComponent } from './../search-exercise/search-exercise.component';
@@ -20,9 +20,11 @@ export class ExerciseListComponent implements OnInit {
     setItemEdit;
 
     @Input() exercisesList = [];
+    @Input() userMeasures;
+    @Output() onChangeList = new EventEmitter();
     displayExercises: Object[];
     // pager props
-    pageSize = 3;
+    pageSize = 1;
     paginatorLength = this.exercisesList.length;
     pageIndex = 0;
     pageEvent: PageEvent;
@@ -44,7 +46,7 @@ export class ExerciseListComponent implements OnInit {
         if (window.innerWidth > 610) {
             this.pageSize = Math.floor((this.container.nativeElement.offsetWidth - 30) / 240);
         } else {
-            this.pageSize = 3;
+            this.pageSize = 1;
         }
         this.showPage(0);
     }
@@ -61,20 +63,20 @@ export class ExerciseListComponent implements OnInit {
 
             this.addExercises(selectedExercises);
             this.searchDialog = null;
+            this.onChangeList.emit(this.exercisesList);
         });
-
     }
 
     deleteExercise(id) {
         this.exercisesList = this.exercisesList.filter(function (el) {
-            if (el.id) {
-                return el.id !== id;
-            } else if (el._id) {
-                return el._id !== id;
+            if (el.exercise.id) {
+                return el.exercise.id !== id;
+            } else if (el.exercise._id) {
+                return el.exercise._id !== id;
             }
         });
-
         this.displayExercises = this.exercisesList.slice(0, this.pageSize);
+        this.onChangeList.emit(this.exercisesList);
     }
 
     showPage(currentPage) {
@@ -85,10 +87,13 @@ export class ExerciseListComponent implements OnInit {
     addExercises(exercises) {
         exercises.forEach((elem, ind) => {
             const inArray = this.exercisesList.find((el) => {
-                return el.id === elem.id;
+                return el.exercise._id === elem._id;
             });
             if (!inArray) {
-                this.exercisesList.push(elem);
+                const newExercise = {
+                    exercise: elem
+                };
+                this.exercisesList.push(newExercise);
             }
         });
         let page = 0;
@@ -130,6 +135,7 @@ export class ExerciseListComponent implements OnInit {
         this.value = '';
         this.value2 = '';
         exercise.edit = false;
+        this.onChangeList.emit(this.exercisesList);
     }
 
     setEdit(exercise, set, index) {
@@ -143,9 +149,9 @@ export class ExerciseListComponent implements OnInit {
         exercise.sets.splice(index, 1);
     }
 
-    showDescription(exercise) {
+    showDescription(exerciseObj) {
         this.dialog.open(ExerciseDescriptionComponent, {
-            data: exercise
+            data: exerciseObj.exercise
         });
     }
 

@@ -14,6 +14,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
 
     @Input() finishTrain: boolean;
     @Input() intervalTrain: boolean;
+    @Output() onStart = new EventEmitter();
     @Output() onFinish = new EventEmitter();
 
     constructor(
@@ -31,6 +32,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
 
     run(): void {
         this.secundomerService.run();
+        this.onStart.emit();
     }
     pause(): void {
         this.secundomerService.pause();

@@ -28,11 +28,11 @@ import {
     MdTooltipModule,
     MdMenuModule,
     MdListModule,
-    MdButtonToggleModule,
     MdTabsModule,
     MdDatepickerModule,
-    MdNativeDateModule
-
+    MdNativeDateModule,
+    MdButtonToggleModule,
+    MdSliderModule
 } from '@angular/material';
 import 'hammerjs';
 import { D3Service } from 'd3-ng2-service';
@@ -54,7 +54,7 @@ import { GCalendarService } from './services/gcalendar.service';
         MdAutocompleteModule,
         MdInputModule,
         MdTabsModule,
-        SortablejsModule,
+        SortablejsModule
     ],
     exports: [
         MdIconModule,
@@ -89,6 +89,7 @@ import { GCalendarService } from './services/gcalendar.service';
         MdDatepickerModule,
         MdNativeDateModule,
         SortablejsModule,
+        MdSliderModule
     ],
     declarations: [
         ListComponent,

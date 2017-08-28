@@ -44,14 +44,26 @@ export class DateService {
 
     constructor() { }
 
-    convertDateToIso(dateObject) {
+    convertDateToIso(dateObject, getTime?: boolean) {
         let isoDate;
         if (dateObject instanceof Date) {
-            isoDate = `${dateObject.getFullYear()}-${dateObject.getMonth()}-${dateObject.getDate()}`;
+            isoDate = `${dateObject.getUTCFullYear()}-${dateObject.getUTCMonth()}-${dateObject.getUTCDate()}`;
+            if (getTime) {
+                isoDate += this.getTimeString(dateObject.getHours(), dateObject.getMinutes());
+            }
         } else {
             isoDate = `${dateObject.year}-${dateObject.month}-${dateObject.day}`;
+            if (getTime) {
+                isoDate += this.getTimeString(dateObject.hours, dateObject.minutes);
+            }
         }
         return isoDate;
+    }
+
+    getTimeString(hours: number, minutes: number): string {
+        const hourOutput = this.addZero(hours);
+        const minuteOutput = this.addZero(minutes);
+        return ` ${hourOutput}:${minuteOutput}`;
     }
 
     convertDateFromIso(isoDate: string, stringMonth?: boolean) {
@@ -59,7 +71,9 @@ export class DateService {
             return {
                 year: '',
                 month: '',
-                day: ''
+                day: '',
+                hours: '',
+                minutes: ''
             };
         }
         const date = new Date(isoDate);
@@ -70,7 +84,9 @@ export class DateService {
         const dateProps = {
             year: date.getFullYear(),
             month: month,
-            day: date.getDate()
+            day: date.getDate(),
+            hours: date.getUTCHours(),
+            minutes: date.getUTCMinutes()
         };
         return dateProps;
     }
@@ -114,4 +130,8 @@ export class DateService {
         return yearsOutput;
     }
 
+    addZero(amount: number | string): string | number {
+        amount = amount < 10 ? '0' + amount : amount;
+        return amount;
+    }
 }

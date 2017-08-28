@@ -54,17 +54,7 @@ export class SearchExerciseComponent implements OnInit {
     this.httpHandler.sendRequest(sendData)
       .then((res) => {
         if (res) {
-
-          this.exercisesList = res.map((element) => {
-            return {
-              name: element.name,
-              exerciseType: element.type,
-              sets: [],
-              id: element._id,
-              description: element.description,
-            };
-          });
-          console.log(this.exercisesList);
+          this.exercisesList = res;
         }
       });
     this.exercsesShow = true;
@@ -75,17 +65,16 @@ export class SearchExerciseComponent implements OnInit {
     const exerciseID = event.source.id;
 
     const exercise = this.exercisesList.find(function (el) {
-      return el.id === exerciseID;
+      return el._id === exerciseID;
     });
-    console.log(exercise);
     const exerciseInList = this.selectedExercises.findIndex(function (el) {
-      return el.id === exerciseID;
+      return el._id === exerciseID;
     });
     if (event.source.checked) {
       this.selectedExercises.push(exercise);
     } else {
       this.selectedExercises = this.selectedExercises.filter(function (el) {
-        return el.id !== exerciseID;
+        return el._id !== exerciseID;
       });
     }
   }
