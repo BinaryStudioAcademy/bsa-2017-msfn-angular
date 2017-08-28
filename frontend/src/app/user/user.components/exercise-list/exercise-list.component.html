@@ -14,15 +14,14 @@
         <div class="exercise-table-body">
             <div *ngFor="let exerciseObj of displayExercises" class="exercise-row">
                 <div class="col name" (click)="showDescription(exerciseObj)">{{exerciseObj.exercise.name}}</div>
-                <div class="col del" (click)="deleteExercise(exerciseObj.exercise.id || exerciseObj.exercise._id)"><i class="material-icons">delete</i></div>
+                <div class="col del" id="exDel" (click)="deleteExercise(exerciseObj.exercise.id || exerciseObj.exercise._id)"><i class="material-icons">delete</i></div>
                 <div class="col sets">
                     <div class="items-conteiner" *ngFor="let set of exerciseObj.sets; let i = index">
-                        <div class="set-item" (dblclick)="setEdit(exerciseObj, set)">
+                        <div class="set-item" (click)="setEdit(exerciseObj, set, i);">
                             <div class="item-id">{{i+1}}</div>
                             <div class="item-val">{{set.value}}</div>
                             <div class="item-opt-val">{{set.value2}}</div>
-                            <div class="col edit" (click)="setEdit(exerciseObj, set, i)"><i class="material-icons">mode_edit</i></div>
-                            <div class="col del" (click)="setDelete(exerciseObj, i)"><i class="material-icons">delete</i></div>
+                            <div class="col del" (click)="setDelete(exerciseObj, i)" *ngIf="exerciseObj.edit"><i class="material-icons">delete</i></div>
                         </div>
                     </div>
                     <div class="set-form" *ngIf="exerciseObj.edit">
