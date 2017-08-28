@@ -41,6 +41,7 @@ import { NotificationsService } from './services/notifications.service';
 import { HeaderNotificationsComponent } from './components/header-notifications/header-notifications.component';
 import { SearchExerciseComponent } from './user/user.components/search-exercise/search-exercise.component';
 import { ExerciseEditDialogComponent } from './user/user.components/exercise-edit-dialog/exercise-edit-dialog.component';
+import {ConstantsService} from './services/constants.service';
 
 @NgModule({
     imports: [
@@ -84,7 +85,8 @@ import { ExerciseEditDialogComponent } from './user/user.components/exercise-edi
         ExerciseTypeService,
         SocketService,
         NotificationsService,
-        ConfirmedPageService
+        ConfirmedPageService,
+        ConstantsService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,
