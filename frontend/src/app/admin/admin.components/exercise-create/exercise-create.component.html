@@ -16,16 +16,22 @@
     <md-input-container class="example-full-width" class="input">
         <textarea mdInput placeholder="Exercise Description" [(ngModel)]="exercise.description" name="description" (keyup)="updateOutput($event.target.value)"></textarea>
     </md-input-container>
-    <button class="btn upload-container" (click)="saveImg()">
+    <button class="btn upload-container" *ngIf="hideCropper">
         <span>Upload exercise image</span>
         <input type="file" accept="image/*" class="upload" (change)="fileChangeListener($event)"/>
     </button>
-    <div class="preview-header">Preview</div>
+    <div class="preview-header" *ngIf="hideCropper">Preview</div>
     <div class="preview">
         <div class="image-preview">
-            <img [src]='exercise.image'>
+            <img *ngIf="!hideCropper" [src]='data.image' [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+            <img *ngIf="hideCropper" [src]='exercise.image'>
         </div>
-        <div class="description" [innerHtml]="convertedDescription"></div>
+        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
+        <div class="cropper-buttons" *ngIf="!hideCropper">
+            <button class="cropper-btn" (click)="cropperBtn('save')">Ok</button>
+            <button class="cropper-btn" (click)="cropperBtn('cancel')">Cancel</button>
+        </div>
+        <div class="description" *ngIf="hideCropper" [innerHtml]="convertedDescription"></div>
     </div>
-    <button class="btn" (click)="save(form)">Save</button>
+    <button class="btn" *ngIf="hideCropper" (click)="save(form)">Save</button>
 </form>

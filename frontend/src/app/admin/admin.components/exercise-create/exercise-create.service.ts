@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
 import { IHttpReq } from '../../../models/http-req';
+import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 
 @Injectable()
 export class ExerciseCreateService {
@@ -60,10 +61,37 @@ export class ExerciseCreateService {
                 name: exerciseForm.name,
                 typeId: exerciseForm.typeId,
                 description: exerciseForm.description,
+                image: exerciseForm.image
                 // sportsId: exerciseForm.sportsId
             },
             successMessage: 'Edited'
         };
         this.httpService.sendRequest(request);
+    }
+
+    saveImg(image, fileName, fileType, folder, callback) {
+        const sendData: IHttpReq = {
+            url: '/api/file',
+            method: 'POST',
+            body: {data: image, fileName: fileName, fileType: fileType, folder: folder},
+        };
+
+        this.httpService.sendRequest(sendData).then(data => {
+            callback(data);
+        });
+    }
+
+    getCropperSettings(): CropperSettings {
+        const cropperSettings = new CropperSettings();
+        cropperSettings.noFileInput = true;
+        cropperSettings.width = 150;
+        cropperSettings.height = 150;
+        cropperSettings.croppedWidth = 150;
+        cropperSettings.croppedHeight = 150;
+        cropperSettings.canvasWidth = 150;
+        cropperSettings.canvasHeight = 150;
+        cropperSettings.dynamicSizing = true;
+        cropperSettings.touchRadius = 10;
+        return cropperSettings;
     }
 }
