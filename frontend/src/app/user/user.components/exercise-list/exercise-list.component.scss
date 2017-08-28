@@ -21,14 +21,19 @@
             .table-title {
                 font-size: 16px;
                 text-transform: uppercase;
-                position: relative;
+                width: 160px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
 
                 .button-add {
-                    position: absolute;
-                    right: -33px;
-                    top: -7px;
                     font-size: 30px;
                     cursor: pointer;
+
+                    &.mat-icon {
+                        height: 30px;
+                        width: 30px;
+                    }
                 }
             }
             .exercise-pagination {
@@ -180,6 +185,17 @@
     .table-title>span {
         display: none;
     }
+    .table-controls {
+        width: 180px;
+    }
+    .exercise-table, .exercises-container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .exercise-row {
+        padding: 20px;
+    }
 }
 
 @media screen and (min-width: $small-screen + 1) and (max-width: $medium-screen) {
@@ -189,4 +205,7 @@
 }
 
 @media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
+    .table-title>span {
+        display: none;
+    }
 }
