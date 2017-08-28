@@ -12,6 +12,16 @@ const mongoose = require('mongoose'),
             weight: 57,
             birthday: '1984-11-22',
             activateToken: '',
+            settings:  {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            },
             userPhoto: 'https://www.looktothestars.org/photo/192-scarlett-johansson/teaser-1379520673.jpg'
         },
         {
@@ -25,6 +35,16 @@ const mongoose = require('mongoose'),
             weight: 67,
             birthday: '1975-12-17',
             activateToken: '',
+            settings:  {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            },
             userPhoto: 'http://www.hotstarz.info/wp-content/uploads/2015/06/3528213-milla-jovovich-051-929926108-150x150.jpg'
         },
         {
@@ -38,6 +58,16 @@ const mongoose = require('mongoose'),
             weight: 62,
             birthday: '1954-4-7',
             activateToken: '',
+            settings:  {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            },
             userPhoto: 'https://www.looktothestars.org/photo/4718-jackie-chan/teaser-1379520542.jpg'
         },
         {
@@ -51,6 +81,16 @@ const mongoose = require('mongoose'),
             weight: 75,
             birthday: '1960-10-18',
             activateToken: '',
+            settings:  {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            },
             userPhoto: 'http://jarviscity.com/wp-content/uploads/2016/09/lionheart-jean-claude-van-damme-150x150.jpg'
         },
         {
@@ -64,6 +104,16 @@ const mongoose = require('mongoose'),
             weight: 75,
             birthday: '1940-3-10',
             activateToken: '',
+            settings:  {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            },
             userPhoto: 'https://www.looktothestars.org/photo/812-chuck-norris/teaser-1379525363.jpg'
         },
         {
@@ -77,6 +127,16 @@ const mongoose = require('mongoose'),
             weight: 70,
             birthday: '1971-12-26',
             activateToken: '',
+            settings:  {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            },
             userPhoto: 'https://www.looktothestars.org/photo/392-jared-leto/teaser-1379522441.jpg'
         },
         {
@@ -90,6 +150,16 @@ const mongoose = require('mongoose'),
             weight: 58,
             birthday: '1975-6-4',
             activateToken: '',
+            settings:  {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            },
             userPhoto: 'https://www.looktothestars.org/photo/20-angelina-jolie/teaser-1379520759.jpg'
         },
         {
@@ -102,6 +172,16 @@ const mongoose = require('mongoose'),
             password: 'aaaaaa',
             birthday: '1974-11-24',
             activateToken: '',
+            settings:  {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            },
             userPhoto: 'https://www.looktothestars.org/photo/68-johnny-depp/teaser-1379520640.jpg'
         },
         {
@@ -115,6 +195,16 @@ const mongoose = require('mongoose'),
             password: 'aaaaaa',
             birthday: '1964-1-17',
             activateToken: '',
+            settings:  {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            },
             userPhoto: 'https://www.looktothestars.org/photo/498-jim-carrey/teaser-1379527674.jpg'
         },
         {
@@ -127,6 +217,16 @@ const mongoose = require('mongoose'),
             email: 'jackman@msfn.com',
             password: 'aaaaaa',
             activateToken: '',
+            settings:  {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            },
             birthday: '1968-10-12',
             userPhoto: 'https://www.looktothestars.org/photo/7594-hugh-jackman/teaser-1379521690.jpg'
         }

@@ -33,6 +33,16 @@ function addItem(body, callback) {
         if (data === null) {
             body.password = decrypt(body.password).password;
             body.email = decrypt(body.email).email;
+            body.settings = {
+                weight : "kg",
+                trainingWeight : "kg",
+                distance : "m",
+                temperature : "°C",
+                timeFormat : "24-hour clock",
+                dateFormat : "European (day.month.year)",
+                startWeek : "Monday",
+                timeZone : "+2"
+            };
             // Generating registration confirmation "TOKEN" for user
             body.activateToken = makeid();
             // Add newly created user into DB
