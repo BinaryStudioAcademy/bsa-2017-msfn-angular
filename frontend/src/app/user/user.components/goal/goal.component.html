@@ -1,0 +1,11 @@
+<div id="goal-container" >
+    <div class="item-container" *ngFor="let item of data" (click)="openDialog(item.count)">
+            <p class="goal-main-text">{{ item.type }}</p>
+            <i class="material-icons train-item-ico">stars</i>
+            <p class="goal-item-text">Value: {{ item.count }}</p>
+            <p class="goal-item-text">Due {{ item.duration }}</p>   
+    </div>
+    <div class="add-container">
+            <i class="material-icons add-item-ico">add</i>
+    </div>
+</div>
