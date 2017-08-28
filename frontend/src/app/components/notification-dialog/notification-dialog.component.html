@@ -16,10 +16,12 @@
 <md-dialog-content class="notifications__dialog">
     <button md-button mdTooltipClass="tooltips"
             class="notifications__dialog-button"
-            *ngFor="let notification of showedNotifications;"
+            *ngFor="let notification of showedNotifications; index as i;"
             [class.unread]="!notification.read"
             (title)="notification.title"
+            #item
             mdTooltip="{{notification.message}}"
+            mdTooltipDisabled="{{test(item)}}"
             (click)="viewNotification(notification)">{{notification.message}}
     </button>
 </md-dialog-content>
