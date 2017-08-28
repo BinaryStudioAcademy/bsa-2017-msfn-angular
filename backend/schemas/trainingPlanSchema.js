@@ -22,11 +22,11 @@ const TrainingPlan = new Schema({
     intervals: Array,
     trainingType: 'general' | 'interval',
     userID: String,
+    gcalendar_id: String,
     isRemoved: {
         type: Boolean,
         default: false
     }
-
 });
 
 module.exports = mongoose.model('TrainingPlan', TrainingPlan);

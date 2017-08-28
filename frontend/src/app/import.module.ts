@@ -40,7 +40,8 @@ import { D3Service } from 'd3-ng2-service';
 // // components
 import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { GCalendarService } from './services/gcalendar.service';
 
 @NgModule({
     imports: [
@@ -95,7 +96,8 @@ import {CommonModule} from '@angular/common';
         AutocompletePipe
     ],
     providers: [
-        D3Service
+        D3Service,
+        GCalendarService
     ]
 })
 

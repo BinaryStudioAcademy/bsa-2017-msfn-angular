@@ -78,6 +78,20 @@ export class GCalendarService {
         });
     }
 
+    getEvent(id, callback) {
+        gapi.client.calendar.events.get({
+            calendarId: 'primary',
+            eventId: id
+        }).then(
+            (response) => {
+            callback(null, response);
+            },
+            (err) => {
+                callback(err.result.error.message);
+            }
+        );
+    }
+
     addEvent(data: object, callback) {
         /**
          * Events fields -
@@ -113,7 +127,7 @@ export class GCalendarService {
             // }
         // };
         gapi.client.calendar.events.insert({
-            calendarId: 'primary',
+            'calendarId': 'primary',
             'resource': data
         }).then(
             response => {
@@ -126,7 +140,7 @@ export class GCalendarService {
     }
 
     updateEvent(eventId: string, data: object, callback) {
-        gapi.client.calendar.events.insert({
+        gapi.client.calendar.events.patch({
             calendarId: 'primary',
             eventId: eventId,
             resource: data
@@ -184,13 +198,22 @@ export class GCalendarService {
         gapi.auth2.getAuthInstance().signOut();
     }
 
-    makeDate(date: Date) {
+    makeDate(date?: Date) {
+        if (!date) {
+            date = new Date();
+        }
         return moment(date).format();
     }
 
     getTimeZone() {
-        console.log(moment());
         return moment.tz.guess();
+    }
+
+    makeFullDate(date: Date) {
+        return {
+            dateTime: this.makeDate(date),
+            timeZone: this.getTimeZone()
+        };
     }
 
 }

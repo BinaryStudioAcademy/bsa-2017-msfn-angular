@@ -6,6 +6,7 @@ import { IHttpReq } from './../../../models/http-req';
 import { HttpService } from '../../../services/http.service';
 import { ActivatedRoute } from '@angular/router';
 import { ExerciseListComponent } from './../exercise-list/exercise-list.component';
+import { GCalendarService } from '../../../services/gcalendar.service';
 
 
 @Component({
@@ -22,13 +23,13 @@ export class PlanDetailComponent implements OnInit {
     exercisesList = [];
 
     days = [
-        { 'key': '1', 'value': 'Mon', 'checked': false },
-        { 'key': '2', 'value': 'Tue', 'checked': false },
-        { 'key': '3', 'value': 'Wed', 'checked': false },
-        { 'key': '4', 'value': 'Thu', 'checked': false },
-        { 'key': '5', 'value': 'Fri', 'checked': false },
-        { 'key': '6', 'value': 'Sat', 'checked': false },
-        { 'key': '0', 'value': 'Sun', 'checked': false }
+        { 'key': '1', 'value': 'Mon', 'checked': false, code: 'MO' },
+        { 'key': '2', 'value': 'Tue', 'checked': false, code: 'TU' },
+        { 'key': '3', 'value': 'Wed', 'checked': false, code: 'WE' },
+        { 'key': '4', 'value': 'Thu', 'checked': false, code: 'TH' },
+        { 'key': '5', 'value': 'Fri', 'checked': false, code: 'FR' },
+        { 'key': '6', 'value': 'Sat', 'checked': false, code: 'SA' },
+        { 'key': '0', 'value': 'Sun', 'checked': false, code: 'SU' }
     ];
 
     // sportTypeValue doesn't use.. ?
@@ -60,10 +61,12 @@ export class PlanDetailComponent implements OnInit {
         trainingType: 'general' || 'interval',
         exercisesList: [],
         intervals: [],
+        gcalendar_id: ''
     };
 
 
     constructor(
+        private gcalendar: GCalendarService,
         private dialog: MdDialog,
         // private paginator: MdPaginatorModule,
         private httpHandler: HttpService,
@@ -160,13 +163,126 @@ export class PlanDetailComponent implements OnInit {
             sendData.url += '/' + this.trainingPlan._id;
         } else {
         }
-        this.httpHandler.sendRequest(sendData)
-            .then((res) => {
-                if (res) {
-                    if (!res.nModified) {
-                        this.trainingPlan._id = res._id;
+
+        if (this.gcalendar.authorized) {
+            let recurrence = 'RRULE:FREQ=WEEKLY;';
+            const newCalendarEvent = {
+                recurrence: [],
+                summary: this.trainingPlan.name,
+                description: 'Today training plan - ' + this.trainingPlan.name,
+                reminders: {
+                    useDefault: true
+                },
+                start: this.gcalendar.makeFullDate(new Date()),
+                end: this.gcalendar.makeFullDate(new Date(Date.now() + 1000 * 60 * 60)),
+                source: 'MFSN'
+            };
+            let dayHeadingAdded = false;
+            this.trainingPlan.days.forEach((item, key) => {
+                if (!dayHeadingAdded) {
+                    recurrence += 'BYDAY=';
+                    dayHeadingAdded = true;
+                }
+                if (item.checked && item.code) {
+                    recurrence += item.code;
+                    if (this.trainingPlan.days[key + 1]) {
+                        recurrence += ',';
                     }
                 }
             });
+            newCalendarEvent.recurrence.push(recurrence);
+            console.log(newCalendarEvent);
+
+            let action = '';
+
+            if (this.trainingPlan.gcalendar_id) {
+                this.gcalendar.getEvent(this.trainingPlan.gcalendar_id,
+                    (err, res) => {
+                    console.log(err);
+                    console.log(res);
+                    if (err && err === 'Not found') {
+                        action = 'add';
+                    }
+                    if (!action && err) {
+                        action = '';
+                    }
+                    if (!action && res.result.status === 'cancelled') {
+                        action = 'add';
+                    }
+                    if (!action) {
+                        action = 'update';
+                    }
+
+                    console.log(action);
+
+                    switch (action) {
+                        case 'add':
+                            this.gcalendar.addEvent(newCalendarEvent, (err, result) => {
+                                if (err) {
+                                    console.error(err);
+                                    return;
+                                }
+                                this.trainingPlan.gcalendar_id = result.result.id;
+                                sendData.body = this.trainingPlan;
+                                this.httpHandler.sendRequest(sendData)
+                                    .then((res) => {
+                                        if (res) {
+                                            if (!res.nModified) {
+                                                this.trainingPlan._id = res._id;
+                                            }
+                                        }
+                                    });
+                            });
+                            break;
+                        case 'update':
+                            this.gcalendar.updateEvent(this.trainingPlan.gcalendar_id, newCalendarEvent, (err, result) => {
+                                if (err) {
+                                    console.error(err);
+                                    return;
+                                }
+                                this.trainingPlan.gcalendar_id = result.result.id;
+                                sendData.body = this.trainingPlan;
+                                this.httpHandler.sendRequest(sendData)
+                                    .then((res) => {
+                                        if (res) {
+                                            if (!res.nModified) {
+                                                this.trainingPlan._id = res._id;
+                                            }
+                                        }
+                                    });
+                            });
+                            break;
+                    }
+                });
+
+            } else {
+                this.gcalendar.addEvent(newCalendarEvent, (err, result) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    this.trainingPlan.gcalendar_id = result.result.id;
+                    sendData.body = this.trainingPlan;
+                    this.httpHandler.sendRequest(sendData)
+                        .then((res) => {
+                            if (res) {
+                                if (!res.nModified) {
+                                    this.trainingPlan._id = res._id;
+                                }
+                            }
+                        });
+                });
+            }
+        } else {
+            console.log('NO GOOGLE AUTH');
+            this.httpHandler.sendRequest(sendData)
+                .then((res) => {
+                    if (res) {
+                        if (!res.nModified) {
+                            this.trainingPlan._id = res._id;
+                        }
+                    }
+                });
+        }
     }
 }
