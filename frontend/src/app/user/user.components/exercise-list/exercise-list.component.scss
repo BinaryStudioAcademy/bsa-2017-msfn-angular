@@ -46,12 +46,13 @@
             .exercise-row {
                 display: flex;
                 max-height: 80%;
+                min-height: 140px;
+                width: 220px;
                 overflow-y: auto;
                 position: relative;
                 flex-direction: column;
                 margin: 10px;
                 padding: 20px 25px;
-                width: 220px;
                 align-items: flex-start;
                 background: linear-gradient($gradient-to-color 75%, $bg-color);
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -113,7 +114,8 @@
                             background-color: #646464;
                         }
                         .item-val {
-                            width: 110px;
+                            width: 40%;
+                            float: left;
                             background-color: #222;
                             border-radius: 15px;
                             height: 18px;
@@ -121,8 +123,14 @@
                             line-height: 18px;
                         }
                         .item-opt-val {
+                            width: 10%;
+                            float: right;
                             margin-left: 10px;
                             line-height: 18px;
+
+                            &:before {
+                                content: 'x'
+                            }
                         }
                         .exercise-add {
                             height: 18px;
@@ -166,4 +174,19 @@
             }
         }
     }
+}
+
+@media screen and (max-width: $small-screen) {
+    .table-title>span {
+        display: none;
+    }
+}
+
+@media screen and (min-width: $small-screen + 1) and (max-width: $medium-screen) {
+    .table-title>span {
+        display: none;
+    }
+}
+
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
 }

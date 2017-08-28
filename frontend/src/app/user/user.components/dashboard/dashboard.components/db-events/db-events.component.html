@@ -1,5 +1,5 @@
 <div class="events inner-container">
-    <h2>{{ dataToDisplay.title }}</h2>
+    <h2>{{ title }}</h2>
     <div class="content">
         <div class="start-date">
             <md-input-container>
@@ -8,7 +8,7 @@
                     value="startDate"
                     [mdDatepicker]="startPicker"
                     placeholder="Start Date"
-                    [(ngModel)]="startDate"
+                    [(ngModel)]="interval.startDate"
                     (ngModelChange)="processDates()">
                 <button mdSuffix [mdDatepickerToggle]="startPicker"></button>
             </md-input-container>
@@ -22,7 +22,7 @@
                     value="endDate"
                     [mdDatepicker]="endPicker"
                     placeholder="End Date"
-                    [(ngModel)]="endDate"
+                    [(ngModel)]="interval.endDate"
                     (ngModelChange)="processDates()">
                 <button mdSuffix [mdDatepickerToggle]="endPicker"></button>
             </md-input-container>

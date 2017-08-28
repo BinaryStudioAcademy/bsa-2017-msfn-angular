@@ -4,6 +4,7 @@
 
 .food-plan > .content {
     flex-direction: column;
+    justify-content: space-between;
     flex-wrap: nowrap;
     height: 70%;
 }

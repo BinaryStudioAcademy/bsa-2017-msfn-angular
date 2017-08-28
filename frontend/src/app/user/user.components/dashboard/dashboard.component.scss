@@ -36,8 +36,15 @@
 
     .content {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
     }
+}
+
+.recent-day {
+    font-size: $main-text;
+}
+
+.recent-value {
+    font-size: $header-text;
 }

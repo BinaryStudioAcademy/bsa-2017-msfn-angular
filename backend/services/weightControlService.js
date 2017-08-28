@@ -16,7 +16,7 @@ function addItem(userId, body, callback) {
             userRepository.update(userId, {
                 $push: {weightControl: {
                     date: body.date,
-                    fatPct: body.datPct,
+                    fatPct: body.fatPct,
                     boneWeight: body.boneWeight,
                     waterPct: body.waterPct,
                     weight: body.weight
