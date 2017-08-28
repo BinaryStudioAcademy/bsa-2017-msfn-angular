@@ -82,7 +82,7 @@ export class NotificationsService {
     }
 
     public addNotification(data: INotification) {
-        this.notifications.push(data);
+        this.notifications.unshift(data);
         this.updateUnreadCount();
     }
 

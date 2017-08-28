@@ -12,6 +12,7 @@ import { NotificationsService } from '../../services/notifications.service';
 export class NotificationDialogComponent implements OnInit {
     showedNotifications: INotification[];
     unreadNotifications: INotification[];
+    reversed = false;
 
     constructor(@Inject(MD_DIALOG_DATA) public data: INotification[],
                 private dialog: MdDialog,
@@ -23,6 +24,9 @@ export class NotificationDialogComponent implements OnInit {
         this.unreadNotifications = this.data.filter((note) => {
             return note.read === false;
         });
+        if (this.unreadNotifications.length > 0) {
+            this.onClickUnread();
+        }
     }
 
     makeRead() {
