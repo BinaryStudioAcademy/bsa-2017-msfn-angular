@@ -30,8 +30,56 @@ export class ActiveTrainingService {
         });
     }
 
-    showFinishDialog(data, callback) {
+    getMeasures(callback) {
+        const sendData: IHttpReq = {
+            url: '/api/user/me',
+            method: 'GET',
+            body: {},
+        };
+
+        this.httpService.sendRequest(sendData).then(data => {
+            callback(data.settings);
+        });
+    }
+
+
+    addTraining(plan, callback) {
+        delete plan._id;
+        delete plan.count;
+        delete plan.days;
+        plan.startDate = new Date().toISOString();
+        const sendData: IHttpReq = {
+            url: '/api/launchedtraining',
+            method: 'POST',
+            body: plan,
+        };
+
+        this.httpService.sendRequest(sendData)
+            .then(data => {
+            callback(data);
+        });
+    }
+
+    updateTraining(plan, final?) {
+        if (final) {
+            plan.results = final;
+        }
+        const sendData: IHttpReq = {
+            url: '/api/launchedtraining',
+            method: 'PUT',
+            body: plan,
+        };
+        console.log('update');
+        this.httpService.sendRequest(sendData);
+    }
+
+    showFinishDialog(data, plan, callback) {
         this.dialogRef = this.dialog.open(FinishDialogComponent, { data: data });
-        this.dialogRef.afterClosed().subscribe(callback);
+        this.dialogRef.afterClosed().subscribe((dialogRes) => {
+            if (dialogRes === true) {
+                this.updateTraining(plan, data);
+            }
+            callback(dialogRes);
+        });
     }
 }

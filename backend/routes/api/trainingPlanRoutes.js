@@ -7,7 +7,7 @@ module.exports = function (app) {
     app.get(baseUrl, function (req, res, next) {
         trainingPlanService.get({userID: req.session.passport.user}, function (err, data) {
             if (!data.length) {
-                data = [{}];
+                data = [];
             }
             res.data = data;
             res.err = err;

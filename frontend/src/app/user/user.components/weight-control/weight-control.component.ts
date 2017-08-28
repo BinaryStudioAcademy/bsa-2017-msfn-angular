@@ -268,7 +268,7 @@ export class WeightControlComponent implements OnInit {
                 }
                 setTimeout(() => {
                     this.updateData();
-                    }, 500);
+                }, 500);
             });
 
             this.weightFormControl.reset();

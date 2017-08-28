@@ -23,6 +23,7 @@ declare module ExerciseApi {
     export interface IExercise {
         name: string;
         type: string;
+        measure: string;
         isRemoved: boolean;
         sportsId: string[];
         description: string;

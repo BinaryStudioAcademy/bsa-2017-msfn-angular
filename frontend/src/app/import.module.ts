@@ -53,7 +53,6 @@ import {CommonModule} from '@angular/common';
         MdAutocompleteModule,
         MdInputModule,
         MdTabsModule,
-        SortablejsModule,
         SortablejsModule
     ],
     exports: [

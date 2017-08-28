@@ -33,7 +33,6 @@ import { FinishDialogComponent } from './user.components/active-training/active-
 // tslint:disable-next-line:max-line-length
 import { ChooseTrainDialogComponent } from './user.components/active-training/active-training.components/choose-train-dialog/choose-train-dialog.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
-
 import { DbWeightControlComponent } from './user.components/dashboard/dashboard.components/db-weight-control/db-weight-control.component';
 import { DbCaloriesComponent } from './user.components/dashboard/dashboard.components/db-calories/db-calories.component';
 import { DbEventsComponent } from './user.components/dashboard/dashboard.components/db-events/db-events.component';

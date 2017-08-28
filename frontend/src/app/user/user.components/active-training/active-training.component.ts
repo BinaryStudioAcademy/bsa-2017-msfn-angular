@@ -11,28 +11,54 @@ import { ActiveTrainingService } from './active-training.service';
 })
 
 export class ActiveTrainingComponent implements OnInit {
-    loaded: boolean = false;
-    typeTrain = 'General';
+    // global
+    loaded: boolean;
     secundomerBind = {
         intervalTrain: false,
         finishTrain: <boolean | string>false
     };
+    userMeasures: any;
 
+
+    trainingPlan: any;
+
+    // child bind
     burnedCallories = 1445;
-
-    exercisesList: [any] = [{}];
 
     constructor(
         private activeTrainingService: ActiveTrainingService
     ) {}
 
     ngOnInit() {
+        this.activeTrainingService.getMeasures((data) => {
+            this.userMeasures = data;
+        });
 
         this.activeTrainingService.getPlans((plan) => {
-            this.exercisesList = plan.exercisesList;
-            this.typeTrain = plan.trainingType;
-            this.secundomerBind.intervalTrain = !!plan.intervals.length;
+            if (!plan) {
+                this.loaded = false;
+                return;
+            }
+            this.trainingPlan = plan;
             this.loaded = true;
+        });
+    }
+
+    choosePlan() {
+        this.activeTrainingService.getPlans((plan) => {
+            if (plan === undefined) {
+                return;
+            }
+            this.trainingPlan = plan;
+            this.loaded = true;
+        });
+    }
+    onStart() {
+        this.activeTrainingService.addTraining(this.trainingPlan, (result) => {
+            if (result) {
+                this.trainingPlan._id = result;
+                console.log(this.trainingPlan);
+            }
         });
     }
 
@@ -41,7 +67,7 @@ export class ActiveTrainingComponent implements OnInit {
             time: timeData,
             calories: this.burnedCallories,
         };
-        this.activeTrainingService.showFinishDialog(data, result => {
+        this.activeTrainingService.showFinishDialog(data, this.trainingPlan, result => {
             if (result) {
                 this.secundomerBind.finishTrain = true;
             } else {
@@ -51,4 +77,10 @@ export class ActiveTrainingComponent implements OnInit {
         });
     }
 
+    onChangeList(updatedList) {
+        this.trainingPlan.exercisesList = updatedList;
+        if (this.trainingPlan._id) {
+            this.activeTrainingService.updateTraining(this.trainingPlan);
+        }
+    }
 }
