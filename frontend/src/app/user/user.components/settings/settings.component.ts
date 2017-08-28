@@ -18,9 +18,9 @@ export class SettingsComponent implements OnInit {
         { type: 'default', name: 'mix units' }
     ];
     userSettingsDefault = {
-        weight: 'Kg',
-        trainingWeight: 'Kg',
-        distance: 'M',
+        weight: 'kg',
+        trainingWeight: 'kg',
+        distance: 'm',
         temperature: '°C',
         timeFormat: '24-hour clock',
         dateFormat: 'European (day.month.year)',

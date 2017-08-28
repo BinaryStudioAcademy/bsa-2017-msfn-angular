@@ -25,10 +25,9 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
         // Prevent registration dialog close, if user did put some values in it
         MdDialogRef.prototype.close = function (dialogResult) {
-
             const instance = this.componentInstance;
             // Check if closing dialog is the Registration dialog
-            if (instance.registrationService) {
+            if (instance.registrationService && instance.requestSent === false) {
 
                 if (instance.emailFormControl.dirty ||
                     instance.firstNameFormControl.dirty ||
