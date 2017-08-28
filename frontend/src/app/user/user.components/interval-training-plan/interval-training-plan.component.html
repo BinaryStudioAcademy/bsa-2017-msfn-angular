@@ -1,30 +1,28 @@
 <div class="buttons-container">
-    <button md-button disableRipple class="btn" (click)="addEmptyCircle()">Add empty circle
+    <button md-button disableRipple class="btn" (click)="saveCircle()">Save interval
     </button>
     <button md-button disableRipple class="btn" (click)="copyToNewCircle()">Copy to new circle
     </button>
     <button md-button disableRipple class="btn" (click)="deleteCircle()">Delete circle
     </button>
 </div>
-<div class="pickers-container">
-    <md-radio-group [(ngModel)]="currentCircleNumber">
-        <md-radio-button class="example-radio-button"
-                         *ngFor="let circle of myInterval.circles;let i = index; trackBy: trackByCircles" [value]="i"
-                         (change)="onChange(i)">
-        </md-radio-button>
-    </md-radio-group>
+<div class="interval-list" *ngFor="let lap of circles; let i = index">
+    {{i}}. LAP:{{lap.lapTime}}=======WARM:{{lap.warmTime}}
+    <svg version="1.1" viewBox="200 190 630 630">
+        <path d="M900.3,281.1l-86.7,87.6c33.3,33.6,53.9,80,53.9,131.3c0,102.6-82.3,185.7-183.8,185.7H377.5V561.9l-245,247.6h245h306.3C853,809.5,990,671.1,990,500C990,414.5,955.7,337.1,900.3,281.1z M132.5,500c0-102.6,82.3-185.7,183.8-185.7h306.3v123.8l245-247.6h-245H316.3C147.2,190.5,10,329.1,10,500c0,85.5,34.3,162.9,89.7,218.8l86.7-87.5C153.1,597.7,132.5,551.3,132.5,500z"/>
+    </svg>
 </div>
 <div class="data-container">
     <div class="circle-time">
-    Circle time:
+        Circle time:
         <md-input-container>
-            <input mdInput [placeholder]='' [value]='getCircleTime()'>
+            <input mdInput [(ngModel)]="currentLap.lapTime">
         </md-input-container>
     </div>
     <div class="rest-time">
         Rest time:
         <md-input-container>
-            <input mdInput [placeholder]='' [value]='getRestTime()'>
+            <input mdInput [(ngModel)]="currentLap.warmTime">
         </md-input-container>
     </div>
 </div>

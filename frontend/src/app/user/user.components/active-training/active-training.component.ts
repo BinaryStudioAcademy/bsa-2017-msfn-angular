@@ -18,7 +18,20 @@ export class ActiveTrainingComponent implements OnInit {
         finishTrain: <boolean | string>false
     };
     userMeasures: any;
-
+    intervalCache = [
+        {
+            lapTime: 151413,
+            warmTime: 12154
+        },
+        {
+            lapTime: 12546,
+            warmTime: 1245
+        },
+        {
+            lapTime: 5142,
+            warmTime: 33254
+        }
+    ];
 
     trainingPlan: any;
 
@@ -39,7 +52,6 @@ export class ActiveTrainingComponent implements OnInit {
                 this.loaded = false;
                 return;
             }
-            console.log(plan);
             this.trainingPlan = plan;
             this.loaded = true;
         });

@@ -8,7 +8,7 @@
             <app-exercise-list [exercisesList]="trainingPlan.exercisesList" [userMeasures]="userMeasures" (onChangeList)="onChangeList($event)"></app-exercise-list>
         </div>
         <div class="intmenu centerContent">
-            <app-interval-training-plan [intervalList]="trainingPlan.intervals" *ngIf="trainingPlan.trainingType === 'general'"></app-interval-training-plan>
+            <app-interval-training-plan [intervalList]="intervalCache" *ngIf="trainingPlan.trainingType === 'general'"></app-interval-training-plan>
         </div>
     </div>
 </div>

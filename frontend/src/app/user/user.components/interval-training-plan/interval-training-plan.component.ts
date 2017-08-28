@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
-import { ICircle, IIntervalExercise, IIntervalPlan } from '../../../models/interval-plan';
+import { ICircle } from '../../../models/interval-plan';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk';
 import 'rxjs/add/observable/of';
@@ -13,95 +13,60 @@ export class IntervalTrainingPlanComponent implements OnInit {
 
     @Input() intervalList: [any];
     displayedColumns = ['name', 'time'];
-    dataSource: CircleDataSource;
-    currentCircleNumber = 0;
-    myInterval: IIntervalPlan;
+    dataSource: any;
+    currentCircleNumber: number = 0;
+    circles: [ICircle] = [{
+        lapTime: 0,
+        warmTime: 0,
+    }];
 
+    currentLap = {
+        lapTime: 0,
+        warmTime: 0,
+    };
 
-    constructor() {
-        this.myInterval = {
-            circles: [
-                {
-                    exercises: [
-                        {name: 'exercise', time: 0}
-                    ],
-                    restTime: 0
-                }
-            ]
-        };
-    }
-
-    trackByCircles(index, station) {
-        return index;
-    }
-
+    constructor() {}
 
     ngOnInit(): void {
-        this.dataSource = new CircleDataSource(this.myInterval.circles[0].exercises);
+        console.log(this.intervalList);
     }
 
     onChange(i: number): void {
-        this.dataSource = new CircleDataSource(this.myInterval.circles[i].exercises);
+        this.currentLap = this.circles[i];
+    }
+
+    saveCircle(): void {
+        const data = {
+            lapTime: this.currentLap.lapTime,
+            warmTime: this.currentLap.warmTime
+        };
+        if (!this.circles[0].lapTime) {
+            this.circles[0] = data;
+        } else {
+            this.circles.push(data);
+        }
+        console.log(this.circles);
     }
 
     copyToNewCircle(): void {
-        const currentCircle: ICircle = JSON.parse(JSON.stringify(this.myInterval.circles[this.currentCircleNumber]));
-        this.myInterval.circles.push(currentCircle);
-    }
-
-    addEmptyCircle(): void {
-        this.myInterval.circles.push({
-            exercises: [{name: 'exercise', time: 0}],
-            restTime: 0
-        });
-        console.log(this.myInterval);
-    }
-
-    addExercise(): void {
-        this.myInterval.circles[this.currentCircleNumber].exercises.push({name: 'exercise', time: 0});
-        this.dataSource = new CircleDataSource(this.myInterval.circles[this.currentCircleNumber].exercises);
+        const currentCircle: ICircle = JSON.parse(JSON.stringify(this.circles[this.currentCircleNumber]));
+        this.circles.push(currentCircle);
     }
 
     deleteCircle(): void {
-        if (this.myInterval.circles.length > 1) {
-            this.myInterval.circles.splice(this.currentCircleNumber, 1);
+        if (this.circles.length > 1) {
+            this.circles.splice(this.currentCircleNumber, 1);
         }
         if (this.currentCircleNumber !== 0) {
             this.currentCircleNumber--;
         }
-        this.dataSource = new CircleDataSource(this.myInterval.circles[this.currentCircleNumber].exercises);
-    }
-
-    editExerciseName(event, row): void {
-        row.name = event.target.value;
-    }
-
-    editExerciseTime(event, row): void {
-        row.time = event.target.value;
     }
 
     getRestTime(): number {
-        return this.myInterval.circles[this.currentCircleNumber].restTime;
+        return this.circles[this.currentCircleNumber].warmTime;
     }
 
     getCircleTime(): number {
-        // return this.myInterval.circles[this.currentCircleNumber].exercises.;
-        return 0;
+        return this.circles[this.currentCircleNumber].lapTime;
     }
 }
-
-
-export class CircleDataSource extends DataSource<IIntervalExercise> {
-    constructor(private exercises: IIntervalExercise[]) {
-        super();
-    }
-
-    connect(): Observable<IIntervalExercise[]> {
-        return Observable.of(this.exercises);
-    }
-
-    disconnect() {
-    }
-}
-
-
