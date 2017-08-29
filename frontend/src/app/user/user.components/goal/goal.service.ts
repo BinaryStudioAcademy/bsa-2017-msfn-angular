@@ -9,7 +9,7 @@ export class GoalService {
     ) { }
 
 
-  getData(callback) {
+    getData(callback) {
         const sendData: IHttpReq = {
             url: '/api/user-goal/',
             method: 'GET',
@@ -20,5 +20,18 @@ export class GoalService {
             .then(data => {
                 callback(data);
         });
-  }
+    }
+
+    deleteGoal(goal, callback) {
+        console.log(goal);
+        const sendData: IHttpReq = {
+            url: '/api/user-goal/' + goal._id,
+            method: 'DELETE',
+            body: {},
+        };
+        this.httpService.sendRequest(sendData)
+            .then(data => {
+                callback(data);
+        });
+    }
 }

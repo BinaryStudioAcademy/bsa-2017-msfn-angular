@@ -1,10 +1,10 @@
 const mongoose = require('mongoose'),
     userRepository = require('../repositories/userRepository'),
     goalTypeService = require('../services/goalTypeService'),
+    goalService = require('../services/goalService'),
     passportOAuthStrategyInit = require('../middleware/passportOAuthMiddleware')(),
     passportStrategyInit = require('../middleware/passportStrategyMiddleware').strategy(),
     measurementService = require('./measurementService'),
-
     adminData = {
         firstName: 'Arnold',
         lastName: 'Schwarzenegger',
@@ -23,7 +23,45 @@ const mongoose = require('mongoose'),
         'Appearance',
         'Improve results',
         'Others',
-    ]
+    ],
+    goals = [
+        {
+            name: 'Lose weight',
+            type: 'Weight',
+        },
+        {
+            name: 'Increase weight',
+            type: 'Weight',
+        },
+        {
+            name: 'Burn calories',
+            type: 'Activity',
+        },
+        {
+            name: 'Run distance',
+            type: 'Activity',
+        },
+        {
+            name: 'Do some count of exercises',
+            type: 'Activity',
+        },
+        {
+            name: 'Do trainings count per week',
+            type: 'Activity',
+        },
+        {
+            name: 'Eat calories per day',
+            type: 'Food',
+        },
+        {
+            name: 'Gain muscles',
+            type: 'Appearance',
+        },
+        {
+            name: 'Beat your records',
+            type: 'Improve results',
+        }
+    ],
     measurments = [
         {
             "measureName": "weight",
@@ -325,6 +363,10 @@ module.exports = function() {
 
     goalTypes.forEach((elem) => {
         goalTypeService.addGoalType(elem, () => {});
+    });
+
+    goals.forEach((elem) => {
+        goalService.createGoal(elem, ()=> {});
     });
 
 }

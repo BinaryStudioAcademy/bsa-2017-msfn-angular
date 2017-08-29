@@ -5,8 +5,6 @@
     </button>
     <button md-button disableRipple class="btn" (click)="deleteCircle()">Delete circle
     </button>
-    <!-- <button md-button disableRipple class="btn" (click)="addExercise()">Add exersice
-    </button> -->
 </div>
 <div class="pickers-container">
     <md-radio-group [(ngModel)]="currentCircleNumber">
@@ -17,27 +15,6 @@
     </md-radio-group>
 </div>
 <div class="data-container">
-    <!-- <md-table #table [dataSource]="dataSource">
-        <ng-container cdkColumnDef="name">
-            <md-header-cell *cdkHeaderCellDef> Name</md-header-cell>
-            <md-cell *cdkCellDef="let row">
-                <md-input-container>
-                    <input mdInput [placeholder]='' [value]='row.name' (change)="editExerciseName($event,row)">
-                </md-input-container>
-            </md-cell>
-        </ng-container>
-
-        <ng-container cdkColumnDef="time">
-            <md-header-cell *cdkHeaderCellDef> Time</md-header-cell>
-            <md-cell *cdkCellDef="let row">
-                <md-input-container>
-                    <input mdInput [placeholder]='' [value]='row.time' (change)="editExerciseTime($event,row)">
-                </md-input-container></md-cell>
-        </ng-container>
-
-        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-        <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
-    </md-table> -->
     <div class="circle-time">
     Circle time:
         <md-input-container>
@@ -51,18 +28,3 @@
         </md-input-container>
     </div>
 </div>
-<!--
-<md-table #table [dataSource]="dataSource">
-    <ng-container cdkColumnDef="name">
-        <md-header-cell *cdkHeaderCellDef> Name</md-header-cell>
-        <md-cell *cdkCellDef="let row"> {{row.name}}</md-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="time">
-        <md-header-cell *cdkHeaderCellDef> Time</md-header-cell>
-        <md-cell *cdkCellDef="let row"> {{row.time}}</md-cell>
-    </ng-container>
-
-    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
-</md-table>-->

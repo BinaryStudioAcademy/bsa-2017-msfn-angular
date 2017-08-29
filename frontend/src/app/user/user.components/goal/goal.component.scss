@@ -6,11 +6,10 @@
     background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
     background: linear-gradient($direction, $color-stops);
 }
-
 #goal-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     position: relative;
     width: 70vw;
@@ -26,6 +25,34 @@
     }
 }
 
+
+
+.delete-line{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.drop-area {
+    margin: 20px 40px 40px 0px;
+    cursor: pointer;
+    i {
+        line-height: 80px;
+        font-size: 80px;
+        text-align: center;
+        color: $text-second-color;
+        width: 80px;
+        &:hover {
+            color: $btn-color;
+        }
+        div {
+            display: none;
+        }
+    }
+}
+.ghost {
+    opacity: 0.5;
+}
 .item-container {
     display: flex;
     align-items: center;
@@ -43,6 +70,22 @@
     font-size: 18px;
     margin: 5px;
     letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+#delete {
+    align-self: flex-end;
+    font-size: 20px !important;
+    margin-bottom: -5px;
+    margin-right: 12px;
+    color: $text-second-color;
+}
+
+#delete:hover{
+    color: $btn-color;
 }
 
 .goal-item-text {
@@ -62,6 +105,7 @@
     font-size: 40px;
 }
 .add-container {
+    order: 1000;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -77,4 +121,24 @@
 .add-container:hover {
     color: $btn-color;
     cursor: pointer;
+}
+
+
+@media only screen and (min-width: $large-screen) {
+    #delete{
+        display: none;
+    }
+    .delete-line{
+        display: flex;
+    }
+}
+
+
+@media only screen and (max-width: $large-screen) {
+    #delete{
+        display: block;
+    }
+    .delete-line{
+        display: none;
+    }
 }

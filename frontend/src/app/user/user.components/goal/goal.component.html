@@ -1,11 +1,15 @@
-<div id="goal-container" >
+<div id="goal-container" [sortablejs]="data" [sortablejsOptions]="dragOptions">
     <div class="item-container" *ngFor="let item of data" (click)="openDialog(item)">
-            <p class="goal-main-text">{{ item.type }}</p>
-            <i class="material-icons train-item-ico">stars</i>
-            <p class="goal-item-text">Value: {{ item.value }}</p>
-            <p class="goal-item-text">Due {{ item.deadline | date: 'yMd'}}</p>   
+        <i class="material-icons" id="delete" (click)="deleteGoal(item, $event)">delete</i>
+        <p class="goal-main-text">{{ item.type }}</p>
+        <i class="material-icons">stars</i>
+        <p class="goal-item-text">Value: {{ item.value }}</p>
+        <p class="goal-item-text">Due {{ item.deadline | date: 'yMd'}}</p>
     </div>
-    <div class="add-container" (click)="openDialog({_id: '-1'})">
+        <div class="add-container" (click)="openDialog({_id: '-1'})">
             <i class="material-icons add-item-ico">add</i>
-    </div>
+        </div>
 </div>
+        <div class="delete-line">
+            <div class="drop-area"><i class="material-icons" [sortablejs]="itemsDropped" [sortablejsOptions]="dragOptions">delete</i></div>
+        </div>
