@@ -11,12 +11,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 export class GoalEditDialogComponent implements OnInit {
     minDate: Date;
     types = [];
-    goal: any;
     id: string;
     selectedType: string;
     deadline: Date;
     value: number;
-    amountFormControl: any;
     constructor(
         @Inject(MD_DIALOG_DATA) public data: any,
         private goalEditDialogService: GoalEditDialogService
@@ -33,7 +31,7 @@ export class GoalEditDialogComponent implements OnInit {
                 this.deadline = new Date();
                 this.deadline.setFullYear(this.deadline.getFullYear() + 1);
                 this.selectedType = this.types[0].name;
-                this.value = 0;
+                this.value = 10;
             } else {
                 this.deadline = new Date(this.data.item.deadline);
                 this.selectedType = this.data.item.type;
@@ -53,7 +51,7 @@ export class GoalEditDialogComponent implements OnInit {
         });
     }
 
-    addUpdateUserGoal(data) {
+    addUpdateUserGoal(data, event) {
         if (this.id === '-1') {
             this.addUserGoal(data);
         } else {
@@ -61,5 +59,6 @@ export class GoalEditDialogComponent implements OnInit {
             this.updateUserGoal(data);
         }
     }
+
 
 }

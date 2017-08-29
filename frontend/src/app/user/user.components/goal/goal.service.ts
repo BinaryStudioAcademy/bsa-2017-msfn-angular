@@ -23,7 +23,14 @@ export class GoalService {
     }
 
     deleteGoal(goal, callback) {
-        // request to server
-        console.log(goal);
+        const sendData: IHttpReq = {
+            url: '/api/user-goal/' + goal._id,
+            method: 'DELETE',
+            body: {},
+        };
+        this.httpService.sendRequest(sendData)
+            .then(data => {
+                callback(data);
+        });
     }
 }

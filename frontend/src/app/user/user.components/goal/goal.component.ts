@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GoalComponent implements OnInit {
 
+
     dialogRef: MdDialogRef<any>;
     private data: any[] = [];
     private itemsDropped: any[] = [];
@@ -42,12 +43,25 @@ export class GoalComponent implements OnInit {
         });
     }
 
+
+    deleteGoal(item, event) {
+        this.data = this.data.filter((elem) => {
+            return elem._id !== item._id;
+        });
+        this.goalService.deleteGoal(item, () => {
+            console.log('Goal is removed');
+        });
+        event.stopPropagation();
+    }
+
+
     openDialog(item) {
         this.dialogRef = this.dialog.open(GoalEditDialogComponent, {
             data: {
                 item: item,
             }
         });
+
 
         this.dialogRef.afterClosed().subscribe(result => {
             if (result) {
@@ -60,9 +74,4 @@ export class GoalComponent implements OnInit {
             }
         });
     }
-
-
-    getData() {
-
-    };
 }

@@ -50,4 +50,21 @@ export class GoalEditDialogService {
         });
     }
 
+
+    checkData(selectedType, deadline, value) {
+        console.log(deadline);
+        let isCorrectType = true, isCorrectDeadline = true, isCorrectValue = true;
+        if (!selectedType || !(selectedType instanceof String)) {
+            isCorrectType = false;
+        }
+        const now = new Date();
+        if (!deadline || deadline < now) {
+            isCorrectDeadline = false;
+        }
+        const val = Number(value);
+        if ((!val) || (val > 0)) {
+            isCorrectValue = false;
+        }
+        return [isCorrectType, isCorrectDeadline, isCorrectValue];
+    }
 }
