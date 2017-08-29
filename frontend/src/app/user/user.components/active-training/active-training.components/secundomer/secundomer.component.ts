@@ -19,6 +19,8 @@ export class SecundomerComponent implements OnInit, OnChanges {
     @Output() showExercises = new EventEmitter();
 
     choosedIntervals = [];
+    lap: number = 0;
+
 
     constructor(
         public secundomerService: SecundomerService
@@ -52,11 +54,13 @@ export class SecundomerComponent implements OnInit, OnChanges {
             warming: this.beautifierTime(this.secundomerService.warmingTime)
         };
         this.pause();
+        this.pauseTimer();
         this.onFinish.emit(data);
     }
 
     setTime(lap, warm) {
-        console.log('setted timer\n  circle time: ' + lap + '\n  rest time: ' + warm);
+        this.secundomerService.timerLapNum = lap * 60 * 1000;
+        this.secundomerService.timerWarmNum = warm * 60 * 1000;
     }
 
     selectCircles() {
@@ -64,12 +68,52 @@ export class SecundomerComponent implements OnInit, OnChanges {
             return el.checked;
         });
     }
+// begin
+    startTimer(second?): void {
+        if (!second) {
+            if (this.choosedIntervals[this.lap]) {
+                this.setTime(this.choosedIntervals[this.lap].lapTime, this.choosedIntervals[this.lap].warmTime);
+            }
+        }
+        this.secundomerService.startTimer();
+    }
 
+    lapTimer() {
+        this.lap++;
+        this.clearTimer();
+        this.startTimer();
+    }
+    pauseTimer(): void {
+        this.secundomerService.pauseTimer();
+    }
+
+    clearTimer(): void {
+        this.secundomerService.clearTimer();
+    }
+
+    rest(): void {
+        this.secundomerService.rest();
+    }
+
+    endRest(): void {
+        this.secundomerService.endRest();
+    }
+
+    finishInterval() {
+        const data = {
+            total: this.beautifierTime(this.secundomerService.secndomerNum),
+            warming: this.beautifierTime(this.secundomerService.warmingTime)
+        };
+        this.pause();
+        this.pauseTimer();
+        this.onFinish.emit(data);
+    }
     ngOnChanges(changes) {
         if (changes.finishTrain.currentValue === true) {
             this.secundomerService.stopTimers();
         } else if (changes.finishTrain.currentValue === 'continue') {
             this.run();
+            this.startTimer(true);
         }
     }
 

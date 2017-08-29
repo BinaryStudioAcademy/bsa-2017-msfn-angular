@@ -19,6 +19,11 @@ export class SecundomerService {
     pauseTime: number;
     resStyle: string;
 
+    timerLapNum: number = 0;
+    timerWarmNum: number = 0;
+    idTimer: number;
+    idRest: number;
+
     constructor( ) { }
 
     run(): void {
@@ -38,6 +43,7 @@ export class SecundomerService {
     }
     stopTimers(): void {
         this.pause();
+        this.clearTimer();
         this.warming = false;
         this.secndomerNum = 0;
         this.pauseTime = 0;
@@ -46,6 +52,8 @@ export class SecundomerService {
         this.lapPauseTime = 0;
         this.secndomerLapNum = 0;
         this.secndomerPreviousLapNum = 0;
+        this.timerLapNum = 0;
+        this.timerWarmNum = 0;
         this.warmOuts = [];
     }
 
@@ -64,5 +72,47 @@ export class SecundomerService {
         this.lapPauseTime = 0;
         this.warmingTime += this.secndomerLapNum;
         this.secndomerPreviousLapNum = this.secndomerLapNum;
+    }
+
+    // timer
+
+    startTimer(): void {
+        this.runned = true;
+        this.idTimer = setInterval( () => {
+            this.timerLapNum -= 250;
+            if (this.timerLapNum <= 0) {
+                this.timerLapNum = 0;
+                this.clearTimer();
+            }
+        }, 250);
+    }
+
+    pauseTimer(): void {
+        clearInterval(this.idTimer);
+        this.runned = false;
+    }
+
+    clearTimer(): void {
+        clearInterval(this.idTimer);
+        clearInterval(this.idRest);
+        this.timerLapNum = 0;
+        this.timerWarmNum = 0;
+        this.runned = false;
+    }
+
+    rest(): void {
+        this.warming = true;
+        this.idRest = setInterval( () => {
+            this.timerWarmNum -= 250;
+            if (this.timerWarmNum <= 0) {
+                this.timerWarmNum = 0;
+                this.clearTimer();
+            }
+        }, 250);
+    }
+
+    endRest(): void {
+        this.warming = false;
+        clearInterval(this.idRest);
     }
 }

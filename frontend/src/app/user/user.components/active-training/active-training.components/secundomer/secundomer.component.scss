@@ -54,7 +54,10 @@ button {
 
     .interval {
         cursor: pointer;
-
+        .field {
+            width: 90%;
+            float: left;
+        }
         input {
             float: right;
         }

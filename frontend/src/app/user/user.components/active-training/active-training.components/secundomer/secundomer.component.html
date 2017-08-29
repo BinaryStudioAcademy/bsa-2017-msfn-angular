@@ -2,25 +2,27 @@
     <button (click)="run()" *ngIf="!secundomerService.runned" class="general start">START</button>
     <button (click)="finish()" *ngIf="secundomerService.runned" class="general finish">FINISH</button>
     <button (click)="pause()" *ngIf="secundomerService.runned" class="general pause">PAUSE</button>
-    <div class="numbers" (click)="showme()">{{beautifierTime(secundomerService.secndomerNum)}}</div>
+    <div class="numbers">{{beautifierTime(secundomerService.secndomerNum)}}</div>
     <button md-raised-button (click)="warmingUp()" *ngIf="secundomerService.runned&&!secundomerService.warming" class="controll">WARMING UP</button>
     <button md-raised-button (click)="endWarmingUp()" *ngIf="secundomerService.runned&&secundomerService.warming" class="controll">END WARMING UP</button>
     <div class="numbers" *ngIf="secundomerService.warming">{{beautifierTime(secundomerService.secndomerLapNum)}}</div>
 </div>
 <div *ngIf="intervals" class="wrap">
-    <button (click)="run()" *ngIf="!secundomerService.runned" class="general start">START</button>
-    <button *ngIf="secundomerService.runned" class="general start">LAP</button>
-    <button (click)="finish()" *ngIf="secundomerService.runned" class="general finish">FINISH</button>
-    <button (click)="pause()" *ngIf="secundomerService.runned" class="general pause">PAUSE</button>
-    <div class="numbers" (click)="showme()">{{beautifierTime(secundomerService.secndomerNum)}}</div>
-    <button md-raised-button (click)="warmingUp()" *ngIf="secundomerService.runned&&!secundomerService.warming" class="controll">WARMING UP</button>
-    <button md-raised-button (click)="endWarmingUp()" *ngIf="secundomerService.runned&&secundomerService.warming" class="controll">END WARMING UP</button>
-    <div class="numbers" *ngIf="secundomerService.warming">{{beautifierTime(secundomerService.secndomerLapNum)}}</div>
+    <button (click)="startTimer()" *ngIf="!secundomerService.runned" class="general start">START</button>
+    <button (click)="lapTimer()" *ngIf="secundomerService.runned&&choosedIntervals[this.lap + 1]" class="general start">LAP</button>
+    <button (click)="finishInterval()" *ngIf="secundomerService.runned" class="general finish">FINISH</button>
+    <button (click)="pauseTimer()" *ngIf="secundomerService.runned" class="general pause">PAUSE</button>
+    <div class="numbers">{{beautifierTime(secundomerService.timerLapNum)}}</div>
+    <button md-raised-button (click)="rest()" *ngIf="secundomerService.runned&&!secundomerService.warming" class="controll">REST</button>
+    <button md-raised-button (click)="endRest()" *ngIf="secundomerService.runned&&secundomerService.warming" class="controll">END REST</button>
+    <div class="numbers" *ngIf="secundomerService.warming">{{beautifierTime(secundomerService.timerWarmNum)}}</div>
     <div class="intervalList" *ngIf="intervals[intervals.length - 1].exList">
-        <div class="interval" *ngFor="let interval of intervals; let i = index" (click)="showExercises.emit(interval.exList); setTime(interval.lapTime, interval.warmTime)">
-            <span>Time: {{interval.lapTime}}</span>
-            <span>Rest: {{interval.warmTime}}</span>
-            <span>Exercise: {{interval.exList.length}}</span>
+        <div class="interval" *ngFor="let interval of intervals; let i = index">
+            <div class="field" (click)="showExercises.emit(interval.exList)">
+                <span>Time: {{interval.lapTime}}</span>
+                <span>Rest: {{interval.warmTime}}</span>
+                <span>Exercise: {{interval.exList.length}}</span>
+            </div>
             <input type="checkbox" [(ngModel)]="interval.checked" (change)="selectCircles()">
         </div>
     </div>
