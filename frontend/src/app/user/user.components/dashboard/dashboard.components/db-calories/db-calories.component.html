@@ -10,15 +10,25 @@
             <div class="interval-dates">
                 <div class="start-date">
                     <md-input-container>
-                        <input mdInput [mdDatepicker]="myDatepicker">
-                        <button mdSuffix [mdDatepickerToggle]="myDatepicker"></button>
+                        <input
+                            mdInput
+                            value="startDate"
+                            [mdDatepicker]="startPicker"
+                            placeholder="Start Date"
+                            [(ngModel)]="interval.startDate">
+                        <button mdSuffix [mdDatepickerToggle]="startPicker"></button>
                     </md-input-container>
-                    <md-datepicker #myDatepicker></md-datepicker>
+                    <md-datepicker #startPicker></md-datepicker>
                 </div>
 
                 <div class="end-date">
                     <md-input-container>
-                        <input mdInput value="endDate" [mdDatepicker]="endPicker" placeholder="End Date" [(ngModel)]="interval.endDate">
+                        <input
+                            mdInput
+                            value="endDate"
+                            [mdDatepicker]="endPicker"
+                            placeholder="End Date"
+                            [(ngModel)]="interval.endDate">
                         <button mdSuffix [mdDatepickerToggle]="endPicker"></button>
                     </md-input-container>
                     <md-datepicker #endPicker></md-datepicker>
@@ -27,10 +37,9 @@
         </div>
 
         <svg id="chart">
-            <text id="tooltip"></text>
             <svg id="day-aim">
                 <text></text>
-                <line x1="20" y1="0" x2="280" y2="0" />
+                <line x1="20" y1="0" x2="280" y2="0"/>
             </svg>
         </svg>
     </div>
