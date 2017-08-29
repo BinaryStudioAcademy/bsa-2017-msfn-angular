@@ -15,6 +15,8 @@ module.exports = function (app) {
         goalRoutes: require('./goalRoutes')(app),
         goalTypeRoutes: require('./goalTypeRoutes')(app),
         launchedTrainingRoutes: require('./launchedTrainingRoutes')(app),
-        trainingPlanRoutes: require('./trainingPlanRoutes')(app)
+        trainingPlanRoutes: require('./trainingPlanRoutes')(app),
+        loadRoutes: require('./loadData/loadRoutes')(app),
+
     };
 };
