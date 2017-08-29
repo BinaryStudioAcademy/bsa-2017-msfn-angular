@@ -25,7 +25,8 @@ export class GoalComponent implements OnInit {
         onEnd: () => {
             if (this.cacheLength < this.itemsDropped.length) {
                 this.cacheLength = this.itemsDropped.length;
-                this.goalService.deleteGoal(this.itemsDropped[this.itemsDropped.length - 1], () => {
+                console.log(this.itemsDropped);
+                this.goalService.deleteGoal(this.itemsDropped[0], () => {
                     console.log('Goal is removed');
                 });
             }

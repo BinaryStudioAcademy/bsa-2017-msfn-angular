@@ -23,6 +23,7 @@ export class GoalService {
     }
 
     deleteGoal(goal, callback) {
+        console.log(goal);
         const sendData: IHttpReq = {
             url: '/api/user-goal/' + goal._id,
             method: 'DELETE',

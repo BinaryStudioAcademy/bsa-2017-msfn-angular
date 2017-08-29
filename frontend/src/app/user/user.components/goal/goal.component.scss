@@ -136,9 +136,9 @@
 
 @media only screen and (max-width: $large-screen) {
     #delete{
-        display: flex;
+        display: block;
     }
     .delete-line{
-        display: block;
+        display: none;
     }
 }
