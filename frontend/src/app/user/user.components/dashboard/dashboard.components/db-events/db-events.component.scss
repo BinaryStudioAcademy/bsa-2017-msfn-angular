@@ -2,66 +2,32 @@
 @import '../../../../../../globalStyles/indentations.scss';
 @import '../../../../../../globalStyles/text.scss';
 
-.events > .content {
-    justify-content: space-between;
-    flex-wrap: wrap;
-    height: 70%;
-}
+.events {
+    .content {
+        justify-content: space-between;
+        flex-wrap: wrap;
+        height: 70%;
 
-.content > div {
-    display: inline-block;
-}
+        .start-date,
+        .end-date {
+            width: 50%;
+        }
 
-.start-date,
-.end-date {
-    width: 50%;
-}
-
-.end-date {
-    text-align: right;
+        .end-date {
+            text-align: right;
+        }
+    }
 }
 
 #day-picker {
     position: relative;
     width: 100%;
-
-    md-radio-group {
-        display: flex;
-        justify-content: space-between;
-        position: absolute;
-        z-index: +1;
-        top: -40px;
-        width: 100%;
-
-        input {
-            display: none;
-        }
-
-        label {
-            cursor: pointer;
-            font-size: $minor-text;
-            color: $text-second-color;
-
-            div {
-                width: 8px;
-                height: 8px;
-                border-radius: 4px;
-                background-color: $btn-second-color;
-            }
-        }
-
-        .label-checked {
-            color: $text-main-color;
-        }
-
-        .label-unchecked {
-            color: $text-second-color;
-        }
-    }
+    margin-top: $content-lr-margin;
 
     svg {
         position: absolute;
         width: 100%;
+        height: 10px;
 
         line {
             stroke: $text-second-color;
@@ -70,13 +36,45 @@
     }
 }
 
+md-radio-group {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    z-index: +1;
+    top: -42px;
+    width: 100%;
+
+    input {
+        display: none;
+    }
+
+    label {
+        cursor: pointer;
+        font-size: $minor-text;
+        color: $text-second-color;
+
+        div {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: $btn-second-color;
+        }
+    }
+
+    .label-checked {
+        color: $text-main-color;
+    }
+
+    .label-unchecked {
+        color: $text-second-color;
+    }
+}
+
 .event-output {
     flex-basis: 100%;
-    margin-top: 20px;
+    margin-top: $content-lr-margin;
 
     .event {
-        display: block;
-
         div {
             display: inline-block;
         }

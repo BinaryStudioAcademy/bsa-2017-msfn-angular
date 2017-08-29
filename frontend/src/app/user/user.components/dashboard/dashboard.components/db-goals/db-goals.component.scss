@@ -2,47 +2,53 @@
 @import '../../../../../../globalStyles/indentations.scss';
 @import '../../../../../../globalStyles/text.scss';
 
-.goals > .content {
-    flex-direction: column;
-    justify-content: space-around;
-    flex-wrap: nowrap;
-    height: 70%;
-}
+.goals {
+    .content {
+        flex-direction: column;
+        justify-content: space-around;
+        flex-wrap: nowrap;
+        height: 70%;
 
-.goal-item {
-    width: 100%;
+        .goal-item {
+            width: 100%;
 
-    md-checkbox {
-        display: inline-block;
-        width: 10%;
-        margin-top: $main-text;
-    }
+            md-checkbox {
+                display: inline-block;
+                width: 10%;
+                margin-top: $main-text;
+            }
+        }
 
-    .goal-body {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        float: right;
-        width: 90%;
-
-        div {
-            display: inline-block;
+        .goal-item:not(:last-child) {
+            margin-bottom: $content-tb-margin;
         }
     }
 }
 
-.goal-start-date,
-.goal-end-date {
-    flex-basis: 50%;
-    font-size: $usual-text;
-}
+.goal-body {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    float: right;
+    width: 90%;
 
-.goal-end-date {
-    text-align: right;
-}
+    div {
+        display: inline-block;
+    }
 
-.goal-value {
-    flex-basis: 100%;
-    margin-top: 5px;
-    font-size: $main-text;
+    .goal-start-date,
+    .goal-end-date {
+        flex-basis: 50%;
+        font-size: $usual-text;
+    }
+
+    .goal-end-date {
+        text-align: right;
+    }
+
+    .goal-value {
+        flex-basis: 100%;
+        margin-top: 5px;
+        font-size: $main-text;
+    }
 }

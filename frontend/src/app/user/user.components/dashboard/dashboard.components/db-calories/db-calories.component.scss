@@ -2,10 +2,12 @@
 @import '../../../../../../globalStyles/indentations.scss';
 @import '../../../../../../globalStyles/text.scss';
 
-.calories > .content {
-    justify-content: space-around;
-    height: 85%;
-    font-size: $main-text;
+.calories {
+    .content {
+        justify-content: space-around;
+        height: 85%;
+        font-size: $main-text;
+    }
 }
 
 #kcal-today-dates {
@@ -19,36 +21,42 @@
         display: inline-block;
         margin: 0 10px;
     }
-}
 
-.start-date,
-.end-date {
-    font-size: $usual-text;
+    #today-burned-kcal {
+        margin-bottom: $content-tb-margin;
+    }
+
+    .interval-dates {
+        .start-date,
+        .end-date {
+            font-size: $usual-text;
+        }
+    }
 }
 
 #chart {
     width: 340px;
     height: 100%;
-}
 
-#day-aim {
-    width: 500px;
-    height: 210px;
-
-    line {
-        stroke: $text-second-color;
-        stroke-width: 2px;
+    #tooltip {
+        opacity: 0;
+        font-size: $usual-text;
+        font-weight: 600;
+        fill: $option1-color;
     }
 
-    text {
-        font-size: $minor-text;
-        fill: $text-second-color;
-    }
-}
+    #day-aim {
+        width: 500px;
+        height: 210px;
 
-#tooltip {
-    opacity: 0;
-    font-size: $usual-text;
-    font-weight: 600;
-    fill: $option1-color;
+        line {
+            stroke: $text-second-color;
+            stroke-width: 2px;
+        }
+
+        text {
+            font-size: $minor-text;
+            fill: $text-second-color;
+        }
+    }
 }
