@@ -13,9 +13,12 @@ import { SecundomerService } from './secundomer.service';
 export class SecundomerComponent implements OnInit, OnChanges {
 
     @Input() finishTrain: boolean;
-    @Input() intervalTrain: boolean;
+    @Input() intervals: [any];
     @Output() onStart = new EventEmitter();
     @Output() onFinish = new EventEmitter();
+    @Output() showExercises = new EventEmitter();
+
+    choosedIntervals = [];
 
     constructor(
         public secundomerService: SecundomerService
@@ -51,6 +54,17 @@ export class SecundomerComponent implements OnInit, OnChanges {
         this.pause();
         this.onFinish.emit(data);
     }
+
+    setTime(lap, warm) {
+        console.log('setted timer\n  circle time: ' + lap + '\n  rest time: ' + warm);
+    }
+
+    selectCircles() {
+        this.choosedIntervals = this.intervals.filter((el) => {
+            return el.checked;
+        });
+    }
+
     ngOnChanges(changes) {
         if (changes.finishTrain.currentValue === true) {
             this.secundomerService.stopTimers();

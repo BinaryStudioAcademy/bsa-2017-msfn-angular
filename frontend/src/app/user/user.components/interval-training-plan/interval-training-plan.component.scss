@@ -54,6 +54,10 @@
                 font-weight: bold;
                 background: none;
                 border: 0;
+
+                &:after {
+                    content: 'min';
+                }
             }
             .lap {
                 top: 25px;

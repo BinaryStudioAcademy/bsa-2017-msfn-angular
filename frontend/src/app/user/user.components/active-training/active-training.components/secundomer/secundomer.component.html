@@ -1,4 +1,4 @@
-<div *ngIf="!intervalTrain" class="wrap">
+<div *ngIf="!intervals" class="wrap">
     <button (click)="run()" *ngIf="!secundomerService.runned" class="general start">START</button>
     <button (click)="finish()" *ngIf="secundomerService.runned" class="general finish">FINISH</button>
     <button (click)="pause()" *ngIf="secundomerService.runned" class="general pause">PAUSE</button>
@@ -7,7 +7,7 @@
     <button md-raised-button (click)="endWarmingUp()" *ngIf="secundomerService.runned&&secundomerService.warming" class="controll">END WARMING UP</button>
     <div class="numbers" *ngIf="secundomerService.warming">{{beautifierTime(secundomerService.secndomerLapNum)}}</div>
 </div>
-<div *ngIf="intervalTrain" class="wrap">
+<div *ngIf="intervals" class="wrap">
     <button (click)="run()" *ngIf="!secundomerService.runned" class="general start">START</button>
     <button *ngIf="secundomerService.runned" class="general start">LAP</button>
     <button (click)="finish()" *ngIf="secundomerService.runned" class="general finish">FINISH</button>
@@ -16,4 +16,12 @@
     <button md-raised-button (click)="warmingUp()" *ngIf="secundomerService.runned&&!secundomerService.warming" class="controll">WARMING UP</button>
     <button md-raised-button (click)="endWarmingUp()" *ngIf="secundomerService.runned&&secundomerService.warming" class="controll">END WARMING UP</button>
     <div class="numbers" *ngIf="secundomerService.warming">{{beautifierTime(secundomerService.secndomerLapNum)}}</div>
+    <div class="intervalList" *ngIf="intervals[intervals.length - 1].exList">
+        <div class="interval" *ngFor="let interval of intervals; let i = index" (click)="showExercises.emit(interval.exList); setTime(interval.lapTime, interval.warmTime)">
+            <span>Time: {{interval.lapTime}}</span>
+            <span>Rest: {{interval.warmTime}}</span>
+            <span>Exercise: {{interval.exList.length}}</span>
+            <input type="checkbox" [(ngModel)]="interval.checked" (change)="selectCircles()">
+        </div>
+    </div>
 </div>

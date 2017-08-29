@@ -103,7 +103,6 @@ export class PlanDetailComponent implements OnInit {
                                 type.checked = true;
                             }
                         });
-                        console.log(this.trainingPlan);
                     }
                 });
         }

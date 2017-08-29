@@ -48,6 +48,19 @@ button {
     border-bottom: 1px solid $text-second-color;
 }
 
+.intervalList {
+    width: 90%;
+    background-color: $gradient-from-color;
+
+    .interval {
+        cursor: pointer;
+
+        input {
+            float: right;
+        }
+    }
+}
+
 @media screen and (max-width: $small-screen) {
     .timers, .child {
         width: 100%;
