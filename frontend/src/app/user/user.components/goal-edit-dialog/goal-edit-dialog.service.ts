@@ -23,7 +23,8 @@ export class GoalEditDialogService {
     }
 
     addUserGoal(body, callback) {
-       const sendData: IHttpReq = {
+        Object.assign(body, {startTime: new Date()});
+        const sendData: IHttpReq = {
             url: '/api/user-goal/',
             method: 'POST',
             body: body,

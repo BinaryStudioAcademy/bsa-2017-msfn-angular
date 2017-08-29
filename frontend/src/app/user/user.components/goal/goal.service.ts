@@ -24,5 +24,6 @@ export class GoalService {
 
     deleteGoal(goal, callback) {
         // request to server
+        console.log(goal);
     }
 }

@@ -11,7 +11,8 @@ module.exports = function (app) {
                type: req.body.type,
                createdByUser: req.user.email,
                value: req.body.value,
-               deadline: req.body.deadline
+               deadline: req.body.deadline,
+               startTime: req.body.startTime
            }
        userGoalService.createUserGoal(body, function(err, data) {
             res.data = data;

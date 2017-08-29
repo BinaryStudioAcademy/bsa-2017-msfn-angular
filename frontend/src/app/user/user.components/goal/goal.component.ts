@@ -35,6 +35,9 @@ export class GoalComponent implements OnInit {
 
     ngOnInit() {
         this.goalService.getData((data) => {
+            if (data.length === 1 && !data[0]._id) {
+                data = [];
+            }
             this.data = data;
         });
     }
@@ -48,9 +51,12 @@ export class GoalComponent implements OnInit {
 
         this.dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                 this.goalService.getData((data) => {
-                     this.data = data;
-                 });
+                this.goalService.getData((data) => {
+                    if (data.length === 1 && !data[0]._id) {
+                        data = [];
+                    }
+                    this.data = data;
+                });
             }
         });
     }
