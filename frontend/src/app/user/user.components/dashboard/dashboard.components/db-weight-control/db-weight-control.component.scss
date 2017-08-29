@@ -19,7 +19,7 @@
     #previous-diff,
     #per-week-diff {
         display: inline-block;
-        max-width: 90%;
+        max-width: 100%;
 
         div {
             display: inline-block;
@@ -32,7 +32,7 @@
     }
 
     #per-week-diff {
-        margin-top: 10px;
+        margin-top: 15px;
 
         #per-week{
             font-size: $main-text;

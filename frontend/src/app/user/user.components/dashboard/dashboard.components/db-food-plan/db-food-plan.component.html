@@ -24,7 +24,7 @@
                 *ngFor = "let item of meal"
                 checked = "item.eaten"
                 [(ngModel)]="item.eaten">
-                {{ item.title }}
+                {{ item.title }} <span>({{ item.amount }} kcal)</span>
             </md-checkbox>
         </div>
     </div>

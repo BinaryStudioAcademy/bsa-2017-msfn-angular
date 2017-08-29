@@ -10,14 +10,22 @@
         height: 70%;
 
         #eaten {
-            width: 30%;
+            width: 100%;
         }
 
         #meal-list {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            width: 50%;
+            width: 90%;
+
+            md-checkbox {
+                margin: 10px;
+
+                span {
+                    font-size: $minor-text;
+                }
+            }
         }
     }
 }
@@ -38,5 +46,13 @@
         span {
             font-size: $main-text;
         }
+    }
+}
+
+
+@media only screen and (min-width: $medium-screen) {
+
+    .food-plan > .content > #eaten {
+        width: 50%;
     }
 }
