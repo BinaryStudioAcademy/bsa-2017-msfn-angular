@@ -60,9 +60,15 @@ export class DateService {
         return isoDate;
     }
 
+    getDateString(month: number, day: number): string {
+        const monthOutput = this.addZero(month + 1),
+            dayOutput = this.addZero(day);
+        return `${monthOutput}/${dayOutput}`;
+    }
+
     getTimeString(hours: number, minutes: number): string {
-        const hourOutput = this.addZero(hours);
-        const minuteOutput = this.addZero(minutes);
+        const hourOutput = this.addZero(hours),
+            minuteOutput = this.addZero(minutes);
         return ` ${hourOutput}:${minuteOutput}`;
     }
 
