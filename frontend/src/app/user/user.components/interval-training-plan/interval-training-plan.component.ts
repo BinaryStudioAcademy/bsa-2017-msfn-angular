@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit } from '@angular/core';
 import { ICircle, IIntervalExercise, IIntervalPlan } from '../../../models/interval-plan';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk';
@@ -10,6 +10,8 @@ import 'rxjs/add/observable/of';
     styleUrls: ['./interval-training-plan.component.scss']
 })
 export class IntervalTrainingPlanComponent implements OnInit {
+
+    @Input() intervalList: [any];
     displayedColumns = ['name', 'time'];
     dataSource: CircleDataSource;
     currentCircleNumber = 0;

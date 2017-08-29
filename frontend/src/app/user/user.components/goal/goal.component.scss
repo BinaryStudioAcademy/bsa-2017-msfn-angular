@@ -6,7 +6,6 @@
     background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
     background: linear-gradient($direction, $color-stops);
 }
-
 #goal-container {
     display: flex;
     justify-content: center;
@@ -25,7 +24,27 @@
         font-size: $header-text;
     }
 }
-
+.drop-area {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    i {
+        line-height: 100px;
+        font-size: 100px;
+        text-align: center;
+        width: 100px;
+        &:hover {
+            color: $btn-color;
+        }
+        div {
+            display: none;
+        }
+    }
+}
+.ghost {
+    opacity: 0.5;
+}
 .item-container {
     display: flex;
     align-items: center;
@@ -62,6 +81,7 @@
     font-size: 40px;
 }
 .add-container {
+    order: 1000;
     display: flex;
     align-items: center;
     flex-direction: column;

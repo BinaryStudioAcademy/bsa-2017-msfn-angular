@@ -39,6 +39,7 @@ export class ActiveTrainingComponent implements OnInit {
                 this.loaded = false;
                 return;
             }
+            console.log(plan);
             this.trainingPlan = plan;
             this.loaded = true;
         });
