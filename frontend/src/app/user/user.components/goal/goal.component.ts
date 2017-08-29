@@ -41,5 +41,5 @@ export class GoalComponent implements OnInit {
 
   getData() {
 
-  };
+  }
 }
