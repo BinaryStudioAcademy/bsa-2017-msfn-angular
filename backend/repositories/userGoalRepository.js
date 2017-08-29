@@ -25,6 +25,7 @@ function findByUsername(username, callback) {
 };
 
 function deleteById(id, username, callback) {
+    console.log(id, username);
     const query = this.model.update({
         $and: [{
                 createdByUser: username
@@ -33,7 +34,7 @@ function deleteById(id, username, callback) {
                 _id: id,
             }
         ]
-    }, {
+    },  {
         $set: {
             isRemoved: true
         }

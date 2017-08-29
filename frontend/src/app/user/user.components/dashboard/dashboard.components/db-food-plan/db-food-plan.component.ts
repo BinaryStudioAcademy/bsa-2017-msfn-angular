@@ -28,14 +28,17 @@ export class DbFoodPlanComponent implements OnInit {
     meal = [
         {
             title: 'breakfast',
+            amount: 400,
             eaten: false
         },
         {
             title: 'lunch',
+            amount: 500,
             eaten: false
         },
         {
             title: 'dinner',
+            amount: 405,
             eaten: false
         }
     ];

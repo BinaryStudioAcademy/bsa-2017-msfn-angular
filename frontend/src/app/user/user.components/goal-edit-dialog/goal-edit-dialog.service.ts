@@ -23,7 +23,8 @@ export class GoalEditDialogService {
     }
 
     addUserGoal(body, callback) {
-       const sendData: IHttpReq = {
+        Object.assign(body, {startTime: new Date()});
+        const sendData: IHttpReq = {
             url: '/api/user-goal/',
             method: 'POST',
             body: body,
@@ -49,4 +50,21 @@ export class GoalEditDialogService {
         });
     }
 
+
+    checkData(selectedType, deadline, value) {
+        console.log(deadline);
+        let isCorrectType = true, isCorrectDeadline = true, isCorrectValue = true;
+        if (!selectedType || !(selectedType instanceof String)) {
+            isCorrectType = false;
+        }
+        const now = new Date();
+        if (!deadline || deadline < now) {
+            isCorrectDeadline = false;
+        }
+        const val = Number(value);
+        if ((!val) || (val > 0)) {
+            isCorrectValue = false;
+        }
+        return [isCorrectType, isCorrectDeadline, isCorrectValue];
+    }
 }

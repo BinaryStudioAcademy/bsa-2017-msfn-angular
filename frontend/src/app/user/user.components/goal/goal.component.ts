@@ -1,6 +1,6 @@
 import { GoalService } from './goal.service';
 import { MdDialogRef, MdDialog } from '@angular/material';
-import { GoalEditDialogComponent } from './../goal-edit-dialog/goal-edit-dialog.component';
+import { GoalEditDialogComponent } from '../goal-edit-dialog/goal-edit-dialog.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
     providers: [GoalService]
 })
 export class GoalComponent implements OnInit {
+
 
     dialogRef: MdDialogRef<any>;
     private data: any[] = [];
@@ -24,7 +25,8 @@ export class GoalComponent implements OnInit {
         onEnd: () => {
             if (this.cacheLength < this.itemsDropped.length) {
                 this.cacheLength = this.itemsDropped.length;
-                this.goalService.deleteGoal(this.itemsDropped[this.itemsDropped.length - 1], () => {
+                console.log(this.itemsDropped);
+                this.goalService.deleteGoal(this.itemsDropped[0], () => {
                     console.log('Goal is removed');
                 });
             }
@@ -35,9 +37,24 @@ export class GoalComponent implements OnInit {
 
     ngOnInit() {
         this.goalService.getData((data) => {
+            if (data.length === 1 && !data[0]._id) {
+                data = [];
+            }
             this.data = data;
         });
     }
+
+
+    deleteGoal(item, event) {
+        this.data = this.data.filter((elem) => {
+            return elem._id !== item._id;
+        });
+        this.goalService.deleteGoal(item, () => {
+            console.log('Goal is removed');
+        });
+        event.stopPropagation();
+    }
+
 
     openDialog(item) {
         this.dialogRef = this.dialog.open(GoalEditDialogComponent, {
@@ -46,17 +63,16 @@ export class GoalComponent implements OnInit {
             }
         });
 
+
         this.dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                 this.goalService.getData((data) => {
-                     this.data = data;
-                 });
+                this.goalService.getData((data) => {
+                    if (data.length === 1 && !data[0]._id) {
+                        data = [];
+                    }
+                    this.data = data;
+                });
             }
         });
     }
-
-
-    getData() {
-
-    };
 }

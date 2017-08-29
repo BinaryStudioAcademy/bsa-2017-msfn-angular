@@ -2,39 +2,42 @@
 @import '../../../../../../globalStyles/indentations.scss';
 @import '../../../../../../globalStyles/text.scss';
 
-.weight-control > .content {
-    height: 100%;
+.weight-control {
+    .content {
+        height: 100%;
+    }
+
+    .content > div {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
+    }
 }
 
-#diff,
-#selection {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
+#diff {
+    #previous-diff,
+    #per-week-diff {
+        display: inline-block;
+        max-width: 100%;
 
-#previous-diff,
-#per-week-diff {
-    display: inline-block;
-    max-width: 45%;
-}
+        div {
+            display: inline-block;
+            margin: 0 10px;
+        }
 
-#per-week-diff {
-    text-align: right;
-}
+        .diff {
+            font-size: $main-text;
+        }
+    }
 
-#previous-diff > div,
-#per-week-diff > div {
-    display: inline-block;
-    margin: 0 10px;
-}
+    #per-week-diff {
+        margin-top: 15px;
 
-#per-week{
-    font-size: $main-text;
-}
-
-.diff {
-    font-size: $main-text;
+        #per-week{
+            font-size: $main-text;
+        }
+    }
 }
 
 #weekly-selection {
@@ -51,9 +54,10 @@ md-radio-group {
     }
 
     label {
-        margin: 0 10px;
+        display: block;
+        margin: 5px 0;
         cursor: pointer;
-        font-size: $minor-text;
+        font-size: $main-text;
         color: $text-second-color;
     }
 
@@ -72,4 +76,49 @@ md-radio-group {
 
 .worse-result {
     color: $text-warn-color;
+}
+
+
+@media only screen and (min-width: $small-screen) {
+
+    .weight-control {
+        .content > div {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+    }
+
+    #diff {
+        #previous-diff,
+        #per-week-diff {
+            display: inline-block;
+            max-width: 45%;
+
+            div {
+                display: inline-block;
+                margin: 0 10px;
+            }
+        }
+
+        #per-week-diff {
+            margin-top: initial;
+            text-align: right;
+        }
+    }
+
+    md-radio-group {
+        label {
+            display: inline-block;
+            margin: 5px 10px;
+        }
+    }
+}
+
+@media only screen and (min-width: $large-screen) {
+    md-radio-group {
+        label {
+            font-size: $minor-text;
+        }
+    }
 }

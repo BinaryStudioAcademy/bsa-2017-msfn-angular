@@ -13,40 +13,37 @@
 #kcal-today-dates {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex-basis: 40%;
+    justify-content: space-around;
+    align-items: center;
+    flex-basis: 100%;
     height: 100%;
 
     div {
-        display: inline-block;
         margin: 0 10px;
     }
 
     #today-burned-kcal {
         margin-bottom: $content-tb-margin;
+
+        div {
+            display: inline-block;
+        }
     }
 
     .interval-dates {
         .start-date,
         .end-date {
+            width: 100%;
             font-size: $usual-text;
         }
     }
 }
 
 #chart {
-    width: 340px;
+    width: 180px;
     height: 100%;
 
-    #tooltip {
-        opacity: 0;
-        font-size: $usual-text;
-        font-weight: 600;
-        fill: $option1-color;
-    }
-
     #day-aim {
-        width: 500px;
         height: 210px;
 
         line {
@@ -58,5 +55,51 @@
             font-size: $minor-text;
             fill: $text-second-color;
         }
+    }
+}
+
+
+@media only screen and (min-width: $medium-screen) {
+
+    #chart {
+        width: 340px;
+    }
+}
+
+
+@media only screen and (min-width: $medium-screen) and (max-width: $large-screen) {
+
+    #kcal-today-dates {
+        .interval-dates {
+            .start-date,
+            .end-date {
+                display: inline-block;
+                width: 40%;
+            }
+        }
+    }
+}
+
+
+@media only screen and (min-width: $large-screen) {
+
+    #kcal-today-dates {
+        flex-direction: row;
+
+        .interval-dates {
+            .start-date,
+            .end-date {
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+@media only screen and (min-width: 1850px) {
+
+    #kcal-today-dates {
+        flex-direction: column;
+        flex-basis: 40%;
     }
 }

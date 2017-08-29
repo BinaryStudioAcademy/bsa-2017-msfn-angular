@@ -65,10 +65,28 @@ export class DbCaloriesComponent implements OnInit {
     }
 
     renderChart() {
-        const d3 = this.d3;
-        const padding: number = 25;
-        const width: number = 500;
-        const height: number = 150;
+        const screenWidth = document.body.clientWidth;
+
+        const d3 = this.d3,
+            padding: number = 25,
+            height: number = 150;
+        let width: number,
+            barWidth: number,
+            xRange: number,
+            aimAxisRange: number;
+
+        if (screenWidth > 500) {
+            width = 300;
+            barWidth = 20;
+            xRange = 250;
+            aimAxisRange = 300;
+        } else {
+            width = 200;
+            barWidth = 10;
+            xRange = 120;
+            aimAxisRange = 180;
+        }
+
         let yScale: any;
 
         const svg = d3.select('#chart')
@@ -80,7 +98,7 @@ export class DbCaloriesComponent implements OnInit {
             .domain(this.data.map(d => {
                 return d.day;
             }))
-            .range([0, 250]);
+            .range([0, xRange]);
 
         yScale = d3.scaleLinear()
             .domain([0, d3.max(this.data, d => {
@@ -97,6 +115,7 @@ export class DbCaloriesComponent implements OnInit {
             .ticks(4);
 
         svg.append('g')
+            .attr('id', 'x-asis')
             .attr('class', 'axis')
             .attr('transform', `translate(${padding}, ${(height - padding)})`)
             .call(xAxis);
@@ -113,6 +132,9 @@ export class DbCaloriesComponent implements OnInit {
         svg.selectAll('text')
             .attr('fill', '#fff');
 
+        svg.selectAll('#x-asis text')
+            .style('transform', 'translate(-10px, 5px) rotate(-45deg)');
+
         const bars = svg.selectAll('rect')
             .data(this.data);
         bars.size();
@@ -124,59 +146,83 @@ export class DbCaloriesComponent implements OnInit {
                 return xScale(d.day);
             })
             .attr('y', d => {
-                return yScale(d.amount);
+                return yScale(d.amount + 55);
             })
-            .attr('transform', `translate(${padding + 7}, ${padding - 5})`)
+            .attr('transform', `translate(${padding + barWidth / 3}, ${padding - 5})`)
             .attr('height', d => {
-                return height - yScale(d.amount) - (2 * padding) + 5;
+                return height - yScale(d.amount) - padding - 2;
             })
-            .attr('width', 20)
+            .attr('width', barWidth)
             .attr('fill', () => {
                 return '#7da7d9';
             })
             .on('mouseover', d => {
-                this.showTip(d);
+                this.showTip(d, svg);
             })
             .on('mouseout', () => {
                 this.hideTip();
             });
 
         const dayAimElement = d3.select('#day-aim');
+
         dayAimElement.select('line')
+            .attr('x2', aimAxisRange)
             .style('transform', `translate(0, ${125 - (this.dayAim / 3)}px)`);
         dayAimElement.select('text')
-            .html('day aim')
-            .style('transform', `translate(275px, ${120 - (this.dayAim / 3)}px)`);
+            .html('aim')
+            .style('transform',
+                   `translate(${aimAxisRange - 30}px, ${120 - (this.dayAim / 3)}px)`);
     }
 
-    showTip(element) {
-        const e = this.d3.event;
-        const target = e.currentTarget;
-        const xCoord = this.d3.mouse(target)[0] <= 10 ? 10 : this.d3.mouse(target)[0];
+    showTip(element, parentElement) {
+        const e = this.d3.event,
+            target = e.currentTarget,
+            xCoord = this.d3.mouse(target)[0] <= 20 ? 30 : this.d3.mouse(target)[0],
+            yCoord = this.d3.mouse(target)[1] > 0 ?
+                     this.d3.mouse(target)[1] + 5 : this.d3.mouse(target)[1] + 35;
 
-        const tooltip = this.d3.select('#tooltip');
+        parentElement.append('rect')
+            .style('transform', `translate(${xCoord - 7}px, ${yCoord - 18}px)`)
+            .style('position', 'absolute')
+            .style('opacity', 0)
+            .attr('id', 'tooltip-bg')
+            .attr('height', 25)
+            .attr('width', 40)
+            .attr('rx', 4)
+            .attr('ry', 4)
+            .attr('fill', '#222')
+            .transition()
+            .duration(100)
+            .style('opacity', 1);
+
+        const tooltip = parentElement.append('text');
+        tooltip.attr('class', 'tooltip')
+            .html(element.amount)
+            .style('position', 'absolute')
+            .style('fill', '#d1c501')
+            .style('font-weight', 600)
+            .style('transform', `translate(${xCoord}px, ${yCoord}px)`);
+
         tooltip.transition()
             .duration(100)
             .style('opacity', 0.9);
         tooltip.html(element.amount)
-            .style('transform', `translate(${xCoord + 20}px, ${135 - (element.amount / 3)}px)`);
+            .style('transform', `translate(${xCoord}px, ${yCoord}px)`);
 
-        this.d3.select(target)
-            .transition()
+        this.d3.select(target).transition()
             .duration(100)
             .attr('fill', '#82ca9c');
     }
 
     hideTip() {
-        const e = this.d3.event;
-        const target = e.currentTarget;
-        const tooltip = this.d3.select('#tooltip');
-        tooltip.transition()
-            .duration(100)
-            .style('opacity', 0);
+        const e = this.d3.event,
+            target = e.currentTarget;
 
-        this.d3.select(target)
-            .transition()
+        this.d3.select('.tooltip').remove();
+
+        this.d3.select('#tooltip-bg').remove();
+
+        this.d3.select(target).transition()
             .duration(100)
             .attr('fill', '#7da7d9');
     }
