@@ -11,7 +11,8 @@ const Exercise = new Schema({
     isRemoved: Boolean,
     sportsId:Array,
     description:String,
-    image:String
+    image:String,
+    externalId: String
 });
 
 module.exports = mongoose.model('Exercise', Exercise);

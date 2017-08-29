@@ -5,8 +5,6 @@ const exerciseLoadService = require('../../../services/exerciseLoadServices/exer
 
 
 router.get('/exercises', function (req, res, next) {
-    console.log('/exercises works');
-    console.log(Date.now());
     exerciseLoadService.getAllExercises(function (err, data) {
         res.data = data;
         res.err = err;
