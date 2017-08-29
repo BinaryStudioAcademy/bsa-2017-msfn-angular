@@ -30,7 +30,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.get(baseUrl, isAdmin, function (req, res, next) {
+    app.get(baseUrl, function (req, res, next) {
         goalService.getGoals(function(err, data) {
             if (!data.length) {
                 data = [{}];

@@ -16,10 +16,7 @@
     <div *ngFor="let exercise of exercisesList" class="exercise-item">
       <h4 md-line>{{exercise.name}}</h4>
       <div class="about-exercise">
-        <p md-line *ngIf="exercise.description">
-          <b>
-            About:
-          </b> {{exercise.description}} </p>
+        <p md-line *ngIf="exercise.description" [innerHtml]="exercise.description"></p>
         <!-- <p md-line>
           <b>
             How to:

@@ -1,0 +1,15 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const UserGoal = new Schema({
+    type: String,
+    value: Number,
+    isRemoved: {
+        type: Boolean,
+        default: false
+    },
+    deadline: Date,
+    createdByUser: String
+});
+
+module.exports = mongoose.model('UserGoal', UserGoal);

@@ -2,11 +2,13 @@
 @import '../../../../../../globalStyles/indentations.scss';
 @import '../../../../../../globalStyles/text.scss';
 
-.news > .content {
-    flex-direction: column;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    height: 70%;
+.news {
+    .content {
+        flex-direction: column;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        height: 70%;
+    }
 }
 
 .news-item {
@@ -17,19 +19,23 @@
     div {
         display: inline-block;
     }
+
+    .news-title {
+        width: 50%;
+        font-size: $main-text;
+    }
+
+    .news-date {
+        width: 50%;
+        text-align: right;
+    }
+
+    .news-text {
+        flex-basis: 100%;
+        margin-top: 20px;
+    }
 }
 
-.news-title {
-    width: 50%;
-    font-size: $main-text;
-}
-
-.news-date {
-    width: 50%;
-    text-align: right;
-}
-
-.news-text {
-    flex-basis: 100%;
-    margin-top: 20px;
+md-radio-group {
+    margin-top: $content-tb-margin;
 }
