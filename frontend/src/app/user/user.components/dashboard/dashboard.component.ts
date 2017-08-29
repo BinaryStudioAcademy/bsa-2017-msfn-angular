@@ -9,7 +9,8 @@ export class DashboardComponent implements OnInit {
 
     constructor() { }
 
-    dataToDisplay = {
+    dragOptions = {
+        animation: 500
     };
 
     ngOnInit() {
