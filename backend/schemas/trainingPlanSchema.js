@@ -21,6 +21,7 @@ const TrainingPlan = new Schema({
     ],
     intervals: [
         {
+            exList: Array,
             lapTime: Number,
             warmTime: Number
         }

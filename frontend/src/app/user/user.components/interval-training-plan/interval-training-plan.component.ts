@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk';
 import 'rxjs/add/observable/of';
@@ -8,7 +8,7 @@ import 'rxjs/add/observable/of';
     templateUrl: './interval-training-plan.component.html',
     styleUrls: ['./interval-training-plan.component.scss']
 })
-export class IntervalTrainingPlanComponent implements OnInit {
+export class IntervalTrainingPlanComponent implements OnInit, OnChanges {
 
     @Input() intervalList: [any];
     @Output() intervalAction = new EventEmitter;
@@ -26,8 +26,13 @@ export class IntervalTrainingPlanComponent implements OnInit {
     constructor() {}
 
     ngOnInit(): void {
-        console.log(this.intervalList);
-        // this.circles = this.intervalList;
+        this.circles = this.intervalList;
+    }
+
+    ngOnChanges(changes): void {
+        if (changes.intervalList) {
+            this.circles = this.intervalList;
+        }
     }
 
     addCircle() {
@@ -40,7 +45,6 @@ export class IntervalTrainingPlanComponent implements OnInit {
         } else {
             this.editMode = true;
         }
-        this.intervalAction.emit({type: 'add'});
     }
 
     saveCircle(): void {
@@ -75,7 +79,6 @@ export class IntervalTrainingPlanComponent implements OnInit {
         this.currentLap = this.circles[i];
         this.currentLap.index = i;
         if (!editNew) {
-            console.log('emit edit');
             this.intervalAction.emit(
                 {
                     type: 'edit',
