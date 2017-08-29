@@ -44,5 +44,8 @@
     <button md-button class="btn btn-save" (click)="savePlan()">Save</button>
 
   </div>
-  <app-exercise-list [userMeasures]="userMeasures" [exercisesList]="trainingPlan.exercisesList"></app-exercise-list>
+  <div class="childContainer">
+    <app-exercise-list [userMeasures]="userMeasures" [exercisesList]="trainingPlan.exercisesList" (onChangeList)="onChangeList($event)"></app-exercise-list>
+    <app-interval-training-plan [intervalList]="trainingPlan.intervals" *ngIf="trainingPlan.trainingType === 'interval'" (intervalAction)="intervalAction($event)"></app-interval-training-plan>
+  </div>
 </div>

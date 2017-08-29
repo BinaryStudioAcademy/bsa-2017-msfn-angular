@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { PageEvent, MdPaginatorModule } from '@angular/material';
 import { SearchExerciseComponent } from './../search-exercise/search-exercise.component';
@@ -10,7 +10,7 @@ import { ExerciseDescriptionComponent } from '../exercise-description/exercise-d
     styleUrls: ['./exercise-list.component.scss'],
     providers: [MdPaginatorModule]
 })
-export class ExerciseListComponent implements OnInit {
+export class ExerciseListComponent implements OnInit, OnChanges {
     private openedDialog: MdDialogRef<any> | null;
     private searchDialog: MdDialogRef<any> | null;
     @ViewChild('container')
@@ -40,6 +40,13 @@ export class ExerciseListComponent implements OnInit {
     ngOnInit() {
         this.displayExercises = this.exercisesList.slice(0, this.pageSize);
         this.onResize();
+    }
+
+    ngOnChanges(changes) {
+        if (changes.exercisesList) {
+            this.displayExercises = this.exercisesList.slice(0, this.pageSize);
+            this.onResize();
+        }
     }
 
     onResize() {

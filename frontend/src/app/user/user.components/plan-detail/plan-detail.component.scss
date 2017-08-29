@@ -110,9 +110,20 @@
     }   
 }
 
-app-exercise-list {
+.childContainer {
+    display: flex;
+    flex-wrap: wrap;
     flex: 65%;
+
+    app-exercise-list {
+        width: 100%;
+    }
+
+    app-interval-training-plan {
+        width: 100%;
+    }
 }
+
 
 .clear {
     clear: both;

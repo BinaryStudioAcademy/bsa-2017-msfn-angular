@@ -1,5 +1,4 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
-import { ICircle } from '../../../models/interval-plan';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk';
 import 'rxjs/add/observable/of';
@@ -12,27 +11,36 @@ import 'rxjs/add/observable/of';
 export class IntervalTrainingPlanComponent implements OnInit {
 
     @Input() intervalList: [any];
+    @Output() intervalAction = new EventEmitter;
     displayedColumns = ['name', 'time'];
     dataSource: any;
-    currentCircleNumber: number = 0;
-    circles: [ICircle] = [{
-        lapTime: 0,
-        warmTime: 0,
-    }];
+    editMode: boolean;
+    circles = [];
 
     currentLap = {
         lapTime: 0,
         warmTime: 0,
+        index: 0
     };
 
     constructor() {}
 
     ngOnInit(): void {
         console.log(this.intervalList);
+        // this.circles = this.intervalList;
     }
 
-    onChange(i: number): void {
-        this.currentLap = this.circles[i];
+    addCircle() {
+        if (this.circles.length) {
+            this.circles.push({
+                lapTime: 0,
+                warmTime: 0
+            });
+            this.edit(this.circles.length - 1, true);
+        } else {
+            this.editMode = true;
+        }
+        this.intervalAction.emit({type: 'add'});
     }
 
     saveCircle(): void {
@@ -40,33 +48,40 @@ export class IntervalTrainingPlanComponent implements OnInit {
             lapTime: this.currentLap.lapTime,
             warmTime: this.currentLap.warmTime
         };
-        if (!this.circles[0].lapTime) {
-            this.circles[0] = data;
-        } else {
-            this.circles.push(data);
-        }
-        console.log(this.circles);
-    }
-
-    copyToNewCircle(): void {
-        const currentCircle: ICircle = JSON.parse(JSON.stringify(this.circles[this.currentCircleNumber]));
-        this.circles.push(currentCircle);
+        this.circles[this.currentLap.index] = data;
+        this.editMode = false;
+        this.intervalAction.emit(
+            {
+                type: 'save',
+                data: data,
+                cacheIndex: this.currentLap.index
+            }
+        );
     }
 
     deleteCircle(): void {
-        if (this.circles.length > 1) {
-            this.circles.splice(this.currentCircleNumber, 1);
-        }
-        if (this.currentCircleNumber !== 0) {
-            this.currentCircleNumber--;
-        }
+        this.circles.splice(this.currentLap.index, 1);
+        this.editMode = false;
+        this.intervalAction.emit(
+            {
+                type: 'delete',
+                cacheIndex: this.currentLap.index
+            }
+        );
     }
 
-    getRestTime(): number {
-        return this.circles[this.currentCircleNumber].warmTime;
-    }
-
-    getCircleTime(): number {
-        return this.circles[this.currentCircleNumber].lapTime;
+    edit(i, editNew) {
+        this.editMode = true;
+        this.currentLap = this.circles[i];
+        this.currentLap.index = i;
+        if (!editNew) {
+            console.log('emit edit');
+            this.intervalAction.emit(
+                {
+                    type: 'edit',
+                    cacheIndex: i
+                }
+            );
+        }
     }
 }

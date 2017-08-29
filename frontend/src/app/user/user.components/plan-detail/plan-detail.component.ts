@@ -58,7 +58,7 @@ export class PlanDetailComponent implements OnInit {
         name: '',
         days: [],
         count: 0,
-        trainingType: 'general' || 'interval',
+        trainingType: 'interval',
         exercisesList: [],
         intervals: [],
         gcalendar_id: ''
@@ -68,12 +68,8 @@ export class PlanDetailComponent implements OnInit {
     constructor(
         private gcalendar: GCalendarService,
         private dialog: MdDialog,
-        // private paginator: MdPaginatorModule,
         private httpHandler: HttpService,
-        public activatedRoute: ActivatedRoute) {
-        // this.openedDialog = null;
-
-    }
+        public activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         const sdata: IHttpReq = {
@@ -118,6 +114,27 @@ export class PlanDetailComponent implements OnInit {
                 });
         }
 
+    }
+
+    onChangeList(updatedList) {
+        this.trainingPlan.exercisesList = updatedList;
+    }
+
+    intervalAction(action) {
+        if (action.type === 'add') {
+
+        } else if (action.type === 'save') {
+            const data = {
+                exList: this.trainingPlan.exercisesList,
+                time: action.data
+            };
+            this.trainingPlan.intervals[action.cacheIndex] = data;
+        } else if (action.type === 'delete') {
+            this.trainingPlan.intervals.splice(action.cacheIndex, 1);
+        } else if (action.type === 'edit') {
+            this.trainingPlan.exercisesList = this.trainingPlan.intervals[action.cacheIndex].exList;
+        }
+        console.log(this.trainingPlan);
     }
 
     selectDays() {

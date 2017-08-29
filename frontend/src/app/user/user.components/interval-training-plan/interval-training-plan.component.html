@@ -1,31 +1,32 @@
-<div class="buttons-container">
-    <button md-button disableRipple class="btn" (click)="saveCircle()">Save interval
-    </button>
-    <button md-button disableRipple class="btn" (click)="copyToNewCircle()">Copy to new circle
-    </button>
-    <button md-button disableRipple class="btn" (click)="deleteCircle()">Delete circle
-    </button>
-</div>
-<div class="interval-list" *ngFor="let lap of circles; let i = index">
-    <div class="interval-circle">
-        <span class="lap">{{lap.lapTime}}</span>
-        <span class="warm">{{lap.warmTime}}</span>
+<div class="container">
+    <div class="buttons-container" *ngIf="editMode">
+        <button md-button disableRipple class="btn" (click)="saveCircle()">Save
+        </button>
+        <button md-button disableRipple class="btn" (click)="deleteCircle()">Delete
+        </button>
+    </div>
+    <div class="interval-list" *ngIf="circles.length && !editMode">
+        <div class="interval-circle" *ngFor="let lap of circles; let i = index" (click)="edit(i)">
+            <span class="lap">{{lap.lapTime}}</span>
+            <span class="warm">{{lap.warmTime}}</span>
+            <svg version="1.1" viewBox="150 150 700 700">
+                <path d="M900.3,281.1l-86.7,87.6c33.3,33.6,53.9,80,53.9,131.3c0,102.6-82.3,185.7-183.8,185.7H377.5V561.9l-245,247.6h245h306.3C853,809.5,990,671.1,990,500C990,414.5,955.7,337.1,900.3,281.1z M132.5,500c0-102.6,82.3-185.7,183.8-185.7h306.3v123.8l245-247.6h-245H316.3C147.2,190.5,10,329.1,10,500c0,85.5,34.3,162.9,89.7,218.8l86.7-87.5C153.1,597.7,132.5,551.3,132.5,500z"/>
+            </svg>
+        </div>
+    </div>
+    <div class="data-container" *ngIf="editMode">
+        <div class="edit-interval">
+            <input type="number" class="lap" [(ngModel)]="currentLap.lapTime">
+            <input type="number" class="warm" [(ngModel)]="currentLap.warmTime">
+            <svg version="1.1" viewBox="150 150 700 700">
+                <path d="M900.3,281.1l-86.7,87.6c33.3,33.6,53.9,80,53.9,131.3c0,102.6-82.3,185.7-183.8,185.7H377.5V561.9l-245,247.6h245h306.3C853,809.5,990,671.1,990,500C990,414.5,955.7,337.1,900.3,281.1z M132.5,500c0-102.6,82.3-185.7,183.8-185.7h306.3v123.8l245-247.6h-245H316.3C147.2,190.5,10,329.1,10,500c0,85.5,34.3,162.9,89.7,218.8l86.7-87.5C153.1,597.7,132.5,551.3,132.5,500z"/>
+            </svg>
+        </div>
+    </div>
+    <div class="add-interval" *ngIf="!editMode" (click)="addCircle()">
+        <span class="lap">+</span>
         <svg version="1.1" viewBox="150 150 700 700">
             <path d="M900.3,281.1l-86.7,87.6c33.3,33.6,53.9,80,53.9,131.3c0,102.6-82.3,185.7-183.8,185.7H377.5V561.9l-245,247.6h245h306.3C853,809.5,990,671.1,990,500C990,414.5,955.7,337.1,900.3,281.1z M132.5,500c0-102.6,82.3-185.7,183.8-185.7h306.3v123.8l245-247.6h-245H316.3C147.2,190.5,10,329.1,10,500c0,85.5,34.3,162.9,89.7,218.8l86.7-87.5C153.1,597.7,132.5,551.3,132.5,500z"/>
         </svg>
-    </div>
-</div>
-<div class="data-container">
-    <div class="circle-time">
-        Circle time:
-        <md-input-container>
-            <input mdInput [(ngModel)]="currentLap.lapTime">
-        </md-input-container>
-    </div>
-    <div class="rest-time">
-        Rest time:
-        <md-input-container>
-            <input mdInput [(ngModel)]="currentLap.warmTime">
-        </md-input-container>
     </div>
 </div>

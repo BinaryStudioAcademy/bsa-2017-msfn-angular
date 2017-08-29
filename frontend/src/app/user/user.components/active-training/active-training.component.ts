@@ -24,12 +24,24 @@ export class ActiveTrainingComponent implements OnInit {
             warmTime: 12154
         },
         {
+            lapTime: 5142,
+            warmTime: 33254
+        },
+        {
+            lapTime: 23,
+            warmTime: 1242
+        },
+        {
             lapTime: 12546,
             warmTime: 1245
         },
         {
             lapTime: 5142,
             warmTime: 33254
+        },
+        {
+            lapTime: 23,
+            warmTime: 1242
         }
     ];
 
