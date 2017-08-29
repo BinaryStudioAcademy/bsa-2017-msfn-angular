@@ -1,6 +1,6 @@
 import { GoalService } from './goal.service';
 import { MdDialogRef, MdDialog } from '@angular/material';
-import { GoalEditDialogComponent } from './../goal-edit-dialog/goal-edit-dialog.component';
+import { GoalEditDialogComponent } from '../goal-edit-dialog/goal-edit-dialog.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

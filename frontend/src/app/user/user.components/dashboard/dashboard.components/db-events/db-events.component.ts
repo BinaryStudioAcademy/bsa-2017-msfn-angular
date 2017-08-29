@@ -97,7 +97,7 @@ export class DbEventsComponent implements OnInit {
         for (const item of items) {
             let dateExists = false;
             const d = new Date(item.date);
-            const dateString = `${d.getUTCMonth() + 1}-${d.getUTCDate()}`;
+            const dateString = this.dateService.getDateString(d.getUTCMonth(), d.getUTCDate());
             item.shortDate = dateString;
 
             for (const selDate of this.selectedDates) {
