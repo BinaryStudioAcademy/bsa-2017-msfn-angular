@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { IHttpReq } from './../../../models/http-req';
 import { HttpService } from '../../../services/http.service';
+import { MarkdownService } from '../../../services/markdown.service';
 
 @Component({
   selector: 'app-search-exercise',
@@ -22,7 +23,9 @@ export class SearchExerciseComponent implements OnInit {
   constructor(
     private dialogRef: MdDialogRef<SearchExerciseComponent>,
     @Inject(MD_DIALOG_DATA) public data: any,
-    private httpHandler: HttpService) { }
+    private httpHandler: HttpService,
+    private markdownService: MarkdownService,
+  ) { }
 
   ngOnInit() {
     // get sport types
@@ -55,6 +58,11 @@ export class SearchExerciseComponent implements OnInit {
       .then((res) => {
         if (res) {
           this.exercisesList = res;
+
+          // conver description to markdown
+          this.exercisesList.forEach( el => {
+            el.description = this.markdownService.convert(el.description);
+          });
         }
       });
     this.exercsesShow = true;

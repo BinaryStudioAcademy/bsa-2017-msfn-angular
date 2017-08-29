@@ -1,0 +1,51 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+* {
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
+}
+
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+md-input-container {
+width: 100%;  
+}
+
+.item-container {
+    display: flex;
+    margin-top: 10px;
+    font-family: $font-general;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+}
+
+md-select {
+            width: 100%;
+            margin-top: 10px;
+}
+
+
+.btn-container {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media screen and (min-width: $large-screen) {
+    .container {
+        min-width: 250px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

@@ -3,7 +3,7 @@
 @import '../../../../../../globalStyles/text.scss';
 
 .weight-control > .content {
-    height: 85%;
+    height: 100%;
 }
 
 #diff,
@@ -37,7 +37,7 @@
     font-size: $main-text;
 }
 
-.weekly-selection {
+#weekly-selection {
     text-align: right;
 }
 

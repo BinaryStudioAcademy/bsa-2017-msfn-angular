@@ -1,3 +1,32 @@
-<p>
-  goal-edit-dialog works!
-</p>
+<div class="container">
+    <h2 class="title" md-dialog-title>Finish training?</h2>
+    <div class="item-container">
+        <md-input-container class="input-row">
+            <input autofocus mdInput type="number" min="0" name="count" placeholder="Amount" required [(ngModel)]="value">
+            <md-error *ngIf="value < 0">
+                0 is minimum
+            </md-error>
+        </md-input-container>
+    </div>
+    <div class="item-container">
+        <md-input-container>
+            <input mdInput [mdDatepicker]="startPicker" placeholder="Start Date" [min]="minDate" [(ngModel)]="deadline">
+            <button mdSuffix [mdDatepickerToggle]="startPicker" ></button>
+        </md-input-container>
+        <md-datepicker touchUi="true" #startPicker></md-datepicker>
+    </div>
+    <div class="item-container">
+                    <md-select placeholder="Goal type" [(ngModel)]="selectedType">
+                        <md-option *ngFor="let type of types" [value]="type.name">
+                            {{type.name}}
+                        </md-option>
+                    </md-select>
+    </div>
+
+
+
+    <div class="btn-container">
+        <button md-raised-button [md-dialog-close]="false">Close</button>
+        <button md-raised-button (click)="addUpdateUserGoal({value: value, type: selectedType, deadline: deadline, _id: id})" [md-dialog-close]="true">Save</button>
+    </div>
+</div>
