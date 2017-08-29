@@ -3,40 +3,64 @@
 @import "../../../../globalStyles/indentations";
 
 .dialog-container{
-    max-height: 80vh;
-}
-.sport-types{
-    width: 300px;
-    margin-bottom: 20px;
-}
-.field-title{
-    font-size: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-input{
-    width: 300px;
-}
-.exercise-item{
-    display: block;
-    position: relative;
-    padding: 10px 0px;
-    &:hover{
-        background-color:$gradient-to-color; 
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+
+    header {
+      display: flex;
+      flex-flow: column nowrap;
+      
+      .sport-types{
+          width: 300px;
+          margin-bottom: 20px;
+        }
+
+        input{
+            width: 300px;
+        }
+    } 
+
+    .exercise-wrap {
+        max-height: 65vh;
+        margin: 0 -23px;
+        overflow: auto;
+        background: #222;
+
+        .exercise-item {
+            display: flex;
+            flex-flow: row nowrap;
+            padding: 10px 34px 10px;
+            align-items: center;
+            justify-content: space-between;
+        
+            &:hover{
+                background-color:$gradient-to-color; 
+            }
+        
+            h4 {
+                margin-right: 10px;
+                cursor: pointer;
+            }
+        }
+
+        .add{
+            color:#fff;
+        }
     }
-}
-.about-exercise{
-    width:80%;
-}
-.add{
-    // background-color: #82ca9c; 
-    // height: 40px;
-    // width: 40px;
-    // border-radius: 20px;
-    // font-size: 30px;
-    // font-weight: bold;
-    color:#fff;
-    position: absolute;
-    right: 5%;
-    top: 40%;
+
+    .btn {
+        border: none;
+        margin-top: $content-between-margin;
+        margin-bottom: -17px;
+        width: 50px;
+        color: $text-main-color;
+        background-color: $btn-color;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 50px;
+        cursor: pointer;
+        outline: none;
+        align-self: flex-end;
+    } 
 }
