@@ -9,7 +9,6 @@ const UserGoal = new Schema({
         default: false
     },
     deadline: Date,
-    startTime: Date,
     createdByUser: String
 });
 
