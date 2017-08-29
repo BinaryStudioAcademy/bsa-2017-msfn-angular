@@ -170,24 +170,30 @@ export class DbCaloriesComponent implements OnInit {
             .style('transform', `translate(0, ${125 - (this.dayAim / 3)}px)`);
         dayAimElement.select('text')
             .html('aim')
-            .style('transform', `translate(${aimAxisRange - 30}px, ${120 - (this.dayAim / 3)}px)`);
+            .style('transform',
+                   `translate(${aimAxisRange - 30}px, ${120 - (this.dayAim / 3)}px)`);
     }
 
     showTip(element, parentElement) {
         const e = this.d3.event,
             target = e.currentTarget,
             xCoord = this.d3.mouse(target)[0] <= 20 ? 30 : this.d3.mouse(target)[0],
-            yCoord = this.d3.mouse(target)[1] > 0 ? this.d3.mouse(target)[1] + 5 : this.d3.mouse(target)[1] + 35;
+            yCoord = this.d3.mouse(target)[1] > 0 ?
+                     this.d3.mouse(target)[1] + 5 : this.d3.mouse(target)[1] + 35;
 
         parentElement.append('rect')
             .style('transform', `translate(${xCoord - 7}px, ${yCoord - 18}px)`)
             .style('position', 'absolute')
+            .style('opacity', 0)
             .attr('id', 'tooltip-bg')
             .attr('height', 25)
             .attr('width', 40)
             .attr('rx', 4)
             .attr('ry', 4)
-            .attr('fill', '#222');
+            .attr('fill', '#222')
+            .transition()
+            .duration(100)
+            .style('opacity', 1);
 
         const tooltip = parentElement.append('text');
         tooltip.attr('class', 'tooltip')
@@ -203,8 +209,7 @@ export class DbCaloriesComponent implements OnInit {
         tooltip.html(element.amount)
             .style('transform', `translate(${xCoord}px, ${yCoord}px)`);
 
-        this.d3.select(target)
-            .transition()
+        this.d3.select(target).transition()
             .duration(100)
             .attr('fill', '#82ca9c');
     }
@@ -214,10 +219,10 @@ export class DbCaloriesComponent implements OnInit {
             target = e.currentTarget;
 
         this.d3.select('.tooltip').remove();
+
         this.d3.select('#tooltip-bg').remove();
 
-        this.d3.select(target)
-            .transition()
+        this.d3.select(target).transition()
             .duration(100)
             .attr('fill', '#7da7d9');
     }
