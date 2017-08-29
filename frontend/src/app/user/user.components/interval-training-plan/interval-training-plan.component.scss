@@ -29,9 +29,27 @@ button:focus {
     width: 60%;
     margin: 0 auto;
 }
-
-svg {
-    fill: $btn-color;
-    width: 300px;
-    height: 200px;
+.interval-list {
+    width: 90%;
+    .interval-circle {
+        position: relative;
+        width: 160px;
+        height: 100px;
+        .lap {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+        }
+        .warm {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+        }
+        svg {
+            fill: $btn-color;
+            width: 160px;
+            height: 100px;
+        }
+    }
 }
+
