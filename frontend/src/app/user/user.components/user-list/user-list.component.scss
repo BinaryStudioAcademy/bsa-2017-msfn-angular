@@ -8,7 +8,7 @@
 }
 
 .search-box {
-    width: 60%;
+    width: 100%;
 }
 
 .all-user-container {
@@ -103,9 +103,15 @@ a {
 }
 
 .user-container {
-    display: flex;
-    justify-content: space-between;
-    div {
-        display: flex;
+    button {
+        margin-left: auto;
     }
+}
+
+div.user-container > div.mat-list-item-content {
+    flex: 1 100%;
+}
+
+div.user-container > div.mat-list-item-content > div {
+    display: flex;
 }
