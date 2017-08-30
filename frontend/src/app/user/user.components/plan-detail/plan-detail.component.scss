@@ -10,9 +10,18 @@
     }
     .about-container {
         flex: 35%;
+        margin-right: $content-tb-margin;
         padding: 0 15px;
-        h1 {
-            margin-top: 0;
+        #title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            margin-bottom: $content-between-margin;
+            h1 {
+                flex-basis: 100%;
+                margin: 0 0 $content-between-margin;
+            }
         }
         .plan-name {
             width: 200px;
@@ -107,7 +116,7 @@
         border-radius: 50px;
         cursor: pointer;
         outline: none;
-    }   
+    }
 }
 
 .childContainer {
@@ -132,5 +141,12 @@
 @media only screen and (max-width: $large-screen) {
     .container {
         flex-direction: column;
+    }
+}
+
+@media only screen and (min-width: $medium-screen) {
+    .container > .about-container > #title-container > h1 {
+        flex-basis: 70%;
+        margin: 0;
     }
 }
