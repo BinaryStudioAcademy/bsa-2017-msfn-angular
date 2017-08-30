@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GoalService } from '../../../goal/goal.service';
+import { DateService } from '../../../../../services/date.service';
 
 @Component({
     selector: 'app-db-goals',
@@ -6,30 +8,35 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: [
         './db-goals.component.scss',
         '../../dashboard.component.scss'
+    ],
+    providers: [
+        GoalService,
+        DateService
     ]
 })
 export class DbGoalsComponent implements OnInit {
 
-    constructor() { }
+    constructor(private goalService: GoalService,
+                private dateService: DateService) { }
 
     title = 'Goals';
-
-    goals = [
-        {
-            startDate: '2017-08-23',
-            endDate: '2017-08-30',
-            value: 'Run 3km for 7 days in a row',
-            achieved: false
-        },
-        {
-            startDate: '2017-08-23',
-            endDate: '2017-09-30',
-            value: 'Increase the number of pushups in a set to 50',
-            achieved: false
-        }
-    ];
+    goals = [];
 
     ngOnInit() {
+        this.getItems();
     }
 
+    getItems(): void {
+        this.goalService.getData(res => {
+            if (res[0].hasOwnProperty('value')) {
+                this.goals = res;
+                for (const goal of this.goals) {
+                    goal.startDateOutput = this.dateService.convertDateToIso(new Date(goal.startTime), true);
+                    goal.deadlineOutput = this.dateService.convertDateToIso(new Date(goal.deadline), true);
+                }
+            } else {
+                this.goals = [];
+            }
+        });
+    }
 }
