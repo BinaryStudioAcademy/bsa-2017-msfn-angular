@@ -305,7 +305,7 @@ exerciseTypeExample = {
 
 module.exports = function() {
     // add exercises
-    exerciseTypeRepository.findByCode(exerciseTypeExample.code, (err, data) => {
+    exerciseTypeRepository.findById(exerciseTypeExample._id, (err, data) => {
         if (data === null) {
             exerciseTypeRepository.add(exerciseTypeExample, (err, data) => {
                 const typeId = data._id;
