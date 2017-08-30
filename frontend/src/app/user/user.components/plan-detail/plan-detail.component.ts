@@ -59,7 +59,8 @@ export class PlanDetailComponent implements OnInit {
         trainingType: 'interval',
         exercisesList: [],
         intervals: [],
-        gcalendar_id: ''
+        gcalendar_id: '',
+        shared: false
     };
 
 

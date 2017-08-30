@@ -20,8 +20,6 @@ router.get('/followers', function (req, res, next) {
 }, apiResponse);
 
 router.post('/follow', function (req, res, next) {
-    console.log(req.session);
-
     subscribeService.follow(req, function (err, data) {
         res.data = data;
         res.err = err;

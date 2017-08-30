@@ -28,6 +28,7 @@ const TrainingPlan = new Schema({
     ],
     trainingType: 'general' | 'interval',
     userID: String,
+    shared: Boolean,
     gcalendar_id: String,
     isRemoved: {
         type: Boolean,
