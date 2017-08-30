@@ -1,31 +1,145 @@
 @import "../../../../globalStyles/variables";
 @import "../../../../globalStyles/indentations";
+@import '../../../../globalStyles/text.scss';
 
-.btn {
-    border: none;
-    color: $text-main-color;
-    background-color: $btn-color;
-    font-weight: bold;
-    font-size: 14px;
-    border-radius: 50px;
-}
 
-button:focus {
-    outline: 0;
-}
-
-.buttons-container {
+.container {
+    width: 100%;
+    height: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    * { margin: $content-tb-margin $content-lr-margin }
+    align-items: center;
+
+    .btn {
+        border: none;
+        color: $text-main-color;
+        background-color: $btn-color;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 50px;
+        margin: 10px 0;
+    }
+    
+    .buttons-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 20%;
+    }
+    
+    .data-container {
+        width: calc(100% - 20% - 320px);
+    }
+
+    .interval-list {
+        display: flex;
+        align-items: center;
+        width: 480px;
+        height: 100%;
+        overflow-x: auto;
+
+        .interval-circle {
+            position: relative;
+            width: 160px;
+            height: 100px;
+
+            .lap, .warm {
+                max-width: 50px;
+                position: absolute;
+                font-size: 14px;
+                color: $text-main-color;
+                font-family: $font-general;
+                font-weight: bold;
+                background: none;
+                border: 0;
+
+                &:after {
+                    content: 'min';
+                }
+            }
+            .lap {
+                top: 25px;
+                left: 45px;
+            }
+            .warm {
+                bottom: 25px;
+                right: 45px;
+            }
+            svg {
+                cursor: pointer;
+                transition: 0.5s;
+                fill: $btn-color;
+                width: 160px;
+                height: 100px;
+
+                &:hover {
+                    fill: darkorange;
+                }
+            }
+        }
+    }
+
+    
+
+    .edit-interval {
+        position: relative;
+        width: 160px;
+        height: 100px;
+        .lap, .warm {
+            max-width: 50px;
+            position: absolute;
+            font-size: 14px;
+            color: $text-main-color;
+            font-family: $font-general;
+            font-weight: bold;
+            background: none;
+            border: 0;
+        }
+        .lap {
+            top: 25px;
+            left: 45px;
+        }
+        .warm {
+            bottom: 25px;
+            right: 45px;
+        }
+        svg {
+            fill: $btn-color;
+            width: 160px;
+            height: 100px;
+        }
+    }
+
+    .add-interval {
+        position: relative;
+        width: 80px;
+        height: 50px;
+        cursor: pointer;
+        .lap {
+            position: absolute;
+            font-size: 43px;
+            color: $btn-color;
+            font-family: $font-general;
+            font-weight: bold;
+            background: none;
+            border: 0;
+            top: 0;
+            left: 29px;
+        }
+        svg {
+            opacity: 0;
+            transition: 0.3s;
+            fill: $btn-color;
+            width: 80px;
+            height: 50px;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
 }
 
-.pickers-container {
-    display: flex;
-    justify-content: center;
-}
 
-.data-container {
-    width: 60%;
-    margin: 0 auto;
-}
+

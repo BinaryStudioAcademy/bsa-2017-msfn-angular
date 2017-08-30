@@ -1,29 +1,21 @@
 <div class="dialog-container">
-  <md-select placeholder="Choose type" [(ngModel)]="sportTypeValue" (change)="getExercises()" name="type" class="sport-types"
-    [style.width]="'200px'">
-    <md-option *ngFor="let type of types" [value]="type._id">
-      {{type.name}}
-    </md-option>
-  </md-select>
+    <header>
+        <md-select placeholder="Choose type" [(ngModel)]="sportTypeValue" (change)="getExercises()" name="type" class="sport-types"
+            [style.width]="'200px'">
+            <md-option *ngFor="let type of types" [value]="type._id">
+                {{type.name}}
+            </md-option>
+        </md-select>
+        <md-input-container *ngIf="exercsesShow">
+            <input mdInput placeholder="Exercise search" #search placeholder="search.." (keyup)="onSearch(search.value)" (change)="onSearch(search.value)" class="search">
+        </md-input-container>
+    </header>
 
-  <div *ngIf="exercsesShow">
-    <!-- <div class="field-title">
-      {{sportTypeValue}} exercises
-    </div> -->
-    <md-input-container>
-      <input mdInput placeholder="Exercise search" value="Coming soon" class="search" [(ngModel)]="searchString">
-    </md-input-container>
-    <div *ngFor="let exercise of exercisesList" class="exercise-item">
-      <h4 md-line>{{exercise.name}}</h4>
-      <div class="about-exercise">
-        <p md-line *ngIf="exercise.description" [innerHtml]="exercise.description"></p>
-        <!-- <p md-line>
-          <b>
-            How to:
-          </b> {{exercise.how_to}} </p> -->
-      </div>
-      <!-- <button md-fab class="add" title="add to plan">+</button> -->
-      <md-checkbox [id]="exercise._id" [checked]="exercise.checked" (change)="selectExercise($event)" class="add">Add to my plan</md-checkbox>
+    <div *ngIf="exercsesShow" class="exercise-wrap">
+        <div *ngFor="let exercise of exercisesList" class="exercise-item">
+            <h4 md-line (click)="showDescription(exercise)">{{exercise.name}}</h4>
+            <md-checkbox [id]="exercise._id" [checked]="exercise.checked" (change)="selectExercise($event)" class="add">Add to my plan</md-checkbox>
+        </div>
     </div>
-  </div>
+    <button *ngIf="exercsesShow" md-button class="btn" md-dialog-close>ok</button>
 </div>

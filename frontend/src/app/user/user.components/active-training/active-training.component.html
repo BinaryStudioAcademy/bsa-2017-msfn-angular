@@ -1,14 +1,14 @@
 <div *ngIf="loaded" class="container centerContent">
     <div class="timers">
         <h2>{{trainingPlan.name}}</h2>
-        <app-secundomer [finishTrain]="secundomerBind.finishTrain" [intervalTrain]="secundomerBind.intervalTrain" (onStart)="onStart()" (onFinish)="onFinish($event)"></app-secundomer>
+        <app-secundomer [finishTrain]="finishTrain" [intervals]="trainingPlan.intervals" (onStart)="onStart()" (onFinish)="onFinish($event)" (showExercises)="showExercises($event)"></app-secundomer>
     </div>
     <div class="child">
         <div class="exlist centerContent">
             <app-exercise-list [exercisesList]="trainingPlan.exercisesList" [userMeasures]="userMeasures" (onChangeList)="onChangeList($event)"></app-exercise-list>
         </div>
         <div class="intmenu centerContent">
-            <app-interval-training-plan [intervalList]="trainingPlan.intervals" *ngIf="trainingPlan.trainingType === 'general'"></app-interval-training-plan>
+            <app-interval-training-plan [intervalList]="trainingPlan.intervals" (intervalAction)="intervalAction($event)" *ngIf="trainingPlan.trainingType === 'interval'"></app-interval-training-plan>
         </div>
     </div>
 </div>

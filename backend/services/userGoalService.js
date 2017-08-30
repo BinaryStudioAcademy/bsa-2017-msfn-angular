@@ -63,7 +63,7 @@ function deleteUserGoal(id, username, callback) {
     userGoalRepository.deleteById(id, username, (err, userGoalData)=>{
 
         if (err) return callback(err);
-        if (goalData === null) {
+        if (userGoalData === null) {
             callback(null, []);
         } else {
             callback(null, userGoalData);

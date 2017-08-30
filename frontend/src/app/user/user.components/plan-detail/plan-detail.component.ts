@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExerciseEditDialogComponent } from './../exercise-edit-dialog/exercise-edit-dialog.component';
 import { IntervalTrainingPlanComponent } from './../interval-training-plan/interval-training-plan.component';
 import { MdDialog, MdDialogRef } from '@angular/material';
@@ -16,8 +16,6 @@ import { GCalendarService } from '../../../services/gcalendar.service';
 })
 
 export class PlanDetailComponent implements OnInit {
-
-@ViewChild(ExerciseListComponent) exercisesListComponent: ExerciseListComponent;
     title = 'Training plan create';
     trainingsCount = 0;
     exercisesList = [];
@@ -58,7 +56,7 @@ export class PlanDetailComponent implements OnInit {
         name: '',
         days: [],
         count: 0,
-        trainingType: 'general' || 'interval',
+        trainingType: 'interval',
         exercisesList: [],
         intervals: [],
         gcalendar_id: ''
@@ -68,12 +66,8 @@ export class PlanDetailComponent implements OnInit {
     constructor(
         private gcalendar: GCalendarService,
         private dialog: MdDialog,
-        // private paginator: MdPaginatorModule,
         private httpHandler: HttpService,
-        public activatedRoute: ActivatedRoute) {
-        // this.openedDialog = null;
-
-    }
+        public activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         const sdata: IHttpReq = {
@@ -91,7 +85,6 @@ export class PlanDetailComponent implements OnInit {
                 url: `/api/training-plan/` + planID,
                 method: 'GET',
                 body: '',
-                successMessage: '',
             };
 
             this.httpHandler.sendRequest(sendData)
@@ -110,14 +103,28 @@ export class PlanDetailComponent implements OnInit {
                                 type.checked = true;
                             }
                         });
-                        this.exercisesListComponent.exercisesList = this.trainingPlan.exercisesList;
-                        this.exercisesListComponent.showPage(0);
-                        // console.log(this.types);
-                        // this.paginatorLength = this.trainingPlan.exercisesList.length;
                     }
                 });
         }
 
+    }
+
+    onChangeList(updatedList) {
+        this.trainingPlan.exercisesList = updatedList;
+    }
+
+    intervalAction(action) {
+        if (action.type === 'save') {
+            const data = action.data;
+            data.exList = this.trainingPlan.exercisesList;
+            this.trainingPlan.intervals[action.cacheIndex] = data;
+            this.trainingPlan.exercisesList = [];
+        } else if (action.type === 'delete') {
+            this.trainingPlan.intervals.splice(action.cacheIndex, 1);
+            this.trainingPlan.exercisesList = [];
+        } else if (action.type === 'edit') {
+            this.trainingPlan.exercisesList = this.trainingPlan.intervals[action.cacheIndex].exList;
+        }
     }
 
     selectDays() {
@@ -157,8 +164,9 @@ export class PlanDetailComponent implements OnInit {
     }
 
     savePlan() {
-      this.trainingPlan.exercisesList = this.exercisesListComponent.exercisesList;
-
+        if (this.trainingPlan.trainingType === 'interval') {
+            this.trainingPlan.exercisesList = [];
+        }
         const sendData: IHttpReq = {
             url: `/api/training-plan`,
             method: 'POST',

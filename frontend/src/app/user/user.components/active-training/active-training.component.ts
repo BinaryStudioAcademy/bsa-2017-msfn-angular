@@ -11,18 +11,10 @@ import { ActiveTrainingService } from './active-training.service';
 })
 
 export class ActiveTrainingComponent implements OnInit {
-    // global
     loaded: boolean;
-    secundomerBind = {
-        intervalTrain: false,
-        finishTrain: <boolean | string>false
-    };
+    finishTrain: boolean | string = false;
     userMeasures: any;
-
-
     trainingPlan: any;
-
-    // child bind
     burnedCallories = 1445;
 
     constructor(
@@ -39,10 +31,27 @@ export class ActiveTrainingComponent implements OnInit {
                 this.loaded = false;
                 return;
             }
-            console.log(plan);
             this.trainingPlan = plan;
             this.loaded = true;
         });
+    }
+
+    intervalAction(action) {
+        if (action.type === 'save') {
+            const data = action.data;
+            data.exList = this.trainingPlan.exercisesList;
+            this.trainingPlan.intervals[action.cacheIndex] = data;
+            this.trainingPlan.exercisesList = [];
+        } else if (action.type === 'delete') {
+            this.trainingPlan.intervals.splice(action.cacheIndex, 1);
+            this.trainingPlan.exercisesList = [];
+        } else if (action.type === 'edit') {
+            this.trainingPlan.exercisesList = this.trainingPlan.intervals[action.cacheIndex].exList;
+        }
+    }
+    showExercises(exList) {
+        console.log(exList);
+        this.trainingPlan.exercisesList = exList;
     }
 
     choosePlan() {
@@ -58,7 +67,6 @@ export class ActiveTrainingComponent implements OnInit {
         this.activeTrainingService.addTraining(this.trainingPlan, (result) => {
             if (result) {
                 this.trainingPlan._id = result;
-                console.log(this.trainingPlan);
             }
         });
     }
@@ -70,11 +78,11 @@ export class ActiveTrainingComponent implements OnInit {
         };
         this.activeTrainingService.showFinishDialog(data, this.trainingPlan, result => {
             if (result) {
-                this.secundomerBind.finishTrain = true;
+                this.finishTrain = true;
             } else {
-                this.secundomerBind.finishTrain = 'continue';
+                this.finishTrain = 'continue';
             }
-            setTimeout(() => { this.secundomerBind.finishTrain = false; }, 1000);
+            setTimeout(() => { this.finishTrain = false; }, 1000);
         });
     }
 
