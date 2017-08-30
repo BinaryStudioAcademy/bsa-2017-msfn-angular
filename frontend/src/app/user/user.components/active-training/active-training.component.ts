@@ -13,6 +13,7 @@ import { ActiveTrainingService } from './active-training.service';
 export class ActiveTrainingComponent implements OnInit {
     loaded: boolean;
     finishTrain: boolean | string = false;
+    reloadIntervals: boolean = false;
     userMeasures: any;
     trainingPlan: any;
     burnedCallories = 1445;
@@ -48,9 +49,9 @@ export class ActiveTrainingComponent implements OnInit {
         } else if (action.type === 'edit') {
             this.trainingPlan.exercisesList = this.trainingPlan.intervals[action.cacheIndex].exList;
         }
+        this.reloadIntervals = !this.reloadIntervals;
     }
     showExercises(exList) {
-        console.log(exList);
         this.trainingPlan.exercisesList = exList;
     }
 

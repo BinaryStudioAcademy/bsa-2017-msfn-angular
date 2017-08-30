@@ -19,12 +19,28 @@ export class SecundomerService {
     pauseTime: number;
     resStyle: string;
 
-    timerLapNum: number = 0;
-    timerWarmNum: number = 0;
+    cacheView = 0;
+    timerLapNum: number;
+    timerWarmNum: number;
+    timer: number = 0;
     idTimer: number;
     idRest: number;
 
     constructor( ) { }
+
+    percentToBar(elem, perc) {
+        elem.style.background = 'linear-gradient(to right, rgba( '
+            + Math.floor(130 - (255 * (1 - perc))) + ', '
+            + Math.floor(202 - (255 * (1 - perc))) + ', '
+            + Math.floor(156 - (255 * (1 - perc))) + ', 0.9), white 95%)';
+        elem.firstElementChild.style.color = 'rgb( '
+            + Math.floor(34 + (255 * (1 - perc))) + ', '
+            + Math.floor(34 + (255 * (1 - perc))) + ', '
+            + Math.floor(34 + (255 * (1 - perc))) + ')';
+        perc = (perc < 0.01) ? 0.01 : perc;
+        perc = (perc > 0.91) ? 0.91 : perc;
+        elem.style.backgroundPosition = elem.clientWidth * perc + 'px 0px';
+    }
 
     run(): void {
         this.runned = true;
@@ -56,7 +72,6 @@ export class SecundomerService {
         this.timerWarmNum = 0;
         this.warmOuts = [];
     }
-
     warmingUp(): void {
         this.warming = true;
         const startLap = this.lapCacheTime = (this.lapCacheTime) ? (Date.now() - (this.lapPauseTime - this.lapCacheTime)) : Date.now();
@@ -64,7 +79,6 @@ export class SecundomerService {
             this.secndomerLapNum = (Date.now() - startLap);
         }, 250);
     }
-
     stopWarm(): void {
         this.warming = false;
         clearInterval(this.intervalLapID);
@@ -76,13 +90,17 @@ export class SecundomerService {
 
     // timer
 
-    startTimer(): void {
+    startTimer(i, rest, callback): void {
         this.runned = true;
+        this.timer = (rest) ? this.timerWarmNum : this.timerLapNum;
+        this.cacheView = this.timer;
         this.idTimer = setInterval( () => {
-            this.timerLapNum -= 250;
-            if (this.timerLapNum <= 0) {
-                this.timerLapNum = 0;
+            this.timer -= 250;
+            this.percentToBar(document.getElementById('interval' + i), (this.cacheView - this.timer) / this.cacheView);
+            if (this.timer <= 0) {
+                this.timer = 0;
                 this.clearTimer();
+                callback();
             }
         }, 250);
     }
