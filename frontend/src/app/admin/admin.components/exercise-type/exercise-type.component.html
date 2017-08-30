@@ -5,14 +5,13 @@
     class="btn"
     id="btn-add" 
     (click)="addRow(table)"
-
     [ngClass]="{'disabled' : wrongInput}">Add new exercise type</button>
         <md-table #table [dataSource]="dataSource" [ngClass]="{'hiding' : !loaded}">
 
-            <ng-container cdkColumnDef="exerciseCode">
-                <md-header-cell *cdkHeaderCellDef> Code </md-header-cell>
+            <ng-container cdkColumnDef="exerciseId">
+                <md-header-cell *cdkHeaderCellDef> Index </md-header-cell>
                 <md-cell *cdkCellDef="let row"> 
-                    <div [ngClass]="{'transp' : row.isRemoved}">{{row.code}}</div>
+                    <div [ngClass]="{'transp' : row.isRemoved}" class="center-id">{{row.index ? row.index : ''}}</div>
                 </md-cell>
             </ng-container>
             <ng-container cdkColumnDef="typeName">
@@ -22,25 +21,25 @@
                         <div></div>
                         <div class="content">
                             <div class="row-text" 
-                            *ngIf="((row.code || !firstShow) && row.code != focusedRowCode) || row.isRemoved" 
-                            (click)="clickRow(row.code)" 
+                            *ngIf="((row._id || !firstShow) && row._id != focusedRowId) || row.isRemoved" 
+                            (click)="clickRow(row._id)" 
                             [ngClass]="{'transp' : row.isRemoved, 'error': !row.name}">
                             {{row.name ? row.name : "Type cannot be empty"}}</div>
 
                             <md-input-container 
                             class="input-container" 
-                            *ngIf="((!row.code && firstShow) || row.code == focusedRowCode) && !row.isRemoved">
-                                <input mdInput #exercise type="text" (blur)="updateRow(row.code, {name: exercise.value})" value="{{row.name}}" [ngClass]="{'input-focused' : !row.code}"
-                                    (keyup.enter)="updateRow(row.code, {name: exercise.value})">
+                            *ngIf="((!row._id && firstShow) || row._id == focusedRowId) && !row.isRemoved">
+                                <input mdInput #exercise type="text" (blur)="updateRow(row._id, {name: exercise.value})" value="{{row.name}}" [ngClass]="{'input-focused' : !row._id}"
+                                    (keyup.enter)="updateRow(row._id, {name: exercise.value})">
                             </md-input-container>
                         </div>
                         <div *ngIf="!row.isRemoved">
-                            <i class="material-icons ico" (click)="updateRow(row.code, {isRemoved: true})">
+                            <i class="material-icons ico" (click)="updateRow(row._id, {isRemoved: true})">
                                 delete
                             </i>
                         </div>
                         <div *ngIf="row.isRemoved">
-                            <i class="material-icons ico" (click)="updateRow(row.code, {isRemoved: false})">
+                            <i class="material-icons ico" (click)="updateRow(row._id, {isRemoved: false})">
                                 add
                             </i>
                         </div>

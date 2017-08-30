@@ -15,6 +15,7 @@ export class GoalEditDialogComponent implements OnInit {
     selectedType: string;
     deadline: Date;
     value: number;
+    validValue = true;
     constructor(
         @Inject(MD_DIALOG_DATA) public data: any,
         private goalEditDialogService: GoalEditDialogService
@@ -60,5 +61,8 @@ export class GoalEditDialogComponent implements OnInit {
         }
     }
 
+    checkValue() {
+        this.validValue = this.value > 0 ? true : false;
+    }
 
 }

@@ -1,18 +1,26 @@
 <div class="goals inner-container">
-    <h2>{{ title }}</h2>
+    <h2><a routerLink="goals">{{ title }}</a></h2>
     <div class="content">
-        <div class="goal-item" *ngFor="let goal of goals">
-            <md-checkbox [(ngModel)]="goal.achieved"></md-checkbox>
+        <div id="set-goal" *ngIf="goals.length === 0">
+            There are no goals yet.
+            <button md-icon-button type="button" routerLink="goals">
+                Set one!
+            </button>
+        </div>
 
-            <div class="goal-body">
+        <div class="goal-item" *ngFor="let goal of goals">
+            <div class="goal-body" *ngIf="goals.length > 0">
                 <div class="goal-start-date">
-                    start: {{ goal.startDate }}
+                    start: {{ goal.startDateOutput }}
                 </div>
                 <div class="goal-end-date">
-                    end: {{ goal.endDate }}
+                    deadline: {{ goal.deadlineOutput }}
                 </div>
                 <div class="goal-value">
-                    {{ goal.value }}
+                    <div class="goal-type">
+                        {{ goal.type }}
+                    </div>
+                    ({{ goal.value }})
                 </div>
             </div>
         </div>

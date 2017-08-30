@@ -9,6 +9,23 @@
         flex-wrap: nowrap;
         height: 70%;
 
+        #set-goal {
+            text-align: center;
+
+            button {
+                display: block;
+                width: 80px;
+                height: 40px;
+                margin: $content-between-margin auto 0;
+                border: none;
+                border-radius: 15px;
+                outline: none;
+                font-size: $main-text;
+                font-weight: 600;
+                background: #82ca9c;
+            }
+        }
+
         .goal-item {
             width: 100%;
 
@@ -20,7 +37,7 @@
         }
 
         .goal-item:not(:last-child) {
-            margin-bottom: $content-tb-margin;
+            margin-bottom: 30px;
         }
     }
 }
@@ -29,8 +46,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    float: right;
-    width: 90%;
+    width: 100%;
 
     div {
         display: inline-block;
@@ -42,13 +58,32 @@
         font-size: $usual-text;
     }
 
+    .goal-start-date {
+        color: $btn-color;
+    }
+
     .goal-end-date {
         text-align: right;
+        color: $btn-second-color;
     }
 
     .goal-value {
         flex-basis: 100%;
-        margin-top: 5px;
+        margin-top: 10px;
         font-size: $main-text;
+    }
+}
+
+
+@media only screen and (min-width: $small-screen) {
+    .goals {
+        .content {
+            #set-goal {
+                button {
+                    display: inline-block;
+                    margin: 0 0 0 $content-between-margin;
+                }
+            }
+        }
     }
 }
