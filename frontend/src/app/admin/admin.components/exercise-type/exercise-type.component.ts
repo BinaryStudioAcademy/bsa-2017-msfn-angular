@@ -14,9 +14,9 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ExerciseTypeComponent implements OnInit {
 
-    focusedRowCode: number;
+    focusedRowId: string;
 
-    displayedColumns = ['exerciseCode', 'typeName'];
+    displayedColumns = ['exerciseId', 'typeName'];
     tableDatabase: TableDatabase;
     dataSource: ExampleDataSource | null;
     firstShow = true;
@@ -29,7 +29,7 @@ export class ExerciseTypeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.focusedRowCode = -1;
+        this.focusedRowId = '-1';
         this.tableDatabase = new TableDatabase();
         this.dataSource = new ExampleDataSource(this.tableDatabase);
         // This must have because material table have an issue when work with routes
@@ -40,41 +40,42 @@ export class ExerciseTypeComponent implements OnInit {
         });
     }
 
-    clickRow(code: number) {
-        this.focusedRowCode = code;
+    clickRow(id: string) {
+        this.focusedRowId = id;
+        console.log(this.focusedRowId);
     }
 
-    updateRow(code: number, body) {
+    updateRow(id: string, body) {
         this.firstShow = false;
         if (body.name === '') {
-            if (!code) {
+            if (!id) {
                 this.wrongInput = true;
             }
-            this.focusedRowCode = -1;
+            this.focusedRowId = '-1';
             return;
         } else {
-            if (!code) {
+            if (!id) {
                 this.wrongInput = false;
             }
         }
-        if (code) {
-            this.exerciseTypeService.updateExerciseTypeByCode(code, body, (data) => {
-                this.loaded = this.tableDatabase.updateRow(code, body) === 0 ? false : true;
+        if (id) {
+            this.exerciseTypeService.updateExerciseTypeById(id, body, (data) => {
+                this.loaded = this.tableDatabase.updateRow(id, body) === 0 ? false : true;
                 this.cd.markForCheck();
             });
         } else {
             this.exerciseTypeService.addExerciseType(body.name, (data) => {
-                this.loaded = this.tableDatabase.addRow(data.code, body.name) === 0 ? false : true;
+                this.loaded = this.tableDatabase.addRow(data._id, body.name) === 0 ? false : true;
                 this.cd.markForCheck();
             });
             this.addedTemporaryRow = false;
         }
-        this.focusedRowCode = -1;
+        this.focusedRowId = '-1';
     }
 
-    deleteRow(code: number) {
-        this.exerciseTypeService.deleteExerciseTypeByCode(code, (data) => {
-            this.loaded = this.tableDatabase.deleteRow(code) === 0 ? false : true;
+    deleteRow(id: string) {
+        this.exerciseTypeService.deleteExerciseTypeById(id, (data) => {
+            this.loaded = this.tableDatabase.deleteRow(id) === 0 ? false : true;
             this.cd.markForCheck();
         });
     }
@@ -91,7 +92,6 @@ export class ExerciseTypeComponent implements OnInit {
         this.addedTemporaryRow = true;
         setTimeout(() => {
             const elems: any = document.getElementsByClassName('input-focused');
-            // console.log(elems);
             elems[0].focus();
         });
 
@@ -111,7 +111,7 @@ export class TableDatabase {
     constructor() {
     }
 
-    addRow(code: number, name: string) {
+    addRow(id: string, name: string) {
         let copiedData = [];
         if (this.data && this.data instanceof Array) {
             copiedData = this.data.slice(0, -1);
@@ -120,9 +120,13 @@ export class TableDatabase {
             return copiedData.length;
         }
         copiedData.push({
-            code: code,
+            _id: id,
             name: name,
             isRemoved: false
+        });
+        copiedData = copiedData.map((elem, i) => {
+            const newElem = Object.assign(elem, {index: i + 1});
+            return newElem;
         });
         this.dataChange.next(copiedData);
         return copiedData.length;
@@ -134,23 +138,28 @@ export class TableDatabase {
             copiedData = this.data.slice();
         }
         copiedData.push({
-            code: null,
+            _id: null,
             name: '',
-            isRemoved: false
+            isRemoved: false,
+            index: null
         });
         this.dataChange.next(copiedData);
         return copiedData.length;
     }
 
     addRows(rows: ExerciseApi.IExerciseType[]) {
-        if (!rows || !(rows instanceof Array) || !rows.length || (!rows[0].name && !rows[0].code && rows.length === 1)) {
+        if (!rows || !(rows instanceof Array) || !rows.length || (!rows[0].name && !rows[0]._id && rows.length === 1)) {
             return 0;
         }
+        rows = rows.map((elem, i) => {
+            const newElem = Object.assign(elem, {index: i + 1});
+            return newElem;
+        });
         this.dataChange.next(rows);
         return rows.length;
     }
 
-    updateRow(code: number, body) {
+    updateRow(id: string, body) {
         if (!this.data || !(this.data instanceof Array)) {
             return 0;
         }
@@ -159,7 +168,7 @@ export class TableDatabase {
             return copiedData.length;
         }
         copiedData.some(function (element) {
-            if (element.code === code) {
+            if (element._id === id) {
                 element = Object.assign(element, body);
                 return true;
             }
@@ -170,20 +179,24 @@ export class TableDatabase {
     }
 
 
-    deleteRow(code: number) {
+    deleteRow(id: string) {
         if (!this.data || !(this.data instanceof Array)) {
             return 0;
         }
-        const copiedData = this.data.slice();
+        let copiedData = this.data.slice();
         let ind = copiedData.length;
         copiedData.some(function (element, index) {
-            if (element.code === code) {
+            if (element._id === id) {
                 ind = index;
                 return true;
             }
             return false;
         });
         copiedData.splice(ind, 1);
+        copiedData = copiedData.map((elem, i) => {
+            const newElem = Object.assign(elem, {index: i + 1});
+            return newElem;
+        });
         this.dataChange.next(copiedData);
         return copiedData.length;
     }
