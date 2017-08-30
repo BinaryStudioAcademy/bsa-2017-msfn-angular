@@ -11,8 +11,12 @@ class exerciseLoadService {
     getFormatedData(data, callback) {
         let exercisesList = [];
         this.getTypesExtId((err, typesId) => {
+            console.log(typesId);
+            if(typesId.length === 0){
+                return callback('import exercises types first. /api/load/types', '');
+            }
             for (let i = 0; i < data.length; i++) {
-                const currentExercise = data[i];
+                const currentExercise = data[i];                
                 const exercise = {
                     name: currentExercise.name,
                     type: typesId[currentExercise.category],
