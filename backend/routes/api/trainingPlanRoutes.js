@@ -1,7 +1,9 @@
 const
-apiResponse = require('express-api-response'),
-trainingPlanService = require('../../services/trainingPlanService'),
-baseUrl = '/api/training-plan';
+    apiResponse = require('express-api-response'),
+    trainingPlanService = require('../../services/trainingPlanService'),
+    trainingPlanRepository = require('../../repositories/trainingPlanRepository'),
+    ApiError = require('../../services/apiErrorService'),
+    baseUrl = '/api/training-plan';
 
 module.exports = function (app) {
     app.get(baseUrl, function (req, res, next) {
@@ -9,6 +11,26 @@ module.exports = function (app) {
             if (!data.length) {
                 data = [];
             }
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(baseUrl + '/public/:offset', function (req, res, next) {
+        const offset = parseInt(req.params.offset);
+        if (isNaN(offset)) {
+            res.err = new ApiError('Wrong offset');
+            next();
+        }
+        trainingPlanRepository.get({
+            filter: {
+                isRemoved: false,
+                shared: true
+            },
+            limit: 1,
+            offset: offset
+        }, function (err, data) {
             res.data = data;
             res.err = err;
             next();
