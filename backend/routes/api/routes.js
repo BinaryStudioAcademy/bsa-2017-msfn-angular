@@ -18,5 +18,6 @@ module.exports = function (app) {
         trainingPlanRoutes: require('./trainingPlanRoutes')(app),
         fakeDataRoutes: require('./fakeDataRoutes')(app),
         userGoalRoutes: require('./userGoalRoutes')(app),
+        loadRoutes: require('./loadData/loadRoutes')(app),
     };
 };
