@@ -15,10 +15,6 @@
     animation: pulse 1s;
 }
 
-.pulse:hover {
-    animation: none;
-}
-
 @-webkit-keyframes pulse {
     0% {
         -webkit-box-shadow:  0 0 0 0 rgb(244, 67, 54);
