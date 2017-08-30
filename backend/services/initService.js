@@ -298,7 +298,6 @@ const mongoose = require('mongoose'),
     ];
 
 exerciseTypeExample = {
-    code: 22,
     name: 'Dumbbell Exercises',
     isRemoved: false
 };
