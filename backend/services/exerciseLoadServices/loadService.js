@@ -37,7 +37,6 @@ class loadService {
             return callback(new ApiError("Incorrect data type"));
         }
         const uri = this.apiPages[type];
-        console.log(uri);
         this.loadFromUri(uri, { page: 1 }, (err, response) => {
             const pagesCount = Math.ceil(response.count / response.results.length);
             if(pagesCount>1){
@@ -46,7 +45,6 @@ class loadService {
                 const loadFunc = (callback) => {
                     this.loadFromUri(uri, { page: i }, callback);
                 }
-                console.log(loadFunc);
                 getRequests.push(loadFunc);
             }
             async.parallel(getRequests,

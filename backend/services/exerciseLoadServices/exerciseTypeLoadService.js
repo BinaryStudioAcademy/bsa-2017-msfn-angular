@@ -1,11 +1,13 @@
 const loadService = require('./loadService');
 const exerciseTypeService = require('./../exerciseTypeService');
+const async = require('async');
+const parallel = require('async/parallel');
 
 class exerciseLoadService {
 
     constructor() { }
 
-    getFormatedData(resultsArray) { 
+    getFormatedData(resultsArray) {
         let types = [];
         for (let i = 0; i < resultsArray.length; i++) {
             const exerciseType = {
@@ -20,17 +22,19 @@ class exerciseLoadService {
     createAllTypes(callback) {
         loadService.getAll('exercisecategory', (err, data) => {
             const formatedTypes = this.getFormatedData(data);
-            console.log(formatedTypes);
-            for(let i = 0; i< formatedTypes.length; i++){
+
+            let funcArray = [];
+            for (let i = 0; i < formatedTypes.length; i++) {
                 const currentType = formatedTypes[i];
-                exerciseTypeService.createExerciseType(currentType, (err, data) => {
-                    console.log('in' + i);
-                });
-                console.log('out' + i);
+                const addFunc = (callback) => {
+                    exerciseTypeService.createExerciseType(currentType, callback);
+                }
+                funcArray.push(addFunc);
             }
-            
-            callback(null, formatedTypes);
-            
+            async.parallel(funcArray,
+                (err, results) => {
+                    callback(err, `Created ${results.length} exercise types `);
+                });
         });
     }
 

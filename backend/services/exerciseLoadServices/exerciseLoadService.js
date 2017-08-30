@@ -1,37 +1,64 @@
 const loadService = require('./loadService');
+const exerciseTypeService = require('./../exerciseTypeService');
+const exerciseService = require('./../exerciseService');
+const async = require('async');
+const parallel = require('async/parallel');
 
 class exerciseLoadService {
 
-    constructor() { }
+    constructor() {}
 
-
-    getFormatedData(data) {
+    getFormatedData(data, callback) {
         let exercisesList = [];
-        
-        console.log(resultsArray.length);
-        for (let i = 0; i < resultsArray.length; i++) {
-            const exercise = {
-                name: resultsArray[i].name,
-                // type: {
-                //     type: Schema.Types.ObjectId,
-                //     ref: 'ExerciseType'
-                // },
-                externalId: resultsArray[i].id,
-                isRemoved: false,
-                // sportsId:Array,
-                description: resultsArray[i].description,
-                image: String
-            };
-        }
-        return true;
-    }
-
-    getAllExercises(callback) {
-        loadService.getAll('exercises', (err, data) => {
-            console.log(data);
+        this.getTypesExtId((err, typesId) => {
+            for (let i = 0; i < data.length; i++) {
+                const currentExercise = data[i];
+                const exercise = {
+                    name: currentExercise.name,
+                    type: typesId[currentExercise.category],
+                    externalId: currentExercise.id,
+                    // sportsId:Array,
+                    description: currentExercise.description,
+                    // image: String
+                };
+                exercisesList.push(exercise);
+            }
+            callback(null, exercisesList);
         });
     }
 
+    createAllExercises(callback) {
+        loadService.getAll('exercises', (err, data) => {
+            this.getFormatedData(data, (err, formatedData) => {
+                let funcArray = [];
+                for (let i = 0; i < formatedData.length; i++) {
+                    const currentExercise = formatedData[i];
+                    const addFunc = (callback) => {
+                        exerciseService.createExercise(currentExercise, callback);
+                    }
+                    funcArray.push(addFunc);
+                }
+                async.parallel(funcArray,
+                    (err, results) => {
+                        callback(err, `Created ${results.length} exercises`);
+                    });
+            });
+            
+        });
+    }
+
+    getTypesExtId(callback) {
+        exerciseTypeService.getAllExerciseTypes((err, data) => {
+            if (err) return false;
+            let resultObj = {};
+            for (let i = 0; i < data.length; i++) {
+                const currentType = data[i];
+                if (currentType.externalId)
+                    resultObj[currentType.externalId] = currentType._id;
+            }
+            callback(null, resultObj);
+        });
+    }
 }
 
 module.exports = new exerciseLoadService();
