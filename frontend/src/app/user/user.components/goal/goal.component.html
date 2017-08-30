@@ -1,3 +1,6 @@
+<div class="delete-line">
+            <div class="drop-area"><i class="material-icons" [sortablejs]="itemsDropped" [sortablejsOptions]="dragOptions">delete</i></div>
+</div>
 <div id="goal-container" [sortablejs]="data" [sortablejsOptions]="dragOptions">
     <div class="item-container" *ngFor="let item of data" (click)="openDialog(item)">
         <i class="material-icons" id="delete" (click)="deleteGoal(item, $event)">delete</i>
@@ -10,6 +13,3 @@
             <i class="material-icons add-item-ico">add</i>
         </div>
 </div>
-        <div class="delete-line">
-            <div class="drop-area"><i class="material-icons" [sortablejs]="itemsDropped" [sortablejsOptions]="dragOptions">delete</i></div>
-        </div>

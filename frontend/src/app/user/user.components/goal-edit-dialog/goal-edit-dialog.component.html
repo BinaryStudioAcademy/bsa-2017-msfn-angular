@@ -2,7 +2,10 @@
     <h2 class="title" md-dialog-title>{{id === '-1' ? 'Create' : 'Update'}} Goal</h2>
     <div class="item-container">
         <md-input-container class="input-row">
-            <input autofocus mdInput type="number" min="1" name="count" placeholder="Value" required [(ngModel)]="value">
+            <input autofocus mdInput type="number" min="1" name="count" placeholder="Value" required [(ngModel)]="value" (change)="checkValue()">
+            <md-hint *ngIf="!validValue">
+                    Value must me positive
+            </md-hint>    
         </md-input-container>
     </div>
     <div class="item-container">
@@ -26,6 +29,7 @@
         <button md-raised-button [md-dialog-close]="false">Close</button>
         <button md-raised-button 
         (click)="addUpdateUserGoal({value: value, type: selectedType, deadline: deadline, _id: id})" 
-        [md-dialog-close]="true" >Save</button>
+        [md-dialog-close]="true"
+        [disabled]="!validValue">Save</button>
     </div>
 </div>

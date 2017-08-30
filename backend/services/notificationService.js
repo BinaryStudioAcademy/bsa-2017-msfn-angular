@@ -14,13 +14,7 @@ NotificationService.prototype.AddNotification = function(json, callback) {
     } else {
         data = json;
     }
-    let title, message, userId;
-    ({title, message, userId} = data);
-    notificationRepository.add({
-        title: title,
-        message: message,
-        userId: userId
-    }, (err, result) => {
+    notificationRepository.add(data, (err, result) => {
         if (err) return callback(err);
         callback(err, result);
     });
@@ -28,16 +22,19 @@ NotificationService.prototype.AddNotification = function(json, callback) {
 
 NotificationService.prototype.ReadNotification = function(json, callback) {
     let data;
-    try {
-        data = JSON.parse(json);
-    } catch (err) {
-        return callback(err);
+    if (typeof json === 'string') {
+        try {
+            data = JSON.parse(json);
+        } catch (err) {
+            return callback(err);
+        }
+    } else {
+        data = json;
     }
     let id, userId;
     ({id, userId} = data);
     notificationRepository.getById(id, (err, result) => {
         if (err) return callback(err);
-        console.log(result);
         if (!result) return callback(new ApiError('Notification not found'));
         if (result.userId.toString() !== userId) return callback(new ApiError('Wrong user'));
         notificationRepository.update(id, {
@@ -51,10 +48,14 @@ NotificationService.prototype.ReadNotification = function(json, callback) {
 
 NotificationService.prototype.GetNotifications = function(json, callback) {
     let data;
-    try {
-        data = JSON.parse(json);
-    } catch (err) {
-        return callback(err);
+    if (typeof json === 'string') {
+        try {
+            data = JSON.parse(json);
+        } catch (err) {
+            return callback(err);
+        }
+    } else {
+        data = json;
     }
     let userId;
     ({userId} = data);
@@ -63,6 +64,7 @@ NotificationService.prototype.GetNotifications = function(json, callback) {
     notificationRepository.get({
         filter: {
             userId: userId,
+            isRemoved: false
     //        read: false
         }
     }, callback);

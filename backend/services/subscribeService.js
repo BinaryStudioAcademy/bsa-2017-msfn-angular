@@ -3,6 +3,8 @@ const userRepository = require('../repositories/userRepository');
 const mongoose = require('mongoose');
 const objID = mongoose.Types;
 const socketService = require('./socketService');
+const notificationService = require('./notificationService');
+const notificationRepository = require('../repositories/notificationRepository');
 
 class subscribeService {
 
@@ -29,15 +31,26 @@ class subscribeService {
             }, (err, res) => {
                 if (err) return callback(err);
 
-                const userToFollowSocket = socketService.GetUserById(userToFollow);
-                if (userToFollowSocket) {
-                    socketService.EmitTo(userToFollowSocket, 'follow', {
-                        email: currentUser.email,
-                        id: currentUser.id
-                    });
-                }
+                notificationService.AddNotification(
+                    {
+                        userId: userToFollow,
+                        title: 'New follower',
+                        message: 'New follower - ' + currentUser.email,
+                        creator: currentUserId,
+                        type: 'follow'
+                    },
+                    (err, res) => {
+                        if (err) return callback(err);
 
-                callback(err, res);
+                        const userToFollowSocket = socketService.GetUserById(userToFollow);
+                        if (userToFollowSocket) {
+                            res.email = currentUser.email;
+                            socketService.EmitTo(userToFollowSocket, 'follow', res);
+                        }
+
+                        callback(err, true);
+                    }
+                );
             });
         });
     }
@@ -55,7 +68,37 @@ class subscribeService {
 
             userRepository.update(currentUserId, {
                 follow: newFollowingList
-            }, callback);
+            }, (err, res) => {
+                if (err) return callback(err);
+
+                notificationRepository.get({
+                    filter: {
+                        userId: userToFollow,
+                        creator: currentUserId,
+                        type: 'follow',
+                        read: false,
+                        isRemoved: false
+                    }
+                }, (err, notifications) => {
+                    if (err) return callback(err);
+
+                    const userToFollowSocket = socketService.GetUserById(userToFollow);
+
+                    notifications.forEach(item => {
+                        notificationRepository.deleteById(item._id, (err, res) => {
+                            if (err) return callback(err);
+
+                            if (userToFollowSocket) {
+                                socketService.EmitTo(userToFollowSocket, 'unfollow', {
+                                    id: item._id
+                                });
+                            }
+                        })
+                    });
+
+                    callback(err, true);
+                });
+            });
         });
     }
 

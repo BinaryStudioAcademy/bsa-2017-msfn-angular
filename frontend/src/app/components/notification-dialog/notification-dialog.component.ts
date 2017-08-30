@@ -36,6 +36,12 @@ export class NotificationDialogComponent implements OnInit {
         this.updateUnread();
     }
 
+    test(e) {
+        const target = e._getHostElement();
+        const textContainer = target.querySelector('span');
+        return (textContainer.offsetWidth < target.offsetWidth);
+    }
+
     viewNotification(notification: INotification) {
         this.dialog.open(NotificationDataDialogComponent, {
             data: {

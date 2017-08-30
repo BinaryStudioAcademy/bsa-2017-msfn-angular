@@ -30,18 +30,20 @@
 .delete-line{
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .drop-area {
-    margin: 20px 40px 40px 0px;
+    text-align: center;
+    margin: 0;
+    margin-top: 20px;
     cursor: pointer;
     i {
-        line-height: 80px;
-        font-size: 80px;
+        line-height: 100px;
+        font-size: 100px;
         text-align: center;
         color: $text-second-color;
-        width: 80px;
+        width: 100px;
         &:hover {
             color: $btn-color;
         }

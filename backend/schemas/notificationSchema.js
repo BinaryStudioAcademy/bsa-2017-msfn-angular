@@ -24,6 +24,13 @@ const Notification = new Schema({
     isRemoved: {
         type: Boolean,
         default: false
+    },
+    creator: {
+        type: ObjectId
+    },
+    type: {
+        type: String,
+        enum: ['follow']
     }
 });
 

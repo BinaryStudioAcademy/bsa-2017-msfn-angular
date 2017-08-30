@@ -19,14 +19,11 @@ export class NotificationsService {
         }));
 
         this.socketService.addListener('follow', (data) => {
-            const newNotification: INotification = {
-                title: 'New follower',
-                message: `${data.email} is now following you`,
-                callback: () => {
-                    console.log(data);
-                }
-            };
-            this.addNotification(newNotification);
+            this.addNotification(data);
+        });
+
+        this.socketService.addListener('unfollow', (data) => {
+            this.hideNotification(data.id);
         });
 
         this.socketService.addListener('get_notifications:success', (json) => {
@@ -72,6 +69,14 @@ export class NotificationsService {
             }
             this.addNotification(data);
         });
+    }
+
+    public hideNotification(id) {
+        const notification = this.getNotificationById(id);
+        if (notification) {
+            this.notifications.splice(this.notifications.indexOf(notification), 1);
+        }
+        this.updateUnreadCount();
     }
 
     public setNotifications(data: INotification[]) {
