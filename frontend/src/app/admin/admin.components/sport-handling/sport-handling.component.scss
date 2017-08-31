@@ -116,11 +116,14 @@ textarea {
             padding: 0 10px;
 
             .item-name {
-                padding-left: 24px;
+                padding-left: 17px;
                 cursor: pointer;
             }
     
             .button-remove {
+                width: 17px;
+                height: 17px;
+                font-size: 17px;
                 cursor: pointer;
                 color: transparent;
             }

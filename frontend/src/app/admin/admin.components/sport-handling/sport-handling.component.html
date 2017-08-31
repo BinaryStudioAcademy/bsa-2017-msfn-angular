@@ -41,8 +41,8 @@
             Related exercises
             <md-icon (click)="addExercises()" class="button-add">add_circle</md-icon>
         </div>
-        <md-chip-list class="exercises-list">
-                <md-chip class="list-item" *ngFor="let exercise of sport.exercisesList">
+        <md-chip-list class="exercises-list" *ngIf="exercisesList.length > 0">
+                <md-chip class="list-item" *ngFor="let exercise of exercisesList">
                     <p class="item-name" (click)="showDescription(exercise)">{{exercise.exercise.name}}</p>
                     <md-icon class="button-remove" (click)="removeExercise(exercise.exercise._id)">clear</md-icon>
                 </md-chip>

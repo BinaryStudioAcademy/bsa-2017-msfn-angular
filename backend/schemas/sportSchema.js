@@ -6,15 +6,7 @@ const Sport = new Schema({
     code: Number,
     name: String,
     description: String,
-    icon: String,
-    exercisesList: [
-        {
-            exercise: {
-                type: ObjectId,
-                ref: 'Exercise'
-            }
-        }
-    ],
+    icon: String
 });
 
 module.exports = mongoose.model('Sport', Sport);

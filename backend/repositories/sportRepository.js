@@ -18,7 +18,6 @@ function getByCode(code, callback) {
     const query = this.model.findOne({
         code: code
     })
-    .populate('exercisesList.exercise');
     query.exec(callback);
 }
 
@@ -26,7 +25,6 @@ function getByName(name, callback) {
     const query = this.model.findOne({
         name: name
     })
-    .populate('exercisesList.exercise');
     query.exec(callback);
 }
 
@@ -34,7 +32,6 @@ function updateByCode(code, body, callback) {
     const query = this.model.update({
         code: code
     }, body)
-    .populate('exercisesList.exercise');
     query.exec(callback);
 }
 
@@ -46,7 +43,6 @@ function deleteByCode(code, callback) {
 }
 
 function deleteAll(callback) {
-    const query = this.model.remove({});
     query.exec(callback);
 }
 

@@ -6,8 +6,11 @@ import { ExerciseCreateService } from './exercise-create.service';
 import { MarkdownService } from '../../../services/markdown.service';
 import IExercise = ExerciseApi.IExercise;
 import IExerciseType = ExerciseApi.IExerciseType;
+import ISport = SportApi.ISport;
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { ToasterService } from '../../../services/toastr.service';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { SelectSportComponent } from '../select-sport/select-sport.component';
 
 @Component({
     selector: 'app-exercise-create',
@@ -20,7 +23,7 @@ export class ExerciseCreateComponent implements OnInit {
         name: '',
         type: '',
         isRemoved: false,
-        sportsId: [],
+        sports: [],
         measure: '',
         image: '',
         description: ''
@@ -30,7 +33,8 @@ export class ExerciseCreateComponent implements OnInit {
     exTypes: [IExerciseType];
     exMeasures: [any];
     exSports;
-    sport;
+    sportList = [];
+    private sportDialog: MdDialogRef<any> | null;
 
     // for cropperImg:
     image: any = new Image();
@@ -46,6 +50,7 @@ export class ExerciseCreateComponent implements OnInit {
         private exerciseCreateService: ExerciseCreateService,
         private markdownService: MarkdownService,
         private toasterService: ToasterService,
+        private dialog: MdDialog,
     ) {
         this.cropperSettings = exerciseCreateService.getCropperSettings();
     }
@@ -65,12 +70,18 @@ export class ExerciseCreateComponent implements OnInit {
         });
         this.exerciseCreateService.getSportTypes((data) => {
             this.exSports = data;
+            this.exSports.forEach(el => {
+                if (this.exercise.sports.includes(el._id)) {
+                    this.sportList.push(el);
+                }
+            });
         });
         this.data = {};
     }
 
     save(form: NgForm) {
         if (form.valid) {
+            this.exercise.sports = this.sportList;
             if (this.data.image) {
                 const folder = 'exercise-image';
                 const fileType = 'img';
@@ -138,5 +149,31 @@ export class ExerciseCreateComponent implements OnInit {
             this.exercise.image = this.data.image;
         }
         this.hideCropper = true;
+    }
+
+    addSport() {
+        this.sportDialog = this.dialog.open(SelectSportComponent, {
+            data: this.sportList
+        });
+        this.sportDialog.afterClosed().subscribe((result: string) => {
+            this.updateSports(this.sportDialog.componentInstance.selectedSports);
+        });
+    }
+
+    updateSports(sports) {
+        sports.forEach(elem => {
+            const inArray = this.sportList.find((el) => {
+                return el._id === elem._id;
+            });
+            if (!inArray) {
+                this.sportList.push(elem);
+            }
+        });
+    }
+
+    removeSport(id) {
+        this.sportList = this.sportList.filter(el => {
+            return el._id !== id;
+        });
     }
 }
