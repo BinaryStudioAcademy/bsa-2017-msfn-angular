@@ -27,6 +27,9 @@
 .image-preview {
     margin: $content-between-margin;
     text-align: center;
+    img{
+        max-width: 100%;
+    }
 }
 
 .description {

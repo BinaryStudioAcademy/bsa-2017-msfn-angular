@@ -5,15 +5,14 @@ const mongoose = require('mongoose')
 function UserGoalService() {}
 
 UserGoalService.prototype.createUserGoal = createUserGoal;
-UserGoalService.prototype.getUserGoalByUser = getUserGoalByUser;
+UserGoalService.prototype.getUserGoalById = getUserGoalById;
 UserGoalService.prototype.updateUserGoal = updateUserGoal;
 UserGoalService.prototype.deleteUserGoal = deleteUserGoal;
 
 
 
-function getUserGoalByUser(username, callback) {
-    const usernameRegExp = new RegExp('^' + username + '$', 'i');
-    userGoalRepository.findByUsername(usernameRegExp, (err, userGoalData) => {
+function getUserGoalById(userId, callback) {
+    userGoalRepository.findById(userId, (err, userGoalData) => {
 
         if (err) return callback(err);
         if (userGoalData === null) {
@@ -56,11 +55,11 @@ if(body.createdByUser && body.value && body.value > 0 && body.deadline && body.t
             }
 }
 
-function deleteUserGoal(id, username, callback) {
+function deleteUserGoal(id, userId, callback) {
     if(mongoose.Types.ObjectId.isValid(id)) {
 
     
-    userGoalRepository.deleteById(id, username, (err, userGoalData)=>{
+    userGoalRepository.deleteById(id, userId, (err, userGoalData)=>{
 
         if (err) return callback(err);
         if (userGoalData === null) {

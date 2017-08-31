@@ -30,9 +30,9 @@ export class ExerciseTypeService {
         });
     }
 
-    deleteExerciseTypeByCode(code: number, callback) {
+    deleteExerciseTypeById(id, callback) {
         const request: IHttpReq = {
-            url: '/api/exercise-type/' + code.toString(),
+            url: '/api/exercise-type/' + id,
             method: 'DELETE',
             body: {}
         };
@@ -42,8 +42,8 @@ export class ExerciseTypeService {
         });
     }
 
-    updateExerciseTypeByCode(code: number, body, callback) {
-        body = Object.assign(body, {code: code});
+    updateExerciseTypeById(id: string, body, callback) {
+        body = Object.assign(body, {_id: id});
         const request: IHttpReq = {
             url: '/api/exercise-type',
             method: 'PUT',
@@ -51,7 +51,6 @@ export class ExerciseTypeService {
         };
         this.httpService.sendRequest(request).then(data => {
             callback(data);
-            // UPDATE COL AFTER UPDATING
         });
     }
 }

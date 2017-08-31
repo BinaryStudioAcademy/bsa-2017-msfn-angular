@@ -3,7 +3,7 @@
 </h2>
 <md-dialog-content>
     <div class="image-preview">
-        <img [src]='exercise.image'>
+        <img [src]='exercise.image[0]'>
     </div>
     <div class="description-header">Description</div>
     <div class="description" [innerHtml]="convertedDescription"></div>

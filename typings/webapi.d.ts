@@ -16,7 +16,7 @@ declare module WebApi {
 declare module ExerciseApi {
     export interface IExerciseType {
         name?: string;
-        code?: string;
+        _id?: string;
         isRemoved?: boolean;
     }
 

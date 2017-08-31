@@ -298,14 +298,13 @@ const mongoose = require('mongoose'),
     ];
 
 exerciseTypeExample = {
-    code: 22,
     name: 'Dumbbell Exercises',
     isRemoved: false
 };
 
 module.exports = function() {
     // add exercises
-    exerciseTypeRepository.findByCode(exerciseTypeExample.code, (err, data) => {
+    exerciseTypeRepository.findById(exerciseTypeExample._id, (err, data) => {
         if (data === null) {
             exerciseTypeRepository.add(exerciseTypeExample, (err, data) => {
                 const typeId = data._id;

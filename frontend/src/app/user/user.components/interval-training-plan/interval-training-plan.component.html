@@ -9,24 +9,34 @@
         <div class="interval-circle" *ngFor="let lap of circles; let i = index" (click)="edit(i)">
             <span class="lap">{{lap.lapTime}}</span>
             <span class="warm">{{lap.warmTime}}</span>
+            <span class="topName">circle time</span>
+            <span class="bottomName">rest time</span>
             <svg version="1.1" viewBox="150 150 700 700">
                 <path d="M900.3,281.1l-86.7,87.6c33.3,33.6,53.9,80,53.9,131.3c0,102.6-82.3,185.7-183.8,185.7H377.5V561.9l-245,247.6h245h306.3C853,809.5,990,671.1,990,500C990,414.5,955.7,337.1,900.3,281.1z M132.5,500c0-102.6,82.3-185.7,183.8-185.7h306.3v123.8l245-247.6h-245H316.3C147.2,190.5,10,329.1,10,500c0,85.5,34.3,162.9,89.7,218.8l86.7-87.5C153.1,597.7,132.5,551.3,132.5,500z"/>
             </svg>
+            <div class="info">{{lap.name}} x{{lap.count}}</div>
         </div>
     </div>
     <div class="data-container" *ngIf="editMode">
         <div class="edit-interval">
-            <input type="number" class="lap" [(ngModel)]="currentLap.lapTime">
-            <input type="number" class="warm" [(ngModel)]="currentLap.warmTime">
+            <input type="number" min="1" class="lap" [(ngModel)]="currentLap.lapTime">
+            <input type="number" min="0" class="warm" [(ngModel)]="currentLap.warmTime">
+            <span class="topName">circle time</span>
+            <span class="bottomName">rest time</span>
             <svg version="1.1" viewBox="150 150 700 700">
                 <path d="M900.3,281.1l-86.7,87.6c33.3,33.6,53.9,80,53.9,131.3c0,102.6-82.3,185.7-183.8,185.7H377.5V561.9l-245,247.6h245h306.3C853,809.5,990,671.1,990,500C990,414.5,955.7,337.1,900.3,281.1z M132.5,500c0-102.6,82.3-185.7,183.8-185.7h306.3v123.8l245-247.6h-245H316.3C147.2,190.5,10,329.1,10,500c0,85.5,34.3,162.9,89.7,218.8l86.7-87.5C153.1,597.7,132.5,551.3,132.5,500z"/>
             </svg>
         </div>
+        <input type="text" maxlength="10" class="name" placeholder="name" [(ngModel)]="currentLap.name">
+        <input type="number" min="1" class="counter" placeholder="count" [(ngModel)]="currentLap.count">
     </div>
-    <div class="add-interval" *ngIf="!editMode" (click)="addCircle()">
+    <div class="add-interval" *ngIf="!editMode && circles.length" (click)="addCircle()">
         <span class="lap">+</span>
         <svg version="1.1" viewBox="150 150 700 700">
             <path d="M900.3,281.1l-86.7,87.6c33.3,33.6,53.9,80,53.9,131.3c0,102.6-82.3,185.7-183.8,185.7H377.5V561.9l-245,247.6h245h306.3C853,809.5,990,671.1,990,500C990,414.5,955.7,337.1,900.3,281.1z M132.5,500c0-102.6,82.3-185.7,183.8-185.7h306.3v123.8l245-247.6h-245H316.3C147.2,190.5,10,329.1,10,500c0,85.5,34.3,162.9,89.7,218.8l86.7-87.5C153.1,597.7,132.5,551.3,132.5,500z"/>
         </svg>
+    </div>
+    <div class="add-interval" *ngIf="!editMode && !circles.length">
+        <button md-raised-button (click)="addCircle()">Add interval</button>
     </div>
 </div>
