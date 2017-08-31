@@ -1,0 +1,23 @@
+<div >
+    <div class="filtering-items">
+    </div>
+    <md-grid-list>
+        <md-grid-tile *ngFor="let food of foods"
+                      (click)="openEditFoodDialog(false, food)">
+            <md-card>
+                <md-card-header>
+                    <img md-card-avatar
+                         src="../../../../../../resources/default.png">
+                    <md-card-title>{{food.name}}</md-card-title>
+                    <md-card-subtitle>{{food.foodType}}</md-card-subtitle>
+                </md-card-header>
+                <md-card-content>
+                    Created by {{food.customUserId ? food.customUserId : 'admin'}}
+                </md-card-content>
+            </md-card>
+        </md-grid-tile>
+        <md-grid-tile id="add-food" (click)="openEditFoodDialog(true)">
+            <i class="material-icons add-item-ico">add</i>
+        </md-grid-tile>
+    </md-grid-list>
+</div>

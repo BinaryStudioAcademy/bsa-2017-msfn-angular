@@ -9,6 +9,6 @@ export interface IFood {
     vendor?: string;
     description?: string;
     picture?: string;
-    customUserId: string;
+    customUserId?: string;
     isRemoved?: boolean;
 }

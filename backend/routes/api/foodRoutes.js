@@ -1,12 +1,11 @@
 const
     apiResponse = require('express-api-response'),
     foodService = require('../../services/foodService'),
-    isAdmin = require('../../middleware/isAdminMiddleware'),
     baseUrl = '/api/food/';
 
 module.exports = function(app) {
 
-    app.post(baseUrl, isAdmin, (req, res, next) => {
+    app.post(baseUrl, (req, res, next) => {
         foodService.createFood(req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -14,7 +13,7 @@ module.exports = function(app) {
         });
     }, apiResponse);
 
-    app.put(baseUrl, isAdmin, (req, res, next) => {
+    app.put(baseUrl, (req, res, next) => {
         foodService.updateFood(req.body.id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -22,7 +21,7 @@ module.exports = function(app) {
         });
     }, apiResponse);
 
-    app.delete(`${baseUrl}:id`, isAdmin, (req, res, next) => {
+    app.delete(`${baseUrl}:id`, (req, res, next) => {
         foodService.deleteFood(req.params.id, (err, data) => {
             res.err = err;
             res.data = data;
@@ -30,7 +29,7 @@ module.exports = function(app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl, isAdmin, (req, res, next) => {
+    app.get(baseUrl, (req, res, next) => {
         foodService.getAllFood((err, data) => {
             if (!data.length) {
                 data = [{}];

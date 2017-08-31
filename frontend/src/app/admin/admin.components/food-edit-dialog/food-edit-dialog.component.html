@@ -1,0 +1,86 @@
+
+    <h2 class="title" md-dialog-title>Food details</h2>
+    <md-dialog-content class="food-edit-dialog-container">
+
+        <md-input-container>
+            <input mdInput
+                   placeholder="Name"
+                   [(ngModel)]="food.name"
+                   name="name">
+            <md-error *ngIf="nameFormControl.hasError('required')">
+                First name is required
+            </md-error>
+            <md-error *ngIf="nameFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')">
+                Name should contain 2-20 characters
+            </md-error>
+        </md-input-container>
+
+        <md-select [(ngModel)]="food.foodType">
+            <md-option *ngFor="let type of foodTypes"
+                       [value]="type"
+            >{{type}}</md-option>
+        </md-select>
+
+        <div class="energy-container">
+            <md-input-container>
+                <input mdInput
+                       [(ngModel)]="food.kcal"
+                       placeholder="Kcal"
+                       name="kcal">
+                <md-error *ngIf="numberFormControl.hasError('pattern')">
+                    Must be a numeric value
+                </md-error>
+            </md-input-container>
+            <md-input-container>
+                <input mdInput
+                       [(ngModel)]="food.protein"
+                       placeholder="Proteins"
+                       name="protein">
+            </md-input-container>
+            <md-input-container>
+                <input mdInput
+                       [(ngModel)]="food.fat"
+                       placeholder="Fats"
+                       name="fat">
+                <md-error *ngIf="numberFormControl.hasError('pattern')">
+                    Must be a numeric value
+                </md-error>
+            </md-input-container>
+            <md-input-container>
+                <input mdInput
+                       [(ngModel)]="food.carbons"
+                       placeholder="Carbons"
+                       name="carbons">
+                <md-error *ngIf="numberFormControl.hasError('pattern')">
+                    Must be a numeric value
+                </md-error>
+            </md-input-container>
+        </div>
+
+
+        <md-input-container>
+            <input mdInput
+                   type="text"
+                   name="vendor"
+                   placeholder="Vendor"
+                   [(ngModel)]="food.vendor"
+            >
+        </md-input-container>
+        <md-input-container>
+            <textarea mdInput
+                      type="text"
+                      name="description"
+                      placeholder="Food description"
+                      [(ngModel)]="food.description"
+                      [formControl]="descriptionFormControl"></textarea>
+            <md-error *ngIf="descriptionFormControl.hasError('required')">
+                Description is required
+            </md-error>
+            <md-error *ngIf="descriptionFormControl.hasError('minlength') || descriptionFormControl.hasError('maxlength')">
+                Description should contain 5-300 characters
+            </md-error>
+        </md-input-container>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <button md-button class="btn">Save</button>
+    </md-dialog-actions>
