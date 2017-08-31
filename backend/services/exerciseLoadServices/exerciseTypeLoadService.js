@@ -33,7 +33,7 @@ class exerciseLoadService {
             }
             async.parallel(funcArray,
                 (err, results) => {
-                    callback(err, `Created ${results.length} exercise types `);
+                    callback(err, {status: `Created ${results.length} exercise types `});
                 });
         });
     }

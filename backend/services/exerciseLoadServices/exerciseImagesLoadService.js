@@ -33,7 +33,6 @@ class exerciseImagesLoadService {
                     }
                     funcArray.push(saveFunc);
                     
-                    //exercisesList[currentImg.exercise].body.image.push(currentImg.image);
                 }
             }
             async.parallel(funcArray,
@@ -51,13 +50,11 @@ class exerciseImagesLoadService {
     addImages(callback) {
         loadService.getAll('exerciseimage', (err, data) => {
             this.getFormatedData(data, (err, formatedData) => {
-console.log(formatedData);
                     let funcArray = [];
                     for (let id in formatedData) {
                         const currentExercise = formatedData[id];
-                        console.log(currentExercise.body.image);
                         const updFunc = (callback) => {
-                            exerciseService.upadeteExerciseById(currentExercise.id, currentExercise.body);
+                            exerciseService.upadeteExerciseById(currentExercise.id, currentExercise.body, callback);
                         }
                         funcArray.push(updFunc);
                     }

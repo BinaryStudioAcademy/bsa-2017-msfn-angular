@@ -12,7 +12,7 @@ const Exercise = new Schema({
     sportsId:Array,
     description:String,
     image: Array,
-    externalId: String
+    externalId: { type : String , unique : true, required : false, dropDups: true }
 });
 
 module.exports = mongoose.model('Exercise', Exercise);
