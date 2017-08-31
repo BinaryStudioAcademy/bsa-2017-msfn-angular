@@ -52,7 +52,7 @@ body {
     line-height: 1.15;
     -webkit-font-smoothing: antialiased;
     color: #fff;
-    background-color: #222;
+    background: $gradient-from-color;
 }
 
 // Suppress the focus outline on elements that cannot be accessed via keyboard.

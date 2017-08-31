@@ -21,7 +21,7 @@ function resendActivateCode(body, callback) {
         } else {
             emailService.send({
                 to: user.email,
-                subject: 'Your MSFN registration',
+                subject: 'Your proFIT registration',
                 html: '<table><tr><td>Additional request for account registration! ' +
                     '!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
                     '<a href="' + config.host.hostAddress + '/confirmation/registration/' + user.activateToken + '">' + 'Activate account </a> </td></tr></table>'

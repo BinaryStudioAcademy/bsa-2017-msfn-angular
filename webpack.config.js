@@ -378,7 +378,7 @@ module.exports = {
             "hash": false,
             "inject": true,
             "compile": true,
-            "favicon": false,
+            "favicon": "./src/globalStyles/favicon.ico",
             "minify": false,
             "cache": true,
             "showErrors": true,
