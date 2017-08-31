@@ -1,5 +1,5 @@
-import { HttpService } from './../../../services/http.service';
-import { IHttpReq } from './../../../models/http-req';
+import { HttpService } from '../../../services/http.service';
+import { IHttpReq } from '../../../models/http-req';
 import { Injectable } from '@angular/core';
 
 @Injectable()

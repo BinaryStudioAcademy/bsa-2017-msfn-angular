@@ -51,7 +51,7 @@ function addItem(body, callback) {
             // TO CHANGE URL in letter for stable site address
             emailService.send({
                 to: body.email,
-                subject: 'Your MSFN registration',
+                subject: 'Your ProFit registration',
                 html: '<table><tr><td>Congratulations, ' +
                 body.firstName +
                 '!</td></tr> <tr><td>You have become a part of our fantastic fitness network!</td></tr> <tr><td> Please, follow this link to activate your account: ' +

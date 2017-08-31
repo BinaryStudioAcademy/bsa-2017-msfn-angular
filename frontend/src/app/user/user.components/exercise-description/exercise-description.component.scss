@@ -1,6 +1,20 @@
 @import "./../../../../globalStyles/variables";
 @import "./../../../../globalStyles/indentations";
 @import "./../../../../globalStyles/text";
+@keyframes cf3FadeInOut {
+    0% {
+        opacity: 1;
+    }
+    45% {
+        opacity: 1;
+    }
+    55% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
 .preview {
     width: 400px;
@@ -27,12 +41,35 @@
 .image-preview {
     margin: $content-between-margin;
     text-align: center;
+    position: relative;
+    img {
+        max-width: 100%;
+        -webkit-filter: invert(100%) contrast(55%) brightness(115%);
+        filter: invert(100%) contrast(55%) brightness(115%);
+    }
+    
 }
-
-.description {
+.animated {
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    img{
+        position: absolute;
+        max-height: 100%;
+        animation-name: cf3FadeInOut;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+        animation-direction: alternate;
+    }
+    img:last-child {
+        animation-delay: -1s;
+        opacity: 0;
+    }
 }
 
 .description-header {
     font-size: $minor-text;
     margin-bottom: 10px;
 }
+

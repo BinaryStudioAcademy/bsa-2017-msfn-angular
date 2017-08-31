@@ -7,9 +7,10 @@ const
 module.exports = function (app) {
 
     app.post(baseUrl, isLoggedIn, function (req, res, next) {
+        console.log(req.user);
       body = {
                type: req.body.type,
-               createdByUser: req.user.email,
+               createdByUser: req.user._id,
                value: req.body.value,
                deadline: req.body.deadline,
                startTime: req.body.startTime
@@ -24,7 +25,7 @@ module.exports = function (app) {
     app.put(baseUrl, isLoggedIn, function (req, res, next) {
             body = {
                type: req.body.type,
-               createdByUser: req.user.email,
+               createdByUser: req.user._id,
                value: req.body.value,
                deadline: req.body.deadline
            }
@@ -37,7 +38,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.delete(baseUrl + ':id', isLoggedIn, function (req, res, next) {
-        userGoalService.deleteUserGoal(req.params.id, req.user.email,  function(err, data) {
+        userGoalService.deleteUserGoal(req.params.id, req.user._id,  function(err, data) {
             res.err = err;
             res.data = data;
             next();
@@ -45,7 +46,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl, isLoggedIn, function (req, res, next) {
-        userGoalService.getUserGoalByUser(req.user.email, function(err, data) {
+        userGoalService.getUserGoalById(req.user._id, function(err, data) {
             if (!data.length) {
                 data = [{}];
             }

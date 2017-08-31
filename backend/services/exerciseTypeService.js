@@ -1,7 +1,7 @@
 const ApiError = require('./apiErrorService');
 const exerciseTypeRepository = require('../repositories/exerciseTypeRepository');
 
-function ExerciseTypeService() {}
+function ExerciseTypeService() { }
 
 ExerciseTypeService.prototype.createExerciseType = createExerciseType; // used funcs
 ExerciseTypeService.prototype.getAllExerciseTypes = getAllExerciseTypes;
@@ -11,33 +11,26 @@ ExerciseTypeService.prototype.deleteAllExerciseTypes = deleteAllExerciseTypes;
 
 
 
-function createExerciseType(name, callback) {
-
-    exerciseTypeRepository.getAll((err, exerciseTypeData) => {
+function createExerciseType(data, callback) {
+    data.isRemoved = false;
+    if (!data.externalId) {
+        data.externalId = '';
+    }
+    exerciseTypeRepository.add(data, (err, exerciseTypeData) => {
         if (err) return callback(err);
+        if (exerciseTypeData === null) {
+            callback(null, []);
+        } else {
+            callback(null, exerciseTypeData);
+        }
 
-        let data = {
-            name: name,
-            isRemoved: false
-        };
-
-
-        exerciseTypeRepository.add(data, (err, exerciseTypeData) => {
-
-            if (err) return callback(err);
-            if (exerciseTypeData === null) {
-                callback(null, []);
-            } else {
-                callback(null, exerciseTypeData);
-            }
-        });
     });
 }
 
 
-function updateExerciseTypeById(id, body, callback) {
-    exerciseTypeRepository.updateById(id, body, (err, exerciseTypeData)=>{
 
+function updateExerciseTypeById(id, body, callback) {
+    exerciseTypeRepository.update(id, body, (err, exerciseTypeData) => {
         if (err) return callback(err);
         if (exerciseTypeData === null) {
             callback(null, []);
@@ -47,9 +40,9 @@ function updateExerciseTypeById(id, body, callback) {
     });
 }
 
-function deleteExerciseTypeById(id, callback) {
-    exerciseTypeRepository.deleteById(id, (err, exerciseTypeData)=>{
 
+function deleteExerciseTypeById(id, callback) {
+    exerciseTypeRepository.deleteById(id, (err, exerciseTypeData) => {
         if (err) return callback(err);
         if (exerciseTypeData === null) {
             callback(null, []);
@@ -62,7 +55,6 @@ function deleteExerciseTypeById(id, callback) {
 
 function deleteAllExerciseTypes(callback) {
     exerciseTypeRepository.deleteAll((err, exerciseTypeData) => {
-
         if (err) return callback(err);
         if (exerciseTypeData === null) {
             callback(null, []);

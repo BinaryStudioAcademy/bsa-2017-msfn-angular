@@ -14,7 +14,6 @@ Repository.prototype.update = update;
 Repository.prototype.get = get;
 
 function add(data, callback) {
-    console.log(data);
     const model = this.model;
     const newItem = new model(data);
     newItem.save(callback);
