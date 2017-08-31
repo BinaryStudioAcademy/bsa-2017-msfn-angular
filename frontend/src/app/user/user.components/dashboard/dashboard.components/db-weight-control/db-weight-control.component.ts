@@ -87,11 +87,8 @@ export class DbWeightControlComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
-        console.log('WEIGHT CONTROL CHANGE');
-
         if (this.weightItems.length > 0 && !this.gotData) {
             this.gotData = true;
-            console.log('WEIGHT INIT', this.weightItems);
 
             this.weeklyItems = this.weightControlService.getWeeklyWeightItems(this.weightItems);
             this.updateData();

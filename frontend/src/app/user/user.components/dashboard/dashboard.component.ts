@@ -3,7 +3,6 @@ import { DashboardService } from './dashboard.service';
 import { GoalProgressService } from '../../../services/goal-progress.service';
 import { WeightControlService } from '../weight-control/weight-control.service';
 import { DateService } from '../../../services/date.service';
-import { GoalService } from '../goal/goal.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -11,7 +10,6 @@ import { GoalService } from '../goal/goal.service';
     styleUrls: ['./dashboard.component.scss'],
     providers: [
         DashboardService,
-        GoalService,
         WeightControlService,
         GoalProgressService,
         DateService
@@ -20,7 +18,6 @@ import { GoalService } from '../goal/goal.service';
 export class DashboardComponent implements OnInit {
 
     constructor(private dashboardService: DashboardService,
-                private goalService: GoalService,
                 private weightControlService: WeightControlService,
                 private goalProgressService: GoalProgressService,
                 private dateService: DateService) { }
@@ -38,7 +35,7 @@ export class DashboardComponent implements OnInit {
     }
 
     getGoalItems(): void {
-        this.goalService.getData(res => {
+        this.dashboardService.getGoalData(res => {
             if (res[0].hasOwnProperty('value')) {
                 this.goalItems = res;
             } else {

@@ -12,9 +12,17 @@ export class GoalProgressService {
     goals = [];
     weightItems = [];
 
-    getGoalData(callback) {
+    getWeightLossProgress(items: any[]) {
+        console.log('WEIGHT PROGRESS INIT', items);
+    }
+
+    getWeightGainProgress(items: any[]) {
+        console.log('WEIGHT PROGRESS INIT', items);
+    }
+
+    getLaunchedTrainingData(id, callback) {
         const sendData: IHttpReq = {
-            url: '/api/user-goal/',
+            url: `/api/launchedtraining/user/${id}`,
             method: 'GET',
             body: {},
         };
@@ -25,21 +33,4 @@ export class GoalProgressService {
             });
     }
 
-    getGoals(): void {
-        this.getGoalData(res => {
-            if (res[0].hasOwnProperty('value')) {
-                this.goals = res;
-            } else {
-                this.goals = [];
-            }
-        });
-    }
-
-    getWeightData(): void {
-        this.weightControlService.getWeightItems(res => {
-            if (res[0].hasOwnProperty('weight')) {
-                this.weightItems = res;
-            }
-        });
-    }
 }
