@@ -12,7 +12,7 @@
         </a>
     </div>
     <div class="notifications" *ngIf="thereIsLoggedInUser">
-        <app-header-notifications></app-header-notifications>
+        <app-header-notifications class="header-notifications"></app-header-notifications>
     </div>
     <div class="settings header__navigation-panel" *ngIf="thereIsLoggedInUser">
         <img class="settings__photo" [src]="userPhotoUrl">

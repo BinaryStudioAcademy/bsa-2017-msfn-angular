@@ -17,8 +17,13 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + '/public/:offset', function (req, res, next) {
+    app.get(baseUrl + '/public/:limit/:offset', function (req, res, next) {
         const offset = parseInt(req.params.offset);
+        const limit = parseInt(req.params.limit);
+        if (isNaN(limit)) {
+            res.err = new ApiError('Wrong limit');
+            next();
+        }
         if (isNaN(offset)) {
             res.err = new ApiError('Wrong offset');
             next();
@@ -28,7 +33,7 @@ module.exports = function (app) {
                 isRemoved: false,
                 shared: true
             },
-            limit: 1,
+            limit: limit,
             offset: offset
         }, function (err, data) {
             res.data = data;

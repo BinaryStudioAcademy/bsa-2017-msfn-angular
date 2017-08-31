@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="plans-wrap">
+        <div class="item-container" *ngFor="let plan of plans">
+            <i class="material-icons train-item-ico">face</i>
+            <p class="train-item-text">{{ plan.name }}</p>
+            <div class="item-footer">
+                <div class="item-author">By {{plan.user.fullName}}</div>
+                <div class="item-exercise-count">{{plan.exercisesList.length}} exercises</div>
+            </div>
+        </div>
+    </div>
+    <div class="load-wrap" *ngIf="ableToLoad">
+        <div class="load-container" title="Load more..." (click)="loadPlans()">
+            <i class="material-icons load-ico" [class.loading]="loading">more_horiz</i>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,9 @@ export class PlansComponent implements OnInit {
     public plans: any[] = [];
     public users: any[] = [];
     public plansToShow: any[] = [];
+    public loading = false;
+    public ableToLoad = true;
+    public countPerPage = 2;
 
     constructor(private httpHandler: HttpService) {
     }
@@ -21,21 +24,28 @@ export class PlansComponent implements OnInit {
     }
 
     loadPlans() {
-        const offset = this.plans.length;
-
         const request: IHttpReq = {
-            url: '/api/training-plan/public/' + offset,
+            url: `/api/training-plan/public/${this.countPerPage}/${this.plans.length}`,
             method: 'GET',
             body: {}
         };
 
+        this.loading = true;
+
         this.httpHandler.sendRequest(request)
             .then((result) => {
-                this.plans = this.plans.concat(result);
+                if (result.length === 0) {
+                    this.ableToLoad = false;
+                    return;
+                }
+                if (result.length < this.countPerPage) {
+                    this.ableToLoad = false;
+                }
 
-                this.plans.forEach(plan => {
+                result.forEach(plan => {
                     if (this.users[plan.userID]) {
                         plan.user = this.users[plan.userID];
+                        this.plans = this.plans.concat([plan]);
                     } else {
                         const userRequest: IHttpReq = {
                             url: '/api/user/' + plan.userID,
@@ -47,9 +57,11 @@ export class PlansComponent implements OnInit {
                             .then((user) => {
                                 plan.user = user;
                                 this.users[plan.userID] = user;
+                                this.plans = this.plans.concat([plan]);
                             });
                     }
                 });
+                this.loading = false;
                 console.log(this.plans);
             });
     }
