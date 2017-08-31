@@ -54,11 +54,19 @@ button {
 
     .interval {
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        height: 20px;
         .field {
             width: 90%;
             float: left;
+            text-align: center;
+            text-shadow: 0 0 2px 0 white;
+            font-weight: bold;
         }
         input {
+            width: 20px;
+            height: 20px;
             float: right;
         }
     }

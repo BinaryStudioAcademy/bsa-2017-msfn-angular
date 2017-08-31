@@ -5,8 +5,8 @@ function ExerciseTypeService() { }
 
 ExerciseTypeService.prototype.createExerciseType = createExerciseType; // used funcs
 ExerciseTypeService.prototype.getAllExerciseTypes = getAllExerciseTypes;
-ExerciseTypeService.prototype.updateExerciseTypeByCode = updateExerciseTypeByCode;
-ExerciseTypeService.prototype.deleteExerciseTypeByCode = deleteExerciseTypeByCode;
+ExerciseTypeService.prototype.updateExerciseTypeById = updateExerciseTypeById;
+ExerciseTypeService.prototype.deleteExerciseTypeById = deleteExerciseTypeById;
 ExerciseTypeService.prototype.deleteAllExerciseTypes = deleteAllExerciseTypes;
 
 
@@ -22,12 +22,14 @@ function createExerciseType(data, callback) {
             console.log(exerciseTypeData);
             callback(null, exerciseTypeData);
         }
+
     });
 }
 
 
-function updateExerciseTypeByCode(code, body, callback) {
-    exerciseTypeRepository.updateByCode(code, body, (err, exerciseTypeData) => {
+
+function updateExerciseTypeById(id, body, callback) {
+    exerciseTypeRepository.updateById(id, body, (err, exerciseTypeData)=>{
 
         if (err) return callback(err);
         if (exerciseTypeData === null) {
@@ -38,8 +40,9 @@ function updateExerciseTypeByCode(code, body, callback) {
     });
 }
 
-function deleteExerciseTypeByCode(code, callback) {
-    exerciseTypeRepository.deleteByCode(code, (err, exerciseTypeData) => {
+
+function deleteExerciseTypeById(id, callback) {
+    exerciseTypeRepository.deleteById(id, (err, exerciseTypeData)=>{
 
         if (err) return callback(err);
         if (exerciseTypeData === null) {

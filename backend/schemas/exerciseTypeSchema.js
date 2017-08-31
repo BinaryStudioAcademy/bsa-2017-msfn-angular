@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 const autoIncrement = require('mongoose-auto-increment');
 
 const ExerciseType = new Schema({
-    code: Number,
     name: String,
     isRemoved: Boolean,
     externalId: String

@@ -22,15 +22,16 @@
     } 
 
     .exercise-wrap {
+        width: calc(100% + 48px);
         max-height: 65vh;
-        margin: 0 -23px;
         overflow: auto;
         background: #222;
+        align-self: center;
 
         .exercise-item {
             display: flex;
             flex-flow: row nowrap;
-            padding: 10px 34px 10px;
+            padding: 10px 24px;
             align-items: center;
             justify-content: space-between;
         

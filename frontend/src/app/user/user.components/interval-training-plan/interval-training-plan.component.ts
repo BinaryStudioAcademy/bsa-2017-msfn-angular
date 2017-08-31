@@ -18,8 +18,10 @@ export class IntervalTrainingPlanComponent implements OnInit, OnChanges {
     circles = [];
 
     currentLap = {
-        lapTime: 0,
+        lapTime: 1,
         warmTime: 0,
+        name: '',
+        count: '',
         index: 0
     };
 
@@ -38,8 +40,10 @@ export class IntervalTrainingPlanComponent implements OnInit, OnChanges {
     addCircle() {
         if (this.circles.length) {
             this.circles.push({
-                lapTime: 0,
-                warmTime: 0
+                lapTime: 1,
+                warmTime: 0,
+                name: '',
+                count: '',
             });
             this.edit(this.circles.length - 1, true);
         } else {
@@ -50,7 +54,9 @@ export class IntervalTrainingPlanComponent implements OnInit, OnChanges {
     saveCircle(): void {
         const data = {
             lapTime: this.currentLap.lapTime,
-            warmTime: this.currentLap.warmTime
+            warmTime: this.currentLap.warmTime,
+            name: this.currentLap.name || 'Circle' + (this.currentLap.index + 1),
+            count: this.currentLap.count || 1
         };
         this.circles[this.currentLap.index] = data;
         this.editMode = false;
