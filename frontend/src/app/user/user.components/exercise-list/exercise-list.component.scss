@@ -173,6 +173,9 @@
 }
 
 @media screen and (max-width: $small-screen) {
+    .table-title {
+        margin: auto;
+    }
     .table-title>span {
         display: none;
     }
@@ -205,7 +208,4 @@
 }
 
 @media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
-    .table-title>span {
-        display: none;
-    }
 }

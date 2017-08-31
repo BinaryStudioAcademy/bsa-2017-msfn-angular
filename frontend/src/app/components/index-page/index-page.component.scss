@@ -12,9 +12,8 @@
 
 .index__banner-wrap {
     width: 100%;
-    background: url('../../../globalStyles/img/banner.png');
+    background: url('../../../globalStyles/img/banner.png') no-repeat;
     background-attachment: fixed;
-    background-size: cover;
 }
 
 .container {
@@ -83,6 +82,9 @@
 }
 
 @media screen and (max-width: 768px) {
+    .index__banner-wrap {
+        background: linear-gradient(to top, $bg-color 75%, $gradient-from-color);
+    }
     .container {
         display: block;
     }
