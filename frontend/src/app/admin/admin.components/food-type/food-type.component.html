@@ -1,0 +1,57 @@
+<div class="food-types-container">
+    <button md-button
+            disableRipple
+            class="btn"
+            (click)="addRow()"
+            id="btn-add">Add food type
+    </button>
+    <div>
+        <md-input-container>
+            <input mdInput
+                   type="text"
+                   #filter
+                   placeholder="search by name">
+        </md-input-container>
+    </div>
+    <md-table class="mat-table"
+              #table
+              [dataSource]="dataSource"
+              mdSort>
+
+        <!-- name -->
+        <ng-container cdkColumnDef="name">
+            <md-header-cell *cdkHeaderCellDef
+                            md-sort-header>Name
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row"
+                     [ngClass]="{'removed': row.isRemoved}"
+                     class="active">{{row.name}}</md-cell>
+        </ng-container>
+
+        <!-- description -->
+        <ng-container cdkColumnDef="description">
+            <md-header-cell *cdkHeaderCellDef>
+                Description
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row"
+                     [ngClass]="{'removed': row.isRemoved}"
+                     class="active"
+                     md-tooltip="{{ row.description }}"
+                     >
+                {{ row.description.substring(0, 30) }}...
+            </md-cell>
+        </ng-container>
+
+        <!-- delete-->
+        <ng-container cdkColumnDef="delete">
+            <md-header-cell *cdkHeaderCellDef></md-header-cell>
+            <md-cell *cdkCellDef="let row" >
+                <i  class="material-icons ico active"
+                    (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>
+            </md-cell>
+        </ng-container>
+
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;" ></md-row>
+    </md-table>
+</div>

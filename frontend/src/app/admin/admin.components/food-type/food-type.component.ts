@@ -1,49 +1,41 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { MeasureListService } from './measure-list.service';
-import { BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FoodService } from '../../services/food.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DataSource } from '@angular/cdk';
 import { MdSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
-import { ActivatedRoute, Router } from '@angular/router';
+import { IFoodType } from '../../../models/food-type';
 
 @Component({
-    selector: 'app-measure-list',
-    templateUrl: './measure-list.component.html',
-    styleUrls: ['./measure-list.component.scss'],
-    providers: [MeasureListService]
+    selector: 'app-food-type',
+    templateUrl: './food-type.component.html',
+    styleUrls: ['./food-type.component.scss'],
+    providers: [FoodService]
 })
-export class MeasureListComponent implements OnInit {
-    items = [];
-    measureName = '';
-    conversionFactor = '';
-    unitName = '';
+export class FoodTypeComponent implements OnInit {
     displayedColumns = [
-        'code',
-        'measureName',
+        'name',
+        'description',
         'delete'
     ];
     tableDatabase = new TableDatabase();
-    dataSource: MeasureTypeDataSource | null;
+    dataSource: FoodTypeDataSource | null;
     @ViewChild(MdSort) sort: MdSort;
     @ViewChild('filter') filter: ElementRef;
 
-
     constructor(private cd: ChangeDetectorRef,
-                public measurementService: MeasureListService,
-                private router: Router,
-                private route: ActivatedRoute) {
-
+                private foodService: FoodService) {
     }
 
-
     ngOnInit() {
-        this.dataSource = new MeasureTypeDataSource(
+        this.dataSource = new FoodTypeDataSource(
             this.tableDatabase,
             this.sort,
-            this.measurementService);
+            this.foodService
+        );
         setTimeout(() => this.cd.markForCheck());
-        this.measurementService.getAllMeasurements( (response) => {
-            this.tableDatabase.addMeasurement(response);
+        this.foodService.getAllFoodTypes( (response) => {
+            this.tableDatabase.addFoodTypes(response);
         });
 
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
@@ -56,30 +48,15 @@ export class MeasureListComponent implements OnInit {
             });
     }
 
-    toggle(row) {
-        this.tableDatabase.toggleRemoved(row);
-        this.measurementService.updateMeasurement(
-            row._id,
-            row.measureUnits,
-            row.measureName,
-            () => {
-                this.cd.markForCheck();
-            },
-            row.isRemoved
-        );
+    addRow() {
+        this.tableDatabase.addNewFoodType('', '');
     }
 
-    addMeasure() {
-        this.router.navigate(['../measure'], {relativeTo: this.route});
-    }
-    onClickName(measureName: string) {
-        const id = this.tableDatabase.data.find(
-            item => item.measureName === measureName)._id;
-        this.router.navigate(['../measure/', id], {relativeTo: this.route});
+    toggle(row) {
+        this.tableDatabase.toggleRemoved(row);
     }
 
 }
-
 export class TableDatabase {
     dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
     get data(): any[] {
@@ -88,15 +65,9 @@ export class TableDatabase {
 
     constructor() { }
 
-    addMeasurement(data) {
-        const getCode = (() => {
-            let current = 0;
-            return () => current += 1;
-        })();
+    addFoodTypes(data) {
         const copiedData = [...data];
-        this.dataChange.next(copiedData
-            .map( obj => Object.assign(obj, { code: getCode() }))
-        );
+        this.dataChange.next(copiedData);
     }
 
     toggleRemoved(row) {
@@ -106,16 +77,30 @@ export class TableDatabase {
         this.dataChange.next(copiedData);
     }
 
-}
+    addNewFoodType(name: string, description?: string) {
+        const copiedData = this.data.slice();
+        copiedData.push(this.createType(name, description));
+        this.dataChange.next(copiedData);
+    }
 
-export class MeasureTypeDataSource extends DataSource<any> {
+    private createType( name: string,
+                        description?: string
+    )  {
+        return {
+            name,
+            description,
+        };
+    }
+
+}
+export class FoodTypeDataSource extends DataSource<IFoodType> {
     _filterChange = new BehaviorSubject('');
     get filter(): string { return this._filterChange.value; }
     set filter(filter: string) { this._filterChange.next(filter); }
 
     constructor(private _tableDatabase: TableDatabase,
                 private _sort: MdSort,
-                private service: MeasureListService) {
+                private service: FoodService) {
         super();
     }
 
@@ -127,7 +112,7 @@ export class MeasureTypeDataSource extends DataSource<any> {
         ];
         return Observable.merge(...displayDataChanges).map(() => {
             return this.getSortedData().slice().filter((item) => {
-                const searchStr = (item.measureName).toLowerCase();
+                const searchStr = (item.name + item.description).toLowerCase();
                 return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
             });
         });
@@ -142,6 +127,7 @@ export class MeasureTypeDataSource extends DataSource<any> {
         if (!this._sort.active || this._sort.direction === '') {
             return data;
         }
-        return this.service.sortData(data, this._sort.active, this._sort.direction);
+        return this.service.sortfoodTypesData(data, this._sort.active, this._sort.direction);
     }
 }
+

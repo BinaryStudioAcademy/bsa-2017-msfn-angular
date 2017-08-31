@@ -1,0 +1,71 @@
+@import "../../../../globalStyles/variables";
+@import "../../../../globalStyles/indentations";
+@import '../../../../globalStyles/text.scss';
+
+.mat-table {
+    width: 80%;
+    margin: 0 auto 40px auto;
+    overflow-y: auto;
+}
+.mat-header-row,
+.mat-row {
+    height: auto;
+    padding: $content-tb-margin 60px;
+}
+
+.mat-header-cell {
+    font-size: $main-text;
+}
+
+md-header-cell,
+md-cell {
+    max-width: 28%;
+    margin-left: 4%;
+    word-break: break-all;
+}
+
+md-header-cell:last-child,
+md-cell:last-child {
+    margin-right: 4%;
+}
+
+.food-types-container {
+    margin: 0 auto;
+    width: 60%;
+    text-align: center;
+    font-family: $font-general;
+    div {
+        overflow-x: hidden;
+    }
+}
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    width: auto;
+    height: 40px;
+    margin: 40px auto 0 auto;
+}
+
+button:focus {
+    outline: 0;
+}
+.active:hover {
+    cursor: pointer;
+}
+
+.ico {
+    color: $btn-color;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.removed {
+    color: $text-second-color;
+    cursor: default;
+    pointer-events: none;
+}
