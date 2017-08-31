@@ -8,13 +8,13 @@ function UserGoalRepository() {
 
 UserGoalRepository.prototype = new Repository();
 
-UserGoalRepository.prototype.findByUsername = findByUsername;
+UserGoalRepository.prototype.findById = findById;
 UserGoalRepository.prototype.deleteById = deleteById;
 
-function findByUsername(username, callback) {
+function findById(userId, callback) {
     const query = this.model.find({
         $and: [{
-                createdByUser: username
+                createdByUser: userId
             },
             {
                 isRemoved: false
@@ -24,11 +24,11 @@ function findByUsername(username, callback) {
     query.exec(callback);
 };
 
-function deleteById(id, username, callback) {
-    console.log(id, username);
+function deleteById(id, userId, callback) {
+    console.log(id, userId);
     const query = this.model.update({
         $and: [{
-                createdByUser: username
+                createdByUser: userId
             },
             {
                 _id: id,

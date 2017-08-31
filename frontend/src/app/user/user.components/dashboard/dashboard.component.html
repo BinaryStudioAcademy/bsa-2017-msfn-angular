@@ -1,6 +1,6 @@
 <div id="dashboard-container" [sortablejs]="" [sortablejsOptions]="dragOptions">
     <div id="weight-container">
-        <app-db-weight-control></app-db-weight-control>
+        <app-db-weight-control [weightItems]="weightItems"></app-db-weight-control>
     </div>
     <div id="calories-container">
         <app-db-calories></app-db-calories>
@@ -15,6 +15,6 @@
         <app-db-news></app-db-news>
     </div>
     <div id="goals-container">
-        <app-db-goals></app-db-goals>
+        <app-db-goals [goalItems]="goalItems" [weightItems]="weightItems"></app-db-goals>
     </div>
 </div>
