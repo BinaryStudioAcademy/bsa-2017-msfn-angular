@@ -29,6 +29,8 @@ export class ExerciseCreateComponent implements OnInit {
     convertedDescription: string;
     exTypes: [IExerciseType];
     exMeasures: [any];
+    exSports;
+    sport;
 
     // for cropperImg:
     image: any = new Image();
@@ -60,6 +62,9 @@ export class ExerciseCreateComponent implements OnInit {
         });
         this.exerciseCreateService.getMeasures((data) => {
             this.exMeasures = data;
+        });
+        this.exerciseCreateService.getSportTypes((data) => {
+            this.exSports = data;
         });
         this.data = {};
     }

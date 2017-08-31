@@ -36,5 +36,18 @@
         </md-error>
     </md-input-container>
 
+    <div class="exercises">
+        <div class="exercises-title">
+            Related exercises
+            <md-icon (click)="addExercises()" class="button-add">add_circle</md-icon>
+        </div>
+        <md-chip-list class="exercises-list">
+                <md-chip class="list-item" *ngFor="let exercise of sport.exercisesList">
+                    <p class="item-name" (click)="showDescription(exercise)">{{exercise.exercise.name}}</p>
+                    <md-icon class="button-remove" (click)="removeExercise(exercise.exercise._id)">clear</md-icon>
+                </md-chip>
+        </md-chip-list>
+    </div>
+
     <button md-button class="btn btn-save" (click)="save()">Save</button>
 </form>

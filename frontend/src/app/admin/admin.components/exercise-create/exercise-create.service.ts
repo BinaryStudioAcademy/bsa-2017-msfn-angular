@@ -31,6 +31,19 @@ export class ExerciseCreateService {
                 callback(data);
         });
     }
+
+    getSportTypes(callback) {
+        const request: IHttpReq = {
+            url: '/api/sport/',
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then(data => {
+                callback(data);
+        });
+    }
+
     getExerciseById(id, callback): void {
         const request: IHttpReq = {
             url: '/api/exercise/' + id,

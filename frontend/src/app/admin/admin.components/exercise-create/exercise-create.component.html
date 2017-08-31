@@ -13,6 +13,17 @@
             {{measure.measureName}}
         </md-option>
     </md-select>
+    <md-select placeholder="Related sport" [(ngModel)]="sport" name="sport" class="select-row input">
+        <md-option *ngFor="let sport of exSports" [hidden]="sport.isRemoved" [value]="sport._id">
+            {{sport.name}}
+        </md-option>
+    </md-select>
+<!--     <md-chip-list class="exercises-list">
+        <md-chip class="list-item" *ngFor="let exercise of sport.exercisesList">
+            <p class="item-name" (click)="showDescription(exercise)">{{exercise.exercise.name}}</p>
+            <md-icon class="button-remove" (click)="removeExercise(exercise.exercise._id)">clear</md-icon>
+        </md-chip>
+    </md-chip-list> -->
     <md-input-container class="example-full-width" class="input">
         <textarea mdInput placeholder="Exercise Description" [(ngModel)]="exercise.description" name="description" (keyup)="updateOutput($event.target.value)"></textarea>
     </md-input-container>
