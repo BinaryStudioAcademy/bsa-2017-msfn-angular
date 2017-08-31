@@ -68,6 +68,7 @@ export class SecundomerService {
         this.lapPauseTime = 0;
         this.secndomerLapNum = 0;
         this.secndomerPreviousLapNum = 0;
+        this.timer = 0;
         this.timerLapNum = 0;
         this.timerWarmNum = 0;
         this.warmOuts = [];
@@ -90,10 +91,15 @@ export class SecundomerService {
 
     // timer
 
-    startTimer(i, rest, callback): void {
+    startTimer(i, rest, change, callback): void {
+        console.log('lap - ' + i);
         this.runned = true;
-        this.timer = (rest) ? this.timerWarmNum : this.timerLapNum;
+        if (!change) {
+            this.timer = (rest) ? this.timerWarmNum : this.timerLapNum;
+        }
         this.cacheView = this.timer;
+        console.log(change);
+        console.log(this.timer);
         this.idTimer = setInterval( () => {
             this.timer -= 250;
             this.percentToBar(document.getElementById('interval' + i), (this.cacheView - this.timer) / this.cacheView);

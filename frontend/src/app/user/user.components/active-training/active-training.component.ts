@@ -18,6 +18,8 @@ export class ActiveTrainingComponent implements OnInit {
     trainingPlan: any;
     burnedCallories = 1445;
 
+    editIntervalMode = false;
+
     constructor(
         private activeTrainingService: ActiveTrainingService
     ) {}
@@ -39,20 +41,25 @@ export class ActiveTrainingComponent implements OnInit {
 
     intervalAction(action) {
         if (action.type === 'save') {
+            this.editIntervalMode = false;
             const data = action.data;
             data.exList = this.trainingPlan.exercisesList;
             this.trainingPlan.intervals[action.cacheIndex] = data;
             this.trainingPlan.exercisesList = [];
         } else if (action.type === 'delete') {
+            this.editIntervalMode = false;
             this.trainingPlan.intervals.splice(action.cacheIndex, 1);
             this.trainingPlan.exercisesList = [];
         } else if (action.type === 'edit') {
+            this.editIntervalMode = true;
             this.trainingPlan.exercisesList = this.trainingPlan.intervals[action.cacheIndex].exList;
         }
         this.reloadIntervals = !this.reloadIntervals;
     }
     showExercises(exList) {
-        this.trainingPlan.exercisesList = exList;
+        if (!this.editIntervalMode) {
+            this.trainingPlan.exercisesList = exList;
+        }
     }
 
     choosePlan() {
