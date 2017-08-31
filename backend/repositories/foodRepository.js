@@ -50,9 +50,7 @@ function updateById(id, body, callback) {
             carbons: body.carbons,
             vendor: body.vendor,
             description: body.description,
-            picture: body.picture,
-            customUserId: body.customUserId,
-            isRemoved: body.isRemoved
+            picture: body.picture
         }
     });
     query.exec(callback);

@@ -6,7 +6,15 @@ const
 module.exports = function(app) {
 
     app.post(baseUrl, (req, res, next) => {
-        foodService.createFood(req.body, (err, data) => {
+        body = req.body;
+        if(req.user.isAdmin) {
+            body.customUserId = '';
+            body.isPublished = true;
+        } else{
+            body.customUserId = req.user._id;
+            body.isPublished = false;
+        }
+        foodService.createFood(body, (err, data) => {
             res.data = data;
             res.err = err;
             next();

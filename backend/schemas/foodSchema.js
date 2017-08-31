@@ -18,6 +18,10 @@ const Food = new Schema({
     description: String,
     picture: String,
     customUserId: String,
+    isPublished: {
+        type: Boolean,
+        default: false
+    },
     isRemoved: {
         type: Boolean,
         default: false
