@@ -13,6 +13,7 @@ export class ExerciseDescriptionComponent implements OnInit {
 
     constructor(@Inject(MD_DIALOG_DATA) public exercise,
                 private markdownService: MarkdownService) {
+                    console.log(this.exercise);
         this.convertedDescription = markdownService.convert(this.exercise.description);
     }
 
