@@ -1,0 +1,27 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+.food-edit-dialog-container {
+    display: flex;
+    flex-direction: column;
+}
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    width: auto;
+    height: 40px;
+    margin: 40px auto 0 auto;
+}
+
+.energy-container {
+    display: flex;
+    flex-direction: row;
+    md-input-container {
+        margin: $input-padding;
+    }
+}

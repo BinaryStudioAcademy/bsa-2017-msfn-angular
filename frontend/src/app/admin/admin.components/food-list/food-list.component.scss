@@ -1,0 +1,29 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+md-grid-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+md-grid-tile {
+    margin: $content-tb-margin auto;
+    background-color: $gradient-to-color;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    md-card {
+        display: flex;
+        flex-direction: column;
+        md-card-title {
+            color: $btn-color;
+            font-size: $header-text;
+        }
+    }
+}
+
+#add-food {
+    display: flex;
+    align-items: center;
+    color: $btn-color;
+    padding: 0 $content-lr-margin;
+}

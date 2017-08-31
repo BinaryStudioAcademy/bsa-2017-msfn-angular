@@ -21,6 +21,9 @@ import { SportHandlingComponent } from './admin.components/sport-handling/sport-
 import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
 import { GoalListComponent } from './admin.components/goal-list/goal-list.component';
 import { MeasureTypeComponent } from './admin.components/measure-type/measure-type.component';
+import { FoodTypeComponent } from './admin.components/food-type/food-type.component';
+import { FoodListComponent } from './admin.components/food-list/food-list.component';
+import { FoodEditDialogComponent } from './admin.components/food-edit-dialog/food-edit-dialog.component';
 
 @NgModule({
     imports: [
@@ -40,12 +43,18 @@ import { MeasureTypeComponent } from './admin.components/measure-type/measure-ty
         SportsListComponent,
         GoalListComponent,
         MeasureListComponent,
-        MeasureTypeComponent
+        MeasureTypeComponent,
+        FoodTypeComponent,
+        FoodListComponent,
+        FoodEditDialogComponent
     ],
     providers: [
         ToasterService,
         AdminRootProfileService,
         ExerciseCreateService
+    ],
+    entryComponents: [
+        FoodEditDialogComponent
     ]
 })
 export class AdminModule {}
