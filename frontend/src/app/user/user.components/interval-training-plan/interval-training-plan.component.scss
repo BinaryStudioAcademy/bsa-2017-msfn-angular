@@ -32,8 +32,9 @@
     .interval-list {
         display: flex;
         align-items: center;
-        width: 480px;
+        width: calc(80% - 80px);
         height: 100%;
+        min-height: 160px;
         overflow-x: auto;
 
         .interval-circle {
@@ -91,7 +92,6 @@
     }
 
     .data-container {
-        width: calc(100% - 20% - 320px);
         .edit-interval {
             position: relative;
             width: 160px;
@@ -121,9 +121,8 @@
                 height: 100px;
             }
         }
-        
-        .counter, .name {
-            width: 80px;
+        .name {
+            text-indent: 15px;
             color: $text-main-color;
             font-family: $font-general;
             font-weight: bold;
@@ -178,5 +177,33 @@
     }
 }
 
+@media screen and (max-width: $small-screen) {
+    .container {
+        justify-content: space-around;
+        .buttons-container {
+            width: auto;
+        }
+        .interval-list {
+            display: flex;
+            align-items: center;
+            width: calc(100% - 80px);
+            height: 100%;
+            min-height: 160px;
+            overflow-x: auto;
+        }
+        .add-interval {
+            position: relative;
+            width: 80px;
+            height: 50px;
+            cursor: pointer;
+        }
+    }
+}
 
+@media screen and (min-width: $small-screen + 1) and (max-width: $medium-screen) {
+    
+}
 
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
+    
+}
