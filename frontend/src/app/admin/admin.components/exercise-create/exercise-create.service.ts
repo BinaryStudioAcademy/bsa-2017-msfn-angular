@@ -61,7 +61,8 @@ export class ExerciseCreateService {
                 name: exerciseForm.name,
                 typeId: exerciseForm.typeId,
                 description: exerciseForm.description,
-                image: exerciseForm.image
+                image: exerciseForm.image,
+                measure: exerciseForm.measure
                 // sportsId: exerciseForm.sportsId
             },
             successMessage: 'Edited'
