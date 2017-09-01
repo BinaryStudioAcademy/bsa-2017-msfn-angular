@@ -45,6 +45,10 @@ export class SecundomerComponent implements OnInit, OnChanges {
             });
             this.choosedIntervals = this.generateIntervalArray(this.intervals);
         }
+
+        if (changes.reloadIntervals && !changes.reloadIntervals.firstChange) {
+            this.showExercises.emit(this.choosedIntervals[0].exList);
+        }
     }
 
     ngOnInit() {
