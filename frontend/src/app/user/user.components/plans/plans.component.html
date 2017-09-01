@@ -1,4 +1,18 @@
 <div class="container">
+    <div class="plans-header">
+        <md-tab-group class="plans-tabs-wrap" [(selectedIndex)]="selectedTab" (selectChange)="changeSort($event)">
+            <md-tab label="All"></md-tab>
+            <md-tab label="Followed"></md-tab>
+        </md-tab-group>
+        <md-input-container class="plans-search-wrap">
+            <input mdInput
+                   class="plans-search"
+                   #search
+                   placeholder="Search"
+                   autocomplete="off">
+            <md-icon mdSuffix>search</md-icon>
+        </md-input-container>
+    </div>
     <div class="plans-wrap">
         <div class="item-container" *ngFor="let plan of plans">
             <i class="material-icons train-item-ico">face</i>

@@ -54,9 +54,6 @@ function update(id, body, callback) {
 }
 
 function get(params, callback) {
-    if (params.filter === undefined) {
-        params.filter = {};
-    }
     if (params.sort === undefined) {
         params.sort = null;
     }
@@ -73,8 +70,13 @@ function get(params, callback) {
         params.populate = null;
     }
     let model = this.model;
-    let query = model.find(params.filter).sort(params.sort).limit(params.limit).skip(params.offset).select(params.fields);
-    if(params.populate){
+
+    let query = model.find(params.filter)
+        .sort(params.sort)
+        .limit(params.limit)
+        .skip(params.offset)
+        .select(params.fields);
+    if (params.populate) {
         query.populate(params.populate);
     }
     query.exec(callback);

@@ -3,6 +3,8 @@ const
     trainingPlanService = require('../../services/trainingPlanService'),
     trainingPlanRepository = require('../../repositories/trainingPlanRepository'),
     ApiError = require('../../services/apiErrorService'),
+    decrypt = require('../../services/decryptService'),
+    urlencode = require('urlencode'),
     baseUrl = '/api/training-plan';
 
 module.exports = function (app) {
@@ -17,29 +19,34 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + '/public/:limit/:offset', function (req, res, next) {
-        const offset = parseInt(req.params.offset);
-        const limit = parseInt(req.params.limit);
-        if (isNaN(limit)) {
-            res.err = new ApiError('Wrong limit');
-            next();
+    app.get(baseUrl + '/public/:params', function (req, res, next) {
+        const params = decrypt(req.params.params);
+        params.filter.isRemoved = false;
+        params.filter.shared = true;
+        if (isNaN(params.limit)) {
+            params.limit = null;
         }
-        if (isNaN(offset)) {
-            res.err = new ApiError('Wrong offset');
-            next();
+        if (isNaN(params.offset)) {
+            params.offset = null;
         }
-        trainingPlanRepository.get({
-            filter: {
-                isRemoved: false,
-                shared: true
-            },
-            limit: limit,
-            offset: offset
-        }, function (err, data) {
+        trainingPlanRepository.get(
+            params,
+            function (err, data) {
             res.data = data;
             res.err = err;
             next();
         });
+    }, apiResponse);
+
+    app.get(baseUrl + '/search/:search', function(req, res, next) {
+        trainingPlanRepository.Search(
+            req.params.search,
+            (err, data) => {
+                console.log(data);
+                res.err = err;
+                res.data = data;
+                next();
+            });
     }, apiResponse);
 
     app.get(baseUrl + '/:id', function (req, res, next) {

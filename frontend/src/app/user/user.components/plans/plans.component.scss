@@ -25,14 +25,14 @@
 }
 
 .container {
-    padding: 20px 15px;
+    padding: 0 15px;
     text-align: center;
     margin: 0 auto;
 }
 
 .plans-wrap {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     position: relative;
     width: 100%;
@@ -44,6 +44,32 @@
         margin-bottom: 0;
         text-align: center;
         font-size: $header-text;
+    }
+}
+
+.plans-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .plans-tabs-wrap {
+        flex-basis: 80%;
+    }
+
+    .plans-search-wrap {
+        flex-basis: 20%;
+
+        .mat-input-wrapper {
+            height: 49px;
+        }
+
+        .mat-input-underline {
+            bottom: 0;
+        }
+    }
+
+    .mat-focused .mat-input-placeholder.mat-float {
+        transform: translateY(-1.08125em) scale(0.75) perspective(100px) translateZ(0.001px);
     }
 }
 
@@ -91,9 +117,9 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    width: 260px;
+    width: 31.33%;
     height: 180px;
-    margin: 10px;
+    margin: 1% 10px;
     color: $btn-color;
     background-color: $gradient-to-color;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
