@@ -51,8 +51,10 @@ export class SecundomerComponent implements OnInit, OnChanges {
         this.intervals.forEach((el) => {
             el.checked = true;
         });
-        this.choosedIntervals = this.generateIntervalArray(this.intervals);
-        this.showExercises.emit(this.choosedIntervals[0].exList);
+        if (this.intervals && this.intervals.length) {
+            this.choosedIntervals = this.generateIntervalArray(this.intervals);
+            this.showExercises.emit(this.choosedIntervals[0].exList);
+        }
     }
 
     generateIntervalArray(array) {
