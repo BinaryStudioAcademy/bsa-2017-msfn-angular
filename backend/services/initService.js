@@ -110,8 +110,8 @@ const mongoose = require('mongoose'),
                 { "conversionFactor": "1", "unitName": "Sunday", "unitType": "imperial" }
             ]
         }
-    ]
-exerciseRepository = require('./../repositories/exerciseRepository'),
+    ];
+    exerciseRepository = require('./../repositories/exerciseRepository');
     exerciseTypeRepository = require('./../repositories/exerciseTypeRepository');
 
 exercises = [
@@ -378,4 +378,4 @@ module.exports = function () {
         goalService.createGoal(elem, () => { });
     });
 
-}
+};

@@ -6,11 +6,11 @@
         </a>
     </div>
     <div class="notifications" *ngIf="thereIsLoggedInUser">
-        <app-header-notifications></app-header-notifications>
+        <app-header-notifications class="header-notifications"></app-header-notifications>
     </div>
     <div class="settings header__navigation-panel" *ngIf="thereIsLoggedInUser">
         <img class="settings__photo" [src]="userPhotoUrl">
-        <span class="settings__name">{{displayName}}</span>
+        <span [routerLink]="'/user/profile/'+userId" class="settings__name">{{displayName}}</span>
         <md-icon [mdMenuTriggerFor]="appMenu">menu</md-icon>
     </div>
     <md-menu class="user_menu" #appMenu="mdMenu" yPosition="below" [overlapTrigger]="false">

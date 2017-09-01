@@ -118,9 +118,11 @@ function getUserById(req, callback) {
         if (req.params.id === req.session.passport.user) {
             callback(err, data);
         } else {
-            data.privacyHideFields.forEach(el => {
-                data[el] = null;
-            })
+            if (data) {
+                data.privacyHideFields.forEach(el => {
+                    data[el] = null;
+                });
+            }
             callback(err, data);
         }
     });
