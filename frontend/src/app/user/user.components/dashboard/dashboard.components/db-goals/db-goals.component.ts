@@ -36,9 +36,8 @@ export class DbGoalsComponent implements OnInit, OnChanges {
                 this.dataToProcess.weight = this.weightItems;
             }
 
-            goal.progress = this.goalProgressService.getWeightLossProgress(
+            goal.progress = this.goalProgressService.getWeightProgress(
                 this.dataToProcess.weight, goal);
-            console.log('GOAL OUTPUT', goal, goal.progress);
 
             const diff = goal.progress.start - goal.progress.goal,
                 currentDiff = goal.progress.start - goal.progress.current;
@@ -49,8 +48,13 @@ export class DbGoalsComponent implements OnInit, OnChanges {
             if (this.dataToProcess.weight.length === 0) {
                 this.dataToProcess.weight = this.weightItems;
             }
-            goal.progress = this.goalProgressService.getWeightGainProgress(
+
+            goal.progress = this.goalProgressService.getWeightProgress(
                 this.dataToProcess.weight, goal);
+
+            const diff = goal.progress.goal - goal.progress.start,
+                currentDiff = goal.progress.current - goal.progress.start;
+            goal.progress.value = currentDiff / diff * 100;
         },
 
         'Burn calories': (goal) => {

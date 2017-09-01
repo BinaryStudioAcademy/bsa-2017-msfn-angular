@@ -9,7 +9,7 @@ export class GoalProgressService {
     constructor(private httpService: HttpService,
                 private weightControlService: WeightControlService) { }
 
-    getWeightLossProgress(items: any[], goal) {
+    getWeightProgress(items: any[], goal) {
         console.log('WEIGHT PROGRESS INIT', items, goal);
         const goalTimeStamp = new Date(goal.startTime).getTime(),
             currentWeight = items[items.length - 1];
@@ -23,9 +23,6 @@ export class GoalProgressService {
             current: currentWeight.weight,
             goal: goal.value
         };
-    }
-
-    getWeightGainProgress(items: any[], goal) {
     }
 
     getLaunchedTrainingData(id, callback) {

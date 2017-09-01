@@ -37,7 +37,7 @@
         }
 
         .goal-item:not(:last-child) {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
     }
 }
@@ -59,12 +59,12 @@
     }
 
     .goal-start-date {
-        color: $btn-color;
+        color: $btn-second-color;
     }
 
     .goal-end-date {
         text-align: right;
-        color: $btn-second-color;
+        color: $text-warn-color;
     }
 
     .goal-value {
@@ -76,8 +76,8 @@
     .goal-progress {
         position: relative;
         width: 100%;
-        margin-top: 20px;
-        padding-top: 20px;
+        margin-top: $content-tb-margin;
+        padding-top: $content-tb-margin;
 
         p {
             display: inline-block;

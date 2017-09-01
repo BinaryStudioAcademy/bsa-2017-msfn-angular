@@ -23,10 +23,10 @@
                     ({{ goal.value }})
                 </div>
                 <div class="goal-progress" *ngIf="goal.progress">
-                    <p class="start-value">
+                    <p class="start-value" *ngIf="goal.progress.current !== goal.progress.start">
                         initial: {{ goal.progress.start }}
                     </p>
-                    <p class="current-value" [ngStyle]="{'left': goal.progress.value - 5 + '%'}">
+                    <p class="current-value" [ngStyle]="{'left': goal.progress.value + '%'}">
                         current: {{ goal.progress.current }}
                     </p>
                     <p class="end-value">
