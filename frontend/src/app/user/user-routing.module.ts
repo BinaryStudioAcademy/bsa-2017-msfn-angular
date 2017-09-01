@@ -20,6 +20,7 @@ import { UserListComponent } from './user.components/user-list/user-list.compone
 import { PrivacyComponent } from './user.components/account-settings/privacy/privacy.component';
 import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
+import { PlansComponent } from './user.components/plans/plans.component';
 
 
 const userRoutes: Routes = [
@@ -97,6 +98,10 @@ const userRoutes: Routes = [
             {
                 path: 'goals',
                 component: GoalComponent
+            },
+            {
+                path: 'plans',
+                component: PlansComponent
             }
         ]
     }
