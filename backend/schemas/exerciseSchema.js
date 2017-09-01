@@ -9,9 +9,14 @@ const Exercise = new Schema({
     },
     measure: String,
     isRemoved: Boolean,
-    sportsId:Array,
-    description:String,
-    image: Array,
+    sports: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Sport'
+        }
+    ],
+    description: String,
+    image: String,
     externalId: { type : String , unique : true, required : false, dropDups: true }
 });
 

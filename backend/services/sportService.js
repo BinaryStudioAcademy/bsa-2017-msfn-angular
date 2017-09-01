@@ -26,7 +26,8 @@ function addItem(body, callback) {
                     code: ++maxCode,
                     name: body.name,
                     description: body.description,
-                    icon: body.icon
+                    icon: body.icon,
+                    exercisesList: body.exercisesList
                 };
                 sportRepository.add(sportData, callback);
             });

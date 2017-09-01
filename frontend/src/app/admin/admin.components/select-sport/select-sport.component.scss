@@ -1,0 +1,55 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/text.scss';
+@import "../../../../globalStyles/indentations";
+
+.dialog-container{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    .title {
+        margin: 0 0 5px;
+    }
+
+    .sport-wrap {
+        width: calc(100% + 48px);
+        max-height: 65vh;
+        overflow: auto;
+        background: #222;
+
+        .sport-item {
+            display: flex;
+            flex-flow: row nowrap;
+            padding: 5px 24px;
+            align-items: center;
+            justify-content: space-between;
+
+            &:hover{
+                background-color: $gradient-to-color; 
+            }
+
+            h4 {
+                margin-right: 10px;
+                cursor: pointer;
+            }
+        }
+
+        .add{
+            color:#fff;
+        }
+    }
+
+    .btn {
+        border: none;
+        margin: 5px 0 -17px 0;
+        width: 50px;
+        color: $text-main-color;
+        background-color: $btn-color;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 50px;
+        cursor: pointer;
+        outline: none;
+        align-self: flex-end;
+    } 
+}

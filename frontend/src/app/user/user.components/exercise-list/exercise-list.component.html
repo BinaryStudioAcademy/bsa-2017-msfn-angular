@@ -29,7 +29,7 @@
                             <div class="item-val">
                                 <md-input-container>
                                     <input
-                                        mdInput [placeholder]="exerciseObj.exercise.measure + '(' + userMeasures[exerciseObj.exercise.measure] + ')'" 
+                                        mdInput placeholder="{{exerciseObj.exercise.measure.length && exerciseObj.exercise.measure + '(' + userMeasures[exerciseObj.exercise.measure] + ')' || ''}}" 
                                         type="number" class="plan-name" 
                                         name="value" [(ngModel)]="value" 
                                         (keyup.enter)="setSaveInfo(exerciseObj, form)"

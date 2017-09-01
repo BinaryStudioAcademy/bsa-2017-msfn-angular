@@ -2,10 +2,12 @@
     <button md-dialog-close class="material-icons close" tabindex="-1">close</button>
 </h2>
 <md-dialog-content>
-    <div class="image-preview">
-        <img [src]='exercise.image[0]'>
+    <div class="image-preview {{animated && 'animated' || 'static'}}">
+        <img  *ngFor="let img of exercise.image;" [src]="img">
     </div>
+    <div *ngIf="convertedDescription.length">
     <div class="description-header">Description</div>
     <div class="description" [innerHtml]="convertedDescription"></div>
+</div>
 </md-dialog-content>
 </div>

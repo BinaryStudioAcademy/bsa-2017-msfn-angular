@@ -38,6 +38,7 @@ export class ExerciseListComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
+        console.log(this.userMeasures);
         this.displayExercises = this.exercisesList.slice(0, this.pageSize);
         this.onResize();
     }
