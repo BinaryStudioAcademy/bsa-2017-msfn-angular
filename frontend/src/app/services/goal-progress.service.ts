@@ -9,15 +9,14 @@ export class GoalProgressService {
     constructor(private httpService: HttpService,
                 private weightControlService: WeightControlService) { }
 
-    goals = [];
-
     getWeightLossProgress(items: any[], goal) {
         console.log('WEIGHT PROGRESS INIT', items, goal);
-        const goalTimeStamp = new Date(goal.startTime).getTime();
+        const goalTimeStamp = new Date(goal.startTime).getTime(),
+            currentWeight = items[items.length - 1];
+
         const startWeight = items.find(item => {
             return goalTimeStamp - new Date(item.date).getTime() < 86400000;
         });
-        const currentWeight = items[items.length - 1];
 
         return {
             start: startWeight.weight,

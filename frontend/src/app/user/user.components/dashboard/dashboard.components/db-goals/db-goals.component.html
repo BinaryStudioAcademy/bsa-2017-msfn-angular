@@ -24,13 +24,13 @@
                 </div>
                 <div class="goal-progress" *ngIf="goal.progress">
                     <p class="start-value">
-                        {{ goal.progress.start }}
+                        initial: {{ goal.progress.start }}
                     </p>
-                    <p class="current-value">
-                        {{ goal.progress.current }}
+                    <p class="current-value" [ngStyle]="{'left': goal.progress.value - 5 + '%'}">
+                        current: {{ goal.progress.current }}
                     </p>
                     <p class="end-value">
-                        {{ goal.progress.goal }}
+                        goal: {{ goal.progress.goal }}
                     </p>
                     <md-progress-bar
                         [color]="accent"
