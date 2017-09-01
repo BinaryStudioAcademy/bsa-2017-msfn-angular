@@ -6,16 +6,16 @@ function FoodService() {}
 
 FoodService.prototype.getAllFood = getAllFood;
 FoodService.prototype.deleteAllFood = deleteAllFood;
-FoodService.prototype.getAllFoodByType = getAllFoodByType;
+FoodService.prototype.getFoodByType = getFoodByType;
 FoodService.prototype.getFood = getFood;
-FoodService.prototype.getFoodByName = getFoodByName;
 FoodService.prototype.createFood = createFood;
 FoodService.prototype.updateFood = updateFood;
+FoodService.prototype.publishFood = publishFood;
 FoodService.prototype.deleteFood = deleteFood;
 
 
-function getAllFood(callback) {
-    foodRepository.getAll((err, foodData) => {
+function getAllFood(userId, callback) {
+    foodRepository.getAll(userId,(err, foodData) => {
         if (err) {
             return err;
         }
@@ -40,9 +40,9 @@ function deleteAllFood(callback) {
     })
 }
 
-function getAllFoodByType(foodType, callback) {
+function getFoodByType(userId, foodType, callback) {
     const foodTypeRegExp = new RegExp('^' + foodType + '$', 'i');
-    foodRepository.getAllByType(foodTypeRegExp, (err, foodData) => {
+    foodRepository.getAllByType(userId, foodTypeRegExp, (err, foodData) => {
         if (err) {
             return err;
         }
@@ -67,25 +67,7 @@ function getFood(id, callback) {
     })
 }
 
-function getFoodByName(name, callback) {
-    const foodNameRegExp = new RegExp('^' + name + '$', 'i');
-    foodRepository.getByName(foodNameRegExp, (err, foodData) => {
-        if (err) {
-            return err;
-        }
-        if (foodData === null) {
-            callback(null, []);
-        } else {
-            callback(null, foodData);
-        }
-    })
-}
-
 function createFood(body, callback) {
-    this.getFoodByName(body.name, (err, data) => {
-        if (data.name) {
-            callback(new ApiError('Food with such name already exists'))
-        } else {
             foodRepository.add(body, (err, foodData) => {
                 if (err) {
                     return err;
@@ -95,17 +77,11 @@ function createFood(body, callback) {
                 } else {
                     callback(null, foodData);
                 }
-            })
-        }
-    })
+            });
 }
 
-function updateFood(id, body, callback) {
-    this.getFoodByName(body.name, (err, data) => {
-        if (data.name && data._id !== id) {
-            callback(new ApiError('Food with such name already exists'));
-        } else {
-            foodRepository.updateById(id, body, (err, foodData) => {
+function updateFood(id, body, userId, callback) {
+            foodRepository.updateById(id, body, userId, (err, foodData) => {
                 if (err) {
                     return err;
                 }
@@ -115,13 +91,28 @@ function updateFood(id, body, callback) {
                     callback(null, foodData);
                 }
             })
-        }
-    })
+
 }
 
-function deleteFood(id, callback) {
+
+function publishFood(id, isPublished, callback) {
+            console.log(id, isPublished);
+            foodRepository.updateIsPublished(id, isPublished, (err, foodData) => {
+                if (err) {
+                    return err;
+                }
+                if (foodData === null) {
+                    callback(null, []);
+                } else {
+                    callback(null, foodData);
+                }
+            })
+
+}
+
+function deleteFood(id, userId, callback) {
     if (mongoose.Types.ObjectId.isValid(id)) {
-        foodRepository.deleteById(id, (err, foodData) => {
+        foodRepository.deleteById(id, userId, (err, foodData) => {
             if (err) {
                 return err;
             }

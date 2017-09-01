@@ -10,7 +10,7 @@ FoodTypeRepository.prototype = new Repository();
 
 
 FoodTypeRepository.prototype.deleteAll = deleteAll;
-FoodTypeRepository.prototype.deleteByName = deleteByName;
+FoodTypeRepository.prototype.deleteById = deleteById;
 FoodTypeRepository.prototype.updateById = updateById;
 FoodTypeRepository.prototype.getById = getById;
 FoodTypeRepository.prototype.getByName = getByName;
@@ -22,9 +22,9 @@ function deleteAll(callback) {
     query.exec(callback);
 }
 
-function deleteByName(name, callback) {
-    const query = this.model.remove({
-        name: name
+function deleteById(id, callback) {
+    const query = this.model.update({
+        _id: id
     }, {
         isRemoved: true
     });

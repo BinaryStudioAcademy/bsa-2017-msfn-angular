@@ -12,18 +12,39 @@ FoodRepository.prototype = new Repository();
 FoodRepository.prototype.deleteAll = deleteAll;
 FoodRepository.prototype.deleteById = deleteById;
 FoodRepository.prototype.updateById = updateById;
+FoodRepository.prototype.updateIsPublished = updateIsPublished;
 FoodRepository.prototype.getById = getById;
-FoodRepository.prototype.getByName = getByName;
 FoodRepository.prototype.getAllByType = getAllByType;
+FoodRepository.prototype.getAll = getAll;
 
 function deleteAll(callback) {
     const query = this.model.remove({});
     query.exec(callback);
 }
 
-function deleteById(id, callback) {
+function getAll(userId, callback) {
+    const query = this.model.find({
+        $or: [{
+                customUserId: userId
+            },
+            {
+                isPublished: true
+            }
+        ]
+    });
+    query.exec(callback);
+
+}
+
+function deleteById(id, userId, callback) {
     const query = this.model.update({
-        _id: id
+        $and: [{
+                customUserId: userId
+            },
+            {
+                _id: id
+            }
+        ]
     }, {
         isRemoved: true
     });
@@ -37,9 +58,27 @@ function getById(id, callback) {
     query.exec(callback);
 }
 
-function updateById(id, body, callback) {
+
+function updateIsPublished(id, isPublished, callback) {
     const query = this.model.update({
-        _id: id
+        _id: id,
+    }, {
+        $set: {
+            isPublished: isPublished
+        }
+    });
+    query.exec(callback);
+}
+
+function updateById(id, body, userId, callback) {
+    const query = this.model.update({
+        $and: [{
+                customUserId: userId
+            },
+            {
+                _id: id,
+            }
+        ]
     }, {
         $set: {
             name: body.name,
@@ -50,24 +89,28 @@ function updateById(id, body, callback) {
             carbons: body.carbons,
             vendor: body.vendor,
             description: body.description,
-            picture: body.picture,
-            customUserId: body.customUserId,
-            isRemoved: body.isRemoved
+            picture: body.picture
         }
     });
     query.exec(callback);
 }
 
-function getByName(name, callback) {
-    const query = this.model.find({
-        name: name
-    });
-    query.exec(callback);
-}
 
-function getAllByType(foodType, callback) {
+function getAllByType(userId, foodType, callback) {
     const query = this.model.find({
-        foodType: foodType
+        $and: [{
+                $or: [{
+                        customUserId: userId
+                    },
+                    {
+                        isPublished: true
+                    }
+                ]
+            },
+            {
+                foodType: foodType
+            }
+        ]
     });
     query.exec(callback);
 }

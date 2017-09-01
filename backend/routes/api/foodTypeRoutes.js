@@ -18,19 +18,30 @@ module.exports = function(app) {
     }, apiResponse);
 
     app.post(baseUrl, isAdmin, (req, res, next) => {
-        foodTypeService.addFoodType(req.body.name, (err, data) => {
+        body = req.body;
+        body.isRemoved = false;
+        foodTypeService.addFoodType(body, (err, data) => {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.delete(`${baseUrl}:name`, isAdmin, (req, res, next) => {
-        foodTypeService.deleteFoodType(req.params.name, (err, data) => {
+    app.delete(baseUrl + ':id', isAdmin, (req, res, next) => {
+        foodTypeService.deleteFoodType(req.params.id, (err, data) => {
             res.data = data;
             res.err = err;
             next();
         });
+    }, apiResponse);
+
+
+    app.put(baseUrl, isAdmin, function (req, res, next) {
+        foodTypeService.updateFoodType(req.body._id, req.body, function(err, data) {
+            res.data = data;
+            res.err = err;
+            next();
+       });
     }, apiResponse);
 
 };
