@@ -16,6 +16,11 @@ header {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-family: $font-general;
 
+    .header-notifications {
+        position: relative;
+        display: flex;
+    }
+
     .logo {
         font-size: 25px;
         margin-left: $header-inner-margin;
@@ -50,16 +55,6 @@ header {
         }
     }
 
-    .notifications {
-        .notifications__count {
-            vertical-align: super;
-        }
-
-        .notification__alert {
-            cursor: pointer;
-        }
-    }
-
     .settings {
         display: flex;
         align-items: center;
@@ -68,6 +63,7 @@ header {
             margin: 0 $header-icons-intendation;
             vertical-align: super;
             font-size: 17px;
+            cursor: pointer;
         }
 
         .settings__photo {

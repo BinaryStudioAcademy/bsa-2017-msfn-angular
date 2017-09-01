@@ -73,6 +73,7 @@
     "sortablejs": "^1.6.0",
     "ts-loader": "^2.3.2",
     "tslint-loader": "^3.5.3",
+    "urlencode": "^1.1.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
