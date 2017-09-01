@@ -16,7 +16,7 @@ const Exercise = new Schema({
         }
     ],
     description: String,
-    image: String,
+    image: Array,
     externalId: { type : String , unique : true, required : false, dropDups: true }
 });
 

@@ -20,9 +20,8 @@ class exerciseLoadService {
                     name: currentExercise.name,
                     type: typesId[currentExercise.category],
                     externalId: currentExercise.id,
-                    measure: '',
+                    measure: 'weight',
                     description: currentExercise.description,
-                    // image: String
                 };
                 exercisesList.push(exercise);
             }
