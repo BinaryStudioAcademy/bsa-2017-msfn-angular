@@ -10,14 +10,23 @@ export class GoalProgressService {
                 private weightControlService: WeightControlService) { }
 
     goals = [];
-    weightItems = [];
 
-    getWeightLossProgress(items: any[]) {
-        console.log('WEIGHT PROGRESS INIT', items);
+    getWeightLossProgress(items: any[], goal) {
+        console.log('WEIGHT PROGRESS INIT', items, goal);
+        const goalTimeStamp = new Date(goal.startTime).getTime();
+        const startWeight = items.find(item => {
+            return goalTimeStamp - new Date(item.date).getTime() < 86400000;
+        });
+        const currentWeight = items[items.length - 1];
+
+        return {
+            start: startWeight.weight,
+            current: currentWeight.weight,
+            goal: goal.value
+        };
     }
 
-    getWeightGainProgress(items: any[]) {
-        console.log('WEIGHT PROGRESS INIT', items);
+    getWeightGainProgress(items: any[], goal) {
     }
 
     getLaunchedTrainingData(id, callback) {

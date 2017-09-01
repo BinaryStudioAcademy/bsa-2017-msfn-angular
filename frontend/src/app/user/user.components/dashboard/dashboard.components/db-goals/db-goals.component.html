@@ -22,6 +22,22 @@
                     </div>
                     ({{ goal.value }})
                 </div>
+                <div class="goal-progress" *ngIf="goal.progress">
+                    <p class="start-value">
+                        {{ goal.progress.start }}
+                    </p>
+                    <p class="current-value">
+                        {{ goal.progress.current }}
+                    </p>
+                    <p class="end-value">
+                        {{ goal.progress.goal }}
+                    </p>
+                    <md-progress-bar
+                        [color]="accent"
+                        [mode]="determinate"
+                        [value]="goal.progress.value">
+                    </md-progress-bar>
+                </div>
             </div>
         </div>
     </div>

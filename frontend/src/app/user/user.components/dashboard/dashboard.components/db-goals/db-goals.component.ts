@@ -29,42 +29,47 @@ export class DbGoalsComponent implements OnInit, OnChanges {
         weight: [],
         activity: []
     };
+    testBarValue = 50;
 
     getGoalData = {
-        'Lose weight': () => {
+        'Lose weight': (goal) => {
             if (this.dataToProcess.weight.length === 0) {
                 this.dataToProcess.weight = this.weightItems;
             }
-            this.goalProgressService.getWeightLossProgress(this._weightItems);
+            goal.progress = this.goalProgressService.getWeightLossProgress(this.dataToProcess.weight, goal);
+            console.log('GOAL OUTPUT', goal, goal.progress);
 
+            const diff = goal.progress.start - goal.progress.goal;
+            const currentDiff = goal.progress.start - goal.progress.current;
+            goal.progress.value = currentDiff / diff * 100;
         },
-        'Increase weight': () => {
+
+        'Increase weight': (goal) => {
             if (this.dataToProcess.weight.length === 0) {
                 this.dataToProcess.weight = this.weightItems;
             }
-            this.goalProgressService.getWeightGainProgress(this._weightItems);
+            goal.progress = this.goalProgressService.getWeightGainProgress(this.dataToProcess.weight, goal);
         },
-        'Burn calories': () => {
+        'Burn calories': (goal) => {
 
         },
-        'Run distance': () => {
+        'Run distance': (goal) => {
 
         },
-        'Do some count of exercises': () => {
+        'Do some count of exercises': (goal) => {
 
         },
-        'Do trainings count per week': () => {
+        'Do trainings count per week': (goal) => {
             this.goalProgressService.getLaunchedTrainingData(this.userId, res => {
-                console.log(res);
             });
         },
-        'Eat calories per day': () => {
+        'Eat calories per day': (goal) => {
 
         },
-        'Gain muscles': () => {
+        'Gain muscles': (goal) => {
 
         },
-        'Beat your records': () => {
+        'Beat your records': (goal) => {
 
         }
     };
@@ -89,8 +94,6 @@ export class DbGoalsComponent implements OnInit, OnChanges {
     ngOnInit() { }
 
     ngOnChanges() {
-        console.log('CHANGE');
-
         if (this.goalItems.length > 0 && !this.gotData.goal) {
             this.gotData.goal = true;
             console.log('GOALS INIT', this.goalItems);
@@ -101,9 +104,8 @@ export class DbGoalsComponent implements OnInit, OnChanges {
 
                 if (!this.goalTypes.includes(goal.type)) {
                     this.goalTypes.push(goal.type);
+                    setTimeout(() => this.getGoalData[goal.type](goal));
                 }
-
-                this.processTypes();
             }
         }
     }

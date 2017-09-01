@@ -72,6 +72,36 @@
         margin-top: 10px;
         font-size: $main-text;
     }
+
+    .goal-progress {
+        position: relative;
+        width: 100%;
+        margin-top: 20px;
+        padding-top: 20px;
+
+        p {
+            display: inline-block;
+            position: absolute;
+            bottom: 0;
+            color: $option1-color;
+        }
+
+        .current-value {
+        }
+
+        .end-value {
+            right: 0;
+            font-size: $main-text;
+        }
+    }
+}
+
+md-progress-bar /deep/ .mat-progress-bar-fill::after {
+    background: $btn-color;
+}
+
+md-progress-bar /deep/ .mat-progress-bar-buffer {
+    background: #556d5b;
 }
 
 
