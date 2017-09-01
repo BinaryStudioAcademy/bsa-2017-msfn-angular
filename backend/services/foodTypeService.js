@@ -5,6 +5,7 @@ function FoodTypeService() {}
 
 FoodTypeService.prototype.getFoodTypeByName = getFoodTypeByName;
 FoodTypeService.prototype.addFoodType = addFoodType;
+FoodTypeService.prototype.updateFoodType = updateFoodType;
 FoodTypeService.prototype.deleteFoodType = deleteFoodType;
 FoodTypeService.prototype.getAllFoodTypes = getAllFoodTypes;
 
@@ -24,12 +25,13 @@ function getFoodTypeByName(name, callback) {
     });
 }
 
-function addFoodType(name, callback) {
-    this.getFoodByName(name, (err, data) => {
+function addFoodType(body, callback) {
+    this.getFoodTypeByName(body.name, (err, data) => {
+        console.log(data);
         if (data.name) {
             callback(new ApiError('Food type with such name already exists'));
         } else {
-            FoodTypeRepository.add( {name: name}, (err, foodTypeData) => {
+            FoodTypeRepository.add( body, (err, foodTypeData) => {
                 if (err) {
                     return callback(err);
                 }
@@ -43,8 +45,21 @@ function addFoodType(name, callback) {
     });
 }
 
-function deleteFoodType(name, callback) {
-    FoodTypeRepository.deleteByName(name, (err, foodTypeData) => {
+function deleteFoodType(id, callback) {
+    FoodTypeRepository.deleteById(id, (err, foodTypeData) => {
+        if (err) {
+            return callback(err);
+        }
+        if (foodTypeData === null) {
+            callback(null, []);
+        } else {
+            callback(null, foodTypeData);
+        }
+    });
+}
+
+function updateFoodType(id, body, callback) {
+    FoodTypeRepository.updateById(id, body, (err, foodTypeData) => {
         if (err) {
             return callback(err);
         }
