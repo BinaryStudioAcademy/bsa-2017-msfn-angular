@@ -25,7 +25,7 @@ declare module ExerciseApi {
         type: string;
         measure: string;
         isRemoved: boolean;
-        sportsId: string[];
+        sports?: Array<SportApi.ISport>;
         description: string;
         image: string;
     }
@@ -47,5 +47,15 @@ declare module SubscribeApi {
         justUnsubscribe?: boolean;
         isFollowed?: boolean;
         userPhoto?: string;
+    }
+}
+
+declare module SportApi {
+    export interface ISport {
+        _id: string;
+        code: number;
+        name: string;
+        description: string;
+        icon: string;
     }
 }
