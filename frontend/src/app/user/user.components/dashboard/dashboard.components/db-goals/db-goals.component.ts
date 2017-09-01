@@ -29,18 +29,19 @@ export class DbGoalsComponent implements OnInit, OnChanges {
         weight: [],
         activity: []
     };
-    testBarValue = 50;
 
     getGoalData = {
         'Lose weight': (goal) => {
             if (this.dataToProcess.weight.length === 0) {
                 this.dataToProcess.weight = this.weightItems;
             }
-            goal.progress = this.goalProgressService.getWeightLossProgress(this.dataToProcess.weight, goal);
+
+            goal.progress = this.goalProgressService.getWeightLossProgress(
+                this.dataToProcess.weight, goal);
             console.log('GOAL OUTPUT', goal, goal.progress);
 
-            const diff = goal.progress.start - goal.progress.goal;
-            const currentDiff = goal.progress.start - goal.progress.current;
+            const diff = goal.progress.start - goal.progress.goal,
+                currentDiff = goal.progress.start - goal.progress.current;
             goal.progress.value = currentDiff / diff * 100;
         },
 
@@ -48,8 +49,10 @@ export class DbGoalsComponent implements OnInit, OnChanges {
             if (this.dataToProcess.weight.length === 0) {
                 this.dataToProcess.weight = this.weightItems;
             }
-            goal.progress = this.goalProgressService.getWeightGainProgress(this.dataToProcess.weight, goal);
+            goal.progress = this.goalProgressService.getWeightGainProgress(
+                this.dataToProcess.weight, goal);
         },
+
         'Burn calories': (goal) => {
 
         },
@@ -99,20 +102,16 @@ export class DbGoalsComponent implements OnInit, OnChanges {
             console.log('GOALS INIT', this.goalItems);
 
             for (const goal of this.goalItems) {
-                goal.startDateOutput = this.dateService.convertDateToIso(new Date(goal.startTime), true);
-                goal.deadlineOutput = this.dateService.convertDateToIso(new Date(goal.deadline), true);
+                goal.startDateOutput = this.dateService.convertDateToIso(
+                    new Date(goal.startTime), true);
+                goal.deadlineOutput = this.dateService.convertDateToIso(
+                    new Date(goal.deadline), true);
 
                 if (!this.goalTypes.includes(goal.type)) {
                     this.goalTypes.push(goal.type);
                     setTimeout(() => this.getGoalData[goal.type](goal));
                 }
             }
-        }
-    }
-
-    processTypes() {
-        for (const goalType of this.goalTypes) {
-            this.getGoalData[goalType]();
         }
     }
 }
