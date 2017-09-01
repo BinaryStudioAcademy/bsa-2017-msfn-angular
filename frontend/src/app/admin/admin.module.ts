@@ -21,6 +21,7 @@ import { SportHandlingComponent } from './admin.components/sport-handling/sport-
 import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
 import { GoalListComponent } from './admin.components/goal-list/goal-list.component';
 import { MeasureTypeComponent } from './admin.components/measure-type/measure-type.component';
+import { SelectSportComponent } from './admin.components/select-sport/select-sport.component';
 
 @NgModule({
     imports: [
@@ -40,12 +41,16 @@ import { MeasureTypeComponent } from './admin.components/measure-type/measure-ty
         SportsListComponent,
         GoalListComponent,
         MeasureListComponent,
-        MeasureTypeComponent
+        MeasureTypeComponent,
+        SelectSportComponent,
     ],
     providers: [
         ToasterService,
         AdminRootProfileService,
         ExerciseCreateService
+    ],
+    entryComponents: [
+        SelectSportComponent,
     ]
 })
 export class AdminModule {}

@@ -7,7 +7,7 @@ const
 module.exports = function (app) {
 
     app.post(baseUrl, isAdmin, function (req, res, next) {
-       exerciseTypeService.createExerciseType(req.body.name, function(err, data) {
+       exerciseTypeService.createExerciseType({name: req.body.name}, function(err, data) {
             res.data = data;
             res.err = err;
             next();
@@ -15,15 +15,15 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.put(baseUrl, isAdmin, function (req, res, next) {
-        exerciseTypeService.updateExerciseTypeByCode(req.body.code, req.body, function(err, data) {
+        exerciseTypeService.updateExerciseTypeById(req.body._id, req.body, function(err, data) {
             res.data = data;
             res.err = err;
             next();
        });
     }, apiResponse);
 
-    app.delete(baseUrl + ':code', isAdmin, function (req, res, next) {
-        exerciseTypeService.deleteExerciseTypeByCode(req.params.code, function(err, data) {
+    app.delete(baseUrl + ':id', isAdmin, function (req, res, next) {
+        exerciseTypeService.deleteExerciseTypeById(req.params.id, function(err, data) {
             res.err = err;
             res.data = data;
             next();

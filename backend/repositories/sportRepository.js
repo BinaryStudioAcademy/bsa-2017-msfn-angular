@@ -17,21 +17,21 @@ SportRepository.prototype.deleteAll = deleteAll;
 function getByCode(code, callback) {
     const query = this.model.findOne({
         code: code
-    });
+    })
     query.exec(callback);
 }
 
 function getByName(name, callback) {
     const query = this.model.findOne({
         name: name
-    });
+    })
     query.exec(callback);
 }
 
 function updateByCode(code, body, callback) {
     const query = this.model.update({
         code: code
-    }, body);
+    }, body)
     query.exec(callback);
 }
 
@@ -43,7 +43,6 @@ function deleteByCode(code, callback) {
 }
 
 function deleteAll(callback) {
-    const query = this.model.remove({});
     query.exec(callback);
 }
 

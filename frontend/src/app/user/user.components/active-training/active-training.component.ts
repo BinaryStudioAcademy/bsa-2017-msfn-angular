@@ -13,9 +13,15 @@ import { ActiveTrainingService } from './active-training.service';
 export class ActiveTrainingComponent implements OnInit {
     loaded: boolean;
     finishTrain: boolean | string = false;
+    reloadIntervals: boolean = false;
     userMeasures: any;
     trainingPlan: any;
     burnedCallories = 1445;
+
+    // validation prop
+    private editIntervalMode = false;
+    private runned = false;
+
 
     constructor(
         private activeTrainingService: ActiveTrainingService
@@ -38,20 +44,25 @@ export class ActiveTrainingComponent implements OnInit {
 
     intervalAction(action) {
         if (action.type === 'save') {
+            this.editIntervalMode = false;
             const data = action.data;
             data.exList = this.trainingPlan.exercisesList;
             this.trainingPlan.intervals[action.cacheIndex] = data;
             this.trainingPlan.exercisesList = [];
         } else if (action.type === 'delete') {
+            this.editIntervalMode = false;
             this.trainingPlan.intervals.splice(action.cacheIndex, 1);
             this.trainingPlan.exercisesList = [];
         } else if (action.type === 'edit') {
+            this.editIntervalMode = true;
             this.trainingPlan.exercisesList = this.trainingPlan.intervals[action.cacheIndex].exList;
         }
+        this.reloadIntervals = !this.reloadIntervals;
     }
     showExercises(exList) {
-        console.log(exList);
-        this.trainingPlan.exercisesList = exList;
+        if (!this.editIntervalMode) {
+            this.trainingPlan.exercisesList = exList;
+        }
     }
 
     choosePlan() {
@@ -69,6 +80,7 @@ export class ActiveTrainingComponent implements OnInit {
                 this.trainingPlan._id = result;
             }
         });
+        this.runned = true;
     }
 
     onFinish(timeData) {
@@ -84,6 +96,7 @@ export class ActiveTrainingComponent implements OnInit {
             }
             setTimeout(() => { this.finishTrain = false; }, 1000);
         });
+        this.runned = false;
     }
 
     onChangeList(updatedList) {

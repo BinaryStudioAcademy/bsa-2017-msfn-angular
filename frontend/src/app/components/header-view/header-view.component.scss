@@ -28,13 +28,25 @@ header {
         a {
             text-decoration: none;
             color: $text-main-color;
+            display: flex;
+            align-items: center;
         }
 
         .logo__icon {
-            width: 53px;
-            height: 40px;
-            vertical-align: bottom;
-            margin-bottom: 1px;
+            width: 125px;
+            height: 50px;
+            background: url('../../../globalStyles/img/logo.png');
+            background-size: contain;
+        }
+        .logo-mini__icon {
+            width: 60px;
+            height: 60px;
+            background: url('../../../globalStyles/img/mini_logo.png') center no-repeat;
+            background-size: 90%;
+
+            &:hover {
+                animation: logoAnim 1s ease-in-out forwards;
+            }
         }
 
         .logo__title {
@@ -78,6 +90,24 @@ header {
 
 md-menu {
     display: none;
+}
+
+@keyframes logoAnim {
+    0% {
+        background-size: 90%;
+    }
+    20% {
+        background-size: 99%;
+        transform: rotateZ(0deg)
+    }
+    80% {
+        background-size: 99%;
+        transform: rotateZ(180deg)
+    }
+    100% {
+        background-size: 90%;
+        transform: rotateZ(180deg);
+    }
 }
 
 

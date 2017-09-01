@@ -28,16 +28,13 @@
         align-items: center;
         width: 20%;
     }
-    
-    .data-container {
-        width: calc(100% - 20% - 320px);
-    }
 
     .interval-list {
         display: flex;
         align-items: center;
-        width: 480px;
+        width: calc(80% - 80px);
         height: 100%;
+        min-height: 160px;
         overflow-x: auto;
 
         .interval-circle {
@@ -78,37 +75,60 @@
                     fill: darkorange;
                 }
             }
+            .info {
+                display: flex;
+                justify-content: center;
+
+                .counter, .name {
+                    text-align: center;
+                    width: 80px;
+                    margin: auto;
+                    color: $text-main-color;
+                    font-family: $font-general;
+                    font-weight: bold;
+                }
+            }
         }
     }
 
-    
-
-    .edit-interval {
-        position: relative;
-        width: 160px;
-        height: 100px;
-        .lap, .warm {
-            max-width: 50px;
-            position: absolute;
-            font-size: 14px;
+    .data-container {
+        .edit-interval {
+            position: relative;
+            width: 160px;
+            height: 100px;
+            .lap, .warm {
+                max-width: 50px;
+                position: absolute;
+                font-size: 14px;
+                color: $text-main-color;
+                font-family: $font-general;
+                font-weight: bold;
+                background: none;
+                border: 0;
+                border-bottom: 2px solid $btn-color;
+            }
+            .lap {
+                top: 25px;
+                left: 45px;
+            }
+            .warm {
+                bottom: 25px;
+                right: 45px;
+            }
+            svg {
+                fill: $btn-color;
+                width: 160px;
+                height: 100px;
+            }
+        }
+        .name {
+            text-indent: 15px;
             color: $text-main-color;
             font-family: $font-general;
             font-weight: bold;
             background: none;
             border: 0;
-        }
-        .lap {
-            top: 25px;
-            left: 45px;
-        }
-        .warm {
-            bottom: 25px;
-            right: 45px;
-        }
-        svg {
-            fill: $btn-color;
-            width: 160px;
-            height: 100px;
+            border-bottom: 2px solid $btn-color;
         }
     }
 
@@ -139,7 +159,51 @@
             }
         }
     }
+
+    .topName, .bottomName {
+        color: #333;
+        position: absolute;
+        font-size: 14px;
+        font-family: $font-general;
+        font-weight: bold;
+    }
+    .topName {
+        top: 7px;
+        left: 45px;
+    }
+    .bottomName {
+        bottom: 7px;
+        right: 45px;
+    }
 }
 
+@media screen and (max-width: $small-screen) {
+    .container {
+        justify-content: space-around;
+        .buttons-container {
+            width: auto;
+        }
+        .interval-list {
+            display: flex;
+            align-items: center;
+            width: calc(100% - 80px);
+            height: 100%;
+            min-height: 160px;
+            overflow-x: auto;
+        }
+        .add-interval {
+            position: relative;
+            width: 80px;
+            height: 50px;
+            cursor: pointer;
+        }
+    }
+}
 
+@media screen and (min-width: $small-screen + 1) and (max-width: $medium-screen) {
+    
+}
 
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
+    
+}

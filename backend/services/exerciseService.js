@@ -10,6 +10,7 @@ ExerciseService.prototype.getExercisesByType = getExercisesByType;
 ExerciseService.prototype.upadeteExerciseById = upadeteExerciseById;
 ExerciseService.prototype.deleteExerciseById = deleteExerciseById;
 ExerciseService.prototype.getExerciseById = getExerciseById;
+ExerciseService.prototype.getExercisesBySport = getExercisesBySport;
 
 function createExercise(body, callback) {
 
@@ -40,6 +41,22 @@ function getExercisesByType(type, callback){
     const params = {
         filter: {
             type: type
+        },
+    };
+    exerciseRepository.get(params, (err, exerciseData) => {
+        if (err) return callback(err);
+        if (exerciseData === null) {
+            callback(null, new ApiError('Not found exersises'));
+        } else {
+            callback(null, exerciseData);
+        }
+    });
+}
+
+function getExercisesBySport(id, callback){
+    const params = {
+        filter: {
+            sports: id
         },
     };
     exerciseRepository.get(params, (err, exerciseData) => {

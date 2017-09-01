@@ -1,7 +1,7 @@
 <div *ngIf="loaded" class="container centerContent">
     <div class="timers">
         <h2>{{trainingPlan.name}}</h2>
-        <app-secundomer [finishTrain]="finishTrain" [intervals]="trainingPlan.intervals" (onStart)="onStart()" (onFinish)="onFinish($event)" (showExercises)="showExercises($event)"></app-secundomer>
+        <app-secundomer [finishTrain]="finishTrain" [intervals]="trainingPlan.intervals" [reloadIntervals]="reloadIntervals" (onStart)="onStart()" (onFinish)="onFinish($event)" (showExercises)="showExercises($event)"></app-secundomer>
     </div>
     <div class="child">
         <div class="exlist centerContent">

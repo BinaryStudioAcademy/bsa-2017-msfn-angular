@@ -25,10 +25,13 @@ button {
             background-color: $btn-color;
         }
         &.finish {
-            background-color: darkred;
+            background-color: rgb(139, 20, 20);
         }
         &.pause {
-            background-color: darkorange;
+            background-color: rgb(255, 160, 20);
+        }
+        &.circle {
+            background-color: #7da7d9;
         }
     }
     &.controll {
@@ -53,12 +56,21 @@ button {
     background-color: $gradient-from-color;
 
     .interval {
+        transition: all 1s linear;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        height: 20px;
         .field {
             width: 90%;
             float: left;
+            text-align: center;
+            text-shadow: 0 0 2px 0 white;
+            font-weight: bold;
         }
         input {
+            width: 20px;
+            height: 20px;
             float: right;
         }
     }

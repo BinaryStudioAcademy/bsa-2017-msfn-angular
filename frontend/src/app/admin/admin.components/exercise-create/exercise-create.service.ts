@@ -31,6 +31,19 @@ export class ExerciseCreateService {
                 callback(data);
         });
     }
+
+    getSportTypes(callback) {
+        const request: IHttpReq = {
+            url: '/api/sport/',
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then(data => {
+                callback(data);
+        });
+    }
+
     getExerciseById(id, callback): void {
         const request: IHttpReq = {
             url: '/api/exercise/' + id,
@@ -61,8 +74,10 @@ export class ExerciseCreateService {
                 name: exerciseForm.name,
                 typeId: exerciseForm.typeId,
                 description: exerciseForm.description,
-                image: exerciseForm.image
+                image: exerciseForm.image,
+                measure: exerciseForm.measure,
                 // sportsId: exerciseForm.sportsId
+                sports: exerciseForm.sports
             },
             successMessage: 'Edited'
         };

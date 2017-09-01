@@ -8,21 +8,12 @@ function ExerciseTypeRepository() {
 
 ExerciseTypeRepository.prototype = new Repository();
 
-ExerciseTypeRepository.prototype.findByCode = findByCode;
+ExerciseTypeRepository.prototype.findById = findById;
 ExerciseTypeRepository.prototype.deleteAll = deleteAll;
-ExerciseTypeRepository.prototype.deleteByCode = deleteByCode;
-ExerciseTypeRepository.prototype.updateByCode = updateByCode;
 
-function findByCode(code, callback) {
+function findById(id, callback) {
     const query = this.model.findOne({
-        code: code
-    });
-    query.exec(callback);
-};
-
-function deleteByCode(code, callback) {
-    const query = this.model.remove({
-        code: code
+        _id: id
     });
     query.exec(callback);
 };
@@ -31,12 +22,5 @@ function deleteAll(callback) {
     const query = this.model.remove({});
     query.exec(callback);
 }
-
-function updateByCode(code, body, callback) {
-    const query = this.model.update({
-        code: code
-    }, body);
-    query.exec(callback);
-};
 
 module.exports = new ExerciseTypeRepository();

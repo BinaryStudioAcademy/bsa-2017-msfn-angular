@@ -9,9 +9,15 @@ const Exercise = new Schema({
     },
     measure: String,
     isRemoved: Boolean,
-    sportsId: Array,
+    sports: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Sport'
+        }
+    ],
     description: String,
-    image: String
+    image: Array,
+    externalId: { type : String , unique : true, required : false, dropDups: true }
 });
 
 module.exports = mongoose.model('Exercise', Exercise);

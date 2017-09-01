@@ -23,7 +23,8 @@ const TrainingPlan = new Schema({
         {
             exList: Array,
             lapTime: Number,
-            warmTime: Number
+            warmTime: Number,
+            name: String
         }
     ],
     trainingType: 'general' | 'interval',

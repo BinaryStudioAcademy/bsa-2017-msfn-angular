@@ -1,15 +1,15 @@
 <div class="goals inner-container">
     <h2><a routerLink="goals">{{ title }}</a></h2>
     <div class="content">
-        <div id="set-goal" *ngIf="goals.length === 0">
+        <div id="set-goal" *ngIf="goalItems.length === 0">
             There are no goals yet.
             <button md-icon-button type="button" routerLink="goals">
                 Set one!
             </button>
         </div>
 
-        <div class="goal-item" *ngFor="let goal of goals">
-            <div class="goal-body" *ngIf="goals.length > 0">
+        <div class="goal-item" *ngFor="let goal of goalItems">
+            <div class="goal-body" *ngIf="goalItems.length > 0">
                 <div class="goal-start-date">
                     start: {{ goal.startDateOutput }}
                 </div>
@@ -21,6 +21,22 @@
                         {{ goal.type }}
                     </div>
                     ({{ goal.value }})
+                </div>
+                <div class="goal-progress" *ngIf="goal.progress">
+                    <p class="start-value" *ngIf="goal.progress.current !== goal.progress.start">
+                        initial: {{ goal.progress.start }}
+                    </p>
+                    <p class="current-value" [ngStyle]="{'left': goal.progress.value + '%'}">
+                        current: {{ goal.progress.current }}
+                    </p>
+                    <p class="end-value">
+                        goal: {{ goal.progress.goal }}
+                    </p>
+                    <md-progress-bar
+                        [color]="accent"
+                        [mode]="determinate"
+                        [value]="goal.progress.value">
+                    </md-progress-bar>
                 </div>
             </div>
         </div>
