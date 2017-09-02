@@ -38,7 +38,7 @@ export class SecundomerService {
             + Math.floor(34 + (255 * (1 - perc))) + ', '
             + Math.floor(34 + (255 * (1 - perc))) + ')';
         perc = (perc < 0.01) ? 0.01 : perc;
-        perc = (perc > 0.91) ? 0.91 : perc;
+        perc = (perc > 0.95) ? 1 : perc;
         elem.style.backgroundPosition = elem.clientWidth * perc + 'px 0px';
     }
 
