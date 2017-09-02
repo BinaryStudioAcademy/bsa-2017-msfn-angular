@@ -120,5 +120,17 @@ $small-screen: 440px;
         .settings__photo, .settings__name, .logo__title {
             display: none;
         }
+        .logo {
+            .logo-mini__icon {
+                width: 40px;
+                height: 40px;
+            }
+            .logo__icon {
+                width: 75px;
+                height: 30px;
+                background: url('../../../globalStyles/img/logo.png');
+                background-size: contain;
+            }
+        }
     }
 }
