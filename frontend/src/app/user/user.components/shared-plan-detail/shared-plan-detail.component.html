@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="left-wrapper">
+        <div class="plan-name">{{trainingPlan.name}}</div>
+        <div class="author-name" *ngIf="trainingPlan.user">
+            <span class="left">By:</span><span class="right">{{trainingPlan.user.fullName}}</span>
+        </div>
+        <div class="training-type">
+            <span class="left">Type:</span><span class="right">{{trainingPlan.trainingType}}</span>
+        </div>
+        <button md-raised-button class="save-button">Copy to my plans</button>
+    </div>
+    <div class="exercise-wrapper">
+
+    </div>
+</div>

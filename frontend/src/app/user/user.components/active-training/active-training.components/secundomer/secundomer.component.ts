@@ -80,7 +80,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
             minute: '2-digit',
             second: '2-digit'
         });
-        return formatter.format(millisecnods - 3000 * 60 * 60);
+        return formatter.format(millisecnods - 2000 * 60 * 60);
     }
 // secundomer functions
     run(): void {

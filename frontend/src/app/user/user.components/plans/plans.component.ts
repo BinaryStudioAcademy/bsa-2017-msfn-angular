@@ -90,6 +90,7 @@ export class PlansComponent implements OnInit {
             return;
         }
         this.lastSearch = search;
+        (<any>this.filter.filter).search = search;
 
         clearTimeout(this.searchTimeout);
 
@@ -98,14 +99,13 @@ export class PlansComponent implements OnInit {
         if (!search) {
             this.loadPlans();
         } else {
-            this.selectedTab = 0;
             this.searchPlans(search);
         }
     }
 
     searchPlans(search) {
         const request: IHttpReq = {
-            url: `/api/training-plan/search/${search}`,
+            url: `/api/training-plan/search/${encodeURIComponent(this.encryptService.encrypt(this.filter.filter))}`,
             method: 'GET'
         };
 
@@ -141,12 +141,14 @@ export class PlansComponent implements OnInit {
                     }
                 });
                 this.loading = false;
-                console.log(this.plans);
             });
     }
 
     loadPlans() {
-        console.log(this.filter);
+        if ((<any>this.filter.filter).search) {
+            this.searchPlans(this.lastSearch);
+            return;
+        }
         this.filter.offset  = this.plans.length;
         const request: IHttpReq = {
             url: `/api/training-plan/public/${encodeURIComponent(this.encryptService.encrypt(this.filter))}`,
@@ -186,7 +188,6 @@ export class PlansComponent implements OnInit {
                     }
                 });
                 this.loading = false;
-                console.log(this.plans);
             });
     }
 }
