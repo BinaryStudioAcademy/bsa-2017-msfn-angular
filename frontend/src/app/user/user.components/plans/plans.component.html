@@ -9,6 +9,7 @@
                    class="plans-search"
                    #search
                    placeholder="Search"
+                   (keyup)="setSearch(search.value)"
                    autocomplete="off">
             <md-icon mdSuffix>search</md-icon>
         </md-input-container>

@@ -39,10 +39,10 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl + '/search/:search', function(req, res, next) {
+        const params = decrypt(req.params.search);
         trainingPlanRepository.Search(
-            req.params.search,
+            params,
             (err, data) => {
-                console.log(data);
                 res.err = err;
                 res.data = data;
                 next();
