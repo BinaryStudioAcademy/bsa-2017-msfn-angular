@@ -12,6 +12,7 @@ Repository.prototype.getById = getById;
 Repository.prototype.findByObject = findByObject;
 Repository.prototype.update = update;
 Repository.prototype.get = get;
+Repository.prototype.makeObjectId = makeObjectId;
 
 function add(data, callback) {
     const model = this.model;
@@ -79,6 +80,10 @@ function get(params, callback) {
         query.populate(params.populate);
     }
     query.exec(callback);
+}
+
+function makeObjectId(string) {
+    return ObjectId(string);
 }
 
 module.exports = Repository;
