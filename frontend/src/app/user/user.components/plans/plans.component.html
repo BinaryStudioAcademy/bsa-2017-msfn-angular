@@ -1,4 +1,4 @@
-<div class="container">
+<div class="plans-container">
     <div class="plans-header">
         <md-tab-group class="plans-tabs-wrap" [(selectedIndex)]="selectedTab" (selectChange)="changeSort($event)">
             <md-tab label="All"></md-tab>
@@ -14,7 +14,7 @@
             <md-icon mdSuffix>search</md-icon>
         </md-input-container>
     </div>
-    <div class="plans-wrap">
+    <div class="plans-wrap" *ngIf="plans.length > 0">
         <div class="item-container" *ngFor="let plan of plans">
             <i class="material-icons train-item-ico">face</i>
             <p class="train-item-text">{{ plan.name }}</p>
@@ -22,6 +22,11 @@
                 <div class="item-author">By {{plan.user.fullName}}</div>
                 <div class="item-exercise-count">{{plan.exercisesList.length}} exercises</div>
             </div>
+        </div>
+    </div>
+    <div class="plans-empty-wrap plans-wrap" *ngIf="plans.length === 0">
+        <div class="plans-empty item-container">
+            <p class="train-item-text">Nothing found</p>
         </div>
     </div>
     <div class="load-wrap" *ngIf="ableToLoad">
