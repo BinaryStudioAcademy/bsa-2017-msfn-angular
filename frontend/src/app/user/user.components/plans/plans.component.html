@@ -15,7 +15,7 @@
         </md-input-container>
     </div>
     <div class="plans-wrap" *ngIf="plans.length > 0">
-        <div class="item-container" *ngFor="let plan of plans">
+        <div class="item-container" *ngFor="let plan of plans" routerLink="/user/plans/{{plan._id}}">
             <i class="material-icons train-item-ico">face</i>
             <p class="train-item-text">{{ plan.name }}</p>
             <div class="item-footer">
