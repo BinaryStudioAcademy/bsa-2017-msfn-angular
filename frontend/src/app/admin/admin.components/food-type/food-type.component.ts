@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FoodService } from '../../services/food.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 import { MdSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { IFoodType } from '../../../models/food-type';
@@ -35,9 +35,10 @@ export class FoodTypeComponent implements OnInit {
         );
         setTimeout(() => this.cd.markForCheck());
         this.foodService.getAllFoodTypes( (response) => {
+            console.log(response);
             this.tableDatabase.addFoodTypes(response);
         });
-
+        console.log(this.tableDatabase.data);
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
             .debounceTime(150)
             .distinctUntilChanged()

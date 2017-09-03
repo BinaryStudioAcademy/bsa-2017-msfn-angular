@@ -1,17 +1,16 @@
-
+<div class="food-edit-dialog-container">
     <h2 class="title" md-dialog-title>Food details</h2>
-    <md-dialog-content class="food-edit-dialog-container">
-
+    <md-dialog-content >
         <md-input-container>
             <input mdInput
                    placeholder="Name"
                    [(ngModel)]="food.name"
                    name="name">
             <md-error *ngIf="nameFormControl.hasError('required')">
-                First name is required
+                Name is required
             </md-error>
-            <md-error *ngIf="nameFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')">
-                Name should contain 2-20 characters
+            <md-error *ngIf="nameFormControl.hasError('maxlength')">
+                Name should contain less than 50 characters
             </md-error>
         </md-input-container>
 
@@ -73,14 +72,12 @@
                       placeholder="Food description"
                       [(ngModel)]="food.description"
                       [formControl]="descriptionFormControl"></textarea>
-            <md-error *ngIf="descriptionFormControl.hasError('required')">
-                Description is required
-            </md-error>
-            <md-error *ngIf="descriptionFormControl.hasError('minlength') || descriptionFormControl.hasError('maxlength')">
-                Description should contain 5-300 characters
+            <md-error *ngIf="descriptionFormControl.hasError('maxlength')">
+                Description should contain less than 300 characters
             </md-error>
         </md-input-container>
     </md-dialog-content>
     <md-dialog-actions>
-        <button md-button class="btn">Save</button>
+        <button md-button class="btn" (click)="save()">Save</button>
     </md-dialog-actions>
+</div>

@@ -1,5 +1,26 @@
-<div >
+<div class="food-list-container">
     <div class="filtering-items">
+        <md-input-container >
+            <input mdInput
+                   #search
+                   placeholder="Search"
+                   [(ngModel)]="filter"
+                   (change)="updateFoods()"
+                   (keyup)="updateFoods()"
+                   autocomplete="off">
+            <md-icon mdSuffix>search</md-icon>
+        </md-input-container>
+        <button md-button
+                disableRipple
+                class="btn"
+                (click)="openEditFoodDialog(true)"
+                id="btn-add">Add food
+        </button>
+        <app-list
+            [items]="items"
+            [options]="options"
+            placeholder="Types"
+            (onChangedList)="updateFoods()"></app-list>
     </div>
     <md-grid-list>
         <md-grid-tile *ngFor="let food of foods"

@@ -5,13 +5,13 @@
             <input autofocus mdInput type="number" min="1" name="count" placeholder="Value" required [(ngModel)]="value" (change)="checkValue()">
             <md-hint *ngIf="!validValue">
                     Value must me positive
-            </md-hint>    
+            </md-hint>
         </md-input-container>
     </div>
     <div class="item-container">
         <md-input-container>
-            <input mdInput [mdDatepicker]="startPicker" placeholder="Deadline" [min]="minDate" [(ngModel)]="deadline" [disabled]="true">
-            <button mdSuffix [mdDatepickerToggle]="startPicker"></button>
+            <!--<input mdInput [mdDatepicker]="startPicker" placeholder="Deadline" [min]="minDate" [(ngModel)]="deadline" [disabled]="true">
+            <button mdSuffix [mdDatepickerToggle]="startPicker"></button>-->
         </md-input-container>
         <md-datepicker touchUi="true" #startPicker></md-datepicker>
     </div>
@@ -27,8 +27,8 @@
 
     <div class="btn-container">
         <button md-raised-button [md-dialog-close]="false">Close</button>
-        <button md-raised-button 
-        (click)="addUpdateUserGoal({value: value, type: selectedType, deadline: deadline, _id: id})" 
+        <button md-raised-button
+        (click)="addUpdateUserGoal({value: value, type: selectedType, deadline: deadline, _id: id})"
         [md-dialog-close]="true"
         [disabled]="!validValue">Save</button>
     </div>

@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
-import {Router} from '@angular/router';
+import {MD_DIALOG_DATA} from '@angular/material';
 import {FoodService} from '../../services/food.service';
 import {IFood} from '../../../models/food';
 import {FormControl, Validators} from '@angular/forms';
+import {ToasterService} from "../../../services/toastr.service";
 
 @Component({
     selector: 'app-food-edit-dialog',
@@ -18,19 +18,16 @@ export class FoodEditDialogComponent implements OnInit {
 
     constructor(
         @Inject(MD_DIALOG_DATA) public data: { food: IFood, newItem: boolean},
-        private mdDialogRef: MdDialogRef<FoodEditDialogComponent>,
         private foodService: FoodService,
-        private router: Router
+        private toasterService: ToasterService
     ) { }
 
     nameFormControl = new FormControl('', [
         Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20)
+        Validators.maxLength(50)
     ]);
 
     descriptionFormControl = new FormControl('', [
-        Validators.minLength(5),
         Validators.maxLength(300)
     ]);
 
@@ -46,7 +43,16 @@ export class FoodEditDialogComponent implements OnInit {
         });
     }
 
-    save(food) {
-        this.foodService[this.newItem ? 'addFood' : 'updateFood'](food, (data) => {});
+    save() {
+        /*if (!(this.nameFormControl.valid
+            && this.numberFormControl.valid)) {
+            this.toasterService.showMessage('error', 'Data wasn\'t added', 'Invalid data');
+            return;
+        }*/
+        this.foodService[this.newItem ? 'addFood' : 'updateFood'](this.food, (data) => {
+            this.updateData(data);
+        });
     }
+
+    updateData(data) {}
 }

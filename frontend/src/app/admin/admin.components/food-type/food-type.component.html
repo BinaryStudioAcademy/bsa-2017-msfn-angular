@@ -3,7 +3,7 @@
             disableRipple
             class="btn"
             (click)="addRow()"
-            id="btn-add">Add food type
+            id="btn-add">Add food
     </button>
     <div>
         <md-input-container>
@@ -17,6 +17,8 @@
               #table
               [dataSource]="dataSource"
               mdSort>
+
+
 
         <!-- name -->
         <ng-container cdkColumnDef="name">

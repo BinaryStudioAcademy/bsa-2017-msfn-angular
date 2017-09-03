@@ -11,7 +11,7 @@ export class FoodService {
     constructor(private httpService: HttpService) {}
 
     getAllFoodTypes(callback): void {
-        /*const request: IHttpReq = {
+        const request: IHttpReq = {
             url: 'api/food-type',
             method: 'GET',
             body: {}
@@ -19,52 +19,7 @@ export class FoodService {
         this.httpService.sendRequest(request)
             .then( data => {
                 callback(data);
-            });*/
-       const foodTypes: IFoodType[] = [
-           {
-               name: 'Fish',
-               description: 'Lorem ipsum dolor sit amet,' +
-               'consectetur adipiscing elit, sed do eiusmod ' +
-               'tempor incididunt ut labore et dolore magna aliqua.',
-               isRemoved: false
-           },
-           {
-               name: 'Vegetables',
-               description: 'Lorem ipsum dolor sit amet,' +
-               'consectetur adipiscing elit, sed do eiusmod ' +
-               'tempor incididunt ut labore et dolore magna aliqua.',
-               isRemoved: false
-           },
-           {
-               name: 'Fruit',
-               description: 'Lorem ipsum dolor sit amet,' +
-               'consectetur adipiscing elit, sed do eiusmod ' +
-               'tempor incididunt ut labore et dolore magna aliqua.',
-               isRemoved: false
-           },
-           {
-               name: 'Nuts and seeds',
-               description: 'Lorem ipsum dolor sit amet,' +
-               'consectetur adipiscing elit, sed do eiusmod ' +
-               'tempor incididunt ut labore et dolore magna aliqua.',
-               isRemoved: false
-           },
-           {
-               name: 'Dairy products',
-               description: 'Lorem ipsum dolor sit amet,' +
-               'consectetur adipiscing elit, sed do eiusmod ' +
-               'tempor incididunt ut labore et dolore magna aliqua.',
-               isRemoved: false
-           },
-           {
-               name: 'Baked goods',
-               description: 'Lorem ipsum dolor sit amet,' +
-               'consectetur adipiscing elit, sed do eiusmod ' +
-               'tempor incididunt ut labore et dolore magna aliqua.',
-               isRemoved: false
-           },
-       ];
-       callback(foodTypes);
+            });
     }
     addFoodType(body: IFoodType, callback): void {
         const request: IHttpReq = {
@@ -119,16 +74,16 @@ export class FoodService {
             );
     }
     getAllFood(callback): void {
-        /*const request: IHttpReq = {
-            url: 'api/food-type',
+        const request: IHttpReq = {
+            url: 'api/food',
             method: 'GET',
             body: {}
         };
         this.httpService.sendRequest(request)
             .then( data => {
                 callback(data);
-            });*/
-        const food: IFood[] = [
+            });
+        /*const food: IFood[] = [
             {
                 name: 'qwerty',
                 foodType: 'type',
@@ -165,7 +120,7 @@ export class FoodService {
                 foodType: 'sweet',
             },
         ];
-        callback(food);
+        callback(food);*/
     }
     deleteFood(body: IFood, callback): void {
         body.isRemoved = true;

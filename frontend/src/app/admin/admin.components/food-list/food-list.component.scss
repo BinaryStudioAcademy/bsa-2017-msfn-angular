@@ -21,9 +21,35 @@ md-grid-tile {
     }
 }
 
-#add-food {
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    width: auto;
+    height: 40px;
+}
+
+.filtering-items {
     display: flex;
+    justify-content: space-around;
     align-items: center;
-    color: $btn-color;
-    padding: 0 $content-lr-margin;
+}
+.food-list-container {
+    width: 90%;
+    margin: auto;
+}
+
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    width: auto;
+    height: 40px;
+    margin: 0 auto;
 }
