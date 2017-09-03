@@ -1,45 +1,121 @@
 @import '../../../../globalStyles/variables.scss';
 @import '../../../../globalStyles/text.scss';
 @import "../../../../globalStyles/indentations";
-.container {
-    padding: 20px 15px;
+
+.centerContent {
     display: flex;
-    .field-container {
-        width: 100%;
-        margin-bottom: 20px;
-    }
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    
     .about-container {
-        flex: 35%;
-        margin-right: $content-tb-margin;
-        padding: 0 15px;
-        #title-container {
+        width: 30%;
+        height: calc(90% - 70px); // 70px for save-button
+        min-height: 400px;
+        background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
+
+        .title-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: flex-end;
-            flex-wrap: wrap;
-            margin-bottom: $content-between-margin;
             h1 {
                 flex-basis: 100%;
-                margin: 0 0 $content-between-margin;
+                text-align: center;
             }
         }
-        .plan-name {
-            width: 200px;
-        }
-        .plan-description {
-            width: 200px;
-            min-height: 100px;
-        }
-        .field-items {
+        .field-container {
             display: flex;
-            flex-direction: column;
-        }
-        .field-item {
-            // display: inline-block;
-            margin-bottom: 20px;
-            display: flex;
+            justify-content: space-around;
             align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+
+            md-input-container {
+                width: 90%;
+            }
+
+            h2, h3 {
+                width: 100%;
+                margin-top: 0;
+            }
+            
+            h2 {
+                text-align: left;
+                text-indent: 5%;
+            }
+
+            h3 {
+                text-align: center;
+            }
+
+            .plan-name {
+                width: 90%;
+            }
+            .field-item {
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                md-radio-group {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-around;
+                }
+
+                md-slide-toggle {
+                    width: 100%;
+                }
+            }
+
+            .week-days {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                
+                .days {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                    input[type=checkbox] {
+                        display: none;
+                    }
+                    label {
+                        background-color: #5a6b60;
+                        opacity: 0.8;
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 23px;
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                    .item:nth-last-child(-n+2) label {
+                        background-color: #92ad9b;
+                    }
+                    label:hover,
+                    input:checked+label {
+                        cursor: pointer;
+                        background-color: #82ca9c!important;
+                        opacity: 1;
+                    }
+
+                    md-radio-group {
+                        justify-content: center;
+                    }
+                }
+            }
+
+            .count-days {
+                width: 50%;
+            }
+            
         }
+        
+        
         .radio-group {
             .radio-button {
                 display: block;
@@ -50,89 +126,50 @@
                 }
             }
         }
-        .days {
-            display: flex;
-            flex-wrap: wrap;
-            input[type=checkbox] {
-                display: none;
-            }
-            label {
-                background-color: #5a6b60;
-                opacity: 0.8;
-                height: 40px;
-                width: 40px;
-                border-radius: 23px;
-                margin-right: 10px;
-                margin-bottom: 10px;
-                font-size: 14px;
-                font-weight: bold;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .item:nth-last-child(-n+2) label {
-                background-color: #92ad9b;
-            }
-            label:hover,
-            input:checked+label {
-                cursor: pointer;
-                background-color: #82ca9c!important;
-                opacity: 1;
-            }
+    }
+    .childContainer {
+        width: 60%;
+        height: calc(90% - 70px); // 70px for save-button;
+        min-height: 400px;
+        display: flex;
+        flex-wrap: wrap;
+        background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
+    
+        app-exercise-list {
+            width: 100%;
+            height: calc(100% - 160px);
         }
-        .count {
-            height: 40px;
-            width: 40px;
-            margin: 0 10px;
-            text-align: center;
-            font-size: 16px;
+    
+        app-interval-training-plan {
+            width: 100%;
+            height: 160px;
+        }
+    }
+    .btn-container {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+
+        .btn-save {
+            display: block;
+            border: none;
+            width: 150px;
+            padding: 5px;
+            color: $text-main-color;
+            background-color: $btn-color;
             font-weight: bold;
-        }
-        .counter {
-            background-color: #82ca9c;
-            height: 30px;
-            width: 30px;
-            border-radius: 20px;
-            font-size: 20px;
-            line-height: 20px; // font-weight: bold;
+            font-size: 14px;
+            border-radius: 50px;
+            cursor: pointer;
             outline: none;
-            color: #fff;
         }
     }
-    .field-title {
-        font-size: 20px;
-        margin-bottom: 20px;
-        font-weight: bold;
-    }
-    .btn-save {
-        border: none;
-        margin-top: $content-between-margin;
-        width: 150px;
-        padding: 5px;
-        color: $text-main-color;
-        background-color: $btn-color;
-        font-weight: bold;
-        font-size: 14px;
-        border-radius: 50px;
-        cursor: pointer;
-        outline: none;
-    }
 }
 
-.childContainer {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 65%;
-
-    app-exercise-list {
-        width: 100%;
-    }
-
-    app-interval-training-plan {
-        width: 100%;
-    }
+.errorBorder {
+    border: 1px solid red;
 }
-
 
 .clear {
     clear: both;
@@ -144,9 +181,48 @@
     }
 }
 
-@media only screen and (min-width: $medium-screen) {
-    .container > .about-container > #title-container > h1 {
-        flex-basis: 70%;
-        margin: 0;
+@media only screen and (max-width: $medium-screen) {
+    .container {  
+        display: block;
+        overflow-y: auto;
+        
+        .about-container {
+            width: 100%;
+            height: 100%;
+
+            .field-container {
+                width: 100%;
+                margin: 0;
+
+                .week-days {
+                    .days {
+                        width: calc(40px*4 + 20px); // fix width to contain 4 week days, for pretty view
+                    }
+                }
+            }
+        }
+        .childContainer {
+            width: 100%;
+            height: calc(200% - 70px);
+            background: none;
+
+            app-exercise-list {
+                width: 100%;
+                height: calc(100vh - 70px);
+            }
+        
+            app-interval-training-plan {
+                width: 100%;
+                height: calc(100vh - 70px);
+            }
+        }
+        .btn-container {
+            flex-direction: column-reverse;
+
+            .btn-save {
+                margin: 0 auto;
+            }
+        }
+
     }
 }
