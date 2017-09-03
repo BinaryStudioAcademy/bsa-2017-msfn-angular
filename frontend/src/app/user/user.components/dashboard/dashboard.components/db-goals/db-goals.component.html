@@ -1,7 +1,7 @@
 <div class="goals inner-container">
     <h2><a routerLink="goals">{{ title }}</a></h2>
     <div class="content">
-        <div id="set-goal" *ngIf="goalItems.length === 0">
+        <div class="no-items" *ngIf="goalItems.length === 0">
             There are no goals yet.
             <button md-icon-button type="button" routerLink="goals">
                 Set one!
@@ -26,7 +26,7 @@
                     <p class="start-value" *ngIf="goal.progress.current !== goal.progress.start">
                         initial: {{ goal.progress.start }}
                     </p>
-                    <p class="current-value" [ngStyle]="{'left': goal.progress.value + '%'}">
+                    <p class="current-value" [ngStyle]="{'left': currentValuePos + '%'}">
                         current: {{ goal.progress.current }}
                     </p>
                     <p class="end-value">

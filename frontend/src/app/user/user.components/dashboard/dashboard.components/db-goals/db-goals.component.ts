@@ -30,8 +30,10 @@ export class DbGoalsComponent implements OnInit, OnChanges {
         activity: []
     };
 
+    currentValuePos: number;
+
     getGoalData = {
-        'Lose weight': (goal) => {
+        'Lose weight': goal => {
             if (this.dataToProcess.weight.length === 0) {
                 this.dataToProcess.weight = this.weightItems;
             }
@@ -42,9 +44,10 @@ export class DbGoalsComponent implements OnInit, OnChanges {
             const diff = goal.progress.start - goal.progress.goal,
                 currentDiff = goal.progress.start - goal.progress.current;
             goal.progress.value = currentDiff / diff * 100;
+            this.currentValuePos = goal.progress.value > 0 ? goal.progress.value : 0;
         },
 
-        'Increase weight': (goal) => {
+        'Increase weight': goal => {
             if (this.dataToProcess.weight.length === 0) {
                 this.dataToProcess.weight = this.weightItems;
             }
@@ -55,6 +58,7 @@ export class DbGoalsComponent implements OnInit, OnChanges {
             const diff = goal.progress.goal - goal.progress.start,
                 currentDiff = goal.progress.current - goal.progress.start;
             goal.progress.value = currentDiff / diff * 100;
+            this.currentValuePos = goal.progress.value > 0 ? goal.progress.value : 0;
         },
 
         'Burn calories': (goal) => {
