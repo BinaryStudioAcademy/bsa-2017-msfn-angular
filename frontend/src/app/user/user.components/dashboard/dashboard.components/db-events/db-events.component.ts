@@ -22,37 +22,37 @@ export class DbEventsComponent implements OnInit {
 
     events = [
         {
-            date: '2017-08-28T09:00:00.412Z',
+            date: '2017-09-04T09:00:00.412Z',
             value: 'Running across Central Park',
             timestamp: null
         },
         {
-            date: '2017-08-29T07:00:00.000Z',
+            date: '2017-09-08T07:00:00.000Z',
             value: 'Swimming',
             timestamp: null
         },
         {
-            date: '2017-08-29T13:00:00.000Z',
+            date: '2017-09-10T13:00:00.000Z',
             value: 'Pull-ups & Push-ups',
             timestamp: null
         },
         {
-            date: '2017-08-30T09:00:00.000Z',
+            date: '2017-09-11T09:00:00.000Z',
             value: 'Running down the street',
             timestamp: null
         },
         {
-            date: '2017-08-31T11:00:00.000Z',
+            date: '2017-09-11T11:00:00.000Z',
             value: 'Pull-ups & Push-ups',
             timestamp: null
         },
         {
-            date: '2017-09-01T07:30:00.000Z',
+            date: '2017-09-15T07:30:00.000Z',
             value: 'Lifting weights',
             timestamp: null
         },
         {
-            date: '2017-09-01T15:30:00.000Z',
+            date: '2017-09-15T15:30:00.000Z',
             value: 'Marathon training',
             timestamp: null
         }
@@ -61,7 +61,7 @@ export class DbEventsComponent implements OnInit {
     processDates = this.initProcessDates();
 
     selectedEvents: any[];
-    selectedDates = [];
+    selectedDates: any[];
     eventOutput: any[];
 
     ngOnInit() {
@@ -75,6 +75,8 @@ export class DbEventsComponent implements OnInit {
         }
 
         return () => {
+            this.eventOutput = [];
+
             const startDateObject = new Date(this.interval.startDate),
                 endDateObject = new Date(this.interval.endDate);
 

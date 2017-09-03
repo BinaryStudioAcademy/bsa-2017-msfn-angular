@@ -1,7 +1,11 @@
 <div class="news inner-container">
     <h2>{{ title }}</h2>
     <div class="content">
-        <div class="news-item">
+        <div class="no-items" *ngIf="news.length === 0">
+            There are no news.
+        </div>
+
+        <div class="news-item" *ngIf="news.length > 0">
             <div class="news-title">
                 {{ news[selIndex].title }}
             </div>
@@ -13,7 +17,10 @@
             </div>
         </div>
 
-        <md-radio-group class="selection" [(ngModel)]="selIndex">
+        <md-radio-group
+            class="selection"
+            *ngIf="news.length > 0"
+            [(ngModel)]="selIndex">
             <md-radio-button class="radio-option"
                 *ngFor="let index of indexes"
                 [value]="index">
