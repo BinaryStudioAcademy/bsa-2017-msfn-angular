@@ -44,7 +44,11 @@ function addItem(body, callback) {
                 startWeek : "Monday",
                 timeZone : "+2"
             };
-            body.advicedCalories = caloriesCountService.getAdvisedCalories(body);
+            caloriesCountService.getAdvisedCalories(body, data, res => {
+                if (res !== 'error') {
+                    body.advicedCalories = res
+                }
+            });
             // Generating registration confirmation "TOKEN" for user
             body.activateToken = makeid();
             // Add newly created user into DB
@@ -83,7 +87,11 @@ function updateItem(id, body, callback) {
                 if (err) return callback(err);
                 if (existingUser && existingUser.id !== id) return callback(new ApiError("User with such email already exists"));
                 if (body.weight || body.height || body.gender || body.birthday || body.activityLevel) {
-                    body.advicedCalories = caloriesCountService.getAdvisedCalories(body, data);
+                    caloriesCountService.getAdvisedCalories(body, data, res => {
+                        if (res !== 'error') {
+                            body.advicedCalories = res
+                        }
+                    });
                 }
                 userRepository.update(id, body, callback);
             });

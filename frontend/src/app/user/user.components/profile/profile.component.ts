@@ -99,6 +99,9 @@ export class ProfileComponent implements OnInit {
             'activityLevel': [this.user.activityLevel, Validators.compose([
                     Validators.required
             ])],
+            'gender': [this.user.gender, Validators.compose([
+                    Validators.required
+            ])],
     });
     }
 

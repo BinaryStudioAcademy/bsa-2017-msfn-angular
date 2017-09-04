@@ -3,7 +3,7 @@ function caloriesCountService() {
 
 caloriesCountService.prototype.getAdvisedCalories = getAdvisedCalories;
 
-function getAdvisedCalories(newData, currentData) {
+function getAdvisedCalories(newData, currentData, callback) {
 
     const gender = newData.gender || currentData.gender;
     const weight = newData.weight || currentData.weight;
@@ -14,7 +14,9 @@ function getAdvisedCalories(newData, currentData) {
     if (gender && weight && height && birthday && activityLevel) {
         let genderNumber = gender === 'Male' ? 5 : -161;
         let age = getAge(birthday);
-        return Math.round((10 * weight + 6.25 * height - 5 * age + genderNumber) * activityLevel);
+        callback(Math.round((10 * weight + 6.25 * height - 5 * age + genderNumber) * activityLevel));
+    } else {
+        callback('error')
     }
 }
 

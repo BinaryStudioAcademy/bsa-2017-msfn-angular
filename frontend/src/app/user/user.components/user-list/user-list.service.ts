@@ -62,7 +62,7 @@ export class UserListService {
             successMessage: 'Unfollow'
         };
         this.httpService.sendRequest(unfollowReq).then(data => {
-            if(data){
+            if (data) {
                 callback(null, data);
             }
         });
@@ -79,7 +79,7 @@ export class UserListService {
             successMessage: 'Followed'
         };
         this.httpService.sendRequest(followReq).then(data => {
-            if(data){
+            if (data) {
                 callback(null, data);
             }
         });
