@@ -72,9 +72,6 @@ md-grid-tile {
     margin-top: 15px;
 }
 
-#only-published {
-    margin-right: 15px;
-}
 
 .btn {
     border: none;
@@ -86,4 +83,18 @@ md-grid-tile {
     width: auto;
     height: 40px;
     margin: 0 auto;
+}
+
+@media only screen and (max-width: $medium-screen) {
+    .filtering-items {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    #btn-add {
+        margin-bottom: 20px;
+    }
+    md-grid-list {
+        justify-content: center;
+    }
 }

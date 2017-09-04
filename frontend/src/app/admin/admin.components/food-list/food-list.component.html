@@ -7,10 +7,8 @@
         <button md-button disableRipple class="btn" (click)="openEditFoodDialog(true)" id="btn-add">Add food
         </button>
         <md-slide-toggle 
-        id="only-published"
         (change)="toggleOnlyPublished($event.checked)"
         [checked]="true">Only published</md-slide-toggle>
-        <app-list [items]="items" [options]="options" placeholder="Types" (onChangedList)="updateFoods()"></app-list>
     </div>
     <md-grid-list>
         <md-grid-tile *ngFor="let food of foodsShown" (click)="openEditFoodDialog(false, food)">
