@@ -46,7 +46,6 @@ export class FoodListComponent implements OnInit {
     }
 
     updateFoods() {
-        debugger;
         let copiedFoods = [...this.foods];
         let filtered = [];
         if (this.items.length > 0) {

@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FoodService } from '../../services/food.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { DataSource } from '@angular/cdk/table';
-import { MdSort } from '@angular/material';
+import {DataSource} from '@angular/cdk/table';
+import {MdDialog, MdSort} from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { IFoodType } from '../../../models/food-type';
+import {FoodTypeEditDialogComponent} from '../food-type-edit-dialog/food-type-edit-dialog.component';
 
 @Component({
     selector: 'app-food-type',
@@ -23,8 +24,11 @@ export class FoodTypeComponent implements OnInit {
     @ViewChild(MdSort) sort: MdSort;
     @ViewChild('filter') filter: ElementRef;
 
+    focusedRowId: string;
+
     constructor(private cd: ChangeDetectorRef,
-                private foodService: FoodService) {
+                private foodService: FoodService,
+                private mdDialog: MdDialog) {
     }
 
     ngOnInit() {
@@ -35,10 +39,9 @@ export class FoodTypeComponent implements OnInit {
         );
         setTimeout(() => this.cd.markForCheck());
         this.foodService.getAllFoodTypes( (response) => {
-            console.log(response);
             this.tableDatabase.addFoodTypes(response);
         });
-        console.log(this.tableDatabase.data);
+
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
             .debounceTime(150)
             .distinctUntilChanged()
@@ -49,12 +52,22 @@ export class FoodTypeComponent implements OnInit {
             });
     }
 
-    addRow() {
-        this.tableDatabase.addNewFoodType('', '');
+
+    openFoodTypeEditDialog(newItem: boolean, foodTypeData: IFoodType) {
+        const foodType = newItem ? { name: '', description: ''} : foodTypeData;
+        this.mdDialog.open(FoodTypeEditDialogComponent, {
+            data: {
+                newItem,
+                foodType
+            }
+        });
     }
 
     toggle(row) {
         this.tableDatabase.toggleRemoved(row);
+        this.foodService.deleteFoodType(row, () => {
+            this.cd.markForCheck();
+        });
     }
 
 }

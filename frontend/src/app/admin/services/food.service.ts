@@ -3,6 +3,7 @@ import { HttpService } from '../../services/http.service';
 import { IHttpReq } from '../../models/http-req';
 import { IFood } from '../../models/food';
 import { IFoodType } from '../../models/food-type';
+import { CropperSettings } from 'ng2-img-cropper';
 
 
 @Injectable()
@@ -35,7 +36,7 @@ export class FoodService {
             );
     }
     deleteFoodType(body: IFoodType, callback): void {
-        body.isRemoved = true;
+        body.isRemoved = !body.isRemoved;
         this.updateFoodType(body, callback);
     }
     updateFoodType(body: IFoodType, callback) {
@@ -48,17 +49,6 @@ export class FoodService {
             .then(
                 data => callback(data)
             );
-    }
-    getAllFoods(callback): void {
-        const request: IHttpReq = {
-            url: 'api/food',
-            method: 'GET',
-            body: {}
-        };
-        this.httpService.sendRequest(request)
-            .then( data => {
-                callback(data);
-            });
     }
     addFood(body: IFood, callback): void {
         const request: IHttpReq = {
@@ -83,47 +73,9 @@ export class FoodService {
             .then( data => {
                 callback(data);
             });
-        /*const food: IFood[] = [
-            {
-                name: 'qwerty',
-                foodType: 'type',
-                customUserId: ''
-            },
-            {
-                name: 'milk',
-                foodType: 'Diary products',
-                customUserId: '123'
-            },
-            {
-                name: 'gtyut',
-                foodType: 'nuts',
-            },
-            {
-                name: 'jhfhjfhj',
-                foodType: 'sweet',
-            },
-            {
-                name: 'macaroon',
-                foodType: 'baked',
-            },
-            {
-                name: 'cheese',
-                foodType: 'Diary products',
-                customUserId: '123'
-            },
-            {
-                name: 'grdffg',
-                foodType: 'baj',
-            },
-            {
-                name: 'ede',
-                foodType: 'sweet',
-            },
-        ];
-        callback(food);*/
     }
     deleteFood(body: IFood, callback): void {
-        body.isRemoved = true;
+        body.isRemoved = !body.isRemoved;
         this.updateFood(body, callback);
     }
     updateFood(body: IFood, callback) {
@@ -150,17 +102,28 @@ export class FoodService {
             return (valueA < valueB ? -1 : 1) * (direction === 'asc' ? 1 : -1);
         });
     }
-    sortFoodData(data, column, direction = 'asc' || 'desc') {
-        return data.sort((a, b) => {
-            let propA = '';
-            let propB = '';
-            switch (column) {
-                case 'name': [propA, propB] = [a.name, b.name]; break;
-                case 'foodType': [propA, propB] = [a.foodType, b.foodType]; break;
-            }
-            const valueA = isNaN(+propA) ? propA : +propA;
-            const valueB = isNaN(+propA) ? propB : +propB;
-            return (valueA < valueB ? -1 : 1) * (direction === 'asc' ? 1 : -1);
+    saveImg(image, fileName, fileType, folder, callback) {
+        const sendData: IHttpReq = {
+            url: '/api/file',
+            method: 'POST',
+            body: {data: image, fileName: fileName, fileType: fileType, folder: folder},
+        };
+
+        this.httpService.sendRequest(sendData).then(data => {
+            callback(data);
         });
+    }
+    getCropperSettings(): CropperSettings {
+        const cropperSettings = new CropperSettings();
+        cropperSettings.noFileInput = true;
+        cropperSettings.width = 150;
+        cropperSettings.height = 150;
+        cropperSettings.croppedWidth = 150;
+        cropperSettings.croppedHeight = 150;
+        cropperSettings.canvasWidth = 150;
+        cropperSettings.canvasHeight = 150;
+        cropperSettings.dynamicSizing = true;
+        cropperSettings.touchRadius = 10;
+        return cropperSettings;
     }
 }

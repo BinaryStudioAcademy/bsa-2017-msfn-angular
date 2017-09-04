@@ -2,8 +2,8 @@
     <button md-button
             disableRipple
             class="btn"
-            (click)="addRow()"
-            id="btn-add">Add food
+            (click)="openFoodTypeEditDialog(true)"
+            id="btn-add">Add food type
     </button>
     <div>
         <md-input-container>
@@ -18,14 +18,13 @@
               [dataSource]="dataSource"
               mdSort>
 
-
-
         <!-- name -->
         <ng-container cdkColumnDef="name">
             <md-header-cell *cdkHeaderCellDef
                             md-sort-header>Name
             </md-header-cell>
             <md-cell *cdkCellDef="let row"
+                     (click)="openFoodTypeEditDialog(false, row)"
                      [ngClass]="{'removed': row.isRemoved}"
                      class="active">{{row.name}}</md-cell>
         </ng-container>
@@ -37,6 +36,7 @@
             </md-header-cell>
             <md-cell *cdkCellDef="let row"
                      [ngClass]="{'removed': row.isRemoved}"
+                     (click)="openFoodTypeEditDialog(false, row)"
                      class="active"
                      md-tooltip="{{ row.description }}"
                      >
