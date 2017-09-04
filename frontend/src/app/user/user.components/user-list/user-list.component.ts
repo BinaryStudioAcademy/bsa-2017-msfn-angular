@@ -1,9 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserListService } from './user-list.service';
 import ISubscribeUser = SubscribeApi.ISubscribeUser;
 import { WindowObj } from '../../../services/window.service';
 
-@Component ({
+@Component({
     selector: 'app-user-list',
     templateUrl: './user-list.component.html',
     styleUrls: ['./user-list.component.scss'],
@@ -33,8 +33,8 @@ export class UserListComponent implements OnInit {
     userPerPage = 20;
 
     constructor(private userListService: UserListService,
-                private window: WindowObj
-                ) {
+        private window: WindowObj
+    ) {
         this.users = {
             all: [],
             filtered: [],
@@ -56,12 +56,12 @@ export class UserListComponent implements OnInit {
     }
 
     ngOnInit() {
+        const currentUser = {
+            id: (this.window.data._injectedData as any).userId,
+            follow: []
+        };
         this.userListService.getAllUsers(data => {
-            const currentUser = {
-                id: (this.window.data._injectedData as any).userId,
-                follow: []
-            };
-            currentUser.follow = data[data.findIndex( item => item._id === currentUser.id)].follow;
+            currentUser.follow = data[data.findIndex(item => item._id === currentUser.id)].follow;
             for (const user of data) {
                 if (!(user.role === 'admin' || user._id === currentUser.id)) {
                     user.isFollowed = currentUser.follow.includes(user._id);
@@ -74,11 +74,18 @@ export class UserListComponent implements OnInit {
             }
         });
         this.userListService.getFollowers(data => {
+            data.forEach(element => {
+                element.isFollowed = currentUser.follow.includes(element._id);
+            });
             this.followers.all = data;
             this.followers.filtered = data;
             this.followers.show = data.slice(0, this.userPerPage);
+            console.log(this.followers);
         });
         this.userListService.getFollowing(data => {
+            data.forEach(element => {
+                element.isFollowed = currentUser.follow.includes(element._id);
+            });
             this.following.all = data;
             this.following.filtered = data;
             this.following.show = data.slice(0, this.userPerPage);
@@ -102,20 +109,27 @@ export class UserListComponent implements OnInit {
 
 
     unfollow(user: ISubscribeUser) {
-        if (user.justUnsubscribe) {
-            this.userListService.follow(user._id);
-            user.justUnsubscribe = false;
-        } else {
-            this.userListService.unfollow(user._id);
-            user.justUnsubscribe = true;
-
-        }
+        this.userListService.unfollow(user._id, (err, data) => {
+            user.isFollowed = false;
+        });
     }
 
-    followNew(user: ISubscribeUser) {
+    follow(user: ISubscribeUser) {
         user.isFollowed = true;
-        this.userListService.follow(user._id);
-        this.following.all.push(user);
-        this.following.show.push(user);
+        this.userListService.follow(user._id, (err, data) => {
+            user.isFollowed = true;
+            const userInList = this.following.all.some((el, ind) => {
+                if (el._id === user._id) {
+                    return false;
+                }
+                return true;
+            });
+            if (!userInList) {
+                this.following.all.push(user);
+                this.following.show = this.following.all.slice(0, this.userPerPage);
+            }
+        });
+
     }
+
 }
