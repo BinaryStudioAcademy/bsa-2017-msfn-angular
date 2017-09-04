@@ -15,7 +15,7 @@
     <button (click)="finishInterval()" *ngIf="secundomerService.runned" class="general finish">FINISH</button>
     <div class="numbers">{{beautifierTime(secundomerService.timer)}}</div>
     <!-- <button md-raised-button (click)="rest()" *ngIf="secundomerService.runned&&!secundomerService.warming" class="controll">REST</button> -->
-    <button md-raised-button (click)="endRest()" *ngIf="secundomerService.runned&&secundomerService.warming" class="controll">END REST</button>
+    <!-- <button md-raised-button (click)="endRest()" *ngIf="secundomerService.runned&&secundomerService.warming" class="controll">END REST</button> -->
     <div class="numbers" *ngIf="secundomerService.warming">{{beautifierTime(secundomerService.timerWarmNum)}}</div>
     <div class="intervalList" *ngIf="intervals[intervals.length - 1].exList && firstRun">
         <div class="interval" *ngFor="let interval of intervals; let i = index">
