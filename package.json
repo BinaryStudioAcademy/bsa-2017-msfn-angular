@@ -13,13 +13,10 @@
   },
   "authors": [
     "Dmitriy Beseda <dmitriy.beseda@binary.studio.com>",
-    "Andrey Kukuruza <andreyku6@gmail.com>",
-    "Dmytro Satskyi <satskyi96@gmail.com>",
     "Lina Vasylieva <lina.vasileva93@gmail.com>",
     "Stas Chernenko <chstas2@gmail.com>",
     "Roman Vey <roman.vey@gmail.com>",
-    "Tovmach Alexandr <alexandrtovmach@gmail.com>",
-    "Igor Stetsiuk <igorstetsuk@gmail.com>"
+    "Tovmach Alexandr <alexandrtovmach@gmail.com>"
   ],
   "private": true,
   "dependencies": {

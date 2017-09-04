@@ -1,26 +1,58 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { IHttpReq } from '../models/http-req';
-import { WeightControlService } from '../user/user.components/weight-control/weight-control.service';
 
 @Injectable()
 export class GoalProgressService {
 
-    constructor(private httpService: HttpService,
-                private weightControlService: WeightControlService) { }
+    constructor(private httpService: HttpService) { }
 
     getWeightProgress(items: any[], goal) {
-        console.log('WEIGHT PROGRESS INIT', items, goal);
-        const goalTimeStamp = new Date(goal.startTime).getTime(),
+        const startTimeStamp = new Date(goal.startTime).getTime(),
             currentWeight = items[items.length - 1];
 
-        const startWeight = items.find(item => {
-            return goalTimeStamp - new Date(item.date).getTime() < 86400000;
+        const startValue = items.find(item => {
+            return startTimeStamp - new Date(item.date).getTime() < 86400000;
         });
 
         return {
-            start: startWeight.weight,
+            start: startValue.weight,
             current: currentWeight.weight,
+            goal: goal.value
+        };
+    }
+
+    getTrainingCountProgress(items: any[], goal) {
+        const startTimeStamp = new Date(goal.startTime).getTime(),
+            endTimeStamp = startTimeStamp + 604800000;
+
+        const foundTrainingItems = items.filter(item => {
+            const itemTimeStamp = new Date(item.startDate).getTime();
+            return itemTimeStamp > startTimeStamp && itemTimeStamp < endTimeStamp;
+        });
+
+        return {
+            start: 0,
+            current: foundTrainingItems.length,
+            goal: goal.value
+        };
+    }
+
+    getExerciseCountProgress(items: any[], goal) {
+        const startTimeStamp = new Date(goal.startTime).getTime(),
+            endTimeStamp = startTimeStamp + 604800000;
+        let exerciceSum = 0;
+
+        for (const item of items) {
+            const itemTimeStamp = new Date(item.startDate).getTime();
+            if (itemTimeStamp > startTimeStamp && itemTimeStamp < endTimeStamp) {
+                exerciceSum += item.exercisesList.length;
+            }
+        }
+
+        return {
+            start: 0,
+            current: exerciceSum,
             goal: goal.value
         };
     }

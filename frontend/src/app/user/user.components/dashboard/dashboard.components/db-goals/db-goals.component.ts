@@ -27,34 +27,22 @@ export class DbGoalsComponent implements OnInit, OnChanges {
 
     dataToProcess = {
         weight: [],
-        activity: []
+        training: []
     };
 
     getGoalData = {
-        'Lose weight': (goal) => {
+        'Lose weight': goal => {
             if (this.dataToProcess.weight.length === 0) {
                 this.dataToProcess.weight = this.weightItems;
             }
-
-            goal.progress = this.goalProgressService.getWeightProgress(
-                this.dataToProcess.weight, goal);
-
-            const diff = goal.progress.start - goal.progress.goal,
-                currentDiff = goal.progress.start - goal.progress.current;
-            goal.progress.value = currentDiff / diff * 100;
+            this.getProgress(goal, 'getWeightProgress', 'weight', true);
         },
 
-        'Increase weight': (goal) => {
+        'Increase weight': goal => {
             if (this.dataToProcess.weight.length === 0) {
                 this.dataToProcess.weight = this.weightItems;
             }
-
-            goal.progress = this.goalProgressService.getWeightProgress(
-                this.dataToProcess.weight, goal);
-
-            const diff = goal.progress.goal - goal.progress.start,
-                currentDiff = goal.progress.current - goal.progress.start;
-            goal.progress.value = currentDiff / diff * 100;
+            this.getProgress(goal, 'getWeightProgress', 'weight');
         },
 
         'Burn calories': (goal) => {
@@ -63,13 +51,29 @@ export class DbGoalsComponent implements OnInit, OnChanges {
         'Run distance': (goal) => {
 
         },
-        'Do some count of exercises': (goal) => {
 
+        'Do some count of exercises': (goal) => {
+            if (this.dataToProcess.training.length === 0) {
+                this.goalProgressService.getLaunchedTrainingData(this.userId, res => {
+                    this.dataToProcess.training = res;
+                    this.getProgress(goal, 'getExerciseCountProgress', 'training');
+                });
+            } else {
+                this.getProgress(goal, 'getExerciseCountProgress', 'training');
+            }
         },
+
         'Do trainings count per week': (goal) => {
-            this.goalProgressService.getLaunchedTrainingData(this.userId, res => {
-            });
+            if (this.dataToProcess.training.length === 0) {
+                this.goalProgressService.getLaunchedTrainingData(this.userId, res => {
+                    this.dataToProcess.training = res;
+                    this.getProgress(goal, 'getTrainingCountProgress', 'training');
+                });
+            } else {
+                this.getProgress(goal, 'getTrainingCountProgress', 'training');
+            }
         },
+
         'Eat calories per day': (goal) => {
 
         },
@@ -116,6 +120,35 @@ export class DbGoalsComponent implements OnInit, OnChanges {
                     setTimeout(() => this.getGoalData[goal.type](goal));
                 }
             }
+        }
+    }
+
+    getProgress(goal,
+                serviceMethod: string,
+                dataType: string,
+                diffReversed?: boolean): void {
+
+        goal.progress = this.goalProgressService
+            [serviceMethod](this.dataToProcess[dataType], goal);
+
+        let diff, currentDiff;
+
+        if (serviceMethod === ('getExerciseCountProgress' || 'getTrainingCountProgress')) {
+            diff = goal.progress.goal;
+            currentDiff = goal.progress.current;
+        } else {
+            if (diffReversed) {
+                diff = goal.progress.start - goal.progress.goal;
+                currentDiff = goal.progress.start - goal.progress.current;
+            } else {
+                diff = goal.progress.goal - goal.progress.start;
+                currentDiff = goal.progress.current - goal.progress.start;
+            }
+        }
+
+        goal.progress.value = currentDiff / diff * 100;
+        if (goal.progress.value < 0) {
+            goal.progress.value = 0;
         }
     }
 }

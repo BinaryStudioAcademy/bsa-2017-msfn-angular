@@ -7,7 +7,8 @@
         height: 100%;
     }
 
-    .content > div {
+    #diff,
+    #selection {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
@@ -82,7 +83,8 @@ md-radio-group {
 @media only screen and (min-width: $small-screen) {
 
     .weight-control {
-        .content > div {
+        #diff,
+        #selection {
             display: flex;
             justify-content: space-between;
             flex-wrap: nowrap;

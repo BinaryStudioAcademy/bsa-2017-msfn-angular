@@ -37,17 +37,19 @@ export class PlanDetailComponent implements OnInit {
     types = [
         {
             key: 'general',
-            value: 'General training',
+            value: 'General',
             checked: false
         },
         {
             key: 'interval',
-            value: 'Interval training',
+            value: 'Interval',
             checked: false
         },
     ];
     userMeasures: any;
     displayExercises: Object[];
+    errorEmptyIntervals = false;
+    errorEmptyName = false;
 
     lastAfterClosedResult: string;
 
@@ -119,6 +121,7 @@ export class PlanDetailComponent implements OnInit {
             const data = action.data;
             data.exList = this.trainingPlan.exercisesList;
             this.trainingPlan.intervals[action.cacheIndex] = data;
+            this.errorEmptyIntervals = false;
             this.trainingPlan.exercisesList = [];
         } else if (action.type === 'delete') {
             this.trainingPlan.intervals.splice(action.cacheIndex, 1);
@@ -136,35 +139,52 @@ export class PlanDetailComponent implements OnInit {
         this.trainingPlan.count = selectedDays.length;
     }
 
-    changeTrainingCount(newValue: string, operation = '') {
-        if (!newValue) {
-            switch (operation) {
-                case 'dec':
-                    if (this.trainingPlan.count > 0) {
-                        this.trainingPlan.count -= 1;
-                    }
-                    break;
-                case 'inc':
-                    if (this.trainingPlan.count < 7) {
-                        this.trainingPlan.count += 1;
-                    }
-                    break;
-            }
-        } else {
-            if (parseInt(newValue, 10)) {
+    // changeTrainingCount(newValue: string, operation = '') {
+    //     if (!newValue) {
+    //         switch (operation) {
+    //             case 'dec':
+    //                 if (this.trainingPlan.count > 0) {
+    //                     this.trainingPlan.count -= 1;
+    //                 }
+    //                 break;
+    //             case 'inc':
+    //                 if (this.trainingPlan.count < 7) {
+    //                     this.trainingPlan.count += 1;
+    //                 }
+    //                 break;
+    //         }
+    //     } else {
+    //         if (parseInt(newValue, 10)) {
 
-                this.trainingPlan.count = parseInt(newValue, 10);
-            }
-        }
+    //             this.trainingPlan.count = parseInt(newValue, 10);
+    //         }
+    //     }
 
-        if (this.trainingPlan.count > 7) {
-            this.trainingPlan.count = 7;
-        } else if (this.trainingPlan.count < 0) {
-            this.trainingPlan.count = 0;
+    //     if (this.trainingPlan.count > 7) {
+    //         this.trainingPlan.count = 7;
+    //     } else if (this.trainingPlan.count < 0) {
+    //         this.trainingPlan.count = 0;
+    //     }
+    // }
+
+
+    validation() {
+        let result = true;
+        if (!this.trainingPlan.name) {
+            this.errorEmptyName = true;
+            result = false;
+        } else if ((this.trainingPlan.trainingType === 'interval') && (!this.trainingPlan.intervals.length)) {
+            result = this.errorEmptyIntervals = true;
+            result = false;
         }
+        return result;
     }
 
     savePlan() {
+        if (!this.validation()) {
+            console.log('save run');
+            return;
+        }
         if (this.trainingPlan.trainingType === 'interval') {
             this.trainingPlan.exercisesList = [];
         }

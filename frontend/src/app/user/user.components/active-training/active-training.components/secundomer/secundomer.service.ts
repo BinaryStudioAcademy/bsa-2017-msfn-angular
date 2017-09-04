@@ -92,14 +92,11 @@ export class SecundomerService {
     // timer
 
     startTimer(i, rest, change, callback): void {
-        console.log('lap - ' + i);
         this.runned = true;
         if (!change) {
             this.timer = (rest) ? this.timerWarmNum : this.timerLapNum;
         }
         this.cacheView = this.timer;
-        console.log(change);
-        console.log(this.timer);
         this.idTimer = setInterval( () => {
             this.timer -= 250;
             this.percentToBar(document.getElementById('interval' + i), (this.cacheView - this.timer) / this.cacheView);
