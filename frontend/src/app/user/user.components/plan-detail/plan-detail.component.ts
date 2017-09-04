@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ExerciseEditDialogComponent } from './../exercise-edit-dialog/exercise-edit-dialog.component';
-import { IntervalTrainingPlanComponent } from './../interval-training-plan/interval-training-plan.component';
-import { MdDialog, MdDialogRef } from '@angular/material';
-import { IHttpReq } from './../../../models/http-req';
-import { HttpService } from '../../../services/http.service';
-import { ActivatedRoute } from '@angular/router';
-import { ExerciseListComponent } from './../exercise-list/exercise-list.component';
-import { GCalendarService } from '../../../services/gcalendar.service';
+import {Component, OnInit} from '@angular/core';
+import {ExerciseEditDialogComponent} from './../exercise-edit-dialog/exercise-edit-dialog.component';
+import {IntervalTrainingPlanComponent} from './../interval-training-plan/interval-training-plan.component';
+import {MdDialog, MdDialogRef} from '@angular/material';
+import {IHttpReq} from './../../../models/http-req';
+import {HttpService} from '../../../services/http.service';
+import {ActivatedRoute} from '@angular/router';
+import {ExerciseListComponent} from './../exercise-list/exercise-list.component';
+import {GCalendarService} from '../../../services/gcalendar.service';
 
 
 @Component({
@@ -21,13 +21,13 @@ export class PlanDetailComponent implements OnInit {
     exercisesList = [];
 
     days = [
-        { 'key': '1', 'value': 'Mon', 'checked': false, code: 'MO' },
-        { 'key': '2', 'value': 'Tue', 'checked': false, code: 'TU' },
-        { 'key': '3', 'value': 'Wed', 'checked': false, code: 'WE' },
-        { 'key': '4', 'value': 'Thu', 'checked': false, code: 'TH' },
-        { 'key': '5', 'value': 'Fri', 'checked': false, code: 'FR' },
-        { 'key': '6', 'value': 'Sat', 'checked': false, code: 'SA' },
-        { 'key': '0', 'value': 'Sun', 'checked': false, code: 'SU' }
+        {'key': '1', 'value': 'Mon', 'checked': false, code: 'MO'},
+        {'key': '2', 'value': 'Tue', 'checked': false, code: 'TU'},
+        {'key': '3', 'value': 'Wed', 'checked': false, code: 'WE'},
+        {'key': '4', 'value': 'Thu', 'checked': false, code: 'TH'},
+        {'key': '5', 'value': 'Fri', 'checked': false, code: 'FR'},
+        {'key': '6', 'value': 'Sat', 'checked': false, code: 'SA'},
+        {'key': '0', 'value': 'Sun', 'checked': false, code: 'SU'}
     ];
 
     // sportTypeValue doesn't use.. ?
@@ -66,11 +66,11 @@ export class PlanDetailComponent implements OnInit {
     };
 
 
-    constructor(
-        private gcalendar: GCalendarService,
-        private dialog: MdDialog,
-        private httpHandler: HttpService,
-        public activatedRoute: ActivatedRoute) {}
+    constructor(private gcalendar: GCalendarService,
+                private dialog: MdDialog,
+                private httpHandler: HttpService,
+                public activatedRoute: ActivatedRoute) {
+    }
 
     ngOnInit() {
         const sdata: IHttpReq = {
@@ -106,10 +106,11 @@ export class PlanDetailComponent implements OnInit {
                                 type.checked = true;
                             }
                         });
+
+                        console.log(this.trainingPlan);
                     }
                 });
         }
-
     }
 
     onChangeList(updatedList) {

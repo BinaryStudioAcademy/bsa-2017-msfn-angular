@@ -2,14 +2,35 @@
     <div class="left-wrapper">
         <div class="plan-name">{{trainingPlan.name}}</div>
         <div class="author-name" *ngIf="trainingPlan.user">
-            <span class="left">By:</span><span class="right">{{trainingPlan.user.fullName}}</span>
+            <span class="left">By:</span>
+            <span class="capitalize">{{trainingPlan.user.fullName}}</span>
+            <span *ngIf="user.userId === trainingPlan.userID">(you)</span>
         </div>
         <div class="training-type">
-            <span class="left">Type:</span><span class="right">{{trainingPlan.trainingType}}</span>
+            <span class="left">Type:</span>
+            <span class="right">{{trainingPlan.trainingType}}</span>
         </div>
-        <button md-raised-button class="save-button">Copy to my plans</button>
+        <div class="training-days">
+            <div class="days-heading">Days:</div>
+            <div class="days-wrap">
+                <div class="item"
+                     [class.active]="day.checked"
+                     *ngFor="let day of days">
+                    <span>{{day.value}}</span>
+                </div>
+            </div>
+        </div>
+        <button md-raised-button
+                *ngIf="user.userId !== trainingPlan.userID"
+                class="save-button"
+                (click)="savePlan()">Copy to my plans
+        </button>
     </div>
     <div class="exercise-wrapper">
-
+        <app-exercise-list
+            class="exercises"
+            [disableActions]="true"
+            [userMeasures]="userMeasures"
+            [exercisesList]="trainingPlan.exercisesList"></app-exercise-list>
     </div>
 </div>
