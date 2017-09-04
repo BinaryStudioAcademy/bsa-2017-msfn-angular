@@ -15,9 +15,10 @@ export class FoodListComponent implements OnInit {
     items = [];
     foods: IFood[] = [];
     foodsShown: IFood[];
-    itemsPerPage = 10000; // TODO: change to smaller and implement 
+    itemsPerPage = 10000; // TODO: change to smaller and implement
     filter = '';
     page = 1;
+    getOnlyPublished = true;
 
     constructor(private foodService: FoodService,
         private mdDialog: MdDialog) { }
@@ -33,13 +34,18 @@ export class FoodListComponent implements OnInit {
         });
     }
 
+    toggleOnlyPublished(value) {
+        this.getOnlyPublished = value;
+        this.updateFoodList();
+    }
+
     changeFoodPrivacy(id, value) {
-        this.foodService.changeFoodPrivacy(id, value, () => {});
+        this.foodService.changeFoodPrivacy(id, value, () => { });
     }
 
     removeFood(id, event) {
         event.stopPropagation();
-        this.foodService.deleteFood(id, () => {});
+        this.foodService.deleteFood(id, () => { });
         this.updateFoodList();
     }
 
@@ -98,13 +104,24 @@ export class FoodListComponent implements OnInit {
     }
 
     updateFoodList() {
-        this.foodService.getAllFood((data) => {
-            data = data.filter((elem) => {
-                return elem.isRemoved === false;
+
+        if (this.getOnlyPublished) {
+            this.foodService.getOnlyPublishedFood((data) => {
+                data = data.filter((elem) => {
+                    return elem.isRemoved === false;
+                });
+                this.foods = data;
+                this.foodsShown = data.slice(0, this.itemsPerPage);
             });
-            this.foods = data;
-            this.foodsShown = data.slice(0, this.itemsPerPage);
-        });
+        } else {
+            this.foodService.getAllFood((data) => {
+                data = data.filter((elem) => {
+                    return elem.isRemoved === false;
+                });
+                this.foods = data;
+                this.foodsShown = data.slice(0, this.itemsPerPage);
+            });
+        }
     }
 
 }

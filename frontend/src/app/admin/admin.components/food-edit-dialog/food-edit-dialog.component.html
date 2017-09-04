@@ -78,6 +78,10 @@
         </md-input-container>
     </md-dialog-content>
     <md-dialog-actions>
-        <button md-button class="btn" (click)="save()" [md-dialog-close]="true">Save</button>
+        <button md-button 
+        class="btn" 
+        (click)="save()" 
+        [disabled]="food.customUserId !== '' && !newItem"
+        [md-dialog-close]="true">Save</button>
     </md-dialog-actions>
 </div>

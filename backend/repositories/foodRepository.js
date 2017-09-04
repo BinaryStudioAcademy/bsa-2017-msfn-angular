@@ -15,14 +15,14 @@ FoodRepository.prototype.updateById = updateById;
 FoodRepository.prototype.updateIsPublished = updateIsPublished;
 FoodRepository.prototype.getById = getById;
 FoodRepository.prototype.getAllByType = getAllByType;
-FoodRepository.prototype.getAll = getAll;
+FoodRepository.prototype.getOnlyPublished = getOnlyPublished;
 
 function deleteAll(callback) {
     const query = this.model.remove({});
     query.exec(callback);
 }
 
-function getAll(userId, callback) {
+function getOnlyPublished(userId, callback) {
     const query = this.model.find({
         $or: [{
                 customUserId: userId

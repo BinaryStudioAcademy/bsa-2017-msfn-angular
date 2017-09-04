@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 function FoodService() {}
 
 FoodService.prototype.getAllFood = getAllFood;
+FoodService.prototype.getOnlyPublishedFood = getOnlyPublishedFood;
 FoodService.prototype.deleteAllFood = deleteAllFood;
 FoodService.prototype.getFoodByType = getFoodByType;
 FoodService.prototype.getFood = getFood;
@@ -14,8 +15,22 @@ FoodService.prototype.publishFood = publishFood;
 FoodService.prototype.deleteFood = deleteFood;
 
 
-function getAllFood(userId, callback) {
-    foodRepository.getAll(userId,(err, foodData) => {
+function getOnlyPublishedFood(userId, callback) {
+    foodRepository.getOnlyPublished(userId,(err, foodData) => {
+        if (err) {
+            return err;
+        }
+        if (foodData === null) {
+            callback(null, []);
+        } else {
+            callback(null, foodData);
+        }
+    })
+}
+
+function getAllFood(callback) {
+    console.log('ALL');
+    foodRepository.getAll((err, foodData) => {
         if (err) {
             return err;
         }

@@ -73,7 +73,7 @@ export class FoodService {
                 data => callback(data)
             );
     }
-    getAllFood(callback): void {
+    getOnlyPublishedFood(callback): void {
         const request: IHttpReq = {
             url: 'api/food',
             method: 'GET',
@@ -83,44 +83,19 @@ export class FoodService {
             .then( data => {
                 callback(data);
             });
-        /*const food: IFood[] = [
-            {
-                name: 'qwerty',
-                foodType: 'type',
-                customUserId: ''
-            },
-            {
-                name: 'milk',
-                foodType: 'Diary products',
-                customUserId: '123'
-            },
-            {
-                name: 'gtyut',
-                foodType: 'nuts',
-            },
-            {
-                name: 'jhfhjfhj',
-                foodType: 'sweet',
-            },
-            {
-                name: 'macaroon',
-                foodType: 'baked',
-            },
-            {
-                name: 'cheese',
-                foodType: 'Diary products',
-                customUserId: '123'
-            },
-            {
-                name: 'grdffg',
-                foodType: 'baj',
-            },
-            {
-                name: 'ede',
-                foodType: 'sweet',
-            },
-        ];
-        callback(food);*/
+    }
+
+
+    getAllFood(callback): void {
+        const request: IHttpReq = {
+            url: 'api/food/all',
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then( data => {
+                callback(data);
+            });
     }
     deleteFood(id, callback): void {
         const request: IHttpReq = {

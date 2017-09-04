@@ -59,7 +59,19 @@ module.exports = function(app) {
         }else{
             userId = req.user._id;
         }
-        foodService.getAllFood(userId, (err, data) => {
+        foodService.getOnlyPublishedFood(userId, (err, data) => {
+            if (!data.length) {
+                data = [{}];
+            }
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+
+    app.get(baseUrl + 'all', isAdmin, (req, res, next) => {
+        foodService.getAllFood((err, data) => {
             if (!data.length) {
                 data = [{}];
             }
