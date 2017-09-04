@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { MeasureListService } from './measure-list.service';
 import { BehaviorSubject} from 'rxjs/BehaviorSubject';
-import { DataSource } from '@angular/cdk/table';
+import { DataSource } from '@angular/cdk';
 import { MdSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
