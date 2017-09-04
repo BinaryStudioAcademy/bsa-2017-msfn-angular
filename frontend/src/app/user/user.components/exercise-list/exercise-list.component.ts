@@ -21,6 +21,7 @@ export class ExerciseListComponent implements OnInit, OnChanges {
 
     @Input() exercisesList = [];
     @Input() userMeasures;
+    @Input() disableActions = false;
     @Output() onChangeList = new EventEmitter();
     displayExercises: Object[];
     // pager props
