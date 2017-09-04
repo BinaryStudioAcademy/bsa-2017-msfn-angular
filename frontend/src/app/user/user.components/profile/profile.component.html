@@ -70,6 +70,14 @@
                         </md-select>
                     </div>
                 </div>
+
+                <div class="profile-activity">
+                    <md-select placeholder="Activity level" formControlName="activityLevel">
+                        <md-option *ngFor="let level of activityLevelOptions" [value]="level.coef">
+                            {{ level.name }}
+                        </md-option>
+                    </md-select>
+                </div>
             <!-- // moved to characteristic
                 <div class="profile-physparam">
                     <div class="weight-container">

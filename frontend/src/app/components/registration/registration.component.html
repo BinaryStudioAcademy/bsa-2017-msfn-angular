@@ -102,6 +102,18 @@
                     </md-error>
                 </md-input-container>
             </div>
+
+            <div class="activity">
+                <md-select placeholder="Activity level" [(ngModel)]="user.activityLevel" [formControl]="activityLevelFormControl">
+                    <md-option *ngFor="let level of activityLevelOptions" [value]="level.coef">
+                        {{ level.name }}
+                    </md-option>
+                </md-select>
+                <md-error *ngIf="activityLevelFormControl.hasError('required')">
+                    Activity level is required
+                </md-error>
+            </div>
+
             <form>
                 <md-input-container class="input-row">
                     <input type="password" mdInput placeholder="Password" required [(ngModel)]="user.password" [formControl]="passwordFormControl">

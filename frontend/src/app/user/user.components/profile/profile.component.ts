@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
 
     user: IUser;
     birthday;
+    activityLevelOptions;
 
     requestForCoaching = false;
     coachingMessage: string;
@@ -66,6 +67,7 @@ export class ProfileComponent implements OnInit {
             this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
             this.buildForm();
         });
+        this.activityLevelOptions = this.profileService.getActivityLevelOptions();
     }
 
     buildForm() {
@@ -93,6 +95,9 @@ export class ProfileComponent implements OnInit {
                     Validators.required,
                     Validators.min(100),
                     Validators.max(300)
+            ])],
+            'activityLevel': [this.user.activityLevel, Validators.compose([
+                    Validators.required
             ])],
     });
     }

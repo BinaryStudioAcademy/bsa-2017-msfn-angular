@@ -260,6 +260,15 @@ label {
     }
 }
 
+.profile-activity {
+    margin: $content-between-margin $content-between-margin 0;
+
+    md-select {
+        width: 100%;
+        margin: $content-between-margin 0;
+    }
+}
+
 .profile-physparam {
     display: flex;
     flex-wrap: wrap;

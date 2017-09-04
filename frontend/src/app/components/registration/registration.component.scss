@@ -131,6 +131,13 @@ form {
     width: 100%;
 }
 
+.activity {
+    md-select {
+        width: 100%;
+        margin: $content-between-margin 0;
+    }
+}
+
 #submit-button {
     margin: $content-between-margin 0 10px 0;
     text-align: center;

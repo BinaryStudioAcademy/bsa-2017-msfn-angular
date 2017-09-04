@@ -3,6 +3,7 @@ const userRepository = require('../repositories/userRepository');
 const decrypt = require('./decryptService');
 const emailService = require('../services/emailService');
 const config = require('../config');
+const caloriesCountService = require('./caloriesCountService');
 
 function UserService() {
 
@@ -43,6 +44,7 @@ function addItem(body, callback) {
                 startWeek : "Monday",
                 timeZone : "+2"
             };
+            body.advicedCalories = caloriesCountService.getAdvisedCalories(body);
             // Generating registration confirmation "TOKEN" for user
             body.activateToken = makeid();
             // Add newly created user into DB
@@ -79,9 +81,10 @@ function updateItem(id, body, callback) {
         } else {
             userRepository.getUserByEmail(body.email, (err, existingUser) => {
                 if (err) return callback(err);
-
                 if (existingUser && existingUser.id !== id) return callback(new ApiError("User with such email already exists"));
-
+                if (body.weight || body.height || body.gender || body.birthday || body.activityLevel) {
+                    body.advicedCalories = caloriesCountService.getAdvisedCalories(body, data);
+                }
                 userRepository.update(id, body, callback);
             });
         }
