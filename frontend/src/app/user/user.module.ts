@@ -43,6 +43,12 @@ import { GoalComponent } from './user.components/goal/goal.component';
 import { GoalEditDialogComponent } from './user.components/goal-edit-dialog/goal-edit-dialog.component';
 import { PlansComponent } from './user.components/plans/plans.component';
 import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
+import { CoachComponent } from './user.components/coach/coach.component';
+import { CoachSidebarComponent } from './user.components/coach/coach-sidebar/coach-sidebar.component';
+import { CoachPostsComponent } from './user.components/coach/coach-posts/coach-posts.component';
+import { CoachEventsComponent } from './user.components/coach/coach-events/coach-events.component';
+import { CoachArticlesComponent } from './user.components/coach/coach-articles/coach-articles.component';
+import { CoachPlansComponent } from './user.components/coach/coach-plans/coach-plans.component';
 
 @NgModule({
     imports: [
@@ -89,6 +95,12 @@ import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/
         GoalEditDialogComponent,
         PlansComponent,
         SharedPlanDetailComponent,
+        CoachComponent,
+        CoachSidebarComponent,
+        CoachPostsComponent,
+        CoachEventsComponent,
+        CoachArticlesComponent,
+        CoachPlansComponent,
     ],
     providers: [
         ForAllUserGuard,
