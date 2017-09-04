@@ -23,6 +23,7 @@ module.exports = function (app) {
         const params = decrypt(req.params.params);
         params.filter.isRemoved = false;
         params.filter.shared = true;
+        params.populate = 'exercisesList.exercise';
         if (isNaN(params.limit)) {
             params.limit = null;
         }

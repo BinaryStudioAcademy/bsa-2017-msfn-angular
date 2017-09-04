@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {IHttpReq} from '../../../models/http-req';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpService} from '../../../services/http.service';
 import {MdDialog} from '@angular/material';
 import {EncryptService} from '../../../services/encrypt.service';
+import {GCalendarService} from '../../../services/gcalendar.service';
+import {WindowObj} from '../../../services/window.service';
 
 @Component({
     selector: 'app-shared-plan-detail',
@@ -12,6 +14,7 @@ import {EncryptService} from '../../../services/encrypt.service';
 })
 export class SharedPlanDetailComponent implements OnInit {
 
+    public user: any;
     public userMeasures: any;
     public trainingPlan = {
         _id: '',
@@ -50,11 +53,16 @@ export class SharedPlanDetailComponent implements OnInit {
 
     constructor(private dialog: MdDialog,
                 private httpHandler: HttpService,
-                public activatedRoute: ActivatedRoute,
-                private encryptService: EncryptService) {
+                private window: WindowObj,
+                private activatedRoute: ActivatedRoute,
+                private encryptService: EncryptService,
+                private gcalendar: GCalendarService,
+                private router: Router) {
     }
 
     ngOnInit() {
+        this.user = this.window.data._injectedData;
+
         const sdata: IHttpReq = {
             url: '/api/user/me',
             method: 'GET',
@@ -77,6 +85,10 @@ export class SharedPlanDetailComponent implements OnInit {
                     if (res) {
                         this.trainingPlan = res.shift();
 
+                        this.trainingPlan.gcalendar_id = null;
+                        this.trainingPlan._id = null;
+                        this.trainingPlan.shared = false;
+
                         const userRequest: IHttpReq = {
                             url: '/api/user/' + this.trainingPlan.userID,
                             method: 'GET'
@@ -86,11 +98,146 @@ export class SharedPlanDetailComponent implements OnInit {
                             .then(user => {
                                 this.trainingPlan.user = user;
                             });
-                    }
 
-                    console.log(this.trainingPlan);
+                        this.trainingPlan.days.forEach(
+                            item => {
+                                this.days.forEach(
+                                    day => {
+                                        if (day.key === item.key && item.checked) {
+                                            day.checked = item.checked;
+                                        }
+                                    }
+                                );
+                            }
+                        );
+
+                        console.log(this.trainingPlan);
+                    }
                 });
         }
     }
 
+    savePlan() {
+        const sendData: IHttpReq = {
+            url: `/api/training-plan`,
+            method: 'POST',
+            body: this.trainingPlan,
+            successMessage: 'Plan created',
+        };
+
+        if (this.gcalendar.authorized) {
+            let recurrence = 'RRULE:FREQ=WEEKLY;';
+            const newCalendarEvent = {
+                recurrence: [],
+                summary: this.trainingPlan.name,
+                description: 'Today training plan - ' + this.trainingPlan.name,
+                reminders: {
+                    useDefault: true
+                },
+                start: this.gcalendar.makeFullDate(new Date()),
+                end: this.gcalendar.makeFullDate(new Date(Date.now() + 1000 * 60 * 60)),
+                source: 'MFSN'
+            };
+            let dayHeadingAdded = false;
+            this.trainingPlan.days.forEach((item, key) => {
+                if (!dayHeadingAdded) {
+                    recurrence += 'BYDAY=';
+                    dayHeadingAdded = true;
+                }
+                if (item.checked && item.code) {
+                    recurrence += item.code;
+                    if (this.trainingPlan.days[key + 1]) {
+                        recurrence += ',';
+                    }
+                }
+            });
+            newCalendarEvent.recurrence.push(recurrence);
+
+            let action = '';
+
+            if (this.trainingPlan.gcalendar_id) {
+                this.gcalendar.getEvent(this.trainingPlan.gcalendar_id, (error, event) => {
+                    if (error && error === 'Not found') {
+                        action = 'add';
+                    }
+                    if (!action && error) {
+                        action = '';
+                    }
+                    if (!action && event.result.status === 'cancelled') {
+                        action = 'add';
+                    }
+                    if (!action) {
+                        action = 'update';
+                    }
+
+                    switch (action) {
+                        case 'add':
+                            this.gcalendar.addEvent(newCalendarEvent, (err, result) => {
+                                if (err) {
+                                    console.error(err);
+                                    return;
+                                }
+                                this.trainingPlan.gcalendar_id = result.result.id;
+                                sendData.body = this.trainingPlan;
+                                this.httpHandler.sendRequest(sendData)
+                                    .then((res) => {
+                                        if (res) {
+                                            if (!res.nModified) {
+                                                this.trainingPlan._id = res._id;
+                                            }
+                                        }
+                                    });
+                            });
+                            break;
+                        case 'update':
+                            this.gcalendar.updateEvent(this.trainingPlan.gcalendar_id, newCalendarEvent, (err, result) => {
+                                if (err) {
+                                    console.error(err);
+                                    return;
+                                }
+                                this.trainingPlan.gcalendar_id = result.result.id;
+                                sendData.body = this.trainingPlan;
+                                this.httpHandler.sendRequest(sendData)
+                                    .then((res) => {
+                                        if (res) {
+                                            if (!res.nModified) {
+                                                this.trainingPlan._id = res._id;
+                                            }
+                                        }
+                                    });
+                            });
+                            break;
+                    }
+                });
+
+            } else {
+                this.gcalendar.addEvent(newCalendarEvent, (err, result) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    this.trainingPlan.gcalendar_id = result.result.id;
+                    sendData.body = this.trainingPlan;
+                    this.httpHandler.sendRequest(sendData)
+                        .then((res) => {
+                            if (res) {
+                                if (!res.nModified) {
+                                    this.router.navigate(['/user/training-plan/' + res._id]);
+                                }
+                            }
+                        });
+                });
+            }
+        } else {
+            console.log('NO GOOGLE AUTH');
+            this.httpHandler.sendRequest(sendData)
+                .then((res) => {
+                    if (res) {
+                        if (!res.nModified) {
+                            this.router.navigate(['/user/training-plan/' + res._id]);
+                        }
+                    }
+                });
+        }
+    }
 }

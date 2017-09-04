@@ -11,7 +11,7 @@
     width: 100%;
     height: 100%;
     flex-wrap: wrap;
-    
+
     .about-container {
         width: 30%;
         height: calc(90% - 70px); // 70px for save-button
@@ -42,7 +42,7 @@
                 width: 100%;
                 margin-top: 0;
             }
-            
+
             h2 {
                 text-align: left;
                 text-indent: 5%;
@@ -76,7 +76,7 @@
                 display: flex;
                 justify-content: center;
                 flex-wrap: wrap;
-                
+
                 .days {
                     display: flex;
                     flex-wrap: wrap;
@@ -112,10 +112,10 @@
             .count-days {
                 width: 50%;
             }
-            
+
         }
-        
-        
+
+
         .radio-group {
             .radio-button {
                 display: block;
@@ -134,12 +134,12 @@
         display: flex;
         flex-wrap: wrap;
         background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
-    
+
         app-exercise-list {
             width: 100%;
             height: calc(100% - 160px);
         }
-    
+
         app-interval-training-plan {
             width: 100%;
             height: 160px;
@@ -176,16 +176,16 @@
 }
 
 @media only screen and (max-width: $large-screen) {
-    .container { 
-        flex-direction: column;
-    }
-}
-
-@media only screen and (max-width: $medium-screen) {
-    .container {  
+    .container {
+        //flex-direction: column;
+    //}
+//}
+//
+//@media only screen and (max-width: $medium-screen) {
+//    .container {
         display: block;
         overflow-y: auto;
-        
+
         .about-container {
             width: 100%;
             height: 100%;
@@ -210,7 +210,7 @@
                 width: 100%;
                 height: calc(100vh - 70px);
             }
-        
+
             app-interval-training-plan {
                 width: 100%;
                 height: calc(100vh - 70px - 70px);
