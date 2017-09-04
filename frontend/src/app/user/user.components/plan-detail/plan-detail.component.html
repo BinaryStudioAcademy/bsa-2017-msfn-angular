@@ -1,23 +1,18 @@
-<div class="container">
+<div class="container centerContent">
     <div class="about-container">
-        <div id="title-container">
+        <div class="title-container">
             <h1>{{title}}</h1>
-            <md-slide-toggle
-                checked = "trainingPlan.shared"
-                [(ngModel)]="trainingPlan.shared">
-                Public
-            </md-slide-toggle>
         </div>
         <div class="field-container">
-            <md-input-container>
+            <md-input-container [class.errorBorder]="errorEmptyName">
                 <input mdInput placeholder="Plan name" value="New plan" class="plan-name"
-                       [(ngModel)]="trainingPlan.name">
+                       [(ngModel)]="trainingPlan.name" (focus)="errorEmptyName = false">
             </md-input-container>
         </div>
         <div class="field-container">
-            <div class="field-title">
+            <h2 class="field-title">
                 Type
-            </div>
+            </h2>
             <div class="field-item">
                 <md-radio-group class="radio-group" [(ngModel)]="trainingPlan.trainingType">
                     <md-radio-button class="radio-button" *ngFor="let type of types" [checked]="type.checked"
@@ -26,41 +21,50 @@
                     </md-radio-button>
                 </md-radio-group>
             </div>
-            <div class="field-items">
-                <div class="field-title">
-                    Days
-                </div>
+            <md-slide-toggle checked = "trainingPlan.shared" [(ngModel)]="trainingPlan.shared">Public</md-slide-toggle>
+        </div>
+        <div class="field-container">
+            <h2 class="field-title">
+                Schedule
+            </h2>
+            <div class="week-days">
+                <h3 class="field-title">
+                    Week days
+                </h3>
                 <div class="field-item days">
                     <div class="item" *ngFor="let day of days">
                         <input type="checkbox" id="day-{{day.key}}" value="{{day.key}}" [(ngModel)]="day.checked"
                                name="weekdays[]" (change)="selectDays()">
-                        <label for="day-{{day.key}}">{{day.value}}</label>
+                        <label class="centerContent" for="day-{{day.key}}">{{day.value}}</label>
                     </div>
                 </div>
-                <div class="field-title">
+            </div>
+            
+            <!-- <div class="count-days">
+                <h3 class="field-title">
                     Count per week
-                </div>
+                </h3>
                 <div class="field-item">
                     <button md-fab class="counter" (click)="changeTrainingCount(false, 'dec');">-</button>
                     <input type="text" name="count" (ngModelChange)="changeTrainingCount($event)" class="count"
                            [ngModel]="trainingPlan.count" value="{{trainingPlan.count}}">
                     <button md-fab class="counter" (click)="changeTrainingCount(false, 'inc');">+</button>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <!-- <div class="field-container">
-          <md-input-container>
-            <textarea mdInput placeholder="Plan description" class="plan-description"></textarea>
-          </md-input-container>
-        </div> -->
-        <button md-button class="btn btn-save" (click)="savePlan()">Save</button>
 
     </div>
     <div class="childContainer">
         <app-exercise-list [userMeasures]="userMeasures" [exercisesList]="trainingPlan.exercisesList"
                            (onChangeList)="onChangeList($event)"></app-exercise-list>
         <app-interval-training-plan [intervalList]="trainingPlan.intervals"
+                                    [class.errorBorder]="errorEmptyIntervals"
                                     *ngIf="trainingPlan.trainingType === 'interval'"
                                     (intervalAction)="intervalAction($event)"></app-interval-training-plan>
+    </div>
+    <div class="btn-container centerContent">
+        <button md-button class="btn-save" (click)="savePlan()">Save</button>
+        <md-error *ngIf="errorEmptyIntervals">*Please create at least one interval</md-error>
+        <md-error *ngIf="errorEmptyName">*Name is empty</md-error>
     </div>
 </div>

@@ -22,7 +22,7 @@
     height: 90%;
     min-height: 400px;
     overflow-y: auto;
-    background-color: $gradient-to-color;
+    background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
 
     h2 {
         width: 90%;
@@ -40,7 +40,7 @@
     height: 90%;
     min-height: 400px;
     overflow-y: auto;
-    background-color: #333;
+    background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
 
     .exlist {
         width: 100%;
@@ -65,9 +65,34 @@
 
 
 @media screen and (max-width: $small-screen) {
-    .timers, .child {
+    .timers {
         width: 100%;
         height: 100%;
+    }
+    .child {
+        width: 100%;
+        height: 200%;
+        background: none;
+
+        .exlist {
+            width: 100%;
+            height: calc(100vh - 70px);
+    
+            app-exercise-list {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    
+        .intmenu {
+            width: 100%;
+            height: calc(100vh - 70px);
+    
+            app-interval-training-plan {
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
     h2 {
         display: none;
@@ -75,7 +100,7 @@
 }
 
 @media screen and (min-width: $small-screen + 1) and (max-width: $medium-screen) {
-    .timers, .child {
+    .timers {
         width: 100%;
         height: 100%;
     }
@@ -85,7 +110,7 @@
 }
 
 @media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
-    .timers, .child {
+    .timers {
         width: 100%;
         height: 100%;
     }

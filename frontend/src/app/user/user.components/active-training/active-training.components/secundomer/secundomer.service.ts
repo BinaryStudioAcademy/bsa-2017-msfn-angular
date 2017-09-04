@@ -38,7 +38,7 @@ export class SecundomerService {
             + Math.floor(34 + (255 * (1 - perc))) + ', '
             + Math.floor(34 + (255 * (1 - perc))) + ')';
         perc = (perc < 0.01) ? 0.01 : perc;
-        perc = (perc > 0.91) ? 0.91 : perc;
+        perc = (perc > 0.95) ? 1 : perc;
         elem.style.backgroundPosition = elem.clientWidth * perc + 'px 0px';
     }
 
@@ -92,14 +92,11 @@ export class SecundomerService {
     // timer
 
     startTimer(i, rest, change, callback): void {
-        console.log('lap - ' + i);
         this.runned = true;
         if (!change) {
             this.timer = (rest) ? this.timerWarmNum : this.timerLapNum;
         }
         this.cacheView = this.timer;
-        console.log(change);
-        console.log(this.timer);
         this.idTimer = setInterval( () => {
             this.timer -= 250;
             this.percentToBar(document.getElementById('interval' + i), (this.cacheView - this.timer) / this.cacheView);

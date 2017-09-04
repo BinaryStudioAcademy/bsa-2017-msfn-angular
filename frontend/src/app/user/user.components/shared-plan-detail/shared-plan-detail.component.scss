@@ -1,0 +1,48 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+.container {
+    padding: 20px 15px 0 15px;
+
+    .left-wrapper {
+        width: 30%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+
+        .plan-name {
+            padding: 10px 5px;
+            font-size: 28px;
+            width: 100%;
+        }
+        .author-name {
+            padding: 10px 5px;
+            font-size: 20px;
+            width: 100%;
+        }
+        .training-type {
+            padding: 10px 5px;
+            width: 100%;
+            font-size: 20px;
+        }
+        .save-button {
+            margin-top: 20px;
+            padding: 5px;
+            width: 100%;
+        }
+
+        .left {
+            width: 60px;
+            display: inline-block;
+        }
+        .right {
+            text-transform: capitalize;
+        }
+    }
+
+    .exercise-wrapper {
+        width: 70%;
+        display: flex;
+    }
+}

@@ -4,25 +4,27 @@
 
 #dashboard-container {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
     flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
     min-height: 100%;
     padding: 20px 6%;
 
-    div {
-        width: 100%;
-        margin: 5px 0;
+    .child {
+        padding: 20px;
+        flex: 48%;
+        display: flex;
+        margin: 5px;
         background: $gradient-to-color;
+
+        .child-app {
+            width: 100%;
+            height: 100%;
+        }
     }
 }
 
 .inner-container {
-    height: 100%;
-    padding: 20px;
-
     h2 {
         margin: 0 0 20px 0;
         padding: 0 0 10px;
@@ -39,6 +41,23 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+
+        .no-items {
+            margin: 0 auto;
+
+            button {
+                display: block;
+                width: 80px;
+                height: 40px;
+                margin: $content-between-margin auto 0;
+                border: none;
+                border-radius: 15px;
+                outline: none;
+                font-size: $main-text;
+                font-weight: 600;
+                background: #82ca9c;
+            }
+        }
     }
 }
 
@@ -54,13 +73,24 @@
 @media only screen and (min-width: $small-screen) {
 
     #dashboard-container {
-        div {
-            margin: 10px 0;
+        .child {
+            width: 90%;
         }
     }
 
     h2 {
         margin: 0 0 5% 0;
+    }
+
+    .inner-container {
+        .content {
+            .no-items {
+                button {
+                    display: inline-block;
+                    margin: 0 0 0 $content-between-margin;
+                }
+            }
+        }
     }
 }
 
@@ -68,27 +98,19 @@
 @media only screen and (min-width: $medium-screen) {
 
     #dashboard-container {
-        div {
+        .child {
             width: 90%;
         }
     }
 }
 
 
-@media only screen and (min-width: $large-screen) {
-
+@media only screen and (max-width: $large-screen) {
     #dashboard-container {
-        flex-direction: row;
-        align-items: baseline;
-        height: 100%;
-        padding: 20px 6%;
-
-        div {
-            width: 48%;
-            min-height: 26%;
+        .child {
+            width: 90%;
         }
     }
-
     .inner-container {
         padding: 25px;
     }

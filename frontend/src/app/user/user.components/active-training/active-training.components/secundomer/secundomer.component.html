@@ -1,7 +1,7 @@
 <div *ngIf="!intervals.length" class="wrap">
     <button (click)="run()" *ngIf="!secundomerService.runned" class="general start">START</button>
-    <button (click)="finish()" *ngIf="secundomerService.runned" class="general finish">FINISH</button>
     <button (click)="pause()" *ngIf="secundomerService.runned" class="general pause">PAUSE</button>
+    <button (click)="finish()" *ngIf="secundomerService.runned" class="general finish">FINISH</button>
     <div class="numbers">{{beautifierTime(secundomerService.secndomerNum)}}</div>
     <button md-raised-button (click)="warmingUp()" *ngIf="secundomerService.runned&&!secundomerService.warming" class="controll">WARMING UP</button>
     <button md-raised-button (click)="endWarmingUp()" *ngIf="secundomerService.runned&&secundomerService.warming" class="controll">END WARMING UP</button>
