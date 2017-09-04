@@ -23,7 +23,7 @@
             (onChangedList)="updateFoods()"></app-list>
     </div>
     <md-grid-list>
-        <md-grid-tile *ngFor="let food of foods"
+        <md-grid-tile *ngFor="let food of foodsShown"
                       (click)="openEditFoodDialog(false, food)">
             <md-card>
                 <md-card-header>
@@ -36,9 +36,6 @@
                     Created by {{food.customUserId ? food.customUserId : 'admin'}}
                 </md-card-content>
             </md-card>
-        </md-grid-tile>
-        <md-grid-tile id="add-food" (click)="openEditFoodDialog(true)">
-            <i class="material-icons add-item-ico">add</i>
         </md-grid-tile>
     </md-grid-list>
 </div>

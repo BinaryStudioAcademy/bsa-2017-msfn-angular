@@ -46,24 +46,34 @@ export class FoodListComponent implements OnInit {
     }
 
     updateFoods() {
+        debugger;
         let copiedFoods = [...this.foods];
-        console.log(copiedFoods);
+        let filtered = [];
         if (this.items.length > 0) {
-            console.log(this.items);
             for (const item of this.items) {
-                copiedFoods = copiedFoods.filter( (food) => {
-                    food.foodType.toLowerCase().includes(item.toLowerCase());
-                });
+                for (const food of copiedFoods) {
+                    if (food.foodType.toLowerCase().includes(item.toLowerCase())) {
+                        filtered.push(food);
+                    }
+                }
              }
+            copiedFoods = filtered;
         }
-        if (this.filter) {
-            console.log(this.filter);
-            copiedFoods = this.foods.filter( (food) => {
-                food.name.toLowerCase().includes(this.filter.toLowerCase());
-            });
+        if (this.filter.length > 0) {
+            if (filtered.length > 0) {
+                copiedFoods = filtered;
+                filtered = [];
+            }
+            for (const food of copiedFoods) {
+                if (food.name.toLowerCase().includes(this.filter.toLowerCase())) {
+                    filtered.push(food);
+                }
+            }
         }
-        console.log(copiedFoods);
-        this.foodsShown = copiedFoods.slice(0, this.itemsPerPage);
+        if (filtered.length === 0) {
+            return;
+        }
+        this.foodsShown = filtered.slice(0, this.itemsPerPage);
     }
 
 
