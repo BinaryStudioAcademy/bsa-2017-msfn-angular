@@ -13,13 +13,10 @@
   },
   "authors": [
     "Dmitriy Beseda <dmitriy.beseda@binary.studio.com>",
-    "Andrey Kukuruza <andreyku6@gmail.com>",
-    "Dmytro Satskyi <satskyi96@gmail.com>",
     "Lina Vasylieva <lina.vasileva93@gmail.com>",
     "Stas Chernenko <chstas2@gmail.com>",
     "Roman Vey <roman.vey@gmail.com>",
-    "Tovmach Alexandr <alexandrtovmach@gmail.com>",
-    "Igor Stetsiuk <igorstetsuk@gmail.com>"
+    "Tovmach Alexandr <alexandrtovmach@gmail.com>"
   ],
   "private": true,
   "dependencies": {
@@ -55,6 +52,7 @@
     "express-session": "^1.15.5",
     "express-useragent": "^1.0.7",
     "hammerjs": "^2.0.8",
+    "image-downloader": "^3.2.2",
     "marked": "^0.3.6",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
@@ -62,6 +60,7 @@
     "mongoose-ttl": "0.0.3",
     "ng2-img-cropper": "^0.9.0",
     "ngx-toastr": "^6.0.1",
+    "node-fetch": "^1.7.2",
     "nodemailer": "^4.0.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",

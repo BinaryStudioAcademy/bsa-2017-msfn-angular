@@ -22,7 +22,7 @@
     height: 90%;
     min-height: 400px;
     overflow-y: auto;
-    background-color: $gradient-to-color;
+    background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
 
     h2 {
         width: 90%;
@@ -40,6 +40,7 @@
     height: 90%;
     min-height: 400px;
     overflow-y: auto;
+    background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
 
     .exlist {
         width: 100%;
@@ -54,7 +55,6 @@
     .intmenu {
         width: 100%;
         height: 160px;
-        background: linear-gradient($gradient-to-color 75%, $bg-color);;
 
         app-interval-training-plan {
             width: 100%;
@@ -71,11 +71,12 @@
     }
     .child {
         width: 100%;
-        height: 100%;
+        height: 200%;
+        background: none;
 
         .exlist {
             width: 100%;
-            height: 100%;
+            height: calc(100vh - 70px);
     
             app-exercise-list {
                 width: 100%;
@@ -85,7 +86,7 @@
     
         .intmenu {
             width: 100%;
-            height: 100%;
+            height: calc(100vh - 70px);
     
             app-interval-training-plan {
                 width: 100%;

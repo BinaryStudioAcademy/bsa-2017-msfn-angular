@@ -75,12 +75,13 @@ export class SecundomerComponent implements OnInit, OnChanges {
     }
 
     beautifierTime(millisecnods: number): string {
-        const formatter = new Intl.DateTimeFormat('ru', {
+        const formatter = new Intl.DateTimeFormat('en-GB', {
             hour: '2-digit',
             minute: '2-digit',
-            second: '2-digit'
+            second: '2-digit',
+            timeZone: 'UTC'
         });
-        return formatter.format(millisecnods - 2000 * 60 * 60);
+        return formatter.format(millisecnods);
     }
 // secundomer functions
     run(): void {

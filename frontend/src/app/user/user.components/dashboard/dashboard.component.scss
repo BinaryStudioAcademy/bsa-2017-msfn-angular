@@ -25,7 +25,6 @@
 }
 
 .inner-container {
-
     h2 {
         margin: 0 0 20px 0;
         padding: 0 0 10px;
@@ -42,6 +41,23 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+
+        .no-items {
+            margin: 0 auto;
+
+            button {
+                display: block;
+                width: 80px;
+                height: 40px;
+                margin: $content-between-margin auto 0;
+                border: none;
+                border-radius: 15px;
+                outline: none;
+                font-size: $main-text;
+                font-weight: 600;
+                background: #82ca9c;
+            }
+        }
     }
 }
 
@@ -64,6 +80,17 @@
 
     h2 {
         margin: 0 0 5% 0;
+    }
+
+    .inner-container {
+        .content {
+            .no-items {
+                button {
+                    display: inline-block;
+                    margin: 0 0 0 $content-between-margin;
+                }
+            }
+        }
     }
 }
 
