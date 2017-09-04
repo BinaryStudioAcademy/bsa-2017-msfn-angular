@@ -139,7 +139,7 @@ export class WeightControlComponent implements OnInit {
                 .append('g')
                 .attr('class', 'wrapper')
                 .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
-                .attr('stroke', 'yellow');
+                .attr('stroke', '#82ca9c');
 
         const x = this._d3.scaleTime().rangeRound([0, width]);
         const y = this._d3.scaleLinear().rangeRound([height, 0]);
@@ -175,15 +175,21 @@ export class WeightControlComponent implements OnInit {
             .attr('transform', 'translate(0,' + height + ')')
             .attr('class', 'x_axis')
             .call(xAxis)
-            .select('.domain')
-            .remove();
+            .select('.domain');
+
+        g.append('path')
+            .attr('class', 'line')
+            .attr('fill', 'none')
+            .attr('stroke-linejoin', 'round')
+            .attr('stroke-linecap', 'round')
+            .attr('stroke-width', 1.5)
+            .attr('d', line(data));
 
         g.append('g')
             .attr('class', 'y_axis')
             .call(yAxis)
             .append('text')
             .attr('class', 'y_axis_text')
-            .attr('fill', '#000')
             .attr('transform', 'rotate(-90)')
             .attr('y', 6)
             .attr('dy', '0.71em')
@@ -193,11 +199,18 @@ export class WeightControlComponent implements OnInit {
         g.append('path')
             .attr('class', 'line')
             .attr('fill', 'none')
-            .attr('stroke', 'white')
             .attr('stroke-linejoin', 'round')
             .attr('stroke-linecap', 'round')
             .attr('stroke-width', 1.5)
             .attr('d', line(data));
+
+
+        g.selectAll('path')
+            .attr('stroke', '#fff');
+        g.selectAll('line')
+            .attr('stroke', '#fff');
+        g.selectAll('text')
+            .attr('fill', '#fff');
 
         g.selectAll('circle')
             .data(data)
