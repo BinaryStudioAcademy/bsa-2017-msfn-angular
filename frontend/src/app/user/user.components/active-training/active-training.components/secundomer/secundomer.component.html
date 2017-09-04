@@ -32,5 +32,9 @@
             </div>
         </div>
     </div>
-    <md-error *ngIf="errorName === 'emptyIntervalList'">*Please check intervals</md-error>
+    <md-error *ngIf="errorName === 'emptyIntervalList'">*Please check intervals</md-error>   
+</div>
+<div *ngIf="secundomerService.runned" class="wrap showEx image-preview">
+    <h2 class="title">{{exercise.name}}</h2>
+    <img  *ngFor="let img of exercise.image;" [src]="img">
 </div>
