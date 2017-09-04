@@ -11,7 +11,7 @@
     padding: 0 15px;
     text-align: center;
     margin: 0 auto;
-  
+
     .plans-wrap {
         display: flex;
         justify-content: flex-start;
@@ -21,7 +21,7 @@
         font-family: $font-general;
         font-size: $usual-text;
         margin: $content-tb-margin auto;
-      
+
         h2 {
             margin-bottom: 0;
             text-align: center;
@@ -40,6 +40,7 @@
     }
 
     .plans-header {
+        position: relative;
         display: flex;
         width: 100%;
         justify-content: space-between;
@@ -68,8 +69,6 @@
         }
     }
 
-
-
     .load-wrap {
         display: flex;
         justify-content: center;
@@ -87,7 +86,7 @@
             background-color: $gradient-to-color;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-radius: 50%;
-          
+
             .load-ico {
                 font-size: 30px;
             }
@@ -96,7 +95,7 @@
                 pointer-events: none;
                 opacity: 0.6;
             }
-          
+
             .load-text {
                 font-size: 14px;
                 margin: 5px;
@@ -108,6 +107,7 @@
             cursor: pointer;
         }
     }
+
     .item-container {
         display: flex;
         align-items: center;
@@ -116,7 +116,7 @@
         text-align: center;
         width: 31.33%;
         height: 180px;
-        margin: 1% 10px;
+        margin: 10px 1%;
         color: $btn-color;
         background-color: $gradient-to-color;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -145,15 +145,18 @@
             }
         }
     }
+
     .train-item-text {
         font-size: $flat-item-text;
         margin: 5px;
         letter-spacing: 1px;
     }
+
     .item-container:hover {
         background-color: #353535;
         cursor: pointer;
     }
+
     .material-icons.train-item-ico {
         font-size: 40px;
         margin: 5px;
@@ -162,6 +165,7 @@
     .material-icons.add-item-ico {
         font-size: 40px;
     }
+
     .add-container {
         display: flex;
         align-items: center;
@@ -175,9 +179,169 @@
         background-color: #353535;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
+
     .add-container:hover {
         color: $btn-color;
         cursor: pointer;
     }
 
+
+    .loader-wrap {
+        display: flex;
+        position: absolute;
+        height: 101%;
+        width: 100%;
+        justify-content: center;
+        background: #222;
+        opacity: 0.9;
+        z-index: 10;
+    }
+
+    .cssload-container{
+        position: absolute;
+        top: 100px;
+    }
+
+    .cssload-whirlpool,
+    .cssload-whirlpool::before,
+    .cssload-whirlpool::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border: 1px solid rgb(204,204,204);
+        border-left-color: rgb(0,0,0);
+        border-radius: 974px;
+        -o-border-radius: 974px;
+        -ms-border-radius: 974px;
+        -webkit-border-radius: 974px;
+        -moz-border-radius: 974px;
+    }
+
+    .cssload-whirlpool {
+        margin: -24px 0 0 -24px;
+        height: 49px;
+        width: 49px;
+        animation: cssload-rotate 1450ms linear infinite;
+        -o-animation: cssload-rotate 1450ms linear infinite;
+        -ms-animation: cssload-rotate 1450ms linear infinite;
+        -webkit-animation: cssload-rotate 1450ms linear infinite;
+        -moz-animation: cssload-rotate 1450ms linear infinite;
+    }
+
+    .cssload-whirlpool::before {
+        content: "";
+        margin: -22px 0 0 -22px;
+        height: 43px;
+        width: 43px;
+        animation: cssload-rotate 1450ms linear infinite;
+        -o-animation: cssload-rotate 1450ms linear infinite;
+        -ms-animation: cssload-rotate 1450ms linear infinite;
+        -webkit-animation: cssload-rotate 1450ms linear infinite;
+        -moz-animation: cssload-rotate 1450ms linear infinite;
+    }
+
+    .cssload-whirlpool::after {
+        content: "";
+        margin: -28px 0 0 -28px;
+        height: 55px;
+        width: 55px;
+        animation: cssload-rotate 2900ms linear infinite;
+        -o-animation: cssload-rotate 2900ms linear infinite;
+        -ms-animation: cssload-rotate 2900ms linear infinite;
+        -webkit-animation: cssload-rotate 2900ms linear infinite;
+        -moz-animation: cssload-rotate 2900ms linear infinite;
+    }
+
+
+
+    @keyframes cssload-rotate {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @-o-keyframes cssload-rotate {
+        100% {
+            -o-transform: rotate(360deg);
+        }
+    }
+
+    @-ms-keyframes cssload-rotate {
+        100% {
+            -ms-transform: rotate(360deg);
+        }
+    }
+
+    @-webkit-keyframes cssload-rotate {
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @-moz-keyframes cssload-rotate {
+        100% {
+            -moz-transform: rotate(360deg);
+        }
+    }
+}
+
+@media screen and (max-width: $large-screen) {
+    .plans-container {
+
+
+        .item-container {
+            width: 48%;
+        }
+    }
+}
+@media screen and (max-width: $small-screen) {
+    .plans-container {
+
+        .mat-input-underline {
+            background-color: transparent;
+        }
+
+        .item-container {
+            width: 100%;
+        }
+
+        .plans-header {
+
+            .plans-tabs-wrap {
+                flex-basis: 100%;
+            }
+
+            .plans-search-wrap {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                height: 100%;
+                z-index: 5;
+                flex-basis: auto;
+                width: 35px;
+
+                .mat-input-placeholder-wrapper {
+                    display: none;
+                }
+
+                .mat-input-wrapper {
+                    height: 100%;
+
+                    .mat-input-flex {
+                        height: 100%;
+                        align-items: center;
+                    }
+                }
+            }
+
+            .plans-search-wrap.mat-focused {
+                background: $gradient-from-color;
+                width: 100%;
+
+                .mat-input-placeholder-wrapper {
+                    display: block;
+                }
+            }
+        }
+    }
 }

@@ -14,7 +14,7 @@
             <md-icon mdSuffix>search</md-icon>
         </md-input-container>
     </div>
-    <div class="plans-wrap" *ngIf="plans.length > 0">
+    <div class="plans-wrap" [class.plans-empty-wrap]="plans.length === 0">
         <div class="item-container" *ngFor="let plan of plans" routerLink="/user/plans/{{plan._id}}">
             <i class="material-icons train-item-ico">face</i>
             <p class="train-item-text">{{ plan.name }}</p>
@@ -23,10 +23,13 @@
                 <div class="item-exercise-count">{{plan.exercisesList.length}} exercises</div>
             </div>
         </div>
-    </div>
-    <div class="plans-empty-wrap plans-wrap" *ngIf="plans.length === 0">
-        <div class="plans-empty item-container">
+        <div class="plans-empty item-container" *ngIf="plans.length === 0">
             <p class="train-item-text">Nothing found</p>
+        </div>
+        <div class="loader-wrap" *ngIf="loading">
+            <div class="cssload-container">
+                <div class="cssload-whirlpool"></div>
+            </div>
         </div>
     </div>
     <div class="load-wrap" *ngIf="ableToLoad">
