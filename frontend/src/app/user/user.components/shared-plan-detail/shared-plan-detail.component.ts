@@ -110,6 +110,8 @@ export class SharedPlanDetailComponent implements OnInit {
                                 );
                             }
                         );
+
+                        console.log(this.trainingPlan);
                     }
                 });
         }
@@ -150,7 +152,6 @@ export class SharedPlanDetailComponent implements OnInit {
                 }
             });
             newCalendarEvent.recurrence.push(recurrence);
-            console.log(newCalendarEvent);
 
             let action = '';
 

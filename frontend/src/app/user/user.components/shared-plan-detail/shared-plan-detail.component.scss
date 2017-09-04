@@ -5,7 +5,7 @@
 .container {
     padding: 20px 15px 0 15px;
     display: flex;
-
+    flex-wrap: wrap;
 
     .left-wrapper {
         display: flex;
@@ -80,6 +80,45 @@
 
         .exercises {
             width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: $large-screen) {
+
+    .container {
+        flex-direction: column;
+
+        .left-wrapper {
+            flex-basis: 100%;
+
+            .save-button {
+                max-width: 300px;
+            }
+        }
+
+        .exercise-wrapper {
+            flex-basis: 100%;
+        }
+    }
+
+}
+@media screen and (max-width: $small-screen) {
+    .container {
+
+        .left-wrapper {
+            flex-basis: 100%;
+
+            .training-days,
+            .training-type,
+            .author-name,
+            .plan-name {
+                padding: 10px 0;
+            }
+        }
+
+        .exercise-wrapper {
+            flex-basis: 100%;
         }
     }
 }
