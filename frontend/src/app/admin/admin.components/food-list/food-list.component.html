@@ -1,39 +1,32 @@
 <div class="food-list-container">
     <div class="filtering-items">
-        <md-input-container >
-            <input mdInput
-                   #search
-                   placeholder="Search"
-                   [(ngModel)]="filter"
-                   (change)="updateFoods()"
-                   (keyup)="updateFoods()"
-                   autocomplete="off">
+        <md-input-container>
+            <input mdInput #search placeholder="Search" [(ngModel)]="filter" (change)="updateFoods()" (keyup)="updateFoods()" autocomplete="off">
             <md-icon mdSuffix>search</md-icon>
         </md-input-container>
-        <button md-button
-                disableRipple
-                class="btn"
-                (click)="openEditFoodDialog(true)"
-                id="btn-add">Add food
+        <button md-button disableRipple class="btn" (click)="openEditFoodDialog(true)" id="btn-add">Add food
         </button>
-        <app-list
-            [items]="items"
-            [options]="options"
-            placeholder="Types"
-            (onChangedList)="updateFoods()"></app-list>
+        <app-list [items]="items" [options]="options" placeholder="Types" (onChangedList)="updateFoods()"></app-list>
     </div>
     <md-grid-list>
-        <md-grid-tile *ngFor="let food of foodsShown"
-                      (click)="openEditFoodDialog(false, food)">
+        <md-grid-tile *ngFor="let food of foodsShown" (click)="openEditFoodDialog(false, food)">
             <md-card>
+                <div class="panel">
+                    <div (click)="$event.stopPropagation()">
+                        <md-slide-toggle 
+                        (change)="changeFoodPrivacy(food._id, $event.checked)"
+                        [checked]="food.isPublished">Is public</md-slide-toggle>
+                    </div>
+                    <i class="material-icons" id="delete" (click)="removeFood(food._id, $event)">delete</i>
+                </div>
+
                 <md-card-header>
-                    <img md-card-avatar
-                         src="../../../../../../resources/default.png">
+                    <img md-card-avatar src="../../../../../../resources/default.png">
                     <md-card-title>{{food.name}}</md-card-title>
                     <md-card-subtitle>{{food.foodType}}</md-card-subtitle>
                 </md-card-header>
                 <md-card-content>
-                    Created by {{food.customUserId ? food.customUserId : 'admin'}}
+                    Created by {{food.customUserId ? 'User' : 'Admin'}}
                 </md-card-content>
             </md-card>
         </md-grid-tile>

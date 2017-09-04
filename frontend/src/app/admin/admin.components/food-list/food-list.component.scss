@@ -7,11 +7,18 @@ md-grid-list {
     flex-wrap: wrap;
     justify-content: flex-start;
 }
+
+md-grid-tile:hover {
+    cursor: pointer;
+}
+
 md-grid-tile {
-    margin: $content-tb-margin auto;
+    width: 260px;
+    margin: 10px;
     background-color: $gradient-to-color;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     md-card {
+        padding: 15px;
         display: flex;
         flex-direction: column;
         md-card-title {
@@ -19,6 +26,28 @@ md-grid-tile {
             font-size: $header-text;
         }
     }
+}
+
+.mat-card {
+    width: 100%;
+    height: 100%;
+}
+
+.panel {
+    width: 100%;
+    padding: 3px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+#delete {
+    font-size: 20px !important;
+    color: $text-second-color;
+}
+
+#delete:hover{
+    color: $btn-color;
 }
 
 .btn {
@@ -40,6 +69,7 @@ md-grid-tile {
 .food-list-container {
     width: 90%;
     margin: auto;
+    margin-top: 15px;
 }
 
 .btn {

@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FoodService} from '../../services/food.service';
-import {MdDialog, MdSort} from '@angular/material';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {IFood} from '../../../models/food';
-import {FoodEditDialogComponent} from '../food-edit-dialog/food-edit-dialog.component';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FoodService } from '../../services/food.service';
+import { MdDialog, MdSort } from '@angular/material';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { IFood } from '../../../models/food';
+import { FoodEditDialogComponent } from '../food-edit-dialog/food-edit-dialog.component';
 @Component({
     selector: 'app-food-list',
     templateUrl: './food-list.component.html',
@@ -15,38 +15,48 @@ export class FoodListComponent implements OnInit {
     items = [];
     foods: IFood[] = [];
     foodsShown: IFood[];
-    itemsPerPage = 20;
+    itemsPerPage = 10000; // TODO: change to smaller and implement 
     filter = '';
+    page = 1;
 
     constructor(private foodService: FoodService,
-                private mdDialog: MdDialog) { }
+        private mdDialog: MdDialog) { }
 
     ngOnInit() {
-        this.foodService.getAllFood( (data) => {
-            this.foods = data;
-            this.foodsShown = data.slice(0, this.itemsPerPage);
-        });
+        this.updateFoodList();
         this.foodService.getAllFoodTypes((result) => {
-           for (const item of result) {
-               if (!this.options.includes(item.name)) {
-                   this.options.push(item.name);
-               }
-           }
+            for (const item of result) {
+                if (!this.options.includes(item.name)) {
+                    this.options.push(item.name);
+                }
+            }
         });
     }
 
+    changeFoodPrivacy(id, value) {
+        this.foodService.changeFoodPrivacy(id, value, () => {});
+    }
+
+    removeFood(id, event) {
+        event.stopPropagation();
+        this.foodService.deleteFood(id, () => {});
+        this.updateFoodList();
+    }
+
     openEditFoodDialog(newItem: boolean, foodData?: IFood) {
-        const food = newItem ? { name: '', foodType: '', description: ''} : foodData;
-        this.mdDialog.open(FoodEditDialogComponent, {
+        const food = newItem ? { name: '', foodType: '', description: '' } : foodData;
+        const dialogRef = this.mdDialog.open(FoodEditDialogComponent, {
             data: {
                 newItem,
                 food
             }
         });
+        dialogRef.afterClosed().subscribe(result => {
+            this.updateFoodList();
+        });
     }
 
     updateFoods() {
-        debugger;
         let copiedFoods = [...this.foods];
         let filtered = [];
         if (this.items.length > 0) {
@@ -56,10 +66,10 @@ export class FoodListComponent implements OnInit {
                         filtered.push(food);
                     }
                 }
-             }
+            }
             copiedFoods = filtered;
         }
-        if (this.filter.length > 0) {
+        if (this.filter.length >= 0) {
             if (filtered.length > 0) {
                 copiedFoods = filtered;
                 filtered = [];
@@ -73,7 +83,7 @@ export class FoodListComponent implements OnInit {
         if (filtered.length === 0) {
             return;
         }
-        this.foodsShown = filtered.slice(0, this.itemsPerPage);
+        this.foodsShown = filtered.slice((this.page - 1) * this.itemsPerPage, this.page * this.itemsPerPage);
     }
 
 
@@ -88,7 +98,13 @@ export class FoodListComponent implements OnInit {
     }
 
     updateFoodList() {
-
+        this.foodService.getAllFood((data) => {
+            data = data.filter((elem) => {
+                return elem.isRemoved === false;
+            });
+            this.foods = data;
+            this.foodsShown = data.slice(0, this.itemsPerPage);
+        });
     }
 
 }

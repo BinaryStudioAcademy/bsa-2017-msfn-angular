@@ -122,15 +122,37 @@ export class FoodService {
         ];
         callback(food);*/
     }
-    deleteFood(body: IFood, callback): void {
-        body.isRemoved = true;
-        this.updateFood(body, callback);
+    deleteFood(id, callback): void {
+        const request: IHttpReq = {
+            url: 'api/food/' + id,
+            method: 'DELETE',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then(
+                data => callback(data)
+            );
     }
     updateFood(body: IFood, callback) {
         const request: IHttpReq = {
             url: 'api/food',
             method: 'PUT',
             body: body
+        };
+        this.httpService.sendRequest(request)
+            .then(
+                data => callback(data)
+            );
+    }
+
+    changeFoodPrivacy(id, value, callback) {
+        const request: IHttpReq = {
+            url: 'api/food/publish',
+            method: 'PUT',
+            body: {
+                _id: id,
+                isPublished: value
+            }
         };
         this.httpService.sendRequest(request)
             .then(
