@@ -93,34 +93,43 @@ button {
 }
 
 .showEx {
-    background-color: red;
+    // background-color: red;
     width: 100%;
     min-height: 100px;
     display: flex;
     justify-content: center;
-    img{
+    text-align: center;
+    position: relative;
+    
+    h2 {
+        width: 100%;
+        max-height: 20px;
+        margin: 0;
+    }
+    span {
         position: absolute;
-        max-height: 100%;
+        width: 100%;
+        max-height: 20px;
+        bottom: 0;
+    }
+    img {
+        position: absolute;
+        top: 20px;
+        bottom: 20px;
+        height: calc(100% - 20px - 20px);
+        max-width: 100%;
         animation-name: cf3FadeInOut;
         animation-timing-function: ease-in-out;
         animation-iteration-count: infinite;
         animation-duration: 1s;
         animation-direction: alternate;
+        -webkit-filter: invert(100%) contrast(55%) brightness(115%);
+        filter: invert(100%) contrast(55%) brightness(115%);
     }
     img:last-child {
         animation-delay: -1s;
         opacity: 0;
     }
-}
-.image-preview {
-    margin: $content-between-margin;
-    text-align: center;
-    position: relative;
-    img {
-        max-width: 100%;
-        -webkit-filter: invert(100%) contrast(55%) brightness(115%);
-        filter: invert(100%) contrast(55%) brightness(115%);
-    } 
 }
 
 @media screen and (max-width: $small-screen) {
