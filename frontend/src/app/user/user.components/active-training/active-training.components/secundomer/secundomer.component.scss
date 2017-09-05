@@ -1,6 +1,20 @@
 @import "../../../../../../globalStyles/variables.scss";
 @import '../../../../../../globalStyles/text.scss';
 @import '../../../../../../globalStyles/indentations.scss';
+@keyframes cf3FadeInOut {
+    0% {
+        opacity: 1;
+    }
+    45% {
+        opacity: 1;
+    }
+    55% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
 .wrap {
     display: flex;
@@ -76,6 +90,37 @@ button {
             float: right;
         }
     }
+}
+
+.showEx {
+    background-color: red;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    img{
+        position: absolute;
+        max-height: 100%;
+        animation-name: cf3FadeInOut;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+        animation-direction: alternate;
+    }
+    img:last-child {
+        animation-delay: -1s;
+        opacity: 0;
+    }
+}
+.image-preview {
+    margin: $content-between-margin;
+    text-align: center;
+    position: relative;
+    img {
+        max-width: 100%;
+        -webkit-filter: invert(100%) contrast(55%) brightness(115%);
+        filter: invert(100%) contrast(55%) brightness(115%);
+    } 
 }
 
 @media screen and (max-width: $small-screen) {

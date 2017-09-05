@@ -24,6 +24,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
     firstRun: boolean = true;
     pauseMode: boolean = false;
     errorName: string;
+    showedEx: any;
 
 
     constructor(
@@ -119,6 +120,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
         }
 
         if (this.choosedIntervals[this.lap]) {
+            this.showedEx = this.choosedIntervals[this.lap];
             this.secundomerService.startTimer(this.lap, rest, this.pauseMode, () => {
                 if (this.choosedIntervals[this.lap + 1]) {
                     this.lapTimer();
