@@ -35,7 +35,7 @@ import { SelectSportComponent } from './admin.components/select-sport/select-spo
         CommonModule,
         FormsModule,
         CdkTableModule,
-        AdminRoutingModule
+        AdminRoutingModule,
     ],
     declarations: [
         AdminComponent,
@@ -52,17 +52,17 @@ import { SelectSportComponent } from './admin.components/select-sport/select-spo
         FoodTypeComponent,
         FoodListComponent,
         FoodEditDialogComponent,
-        FoodTypeEditDialogComponent
+        FoodTypeEditDialogComponent,
         SelectSportComponent,
     ],
     providers: [
         ToasterService,
         AdminRootProfileService,
-        ExerciseCreateService
+        ExerciseCreateService,
     ],
     entryComponents: [
         FoodEditDialogComponent,
-        FoodTypeEditDialogComponent
+        FoodTypeEditDialogComponent,
         SelectSportComponent,
     ]
 })
