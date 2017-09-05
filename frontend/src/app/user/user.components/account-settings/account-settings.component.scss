@@ -46,7 +46,7 @@ aside {
             font-weight: inherit;
             font-size: inherit;
         }
-        
+
         .navigation__icon {
             float: left;
             fill: #aaa;
@@ -78,6 +78,11 @@ aside {
 }
 
 @media screen and (max-width: $small-screen) {
+    .mainblock {
+        width: 98%;
+        margin: 1%;
+    }
+
     aside {
         width: 55px;
 

@@ -12,6 +12,7 @@ export class GCalendarService {
     private _apiUrl = 'https://www.googleapis.com/auth/calendar';
     public client: any;
     public authorized: boolean;
+    public inited = false;
 
     constructor() {
         gapi.load('client:auth2', () => {
@@ -33,16 +34,16 @@ export class GCalendarService {
     }
 
     updateSigninStatus(status) {
-        console.log(status);
         this.authorized = status;
+        this.inited = true;
     }
 
     checkAuthorized(callback) {
         if (this.authorized) {
-            callback();
+            callback(null, true);
         } else {
-            this.signIn().then(() => {
-                callback();
+            this.signIn().then((err, result) => {
+                callback(err, result);
             });
         }
     }

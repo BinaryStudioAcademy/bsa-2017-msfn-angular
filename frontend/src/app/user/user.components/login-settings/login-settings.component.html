@@ -46,5 +46,21 @@
                 Link your account with social networks for a simple login
             </div>
         </div>
+
+        <h3 class="setting-header">Google calendar</h3>
+        <div class="profile-calendar">
+            <button md-raised-button
+                    *ngIf="!gcalendarService.inited"
+                    disabled="true"
+                    class="">Loading</button>
+            <button md-raised-button
+                    *ngIf="gcalendarService.inited"
+                    [disabled]="gcalendarService.authorized"
+                    (click)="enableGoogleCalendar()"
+                    class="">{{(gcalendarService.authorized) ? 'Google calendar integration enabled' : 'Enable google calendar integration'}}</button>
+            <div class="addition-info">
+                Check your plans on any device
+            </div>
+        </div>
     </div>
 </div>
