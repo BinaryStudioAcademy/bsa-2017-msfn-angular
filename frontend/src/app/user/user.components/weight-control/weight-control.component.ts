@@ -87,19 +87,16 @@ export class WeightControlComponent implements OnInit {
     ]);
 
     waterFormControl = new FormControl('', [
-        Validators.required,
         Validators.min(40),
         Validators.max(80)
     ]);
 
     boneFormControl = new FormControl('', [
-        Validators.required,
         Validators.min(3),
         Validators.max(60)
     ]);
 
     fatFormControl = new FormControl('', [
-        Validators.required,
         Validators.min(5),
         Validators.max(35)
     ]);
@@ -196,15 +193,6 @@ export class WeightControlComponent implements OnInit {
             .attr('text-anchor', 'end')
             .text('Weight');
 
-        g.append('path')
-            .attr('class', 'line')
-            .attr('fill', 'none')
-            .attr('stroke-linejoin', 'round')
-            .attr('stroke-linecap', 'round')
-            .attr('stroke-width', 1.5)
-            .attr('d', line(data));
-
-
         g.selectAll('path')
             .attr('stroke', '#fff');
         g.selectAll('line')
@@ -236,19 +224,21 @@ export class WeightControlComponent implements OnInit {
         const target = e.currentTarget;
         const coord = this._d3.mouse(target);
 
+        const svgPosition = this._d3.select('#chart').node().getBoundingClientRect();
+
         const tooltip = this._d3.select('.tooltip');
         tooltip.transition()
             .duration(200)
-            .style('opacity', 0.9);
-        tooltip.html(element.value)
-            .style('transform', `translate(${coord[0] + this.margin.left - 10}px,${coord[1] + this.margin.top - 20}px)`);
+            .style('opacity', 1);
+        tooltip.html(element.value);
+        tooltip.style('left', (e.clientX - 10) + 'px');
+        tooltip.style('top', (e.clientY - 30) + 'px');
 
         this._d3.select(target)
             .transition()
             .duration(200)
             .attr('r', 7);
     }
-
 
     hideData() {
         const e = this._d3.event;
@@ -281,7 +271,7 @@ export class WeightControlComponent implements OnInit {
                 }
                 setTimeout(() => {
                     this.updateData();
-                }, 500);
+                }, 2000);
             });
 
             this.weightFormControl.reset();
@@ -330,11 +320,14 @@ export class WeightControlComponent implements OnInit {
     updateChart() {
         const svg = this._d3.select('#chart');
 
-        const data = this.periodItems.map(item => {
-            return {
-                value: item[this.settings.selection],
-                date: new Date(item.date).getTime()
-            };
+        const data = [];
+        this.periodItems.forEach(item => {
+            if (item[this.settings.selection]) {
+                data.push({
+                    value: item[this.settings.selection],
+                    date: new Date(item.date).getTime()
+                });
+            }
         });
 
         const width = +svg.node().clientWidth - this.margin.left - this.margin.right,
