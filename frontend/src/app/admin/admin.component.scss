@@ -86,7 +86,7 @@ aside {
 
 @media screen and (max-width: $small-screen) {
     aside {
-        width: 55px;
+        width: auto;
 
         .navigation__title, .navigation__subheader {
             display: none;

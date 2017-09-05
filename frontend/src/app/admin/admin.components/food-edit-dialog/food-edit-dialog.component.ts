@@ -3,7 +3,7 @@ import {MD_DIALOG_DATA} from '@angular/material';
 import {FoodService} from '../../services/food.service';
 import {IFood} from '../../../models/food';
 import {FormControl, Validators} from '@angular/forms';
-import {ToasterService} from "../../../services/toastr.service";
+import {ToasterService} from '../../../services/toastr.service';
 
 @Component({
     selector: 'app-food-edit-dialog',

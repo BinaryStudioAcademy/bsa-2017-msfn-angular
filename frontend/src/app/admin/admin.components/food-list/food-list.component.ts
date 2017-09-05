@@ -11,9 +11,10 @@ import { FoodEditDialogComponent } from '../food-edit-dialog/food-edit-dialog.co
     providers: [FoodService]
 })
 export class FoodListComponent implements OnInit {
-    options = [];
+    options = []; // TODO: upd
     items = [];
     foods: IFood[] = [];
+    allFood: IFood[];
     foodsShown: IFood[];
     itemsPerPage = 10000; // TODO: change to smaller and implement
     filter = '';
@@ -24,14 +25,15 @@ export class FoodListComponent implements OnInit {
         private mdDialog: MdDialog) { }
 
     ngOnInit() {
-        this.updateFoodList();
-        this.foodService.getAllFoodTypes((result) => {
+            this.foodService.getAllFoodTypes((result) => {
             for (const item of result) {
                 if (!this.options.includes(item.name)) {
                     this.options.push(item.name);
                 }
             }
         });
+        console.log(this.options);
+        this.updateFoodList();
     }
 
     toggleOnlyPublished(value) {
@@ -63,33 +65,24 @@ export class FoodListComponent implements OnInit {
     }
 
     updateFoods() {
-        let copiedFoods = [...this.foods];
-        let filtered = [];
         if (this.items.length > 0) {
-            for (const item of this.items) {
-                for (const food of copiedFoods) {
-                    if (food.foodType.toLowerCase().includes(item.toLowerCase())) {
-                        filtered.push(food);
+            this.foods = [];
+            for (let i = 0; i < this.allFood.length; i++) {
+                for (let j = 0; j < this.items.length; j++) {
+                    if (this.allFood[i].foodType === this.items[j]) {
+                        this.foods.push(this.allFood[i]);
+                        break;
                     }
                 }
             }
-            copiedFoods = filtered;
+        } else {
+            this.foods = this.allFood;
         }
-        if (this.filter.length >= 0) {
-            if (filtered.length > 0) {
-                copiedFoods = filtered;
-                filtered = [];
-            }
-            for (const food of copiedFoods) {
-                if (food.name.toLowerCase().includes(this.filter.toLowerCase())) {
-                    filtered.push(food);
-                }
-            }
-        }
-        if (filtered.length === 0) {
-            return;
-        }
-        this.foodsShown = filtered.slice((this.page - 1) * this.itemsPerPage, this.page * this.itemsPerPage);
+        this.foods = this.foods.filter((elem) => {
+            return elem.name.toLowerCase().includes(this.filter.toLowerCase())
+            || elem.vendor.toLowerCase().includes(this.filter.toLowerCase());
+        });
+        this.foodsShown = this.foods;
     }
 
 
@@ -97,7 +90,7 @@ export class FoodListComponent implements OnInit {
         const filtered: IFood[] = this.foods.filter(food =>
             food.name.toLowerCase().includes(this.filter.toLowerCase()));
         if (this.foodsShown.length < filtered.length) {
-            this.foodsShown.push(...filtered.slice(
+            this.foodsShown.push(...this.foods.slice(
                 this.foodsShown.length,
                 this.foodsShown.length + this.itemsPerPage));
         }
@@ -107,21 +100,34 @@ export class FoodListComponent implements OnInit {
 
         if (this.getOnlyPublished) {
             this.foodService.getOnlyPublishedFood((data) => {
-                data = data.filter((elem) => {
-                    return elem.isRemoved === false;
-                });
+                data = this.updateData(data);
+                this.allFood = data;
                 this.foods = data;
                 this.foodsShown = data.slice(0, this.itemsPerPage);
             });
         } else {
             this.foodService.getAllFood((data) => {
-                data = data.filter((elem) => {
-                    return elem.isRemoved === false;
-                });
-                this.foods = data;
-                this.foodsShown = data.slice(0, this.itemsPerPage);
+                data = this.updateData(data);
+                this.allFood = data;
+                this.updateFoods();
             });
         }
+    }
+
+    updateData(data) {
+        data = data.filter((elem) => {
+            return elem.isRemoved === false;
+        });
+        data = data.sort(function (a, b) {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }
+            return 0;
+        });
+        return data;
     }
 
 }

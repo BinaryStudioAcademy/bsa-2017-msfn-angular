@@ -3,7 +3,6 @@ import {MD_DIALOG_DATA} from '@angular/material';
 import {FoodService} from '../../services/food.service';
 import {IFoodType} from '../../../models/food-type';
 import {FormControl, Validators} from '@angular/forms';
-import {ToasterService} from '../../../services/toastr.service';
 
 @Component({
     selector: 'app-food-type-edit-dialog',
@@ -15,8 +14,7 @@ export class FoodTypeEditDialogComponent implements OnInit {
     public foodType: IFoodType;
     public newItem: boolean;
     constructor(@Inject(MD_DIALOG_DATA) public data: { foodType: IFoodType, newItem: boolean},
-                private foodService: FoodService,
-                private toasterService: ToasterService
+                private foodService: FoodService
     ) { }
 
     nameFormControl = new FormControl('', [
@@ -34,9 +32,7 @@ export class FoodTypeEditDialogComponent implements OnInit {
     }
 
     save() {
-        this.foodService[this.newItem ? 'addFoodType' : 'updateFoodType'](this.foodType, () => {
-            this.toasterService.showMessage('success', `${this.newItem ? 'Added' : 'Updated'}`);
-        });
+        this.foodService[this.newItem ? 'addFoodType' : 'updateFoodType'](this.foodType, () => {});
     }
 
 }

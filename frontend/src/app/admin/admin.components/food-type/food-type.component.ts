@@ -6,7 +6,6 @@ import { MdDialog, MdSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { IFoodType } from '../../../models/food-type';
 import { FoodTypeEditDialogComponent } from '../food-type-edit-dialog/food-type-edit-dialog.component';
-import { ToasterService } from '../../../services/toastr.service';
 
 @Component({
     selector: 'app-food-type',
@@ -27,7 +26,6 @@ export class FoodTypeComponent implements OnInit {
 
     constructor(private cd: ChangeDetectorRef,
                 private foodService: FoodService,
-                private toasterService: ToasterService,
                 private mdDialog: MdDialog) {
         mdDialog.afterAllClosed
             .subscribe(() => {
@@ -74,7 +72,6 @@ export class FoodTypeComponent implements OnInit {
         this.foodService.updateFoodType(row, () => {
             this.cd.markForCheck();
         });
-        this.toasterService.showMessage('success', 'Updated');
     }
 
 }

@@ -1,15 +1,22 @@
 <div class="food-list-container">
     <div class="filtering-items">
         <md-input-container>
-            <input mdInput #search placeholder="Search" [(ngModel)]="filter" (change)="updateFoods()" (keyup)="updateFoods()" autocomplete="off">
+            <input mdInput #search placeholder="Search" [(ngModel)]="filter" (keyup)="updateFoods()" (change)="updateFoods()" autocomplete="off">
             <md-icon mdSuffix>search</md-icon>
         </md-input-container>
         <button md-button disableRipple class="btn" (click)="openEditFoodDialog(true)" id="btn-add">Add food
         </button>
-        <md-slide-toggle 
+        <md-slide-toggle
         (change)="toggleOnlyPublished($event.checked)"
         [checked]="true">Only published</md-slide-toggle>
     </div>
+    <div id="type-sort">        
+        <app-list
+        [items]="items"
+        [options]="options"
+        placeholder="types"
+        (onChangedList)="updateFoods()"></app-list>
+        </div>
     <md-grid-list>
         <md-grid-tile *ngFor="let food of foodsShown" (click)="openEditFoodDialog(false, food)">
             <md-card>
@@ -26,6 +33,7 @@
                     <img md-card-avatar src="../../../../../../resources/default.png">
                     <md-card-title>{{food.name}}</md-card-title>
                     <md-card-subtitle>{{food.foodType}}</md-card-subtitle>
+                    <md-card-subtitle>{{food.vendor}}</md-card-subtitle>
                 </md-card-header>
                 <md-card-content>
                     Created by {{food.customUserId ? 'User' : 'Admin'}}

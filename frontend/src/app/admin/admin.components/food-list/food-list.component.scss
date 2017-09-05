@@ -12,6 +12,7 @@ md-grid-tile:hover {
     cursor: pointer;
 }
 
+
 md-grid-tile {
     width: 260px;
     margin: 10px;
@@ -48,6 +49,14 @@ md-grid-tile {
 
 #delete:hover{
     color: $btn-color;
+}
+
+#type-sort {
+    width: 90%;
+    display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
+    justify-content: center;
 }
 
 .btn {
@@ -92,6 +101,7 @@ md-grid-tile {
         flex-wrap: wrap;
         align-items: center;
     }
+
     #btn-add {
         margin-bottom: 20px;
     }

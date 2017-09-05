@@ -2,10 +2,14 @@
 @import "../../../../globalStyles/indentations";
 @import '../../../../globalStyles/text.scss';
 
+#filter-item {
+    margin-top: 15px;
+}
+
 .mat-table {
     width: 80%;
     margin: 0 auto 40px auto;
-    overflow-y: auto;
+    overflow: auto;
 }
 .mat-header-row,
 .mat-row {
@@ -21,7 +25,6 @@ md-header-cell,
 md-cell {
     max-width: 28%;
     margin-left: 4%;
-    word-break: break-all;
 }
 
 md-header-cell:last-child,
@@ -30,13 +33,12 @@ md-cell:last-child {
 }
 
 .food-types-container {
-    margin: 0 auto;
-    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     text-align: center;
     font-family: $font-general;
-    div {
-        overflow-x: hidden;
-    }
 }
 .btn {
     border: none;
@@ -73,4 +75,13 @@ button:focus {
 .with-delete {
     display: flex;
     justify-content: space-between;
+}
+
+
+@media only screen and (max-width: $medium-screen) {
+    .mat-table {
+        width: 80%;
+        margin: 0 auto 40px auto;
+        overflow: auto;
+    }
 }
