@@ -1,0 +1,30 @@
+@import "../../../../globalStyles/variables";
+@import "../../../../globalStyles/indentations";
+@import '../../../../globalStyles/text.scss';
+
+md-dialog-content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.food-type-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.food-type-picture {
+
+}
+
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    width: auto;
+    height: 40px;
+    margin: 0 auto 20px auto;
+}
