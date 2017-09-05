@@ -51,7 +51,7 @@ export class UserListService {
         });
     }
 
-    unfollow(id) {
+    unfollow(id, callback) {
         const unfollowReq: IHttpReq = {
             url: '/api/user/subscribe/unfollow',
             method: 'POST',
@@ -62,10 +62,13 @@ export class UserListService {
             successMessage: 'Unfollow'
         };
         this.httpService.sendRequest(unfollowReq).then(data => {
+            if (data) {
+                callback(null, data);
+            }
         });
     }
 
-    follow(id: string) {
+    follow(id: string, callback) {
         const followReq: IHttpReq = {
             url: '/api/user/subscribe/follow',
             method: 'POST',
@@ -76,6 +79,9 @@ export class UserListService {
             successMessage: 'Followed'
         };
         this.httpService.sendRequest(followReq).then(data => {
+            if (data) {
+                callback(null, data);
+            }
         });
     }
 }

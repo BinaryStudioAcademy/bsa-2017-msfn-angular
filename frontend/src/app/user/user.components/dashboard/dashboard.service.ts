@@ -20,4 +20,15 @@ export class DashboardService {
                 callback(data);
             });
     }
+
+    getUser(callback) {
+        const request: IHttpReq = {
+            url: '/api/user/me',
+            method: 'GET',
+            body: ''
+        };
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
+        });
+    }
 }

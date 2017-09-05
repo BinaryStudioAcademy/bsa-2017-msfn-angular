@@ -86,4 +86,37 @@ export class ProfileService {
         cropperSettings.touchRadius = 10;
         return cropperSettings;
     }
+
+    getActivityLevelOptions() {
+        return [
+            {
+                name: 'Sitting/lying all day',
+                coef: 1.2
+            },
+            {
+                name: 'Seated work, light exercise',
+                coef: 1.375
+            },
+            {
+                name: 'Moderately physical work, no exercise',
+                coef: 1.4625
+            },
+            {
+                name: 'Moderately physcial work, light exercise',
+                coef: 1.550
+            },
+            {
+                name: 'Moderately physcial work, heavy exercise',
+                coef: 1.6375
+            },
+            {
+                name: 'Heavy work / heavy exercise',
+                coef: 1.725
+            },
+            {
+                name: 'Above average physical work / exercise',
+                coef: 1.9
+            }
+        ];
+    }
 }

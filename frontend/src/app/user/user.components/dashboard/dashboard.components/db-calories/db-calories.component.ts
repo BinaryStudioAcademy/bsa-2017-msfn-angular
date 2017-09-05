@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
     D3Service,
     D3
@@ -26,7 +26,7 @@ export class DbCaloriesComponent implements OnInit {
         endDate: new Date()
     };
 
-    dayAim = 300;
+    @Input() dayAim: number;
     todayBurnedKcal = 120.6;
 
     data = [
