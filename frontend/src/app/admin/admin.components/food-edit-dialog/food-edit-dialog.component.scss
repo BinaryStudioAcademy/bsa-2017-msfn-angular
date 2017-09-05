@@ -2,10 +2,15 @@
 @import '../../../../globalStyles/indentations';
 @import '../../../../globalStyles/text';
 
+md-input-container {
+    width: 100%;
+}
+
 .food-edit-dialog-container {
     display: flex;
     flex-direction: column;
     margin: 0 $content-between-margin;
+    width: 300px;
 }
 .btn {
     border: none;
@@ -16,7 +21,7 @@
     border-radius: 50px;
     width: auto;
     height: 40px;
-    margin: 40px auto 0 auto;
+    margin: 0 auto;
 }
 
 .energy-container {
@@ -24,5 +29,21 @@
     flex-direction: row;
     md-input-container {
         margin: $input-padding;
+    }
+}
+
+.energy-item {
+    width: 20%;
+}
+
+@media only screen and (max-width: $small-screen) {
+    .food-edit-dialog-container {
+        width: 200px;
+    }
+    .energy-container {
+        flex-direction: column;
+    }
+    .energy-item {
+        width: 100%;
     }
 }
