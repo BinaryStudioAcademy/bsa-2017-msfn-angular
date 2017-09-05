@@ -7,8 +7,8 @@
         <div class="exlist centerContent">
             <app-exercise-list [exercisesList]="trainingPlan.exercisesList" [userMeasures]="userMeasures" (onChangeList)="onChangeList($event)"></app-exercise-list>
         </div>
-        <div class="intmenu centerContent">
-            <app-interval-training-plan [intervalList]="trainingPlan.intervals" (intervalAction)="intervalAction($event)" *ngIf="trainingPlan.trainingType === 'interval'"></app-interval-training-plan>
+        <div class="intmenu centerContent"  *ngIf="trainingPlan.trainingType === 'interval'">
+            <app-interval-training-plan [intervalList]="trainingPlan.intervals" (intervalAction)="intervalAction($event)"></app-interval-training-plan>
         </div>
     </div>
 </div>

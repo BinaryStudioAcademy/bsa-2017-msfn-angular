@@ -26,6 +26,8 @@ import { FoodListComponent } from './admin.components/food-list/food-list.compon
 import { FoodEditDialogComponent } from './admin.components/food-edit-dialog/food-edit-dialog.component';
 import { CdkTableModule } from '@angular/cdk';
 import { FoodTypeEditDialogComponent } from './admin.components/food-type-edit-dialog/food-type-edit-dialog.component';
+import { SelectSportComponent } from './admin.components/select-sport/select-sport.component';
+
 
 @NgModule({
     imports: [
@@ -51,6 +53,7 @@ import { FoodTypeEditDialogComponent } from './admin.components/food-type-edit-d
         FoodListComponent,
         FoodEditDialogComponent,
         FoodTypeEditDialogComponent
+        SelectSportComponent,
     ],
     providers: [
         ToasterService,
@@ -60,6 +63,7 @@ import { FoodTypeEditDialogComponent } from './admin.components/food-type-edit-d
     entryComponents: [
         FoodEditDialogComponent,
         FoodTypeEditDialogComponent
+        SelectSportComponent,
     ]
 })
 export class AdminModule {}

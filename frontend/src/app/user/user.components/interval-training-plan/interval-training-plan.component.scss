@@ -40,7 +40,7 @@
         .interval-circle {
             position: relative;
             width: 160px;
-            height: 100px;
+            min-height: 120px;
 
             .lap, .warm {
                 max-width: 50px;
@@ -61,7 +61,15 @@
                 left: 45px;
             }
             .warm {
-                bottom: 25px;
+                bottom: 45px;
+                right: 45px;
+            }
+            .topName {
+                top: 7px;
+                left: 45px;
+            }
+            .bottomName {
+                bottom: 27px;
                 right: 45px;
             }
             svg {
@@ -115,6 +123,14 @@
                 bottom: 25px;
                 right: 45px;
             }
+            .topName {
+                top: 7px;
+                left: 45px;
+            }
+            .bottomName {
+                bottom: 7px;
+                right: 45px;
+            }
             svg {
                 fill: $btn-color;
                 width: 160px;
@@ -134,8 +150,6 @@
 
     .add-interval {
         position: relative;
-        width: 80px;
-        height: 50px;
         cursor: pointer;
         .lap {
             position: absolute;
@@ -167,14 +181,6 @@
         font-family: $font-general;
         font-weight: bold;
     }
-    .topName {
-        top: 7px;
-        left: 45px;
-    }
-    .bottomName {
-        bottom: 7px;
-        right: 45px;
-    }
 }
 
 @media screen and (max-width: $small-screen) {
@@ -184,18 +190,10 @@
             width: auto;
         }
         .interval-list {
-            display: flex;
-            align-items: center;
-            width: calc(100% - 80px);
-            height: 100%;
-            min-height: 160px;
-            overflow-x: auto;
-        }
-        .add-interval {
-            position: relative;
-            width: 80px;
-            height: 50px;
-            cursor: pointer;
+            width: 100%;
+            flex-wrap: wrap;
+            height: calc(100% - 100px);
+            justify-content: center;
         }
     }
 }

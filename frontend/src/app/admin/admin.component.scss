@@ -67,7 +67,7 @@ aside {
     flex: 0 0 calc(20vw);
     min-width: 20vw; /*need -20px for scrollbar*/
 }
-    
+
 .child-container {
     flex: 0 0 80vw;
     min-width: 80vw;
@@ -84,7 +84,7 @@ aside {
 }
 
 
-@media screen and (max-width: $small-screen) {
+@media screen and (max-width: $medium-screen) {
     aside {
         width: auto;
 

@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ExerciseEditDialogComponent } from './../exercise-edit-dialog/exercise-edit-dialog.component';
-import { IntervalTrainingPlanComponent } from './../interval-training-plan/interval-training-plan.component';
-import { MdDialog, MdDialogRef } from '@angular/material';
-import { IHttpReq } from './../../../models/http-req';
-import { HttpService } from '../../../services/http.service';
-import { ActivatedRoute } from '@angular/router';
-import { ExerciseListComponent } from './../exercise-list/exercise-list.component';
-import { GCalendarService } from '../../../services/gcalendar.service';
+import {Component, OnInit} from '@angular/core';
+import {ExerciseEditDialogComponent} from './../exercise-edit-dialog/exercise-edit-dialog.component';
+import {IntervalTrainingPlanComponent} from './../interval-training-plan/interval-training-plan.component';
+import {MdDialog, MdDialogRef} from '@angular/material';
+import {IHttpReq} from './../../../models/http-req';
+import {HttpService} from '../../../services/http.service';
+import {ActivatedRoute} from '@angular/router';
+import {ExerciseListComponent} from './../exercise-list/exercise-list.component';
+import {GCalendarService} from '../../../services/gcalendar.service';
 
 
 @Component({
@@ -21,13 +21,13 @@ export class PlanDetailComponent implements OnInit {
     exercisesList = [];
 
     days = [
-        { 'key': '1', 'value': 'Mon', 'checked': false, code: 'MO' },
-        { 'key': '2', 'value': 'Tue', 'checked': false, code: 'TU' },
-        { 'key': '3', 'value': 'Wed', 'checked': false, code: 'WE' },
-        { 'key': '4', 'value': 'Thu', 'checked': false, code: 'TH' },
-        { 'key': '5', 'value': 'Fri', 'checked': false, code: 'FR' },
-        { 'key': '6', 'value': 'Sat', 'checked': false, code: 'SA' },
-        { 'key': '0', 'value': 'Sun', 'checked': false, code: 'SU' }
+        {'key': '1', 'value': 'Mon', 'checked': false, code: 'MO'},
+        {'key': '2', 'value': 'Tue', 'checked': false, code: 'TU'},
+        {'key': '3', 'value': 'Wed', 'checked': false, code: 'WE'},
+        {'key': '4', 'value': 'Thu', 'checked': false, code: 'TH'},
+        {'key': '5', 'value': 'Fri', 'checked': false, code: 'FR'},
+        {'key': '6', 'value': 'Sat', 'checked': false, code: 'SA'},
+        {'key': '0', 'value': 'Sun', 'checked': false, code: 'SU'}
     ];
 
     // sportTypeValue doesn't use.. ?
@@ -37,17 +37,19 @@ export class PlanDetailComponent implements OnInit {
     types = [
         {
             key: 'general',
-            value: 'General training',
+            value: 'General',
             checked: false
         },
         {
             key: 'interval',
-            value: 'Interval training',
+            value: 'Interval',
             checked: false
         },
     ];
     userMeasures: any;
     displayExercises: Object[];
+    errorEmptyIntervals = false;
+    errorEmptyName = false;
 
     lastAfterClosedResult: string;
 
@@ -64,11 +66,11 @@ export class PlanDetailComponent implements OnInit {
     };
 
 
-    constructor(
-        private gcalendar: GCalendarService,
-        private dialog: MdDialog,
-        private httpHandler: HttpService,
-        public activatedRoute: ActivatedRoute) {}
+    constructor(private gcalendar: GCalendarService,
+                private dialog: MdDialog,
+                private httpHandler: HttpService,
+                public activatedRoute: ActivatedRoute) {
+    }
 
     ngOnInit() {
         const sdata: IHttpReq = {
@@ -104,10 +106,11 @@ export class PlanDetailComponent implements OnInit {
                                 type.checked = true;
                             }
                         });
+
+                        console.log(this.trainingPlan);
                     }
                 });
         }
-
     }
 
     onChangeList(updatedList) {
@@ -119,6 +122,7 @@ export class PlanDetailComponent implements OnInit {
             const data = action.data;
             data.exList = this.trainingPlan.exercisesList;
             this.trainingPlan.intervals[action.cacheIndex] = data;
+            this.errorEmptyIntervals = false;
             this.trainingPlan.exercisesList = [];
         } else if (action.type === 'delete') {
             this.trainingPlan.intervals.splice(action.cacheIndex, 1);
@@ -136,35 +140,52 @@ export class PlanDetailComponent implements OnInit {
         this.trainingPlan.count = selectedDays.length;
     }
 
-    changeTrainingCount(newValue: string, operation = '') {
-        if (!newValue) {
-            switch (operation) {
-                case 'dec':
-                    if (this.trainingPlan.count > 0) {
-                        this.trainingPlan.count -= 1;
-                    }
-                    break;
-                case 'inc':
-                    if (this.trainingPlan.count < 7) {
-                        this.trainingPlan.count += 1;
-                    }
-                    break;
-            }
-        } else {
-            if (parseInt(newValue, 10)) {
+    // changeTrainingCount(newValue: string, operation = '') {
+    //     if (!newValue) {
+    //         switch (operation) {
+    //             case 'dec':
+    //                 if (this.trainingPlan.count > 0) {
+    //                     this.trainingPlan.count -= 1;
+    //                 }
+    //                 break;
+    //             case 'inc':
+    //                 if (this.trainingPlan.count < 7) {
+    //                     this.trainingPlan.count += 1;
+    //                 }
+    //                 break;
+    //         }
+    //     } else {
+    //         if (parseInt(newValue, 10)) {
 
-                this.trainingPlan.count = parseInt(newValue, 10);
-            }
-        }
+    //             this.trainingPlan.count = parseInt(newValue, 10);
+    //         }
+    //     }
 
-        if (this.trainingPlan.count > 7) {
-            this.trainingPlan.count = 7;
-        } else if (this.trainingPlan.count < 0) {
-            this.trainingPlan.count = 0;
+    //     if (this.trainingPlan.count > 7) {
+    //         this.trainingPlan.count = 7;
+    //     } else if (this.trainingPlan.count < 0) {
+    //         this.trainingPlan.count = 0;
+    //     }
+    // }
+
+
+    validation() {
+        let result = true;
+        if (!this.trainingPlan.name) {
+            this.errorEmptyName = true;
+            result = false;
+        } else if ((this.trainingPlan.trainingType === 'interval') && (!this.trainingPlan.intervals.length)) {
+            result = this.errorEmptyIntervals = true;
+            result = false;
         }
+        return result;
     }
 
     savePlan() {
+        if (!this.validation()) {
+            console.log('save run');
+            return;
+        }
         if (this.trainingPlan.trainingType === 'interval') {
             this.trainingPlan.exercisesList = [];
         }

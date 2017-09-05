@@ -1,7 +1,14 @@
 <div class="events inner-container">
     <h2>{{ title }}</h2>
     <div class="content">
-        <div class="start-date">
+        <div class="no-items" *ngIf="events.length === 0">
+            There are no events yet.
+            <button md-icon-button type="button" routerLink="">
+                Add one!
+            </button>
+        </div>
+
+        <div class="start-date" *ngIf="events.length > 0">
             <md-input-container>
                 <input
                     mdInput
@@ -17,7 +24,7 @@
             <md-datepicker #startPicker></md-datepicker>
         </div>
 
-        <div class="end-date">
+        <div class="end-date" *ngIf="events.length > 0">
             <md-input-container>
                 <input
                     mdInput
@@ -33,12 +40,16 @@
             <md-datepicker #endPicker></md-datepicker>
         </div>
 
-        <div id="day-picker">
+        <p class="no-data" *ngIf="eventOutput.length === 0">
+            No events were found.
+        </p>
+
+        <div id="day-picker" *ngIf="selectedDates.length > 0">
             <md-radio-group id="day-options" *ngIf="selectedDates">
                 <label
                     *ngFor="let event of selectedDates; let i = index"
                     for="event-{{ i }}"
-                       [ngClass]="{'label-checked': event.checked, 'label-unchecked': !event.checked}">
+                    [ngClass]="{'label-checked': event.checked, 'label-unchecked': !event.checked}">
                     <p>{{ event.dateOutput }}</p>
                     <div></div>
                 </label>

@@ -3,6 +3,7 @@ const userRepository = require('../repositories/userRepository');
 const decrypt = require('./decryptService');
 const emailService = require('../services/emailService');
 const config = require('../config');
+const caloriesCountService = require('./caloriesCountService');
 
 function UserService() {
 
@@ -43,6 +44,11 @@ function addItem(body, callback) {
                 startWeek : "Monday",
                 timeZone : "+2"
             };
+            caloriesCountService.getAdvisedCalories(body, data, res => {
+                if (res !== 'error') {
+                    body.advicedCalories = res
+                }
+            });
             // Generating registration confirmation "TOKEN" for user
             body.activateToken = makeid();
             // Add newly created user into DB
@@ -51,7 +57,7 @@ function addItem(body, callback) {
             // TO CHANGE URL in letter for stable site address
             emailService.send({
                 to: body.email,
-                subject: 'Your MSFN registration',
+                subject: 'Your ProFit registration',
                 html: '<table><tr><td>Congratulations, ' +
                 body.firstName +
                 '!</td></tr> <tr><td>You have become a part of our fantastic fitness network!</td></tr> <tr><td> Please, follow this link to activate your account: ' +
@@ -79,9 +85,14 @@ function updateItem(id, body, callback) {
         } else {
             userRepository.getUserByEmail(body.email, (err, existingUser) => {
                 if (err) return callback(err);
-
                 if (existingUser && existingUser.id !== id) return callback(new ApiError("User with such email already exists"));
-
+                if (body.weight || body.height || body.gender || body.birthday || body.activityLevel) {
+                    caloriesCountService.getAdvisedCalories(body, data, res => {
+                        if (res !== 'error') {
+                            body.advicedCalories = res
+                        }
+                    });
+                }
                 userRepository.update(id, body, callback);
             });
         }
@@ -118,9 +129,11 @@ function getUserById(req, callback) {
         if (req.params.id === req.session.passport.user) {
             callback(err, data);
         } else {
-            data.privacyHideFields.forEach(el => {
-                data[el] = null;
-            })
+            if (data) {
+                data.privacyHideFields.forEach(el => {
+                    data[el] = null;
+                });
+            }
             callback(err, data);
         }
     });

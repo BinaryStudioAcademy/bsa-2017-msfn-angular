@@ -3,58 +3,74 @@
         <div class="exercise-table-head">
             <div class="table-title">
                 <span>Exercise list</span>
-                <md-icon (click)="addExercise()" id="test" class="button-add">add_circle</md-icon>
+                <md-icon *ngIf="!disableActions"
+                         (click)="addExercise()"
+                         id="icon"
+                         class="button-add">add_circle
+                </md-icon>
             </div>
             <div class="table-controls" *ngIf="(exercisesList.length / pageSize) > 1">
-                <md-paginator class="exercise-pagination" [length]="exercisesList.length" [(pageIndex)]="pageIndex" [pageSize]="pageSize"
-                    (page)="pageEvent = $event; showPage(pageEvent.pageIndex)">
+                <md-paginator class="exercise-pagination"
+                              [length]="exercisesList.length"
+                              [(pageIndex)]="pageIndex"
+                              [pageSize]="pageSize"
+                              (page)="pageEvent = $event; showPage(pageEvent.pageIndex)">
                 </md-paginator>
             </div>
         </div>
         <div class="exercise-table-body">
             <div *ngFor="let exerciseObj of displayExercises" class="exercise-row">
                 <div class="col name" (click)="showDescription(exerciseObj)">{{exerciseObj.exercise.name}}</div>
-                <div class="col del" id="exDel" (click)="deleteExercise(exerciseObj.exercise.id || exerciseObj.exercise._id)"><i class="material-icons">delete</i></div>
+                <div class="col del"
+                     *ngIf="!disableActions"
+                     id="exDel"
+                     (click)="deleteExercise(exerciseObj.exercise.id || exerciseObj.exercise._id)">
+                    <i class="material-icons">delete</i>
+                </div>
                 <div class="col sets">
-                    <div class="items-conteiner" *ngFor="let set of exerciseObj.sets; let i = index">
-                        <div class="set-item" (click)="setEdit(exerciseObj, set, i);">
-                            <div class="item-id">{{i+1}}</div>
-                            <div class="item-val">{{set.value}}</div>
-                            <div class="item-opt-val">{{set.value2}}</div>
-                            <div class="col del" (click)="setDelete(exerciseObj, i)" *ngIf="exerciseObj.edit"><i class="material-icons">delete</i></div>
+                    <div class="set-item" *ngFor="let set of exerciseObj.sets; let i = index"
+                         (click)="setEdit(exerciseObj, set, i);">
+                        <div class="item-id verticalCenter horizontalCenter">{{i+1}}</div>
+                        <div class="item-val verticalCenter">{{set.value}}</div>
+                        <div class="item-opt-val verticalCenter">{{set.value2}}</div>
+                        <div class="col del verticalCenter horizontalCenter"
+                             (click)="setDelete(exerciseObj, i)" *ngIf="exerciseObj.edit && !disableActions">
+                            <i class="material-icons">close</i>
                         </div>
                     </div>
-                    <div class="set-form" *ngIf="exerciseObj.edit">
+                    <div class="set-form" *ngIf="exerciseObj.edit && !disableActions">
                         <form #form="ngForm">
                             <div class="item-val">
                                 <md-input-container>
-                                    <input
-                                        mdInput [placeholder]="exerciseObj.exercise.measure + '(' + userMeasures[exerciseObj.exercise.measure] + ')'" 
-                                        type="number" class="plan-name" 
-                                        name="value" [(ngModel)]="value" 
-                                        (keyup.enter)="setSaveInfo(exerciseObj, form)"
-                                    >
+                                    <input mdInput
+                                           placeholder="{{exerciseObj.exercise.measure.length && exerciseObj.exercise.measure + '(' + userMeasures[exerciseObj.exercise.measure] + ')' || ''}}"
+                                           type="number" class="plan-name"
+                                           name="value" [(ngModel)]="value"
+                                           (keyup.enter)="setSaveInfo(exerciseObj, form)">
                                 </md-input-container>
                             </div>
                             <div class="item-opt-val">
                                 <md-input-container>
-                                    <input
-                                        mdInput placeholder="count" 
-                                        type="number" class="plan-name" 
-                                        name="value2" [(ngModel)]="value2" 
-                                        (keyup.enter)="setSaveInfo(exerciseObj, form)"
-                                    >
+                                    <input mdInput
+                                           placeholder="count"
+                                           type="number"
+                                           class="plan-name"
+                                           name="value2"
+                                           [(ngModel)]="value2"
+                                           (keyup.enter)="setSaveInfo(exerciseObj, form)">
                                 </md-input-container>
                             </div>
-                            <div class="set-item add">
-                                <div class="item-id" (click)="setSaveInfo(exerciseObj, form)">+</div>
-                                <a class="exercise-add" (click)="setSaveInfo(exerciseObj, form)">Save</a>
+                            <div class="set-item add" *ngIf="!disableActions">
+                                <div class="item-id verticalCenter horizontalCenter"
+                                     (click)="setSaveInfo(exerciseObj, form)">+</div>
+                                <a class="exercise-add verticalCenter horizontalCenter"
+                                   (click)="setSaveInfo(exerciseObj, form)">Save</a>
                             </div>
                         </form>
                     </div>
-                    <div class="set-item add" *ngIf="!exerciseObj.edit">
-                        <div class="item-id" (click)="setAdd(exerciseObj)">+</div>
-                        <a class="exercise-add" (click)="setAdd(exerciseObj)">Add</a>
+                    <div class="set-item add" *ngIf="!exerciseObj.edit && !disableActions">
+                        <div class="item-id verticalCenter horizontalCenter" (click)="setAdd(exerciseObj)">+</div>
+                        <a class="exercise-add verticalCenter horizontalCenter" (click)="setAdd(exerciseObj)">Add</a>
                     </div>
                 </div>
             </div>

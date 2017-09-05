@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { WeightControlService } from '../../../weight-control/weight-control.service';
 import { DateService } from '../../../../../services/date.service';
 
@@ -14,7 +14,7 @@ import { DateService } from '../../../../../services/date.service';
         DateService
     ]
 })
-export class DbWeightControlComponent implements OnInit, OnChanges {
+export class DbWeightControlComponent implements OnChanges {
 
     constructor(private weightControlService: WeightControlService) { }
 
@@ -82,29 +82,13 @@ export class DbWeightControlComponent implements OnInit, OnChanges {
 
     title = 'Weight Control';
 
-    ngOnInit() {
-  //      this.getItems();
-    }
-
     ngOnChanges() {
-        console.log('WEIGHT CONTROL CHANGE');
-
         if (this.weightItems.length > 0 && !this.gotData) {
             this.gotData = true;
-            console.log('WEIGHT INIT', this.weightItems);
 
             this.weeklyItems = this.weightControlService.getWeeklyWeightItems(this.weightItems);
             this.updateData();
         }
-    }
-
-    getItems(): void {
-        this.weightControlService.getWeightItems(res => {
-            if (res[0].hasOwnProperty('weight')) {
-                this.weeklyItems = this.weightControlService.getWeeklyWeightItems(res);
-                this.updateData();
-            }
-        });
     }
 
     updateData(): void {

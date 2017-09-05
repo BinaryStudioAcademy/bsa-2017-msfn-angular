@@ -25,13 +25,13 @@ button {
             background-color: $btn-color;
         }
         &.finish {
-            background-color: rgb(139, 20, 20);
+            background-color: rgba(49, 122, 76, 1);
         }
         &.pause {
-            background-color: rgb(255, 160, 20);
+            background-color: rgba(89, 162, 116, 1);
         }
         &.circle {
-            background-color: #7da7d9;
+            background-color: rgba(129, 202, 156, 1);
         }
     }
     &.controll {
@@ -53,7 +53,7 @@ button {
 
 .intervalList {
     width: 90%;
-    background-color: $gradient-from-color;
+    // background-color: $gradient-from-color;
 
     .interval {
         transition: all 1s linear;
@@ -61,6 +61,8 @@ button {
         display: flex;
         align-items: center;
         height: 20px;
+        margin: 5px;
+        background-color: #333;
         .field {
             width: 90%;
             float: left;
@@ -82,15 +84,16 @@ button {
         height: 100%;
         overflow: auto;
     }
-    button {
-        &.general {
-            width: 35vw;
-            height: 35vw;
-            border-radius: 50%;
+    .intervalList {
+        .interval {
+            height: 40px;
+            font-size: 20px;
 
-            &.start {
-                width: 50vw;
-                height: 50vw;
+            .field {
+            }
+            input {
+                width: 40px;
+                height: 40px;
             }
         }
     }

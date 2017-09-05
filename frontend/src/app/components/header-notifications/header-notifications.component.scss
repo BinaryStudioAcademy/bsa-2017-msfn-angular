@@ -1,5 +1,32 @@
+@import '../../../globalStyles/variables';
+@import '../../../globalStyles/indentations';
+@import '../../../globalStyles/text';
 .notifications__count {
     vertical-align: super;
+    position: absolute;
+    right: -3px;
+    bottom: 0;
+    background: white;
+    color: $text-dark-color;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    line-height: 13px;
+    text-align: center;
+    font-size: 11px;
+    box-shadow: 0 0 2px 1px $text-dark-color;
+    font-weight: bold;
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.notifications__count.hidden {
+    opacity: 0;
+    transition: opacity 0s;
+}
+
+.notifications__count.short {
+    line-height: 8px;
 }
 
 .notification__alert {
@@ -12,7 +39,7 @@
 .pulse {
     border-radius: 50%;
     box-shadow:  0 0 0 rgb(244, 67, 54);
-    animation: pulse 1s;
+    animation: pulse 0.7s;
 }
 
 @-webkit-keyframes pulse {
@@ -32,8 +59,8 @@
         box-shadow:  0 0 0 0 rgb(244, 67, 54);
     }
     70% {
-        -moz-box-shadow:  0 0 0 10px rgba(244, 67, 54, 0);
-        box-shadow:  0 0 0 10px rgba(244, 67, 54, 0);
+        -moz-box-shadow:  0 0 0 5px rgba(244, 67, 54, 0);
+        box-shadow:  0 0 0 5px rgba(244, 67, 54, 0);
     }
     100% {
         -moz-box-shadow:  0 0 0 0 rgba(244, 67, 54, 0);

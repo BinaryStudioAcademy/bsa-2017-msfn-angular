@@ -53,6 +53,15 @@ const User = new Schema({
         }
     ],
     privacyHideFields: [String],
+    activityLevel: Number,
+    advicedCalories: Number,
+}, {
+    toObject: {
+        virtuals: true
+    },
+    toJSON: {
+        virtuals: true
+    }
 });
 
 User.pre('save', function (next) {
@@ -99,6 +108,12 @@ User.methods.encryptPassword = function (password, callback) {
 
 User.methods.checkToken = function (token, callback) {
     callback(this.activateToken === token);
-}
+};
+
+User.virtual('fullName').get(
+    function() {
+        return this.firstName + ' ' + this.lastName;
+    }
+);
 
 module.exports = mongoose.model('User', User);

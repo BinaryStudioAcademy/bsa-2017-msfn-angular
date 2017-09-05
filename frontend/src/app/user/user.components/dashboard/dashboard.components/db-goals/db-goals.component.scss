@@ -9,23 +9,6 @@
         flex-wrap: nowrap;
         height: 70%;
 
-        #set-goal {
-            text-align: center;
-
-            button {
-                display: block;
-                width: 80px;
-                height: 40px;
-                margin: $content-between-margin auto 0;
-                border: none;
-                border-radius: 15px;
-                outline: none;
-                font-size: $main-text;
-                font-weight: 600;
-                background: #82ca9c;
-            }
-        }
-
         .goal-item {
             width: 100%;
 
@@ -37,7 +20,11 @@
         }
 
         .goal-item:not(:last-child) {
-            margin-bottom: 30px;
+            margin-bottom: 60px;
+        }
+
+        .goal-item:last-child {
+            margin-bottom: 20px;
         }
     }
 }
@@ -59,12 +46,12 @@
     }
 
     .goal-start-date {
-        color: $btn-color;
+        color: $btn-second-color;
     }
 
     .goal-end-date {
         text-align: right;
-        color: $btn-second-color;
+        color: $text-warn-color;
     }
 
     .goal-value {
@@ -72,18 +59,42 @@
         margin-top: 10px;
         font-size: $main-text;
     }
+
+    .goal-progress {
+        position: relative;
+        width: 100%;
+        margin-top: $content-tb-margin;
+        padding-top: $content-tb-margin;
+
+        p {
+            display: inline-block;
+            position: absolute;
+            color: $option1-color;
+        }
+
+        .start-value,
+        .end-value {
+            top: 20px;
+        }
+
+        .current-value {
+            bottom: 0;
+        }
+
+        .end-value {
+            right: 0;
+        }
+    }
+}
+
+md-progress-bar /deep/ .mat-progress-bar-fill::after {
+    background: $btn-color;
+}
+
+md-progress-bar /deep/ .mat-progress-bar-buffer {
+    background: #556d5b;
 }
 
 
 @media only screen and (min-width: $small-screen) {
-    .goals {
-        .content {
-            #set-goal {
-                button {
-                    display: inline-block;
-                    margin: 0 0 0 $content-between-margin;
-                }
-            }
-        }
-    }
 }

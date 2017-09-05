@@ -45,14 +45,20 @@ export class SecundomerComponent implements OnInit, OnChanges {
             });
             this.choosedIntervals = this.generateIntervalArray(this.intervals);
         }
+
+        if (changes.reloadIntervals && !changes.reloadIntervals.firstChange) {
+            this.showExercises.emit(this.choosedIntervals[0].exList);
+        }
     }
 
     ngOnInit() {
         this.intervals.forEach((el) => {
             el.checked = true;
         });
-        this.choosedIntervals = this.generateIntervalArray(this.intervals);
-        this.showExercises.emit(this.choosedIntervals[0].exList);
+        if (this.intervals && this.intervals.length) {
+            this.choosedIntervals = this.generateIntervalArray(this.intervals);
+            this.showExercises.emit(this.choosedIntervals[0].exList);
+        }
     }
 
     generateIntervalArray(array) {
@@ -69,12 +75,13 @@ export class SecundomerComponent implements OnInit, OnChanges {
     }
 
     beautifierTime(millisecnods: number): string {
-        const formatter = new Intl.DateTimeFormat('ru', {
+        const formatter = new Intl.DateTimeFormat('en-GB', {
             hour: '2-digit',
             minute: '2-digit',
-            second: '2-digit'
+            second: '2-digit',
+            timeZone: 'UTC'
         });
-        return formatter.format(millisecnods - 3000 * 60 * 60);
+        return formatter.format(millisecnods);
     }
 // secundomer functions
     run(): void {

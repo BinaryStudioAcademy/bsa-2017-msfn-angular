@@ -18,7 +18,10 @@ export class ActiveTrainingComponent implements OnInit {
     trainingPlan: any;
     burnedCallories = 1445;
 
-    editIntervalMode = false;
+    // validation prop
+    private editIntervalMode = false;
+    private runned = false;
+
 
     constructor(
         private activeTrainingService: ActiveTrainingService
@@ -77,6 +80,7 @@ export class ActiveTrainingComponent implements OnInit {
                 this.trainingPlan._id = result;
             }
         });
+        this.runned = true;
     }
 
     onFinish(timeData) {
@@ -92,6 +96,7 @@ export class ActiveTrainingComponent implements OnInit {
             }
             setTimeout(() => { this.finishTrain = false; }, 1000);
         });
+        this.runned = false;
     }
 
     onChangeList(updatedList) {

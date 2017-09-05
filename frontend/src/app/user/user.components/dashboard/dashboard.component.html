@@ -1,20 +1,20 @@
 <div id="dashboard-container" [sortablejs]="" [sortablejsOptions]="dragOptions">
-    <div id="weight-container">
-        <app-db-weight-control [weightItems]="weightItems"></app-db-weight-control>
+    <div id="weight-container" class="child">
+        <app-db-weight-control class="child-app" [weightItems]="weightItems"></app-db-weight-control>
     </div>
-    <div id="calories-container">
-        <app-db-calories></app-db-calories>
+    <div id="calories-container" class="child" *ngIf="user">
+        <app-db-calories class="child-app" dayAim="{{user.advicedCalories || 300}}"></app-db-calories>
     </div>
-    <div id="events-container">
-        <app-db-events></app-db-events>
+    <div id="events-container" class="child">
+        <app-db-events class="child-app"></app-db-events>
     </div>
-    <div id="food-container">
-        <app-db-food-plan></app-db-food-plan>
+    <div id="food-container" class="child">
+        <app-db-food-plan class="child-app"></app-db-food-plan>
     </div>
-    <div id="news-container">
-        <app-db-news></app-db-news>
+    <div id="news-container" class="child">
+        <app-db-news class="child-app"></app-db-news>
     </div>
-    <div id="goals-container">
-        <app-db-goals [goalItems]="goalItems" [weightItems]="weightItems"></app-db-goals>
+    <div id="goals-container" class="child">
+        <app-db-goals class="child-app" [goalItems]="goalItems" [weightItems]="weightItems"></app-db-goals>
     </div>
 </div>

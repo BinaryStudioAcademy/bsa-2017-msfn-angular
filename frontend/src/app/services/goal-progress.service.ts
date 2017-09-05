@@ -1,20 +1,65 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { IHttpReq } from '../models/http-req';
-import { WeightControlService } from '../user/user.components/weight-control/weight-control.service';
 
 @Injectable()
 export class GoalProgressService {
 
-    constructor(private httpService: HttpService,
-                private weightControlService: WeightControlService) { }
+    constructor(private httpService: HttpService) { }
 
-    goals = [];
-    weightItems = [];
+    getWeightProgress(items: any[], goal) {
+        const startTimeStamp = new Date(goal.startTime).getTime(),
+            currentWeight = items[items.length - 1];
 
-    getGoalData(callback) {
+        const startValue = items.find(item => {
+            return startTimeStamp - new Date(item.date).getTime() < 86400000;
+        });
+
+        return {
+            start: startValue.weight,
+            current: currentWeight.weight,
+            goal: goal.value
+        };
+    }
+
+    getTrainingCountProgress(items: any[], goal) {
+        const startTimeStamp = new Date(goal.startTime).getTime(),
+            endTimeStamp = startTimeStamp + 604800000;
+
+        const foundTrainingItems = items.filter(item => {
+            const itemTimeStamp = new Date(item.startDate).getTime();
+            return itemTimeStamp > startTimeStamp && itemTimeStamp < endTimeStamp;
+        });
+
+        return {
+            start: 0,
+            current: foundTrainingItems.length,
+            goal: goal.value
+        };
+    }
+
+    getExerciseCountProgress(items: any[], goal) {
+        const startTimeStamp = new Date(goal.startTime).getTime(),
+            endTimeStamp = startTimeStamp + 604800000;
+        let exerciceSum = 0;
+
+        for (const item of items) {
+            const itemTimeStamp = new Date(item.startDate).getTime();
+            if (itemTimeStamp > startTimeStamp && itemTimeStamp < endTimeStamp) {
+                exerciceSum += item.exercisesList.length;
+            }
+        }
+
+        return {
+            start: 0,
+            current: exerciceSum,
+            goal: goal.value
+        };
+    }
+
+    getLaunchedTrainingData(id, callback) {
         const sendData: IHttpReq = {
-            url: '/api/user-goal/',
+            url: `/api/launchedtraining/user/${id}`,
             method: 'GET',
             body: {},
         };
@@ -25,21 +70,4 @@ export class GoalProgressService {
             });
     }
 
-    getGoals(): void {
-        this.getGoalData(res => {
-            if (res[0].hasOwnProperty('value')) {
-                this.goals = res;
-            } else {
-                this.goals = [];
-            }
-        });
-    }
-
-    getWeightData(): void {
-        this.weightControlService.getWeightItems(res => {
-            if (res[0].hasOwnProperty('weight')) {
-                this.weightItems = res;
-            }
-        });
-    }
 }

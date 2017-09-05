@@ -3,8 +3,14 @@
     <div class="content">
         <div id="kcal-today-dates">
             <div id="today-burned-kcal">
-                <div class="recent-day">today:</div>
-                <div class="recent-value">{{ todayBurnedKcal }}kcal</div>
+                <div class="recent-wrap">
+                    <div class="recent-day">today:</div>
+                    <div class="recent-value">{{ todayBurnedKcal }} kcal</div>
+                </div>
+                <div class="recent-wrap">
+                    <div class="recent-day">recommended:</div>
+                    <div class="recent-value">{{ dayAim }} kcal</div>
+                </div>
             </div>
 
             <div class="interval-dates">

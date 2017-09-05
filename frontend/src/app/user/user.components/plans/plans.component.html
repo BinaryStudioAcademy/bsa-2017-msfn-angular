@@ -1,0 +1,40 @@
+<div class="plans-container">
+    <div class="plans-header">
+        <md-tab-group class="plans-tabs-wrap" [(selectedIndex)]="selectedTab" (selectChange)="changeSort($event)">
+            <md-tab label="All"></md-tab>
+            <md-tab label="Followed"></md-tab>
+        </md-tab-group>
+        <md-input-container class="plans-search-wrap">
+            <input mdInput
+                   class="plans-search"
+                   #search
+                   placeholder="Search"
+                   (keyup)="setSearch(search.value)"
+                   autocomplete="off">
+            <md-icon mdSuffix>search</md-icon>
+        </md-input-container>
+    </div>
+    <div class="plans-wrap" [class.plans-empty-wrap]="plans.length === 0">
+        <div class="item-container" *ngFor="let plan of plans" routerLink="/user/plans/{{plan._id}}">
+            <i class="material-icons train-item-ico">face</i>
+            <p class="train-item-text">{{ plan.name }}</p>
+            <div class="item-footer">
+                <div class="item-author">By {{plan.user.fullName}}</div>
+                <div class="item-exercise-count">{{plan.exercisesList.length}} exercises</div>
+            </div>
+        </div>
+        <div class="plans-empty item-container" *ngIf="plans.length === 0">
+            <p class="train-item-text">Nothing found</p>
+        </div>
+        <div class="loader-wrap" *ngIf="loading">
+            <div class="cssload-container">
+                <div class="cssload-whirlpool"></div>
+            </div>
+        </div>
+    </div>
+    <div class="load-wrap" *ngIf="ableToLoad">
+        <div class="load-container" title="Load more..." (click)="loadPlans()">
+            <i class="material-icons load-ico" [class.loading]="loading">more_horiz</i>
+        </div>
+    </div>
+</div>

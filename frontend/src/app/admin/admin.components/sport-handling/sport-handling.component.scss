@@ -90,3 +90,49 @@ textarea {
     color: $text-main-color;
     background: $btn-color;
 }
+
+.exercises {
+    display: flex;
+    flex-flow: column nowrap;
+
+    .exercises-title {
+        display: flex;
+        margin: 0 10px;
+        flex-flow: row nowrap;
+        align-items: center;
+
+        md-icon {
+            margin: 0 5px;
+            cursor: pointer;
+        }
+    }
+
+    .exercises-list {
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+            padding: 0 10px;
+
+            .item-name {
+                padding-left: 17px;
+                cursor: pointer;
+            }
+    
+            .button-remove {
+                width: 17px;
+                height: 17px;
+                font-size: 17px;
+                cursor: pointer;
+                color: transparent;
+            }
+
+            &:hover {
+                .button-remove {
+                    color: inherit;
+                }
+            }
+        }
+    }
+}

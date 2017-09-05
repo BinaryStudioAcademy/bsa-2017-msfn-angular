@@ -13,13 +13,14 @@ ExerciseTypeService.prototype.deleteAllExerciseTypes = deleteAllExerciseTypes;
 
 function createExerciseType(data, callback) {
     data.isRemoved = false;
-
+    if (!data.externalId) {
+        data.externalId = '';
+    }
     exerciseTypeRepository.add(data, (err, exerciseTypeData) => {
         if (err) return callback(err);
         if (exerciseTypeData === null) {
             callback(null, []);
         } else {
-            console.log(exerciseTypeData);
             callback(null, exerciseTypeData);
         }
 
@@ -29,8 +30,7 @@ function createExerciseType(data, callback) {
 
 
 function updateExerciseTypeById(id, body, callback) {
-    exerciseTypeRepository.updateById(id, body, (err, exerciseTypeData)=>{
-
+    exerciseTypeRepository.update(id, body, (err, exerciseTypeData) => {
         if (err) return callback(err);
         if (exerciseTypeData === null) {
             callback(null, []);
@@ -42,8 +42,7 @@ function updateExerciseTypeById(id, body, callback) {
 
 
 function deleteExerciseTypeById(id, callback) {
-    exerciseTypeRepository.deleteById(id, (err, exerciseTypeData)=>{
-
+    exerciseTypeRepository.deleteById(id, (err, exerciseTypeData) => {
         if (err) return callback(err);
         if (exerciseTypeData === null) {
             callback(null, []);
@@ -56,7 +55,6 @@ function deleteExerciseTypeById(id, callback) {
 
 function deleteAllExerciseTypes(callback) {
     exerciseTypeRepository.deleteAll((err, exerciseTypeData) => {
-
         if (err) return callback(err);
         if (exerciseTypeData === null) {
             callback(null, []);

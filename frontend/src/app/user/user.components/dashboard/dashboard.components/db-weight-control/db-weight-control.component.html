@@ -1,6 +1,13 @@
 <div class="weight-control inner-container">
     <h2><a routerLink="weight-control">{{ title }}</a></h2>
     <div class="content">
+        <div class="no-items" *ngIf="weeklyItems.length === 0">
+            There are no recent weight measurements.
+            <button md-icon-button type="button" routerLink="weight-control">
+                Add one!
+            </button>
+        </div>
+
         <div id="diff">
             <div id="previous-diff" *ngIf="currentWeight">
                 <div class="recent-day">{{ recentDay }}:</div>
@@ -21,8 +28,8 @@
             </div>
         </div>
 
-        <div id="selection">
-            <md-radio-group id="recent-selection" *ngIf="weeklyItems.length > 1" [(ngModel)]="settings.recent.selection">
+        <div id="selection" *ngIf="weeklyItems.length > 1">
+            <md-radio-group id="recent-selection" [(ngModel)]="settings.recent.selection">
                 <label for="recent-{{ option.value }}"
                        *ngFor="let option of options"
                        [ngClass]="{'label-checked': option.recentChecked, 'label-unchecked': !option.recentChecked}">

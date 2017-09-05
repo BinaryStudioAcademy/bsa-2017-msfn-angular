@@ -1,0 +1,11 @@
+<div class="dialog-container">
+    <h4 class="title">Sports list</h4>
+    <p *ngIf="!sportList.length || !sportList">no more sport types</p>
+    <div *ngIf="sportList && sportList.length" class="sport-wrap">
+        <div *ngFor="let sport of sportList" class="sport-item">
+            <h4 md-line>{{sport.name}}</h4>
+            <md-checkbox (change)="selectExercise(sport)" class="add"></md-checkbox>
+        </div>
+    </div>
+    <button md-button class="btn" md-dialog-close>ok</button>
+</div>

@@ -38,27 +38,27 @@ a {
         justify-content: space-around;
         align-items: center;
         padding: 10px 0;
-    
+
         .profile-current-emails {
             display: flex;
             flex-direction: column;
             flex: 1 1 233px;
             color: $usual-text;
-    
+
             .email-item {
                 display: flex;
                 justify-content: space-between;
                 border: 2px solid #424242;
                 padding: 6px 10px;
                 background-color: #333;
-    
+
                 .email {
                     display: inline-block;
                     overflow: hidden;
-                    text-overflow: ellipsis; 
+                    text-overflow: ellipsis;
                     white-space: nowrap;
                 }
-                
+
                 .root-title {
                     color: $btn-color;
                     font-weight: bold;
@@ -71,21 +71,21 @@ a {
                     font-style: italic;
                     opacity: 0.5;
                 }
-                
+
                 .root-btn:hover {
                     text-decoration: underline;
                 }
             }
-            
+
             .email-item:hover {
                 .root-btn {
                     display: inline;
                 }
-            
+
                 .email {
                     max-width: 70%;
                 }
-            
+
                 .root-btn {
                     margin-left: -10px;
                 }
@@ -102,6 +102,16 @@ a {
 
 .profile-password {
     margin: auto;
+}
+
+.profile-calendar {
+    margin: auto;
+
+    .addition-info{
+        margin: 10px 0;
+        text-align: center;
+        font-size: $minor-text;
+    }
 }
 
 .social-wrapper {

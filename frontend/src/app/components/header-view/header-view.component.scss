@@ -16,6 +16,11 @@ header {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-family: $font-general;
 
+    .header-notifications {
+        position: relative;
+        display: flex;
+    }
+
     .logo {
         font-size: 25px;
         margin-left: $header-inner-margin;
@@ -23,28 +28,30 @@ header {
         a {
             text-decoration: none;
             color: $text-main-color;
+            display: flex;
+            align-items: center;
         }
 
         .logo__icon {
-            width: 53px;
-            height: 40px;
-            vertical-align: bottom;
-            margin-bottom: 1px;
+            width: 125px;
+            height: 50px;
+            background: url('../../../globalStyles/img/logo.png');
+            background-size: contain;
+        }
+        .logo-mini__icon {
+            width: 60px;
+            height: 60px;
+            background: url('../../../globalStyles/img/mini_logo.png') center no-repeat;
+            background-size: 90%;
+
+            &:hover {
+                animation: logoAnim 1s ease-in-out forwards;
+            }
         }
 
         .logo__title {
             margin-left: $header-icons-intendation;
             vertical-align: super;
-        }
-    }
-
-    .notifications {
-        .notifications__count {
-            vertical-align: super;
-        }
-
-        .notification__alert {
-            cursor: pointer;
         }
     }
 
@@ -56,6 +63,7 @@ header {
             margin: 0 $header-icons-intendation;
             vertical-align: super;
             font-size: 17px;
+            cursor: pointer;
         }
 
         .settings__photo {
@@ -84,6 +92,24 @@ md-menu {
     display: none;
 }
 
+@keyframes logoAnim {
+    0% {
+        background-size: 90%;
+    }
+    20% {
+        background-size: 99%;
+        transform: rotateZ(0deg)
+    }
+    80% {
+        background-size: 99%;
+        transform: rotateZ(180deg)
+    }
+    100% {
+        background-size: 90%;
+        transform: rotateZ(180deg);
+    }
+}
+
 
 $large-screen: 960px;
 $medium-screen: 600px;
@@ -93,6 +119,18 @@ $small-screen: 440px;
     header {
         .settings__photo, .settings__name, .logo__title {
             display: none;
+        }
+        .logo {
+            .logo-mini__icon {
+                width: 40px;
+                height: 40px;
+            }
+            .logo__icon {
+                width: 75px;
+                height: 30px;
+                background: url('../../../globalStyles/img/logo.png');
+                background-size: contain;
+            }
         }
     }
 }

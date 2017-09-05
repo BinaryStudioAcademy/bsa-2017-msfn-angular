@@ -13,6 +13,16 @@
             {{measure.measureName}}
         </md-option>
     </md-select>
+    <div class="sport">
+        <p class="sport-title">Related Sport</p>
+        <md-icon (click)="addSport()" class="button-add">add_circle</md-icon>
+    </div>
+    <md-chip-list class="sport-list">
+        <md-chip class="list-item" *ngFor="let sport of sportList">
+            <p class="item-name">{{sport.name}}</p>
+            <md-icon class="button-remove" (click)="removeSport(sport._id)">clear</md-icon>
+        </md-chip>
+    </md-chip-list>
     <md-input-container class="example-full-width" class="input">
         <textarea mdInput placeholder="Exercise Description" [(ngModel)]="exercise.description" name="description" (keyup)="updateOutput($event.target.value)"></textarea>
     </md-input-container>

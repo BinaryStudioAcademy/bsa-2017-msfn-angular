@@ -36,7 +36,8 @@ export class RegistrationComponent {
         height: '',
         weight: '',
         password: '',
-        birthday: ''
+        birthday: '',
+        activityLevel: 1.550
     };
 
     birthday = {
@@ -44,6 +45,37 @@ export class RegistrationComponent {
         month: 'January',
         day: 1
     };
+
+    activityLevelOptions = [
+        {
+            name: 'Sitting/lying all day',
+            coef: 1.2
+        },
+        {
+            name: 'Seated work, light exercise',
+            coef: 1.375
+        },
+        {
+            name: 'Moderately physical work, no exercise',
+            coef: 1.4625
+        },
+        {
+            name: 'Moderately physcial work, light exercise',
+            coef: 1.550
+        },
+        {
+            name: 'Moderately physcial work, heavy exercise',
+            coef: 1.6375
+        },
+        {
+            name: 'Heavy work / heavy exercise',
+            coef: 1.725
+        },
+        {
+            name: 'Above average physical work / exercise',
+            coef: 1.9
+        }
+    ];
 
     monthOptions = this.dateService.generateMonths();
     yearOptions = this.dateService.generateYears();
@@ -56,11 +88,11 @@ export class RegistrationComponent {
     requestSent = false;
 
     constructor(private httpService: HttpService,
-                private router: Router,
-                private encryptor: EncryptService,
-                private registrationService: RegistrationService,
-                private dateService: DateService,
-                private _dialogRef: MdDialogRef<RegistrationComponent>) {
+        private router: Router,
+        private encryptor: EncryptService,
+        private registrationService: RegistrationService,
+        private dateService: DateService,
+        private _dialogRef: MdDialogRef<RegistrationComponent>) {
     }
 
     emailFormControl = new FormControl('', [
@@ -97,6 +129,10 @@ export class RegistrationComponent {
         Validators.minLength(6)
     ]);
 
+    activityLevelFormControl = new FormControl('', [
+        Validators.required
+    ]);
+
     setDayOptions(month: string, year: number): void {
         this.dayOptions = this.dateService.generateDays(month, year);
     }
@@ -107,7 +143,8 @@ export class RegistrationComponent {
             this.lastNameFormControl.valid &&
             this.heightFormControl.valid &&
             this.weightFormControl.valid &&
-            this.passwordFormControl.valid) {
+            this.passwordFormControl.valid &&
+            this.activityLevelFormControl.valid) {
 
             this.userError = '';
             const monthNumber = this.monthOptions.indexOf(this.birthday.month) + 1;

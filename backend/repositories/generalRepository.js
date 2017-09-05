@@ -12,9 +12,9 @@ Repository.prototype.getById = getById;
 Repository.prototype.findByObject = findByObject;
 Repository.prototype.update = update;
 Repository.prototype.get = get;
+Repository.prototype.makeObjectId = makeObjectId;
 
 function add(data, callback) {
-    console.log(data);
     const model = this.model;
     const newItem = new model(data);
     newItem.save(callback);
@@ -54,9 +54,6 @@ function update(id, body, callback) {
 }
 
 function get(params, callback) {
-    if (params.filter === undefined) {
-        params.filter = {};
-    }
     if (params.sort === undefined) {
         params.sort = null;
     }
@@ -73,11 +70,20 @@ function get(params, callback) {
         params.populate = null;
     }
     let model = this.model;
-    let query = model.find(params.filter).sort(params.sort).limit(params.limit).skip(params.offset).select(params.fields);
-    if(params.populate){
+
+    let query = model.find(params.filter)
+        .sort(params.sort)
+        .limit(params.limit)
+        .skip(params.offset)
+        .select(params.fields);
+    if (params.populate) {
         query.populate(params.populate);
     }
     query.exec(callback);
+}
+
+function makeObjectId(string) {
+    return ObjectId(string);
 }
 
 module.exports = Repository;

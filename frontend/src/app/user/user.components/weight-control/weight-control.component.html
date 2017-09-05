@@ -25,8 +25,8 @@
         <md-datepicker #period_max (selectedChanged)="updateData()"></md-datepicker>
     </div>
 
+    <span class="tooltip"></span>
     <svg id='chart' #chart class="weight-chart" xmlns="http://www.w3.org/2000/svg" (hidden)="periodItems.length === 0">
-        <text class="tooltip"></text>
     </svg>
 
     <div class="diff-block">
@@ -81,7 +81,7 @@
         </md-input-container>
 
         <md-input-container id="water">
-            <input mdInput type="number" name="water" placeholder="water, %" required [(ngModel)]="newWeight.waterPct" [formControl]="waterFormControl">
+            <input mdInput type="number" name="water" placeholder="water, %" [(ngModel)]="newWeight.waterPct" [formControl]="waterFormControl">
             <md-error *ngIf="waterFormControl.hasError('required')">
                 Water percentage is required
             </md-error>
@@ -91,7 +91,7 @@
         </md-input-container>
 
         <md-input-container id="bones">
-            <input mdInput type="number" name="bones" placeholder="bones, kg" required [(ngModel)]="newWeight.boneWeight" [formControl]="boneFormControl">
+            <input mdInput type="number" name="bones" placeholder="bones, kg" [(ngModel)]="newWeight.boneWeight" [formControl]="boneFormControl">
             <md-error *ngIf="boneFormControl.hasError('required')">
                 Bone weight is required
             </md-error>
@@ -101,7 +101,7 @@
         </md-input-container>
 
         <md-input-container id="fat">
-            <input mdInput type="number" name="fat" placeholder="fat, %" required [(ngModel)]="newWeight.fatPct" [formControl]="fatFormControl">
+            <input mdInput type="number" name="fat" placeholder="fat, %" [(ngModel)]="newWeight.fatPct" [formControl]="fatFormControl">
             <md-error *ngIf="fatFormControl.hasError('required')">
                 Fat percentage is required
             </md-error>

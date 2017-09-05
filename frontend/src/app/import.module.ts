@@ -32,7 +32,8 @@ import {
     MdDatepickerModule,
     MdNativeDateModule,
     MdButtonToggleModule,
-    MdSliderModule
+    MdSliderModule,
+    MdProgressBarModule
 } from '@angular/material';
 import 'hammerjs';
 import { D3Service } from 'd3-ng2-service';
@@ -89,7 +90,8 @@ import { GCalendarService } from './services/gcalendar.service';
         MdDatepickerModule,
         MdNativeDateModule,
         SortablejsModule,
-        MdSliderModule
+        MdSliderModule,
+        MdProgressBarModule
     ],
     declarations: [
         ListComponent,

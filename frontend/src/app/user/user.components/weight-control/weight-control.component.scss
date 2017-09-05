@@ -76,7 +76,7 @@ md-radio-group {
 
 #add-new-weight {
     flex-basis: 100%;
-    margin-top: 100px;
+    margin-top: 30px;
     text-align: center;
     display: flex;
     flex-wrap: wrap;
@@ -147,10 +147,16 @@ md-radio-group {
 }
 
 .tooltip {
+    position: fixed;
     pointer-events: none;
     opacity: 0;
-    fill: red;
+    color: black;
     z-index: 100;
+    background: #82ca9c;
+    padding: 3px;
+    border-radius: 3px;
+    box-shadow: 0 0 1px 1px #82ca9c;
+    font-weight: bold;
 }
 
 @media only screen and (max-width: $medium-screen) {

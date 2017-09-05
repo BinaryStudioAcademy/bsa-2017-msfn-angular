@@ -1,6 +1,13 @@
 <div class="container">
     <h2 class="title" md-dialog-title>{{id === '-1' ? 'Create' : 'Update'}} Goal</h2>
     <div class="item-container">
+        <md-select placeholder="I want to" [(ngModel)]="selectedType">
+            <md-option *ngFor="let type of types" [value]="type.name">
+                {{type.name}}
+            </md-option>
+        </md-select>
+    </div>
+    <div class="item-container">
         <md-input-container class="input-row">
             <input autofocus mdInput type="number" min="1" name="count" placeholder="Value" required [(ngModel)]="value" (change)="checkValue()">
             <md-hint *ngIf="!validValue">
@@ -15,15 +22,6 @@
         </md-input-container>
         <md-datepicker touchUi="true" #startPicker></md-datepicker>
     </div>
-    <div class="item-container">
-        <md-select placeholder="Goal type" [(ngModel)]="selectedType">
-            <md-option *ngFor="let type of types" [value]="type.name">
-                {{type.name}}
-            </md-option>
-        </md-select>
-    </div>
-
-
 
     <div class="btn-container">
         <button md-raised-button [md-dialog-close]="false">Close</button>

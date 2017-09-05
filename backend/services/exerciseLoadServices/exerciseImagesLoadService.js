@@ -3,10 +3,13 @@ const exerciseService = require('./../exerciseService');
 const async = require('async');
 const parallel = require('async/parallel');
 const download = require('image-downloader');
+const fs = require('fs');
 
 class exerciseImagesLoadService {
 
-    constructor() {}
+    constructor() {
+        this.imagesDir = './resources/exercise-image/loaded/';
+    }
 
     getFormatedData(data, callback) {
         this.getExercisesExtId((err, exercisesId) => {
@@ -27,7 +30,7 @@ class exerciseImagesLoadService {
                             }
                         };
                     }
-                
+            
                     const saveFunc = (callback) => {
                         this.saveImage(currentImg.exercise, currentImg.image, callback);
                     }
@@ -49,6 +52,11 @@ class exerciseImagesLoadService {
 
     addImages(callback) {
         loadService.getAll('exerciseimage', (err, data) => {
+            
+            if (!fs.existsSync(this.imagesDir)){
+                fs.mkdirSync(this.imagesDir);
+            }
+
             this.getFormatedData(data, (err, formatedData) => {
                     let funcArray = [];
                     for (let id in formatedData) {
@@ -84,7 +92,7 @@ class exerciseImagesLoadService {
     saveImage(id, url, callback){
         const options = {
             url: url,
-            dest: './resources/exercise-image/loaded/'       
+            dest: this.imagesDir       
           };
            
           download.image(options)

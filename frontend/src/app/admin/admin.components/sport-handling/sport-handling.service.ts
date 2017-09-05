@@ -33,7 +33,7 @@ export class SportHandlingService {
     }
 
 
-        getKindsOfSportByCode(code, callback): void {
+    getKindsOfSportByCode(code, callback): void {
         const request: IHttpReq = {
             url: '/api/sport/' + code.toString(),
             method: 'GET',
@@ -61,6 +61,40 @@ export class SportHandlingService {
         const request: IHttpReq = {
             url: `/api/sport/${code}`,
             method: 'PUT',
+            body: data
+        };
+
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
+        });
+    }
+
+    getExercisesBySport(code, callback) {
+        const request: IHttpReq = {
+            url: `api/exercise/sport/${code}`,
+            method: 'GET',
+            body: {}
+        };
+
+        this.httpService.sendRequest(request).then(res => {
+            callback(res);
+        });
+    }
+
+    updateExercise(code, data) {
+        const request: IHttpReq = {
+            url: `/api/exercise/sport/${code}`,
+            method: 'PUT',
+            body: data
+        };
+
+        this.httpService.sendRequest(request);
+    }
+
+    removeExercise(data, callback) {
+        const request: IHttpReq = {
+            url: '/api/exercise/sport',
+            method: 'POST',
             body: data
         };
 
