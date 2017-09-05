@@ -32,7 +32,6 @@ export class FoodListComponent implements OnInit {
                 }
             }
         });
-        console.log(this.options);
         this.updateFoodList();
     }
 

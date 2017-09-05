@@ -48,7 +48,7 @@ function createGoal(body, callback) {
 
 function updateGoal(id, body, callback) {
     this.getGoalByName(body.name, (err, data) => {
-        if (data.name && data._id !== id) {
+        if (data.name && data._id != id) {
             callback(new ApiError('This goal name already exists'));
         } else {
 

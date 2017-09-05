@@ -52,11 +52,8 @@ md-grid-tile {
 }
 
 #type-sort {
-    width: 90%;
     display: flex;
-    margin-left: 5%;
-    margin-right: 5%;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .btn {
@@ -100,6 +97,9 @@ md-grid-tile {
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
+    }
+    #type-sort {
+            justify-content: center;
     }
 
     #btn-add {

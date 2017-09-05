@@ -14,7 +14,7 @@
             </md-error>
         </md-input-container>
 
-        <md-select [(ngModel)]="food.foodType" class="select-type">
+        <md-select [(ngModel)]="food.foodType" class="select-type" placeholder="Type">
             <md-option *ngFor="let type of foodTypes"
                        [value]="type"
             >{{type}}</md-option>
