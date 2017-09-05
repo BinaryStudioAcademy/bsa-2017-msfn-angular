@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FoodService } from '../../services/food.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { DataSource } from '@angular/cdk/table';
+import { DataSource } from '@angular/cdk';
 import { MdDialog, MdSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { IFoodType } from '../../../models/food-type';
 import { FoodTypeEditDialogComponent } from '../food-type-edit-dialog/food-type-edit-dialog.component';
-import {ToasterService} from "../../../services/toastr.service";
+import { ToasterService } from '../../../services/toastr.service';
 
 @Component({
     selector: 'app-food-type',
