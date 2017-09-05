@@ -40,7 +40,7 @@
                      class="active"
                      md-tooltip="{{ row.description }}"
                      >
-                {{ row.description.substring(0, 30) }}...
+                {{ row.description.substring(0, 20) }}...
             </md-cell>
         </ng-container>
 
@@ -48,8 +48,8 @@
         <ng-container cdkColumnDef="delete">
             <md-header-cell *cdkHeaderCellDef></md-header-cell>
             <md-cell *cdkCellDef="let row" >
-                <i  class="material-icons ico active"
-                    (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i>
+                <div><i  class="material-icons ico active"
+                         (click)="toggle(row)">{{row.isRemoved ? 'add ' : 'delete'}}</i></div>
             </md-cell>
         </ng-container>
 

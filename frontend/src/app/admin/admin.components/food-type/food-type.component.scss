@@ -69,3 +69,8 @@ button:focus {
     cursor: default;
     pointer-events: none;
 }
+
+.with-delete {
+    display: flex;
+    justify-content: space-between;
+}

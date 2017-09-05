@@ -1,6 +1,6 @@
-<div class="food-edit-dialog-container">
+<div >
     <h2 class="title" md-dialog-title>Food details</h2>
-    <md-dialog-content >
+    <md-dialog-content class="food-edit-dialog-container">
         <md-input-container>
             <input mdInput
                    placeholder="Name"
@@ -14,14 +14,14 @@
             </md-error>
         </md-input-container>
 
-        <md-select [(ngModel)]="food.foodType">
+        <md-select [(ngModel)]="food.foodType" class="select-type">
             <md-option *ngFor="let type of foodTypes"
                        [value]="type"
             >{{type}}</md-option>
         </md-select>
 
         <div class="energy-container">
-            <md-input-container>
+            <md-input-container class="energy-item">
                 <input mdInput
                        [(ngModel)]="food.kcal"
                        placeholder="Kcal"
@@ -30,13 +30,13 @@
                     Must be a numeric value
                 </md-error>
             </md-input-container>
-            <md-input-container>
+            <md-input-container class="energy-item">
                 <input mdInput
                        [(ngModel)]="food.protein"
                        placeholder="Proteins"
                        name="protein">
             </md-input-container>
-            <md-input-container>
+            <md-input-container class="energy-item">
                 <input mdInput
                        [(ngModel)]="food.fat"
                        placeholder="Fats"
@@ -45,7 +45,7 @@
                     Must be a numeric value
                 </md-error>
             </md-input-container>
-            <md-input-container>
+            <md-input-container class="energy-item">
                 <input mdInput
                        [(ngModel)]="food.carbons"
                        placeholder="Carbons"

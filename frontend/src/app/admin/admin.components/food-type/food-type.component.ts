@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FoodService } from '../../services/food.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import {DataSource} from '@angular/cdk/table';
-import {MdDialog, MdSort} from '@angular/material';
+import { DataSource } from '@angular/cdk/table';
+import { MdDialog, MdSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { IFoodType } from '../../../models/food-type';
-import {FoodTypeEditDialogComponent} from '../food-type-edit-dialog/food-type-edit-dialog.component';
+import { FoodTypeEditDialogComponent } from '../food-type-edit-dialog/food-type-edit-dialog.component';
+import {ToasterService} from "../../../services/toastr.service";
 
 @Component({
     selector: 'app-food-type',
@@ -24,11 +25,16 @@ export class FoodTypeComponent implements OnInit {
     @ViewChild(MdSort) sort: MdSort;
     @ViewChild('filter') filter: ElementRef;
 
-    focusedRowId: string;
-
     constructor(private cd: ChangeDetectorRef,
                 private foodService: FoodService,
+                private toasterService: ToasterService,
                 private mdDialog: MdDialog) {
+        mdDialog.afterAllClosed
+            .subscribe(() => {
+                this.foodService.getAllFoodTypes( (response) => {
+                    this.tableDatabase.addFoodTypes(response);
+                });
+            });
     }
 
     ngOnInit() {
@@ -65,9 +71,10 @@ export class FoodTypeComponent implements OnInit {
 
     toggle(row) {
         this.tableDatabase.toggleRemoved(row);
-        this.foodService.deleteFoodType(row, () => {
+        this.foodService.updateFoodType(row, () => {
             this.cd.markForCheck();
         });
+        this.toasterService.showMessage('success', 'Updated');
     }
 
 }

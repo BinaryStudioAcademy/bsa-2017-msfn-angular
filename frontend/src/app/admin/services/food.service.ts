@@ -36,7 +36,7 @@ export class FoodService {
             );
     }
     deleteFoodType(body: IFoodType, callback): void {
-        body.isRemoved = !body.isRemoved;
+        body.isRemoved = true;
         this.updateFoodType(body, callback);
     }
     updateFoodType(body: IFoodType, callback) {
