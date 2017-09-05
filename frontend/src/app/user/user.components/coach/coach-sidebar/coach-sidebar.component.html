@@ -1,3 +1,47 @@
-<p>
-  coach-sidebar works!
-</p>
+<div id="main-sidebar-block">
+    <div id="general-coach-info">
+        <div id="name-location">
+            <h2 id="coach-name">{{ coachInfo.name }}</h2>
+            <p id="coach-location">{{ coachInfo.location }}</p>
+        </div>
+        <div id="follow-button">
+            <button
+                md-icon-button
+                type="button"
+                routerLink="">
+                FOLLOW <span>{{ coachInfo.followers }}</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="coach-photo">
+        <img src="{{ coachInfo.photo }}">
+    </div>
+
+    <div id="social-links">
+        <a
+            *ngFor="let link of coachInfo.socialLinks"
+            href="link.link"
+            [ngStyle]="{'color': link.color }">
+            {{ link.name }}
+        </a>
+    </div>
+</div>
+
+<div id="coach-about">
+    <h3>About me</h3>
+    <p>{{ coachInfo.about }}</p>
+</div>
+
+<div id="testimonials">
+    <h3>Testimonials</h3>
+    <div class="testimonial" *ngFor="let testimonial of coachInfo.testimonials">
+        <div class="testimonial-photo">
+            <img src="{{ testimonial.photo }}">
+        </div>
+        <div class="testimonial-text-block">
+            <p class="testimonial-name">{{ testimonial.name }}</p>
+            <p class="testimonial-text">{{ testimonial.text }}</p>
+        </div>
+    </div>
+</div>

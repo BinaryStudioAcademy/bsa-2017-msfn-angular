@@ -1,0 +1,125 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+
+#main-sidebar-block {
+    #general-coach-info {
+        display: flex;
+        align-items: center;
+
+        #name-location {
+            display: inline-block;
+            width: 50%;
+
+            h2 {
+                margin-bottom: 10px;
+                font-size: 25px;
+            }
+
+            #coach-location {
+                font-size: 14px;
+                font-weight: 300;
+            }
+        }
+
+        #follow-button {
+            display: inline-block;
+            width: 40%;
+            margin: 0 auto;
+
+            button {
+                display: block;
+                width: 120px;
+                height: 40px;
+                border: none;
+                border-radius: 20px;
+                outline: none;
+                font-size: $main-text;
+                font-weight: 600;
+                background: #82ca9c;
+
+                span {
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    #coach-photo {
+        margin: 30px auto;
+        text-align: center;
+
+        img {
+            width: 170px;
+            border-radius: 85px;
+        }
+    }
+
+    #social-links {
+        display: flex;
+        flex-wrap: wrap;
+        width: 80%;
+        margin: 0 auto;
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        a:nth-child(odd) {
+            margin-right: 25%;
+        }
+
+        a:not(:nth-last-child(-n+2)) {
+            margin-bottom: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+#coach-about {
+    p {
+        font-size: 16px;
+    }
+}
+
+#testimonials {
+    .testimonial:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    .testimonial-photo {
+        display: inline-block;
+        width: 20%;
+        vertical-align: top;
+
+        img {
+            width: 44px;
+            border-radius: 22px;
+        }
+    }
+
+    .testimonial-text-block {
+        display: inline-block;
+        width: 78%;
+
+        .testimonial-name {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .testimonial-text {
+            font-size: 12px;
+        }
+    }
+}
+
+h3 {
+    margin: 0 0 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
