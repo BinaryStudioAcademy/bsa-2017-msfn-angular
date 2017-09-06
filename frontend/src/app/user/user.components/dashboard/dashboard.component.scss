@@ -69,6 +69,9 @@
     font-size: $header-text;
 }
 
+* /deep/ .drag-handle {
+	cursor: move;
+}
 
 @media only screen and (min-width: $small-screen) {
 
