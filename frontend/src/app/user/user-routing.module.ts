@@ -21,7 +21,8 @@ import { PrivacyComponent } from './user.components/account-settings/privacy/pri
 import { ExerciseTableComponent } from './user.components/exercise-table/exercise-table.component';
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 import { PlansComponent } from './user.components/plans/plans.component';
-import {SharedPlanDetailComponent} from './user.components/shared-plan-detail/shared-plan-detail.component';
+import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
+import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 
 
 const userRoutes: Routes = [
@@ -107,7 +108,11 @@ const userRoutes: Routes = [
             {
                 path: 'plans/:id',
                 component: SharedPlanDetailComponent
-            }
+            },
+            {
+                path: 'training-history',
+                component: TrainingHistoryComponent
+            },
         ]
     }
 ];

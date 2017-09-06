@@ -29,7 +29,8 @@ const LaunchedTraining = new Schema({
     isRemoved: {
         type: Boolean,
         default: false
-    }
+    },
+    trainingPlanID: String,
 });
 
 module.exports = mongoose.model('LaunchedTraining', LaunchedTraining);

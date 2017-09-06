@@ -75,6 +75,7 @@ export class ActiveTrainingComponent implements OnInit {
         });
     }
     onStart() {
+        this.trainingPlan.trainingPlanID = this.trainingPlan._id;
         this.activeTrainingService.addTraining(this.trainingPlan, (result) => {
             if (result) {
                 this.trainingPlan._id = result;
