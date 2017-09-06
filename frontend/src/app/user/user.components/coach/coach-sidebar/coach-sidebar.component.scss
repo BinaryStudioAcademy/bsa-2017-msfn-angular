@@ -12,12 +12,12 @@
             width: 50%;
 
             h2 {
-                margin-bottom: 10px;
-                font-size: 25px;
+                margin-bottom: $mini-indent;
+                font-size: $macro-text;
             }
 
             #coach-location {
-                font-size: 14px;
+                font-size: $usual-text;
                 font-weight: 300;
             }
         }
@@ -46,7 +46,7 @@
     }
 
     #coach-photo {
-        margin: 30px auto;
+        margin: $macro-indent auto;
         text-align: center;
 
         img {
@@ -64,7 +64,7 @@
         a {
             display: inline-block;
             text-decoration: none;
-            font-size: 16px;
+            font-size: $main-text;
         }
 
         a:nth-child(odd) {
@@ -72,7 +72,7 @@
         }
 
         a:not(:nth-last-child(-n+2)) {
-            margin-bottom: 10px;
+            margin-bottom: $mini-indent;
         }
 
         a:hover {
@@ -83,13 +83,13 @@
 
 #coach-about {
     p {
-        font-size: 16px;
+        font-size: $main-text;
     }
 }
 
 #testimonials {
     .testimonial:not(:last-child) {
-        margin-bottom: 20px;
+        margin-bottom: $standard-indent;
     }
 
     .testimonial-photo {
@@ -108,18 +108,24 @@
         width: 78%;
 
         .testimonial-name {
-            margin-bottom: 5px;
-            font-size: 14px;
+            display: inline-block;
+            margin-bottom: $micro-indent;
+            font-size: $usual-text;
+        }
+
+        .testimonial-name:hover {
+            cursor: pointer;
+            text-decoration: underline;
         }
 
         .testimonial-text {
-            font-size: 12px;
+            font-size: $minor-text;
         }
     }
 }
 
 h3 {
-    margin: 0 0 20px;
-    font-size: 16px;
+    margin: 0 0 $standard-indent;
+    font-size: $main-text;
     font-weight: 600;
 }

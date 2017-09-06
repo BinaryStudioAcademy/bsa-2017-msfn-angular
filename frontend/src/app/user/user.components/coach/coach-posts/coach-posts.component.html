@@ -1,3 +1,29 @@
-<p>
-  coach-posts works!
-</p>
+<div class="post-container inner-container">
+    <h2>{{ title }}</h2>
+    <div class="content">
+        <div class="no-items" *ngIf="posts.length === 0">
+            There are no posts yet.
+        </div>
+
+        <div id="posts">
+            <div class="post" *ngFor="let post of postOutput">
+                <div class="post-avatar">
+                    <img src="{{ post.avatar }}">
+                </div>
+                <div class="post-text-block">
+                    <p class="post-name">{{ post.name }}</p>
+                    <p class="post-date">{{ post.date }}</p>
+                    <p class="post-text">{{ post.text }}</p>
+                </div>
+            </div>
+        </div>
+
+        <md-paginator
+            [length]="posts.length"
+            [pageSize]="pageEvent.pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageEvent = $event"
+            (click)="changePaginatorOptions()">
+        </md-paginator>
+    </div>
+</div>

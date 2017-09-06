@@ -1,3 +1,59 @@
-@import '../../../../../globalStyles/variables';
-@import '../../../../../globalStyles/indentations';
-@import '../../../../../globalStyles/text';
+@import '../../../../../globalStyles/variables.scss';
+@import '../../../../../globalStyles/indentations.scss';
+@import '../../../../../globalStyles/text.scss';
+
+.post-container {
+    .content {
+    }
+}
+
+#posts {
+
+}
+
+.post {
+    .post-avatar {
+        display: inline-block;
+        width: 12%;
+        vertical-align: top;
+
+        img {
+            width: 44px;
+            border-radius: 22px;
+        }
+    }
+
+    .post-text-block {
+        display: inline-block;
+        width: 86%;
+
+        p {
+            display: inline-block;
+        }
+
+        .post-name {
+            display: inline-block;
+            width: 70%;
+            margin-bottom: $mini-indent;
+            font-size: $main-text;
+        }
+
+        .post-date {
+            width: 20%;
+            float: right;
+            text-align: right;
+            font-size: $minor-text;
+        }
+
+        .post-text {
+            width: 100%;
+            font-size: $usual-text;
+        }
+    }
+}
+
+.post:not(:last-child) {
+    margin-bottom: $standard-indent;
+    padding-bottom: $standard-indent;
+    border-bottom: 1px solid $text-main-color;
+}
