@@ -24,6 +24,15 @@ export class SecundomerComponent implements OnInit, OnChanges {
     firstRun: boolean = true;
     pauseMode: boolean = false;
     errorName: string;
+    showedEx: any;
+    nextShowedEx: any;
+
+    restEx = {
+        exercise: {
+            name: 'REST',
+            image: []
+        }
+    };
 
 
     constructor(
@@ -83,6 +92,18 @@ export class SecundomerComponent implements OnInit, OnChanges {
         });
         return formatter.format(millisecnods);
     }
+
+    exerciseShow(exList, time) {
+        // mega math formula
+        const result = Math.floor((time - this.secundomerService.timer) / Math.ceil(time / exList.length));
+        this.nextShowedEx = (exList[result + 1] && !(this.lap % 2)) ? exList[result + 1].exercise.name : 'REST';
+
+        if (this.lap % 2) {
+            this.showedEx = this.restEx;
+        } else if (exList[result]) {
+            this.showedEx = exList[result];
+        }
+    }
 // secundomer functions
     run(): void {
         this.secundomerService.run();
@@ -119,7 +140,10 @@ export class SecundomerComponent implements OnInit, OnChanges {
         }
 
         if (this.choosedIntervals[this.lap]) {
-            this.secundomerService.startTimer(this.lap, rest, this.pauseMode, () => {
+            this.secundomerService.startTimer(this.lap, rest, this.pauseMode, (refreshShow) => {
+                if (refreshShow) {
+                    return this.exerciseShow(this.choosedIntervals[this.lap].exList, this.secundomerService.timerLapNum);
+                }
                 if (this.choosedIntervals[this.lap + 1]) {
                     this.lapTimer();
                 } else {
@@ -128,6 +152,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
             });
             this.pauseMode = false;
             this.showExercises.emit(this.choosedIntervals[this.lap].exList);
+            this.exerciseShow(this.choosedIntervals[this.lap].exList, this.secundomerService.timerLapNum);
         }
     }
 
