@@ -5,9 +5,9 @@ import { DateService } from '../../../../services/date.service';
     selector: 'app-coach-events',
     templateUrl: './coach-events.component.html',
     styleUrls: [
-        // './coach-events.component.scss',
         '../../dashboard/dashboard.components/db-events/db-events.component.scss',
-        '../coach.component.scss'
+        '../coach.component.scss',
+        './coach-events.component.scss'
     ],
     providers: [DateService]
 })
