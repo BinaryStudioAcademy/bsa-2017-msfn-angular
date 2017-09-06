@@ -5,7 +5,7 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 import {IHttpReq} from './../../../models/http-req';
 import {HttpService} from '../../../services/http.service';
 import {ActivatedRoute} from '@angular/router';
-import {ExerciseListComponent} from './../exercise-list/exercise-list.component';
+import {ExercisesComponent} from './../exercises/exercises.component';
 import {GCalendarService} from '../../../services/gcalendar.service';
 
 
