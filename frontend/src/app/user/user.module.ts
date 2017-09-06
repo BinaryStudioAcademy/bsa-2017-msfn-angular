@@ -49,6 +49,8 @@ import { CoachPostsComponent } from './user.components/coach/coach-posts/coach-p
 import { CoachEventsComponent } from './user.components/coach/coach-events/coach-events.component';
 import { CoachArticlesComponent } from './user.components/coach/coach-articles/coach-articles.component';
 import { CoachPlansComponent } from './user.components/coach/coach-plans/coach-plans.component';
+import { ArticleAddComponent } from './user.components/article-add/article-add.component';
+import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 
 @NgModule({
@@ -102,6 +104,8 @@ import { TrainingHistoryComponent } from './user.components/training-history/tra
         CoachEventsComponent,
         CoachArticlesComponent,
         CoachPlansComponent,
+        ArticleAddComponent,
+        ArticleDetailComponent,
         TrainingHistoryComponent,
     ],
     providers: [

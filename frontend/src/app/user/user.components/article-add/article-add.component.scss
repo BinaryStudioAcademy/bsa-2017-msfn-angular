@@ -1,0 +1,128 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/text.scss';
+@import "../../../../globalStyles/indentations";
+.article-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 60vw;
+    min-height: 500px;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+    form{
+        width: 100%;
+    }
+    h1 {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: $header-text;
+    }
+    .input {
+        width: 100%;
+    }
+    textarea {
+        min-height: 100px;
+    }
+    .preview-header {
+        align-self: flex-start;
+        font-size: $main-text;
+        margin-bottom: 10px;
+    }
+    .preview {
+        margin: 0 auto;
+        // width: 400px;
+        display: flex;
+        // flex-direction: column;
+        align-items: center;
+        .image-preview {
+            margin: $content-between-margin;
+            text-align: center;
+        }
+    }
+    .upload-container {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+    .image-button {
+        .btn.upload-container {
+            width: 48px;
+            border: 1px solid $btn-color;
+            background-color: transparent;
+            * {
+                cursor: pointer;
+            }
+            &:hover {
+                cursor: pointer;
+                background-color: $btn-color;
+                input {
+                    cursor: pointer;
+                }
+            }
+            input.upload {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                cursor: pointer;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                filter: alpha(opacity=0);
+            }
+        }
+        .btn.upload-container+span {}
+    }
+    .image-preview img {
+        max-height: 300px;
+        width: auto;
+    }
+    .cropper-buttons {
+        .cropper-btn {
+            height: 48px;
+            width: 48px;
+            padding: 5px;
+            margin: 15px 5px;
+            color: $text-main-color;
+            background-color: transparent;
+            border-radius: 50px;
+            outline: none;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .save {
+            border: 1px solid $btn-color;
+            &:hover {
+                cursor: pointer;
+                background-color: $btn-color;
+            }
+        }
+        .cancel {
+            border: 1px solid $error-color;
+            &:hover {
+                cursor: pointer;
+                background-color: $error-color;
+            }
+        }
+    }
+    .btn {
+        border: none;
+        margin: 35px auto 0 auto;
+        width: 250px;
+        padding: 15px;
+        color: $text-main-color;
+        background-color: $btn-color;
+        font-weight: 600;
+        border-radius: 50px;
+        outline: none;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
