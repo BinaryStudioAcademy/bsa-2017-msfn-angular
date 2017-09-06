@@ -21,6 +21,7 @@ export class FoodEditDialogComponent implements OnInit {
     // for cropperImg:
     image: any = new Image();
     type: string;
+    upd;
     cropperSettings: CropperSettings;
     outputImage: any;
     @ViewChild('cropper', undefined)
@@ -57,17 +58,7 @@ export class FoodEditDialogComponent implements OnInit {
             this.foodTypes = data.map((item) => item.name);
         });
         this.outputImage = {};
-        console.log(this.food);
-    }
-
-    guid() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4();
+        this.upd = (+new Date).toString(36); 
     }
 
 
@@ -79,19 +70,40 @@ export class FoodEditDialogComponent implements OnInit {
         }*/
 
         if (this.outputImage.image) {
-            const folder = 'food-image';
-            const fileType = 'img';
-            const fileName = this.food.picture ? this.food.picture : this.guid();
-            this.foodService.saveImg(this.outputImage.image, fileName, fileType, folder, result => {
-                console.log(result);
-                if (result.err) {
-                    this.food.picture = this.oldImg;
-                    this.toasterService.showMessage('error', result.err);
-                } else {
-                    this.food.picture = 'resources/' + folder + '/' + fileName + '.' + fileType;
-                }
-                this.foodService[this.newItem ? 'addFood' : 'updateFood'](this.food, (data) => { });
-            });
+            if (this.newItem) {
+                this.food.picture = undefined;
+                this.foodService[this.newItem ? 'addFood' : 'updateFood'](this.food, (data) => {
+                    this.food = data;
+                    const folder = 'food-image';
+                    const fileType = 'jpeg';
+                    const fileName = this.food._id;
+                    this.foodService.saveImg(this.outputImage.image, fileName, fileType, folder, result => {
+                        if (result.err) {
+                            this.food.picture = this.oldImg;
+                            this.toasterService.showMessage('error', result.err);
+                        } else {
+                            this.food.picture = './resources/' + folder + '/' + fileName + '.' + fileType;
+                        }
+                        this.foodService.updateFood(this.food, (res) => { });
+                        this.upd = (+new Date).toString(36); 
+                    });
+                });
+            } else {
+                const folder = 'food-image';
+                const fileType = 'jpeg';
+                const fileName = this.food._id;
+                this.foodService.saveImg(this.outputImage.image, fileName, fileType, folder, result => {
+                    if (result.err) {
+                        this.food.picture = this.oldImg;
+                        this.toasterService.showMessage('error', result.err);
+                    } else {
+                        this.food.picture = './resources/' + folder + '/' + fileName + '.' + fileType;
+                        this.foodService.updateFood(this.food, (res) => { });
+                        this.upd = (+new Date).toString(36); 
+                    }
+                });
+            }
+
         } else {
             this.foodService[this.newItem ? 'addFood' : 'updateFood'](this.food, (data) => { });
         }
@@ -125,7 +137,6 @@ export class FoodEditDialogComponent implements OnInit {
                 this.cropper.setImage(this.image);
             }
         };
-        console.log(this.outputImage.image);
         myReader.readAsDataURL(file);
     }
 

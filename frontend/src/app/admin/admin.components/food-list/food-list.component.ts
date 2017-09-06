@@ -19,6 +19,7 @@ export class FoodListComponent implements OnInit {
     itemsPerPage = 10000; // TODO: change to smaller and implement
     filter = '';
     page = 1;
+    upd: String;
     getOnlyPublished = true;
 
     constructor(private foodService: FoodService,
@@ -32,6 +33,7 @@ export class FoodListComponent implements OnInit {
                 }
             }
         });
+        this.upd = (+new Date).toString(36);
         this.updateFoodList();
     }
 
@@ -96,7 +98,7 @@ export class FoodListComponent implements OnInit {
     }
 
     updateFoodList() {
-
+        this.upd = (+new Date).toString(36);
         if (this.getOnlyPublished) {
             this.foodService.getOnlyPublishedFood((data) => {
                 data = this.updateData(data);

@@ -86,7 +86,7 @@
     <div class="preview">
         <div class="image-preview">
             <img *ngIf="!hideCropper" [src]='outputImage.image' [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-            <img *ngIf="hideCropper" [src]='food.picture'>
+            <img *ngIf="hideCropper" src="{{food.picture.length > 500 ? food.picture : food.picture + '?' + upd}}">
         </div>
         <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="outputImage" [settings]="cropperSettings"></img-cropper>
         <div class="cropper-buttons" *ngIf="!hideCropper">
