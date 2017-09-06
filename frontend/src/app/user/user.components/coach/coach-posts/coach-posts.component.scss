@@ -2,15 +2,6 @@
 @import '../../../../../globalStyles/indentations.scss';
 @import '../../../../../globalStyles/text.scss';
 
-.post-container {
-    .content {
-    }
-}
-
-#posts {
-
-}
-
 .post {
     .post-avatar {
         display: inline-block;
@@ -39,7 +30,7 @@
         }
 
         .post-date {
-            width: 20%;
+            width: 30%;
             float: right;
             text-align: right;
             font-size: $minor-text;

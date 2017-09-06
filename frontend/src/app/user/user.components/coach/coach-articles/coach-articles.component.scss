@@ -1,3 +1,58 @@
-@import '../../../../../globalStyles/variables';
-@import '../../../../../globalStyles/indentations';
-@import '../../../../../globalStyles/text';
+@import '../../../../../globalStyles/variables.scss';
+@import '../../../../../globalStyles/indentations.scss';
+@import '../../../../../globalStyles/text.scss';
+
+.article {
+    display: flex;
+    justify-content: space-between;
+}
+
+.article:not(:last-child) {
+    margin-bottom: $standard-indent;
+    padding-bottom: $standard-indent;
+    border-bottom: 1px solid $text-main-color;
+}
+
+.article-image {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: $standard-indent;
+
+    img {
+        height: 170px;
+    }
+}
+
+.article-text-block {
+    display: inline-block;
+
+    p {
+        display: inline-block;
+    }
+
+    .article-title {
+        display: inline-block;
+        width: 70%;
+        margin-bottom: $mini-indent;
+        font-size: $main-text;
+        font-weight: 600;
+    }
+
+    .article-date {
+        width: 30%;
+        float: right;
+        text-align: right;
+        font-size: $minor-text;
+    }
+
+    .article-text {
+        width: 100%;
+        font-size: $usual-text;
+    }
+
+    a {
+        float: right;
+        font-size: $usual-text;
+        color: $text-main-color;
+    }
+}

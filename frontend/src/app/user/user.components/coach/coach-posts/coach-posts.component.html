@@ -6,7 +6,7 @@
         </div>
 
         <div id="posts">
-            <div class="post" *ngFor="let post of postOutput">
+            <div class="post" *ngFor="let post of paginatorOutput">
                 <div class="post-avatar">
                     <img src="{{ post.avatar }}">
                 </div>
@@ -23,7 +23,7 @@
             [pageSize]="pageEvent.pageSize"
             [pageSizeOptions]="pageSizeOptions"
             (page)="pageEvent = $event"
-            (click)="changePaginatorOptions()">
+            (click)="makePaginatorOutput()">
         </md-paginator>
     </div>
 </div>

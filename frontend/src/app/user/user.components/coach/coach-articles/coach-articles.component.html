@@ -1,3 +1,30 @@
-<p>
-  coach-articles works!
-</p>
+<div class="article-container inner-container">
+    <h2>{{ title }}</h2>
+    <div class="content">
+        <div class="no-items" *ngIf="articles.length === 0">
+            There are no articles yet.
+        </div>
+
+        <div id="articles">
+            <div class="article" *ngFor="let article of paginatorOutput">
+                <div class="article-image">
+                    <img src="{{ article.image }}">
+                </div>
+                <div class="article-text-block">
+                    <p class="article-title">{{ article.title }}</p>
+                    <p class="article-date">{{ article.date }}</p>
+                    <p class="article-text">{{ article.text }}</p>
+                    <a class="open-article" routerLink="">more ></a>
+                </div>
+            </div>
+        </div>
+
+        <md-paginator
+            [length]="articles.length"
+            [pageSize]="pageEvent.pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageEvent = $event"
+            (click)="makePaginatorOutput()">
+        </md-paginator>
+    </div>
+</div>

@@ -52,7 +52,7 @@ export class CoachPostsComponent implements OnInit {
         }
     ];
 
-    postOutput: any[];
+    paginatorOutput: any[];
 
     pageSizeOptions = [2, 4, 5];
     pageEvent: PageEvent = {
@@ -62,17 +62,17 @@ export class CoachPostsComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.changePaginatorOptions();
+        this.makePaginatorOutput();
     }
 
-    changePaginatorOptions() {
-        this.postOutput = [];
+    makePaginatorOutput() {
+        this.paginatorOutput = [];
         const startPos = this.pageEvent.pageIndex * this.pageEvent.pageSize;
         let pageSize = startPos + this.pageEvent.pageSize;
         pageSize = pageSize > this.posts.length ? this.posts.length : pageSize;
 
         for (let i = startPos; i < pageSize; i++) {
-            this.postOutput.push(this.posts[i]);
+            this.paginatorOutput.push(this.posts[i]);
         }
     }
 }
