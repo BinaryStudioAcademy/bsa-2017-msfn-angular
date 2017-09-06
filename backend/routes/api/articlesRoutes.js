@@ -7,9 +7,6 @@ module.exports = function (app) {
 
     app.get(baseUrl, function (req, res, next) {
         articlesService.get('', function (err, data) {
-            if (!data.length) {
-                data = [{}];
-            }
             res.data = data;
             res.err = err;
             next();
@@ -18,9 +15,8 @@ module.exports = function (app) {
 
     app.get(baseUrl + ':id', function (req, res, next) {
         articlesService.get({_id: req.params.id}, function (err, data) {
-            if (!data.length) {
-                data = [{}];
-            }
+            console.log(err);
+            console.log(data);
             res.data = data;
             res.err = err;
             next();
@@ -29,9 +25,6 @@ module.exports = function (app) {
 
     app.get(baseUrl + 'user/:id', function (req, res, next) {
         articlesService.getByUser({_id: req.params.id}, function (err, data) {
-            if (!data.length) {
-                data = [{}];
-            }
             res.data = data;
             res.err = err;
             next();

@@ -1,3 +1,19 @@
-<p>
-  article-list works!
-</p>
+<div class="container">
+    <div class="articles-wrap">
+        <div class="article-wrap" *ngFor="let article of displayArticles">
+            <div class="image-wrap"
+                 routerLink="/user/articles/{{article._id}}"
+                 [style.background-image]="'url(' + article.image + ')'"></div>
+            <div class="content-wrap">
+                <div class="heading" >
+                    <a routerLink="/user/articles/{{article._id}}" class="heading-link"> {{article.title}}</a>
+                </div>
+                <div class="author-wrap">
+                    <div class="author">By {{article.userId.fullName}}</div>
+                    <div class="date">{{article.date | date}}</div>
+                </div>
+                <div class="preview-text" [innerHTML]="article.previewHTML"></div>
+            </div>
+        </div>
+    </div>
+</div>
