@@ -18,7 +18,7 @@ export class ArticleDetailComponent implements OnInit {
   constructor(
     public activatedRoute: ActivatedRoute,
     private httpHandler: HttpService,
-    private markdownService: MarkdownService,    
+    private markdownService: MarkdownService
   ) { }
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class ArticleDetailComponent implements OnInit {
       const sendData: IHttpReq = {
         url: `/api/articles/` + articleID,
         method: 'GET',
-        body: '',
+        body: ''
       };
 
       this.httpHandler.sendRequest(sendData)
@@ -36,7 +36,7 @@ export class ArticleDetailComponent implements OnInit {
             this.article = res[0];
             this.converted = {
               detail: this.markdownService.convert(this.article.detail),
-              preview: this.markdownService.convert(this.article.preview),
+              preview: this.markdownService.convert(this.article.preview)
             };
           }
         });
