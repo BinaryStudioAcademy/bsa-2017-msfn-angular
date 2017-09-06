@@ -153,6 +153,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
             this.pauseMode = false;
             this.showExercises.emit(this.choosedIntervals[this.lap].exList);
             this.exerciseShow(this.choosedIntervals[this.lap].exList, this.secundomerService.timerLapNum);
+            this.onStart.emit();
         }
     }
 

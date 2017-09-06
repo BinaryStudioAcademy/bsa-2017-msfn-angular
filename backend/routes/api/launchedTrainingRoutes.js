@@ -6,6 +6,7 @@ const
 module.exports = function (app) {
 
     app.post(baseUrl, function (req, res, next) {
+        console.log('post');
         launchedTrainingService.createLaunchedTraining(req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -14,7 +15,9 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.put(baseUrl, function (req, res, next) {
+        console.log('put');
         launchedTrainingService.updateLaunchedTraining(req.body._id, req.body, (err, data) => {
+            console.log(data);
             res.data = data;
             res.err = err;
             next();
