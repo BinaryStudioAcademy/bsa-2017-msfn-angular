@@ -118,7 +118,7 @@ const userRoutes: Routes = [
             {
                 path: 'articles/:id',
                 component: ArticleDetailComponent
-            }, 
+            },
             {
                 path: 'training-history',
                 component: TrainingHistoryComponent
