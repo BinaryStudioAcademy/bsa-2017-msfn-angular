@@ -1,5 +1,5 @@
 export interface IFood {
-    id?: string;
+    _id?: string;
     name: string;
     foodType: string;
     kcal?: number;

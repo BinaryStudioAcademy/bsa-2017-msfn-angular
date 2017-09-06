@@ -58,7 +58,7 @@
         </div>
 
 
-        <md-input-container>
+        <md-input-container id="vendor">
             <input mdInput
                    type="text"
                    name="vendor"
@@ -77,6 +77,25 @@
                 Description should contain less than 300 characters
             </md-error>
         </md-input-container>
+        
+            <button class="btn upload-container" *ngIf="hideCropper">
+        <span>Upload food image</span>
+        <input type="file" accept="image/*" id="upload" (change)="fileChangeListener($event)"/>
+    </button>
+    <div class="preview-header" *ngIf="hideCropper">Preview</div>
+    <div class="preview">
+        <div class="image-preview">
+            <img *ngIf="!hideCropper" [src]='outputImage.image' [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+            <img *ngIf="hideCropper" [src]='food.picture'>
+        </div>
+        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="outputImage" [settings]="cropperSettings"></img-cropper>
+        <div class="cropper-buttons" *ngIf="!hideCropper">
+            <button class="cropper-btn" (click)="cropperBtn('save')">Ok</button>
+            <button class="cropper-btn" (click)="cropperBtn('cancel')">Cancel</button>
+        </div>
+        <div class="description" *ngIf="hideCropper" [innerHtml]="convertedDescription"></div>
+    </div>
+
     </md-dialog-content>
     <md-dialog-actions>
         <button md-button 
