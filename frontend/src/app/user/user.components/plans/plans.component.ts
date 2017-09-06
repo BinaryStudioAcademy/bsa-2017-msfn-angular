@@ -21,7 +21,7 @@ export class PlansComponent implements OnInit {
     public plansToShow: any[] = [];
     public loading = false;
     public ableToLoad = true;
-    public countPerPage = 3;
+    public countPerPage = 12;
     private filter = {
         'filter': {},
         'limit': this.countPerPage,

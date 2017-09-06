@@ -45,6 +45,15 @@
                     </div>
                 </div>
             -->
+
+                <div class="profile-gender" *ngIf="!user.gender">
+                    <h3 class="gender-header">Gender:</h3>
+                    <input formControlName="gender" id="Male" type="radio" value="Male" name="gender">
+                    <label for="Male">Male</label>
+                    <input formControlName="gender" id="Female" type="radio" value="Female" name="gender">
+                    <label for="Female">Female</label>
+                </div>
+
                 <div class="profile-birthday">
                     <div class="birthday-month">
                         <md-select placeholder="Month" [(ngModel)]="birthday.month" (change)="onSelect(birthday.month,birthday.year)"
@@ -69,6 +78,21 @@
                             </md-option>
                         </md-select>
                     </div>
+                </div>
+
+                <md-input-container class="profile-height" *ngIf="!user.height">
+                        <input mdInput type="number" name="height" placeholder="Height, cm" required formControlName="height">
+                        <md-error>
+                            Height should be 100-300cm
+                        </md-error>
+                </md-input-container>
+
+                <div class="profile-activity">
+                    <md-select placeholder="Activity level" formControlName="activityLevel">
+                        <md-option *ngFor="let level of activityLevelOptions" [value]="level.coef">
+                            {{ level.name }}
+                        </md-option>
+                    </md-select>
                 </div>
             <!-- // moved to characteristic
                 <div class="profile-physparam">

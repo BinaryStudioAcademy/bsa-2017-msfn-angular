@@ -24,6 +24,7 @@ import { PlansComponent } from './user.components/plans/plans.component';
 import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
 import { ArticleAddComponent } from './user.components/article-add/article-add.component';
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
+import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 
 
 const userRoutes: Routes = [
@@ -117,6 +118,10 @@ const userRoutes: Routes = [
             {
                 path: 'articles/:id',
                 component: ArticleDetailComponent
+            }, 
+            {
+                path: 'training-history',
+                component: TrainingHistoryComponent
             },
         ]
     }

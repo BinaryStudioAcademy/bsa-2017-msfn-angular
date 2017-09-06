@@ -43,8 +43,12 @@ import { GoalComponent } from './user.components/goal/goal.component';
 import { GoalEditDialogComponent } from './user.components/goal-edit-dialog/goal-edit-dialog.component';
 import { PlansComponent } from './user.components/plans/plans.component';
 import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
+<<<<<<< HEAD
 import { ArticleAddComponent } from './user.components/article-add/article-add.component';
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
+=======
+import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
+>>>>>>> 695dde7085a587909f4785a02002e723fe609d18
 
 @NgModule({
     imports: [
@@ -91,8 +95,12 @@ import { ArticleDetailComponent } from './user.components/article-detail/article
         GoalEditDialogComponent,
         PlansComponent,
         SharedPlanDetailComponent,
+<<<<<<< HEAD
         ArticleAddComponent,
         ArticleDetailComponent,
+=======
+        TrainingHistoryComponent,
+>>>>>>> 695dde7085a587909f4785a02002e723fe609d18
     ],
     providers: [
         ForAllUserGuard,

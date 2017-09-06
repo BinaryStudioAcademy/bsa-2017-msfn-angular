@@ -260,6 +260,45 @@ label {
     }
 }
 
+.profile-gender {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: 0 0 $content-between-margin 0;
+    font-size: $main-text;
+
+    .gender-header {
+        flex: 100%;
+    }
+
+    input{
+        display: none;
+    }
+
+    label {
+        color: $text-second-color;
+        cursor: pointer;
+    }
+
+    input:checked + label {
+        color: $text-main-color;
+    }
+}
+
+.profile-height {
+    width: 35%;
+    margin: $content-between-margin $content-between-margin 0;
+}
+
+.profile-activity {
+    margin: $content-between-margin $content-between-margin 0;
+
+    md-select {
+        width: 100%;
+        margin: $content-between-margin 0;
+    }
+}
+
 .profile-physparam {
     display: flex;
     flex-wrap: wrap;
