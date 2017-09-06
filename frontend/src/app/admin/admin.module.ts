@@ -11,6 +11,7 @@ import { ExerciseListComponent } from './admin.components/exercise-list/exercise
 import { ExerciseTypeComponent } from './admin.components/exercise-type/exercise-type.component';
 import { AdminRootProfileComponent } from './admin.components/admin-root-profile/admin-root-profile.component';
 import { MeasureListComponent } from './admin.components/measure-list/measure-list.component';
+import { SidebarAdminViewComponent } from './admin.components/sidebar-admin-view/sidebar-admin-view.component';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -40,6 +41,7 @@ import { SelectSportComponent } from './admin.components/select-sport/select-spo
     declarations: [
         AdminComponent,
         UserListComponent,
+        SidebarAdminViewComponent,
         ExerciseCreateComponent,
         ExerciseListComponent,
         ExerciseTypeComponent,
