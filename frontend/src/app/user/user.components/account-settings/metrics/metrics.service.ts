@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../../../services/http.service';
-import { IHttpReq } from '../../../models/http-req';
-import { WindowObj } from '../../../services/window.service';
+import { HttpService } from '../../../../services/http.service';
+import { IHttpReq } from '../../../../models/http-req';
+import { WindowObj } from '../../../../services/window.service';
 import { timeZone } from './timeZones';
 
 @Injectable()

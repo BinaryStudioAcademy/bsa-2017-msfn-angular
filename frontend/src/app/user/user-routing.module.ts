@@ -1,17 +1,17 @@
 import { GoalComponent } from './user.components/goal/goal.component';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
-import { SettingsComponent } from './user.components/settings/settings.component';
+import { MetricsComponent } from './user.components/account-settings/metrics/metrics.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserComponent } from './user.component';
-import { ProfileComponent } from './user.components/profile/profile.component';
+import { ProfileComponent } from './user.components/account-settings/profile/profile.component';
 import { ForAllUserGuard } from '../guards/for-all-user.guard';
 import { IntervalTrainingPlanComponent } from './user.components/interval-training-plan/interval-training-plan.component';
 import { AccountSettingsComponent } from './user.components/account-settings/account-settings.component';
 import { OtherProfilesComponent } from './user.components/other-profiles/other-profiles.component';
 // import { FriendsComponent } from './user.components/friends/friends.component';
-import { LoginSettingsComponent } from './user.components/login-settings/login-settings.component';
+import { LoginSettingsComponent } from './user.components/account-settings/login-settings/login-settings.component';
 import { PlanDetailComponent } from './user.components/plan-detail/plan-detail.component';
 import { WeightControlComponent } from './user.components/weight-control/weight-control.component';
 import { DashboardComponent } from './user.components/dashboard/dashboard.component';
@@ -22,6 +22,7 @@ import { ExerciseTableComponent } from './user.components/exercise-table/exercis
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 import { PlansComponent } from './user.components/plans/plans.component';
 import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
+import { CoachComponent } from './user.components/coach/coach.component';
 import { ArticleAddComponent } from './user.components/article-add/article-add.component';
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
@@ -47,7 +48,7 @@ const userRoutes: Routes = [
                 children: [
                     {
                         path: 'settings',
-                        component: SettingsComponent
+                        component: MetricsComponent
                     },
                     {
                         path: 'profile',
@@ -110,6 +111,10 @@ const userRoutes: Routes = [
             {
                 path: 'plans/:id',
                 component: SharedPlanDetailComponent
+            },
+            {
+                path: 'coach',
+                component: CoachComponent
             },
             {
                 path: 'articles/create',

@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { SettingsService } from './settings.service';
-import { ToasterService } from '../../../services/toastr.service';
+import { SettingsService } from './metrics.service';
+import { ToasterService } from '../../../../services/toastr.service';
 
 @Component({
-    selector: 'app-profile',
-    templateUrl: './settings.component.html',
-    styleUrls: ['./settings.component.scss'],
+    selector: 'app-metrics',
+    templateUrl: './metrics.component.html',
+    styleUrls: ['./metrics.component.scss'],
     providers: [SettingsService]
 })
-export class SettingsComponent implements OnInit {
+export class MetricsComponent implements OnInit {
     timeZone;
     settings;
     unitTypeData = [
