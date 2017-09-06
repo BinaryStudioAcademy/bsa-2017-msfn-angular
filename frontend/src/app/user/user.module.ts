@@ -43,6 +43,8 @@ import { GoalComponent } from './user.components/goal/goal.component';
 import { GoalEditDialogComponent } from './user.components/goal-edit-dialog/goal-edit-dialog.component';
 import { PlansComponent } from './user.components/plans/plans.component';
 import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
+import { ArticleAddComponent } from './user.components/article-add/article-add.component';
+import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 
 @NgModule({
     imports: [
@@ -89,6 +91,8 @@ import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/
         GoalEditDialogComponent,
         PlansComponent,
         SharedPlanDetailComponent,
+        ArticleAddComponent,
+        ArticleDetailComponent,
     ],
     providers: [
         ForAllUserGuard,

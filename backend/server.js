@@ -46,7 +46,7 @@ app.use('/profile/*', isLogged);
 app.use('/dist', express.static(path.resolve(__dirname + '/../dist')));
 app.use('/resources', express.static(path.resolve(__dirname + '/../resources')));
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
