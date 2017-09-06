@@ -1,21 +1,21 @@
 <div id="coach-container">
     <div id="main-content">
         <div id="event-container">
-            <app-coach-events></app-coach-events>
+            <app-coach-events [userData]="userData"></app-coach-events>
         </div>
         <div id="post-container">
-            <app-coach-posts></app-coach-posts>
+            <app-coach-posts [userData]="userData"></app-coach-posts>
         </div>
         <div id="article-container">
-            <app-coach-articles></app-coach-articles>
+            <app-coach-articles [userData]="userData"></app-coach-articles>
         </div>
         <div id="plan-container">
-            <app-coach-plans></app-coach-plans>
+            <app-coach-plans [userData]="userData"></app-coach-plans>
         </div>
     </div>
 </div>
 
 <aside id="sidebar-wrapper">
-    <app-coach-sidebar></app-coach-sidebar>
+    <app-coach-sidebar [userData]="userData"></app-coach-sidebar>
 </aside>
 

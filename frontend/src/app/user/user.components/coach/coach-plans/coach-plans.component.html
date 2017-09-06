@@ -7,12 +7,12 @@
 
         <div id="plans">
             <div class="plan" *ngFor="let plan of paginatorOutput">
-                <h3 class="plan-title">{{ plan.title }}</h3>
+                <h3 class="plan-title">{{ plan.name }}</h3>
                 <div class="plan-exercises">
                     <p>Exercise List</p>
                     <ol>
-                        <li *ngFor="let exercise of plan.exercises">
-                            {{ exercise }}
+                        <li *ngFor="let exercise of plan.exercisesList">
+                            {{ exercise.exercise.name }}
                         </li>
                     </ol>
                 </div>
