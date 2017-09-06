@@ -59,3 +59,13 @@ declare module SportApi {
         icon: string;
     }
 }
+declare module ArticleApi {
+    export interface IArticle {
+        _id?: string;
+        title: string;        
+        preview: string;
+        detail: string;
+        image?: string;
+        date?: string;
+    }
+}

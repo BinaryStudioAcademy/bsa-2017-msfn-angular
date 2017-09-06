@@ -22,6 +22,9 @@ import { ExerciseTableComponent } from './user.components/exercise-table/exercis
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 import { PlansComponent } from './user.components/plans/plans.component';
 import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
+import { CoachComponent } from './user.components/coach/coach.component';
+import { ArticleAddComponent } from './user.components/article-add/article-add.component';
+import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 
 
@@ -108,6 +111,18 @@ const userRoutes: Routes = [
             {
                 path: 'plans/:id',
                 component: SharedPlanDetailComponent
+            },
+            {
+                path: 'coach',
+                component: CoachComponent
+            },
+            {
+                path: 'articles/create',
+                component: ArticleAddComponent
+            },
+            {
+                path: 'articles/:id',
+                component: ArticleDetailComponent
             },
             {
                 path: 'training-history',

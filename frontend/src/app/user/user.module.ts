@@ -43,6 +43,14 @@ import { GoalComponent } from './user.components/goal/goal.component';
 import { GoalEditDialogComponent } from './user.components/goal-edit-dialog/goal-edit-dialog.component';
 import { PlansComponent } from './user.components/plans/plans.component';
 import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
+import { CoachComponent } from './user.components/coach/coach.component';
+import { CoachSidebarComponent } from './user.components/coach/coach-sidebar/coach-sidebar.component';
+import { CoachPostsComponent } from './user.components/coach/coach-posts/coach-posts.component';
+import { CoachEventsComponent } from './user.components/coach/coach-events/coach-events.component';
+import { CoachArticlesComponent } from './user.components/coach/coach-articles/coach-articles.component';
+import { CoachPlansComponent } from './user.components/coach/coach-plans/coach-plans.component';
+import { ArticleAddComponent } from './user.components/article-add/article-add.component';
+import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 
 @NgModule({
@@ -90,6 +98,14 @@ import { TrainingHistoryComponent } from './user.components/training-history/tra
         GoalEditDialogComponent,
         PlansComponent,
         SharedPlanDetailComponent,
+        CoachComponent,
+        CoachSidebarComponent,
+        CoachPostsComponent,
+        CoachEventsComponent,
+        CoachArticlesComponent,
+        CoachPlansComponent,
+        ArticleAddComponent,
+        ArticleDetailComponent,
         TrainingHistoryComponent,
     ],
     providers: [
