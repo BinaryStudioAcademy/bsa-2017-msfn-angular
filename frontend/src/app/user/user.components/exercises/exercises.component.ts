@@ -5,12 +5,12 @@ import {SearchExerciseComponent} from './../search-exercise/search-exercise.comp
 import {ExerciseDescriptionComponent} from '../exercise-description/exercise-description.component';
 
 @Component({
-    selector: 'app-exercise-list',
-    templateUrl: './exercise-list.component.html',
-    styleUrls: ['./exercise-list.component.scss'],
+    selector: 'app-exercises',
+    templateUrl: './exercises.component.html',
+    styleUrls: ['./exercises.component.scss'],
     providers: [MdPaginatorModule]
 })
-export class ExerciseListComponent implements OnInit, OnChanges {
+export class ExercisesComponent implements OnInit, OnChanges {
     private openedDialog: MdDialogRef<any> | null;
     private searchDialog: MdDialogRef<any> | null;
     @ViewChild('container')

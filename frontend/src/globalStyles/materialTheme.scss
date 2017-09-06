@@ -18,7 +18,7 @@ $theme: mat-dark-theme($primary, $accent, $warn);
 // that you are using.
 @include angular-material-theme($theme);
 
-app-exercise-list {
+app-exercises {
     .mat-paginator-page-size {
         display: none;
     }

@@ -1,0 +1,73 @@
+@import "../../../../globalStyles/variables.scss";
+@import '../../../../globalStyles/text.scss';
+@import '../../../../globalStyles/indentations.scss';
+
+$height: calc(100vh - 70px);
+
+.menu-element {
+    display: block;
+}
+md-list {
+    padding-top: 0;
+}
+aside {
+    width: 100%;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+    min-height: $height;
+    font-family: $font-general;
+    font-weight: 600;
+    font-size: $usual-text;
+    float: left;
+    background: linear-gradient($bg-color 75%, $gradient-from-color);
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
+
+    nav {
+        float: right;
+        width: 90%;
+        position: relative;
+
+        a {
+            line-height: $header-text;
+            text-decoration: none;
+            color: #aaa;
+        }
+
+        .navigation__icon {
+            float: left;
+            fill: #aaa;
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            margin-right: 13px;
+        }
+
+        .active-link {
+            svg {
+                fill: #fff;
+            }
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .active-link::before {
+            content: "•";
+            position: absolute;
+            display: block;
+            font-size: 30px;
+            left: 0;
+            line-height: $header-text;
+            color: #82A690;
+        }
+    }
+}
+
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {}
+
+@media screen and (max-width: $medium-screen) {
+    aside {
+        .navigation__title, .navigation__subheader {
+            display: none;
+        }
+    }
+}

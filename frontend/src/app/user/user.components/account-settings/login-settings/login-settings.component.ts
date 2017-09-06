@@ -1,16 +1,16 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators, FormControl} from '@angular/forms';
 import {LoginSettingsService} from './login-settings.service';
-import {DateService} from '../../../services/date.service';
+import {DateService} from '../../../../services/date.service';
 import {CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
 import {MdDialog} from '@angular/material';
-import {ConfirmPasswordDialogComponent} from '../../../components/confirm-password-dialog/confirm-password-dialog.component';
-import {WindowObj} from '../../../services/window.service';
-import {IUser} from '../../../models/user';
-import {ToasterService} from '../../../services/toastr.service';
-import {AddNewEmailDialogComponent} from '../../../components/add-new-email-dialog/add-new-email-dialog.component';
-import {ChangeRootEmailDialogComponent} from '../../../components/change-root-email-dialog/change-root-email-dialog.component';
-import {GCalendarService} from '../../../services/gcalendar.service';
+import {ConfirmPasswordDialogComponent} from '../../../../components/confirm-password-dialog/confirm-password-dialog.component';
+import {WindowObj} from '../../../../services/window.service';
+import {IUser} from '../../../../models/user';
+import {ToasterService} from '../../../../services/toastr.service';
+import {AddNewEmailDialogComponent} from '../../../../components/add-new-email-dialog/add-new-email-dialog.component';
+import {ChangeRootEmailDialogComponent} from '../../../../components/change-root-email-dialog/change-root-email-dialog.component';
+import {GCalendarService} from '../../../../services/gcalendar.service';
 
 @Component({
     selector: 'app-login-settings',

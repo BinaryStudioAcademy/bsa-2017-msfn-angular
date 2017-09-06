@@ -1,6 +1,6 @@
-@import '../../../../globalStyles/variables';
-@import '../../../../globalStyles/indentations';
-@import '../../../../globalStyles/text';
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
 @mixin linear-gradient($direction, $color-stops...) {
     background: nth(nth($color-stops, 1), 1);
     background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
@@ -113,7 +113,7 @@ label {
 .coach-mark:after {
     display: block;
     content: '';
-    background: url('../../../../../../resources/icons/whistle-icon.svg') center;
+    background: url('../../../../../../../resources/icons/whistle-icon.svg') center;
     background-size: 170%;
     background-repeat: no-repeat;
     height: 50px;
