@@ -29,7 +29,6 @@ export class FoodEditDialogComponent implements OnInit {
     hideCropper = true;
     oldImg;
 
-
     constructor(
         @Inject(MD_DIALOG_DATA) public data: { food: IFood, newItem: boolean },
         private foodService: FoodService,
@@ -58,17 +57,15 @@ export class FoodEditDialogComponent implements OnInit {
             this.foodTypes = data.map((item) => item.name);
         });
         this.outputImage = {};
-        this.upd = (+new Date).toString(36); 
+        this.upd = (+new Date).toString(36);
     }
 
 
     save() {
-        /*if (!(this.nameFormControl.valid
-            && this.numberFormControl.valid)) {
-            this.toasterService.showMessage('error', 'Data wasn\'t added', 'Invalid data');
+        if (!(this.nameFormControl.valid && this.descriptionFormControl.valid)) {
+            this.toasterService.showMessage('error', 'Invalid data', 'Food not updated');
             return;
-        }*/
-
+        }
         if (this.outputImage.image) {
             if (this.newItem) {
                 this.food.picture = undefined;
@@ -85,7 +82,7 @@ export class FoodEditDialogComponent implements OnInit {
                             this.food.picture = './resources/' + folder + '/' + fileName + '.' + fileType;
                         }
                         this.foodService.updateFood(this.food, (res) => { });
-                        this.upd = (+new Date).toString(36); 
+                        this.upd = (+new Date).toString(36);
                     });
                 });
             } else {
@@ -144,6 +141,9 @@ export class FoodEditDialogComponent implements OnInit {
         this.oldImg = this.food.picture;
         if (action === 'save') {
             this.food.picture = this.outputImage.image;
+        } else {
+            this.food.picture = this.oldImg;
+            this.outputImage.image = this.oldImg;
         }
         this.hideCropper = true;
     }

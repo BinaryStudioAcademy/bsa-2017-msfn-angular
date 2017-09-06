@@ -79,19 +79,7 @@ function updateById(id, body, userId, callback) {
                 _id: id,
             }
         ]
-    }, {
-        $set: {
-            name: body.name,
-            foodType: body.foodType,
-            kcal: body.kcal,
-            protein: body.protein,
-            fat: body.fat,
-            carbons: body.carbons,
-            vendor: body.vendor,
-            description: body.description,
-            picture: body.picture
-        }
-    });
+    }, body);
     query.exec(callback);
 }
 

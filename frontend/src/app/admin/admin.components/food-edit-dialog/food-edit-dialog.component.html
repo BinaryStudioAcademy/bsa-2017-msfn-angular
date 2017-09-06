@@ -5,6 +5,7 @@
             <input mdInput
                    placeholder="Name"
                    [(ngModel)]="food.name"
+                   [formControl]="nameFormControl"
                    name="name">
             <md-error *ngIf="nameFormControl.hasError('required')">
                 Name is required
@@ -26,7 +27,8 @@
                 <input mdInput
                        [(ngModel)]="food.kcal"
                        placeholder="Kcal"
-                       name="kcal">
+                       name="kcal"
+                       [formControl]="numberFormControl">
                 <md-error *ngIf="numberFormControl.hasError('pattern')">
                     Must be a numeric value
                 </md-error>
@@ -35,13 +37,15 @@
                 <input mdInput
                        [(ngModel)]="food.protein"
                        placeholder="Proteins"
-                       name="protein">
+                       name="protein"
+                       [formControl]="numberFormControl">
             </md-input-container>
             <md-input-container class="energy-item">
                 <input mdInput
                        [(ngModel)]="food.fat"
                        placeholder="Fats"
-                       name="fat">
+                       name="fat"
+                       [formControl]="numberFormControl">
                 <md-error *ngIf="numberFormControl.hasError('pattern')">
                     Must be a numeric value
                 </md-error>
@@ -50,7 +54,8 @@
                 <input mdInput
                        [(ngModel)]="food.carbons"
                        placeholder="Carbons"
-                       name="carbons">
+                       name="carbons"
+                       [formControl]="numberFormControl">
                 <md-error *ngIf="numberFormControl.hasError('pattern')">
                     Must be a numeric value
                 </md-error>
