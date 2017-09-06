@@ -21,5 +21,6 @@ module.exports = function (app) {
         loadRoutes: require('./loadData/loadRoutes')(app),
         foodRoutes: require('./foodRoutes')(app),
         foodTypeRoutes: require('./foodTypeRoutes')(app),
+        articlesRoutes: require('./articlesRoutes')(app),
     };
 };

@@ -1,0 +1,125 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+p {
+    margin: 0;
+}
+
+#coach-container {
+    display: inline-block;
+    width: 80%;
+    min-height: 100%;
+}
+
+#sidebar-wrapper {
+    display: inline-block;
+    float: right;
+    width: 20%;
+    max-width: 300px;
+    min-height: 100%;
+    padding: $standard-indent;
+    background: linear-gradient($bg-color 75%, $gradient-from-color);
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
+
+    app-coach-sidebar {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: calc(100vh - 110px);
+    }
+}
+
+#main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    //padding: 20px 6%;
+
+    div {
+        width: 100%;
+        margin: $micro-indent 0;
+        background: $gradient-to-color;
+    }
+}
+
+.inner-container {
+    height: 100%;
+    padding: $standard-indent;
+
+    h2 {
+        margin: 0 0 $standard-indent 0;
+        padding: 0 0 $mini-indent;
+        border-bottom: 1px solid $text-main-color;
+        font-size: $usual-text;
+
+        a {
+            text-decoration: none;
+            color: $text-main-color;
+        }
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .no-items {
+            margin: 0 auto;
+        }
+    }
+}
+
+.recent-day {
+    font-size: $main-text;
+}
+
+.recent-value {
+    font-size: $header-text;
+}
+
+
+@media only screen and (min-width: $small-screen) {
+
+    #main-content {
+        div {
+            margin: $mini-indent 0;
+        }
+    }
+
+    h2 {
+        margin: 0 0 5% 0;
+    }
+}
+
+
+@media only screen and (min-width: $medium-screen) {
+
+    #main-content {
+        div {
+            width: 90%;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $large-screen) {
+
+    #main-content {
+        flex-direction: row;
+        align-items: baseline;
+        height: 100%;
+        padding: $standard-indent 6%;
+
+        div {
+            width: 48%;
+            min-height: 26%;
+        }
+    }
+
+    .inner-container {
+        padding: $large-indent;
+    }
+}

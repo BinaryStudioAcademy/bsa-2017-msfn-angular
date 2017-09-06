@@ -49,6 +49,9 @@ export class ActiveTrainingComponent implements OnInit {
             data.exList = this.trainingPlan.exercisesList;
             this.trainingPlan.intervals[action.cacheIndex] = data;
             this.trainingPlan.exercisesList = [];
+            if (this.trainingPlan._id) {
+                this.activeTrainingService.updateTraining(this.trainingPlan);
+            }
         } else if (action.type === 'delete') {
             this.editIntervalMode = false;
             this.trainingPlan.intervals.splice(action.cacheIndex, 1);
@@ -75,6 +78,7 @@ export class ActiveTrainingComponent implements OnInit {
         });
     }
     onStart() {
+        this.trainingPlan.trainingPlanID = this.trainingPlan._id;
         this.activeTrainingService.addTraining(this.trainingPlan, (result) => {
             if (result) {
                 this.trainingPlan._id = result;
