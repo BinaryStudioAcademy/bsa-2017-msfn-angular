@@ -1,0 +1,77 @@
+@import '../../../../globalStyles/indentations.scss';
+@import '../../../../globalStyles/text.scss';
+@import '../../../../globalStyles/variables.scss';
+
+.training-history {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 80%;
+    min-height: 500px;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+
+    h2 {
+        text-align: center;
+        font-size: $header-text;
+    }
+}
+
+.mat-table {
+    width: 100%;
+    margin: 0 auto 40px auto;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.mat-header-row,
+.mat-row {
+    height: auto;
+    padding: $content-tb-margin 60px;
+}
+
+.name {
+    cursor: pointer;
+}
+
+.mat-header-cell {
+    font-size: $main-text;
+}
+
+md-header-cell,
+md-cell {
+    max-width: 25%;
+}
+
+md-header-cell:last-child,
+md-cell:last-child {
+    max-width: 20%;
+}
+
+md-header-cell:nth-child(2),
+md-cell:nth-child(2) {
+    max-width: 30%;
+}
+
+md-header-cell {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: $large-screen) {
+
+    .training-history {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .mat-header-row,
+    .mat-row {
+        padding: 20px 10px;
+    }
+
+    md-cell {
+        font-size: 12px;
+    }
+}

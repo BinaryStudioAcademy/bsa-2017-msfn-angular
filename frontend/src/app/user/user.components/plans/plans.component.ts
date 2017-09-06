@@ -29,7 +29,7 @@ export class PlansComponent implements OnInit {
     };
     private searchTimeout = 0;
     private followedUsers: any[] = [];
-    private lastSearch: string = null;
+    private lastSearch = '';
 
     constructor(private httpHandler: HttpService,
                 private encryptService: EncryptService) {
@@ -79,6 +79,10 @@ export class PlansComponent implements OnInit {
     }
 
     setSearch(search) {
+        if (search === this.lastSearch) {
+            return;
+        }
+        this.loading = true;
         clearTimeout(this.searchTimeout);
         this.searchTimeout = setTimeout(() => {
             this.executeSearch(search);
@@ -97,6 +101,8 @@ export class PlansComponent implements OnInit {
         this.plans = [];
         this.ableToLoad = true;
         if (!search) {
+            (<any>this.filter.filter).search = null;
+            delete (<any>this.filter.filter).search;
             this.loadPlans();
         } else {
             this.searchPlans(search);
@@ -140,15 +146,18 @@ export class PlansComponent implements OnInit {
                             });
                     }
                 });
+            }).then(() => {
+                console.log(this);
                 this.loading = false;
-            });
+        });
     }
 
     loadPlans() {
-        if ((<any>this.filter.filter).search) {
+        if ((<any>this.filter.filter).search && this.lastSearch !== '') {
             this.searchPlans(this.lastSearch);
             return;
         }
+        console.log('load');
         this.filter.offset  = this.plans.length;
         const request: IHttpReq = {
             url: `/api/training-plan/public/${encodeURIComponent(this.encryptService.encrypt(this.filter))}`,
@@ -187,7 +196,9 @@ export class PlansComponent implements OnInit {
                             });
                     }
                 });
-                this.loading = false;
-            });
+            }).then(() => {
+            console.log(this);
+            this.loading = false;
+        });
     }
 }

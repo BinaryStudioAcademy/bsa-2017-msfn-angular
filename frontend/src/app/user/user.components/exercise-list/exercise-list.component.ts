@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ElementRef, ViewChild } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
-import { PageEvent, MdPaginatorModule } from '@angular/material';
-import { SearchExerciseComponent } from './../search-exercise/search-exercise.component';
-import { ExerciseDescriptionComponent } from '../exercise-description/exercise-description.component';
+import {Component, OnInit, Input, Output, EventEmitter, OnChanges, ElementRef, ViewChild} from '@angular/core';
+import {MdDialog, MdDialogRef} from '@angular/material';
+import {PageEvent, MdPaginatorModule} from '@angular/material';
+import {SearchExerciseComponent} from './../search-exercise/search-exercise.component';
+import {ExerciseDescriptionComponent} from '../exercise-description/exercise-description.component';
 
 @Component({
     selector: 'app-exercise-list',
@@ -21,6 +21,7 @@ export class ExerciseListComponent implements OnInit, OnChanges {
 
     @Input() exercisesList = [];
     @Input() userMeasures;
+    @Input() disableActions = false;
     @Output() onChangeList = new EventEmitter();
     displayExercises: Object[];
     // pager props
@@ -30,10 +31,8 @@ export class ExerciseListComponent implements OnInit, OnChanges {
     pageEvent: PageEvent;
     lastAfterClosedResult: string;
 
-    constructor(
-        private dialog: MdDialog,
-        private paginator: MdPaginatorModule,
-    ) {
+    constructor(private dialog: MdDialog,
+                private paginator: MdPaginatorModule) {
         this.openedDialog = null;
     }
 
@@ -60,6 +59,10 @@ export class ExerciseListComponent implements OnInit, OnChanges {
     }
 
     addExercise() {
+        if (this.disableActions) {
+            return;
+        }
+
         this.searchDialog = this.dialog.open(SearchExerciseComponent, {
             data: {
                 currentExercises: this.exercisesList
@@ -76,6 +79,10 @@ export class ExerciseListComponent implements OnInit, OnChanges {
     }
 
     deleteExercise(id) {
+        if (this.disableActions) {
+            return;
+        }
+
         this.exercisesList = this.exercisesList.filter(function (el) {
             if (el.exercise.id) {
                 return el.exercise.id !== id;
@@ -93,6 +100,10 @@ export class ExerciseListComponent implements OnInit, OnChanges {
     }
 
     addExercises(exercises) {
+        if (this.disableActions) {
+            return;
+        }
+
         exercises.forEach((elem, ind) => {
             const inArray = this.exercisesList.find((el) => {
                 return el.exercise._id === elem._id;
@@ -112,6 +123,10 @@ export class ExerciseListComponent implements OnInit, OnChanges {
     }
 
     setAdd(exercise) {
+        if (this.disableActions) {
+            return;
+        }
+
         this.displayExercises.forEach((item: any) => {
             item.edit = false;
         });
@@ -122,6 +137,10 @@ export class ExerciseListComponent implements OnInit, OnChanges {
     }
 
     setSaveInfo(exercise, form) {
+        if (this.disableActions) {
+            return;
+        }
+
         if (form.value.value && form.value.value2) {
             if (this.setItemEdit || this.setItemEdit === 0) {
                 exercise.sets[this.setItemEdit].value = this.value;
@@ -147,6 +166,10 @@ export class ExerciseListComponent implements OnInit, OnChanges {
     }
 
     setEdit(exercise, set, index) {
+        if (this.disableActions) {
+            return;
+        }
+
         this.setItemEdit = index;
         this.value = set.value;
         this.value2 = set.value2;
@@ -154,6 +177,10 @@ export class ExerciseListComponent implements OnInit, OnChanges {
     }
 
     setDelete(exercise, index) {
+        if (this.disableActions) {
+            return;
+        }
+
         exercise.sets.splice(index, 1);
     }
 

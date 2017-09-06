@@ -53,6 +53,8 @@ const User = new Schema({
         }
     ],
     privacyHideFields: [String],
+    activityLevel: Number,
+    advicedCalories: Number,
 }, {
     toObject: {
         virtuals: true

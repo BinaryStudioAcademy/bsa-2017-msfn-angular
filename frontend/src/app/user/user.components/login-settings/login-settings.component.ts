@@ -1,15 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { LoginSettingsService } from './login-settings.service';
-import { DateService } from '../../../services/date.service';
-import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
-import { MdDialog } from '@angular/material';
-import { ConfirmPasswordDialogComponent } from '../../../components/confirm-password-dialog/confirm-password-dialog.component';
-import { WindowObj } from '../../../services/window.service';
-import { IUser } from '../../../models/user';
-import { ToasterService } from '../../../services/toastr.service';
-import { AddNewEmailDialogComponent } from '../../../components/add-new-email-dialog/add-new-email-dialog.component';
-import { ChangeRootEmailDialogComponent } from '../../../components/change-root-email-dialog/change-root-email-dialog.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, Validators, FormControl} from '@angular/forms';
+import {LoginSettingsService} from './login-settings.service';
+import {DateService} from '../../../services/date.service';
+import {CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
+import {MdDialog} from '@angular/material';
+import {ConfirmPasswordDialogComponent} from '../../../components/confirm-password-dialog/confirm-password-dialog.component';
+import {WindowObj} from '../../../services/window.service';
+import {IUser} from '../../../models/user';
+import {ToasterService} from '../../../services/toastr.service';
+import {AddNewEmailDialogComponent} from '../../../components/add-new-email-dialog/add-new-email-dialog.component';
+import {ChangeRootEmailDialogComponent} from '../../../components/change-root-email-dialog/change-root-email-dialog.component';
+import {GCalendarService} from '../../../services/gcalendar.service';
 
 @Component({
     selector: 'app-login-settings',
@@ -56,7 +57,8 @@ export class LoginSettingsComponent implements OnInit {
                 private dialog: MdDialog,
                 private window: WindowObj,
                 private dateService: DateService,
-                private toasterService: ToasterService) {
+                private toasterService: ToasterService,
+                private gcalendarService: GCalendarService) {
         this.cropperSettings = profileService.getCropperSettings();
         this.data = {
             image: this.image
@@ -79,15 +81,14 @@ export class LoginSettingsComponent implements OnInit {
     buildForm() {
         this.profileForm = this.formBuilder.group({
             'email': new FormControl({
-                    value: this.user.email,
-                    disabled: this.isDisabledEmail
+                value: this.user.email,
+                disabled: this.isDisabledEmail
             })
         });
     }
 
     openAddNewEmailDialog() {
-        const dialogRef = this.dialog.open(AddNewEmailDialogComponent, {
-        });
+        const dialogRef = this.dialog.open(AddNewEmailDialogComponent, {});
         dialogRef.afterClosed().subscribe(email => {
             if (email && email !== this.user.email) {
                 this.profileService.addNewEmail(email, this.user._id, res => {
@@ -113,6 +114,7 @@ export class LoginSettingsComponent implements OnInit {
             }
         });
     }
+
     onSubmit(user) {
         const monthNumber = this.months.indexOf(this.birthday.month) + 1;
         const birthday = this.dateService.convertDateToIso({
@@ -133,7 +135,7 @@ export class LoginSettingsComponent implements OnInit {
     }
 
     openConfirmPasswordDialog() {
-        this.dialog.open(ConfirmPasswordDialogComponent, { data: Boolean(this.user.password) });
+        this.dialog.open(ConfirmPasswordDialogComponent, {data: Boolean(this.user.password)});
     }
 
     // for cropperImg:
@@ -179,5 +181,12 @@ export class LoginSettingsComponent implements OnInit {
             };
             this.hideCropper = true;
         }
+    }
+
+    enableGoogleCalendar() {
+        this.gcalendarService.checkAuthorized((err, result) => {
+            console.log(err);
+            console.log(result);
+        });
     }
 }

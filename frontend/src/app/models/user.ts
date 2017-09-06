@@ -5,6 +5,7 @@ export interface IUser {
     email: string;
     gender: string;
     birthday: string;
+    activityLevel?: number;
     _id?: string;
     position?: number;
     isCoach?: boolean;

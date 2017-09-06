@@ -2,8 +2,8 @@
     <div id="weight-container" class="child">
         <app-db-weight-control class="child-app" [weightItems]="weightItems"></app-db-weight-control>
     </div>
-    <div id="calories-container" class="child">
-        <app-db-calories class="child-app"></app-db-calories>
+    <div id="calories-container" class="child" *ngIf="user">
+        <app-db-calories class="child-app" dayAim="{{user.advicedCalories || 300}}"></app-db-calories>
     </div>
     <div id="events-container" class="child">
         <app-db-events class="child-app"></app-db-events>

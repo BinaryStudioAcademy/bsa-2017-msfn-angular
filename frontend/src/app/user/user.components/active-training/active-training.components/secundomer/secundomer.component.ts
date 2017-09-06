@@ -24,6 +24,16 @@ export class SecundomerComponent implements OnInit, OnChanges {
     firstRun: boolean = true;
     pauseMode: boolean = false;
     errorName: string;
+    showedEx: any;
+    nextShowedEx: any;
+    history = [];
+
+    restEx = {
+        exercise: {
+            name: 'REST',
+            image: []
+        }
+    };
 
 
     constructor(
@@ -83,6 +93,18 @@ export class SecundomerComponent implements OnInit, OnChanges {
         });
         return formatter.format(millisecnods);
     }
+
+    exerciseShow(exList, time) {
+        // mega math formula
+        const result = Math.floor((time - this.secundomerService.timer) / Math.ceil(time / exList.length));
+        this.nextShowedEx = (exList[result + 1] && !(this.lap % 2)) ? exList[result + 1].exercise.name : 'REST';
+
+        if (this.lap % 2) {
+            this.showedEx = this.restEx;
+        } else if (exList[result]) {
+            this.showedEx = exList[result];
+        }
+    }
 // secundomer functions
     run(): void {
         this.secundomerService.run();
@@ -109,6 +131,9 @@ export class SecundomerComponent implements OnInit, OnChanges {
 
 // timer functions
     startTimer(firstRun, rest): void {
+        if (!this.lap) {
+            this.onStart.emit();
+        }
         if (firstRun) {
             if (this.choosedIntervals[this.lap]) {
                 this.firstRun = false;
@@ -119,7 +144,10 @@ export class SecundomerComponent implements OnInit, OnChanges {
         }
 
         if (this.choosedIntervals[this.lap]) {
-            this.secundomerService.startTimer(this.lap, rest, this.pauseMode, () => {
+            this.secundomerService.startTimer(this.lap, rest, this.pauseMode, (refreshShow) => {
+                if (refreshShow) {
+                    return this.exerciseShow(this.choosedIntervals[this.lap].exList, this.secundomerService.timerLapNum);
+                }
                 if (this.choosedIntervals[this.lap + 1]) {
                     this.lapTimer();
                 } else {
@@ -128,6 +156,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
             });
             this.pauseMode = false;
             this.showExercises.emit(this.choosedIntervals[this.lap].exList);
+            this.exerciseShow(this.choosedIntervals[this.lap].exList, this.secundomerService.timerLapNum);
         }
     }
 
@@ -146,19 +175,23 @@ export class SecundomerComponent implements OnInit, OnChanges {
         this.secundomerService.clearTimer();
     }
 
-    rest(): void {
-        this.secundomerService.rest();
-    }
-
-    endRest(): void {
-        this.secundomerService.endRest();
-    }
-
     finishInterval() {
+        let lap = 0, warm = 0;
+        const resArr = [];
+        this.history.forEach((element, i) => {
+            if (i % 2) {
+                warm += element;
+            } else {
+                lap += element;
+            }
+            resArr.push(this.beautifierTime(element));
+        });
         const data = {
-            total: this.beautifierTime(this.secundomerService.secndomerNum),
-            warming: this.beautifierTime(this.secundomerService.warmingTime)
+            timeIntervals: resArr,
+            total: this.beautifierTime(lap),
+            warming: this.beautifierTime(warm)
         };
+        this.history = [];
         this.pause();
         this.pauseTimer();
         this.onFinish.emit(data);
@@ -167,6 +200,12 @@ export class SecundomerComponent implements OnInit, OnChanges {
     setTime(lap, warm) {
         this.secundomerService.timerLapNum = lap * 60 * 1000;
         this.secundomerService.timerWarmNum = warm * 60 * 1000;
+        if (this.lap % 2) {
+            this.history.push(this.secundomerService.timerLapNum - this.secundomerService.timer);
+            this.history.push(this.secundomerService.timerWarmNum);
+        } else if (this.lap !== 0) {
+            this.history[this.history.length - 1] -= this.secundomerService.timer;
+        }
     }
 
     selectCircles() {

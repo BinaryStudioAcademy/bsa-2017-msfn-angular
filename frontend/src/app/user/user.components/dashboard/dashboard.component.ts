@@ -3,6 +3,7 @@ import { DashboardService } from './dashboard.service';
 import { GoalProgressService } from '../../../services/goal-progress.service';
 import { WeightControlService } from '../weight-control/weight-control.service';
 import { DateService } from '../../../services/date.service';
+import { IUser } from '../../../models/user';
 
 @Component({
     selector: 'app-dashboard',
@@ -28,10 +29,12 @@ export class DashboardComponent implements OnInit {
 
     goalItems = [];
     weightItems = [];
+    user: IUser;
 
     ngOnInit() {
         this.getGoalItems();
         this.getWeightItems();
+        this.getUser();
     }
 
     getGoalItems(): void {
@@ -51,6 +54,12 @@ export class DashboardComponent implements OnInit {
             } else {
                 this.weightItems = [];
             }
+        });
+    }
+
+    getUser(): void {
+        this.dashboardService.getUser(res => {
+            this.user = res;
         });
     }
 }

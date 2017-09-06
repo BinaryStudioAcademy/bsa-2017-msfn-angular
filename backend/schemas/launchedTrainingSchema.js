@@ -10,6 +10,10 @@ const LaunchedTraining = new Schema({
         time: {
             total: String,
             warming: String,
+            timeIntervals: {
+                required: false,
+                type: Array
+            }
         },
         calories: Number
     },
@@ -29,7 +33,8 @@ const LaunchedTraining = new Schema({
     isRemoved: {
         type: Boolean,
         default: false
-    }
+    },
+    trainingPlanID: String,
 });
 
 module.exports = mongoose.model('LaunchedTraining', LaunchedTraining);

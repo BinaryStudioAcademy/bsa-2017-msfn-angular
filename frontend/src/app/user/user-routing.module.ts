@@ -23,6 +23,7 @@ import { ActiveTrainingComponent } from './user.components/active-training/activ
 import { PlansComponent } from './user.components/plans/plans.component';
 import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
 import { CoachComponent } from './user.components/coach/coach.component';
+import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 
 
 const userRoutes: Routes = [
@@ -112,7 +113,11 @@ const userRoutes: Routes = [
             {
                 path: 'coach',
                 component: CoachComponent
-            }
+            },
+            {
+                path: 'training-history',
+                component: TrainingHistoryComponent
+            },
         ]
     }
 ];

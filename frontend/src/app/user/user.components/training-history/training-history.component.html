@@ -1,0 +1,44 @@
+<div class="training-history">
+    <h2>Training history</h2>
+
+    <md-table #table [dataSource]="dataSource" mdSort>
+        <ng-container cdkColumnDef="name">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Name
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row" class="name" routerLink="/user/training-plan/{{row.trainingPlanID}}">
+                {{ row.name }}
+            </md-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="date">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Date
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                {{ row.date }}
+            </md-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="totalTime">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Total time
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                {{ row.totalTime }}
+            </md-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="calories">
+            <md-header-cell *cdkHeaderCellDef md-sort-header>
+                Calories
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                {{ row.calories }}
+            </md-cell>
+        </ng-container>
+
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+</div>
