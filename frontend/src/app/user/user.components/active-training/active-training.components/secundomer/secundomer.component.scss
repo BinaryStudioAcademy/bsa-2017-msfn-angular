@@ -103,12 +103,19 @@ button {
     
     h2 {
         width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
         max-height: 20px;
         margin: 0;
+
     }
     span {
         position: absolute;
         width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
         max-height: 20px;
         bottom: 0;
     }
