@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-coach-sidebar',
@@ -12,6 +12,8 @@ export class CoachSidebarComponent implements OnInit {
 
     constructor() {
     }
+
+    @Input() userData;
 
     coachInfo = {
         name: 'Brick',
@@ -60,5 +62,4 @@ export class CoachSidebarComponent implements OnInit {
 
     ngOnInit() {
     }
-
 }

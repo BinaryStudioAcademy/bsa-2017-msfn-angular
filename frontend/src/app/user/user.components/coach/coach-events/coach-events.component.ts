@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DateService } from '../../../../services/date.service';
 
 @Component({
@@ -14,6 +14,8 @@ import { DateService } from '../../../../services/date.service';
 export class CoachEventsComponent implements OnInit {
 
     constructor(private dateService: DateService) { }
+
+    @Input() userData;
 
     title = 'Planned Events';
     interval = {
@@ -67,6 +69,7 @@ export class CoachEventsComponent implements OnInit {
 
     ngOnInit() {
         this.processDates();
+        console.log(this.userData);
     }
 
     initProcessDates() {

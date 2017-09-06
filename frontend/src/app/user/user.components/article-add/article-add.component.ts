@@ -37,14 +37,14 @@ export class ArticleAddComponent implements OnInit {
     this.cropperSettings = this.articleAddService.getCropperSettings();
     this.article = {
       title: '',
-      detail: '',      
+      detail: '',
       preview: '',
       image: ''
     };
     this.converted = {
       preview: '',
       detail: ''
-    }
+    };
   }
 
   fileChangeListener($event) {
