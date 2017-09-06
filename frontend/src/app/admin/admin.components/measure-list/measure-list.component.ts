@@ -67,7 +67,6 @@ export class MeasureListComponent implements OnInit {
             },
             row.isRemoved
         );
-        console.log(this.tableDatabase.data);
     }
 
     addMeasure() {

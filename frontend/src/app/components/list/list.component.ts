@@ -28,9 +28,9 @@ export class ListComponent implements OnInit {
                     this.items.push(this.input);
                 }
                 this.input = '';
+                this.onChangedList.emit();
             }
         }, 0);
-        this.onChangedList.emit();
     }
 
     deleteItem(index) {

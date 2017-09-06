@@ -13,6 +13,8 @@ import { SportHandlingComponent } from './admin.components/sport-handling/sport-
 import { MeasureListComponent } from './admin.components/measure-list/measure-list.component';
 import { MeasureTypeComponent } from './admin.components/measure-type/measure-type.component';
 import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
+import { FoodTypeComponent } from './admin.components/food-type/food-type.component';
+import { FoodListComponent } from './admin.components/food-list/food-list.component';
 
 const adminRoutes: Routes = [
     {
@@ -55,7 +57,7 @@ const adminRoutes: Routes = [
                         path: 'sport-handling/:id',
                         component: SportHandlingComponent
                     },
-                   {
+                    {
                         path: 'sports-list',
                         component: SportsListComponent
                     },
@@ -74,6 +76,14 @@ const adminRoutes: Routes = [
                     {
                         path: 'measure',
                         component: MeasureTypeComponent
+                    },
+                    {
+                        path: 'food-list',
+                        component: FoodListComponent
+                    },
+                    {
+                        path: 'food-types',
+                        component: FoodTypeComponent
                     }
                 ]
             }

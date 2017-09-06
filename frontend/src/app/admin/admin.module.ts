@@ -22,14 +22,21 @@ import { SportHandlingComponent } from './admin.components/sport-handling/sport-
 import { SportsListComponent } from './admin.components/sports-list/sports-list.component';
 import { GoalListComponent } from './admin.components/goal-list/goal-list.component';
 import { MeasureTypeComponent } from './admin.components/measure-type/measure-type.component';
+import { FoodTypeComponent } from './admin.components/food-type/food-type.component';
+import { FoodListComponent } from './admin.components/food-list/food-list.component';
+import { FoodEditDialogComponent } from './admin.components/food-edit-dialog/food-edit-dialog.component';
+import { CdkTableModule } from '@angular/cdk';
+import { FoodTypeEditDialogComponent } from './admin.components/food-type-edit-dialog/food-type-edit-dialog.component';
 import { SelectSportComponent } from './admin.components/select-sport/select-sport.component';
+
 
 @NgModule({
     imports: [
         ImportModule,
         CommonModule,
         FormsModule,
-        AdminRoutingModule
+        CdkTableModule,
+        AdminRoutingModule,
     ],
     declarations: [
         AdminComponent,
@@ -44,14 +51,20 @@ import { SelectSportComponent } from './admin.components/select-sport/select-spo
         GoalListComponent,
         MeasureListComponent,
         MeasureTypeComponent,
+        FoodTypeComponent,
+        FoodListComponent,
+        FoodEditDialogComponent,
+        FoodTypeEditDialogComponent,
         SelectSportComponent,
     ],
     providers: [
         ToasterService,
         AdminRootProfileService,
-        ExerciseCreateService
+        ExerciseCreateService,
     ],
     entryComponents: [
+        FoodEditDialogComponent,
+        FoodTypeEditDialogComponent,
         SelectSportComponent,
     ]
 })

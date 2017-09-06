@@ -29,7 +29,6 @@ module.exports = function (app) {
                value: req.body.value,
                deadline: req.body.deadline
            }
-           console.log(body);
         userGoalService.updateUserGoal(req.body._id, body, function(err, data) {
             res.data = data;
             res.err = err;
