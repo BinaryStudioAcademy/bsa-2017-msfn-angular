@@ -55,8 +55,8 @@
 
     </div>
     <div class="childContainer">
-        <app-exercise-list [userMeasures]="userMeasures" [exercisesList]="trainingPlan.exercisesList"
-                           (onChangeList)="onChangeList($event)"></app-exercise-list>
+        <app-exercises [userMeasures]="userMeasures" [exercisesList]="trainingPlan.exercisesList"
+                           (onChangeList)="onChangeList($event)"></app-exercises>
         <app-interval-training-plan [intervalList]="trainingPlan.intervals"
                                     [class.errorBorder]="errorEmptyIntervals"
                                     *ngIf="trainingPlan.trainingType === 'interval'"

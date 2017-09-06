@@ -135,7 +135,7 @@
         flex-wrap: wrap;
         background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
 
-        app-exercise-list {
+        app-exercises {
             width: 100%;
             height: calc(100% - 160px);
         }
@@ -206,7 +206,7 @@
             height: calc(200% - 70px);
             background: none;
 
-            app-exercise-list {
+            app-exercises {
                 width: 100%;
                 height: calc(100vh - 70px);
             }

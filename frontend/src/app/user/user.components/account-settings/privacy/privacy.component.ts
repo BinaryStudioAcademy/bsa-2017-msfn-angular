@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WindowObj } from '../../../../services/window.service';
-import { ProfileService } from '../../profile/profile.service';
+import { ProfileService } from '../profile/profile.service';
 import { ToasterService } from '../../../../services/toastr.service';
 
 @Component({

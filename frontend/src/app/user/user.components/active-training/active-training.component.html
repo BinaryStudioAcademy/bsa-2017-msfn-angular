@@ -5,7 +5,7 @@
     </div>
     <div class="child">
         <div class="exlist centerContent">
-            <app-exercise-list [exercisesList]="trainingPlan.exercisesList" [userMeasures]="userMeasures" (onChangeList)="onChangeList($event)"></app-exercise-list>
+            <app-exercises [exercisesList]="trainingPlan.exercisesList" [userMeasures]="userMeasures" (onChangeList)="onChangeList($event)"></app-exercises>
         </div>
         <div class="intmenu centerContent"  *ngIf="trainingPlan.trainingType === 'interval'">
             <app-interval-training-plan [intervalList]="trainingPlan.intervals" (intervalAction)="intervalAction($event)"></app-interval-training-plan>
