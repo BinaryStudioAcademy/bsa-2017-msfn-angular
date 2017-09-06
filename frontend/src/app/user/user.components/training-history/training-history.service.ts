@@ -35,11 +35,14 @@ export class TrainingHistoryService {
                 case 'name':
                     [propA, propB] = [a.name.toLowerCase(), b.name.toLowerCase()];
                     break;
-                case 'data':
-                    [propA, propB] = [a.data, b.data];
+                case 'type':
+                    [propA, propB] = [a.type.toLowerCase(), b.type.toLowerCase()];
+                    break;
+                case 'date':
+                    [propA, propB] = [a.date.raw, b.date.raw];
                     break;
                 case 'totalTime':
-                    [propA, propB] = [a.totalTime, b.totalTime];
+                    [propA, propB] = [a.totalTime.seconds, b.totalTime.seconds];
                     break;
                 case 'calories':
                     [propA, propB] = [a.calories, b.calories];
@@ -55,11 +58,9 @@ export class TrainingHistoryService {
 
     beautifyDate(date): string {
         const d = new Date(date);
-        return d.getFullYear() + '.' +
-         this.addZeroToNum(d.getMonth() + 1) + '.' +
-         this.addZeroToNum(d.getDate()) + ' (' +
-         this.addZeroToNum(d.getHours()) + ':' +
-         this.addZeroToNum(d.getMinutes()) + ')';
+        return this.addZeroToNum(d.getDate()) + '.' +
+               this.addZeroToNum(d.getMonth() + 1) + '.' +
+               d.getFullYear();
     }
 
     private addZeroToNum(num: number): string {
@@ -68,5 +69,10 @@ export class TrainingHistoryService {
         } else {
             return num.toString();
         }
+    }
+
+    getSeconds(string) {
+        const arr = string.split(':');
+        return Number(arr[2]) + Number(arr[1]) * 60 + Number(arr[0]) * 3600;
     }
 }
