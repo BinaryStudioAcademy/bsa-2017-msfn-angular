@@ -13,10 +13,7 @@
     <button (click)="lapTimer()" *ngIf="secundomerService.runned&&choosedIntervals[this.lap + 1]&&!(lap%2)" class="general circle">REST</button>
     <button (click)="pauseTimer()" *ngIf="secundomerService.runned" class="general pause">PAUSE</button>
     <button (click)="finishInterval()" *ngIf="secundomerService.runned" class="general finish">FINISH</button>
-    <div class="numbers">{{beautifierTime(secundomerService.timer)}}</div>
-    <!-- <button md-raised-button (click)="rest()" *ngIf="secundomerService.runned&&!secundomerService.warming" class="controll">REST</button> -->
-    <!-- <button md-raised-button (click)="endRest()" *ngIf="secundomerService.runned&&secundomerService.warming" class="controll">END REST</button> -->
-    <div class="numbers" *ngIf="secundomerService.warming">{{beautifierTime(secundomerService.timerWarmNum)}}</div>
+    <div class="numbers">{{beautifierTime(secundomerService.timer)}}</div> <div class="numbers" *ngIf="secundomerService.warming">{{beautifierTime(secundomerService.timerWarmNum)}}</div>
     <div class="intervalList" *ngIf="intervals[intervals.length - 1].exList && firstRun">
         <div class="interval" *ngFor="let interval of intervals; let i = index">
             <div class="field" (click)="showExercises.emit(interval.exList)" >

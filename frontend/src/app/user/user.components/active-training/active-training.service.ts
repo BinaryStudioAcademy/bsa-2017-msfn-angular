@@ -69,7 +69,6 @@ export class ActiveTrainingService {
             method: 'PUT',
             body: plan,
         };
-        console.log('update');
         this.httpService.sendRequest(sendData);
     }
 

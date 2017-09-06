@@ -122,20 +122,4 @@ export class SecundomerService {
         this.timerWarmNum = 0;
         this.runned = false;
     }
-
-    rest(): void {
-        this.warming = true;
-        this.idRest = setInterval( () => {
-            this.timerWarmNum -= 250;
-            if (this.timerWarmNum <= 0) {
-                this.timerWarmNum = 0;
-                this.clearTimer();
-            }
-        }, 250);
-    }
-
-    endRest(): void {
-        this.warming = false;
-        clearInterval(this.idRest);
-    }
 }

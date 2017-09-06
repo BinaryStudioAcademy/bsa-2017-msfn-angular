@@ -26,6 +26,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
     errorName: string;
     showedEx: any;
     nextShowedEx: any;
+    history = [];
 
     restEx = {
         exercise: {
@@ -130,6 +131,9 @@ export class SecundomerComponent implements OnInit, OnChanges {
 
 // timer functions
     startTimer(firstRun, rest): void {
+        if (!this.lap) {
+            this.onStart.emit();
+        }
         if (firstRun) {
             if (this.choosedIntervals[this.lap]) {
                 this.firstRun = false;
@@ -153,7 +157,6 @@ export class SecundomerComponent implements OnInit, OnChanges {
             this.pauseMode = false;
             this.showExercises.emit(this.choosedIntervals[this.lap].exList);
             this.exerciseShow(this.choosedIntervals[this.lap].exList, this.secundomerService.timerLapNum);
-            this.onStart.emit();
         }
     }
 
@@ -172,19 +175,23 @@ export class SecundomerComponent implements OnInit, OnChanges {
         this.secundomerService.clearTimer();
     }
 
-    rest(): void {
-        this.secundomerService.rest();
-    }
-
-    endRest(): void {
-        this.secundomerService.endRest();
-    }
-
     finishInterval() {
+        let lap = 0, warm = 0;
+        const resArr = [];
+        this.history.forEach((element, i) => {
+            if (i % 2) {
+                warm += element;
+            } else {
+                lap += element;
+            }
+            resArr.push(this.beautifierTime(element));
+        });
         const data = {
-            total: this.beautifierTime(this.secundomerService.secndomerNum),
-            warming: this.beautifierTime(this.secundomerService.warmingTime)
+            timeIntervals: resArr,
+            total: this.beautifierTime(lap),
+            warming: this.beautifierTime(warm)
         };
+        this.history = [];
         this.pause();
         this.pauseTimer();
         this.onFinish.emit(data);
@@ -193,6 +200,12 @@ export class SecundomerComponent implements OnInit, OnChanges {
     setTime(lap, warm) {
         this.secundomerService.timerLapNum = lap * 60 * 1000;
         this.secundomerService.timerWarmNum = warm * 60 * 1000;
+        if (this.lap % 2) {
+            this.history.push(this.secundomerService.timerLapNum - this.secundomerService.timer);
+            this.history.push(this.secundomerService.timerWarmNum);
+        } else if (this.lap !== 0) {
+            this.history[this.history.length - 1] -= this.secundomerService.timer;
+        }
     }
 
     selectCircles() {
