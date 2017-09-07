@@ -17,7 +17,7 @@
 
         .new-article {
             flex-basis: 100%;
-            border-bottom: 1px solid rgba(255,255,255,0.12);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
             color: grey;
         }
 
@@ -133,7 +133,7 @@
         left: 0;
     }
 
-    .cssload-container{
+    .cssload-container {
         position: absolute;
         top: 100px;
     }
@@ -144,8 +144,8 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        border: 1px solid rgb(204,204,204);
-        border-left-color: rgb(0,0,0);
+        border: 1px solid rgb(204, 204, 204);
+        border-left-color: rgb(0, 0, 0);
         border-radius: 974px;
         -o-border-radius: 974px;
         -ms-border-radius: 974px;
@@ -187,8 +187,6 @@
         -webkit-animation: cssload-rotate 2900ms linear infinite;
         -moz-animation: cssload-rotate 2900ms linear infinite;
     }
-
-
 
     @keyframes cssload-rotate {
         100% {
