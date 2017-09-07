@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { SecundomerService } from './secundomer.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { SecundomerService } from './secundomer.service';
     ]
 })
 
-export class SecundomerComponent implements OnInit, OnChanges {
+export class SecundomerComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() finishTrain: boolean;
     @Input() reloadIntervals: boolean;
@@ -43,11 +43,12 @@ export class SecundomerComponent implements OnInit, OnChanges {
     ngOnChanges(changes) {
         if (changes.finishTrain && changes.finishTrain.currentValue === true) {
             this.secundomerService.stopTimers();
+            this.history = [];
             this.firstRun = true;
             this.pauseMode = false;
             this.lap = 0;
         } else if (changes.finishTrain && changes.finishTrain.currentValue === 'continue') {
-            this.run();
+            this.run(this.firstRun);
             this.startTimer(this.firstRun, this.lap % 2);
         } else if (changes.reloadIntervals) {
             this.intervals.forEach((el) => {
@@ -69,6 +70,10 @@ export class SecundomerComponent implements OnInit, OnChanges {
             this.choosedIntervals = this.generateIntervalArray(this.intervals);
             this.showExercises.emit(this.choosedIntervals[0].exList);
         }
+    }
+
+    ngOnDestroy() {
+        this.secundomerService.stopTimers();
     }
 
     generateIntervalArray(array) {
@@ -106,9 +111,12 @@ export class SecundomerComponent implements OnInit, OnChanges {
         }
     }
 // secundomer functions
-    run(): void {
+    run(firstRun?): void {
         this.secundomerService.run();
-        this.onStart.emit();
+        if (firstRun) {
+            this.onStart.emit();
+            this.firstRun = false;
+        }
     }
     pause(): void {
         this.secundomerService.pause();
@@ -131,7 +139,7 @@ export class SecundomerComponent implements OnInit, OnChanges {
 
 // timer functions
     startTimer(firstRun, rest): void {
-        if (!this.lap) {
+        if (!this.lap && firstRun) {
             this.onStart.emit();
         }
         if (firstRun) {
@@ -191,7 +199,6 @@ export class SecundomerComponent implements OnInit, OnChanges {
             total: this.beautifierTime(lap),
             warming: this.beautifierTime(warm)
         };
-        this.history = [];
         this.pause();
         this.pauseTimer();
         this.onFinish.emit(data);
@@ -200,10 +207,11 @@ export class SecundomerComponent implements OnInit, OnChanges {
     setTime(lap, warm) {
         this.secundomerService.timerLapNum = lap * 60 * 1000;
         this.secundomerService.timerWarmNum = warm * 60 * 1000;
+
         if (this.lap % 2) {
             this.history.push(this.secundomerService.timerLapNum - this.secundomerService.timer);
             this.history.push(this.secundomerService.timerWarmNum);
-        } else if (this.lap !== 0) {
+        } else if (this.lap) {
             this.history[this.history.length - 1] -= this.secundomerService.timer;
         }
     }

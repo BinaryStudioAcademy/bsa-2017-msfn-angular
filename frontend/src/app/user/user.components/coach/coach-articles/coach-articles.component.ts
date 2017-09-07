@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material';
 
 @Component({
@@ -13,6 +13,8 @@ export class CoachArticlesComponent implements OnInit {
 
     constructor() {
     }
+
+    @Input() userData;
 
     title = 'Articles';
 

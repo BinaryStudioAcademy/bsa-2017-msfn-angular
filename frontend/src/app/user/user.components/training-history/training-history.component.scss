@@ -16,6 +16,19 @@
         text-align: center;
         font-size: $header-text;
     }
+
+    .navigate {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        .period-wrap {
+
+            md-input-container {
+                margin: 0 10px;
+            }
+        }
+    }
 }
 
 .mat-table {
@@ -31,31 +44,24 @@
     padding: $content-tb-margin 60px;
 }
 
-.name {
-    cursor: pointer;
-}
-
 .mat-header-cell {
     font-size: $main-text;
 }
 
 md-header-cell,
 md-cell {
-    max-width: 25%;
+    max-width: 20%;
+    cursor: pointer;
 }
 
 md-header-cell:last-child,
 md-cell:last-child {
-    max-width: 20%;
+    max-width: 15%;
 }
 
-md-header-cell:nth-child(2),
-md-cell:nth-child(2) {
-    max-width: 30%;
-}
-
-md-header-cell {
-    cursor: pointer;
+md-header-cell:nth-child(3),
+md-cell:nth-child(3) {
+    max-width: 25%;
 }
 
 @media only screen and (max-width: $large-screen) {

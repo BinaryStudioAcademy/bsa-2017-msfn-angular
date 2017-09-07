@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material';
+import { CoachService } from '../coach.service';
 
 @Component({
     selector: 'app-coach-plans',
@@ -11,39 +12,11 @@ import { PageEvent } from '@angular/material';
 })
 export class CoachPlansComponent implements OnInit {
 
-    title = 'Training Plans';
+    constructor(private coachService: CoachService) { }
 
-    plans = [
-        {
-            title: 'Praesent feugiat',
-            exercises: [
-                'Dumbbell Goblet Squat',
-                'Dumbbell Lunges Walking',
-                'Bent Over Barbell Row',
-                'Chin-ups',
-                'V-Bar Pulldown'
-            ],
-            description: 'Cras ac erat mattis, elementum ipsum sit amet, feugiat ante.' +
-            'Aliquam velit turpis, sollicitudin ut ullamcorper tristique, eleifend ac turpis.' +
-            'Ut molestie est at ex consectetur, eu gravida lectus suscipit.' +
-            'In in leo sit amet felis venenatis faucibus. Mauris sapien ex, malesuada id turpis at.'
-        },
-        {
-            title: 'Duis aliquet',
-            exercises: [
-                'Rack Deadlift',
-                'Close-grip Lat Pull Down',
-                'Deficit Deadlift',
-                'Straight-arm Pull Down (bar Attachment)',
-                'Bent Over Rowing'
-            ],
-            description: 'Maecenas consectetur scelerisque orci.' +
-            'Vestibulum sagittis dictum velit, posuere iaculis lorem egestas nec.' +
-            'Donec ligula odio, sollicitudin eleifend arcu nec, rhoncus semper felis.' +
-            'Aliquam dignissim in arcu quis tincidunt.' +
-            'Praesent non hendrerit leo. Sed imperdiet id quam sed vestibulum.'
-        }
-    ];
+    @Input() userData;
+    title = 'Training Plans';
+    plans = [];
 
     paginatorOutput: any[];
 
@@ -55,7 +28,11 @@ export class CoachPlansComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.makePaginatorOutput();
+        this.coachService.getTrainingPlans(this.userData._id, res => {
+            this.plans = res;
+            this.makePaginatorOutput();
+            console.log(this.plans);
+        });
     }
 
     makePaginatorOutput() {

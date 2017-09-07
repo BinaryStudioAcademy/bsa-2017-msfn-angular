@@ -1,7 +1,7 @@
 <div id="main-sidebar-block">
     <div id="general-coach-info">
         <div id="name-location">
-            <h2 id="coach-name">{{ coachInfo.name }}</h2>
+            <h2 id="coach-name">{{ userData.fullName }}</h2>
             <p id="coach-location">{{ coachInfo.location }}</p>
         </div>
         <div id="follow-button">
@@ -9,7 +9,7 @@
                 md-icon-button
                 type="button"
                 routerLink="">
-                FOLLOW <span>{{ coachInfo.followers }}</span>
+                FOLLOW <span>{{ userData.follow.length }}</span>
             </button>
         </div>
     </div>
