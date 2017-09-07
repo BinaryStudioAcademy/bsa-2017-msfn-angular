@@ -34,14 +34,7 @@ function deleteById(id, callback) {
 function updateById(id, body, callback) {
     const query = this.model.update({
         _id: id
-    }, {
-        $set: {
-            name: body.name,
-            description: body.description,
-            picture: body.picture,
-            isRemoved: body.isRemoved,
-        }
-    });
+    }, body);
     query.exec(callback);
 }
 
