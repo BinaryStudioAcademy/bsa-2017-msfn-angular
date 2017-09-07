@@ -69,9 +69,11 @@ export class CoachSidebarComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.userListService.getFollowers(data => {
+        this.userListService.getFollowers(this.userData._id, data => {
             this.followers = data;
-            console.log(this.followers);
+            this.isFollowed = this.followers.find(item => {
+                return item.id === this._id;
+            });
         });
     }
 
@@ -86,7 +88,7 @@ export class CoachSidebarComponent implements OnInit {
     followUser(): void {
         this.userListService.follow(this.userData._id, () => {
             this.isFollowed = true;
-            this.userListService.getFollowing(data => {
+            this.userListService.getFollowers(this.userData._id, data => {
                 this.followers = data;
             });
         });
@@ -95,7 +97,7 @@ export class CoachSidebarComponent implements OnInit {
     unfollowUser(): void {
         this.userListService.unfollow(this.userData._id, () => {
             this.isFollowed = false;
-            this.userListService.getFollowing(data => {
+            this.userListService.getFollowers(this.userData._id, data => {
                 this.followers = data;
             });
         });

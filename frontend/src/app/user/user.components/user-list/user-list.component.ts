@@ -73,16 +73,15 @@ export class UserListComponent implements OnInit {
                 }
             }
         });
-        this.userListService.getFollowers(data => {
+        this.userListService.getFollowers(currentUser.id, data => {
             data.forEach(element => {
                 element.isFollowed = currentUser.follow.includes(element._id);
             });
             this.followers.all = data;
             this.followers.filtered = data;
             this.followers.show = data.slice(0, this.userPerPage);
-            console.log(this.followers);
         });
-        this.userListService.getFollowing(data => {
+        this.userListService.getFollowing(currentUser.id, data => {
             data.forEach(element => {
                 element.isFollowed = currentUser.follow.includes(element._id);
             });
