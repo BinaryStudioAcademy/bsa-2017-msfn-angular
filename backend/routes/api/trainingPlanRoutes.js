@@ -4,7 +4,6 @@ const
     trainingPlanRepository = require('../../repositories/trainingPlanRepository'),
     ApiError = require('../../services/apiErrorService'),
     decrypt = require('../../services/decryptService'),
-    urlencode = require('urlencode'),
     baseUrl = '/api/training-plan';
 
 module.exports = function (app) {

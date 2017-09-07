@@ -1,6 +1,22 @@
-<div class="container">
+<div class="articles-container">
+    <div class="articles-header">
+        <md-tab-group class="articles-tabs-wrap" [(selectedIndex)]="selectedTab" (selectChange)="changeSort($event)">
+            <md-tab label="My"></md-tab>
+            <md-tab label="Followed"></md-tab>
+            <md-tab label="All"></md-tab>
+        </md-tab-group>
+        <md-input-container class="articles-search-wrap">
+            <input mdInput
+                   class="articles-search"
+                   #search
+                   placeholder="Search"
+                   (keyup)="setSearch(search.value)"
+                   autocomplete="off">
+            <md-icon mdSuffix>search</md-icon>
+        </md-input-container>
+    </div>
     <div class="articles-wrap">
-        <div class="article-wrap" *ngFor="let article of displayArticles">
+        <div class="article-wrap" *ngFor="let article of articles">
             <div class="image-wrap"
                  routerLink="/user/articles/{{article._id}}"
                  [style.background-image]="'url(' + article.image + ')'"></div>
@@ -9,7 +25,7 @@
                     <a routerLink="/user/articles/{{article._id}}" class="heading-link"> {{article.title}}</a>
                 </div>
                 <div class="author-wrap">
-                    <div class="author">By {{article.userId.fullName}}</div>
+                    <div class="author">By {{article.user.fullName}}</div>
                     <div class="date">{{article.date | date}}</div>
                 </div>
                 <div class="preview-text" [innerHTML]="article.previewHTML"></div>

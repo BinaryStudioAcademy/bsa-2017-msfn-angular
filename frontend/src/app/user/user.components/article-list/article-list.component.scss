@@ -2,8 +2,38 @@
 @import '../../../../globalStyles/text.scss';
 @import "../../../../globalStyles/indentations";
 
-.container {
-    padding: 10px 15px;
+.articles-container {
+    padding: 0 15px 10px 15px;
+
+    .articles-header {
+        position: relative;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        .articles-tabs-wrap {
+            flex-basis: 80%;
+        }
+
+        .articles-search-wrap {
+            flex-basis: 20%;
+            display: flex;
+
+            .mat-input-wrapper {
+                align-self: flex-end;
+                width: 100%;
+                padding-bottom: 0;
+            }
+
+            .mat-input-underline {
+                bottom: 0;
+            }
+        }
+
+        .articles-search-wrap.mat-focused .mat-input-underline .mat-input-ripple {
+            top: -1px;
+        }
+    }
 
     .articles-wrap {
         width: 100%;
@@ -45,6 +75,7 @@
                     height: 20%;
                     display: flex;
                     justify-content: space-between;
+                    color: $text-second-color;
                 }
 
                 .preview-text {
