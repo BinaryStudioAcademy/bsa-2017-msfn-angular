@@ -49,7 +49,7 @@ export class ArticleListComponent implements OnInit {
         switch (tab) {
             case 'follow':
                 const followersRequest: IHttpReq = {
-                    url: '/api/user/subscribe/following',
+                    url: '/api/user/subscribe/following/' + this.userId,
                     method: 'GET'
                 };
                 this.loading = true;
