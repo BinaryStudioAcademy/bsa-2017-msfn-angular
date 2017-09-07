@@ -8,6 +8,7 @@
 #Users photo
 /resources/usersImg
 /resources/exercise-image/loaded
+/resources/articles-image/
 
 # dependencies
 /node_modules

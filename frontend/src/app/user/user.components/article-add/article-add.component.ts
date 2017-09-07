@@ -6,6 +6,7 @@ import { ToasterService } from '../../../services/toastr.service';
 import { NgForm } from '@angular/forms';
 import { ArticleAddService } from './article-add.service';
 import { MarkdownService } from '../../../services/markdown.service';
+import { ArticleDetailComponent } from './../article-detail/article-detail.component';
 
 
 @Component({
@@ -20,7 +21,10 @@ export class ArticleAddComponent implements OnInit {
   type: string;
   cropperSettings: CropperSettings;
   data: any;
-  converted: Object;
+  converted: {
+    detail: string,
+    preview: string
+  };
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   hideCropper = true;
@@ -37,7 +41,7 @@ export class ArticleAddComponent implements OnInit {
     this.cropperSettings = this.articleAddService.getCropperSettings();
     this.article = {
       title: '',
-      detail: '',      
+      detail: '',
       preview: '',
       image: ''
     };
@@ -82,14 +86,21 @@ export class ArticleAddComponent implements OnInit {
     this.hideCropper = true;
   }
   updateOutput(mdText: string, textType) {
+    if (textType === 'preview') {
+      mdText = mdText.substring(0, 350);
+      this.article.preview = mdText;
+      console.log(mdText);
+      this.converted.preview = this.markdownService.convert(mdText);
+    }
     this.converted[textType] = this.markdownService.convert(mdText);
+    console.log(this.converted);
   }
   save(form: NgForm) {
     if (form.valid) {
       if (this.data.image) {
         const folder = 'articles-image';
         const fileType = 'img';
-        const fileName = this.article.title + Date.now();
+        const fileName = this.article.title.replace(/ /g,'_') + Date.now();
         this.articleAddService.saveImg(this.data.image, fileName, fileType, folder, result => {
           if (result.err) {
             this.article.image = this.oldImg;

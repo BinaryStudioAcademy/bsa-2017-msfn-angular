@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IHttpReq } from './../../../models/http-req';
 import { HttpService } from '../../../services/http.service';
@@ -12,9 +12,9 @@ import { MarkdownService } from '../../../services/markdown.service';
   styleUrls: ['./article-detail.component.scss']
 })
 export class ArticleDetailComponent implements OnInit {
-  article: IArticle;
+  // article: IArticle;
   converted: Object;
-
+  @Input() article: any;
   constructor(
     public activatedRoute: ActivatedRoute,
     private httpHandler: HttpService,
@@ -22,7 +22,8 @@ export class ArticleDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.activatedRoute.snapshot.params.id) {
+    
+    if (this.activatedRoute.snapshot.params.id && !this.article) {
       const articleID = this.activatedRoute.snapshot.params.id;
       const sendData: IHttpReq = {
         url: `/api/articles/` + articleID,
@@ -40,7 +41,11 @@ export class ArticleDetailComponent implements OnInit {
             };
           }
         });
-    }
+    } 
+  }
+
+  convertMd(data){
+    return this.markdownService.convert(data);
   }
 
 }

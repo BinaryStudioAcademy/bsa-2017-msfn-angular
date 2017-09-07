@@ -5,10 +5,11 @@
       <input mdInput placeholder="Article Title" [(ngModel)]="article.title" name="title" required>
     </md-input-container>
     <md-input-container class="example-full-width" class="input">
-      <textarea mdInput placeholder="Article preview text" [(ngModel)]="article.preview" name="text" required (keyup)="updateOutput($event.target.value, 'preview')"></textarea>
+      <textarea mdInput placeholder="Article preview text" [(ngModel)]="article.preview" maxlength="350"  name="preview" required (keyup)="updateOutput($event.target.value, 'preview')"></textarea>
+      <md-hint align="end">{{article.preview.length}} / 350</md-hint>
     </md-input-container>
     <md-input-container class="example-full-width" class="input">
-      <textarea mdInput placeholder="Article text" [(ngModel)]="article.detail" name="text" required (keyup)="updateOutput($event.target.value, 'detail')"></textarea>
+      <textarea mdInput placeholder="Article text" [(ngModel)]="article.detail" name="detail" required (keyup)="updateOutput($event.target.value, 'detail')"></textarea>
     </md-input-container>
     <div class="image-button" *ngIf="hideCropper">
       <span>Upload article picture</span>
@@ -17,21 +18,20 @@
       <input type="file" accept="image/*" class="upload" (change)="fileChangeListener($event)"/>
     </button>
     </div>
-    <div class="preview-header">Preview</div>
     <div class="preview">
       <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
       <div class="cropper-buttons" *ngIf="!hideCropper">
         <button class="cropper-btn save" (click)="cropperBtn('save')"><i class="material-icons">check</i></button>
         <button class="cropper-btn cancel" (click)="cropperBtn('cancel')"><i class="material-icons">close</i></button>
       </div>
-      <div class="image-preview">
+      <div class="image-preview" *ngIf="data.image || article.image">
         <img *ngIf="!hideCropper" [src]='data.image' [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
         <img *ngIf="hideCropper" [src]='article.image'>
       </div>
-
-      <div class="description" *ngIf="hideCropper" [innerHtml]="converted.preview"></div>
     </div>
-    <div class="description" *ngIf="hideCropper" [innerHtml]="converted.detail"></div>
     <button class="btn" *ngIf="hideCropper" (click)="save(form)">Save</button>
   </form>
+
+  <h3>Preview</h3>
+  <app-article-detail [article]="article"></app-article-detail>
 </div>

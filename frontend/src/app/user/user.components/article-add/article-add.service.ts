@@ -34,7 +34,7 @@ export class ArticleAddService {
         const cropperSettings = new CropperSettings();
         cropperSettings.noFileInput = true;
         cropperSettings.width = 225;
-        cropperSettings.height = 175;
+        cropperSettings.height = 150;
         cropperSettings.croppedWidth = 300;
         cropperSettings.croppedHeight = 200;
         cropperSettings.canvasWidth = 225;
