@@ -26,6 +26,7 @@ import { CoachComponent } from './user.components/coach/coach.component';
 import { ArticleAddComponent } from './user.components/article-add/article-add.component';
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
+import {ArticleListComponent} from './user.components/article-list/article-list.component';
 
 
 const userRoutes: Routes = [
@@ -115,6 +116,10 @@ const userRoutes: Routes = [
             {
                 path: 'coach',
                 component: CoachComponent
+            },
+            {
+                path: 'articles',
+                component: ArticleListComponent
             },
             {
                 path: 'articles/create',

@@ -42,7 +42,6 @@ export class ArticleAddService {
         cropperSettings.dynamicSizing = true;
         cropperSettings.preserveSize = true;
         cropperSettings.touchRadius = 10;
-
         return cropperSettings;
     }
 }

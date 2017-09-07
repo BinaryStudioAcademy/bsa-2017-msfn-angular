@@ -28,7 +28,6 @@ export class PlansComponent implements OnInit {
         'offset': this.plans.length
     };
     private searchTimeout = 0;
-    private followedUsers: any[] = [];
     private lastSearch = '';
 
     constructor(private httpHandler: HttpService,
@@ -37,10 +36,6 @@ export class PlansComponent implements OnInit {
 
     ngOnInit() {
         this.loadPlans();
-    }
-
-    setFilterOffset(value) {
-        this.filter.offset = value;
     }
 
     changeSort(e) {

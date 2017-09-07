@@ -3,13 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { IHttpReq } from './../../../models/http-req';
 import { HttpService } from '../../../services/http.service';
 import IArticle = ArticleApi.IArticle;
-import { MarkdownService } from '../../../services/markdown.service';
+import {MarkdownService} from '../../../services/markdown.service';
 
 
 @Component({
-  selector: 'app-article-detail',
-  templateUrl: './article-detail.component.html',
-  styleUrls: ['./article-detail.component.scss']
+    selector: 'app-article-detail',
+    templateUrl: './article-detail.component.html',
+    styleUrls: ['./article-detail.component.scss']
 })
 export class ArticleDetailComponent implements OnInit {
   // article: IArticle;
@@ -47,5 +47,4 @@ export class ArticleDetailComponent implements OnInit {
   convertMd(data){
     return this.markdownService.convert(data);
   }
-
 }

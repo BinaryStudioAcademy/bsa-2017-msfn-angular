@@ -1,15 +1,15 @@
 const
     apiResponse = require('express-api-response'),
     articlesService = require('../../services/articlesService'),
+    articlesRepository = require('../../repositories/articlesRepository'),
+    decrypt = require('../../services/decryptService'),
+    ApiError = require('../../services/apiErrorService'),
     baseUrl = '/api/articles/';
 
 module.exports = function (app) {
 
     app.get(baseUrl, function (req, res, next) {
         articlesService.get('', function (err, data) {
-            if (!data.length) {
-                data = [{}];
-            }
             res.data = data;
             res.err = err;
             next();
@@ -18,9 +18,8 @@ module.exports = function (app) {
 
     app.get(baseUrl + ':id', function (req, res, next) {
         articlesService.get({_id: req.params.id}, function (err, data) {
-            if (!data.length) {
-                data = [{}];
-            }
+            console.log(err);
+            console.log(data);
             res.data = data;
             res.err = err;
             next();
@@ -28,15 +27,36 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl + 'user/:id', function (req, res, next) {
-        articlesService.getByUser({_id: req.params.id}, function (err, data) {
-            if (!data.length) {
-                data = [{}];
-            }
+        articlesService.get({userId: req.params.id}, function (err, data) {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
+
+    app.get(baseUrl + 'filter/:filter', function(req, res, next) {
+        const params = decrypt(req.params.filter);
+        console.log(params);
+        articlesService.get(
+            params,
+            (err, data) => {
+                res.err = err;
+                res.data = data;
+                next();
+            });
+    }, apiResponse);
+
+    app.get(baseUrl + 'search/:search', function(req, res, next) {
+        const params = decrypt(req.params.search);
+        articlesRepository.Search(
+            params,
+            (err, data) => {
+                res.err = err;
+                res.data = data;
+                next();
+            });
+    }, apiResponse);
+
     app.post(baseUrl, function (req, res, next) {
         articlesService.add(req, function (err, data) {
             res.data = data;

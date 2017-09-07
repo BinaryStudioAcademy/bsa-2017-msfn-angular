@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import IArticle = ArticleApi.IArticle;
 import { ActivatedRoute } from '@angular/router';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
@@ -10,10 +10,10 @@ import { ArticleDetailComponent } from './../article-detail/article-detail.compo
 
 
 @Component({
-  selector: 'app-article-add',
-  templateUrl: './article-add.component.html',
-  providers: [ArticleAddService],
-  styleUrls: ['./article-add.component.scss']
+    selector: 'app-article-add',
+    templateUrl: './article-add.component.html',
+    providers: [ArticleAddService],
+    styleUrls: ['./article-add.component.scss']
 })
 export class ArticleAddComponent implements OnInit {
   article: IArticle;
@@ -30,11 +30,11 @@ export class ArticleAddComponent implements OnInit {
   hideCropper = true;
   oldImg;
 
-  constructor(private toasterService: ToasterService,
-    private articleAddService: ArticleAddService,
-    public router: ActivatedRoute,
-    private markdownService: MarkdownService,
-  ) { }
+    constructor(private toasterService: ToasterService,
+                private articleAddService: ArticleAddService,
+                public router: ActivatedRoute,
+                private markdownService: MarkdownService) {
+    }
 
   ngOnInit() {
     this.data = {};
@@ -51,40 +51,41 @@ export class ArticleAddComponent implements OnInit {
     };
   }
 
-  fileChangeListener($event) {
+    fileChangeListener($event) {
 
-    this.hideCropper = false;
-    const file: File = $event.target.files[0];
-    if ($event.target.files === 0) {
-      return;
-    }
-    if (file.type.split('/')[0] !== 'image') {
-      this.toasterService.showMessage('error', 'wrong format');
-      this.hideCropper = true;
-      return;
-    }
-    console.log(file);
-    const myReader: FileReader = new FileReader();
-    this.type = file.type.split('/')[1];
+        this.hideCropper = false;
+        const file: File = $event.target.files[0];
+        if ($event.target.files === 0) {
+            return;
+        }
+        if (file.type.split('/')[0] !== 'image') {
+            this.toasterService.showMessage('error', 'wrong format');
+            this.hideCropper = true;
+            return;
+        }
+        console.log(file);
+        const myReader: FileReader = new FileReader();
+        this.type = file.type.split('/')[1];
 
-    myReader.onloadend = (loadEvent: any) => {
-      this.image.src = loadEvent.target.result;
-      if (this.type === 'gif') {
-        this.article.image = this.image.src;
-        this.data.image = this.image.src;
+        myReader.onloadend = (loadEvent: any) => {
+            this.image.src = loadEvent.target.result;
+            if (this.type === 'gif') {
+                this.article.image = this.image.src;
+                this.data.image = this.image.src;
+                this.hideCropper = true;
+            } else {
+                this.cropper.setImage(this.image);
+            }
+        };
+        myReader.readAsDataURL(file);
+    }
+
+    cropperBtn(action) {
+        if (action === 'save') {
+            this.article.image = this.data.image;
+        }
         this.hideCropper = true;
-      } else {
-        this.cropper.setImage(this.image);
-      }
-    };
-    myReader.readAsDataURL(file);
-  }
-  cropperBtn(action) {
-    if (action === 'save') {
-      this.article.image = this.data.image;
     }
-    this.hideCropper = true;
-  }
   updateOutput(mdText: string, textType) {
     if (textType === 'preview') {
       mdText = mdText.substring(0, 350);
@@ -124,5 +125,4 @@ export class ArticleAddComponent implements OnInit {
     } else {
       this.toasterService.showMessage('error', 'Fill in all the fields');
     }
-  }
 }
