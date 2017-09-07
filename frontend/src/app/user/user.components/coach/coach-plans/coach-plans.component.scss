@@ -1,3 +1,72 @@
-@import '../../../../../globalStyles/variables';
-@import '../../../../../globalStyles/indentations';
-@import '../../../../../globalStyles/text';
+@import '../../../../../globalStyles/variables.scss';
+@import '../../../../../globalStyles/indentations.scss';
+@import '../../../../../globalStyles/text.scss';
+
+.plan {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    h3 {
+        width: 100%;
+        margin: 0 0 $standard-indent;
+        text-align: center;
+        font-size: $main-text;
+        font-weight: 600;
+    }
+
+    .plan-exercises {
+        display: inline-block;
+        width: 100%;
+        margin: 0 0 $standard-indent;
+
+        p {
+            margin: 0 0 $mini-indent;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        ol {
+            margin: 0;
+            padding-left: $mini-indent;
+        }
+    }
+
+    .plan-text-block {
+        display: inline-block;
+        width: 100%;
+
+        .plan-description {
+            width: 100%;
+            font-size: $minor-text;
+        }
+
+        a {
+            float: right;
+            margin-top: $mini-indent;
+            font-size: $usual-text;
+            color: $text-main-color;
+        }
+    }
+}
+
+.plan:not(:last-child) {
+    margin-bottom: $standard-indent;
+    padding-bottom: $standard-indent;
+    border-bottom: 1px solid $text-main-color;
+}
+
+
+@media only screen and (min-width: $medium-screen) {
+
+    .plan {
+        .plan-exercises {
+            width: 45%;
+            margin: 0 $standard-indent 0 0;
+        }
+
+        .plan-text-block {
+            width: 45%;
+        }
+    }
+}

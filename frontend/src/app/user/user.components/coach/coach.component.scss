@@ -6,18 +6,27 @@ p {
     margin: 0;
 }
 
+md-paginator {
+    flex-wrap: wrap;
+
+}
+
+md-paginator /deep/ .mat-paginator-range-label {
+    margin: 0;
+}
+
 #coach-container {
+    order: 2;
     display: inline-block;
-    width: 80%;
+    width: 90%;
     min-height: 100%;
 }
 
 #sidebar-wrapper {
+    order: 1;
     display: inline-block;
     float: right;
-    width: 20%;
-    max-width: 300px;
-    min-height: 100%;
+    width: 90%;
     padding: $standard-indent;
     background: linear-gradient($bg-color 75%, $gradient-from-color);
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
@@ -26,7 +35,6 @@ p {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: calc(100vh - 110px);
     }
 }
 
@@ -36,18 +44,22 @@ p {
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    //padding: 20px 6%;
+    margin: 0 auto;
 
     div {
         width: 100%;
         margin: $micro-indent 0;
+        padding: $standard-indent;
         background: $gradient-to-color;
+    }
+
+    div:not(:first-child) {
+        padding-bottom: 0;
     }
 }
 
 .inner-container {
     height: 100%;
-    padding: $standard-indent;
 
     h2 {
         margin: 0 0 $standard-indent 0;
@@ -95,31 +107,56 @@ p {
 }
 
 
-@media only screen and (min-width: $medium-screen) {
+@media only screen and (min-width: $large-screen) {
 
-    #main-content {
-        div {
-            width: 90%;
+    md-paginator {
+        flex-wrap: initial;
+    }
+
+    md-paginator /deep/ .mat-paginator-range-label {
+        margin: initial;
+    }
+
+    #coach-container {
+        order: 1;
+        display: inline-block;
+        width: 80%;
+        min-height: 100%;
+    }
+
+    #sidebar-wrapper {
+        order: 2;
+        display: inline-block;
+        float: right;
+        width: 20%;
+        max-width: 300px;
+        min-height: 100%;
+        padding: $standard-indent;
+        background: linear-gradient($bg-color 75%, $gradient-from-color);
+        box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
+
+        app-coach-sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: calc(100vh - 110px);
         }
     }
-}
-
-
-@media only screen and (min-width: $large-screen) {
 
     #main-content {
         flex-direction: row;
         align-items: baseline;
         height: 100%;
-        padding: $standard-indent 6%;
+        padding: $mini-indent 3%;
 
         div {
             width: 48%;
             min-height: 26%;
+            padding: $large-indent;
         }
-    }
 
-    .inner-container {
-        padding: $large-indent;
+        div:not(:first-child) {
+            padding-bottom: 0;
+        }
     }
 }

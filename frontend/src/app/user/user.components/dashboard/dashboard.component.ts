@@ -24,7 +24,8 @@ export class DashboardComponent implements OnInit {
                 private dateService: DateService) { }
 
     dragOptions = {
-        animation: 500
+        animation: 500,
+        handle: '.drag-handle'
     };
 
     goalItems = [];

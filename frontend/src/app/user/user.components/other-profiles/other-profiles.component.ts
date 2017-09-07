@@ -13,6 +13,7 @@ import { IUser } from '../../../models/user';
 })
 export class OtherProfilesComponent implements OnInit {
     user: IUser;
+    isCoach: boolean = false;
 
     constructor(
         private otherProfilesService: OtherProfilesService,
@@ -23,6 +24,7 @@ export class OtherProfilesComponent implements OnInit {
         const id = this.route.snapshot.paramMap.get('id');
         this.otherProfilesService.getUser(id, (user: IUser) => {
             this.user = user;
+            this.isCoach = user.isCoach;
         });
     }
 }

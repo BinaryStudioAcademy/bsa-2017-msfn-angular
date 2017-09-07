@@ -1,11 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import IArticle = ArticleApi.IArticle;
-import {ActivatedRoute} from '@angular/router';
-import {CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
-import {ToasterService} from '../../../services/toastr.service';
-import {NgForm} from '@angular/forms';
-import {ArticleAddService} from './article-add.service';
-import {MarkdownService} from '../../../services/markdown.service';
+import { ActivatedRoute } from '@angular/router';
+import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
+import { ToasterService } from '../../../services/toastr.service';
+import { NgForm } from '@angular/forms';
+import { ArticleAddService } from './article-add.service';
+import { MarkdownService } from '../../../services/markdown.service';
+import { ArticleDetailComponent } from './../article-detail/article-detail.component';
 
 
 @Component({
@@ -15,16 +16,19 @@ import {MarkdownService} from '../../../services/markdown.service';
     styleUrls: ['./article-add.component.scss']
 })
 export class ArticleAddComponent implements OnInit {
-    article: IArticle;
-    image: any = new Image();
-    type: string;
-    cropperSettings: CropperSettings;
-    data: any;
-    converted: Object;
-    @ViewChild('cropper', undefined)
-    cropper: ImageCropperComponent;
-    hideCropper = true;
-    oldImg;
+  article: IArticle;
+  image: any = new Image();
+  type: string;
+  cropperSettings: CropperSettings;
+  data: any;
+  converted: {
+    detail: string,
+    preview: string
+  };
+  @ViewChild('cropper', undefined)
+  cropper: ImageCropperComponent;
+  hideCropper = true;
+  oldImg;
 
     constructor(private toasterService: ToasterService,
                 private articleAddService: ArticleAddService,
@@ -32,20 +36,20 @@ export class ArticleAddComponent implements OnInit {
                 private markdownService: MarkdownService) {
     }
 
-    ngOnInit() {
-        this.data = {};
-        this.cropperSettings = this.articleAddService.getCropperSettings();
-        this.article = {
-            title: '',
-            detail: '',
-            preview: '',
-            image: ''
-        };
-        this.converted = {
-            preview: '',
-            detail: ''
-        };
-    }
+  ngOnInit() {
+    this.data = {};
+    this.cropperSettings = this.articleAddService.getCropperSettings();
+    this.article = {
+      title: '',
+      detail: '',
+      preview: '',
+      image: ''
+    };
+    this.converted = {
+      preview: '',
+      detail: ''
+    };
+  }
 
     fileChangeListener($event) {
 
@@ -82,39 +86,43 @@ export class ArticleAddComponent implements OnInit {
         }
         this.hideCropper = true;
     }
-
-    updateOutput(mdText: string, textType) {
-        this.converted[textType] = this.markdownService.convert(mdText);
+  updateOutput(mdText: string, textType) {
+    if (textType === 'preview') {
+      mdText = mdText.substring(0, 350);
+      this.article.preview = mdText;
+      console.log(mdText);
+      this.converted.preview = this.markdownService.convert(mdText);
     }
-
-    save(form: NgForm) {
-        if (form.valid) {
-            if (this.data.image) {
-                const folder = 'articles-image';
-                const fileType = 'img';
-                const fileName = this.article.title + Date.now();
-                this.articleAddService.saveImg(this.data.image, fileName, fileType, folder, result => {
-                    if (result.err) {
-                        this.article.image = this.oldImg;
-                        this.toasterService.showMessage('error', result.err);
-                    } else {
-                        this.article.image = './resources/articles-image/' + fileName + '.' + this.type;
-                        // if (this.router.snapshot.params.id) {
-                        //     this.articleAddService.updateExercise(this.router.snapshot.params.id, this.article);
-                        // } else {
-                        this.articleAddService.send(this.article);
-                        // }
-                    }
-                });
-            } else {
-                // if (this.router.snapshot.params.id) {
-                //     this.articleAddService.updateExercise(this.router.snapshot.params.id, this.article);
-                // } else {
-                this.articleAddService.send(this.article);
-                // }
-            }
-        } else {
-            this.toasterService.showMessage('error', 'Fill in all the fields');
-        }
+    this.converted[textType] = this.markdownService.convert(mdText);
+    console.log(this.converted);
+  }
+  save(form: NgForm) {
+    if (form.valid) {
+      if (this.data.image) {
+        const folder = 'articles-image';
+        const fileType = 'img';
+        const fileName = this.article.title.replace(/ /g,'_') + Date.now();
+        this.articleAddService.saveImg(this.data.image, fileName, fileType, folder, result => {
+          if (result.err) {
+            this.article.image = this.oldImg;
+            this.toasterService.showMessage('error', result.err);
+          } else {
+            this.article.image = './resources/articles-image/' + fileName + '.' + this.type;
+            // if (this.router.snapshot.params.id) {
+            //     this.articleAddService.updateExercise(this.router.snapshot.params.id, this.article);
+            // } else {
+            this.articleAddService.send(this.article);
+            // }
+          }
+        });
+      } else {
+        // if (this.router.snapshot.params.id) {
+        //     this.articleAddService.updateExercise(this.router.snapshot.params.id, this.article);
+        // } else {
+        this.articleAddService.send(this.article);
+        // }
+      }
+    } else {
+      this.toasterService.showMessage('error', 'Fill in all the fields');
     }
 }

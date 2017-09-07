@@ -1,0 +1,34 @@
+<div class="plan-container inner-container">
+    <h2>{{ title }}</h2>
+    <div class="content">
+        <div class="no-items" *ngIf="plans.length === 0">
+            There are no training plans yet.
+        </div>
+
+        <div id="plans">
+            <div class="plan" *ngFor="let plan of paginatorOutput">
+                <h3 class="plan-title">{{ plan.name }}</h3>
+                <div class="plan-exercises">
+                    <p>Exercise List</p>
+                    <ol>
+                        <li *ngFor="let exercise of plan.exercisesList">
+                            {{ exercise.exercise.name }}
+                        </li>
+                    </ol>
+                </div>
+                <div class="plan-text-block">
+                    <p class="plan-description">{{ plan.description }}</p>
+                    <a class="open-plan" routerLink="">more ></a>
+                </div>
+            </div>
+        </div>
+
+        <md-paginator
+            [length]="plans.length"
+            [pageSize]="pageEvent.pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageEvent = $event"
+            (click)="makePaginatorOutput()">
+        </md-paginator>
+    </div>
+</div>

@@ -18,6 +18,17 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+    app.get(baseUrl + '/user/:id', function (req, res, next) {
+        trainingPlanService.get({userID: req.params.id}, function (err, data) {
+            if (!data.length) {
+                data = [];
+            }
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.get(baseUrl + '/public/:params', function (req, res, next) {
         const params = decrypt(req.params.params);
         params.filter.isRemoved = false;

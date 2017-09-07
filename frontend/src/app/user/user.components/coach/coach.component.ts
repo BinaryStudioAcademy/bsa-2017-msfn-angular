@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {CoachService} from './coach.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { CoachService } from './coach.service';
 
 @Component({
     selector: 'app-coach-page',
@@ -12,7 +12,9 @@ export class CoachComponent implements OnInit {
     constructor(private coachService: CoachService) {
     }
 
-    ngOnInit() {
-    }
+    @Input() userData;
 
+    ngOnInit() {
+        console.log(this.userData);
+    }
 }
