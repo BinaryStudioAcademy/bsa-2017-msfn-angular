@@ -7,7 +7,7 @@ const
 module.exports = function (app) {
 
     app.post(baseUrl, isAdmin, function (req, res, next) {
-       exerciseTypeService.createExerciseType({name: req.body.name}, function(err, data) {
+        exerciseTypeService.createExerciseType({name: req.body.name}, function(err, data) {
             res.data = data;
             res.err = err;
             next();

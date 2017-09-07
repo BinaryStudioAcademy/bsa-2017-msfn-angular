@@ -7,7 +7,9 @@ const
 module.exports = function (app) {
 
     app.post(baseUrl, isAdmin, function (req, res, next) {
-       goalService.createGoal(req.body, function(err, data) {
+        body = req.body;
+        body.isRemoved = false; 
+        goalService.createGoal(body, function(err, data) {
             res.data = data;
             res.err = err;
             next();
