@@ -79,6 +79,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.put(baseUrl + '/:id', function (req, res, next) {
+        console.log(req.body);
         trainingPlanService.update(req.params.id, req.body, function (err, data) {
             res.data = data;
             res.err = err;
