@@ -8,8 +8,8 @@
             <button
                 md-icon-button
                 type="button"
-                routerLink="">
-                FOLLOW <span>{{ userData.follow.length }}</span>
+                (click)="followAction()">
+                {{ isFollowed ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ userData.follow.length }}</span>
             </button>
         </div>
     </div>

@@ -100,7 +100,7 @@ export class ArticleAddComponent implements OnInit {
       if (this.data.image) {
         const folder = 'articles-image';
         const fileType = 'img';
-        const fileName = this.article.title.replace(/ /g,'_') + Date.now();
+        const fileName = this.article.title.replace(/ /g, '_') + Date.now();
         this.articleAddService.saveImg(this.data.image, fileName, fileType, folder, result => {
           if (result.err) {
             this.article.image = this.oldImg;

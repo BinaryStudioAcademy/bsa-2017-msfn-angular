@@ -113,10 +113,6 @@ const userRoutes: Routes = [
                 component: SharedPlanDetailComponent
             },
             {
-                path: 'coach',
-                component: CoachComponent
-            },
-            {
                 path: 'articles/create',
                 component: ArticleAddComponent
             },

@@ -22,7 +22,7 @@ export class ArticleDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     if (this.activatedRoute.snapshot.params.id && !this.article) {
       const articleID = this.activatedRoute.snapshot.params.id;
       const sendData: IHttpReq = {
@@ -41,10 +41,10 @@ export class ArticleDetailComponent implements OnInit {
             };
           }
         });
-    } 
+    }
   }
 
-  convertMd(data){
+  convertMd(data) {
     return this.markdownService.convert(data);
   }
 
