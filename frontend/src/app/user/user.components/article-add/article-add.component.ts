@@ -128,3 +128,4 @@ export class ArticleAddComponent implements OnInit {
             this.toasterService.showMessage('error', 'Fill in all the fields');
         }
     }
+}
