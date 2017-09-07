@@ -1,21 +1,21 @@
 <div id="coach-container">
     <div id="main-content">
-        <div id="weight-container">
-            <app-coach-events></app-coach-events>
+        <div id="event-container">
+            <app-coach-events [userData]="userData"></app-coach-events>
         </div>
-        <div id="calories-container">
-            <app-coach-posts></app-coach-posts>
+        <div id="post-container">
+            <app-coach-posts [userData]="userData"></app-coach-posts>
         </div>
-        <div id="events-container">
-            <app-coach-articles></app-coach-articles>
+        <div id="article-container">
+            <app-coach-articles [userData]="userData"></app-coach-articles>
         </div>
-        <div id="food-container">
-            <app-coach-plans></app-coach-plans>
+        <div id="plan-container">
+            <app-coach-plans [userData]="userData"></app-coach-plans>
         </div>
     </div>
 </div>
 
 <aside id="sidebar-wrapper">
-    <app-coach-sidebar></app-coach-sidebar>
+    <app-coach-sidebar [userData]="userData"></app-coach-sidebar>
 </aside>
 

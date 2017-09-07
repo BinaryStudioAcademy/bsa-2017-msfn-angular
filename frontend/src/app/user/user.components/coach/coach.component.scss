@@ -36,18 +36,21 @@ p {
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    //padding: 20px 6%;
 
     div {
         width: 100%;
         margin: $micro-indent 0;
+        padding: $standard-indent;
         background: $gradient-to-color;
+    }
+
+    div:not(:first-child) {
+        padding-bottom: 0;
     }
 }
 
 .inner-container {
     height: 100%;
-    padding: $standard-indent;
 
     h2 {
         margin: 0 0 $standard-indent 0;
@@ -111,15 +114,16 @@ p {
         flex-direction: row;
         align-items: baseline;
         height: 100%;
-        padding: $standard-indent 6%;
+        padding: $mini-indent 3%;
 
         div {
             width: 48%;
             min-height: 26%;
+            padding: $large-indent;
         }
-    }
 
-    .inner-container {
-        padding: $large-indent;
+        div:not(:first-child) {
+            padding-bottom: 0;
+        }
     }
 }

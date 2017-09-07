@@ -1,4 +1,4 @@
-<div *ngIf="user" class="container">
+<div *ngIf="user && !isCoach" class="container">
     <div class="profile-photo">
         <img src="{{user.userPhoto}}">
     </div>
@@ -10,3 +10,5 @@
         <div class="info-weight">Weight, kg: <span class="info-value">{{user.weight}}</span></div>
     </div>
 </div>
+
+<app-coach-page *ngIf="isCoach" [userData]="user"></app-coach-page>

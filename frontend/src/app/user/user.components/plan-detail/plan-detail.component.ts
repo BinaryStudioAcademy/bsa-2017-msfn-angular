@@ -62,6 +62,7 @@ export class PlanDetailComponent implements OnInit {
         exercisesList: [],
         intervals: [],
         gcalendar_id: '',
+        description: '',
         shared: false
     };
 

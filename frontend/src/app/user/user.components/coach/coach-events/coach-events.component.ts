@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DateService } from '../../../../services/date.service';
 
 @Component({
     selector: 'app-coach-events',
     templateUrl: './coach-events.component.html',
     styleUrls: [
-        // './coach-events.component.scss',
         '../../dashboard/dashboard.components/db-events/db-events.component.scss',
-        '../coach.component.scss'
+        '../coach.component.scss',
+        './coach-events.component.scss'
     ],
     providers: [DateService]
 })
 export class CoachEventsComponent implements OnInit {
 
     constructor(private dateService: DateService) { }
+
+    @Input() userData;
 
     title = 'Planned Events';
     interval = {
@@ -67,6 +69,7 @@ export class CoachEventsComponent implements OnInit {
 
     ngOnInit() {
         this.processDates();
+        console.log(this.userData);
     }
 
     initProcessDates() {
