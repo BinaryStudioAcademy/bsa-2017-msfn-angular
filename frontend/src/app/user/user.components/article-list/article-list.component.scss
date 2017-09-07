@@ -87,15 +87,22 @@
                 padding: 10px 20px;
                 display: flex;
                 flex-direction: column;
+                max-width: 70%;
 
                 .heading {
                     font-size: $header-text;
                     padding-bottom: 10px;
                     height: 20%;
+                    width: 100%;
 
                     .heading-link {
                         text-decoration: none;
                         color: $text-main-color;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 100%;
+                        display: block;
                     }
                 }
 
@@ -250,6 +257,7 @@
                 }
                 .content-wrap {
                     flex-basis: 100%;
+                    max-width: 100%;
                 }
             }
         }
