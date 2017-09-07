@@ -15,20 +15,29 @@
             <md-icon mdSuffix>search</md-icon>
         </md-input-container>
     </div>
-    <div class="articles-wrap">
+    <div class="articles-wrap" [class.articles-empty-wrap]="articles.length === 0">
         <div class="article-wrap" *ngFor="let article of articles">
             <div class="image-wrap"
-                 routerLink="/user/articles/{{article._id}}"
+                 [routerLink]="'/user/articles/' + (linksToEdit ? 'edit/' : '') + article._id"
                  [style.background-image]="'url(' + article.image + ')'"></div>
             <div class="content-wrap">
                 <div class="heading" >
-                    <a routerLink="/user/articles/{{article._id}}" class="heading-link"> {{article.title}}</a>
+                    <a [routerLink]="'/user/articles/' + (linksToEdit ? 'edit/' : '') + article._id"
+                       class="heading-link"> {{article.title}}</a>
                 </div>
                 <div class="author-wrap">
                     <div class="author">By {{article.user.fullName}}</div>
                     <div class="date">{{article.date | date}}</div>
                 </div>
                 <div class="preview-text" [innerHTML]="article.previewHTML"></div>
+            </div>
+        </div>
+        <div class="articles-empty item-container" *ngIf="articles.length === 0">
+            <p class="train-item-text">Nothing found</p>
+        </div>
+        <div class="loader-wrap" *ngIf="loading">
+            <div class="cssload-container">
+                <div class="cssload-whirlpool"></div>
             </div>
         </div>
     </div>

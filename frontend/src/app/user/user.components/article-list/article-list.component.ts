@@ -14,8 +14,7 @@ import {WindowObj} from '../../../services/window.service';
 export class ArticleListComponent implements OnInit {
 
     public userId = (this.window.data._injectedData as any).userId;
-    public users: any[];
-    public articles: any[];
+    public articles: any[] = [];
     public selectedTab = 0;
     private lastSearch = '';
     private searchTimeout: any = null;
@@ -28,6 +27,7 @@ export class ArticleListComponent implements OnInit {
         1: 'follow',
         2: 'all'
     };
+    public linksToEdit = true;
 
     constructor(private httpHandler: HttpService,
                 private markdownService: MarkdownService,
@@ -43,6 +43,8 @@ export class ArticleListComponent implements OnInit {
         const tab = this.tabs[this.selectedTab];
 
         this.articles = [];
+
+        this.linksToEdit = false;
 
         switch (tab) {
             case 'follow':
@@ -71,6 +73,7 @@ export class ArticleListComponent implements OnInit {
                 this.loadArticles();
                 break;
             case 'my':
+                this.linksToEdit = true;
                 (<any>this.filter).userId = this.userId;
                 this.loadArticles();
                 break;
@@ -112,7 +115,6 @@ export class ArticleListComponent implements OnInit {
             this.searchArticles(this.lastSearch);
             return;
         }
-        console.log('load');
         const request: IHttpReq = {
             url: `/api/articles/filter/${encodeURIComponent(this.encryptService.encrypt(this.filter))}`,
             method: 'GET',
@@ -131,13 +133,13 @@ export class ArticleListComponent implements OnInit {
                     if (item.userId) {
                         item.user = item.userId;
                     }
+                    item.previewHTML = this.markdownService.convert(item.preview);
 
                     return item;
                 });
 
                 this.articles = result;
             }).then(() => {
-            console.log(this);
             this.loading = false;
         });
     }
@@ -160,13 +162,13 @@ export class ArticleListComponent implements OnInit {
                     if (item.user) {
                         item.user = item.user.shift();
                     }
+                    item.previewHTML = this.markdownService.convert(item.preview);
 
                     return item;
                 });
 
                 this.articles = result;
             }).then(() => {
-            console.log(this);
             this.loading = false;
         });
     }
