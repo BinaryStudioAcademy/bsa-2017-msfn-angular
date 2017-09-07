@@ -1,6 +1,7 @@
 @import '../../../../globalStyles/variables.scss';
 @import '../../../../globalStyles/text.scss';
 @import "../../../../globalStyles/indentations";
+
 .article-container {
     display: flex;
     flex-direction: column;
@@ -54,7 +55,7 @@
 @media only screen and (max-width: $large-screen) {
     .article-container {
         width: 60vw;
-        h1{
+        h1 {
             font-size: 1.5em;
         }
         .preview {

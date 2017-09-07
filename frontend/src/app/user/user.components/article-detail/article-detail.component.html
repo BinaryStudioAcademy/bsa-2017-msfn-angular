@@ -1,22 +1,23 @@
 <div class="article-container" *ngIf="article">
-  <h1>{{article.title}}</h1>
-  <div class="article-data">
-    <div class="author" *ngIf="article.userId">
-      <div class="photo">
-        <img src="{{article.userId.userPhoto}}" alt="">
-      </div>
-      {{article.userId.fullName}}</div>
-    <span class="date" *ngIf="article.date">{{article.date | date}}</span>
+    <h1>{{article.title}}</h1>
+    <div class="article-data">
+        <div class="author" *ngIf="article.userId">
+            <div class="photo">
+                <img src="{{article.userId.userPhoto}}" alt="">
+            </div>
+            {{article.userId.fullName}}
+        </div>
+        <span class="date" *ngIf="article.date">{{article.date | date}}</span>
 
-  </div>
-  <div class="preview">
-    <div class="preview-img">
-      <img *ngIf="article.image" src="{{article.image}}" alt="">
     </div>
-    <div *ngIf="article.preview" class="preview-text" [innerHtml]="convertMd(article.preview)"></div>
-</div>
-<div class="detail">
-  <div class="detail-text" [innerHtml]="convertMd(article.detail)"></div>
+    <div class="preview">
+        <div class="preview-img">
+            <img *ngIf="article.image" src="{{article.image}}" alt="">
+        </div>
+        <div *ngIf="article.preview" class="preview-text" [innerHtml]="convertMd(article.preview)"></div>
+    </div>
+    <div class="detail">
+        <div class="detail-text" [innerHtml]="convertMd(article.detail)"></div>
 
-</div>
+    </div>
 </div>

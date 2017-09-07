@@ -6,7 +6,8 @@ const objID = mongoose.Types;
 
 class articlesService {
 
-    constructor() { }
+    constructor() {
+    }
 
     add(req, callback) {
         let data = req.body;
@@ -28,9 +29,9 @@ class articlesService {
             filter: {
                 isRemoved: false,
             },
-            populate: { path: 'userId', select: ['firstName', 'lastName', 'fullName','_id', 'userPhoto'] },
+            populate: {path: 'userId', select: ['firstName', 'lastName', 'fullName', '_id', 'userPhoto']},
         };
-        
+
         if (data) {
             params.filter = Object.assign(params.filter, data);
         }
@@ -51,7 +52,6 @@ class articlesService {
     delete(id, callback) {
         articlesRepository.deleteById(id, callback);
     }
-
 }
 
 module.exports = new articlesService();

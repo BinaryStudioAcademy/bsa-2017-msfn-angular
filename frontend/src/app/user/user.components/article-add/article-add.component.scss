@@ -1,6 +1,7 @@
 @import '../../../../globalStyles/variables.scss';
 @import '../../../../globalStyles/text.scss';
 @import "../../../../globalStyles/indentations";
+
 .article-container {
     display: flex;
     flex-direction: column;
@@ -11,7 +12,7 @@
     font-family: $font-general;
     font-size: $usual-text;
     margin: $content-tb-margin auto;
-    form{
+    form {
         width: 100%;
     }
     h1 {
@@ -76,7 +77,8 @@
                 filter: alpha(opacity=0);
             }
         }
-        .btn.upload-container+span {}
+        .btn.upload-container + span {
+        }
     }
     .image-preview img {
         max-height: 300px;
