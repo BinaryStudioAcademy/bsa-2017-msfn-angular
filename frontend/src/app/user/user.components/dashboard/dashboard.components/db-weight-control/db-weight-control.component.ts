@@ -93,15 +93,17 @@ export class DbWeightControlComponent implements OnChanges {
 
     updateData(): void {
         const recentItem = this.weeklyItems[this.weeklyItems.length - 1];
-        this.recentDay = this.weightControlService.getRecentDay(recentItem);
-        this.currentWeight = recentItem.weight;
+        if (recentItem) {
+            this.recentDay = this.weightControlService.getRecentDay(recentItem);
+            this.currentWeight = recentItem.weight;
 
-        if (this.weeklyItems.length > 1) {
-            this.diff.recent = this.weightControlService.getRecentDiff(this.weeklyItems);
-            this.diff.weekly = this.weightControlService.getPeriodDiff(this.weeklyItems);
+            if (this.weeklyItems.length > 1) {
+                this.diff.recent = this.weightControlService.getRecentDiff(this.weeklyItems);
+                this.diff.weekly = this.weightControlService.getPeriodDiff(this.weeklyItems);
 
-            this.changeOption('weight', 'recent');
-            this.changeOption('weight', 'weekly');
+                this.changeOption('weight', 'recent');
+                this.changeOption('weight', 'weekly');
+            }
         }
     }
 
