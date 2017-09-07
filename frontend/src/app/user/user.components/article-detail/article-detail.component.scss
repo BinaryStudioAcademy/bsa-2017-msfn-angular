@@ -1,6 +1,7 @@
 @import '../../../../globalStyles/variables.scss';
 @import '../../../../globalStyles/text.scss';
 @import "../../../../globalStyles/indentations";
+
 .article-container {
     display: flex;
     flex-direction: column;
@@ -20,7 +21,6 @@
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
-
         .author {
             display: flex;
             align-items: center;
@@ -32,11 +32,16 @@
         }
     }
     .preview {
-        margin-top: 20px;        
+        margin-top: 20px;
         display: flex;
-        img {
-            height: 200px;
-            margin-right: 20px;
+        width: 100%;
+        .preview-img {
+            max-width: 30%;
+            margin: auto 20px;
+            margin-left: 0;
+            img {
+                width: 100%;
+            }
         }
         .preview-text {
             font-style: italic;
@@ -44,5 +49,27 @@
     }
     .detail {
         margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width: $large-screen) {
+    .article-container {
+        width: 60vw;
+        h1 {
+            font-size: 1.5em;
+        }
+        .preview {
+            flex-direction: column;
+            .preview-img {
+                max-width: none;
+                margin: 10px auto;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $medium-screen) {
+    .article-container {
+        width: 70vw;
     }
 }

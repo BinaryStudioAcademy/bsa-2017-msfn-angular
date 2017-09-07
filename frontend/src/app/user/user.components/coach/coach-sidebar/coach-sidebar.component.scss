@@ -2,86 +2,87 @@
 @import '../../../../../globalStyles/indentations';
 @import '../../../../../globalStyles/text';
 
-#main-sidebar-block {
-    #general-coach-info {
-        display: flex;
-        align-items: center;
+h3 {
+    margin: 0 0 $standard-indent;
+    font-size: $main-text;
+    font-weight: 600;
+}
 
-        #name-location {
-            display: inline-block;
-            width: 50%;
+#general-coach-info {
+    display: flex;
+    align-items: center;
 
-            h2 {
-                margin-bottom: $mini-indent;
-                font-size: $macro-text;
-            }
+    #name-location {
+        display: inline-block;
+        width: 50%;
 
-            #coach-location {
-                font-size: $usual-text;
-                font-weight: 300;
-            }
+        h2 {
+            margin-bottom: $mini-indent;
+            font-size: $macro-text;
         }
 
-        #follow-button {
-            display: inline-block;
-            width: 40%;
-            margin: 0 auto;
-
-            button {
-                display: block;
-                width: 120px;
-                height: 40px;
-                border: none;
-                border-radius: 20px;
-                outline: none;
-                font-size: $main-text;
-                font-weight: 600;
-                background: #82ca9c;
-
-                span {
-                    text-align: right;
-                }
-            }
+        #coach-location {
+            font-size: $usual-text;
+            font-weight: 300;
         }
     }
 
-    #coach-photo {
-        margin: $macro-indent auto;
-        text-align: center;
-
-        img {
-            width: 170px;
-            border-radius: 85px;
-        }
-    }
-
-    #social-links {
-        display: flex;
-        flex-wrap: wrap;
-        width: 80%;
+    #follow-button {
+        display: inline-block;
+        width: 40%;
         margin: 0 auto;
 
-        a {
-            display: inline-block;
-            text-decoration: none;
+        button {
+            display: block;
+            width: 120px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
             font-size: $main-text;
-        }
+            font-weight: 600;
+            background: #82ca9c;
 
-        a:nth-child(odd) {
-            margin-right: 25%;
-        }
-
-        a:not(:nth-last-child(-n+2)) {
-            margin-bottom: $mini-indent;
-        }
-
-        a:hover {
-            text-decoration: underline;
+            span {
+                text-align: right;
+            }
         }
     }
 }
 
+#coach-photo {
+    display: inline-block;
+    width: 45%;
+    margin: $macro-indent 10% $macro-indent auto;
+    text-align: right;
+
+    img {
+        width: 100px;
+        border-radius: 50px;
+    }
+}
+
+#social-links {
+    display: inline-block;
+    flex-wrap: wrap;
+    margin: $macro-indent auto;
+    vertical-align: middle;
+
+    a {
+        display: block;
+        margin-bottom: $mini-indent;
+        text-decoration: none;
+        font-size: $large-text;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
 #coach-about {
+    margin-bottom: $macro-indent;
+
     p {
         font-size: $main-text;
     }
@@ -128,8 +129,100 @@
     }
 }
 
-h3 {
-    margin: 0 0 $standard-indent;
-    font-size: $main-text;
-    font-weight: 600;
+
+@media only screen and (min-width: $small-screen) {
+
+    #coach-photo {
+        img {
+            width: 170px;
+            border-radius: 85px;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $large-screen) {
+
+    #general-coach-info {
+        #name-location {
+            display: inline-block;
+            width: 50%;
+
+            h2 {
+                margin-bottom: $mini-indent;
+            }
+        }
+
+        #follow-button {
+            display: inline-block;
+            width: 40%;
+            margin: 0 auto;
+
+            button {
+                display: block;
+                width: 120px;
+                height: 40px;
+                border-radius: 20px;
+                font-size: $main-text;
+            }
+        }
+    }
+
+    #coach-photo {
+        display: block;
+        width: initial;
+        margin: $macro-indent auto;
+        text-align: center;
+
+        img {
+            width: 170px;
+            border-radius: 85px;
+        }
+    }
+
+    #social-links {
+        display: flex;
+        flex-wrap: wrap;
+        width: 80%;
+        margin: 0 auto;
+
+        a {
+            display: inline-block;
+            margin-bottom: initial;
+            text-decoration: none;
+            font-size: $main-text;
+        }
+
+        a:nth-child(odd) {
+            margin-right: 25%;
+        }
+
+        a:not(:nth-last-child(-n+2)) {
+            margin-bottom: $mini-indent;
+        }
+    }
+
+    #coach-about {
+        margin-bottom: $macro-indent;
+    }
+
+    #testimonials {
+        .testimonial:not(:last-child) {
+            margin-bottom: $standard-indent;
+        }
+
+        .testimonial-photo {
+            display: inline-block;
+            width: 20%;
+        }
+
+        .testimonial-text-block {
+            display: inline-block;
+            width: 78%;
+
+            .testimonial-name {
+                display: inline-block;
+            }
+        }
+    }
 }

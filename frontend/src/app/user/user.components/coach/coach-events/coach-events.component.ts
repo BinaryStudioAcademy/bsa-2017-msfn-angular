@@ -69,7 +69,6 @@ export class CoachEventsComponent implements OnInit {
 
     ngOnInit() {
         this.processDates();
-        console.log(this.userData);
     }
 
     initProcessDates() {

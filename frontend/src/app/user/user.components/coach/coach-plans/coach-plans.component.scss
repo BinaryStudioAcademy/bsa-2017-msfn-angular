@@ -17,8 +17,8 @@
 
     .plan-exercises {
         display: inline-block;
-        width: 45%;
-        margin-right: $standard-indent;
+        width: 100%;
+        margin: 0 0 $standard-indent;
 
         p {
             margin: 0 0 $mini-indent;
@@ -34,7 +34,7 @@
 
     .plan-text-block {
         display: inline-block;
-        width: 50%;
+        width: 100%;
 
         .plan-description {
             width: 100%;
@@ -54,4 +54,19 @@
     margin-bottom: $standard-indent;
     padding-bottom: $standard-indent;
     border-bottom: 1px solid $text-main-color;
+}
+
+
+@media only screen and (min-width: $medium-screen) {
+
+    .plan {
+        .plan-exercises {
+            width: 45%;
+            margin: 0 $standard-indent 0 0;
+        }
+
+        .plan-text-block {
+            width: 45%;
+        }
+    }
 }

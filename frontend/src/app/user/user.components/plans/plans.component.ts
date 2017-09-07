@@ -28,7 +28,6 @@ export class PlansComponent implements OnInit {
         'offset': this.plans.length
     };
     private searchTimeout = 0;
-    private followedUsers: any[] = [];
     private lastSearch = '';
 
     constructor(private httpHandler: HttpService,
@@ -37,10 +36,6 @@ export class PlansComponent implements OnInit {
 
     ngOnInit() {
         this.loadPlans();
-    }
-
-    setFilterOffset(value) {
-        this.filter.offset = value;
     }
 
     changeSort(e) {
@@ -147,8 +142,8 @@ export class PlansComponent implements OnInit {
                     }
                 });
             }).then(() => {
-                console.log(this);
-                this.loading = false;
+            console.log(this);
+            this.loading = false;
         });
     }
 
@@ -158,7 +153,7 @@ export class PlansComponent implements OnInit {
             return;
         }
         console.log('load');
-        this.filter.offset  = this.plans.length;
+        this.filter.offset = this.plans.length;
         const request: IHttpReq = {
             url: `/api/training-plan/public/${encodeURIComponent(this.encryptService.encrypt(this.filter))}`,
             method: 'GET',

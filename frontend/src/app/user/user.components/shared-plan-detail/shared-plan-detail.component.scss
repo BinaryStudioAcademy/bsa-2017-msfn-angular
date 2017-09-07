@@ -33,6 +33,19 @@
             padding: 5px;
             width: 100%;
         }
+        .plan-description {
+            padding: 5px;
+
+            .description-heading {
+                font-size: 20px;
+                width: 100%;
+            }
+
+            .description-text {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
         .training-days {
             padding: 10px 5px;
             width: 100%;
@@ -111,6 +124,7 @@
 
             .training-days,
             .training-type,
+            .plan-description,
             .author-name,
             .plan-name {
                 padding: 10px 0;

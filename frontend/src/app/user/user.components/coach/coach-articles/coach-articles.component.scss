@@ -4,6 +4,7 @@
 
 .article {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -14,12 +15,14 @@
 }
 
 .article-image {
-    display: inline-block;
+    display: block;
+    width: 90%;
+    max-width: 170px;
     vertical-align: top;
-    margin-right: $standard-indent;
+    margin: 0 auto $standard-indent;
 
     img {
-        height: 170px;
+        width: 100%;
     }
 }
 
@@ -54,5 +57,24 @@
         float: right;
         font-size: $usual-text;
         color: $text-main-color;
+    }
+}
+
+
+@media only screen and (min-width: $medium-screen) {
+
+    .article {
+        flex-direction: row;
+    }
+
+    .article-image {
+        display: inline-block;
+        width: initial;
+        margin: 0 $standard-indent 0 0;
+
+        img {
+            width: initial;
+            height: 170px;
+        }
     }
 }

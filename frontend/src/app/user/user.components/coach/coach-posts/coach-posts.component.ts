@@ -65,7 +65,6 @@ export class CoachPostsComponent implements OnInit {
 
     ngOnInit() {
         this.makePaginatorOutput();
-        console.log(this.userData);
     }
 
     makePaginatorOutput() {
