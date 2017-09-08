@@ -1,0 +1,67 @@
+<div class="content">
+    <div class="days">
+        <div class="day" *ngFor="let day of days">
+            <div class="head" (click)="selectDay(day.name)">{{day.name}}</div>
+            <div class="day-plan" *ngIf="day.selected">
+                <div class="add-item">
+                    <i class="material-icons">add</i>
+                    <span>Add meal</span>
+                </div>
+                <div class="meal-form">
+                    <md-input-container class="meal-name">
+                        <input mdInput placeholder="Meal name" name="Meal name" required value="">
+                    </md-input-container>
+                    <div class="products">
+                        <h4>Product list</h4>
+                        <div class="list">
+                            <div class="item">
+                                <div class="name">Milk</div>
+                                <div class="quantity"> 160 ml</div>
+                                <div class="del"><i class="material-icons">close</i> </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">nesquik cereal</div>
+                                <div class="quantity"> 150 g</div>
+                                <div class="del"><i class="material-icons">close</i> </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">Orange</div>
+                                <div class="quantity"> 1 pc</div>
+                                <div class="del"><i class="material-icons">close</i> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="save">
+                        <span>  
+                        Save meal</span></div>
+                </div>
+                <div class="saved-meals">
+                    <div class="meal">
+                        <h4>Dinner</h4>
+                        <div class="kcal">369 kcal</div>
+                        <div class="products">
+                            <div class="list">
+                                <div class="item">
+                                    <div class="name">Borscht</div>
+                                    <div class="quantity"> 300 ml</div>
+                                    <div class="kcal">171 kcal</div>
+                                </div>
+                                <div class="item">
+                                    <div class="name">Sour cream</div>
+                                    <div class="quantity"> 100 g</div>
+                                    <div class="kcal">160 kcal</div>
+
+                                </div>
+                                <div class="item">
+                                    <div class="name">Juice</div>
+                                    <div class="quantity"> 250 ml</div>
+                                    <div class="kcal">38 kcal</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
