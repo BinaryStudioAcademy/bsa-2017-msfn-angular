@@ -45,6 +45,14 @@ const User = new Schema({
         dateFormat: String,
         startWeek: String,
     },
+    achivements: [{
+        goal: { 
+            type: Schema.Types.ObjectId, 
+            ref: 'Person' 
+        },
+        finished: Date,
+        value: Number
+    }],
     weightControl: [
         {
             weight: Number,
