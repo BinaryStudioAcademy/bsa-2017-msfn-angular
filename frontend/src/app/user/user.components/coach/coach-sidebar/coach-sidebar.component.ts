@@ -24,10 +24,6 @@ export class CoachSidebarComponent implements OnInit {
     isFollowed: boolean = false;
 
     coachInfo = {
-        name: 'Brick',
-        location: 'Pandora, The Vault',
-        followers: '1M',
-        photo: '../../resources/default.png',
         socialLinks: [
             {
                 name: 'Facebook',
@@ -50,10 +46,6 @@ export class CoachSidebarComponent implements OnInit {
                 color: '#f12727'
             }
         ],
-        about: 'Phasellus dignissim condimentum metus vel egestas.' +
-            'Quisque quis dui iaculis, pulvinar leo eget, mollis metus.' +
-            'Suspendisse fermentum tempor purus, ac lacinia nunc facilisis ac.' +
-            'Morbi augue neque, aliquam et fermentum eget, sodales id mauris. Proin viverra.',
         testimonials: [
             {
                 name: 'Ellie',

@@ -20,7 +20,8 @@ export interface IUser {
     userPhoto?: string;
     requestForCoaching?: boolean;
     secondaryEmails?: string[];
-    about?: string[];
+    location?: string;
+    about?: string;
     settings?: {
         weight: string,
         trainingWeight: string,
