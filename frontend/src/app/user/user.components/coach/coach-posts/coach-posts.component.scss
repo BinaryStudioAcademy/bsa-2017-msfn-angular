@@ -2,6 +2,10 @@
 @import '../../../../../globalStyles/indentations.scss';
 @import '../../../../../globalStyles/text.scss';
 
+#posts {
+    width: 100%;
+}
+
 .post-avatar {
     display: none;
 }
