@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="general-info">
+        <h1>
+            Food plan create
+        </h1>
+        <!-- <div class="type">
+        <div class="type-name">Weekly</div>
+        <md-slide-toggle>
+        </md-slide-toggle>
+        <div class="type-name">Daily</div>
+    </div> -->
+
+        <md-input-container class="title-container">
+            <input mdInput placeholder="Plan title" [(ngModel)]="foodplan.title" name="title" required>
+        </md-input-container>
+        <div class="type-container">
+            <md-button-toggle-group #group="mdButtonToggleGroup" (change)="currentType(group.value)" class="type-container">
+                <md-button-toggle value="weekly" class="toggle-button">
+                    Weekly
+                </md-button-toggle>
+                <md-button-toggle value="daily" class="toggle-button">
+                    Daily
+                </md-button-toggle>
+            </md-button-toggle-group>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="plan-side">
+                <app-weekly *ngIf="group.value === 'weekly'"></app-weekly>
+                <app-daily *ngIf="group.value === 'daily'"></app-daily>
+        </div>
+        <div class="food-side">
+                <app-search></app-search>
+        </div>
+    </div>
+</div>
