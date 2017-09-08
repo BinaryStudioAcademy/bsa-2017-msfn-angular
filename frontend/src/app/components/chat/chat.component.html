@@ -1,0 +1,11 @@
+<button md-raised-button class="show-chats"
+        [class.active]="chatListVisible"
+        (click)="toggleChat()">{{(chatListVisible) ? 'Hide' : 'Show'}} chats list</button>
+<div class="chats-list-wrapper active" [class.active]="chatListVisible">
+    <div class="users-wrapper">
+        <div class="user-wrapper" *ngFor="let chat of chats">
+            <div class="user-image" [style.background-image]="'url(' + chat.user.userPhoto + ')'"></div>
+            <div class="user-name">{{chat.user.fullName}}</div>
+        </div>
+    </div>
+</div>

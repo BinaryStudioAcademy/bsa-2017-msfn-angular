@@ -42,6 +42,8 @@ import { HeaderNotificationsComponent } from './components/header-notifications/
 import { SearchExerciseComponent } from './user/user.components/search-exercise/search-exercise.component';
 import { ExerciseEditDialogComponent } from './user/user.components/exercise-edit-dialog/exercise-edit-dialog.component';
 import {ConstantsService} from './services/constants.service';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatService } from './services/chat.service';
 
 @NgModule({
     imports: [
@@ -72,6 +74,7 @@ import {ConstantsService} from './services/constants.service';
         LoginDialogComponent,
         NotificationDataDialogComponent,
         HeaderNotificationsComponent,
+        ChatComponent,
     ],
     providers: [
         ToasterService,
@@ -86,7 +89,8 @@ import {ConstantsService} from './services/constants.service';
         SocketService,
         NotificationsService,
         ConfirmedPageService,
-        ConstantsService
+        ConstantsService,
+        ChatService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,

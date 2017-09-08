@@ -1,0 +1,85 @@
+@import '../../../globalStyles/variables.scss';
+@import '../../../globalStyles/indentations.scss';
+@import '../../../globalStyles/text.scss';
+
+.show-chats {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 40px;
+    opacity: 0.2;
+    transition: opacity 0.3s, border-radius 0.5s, background-color 0.5s;
+    background-color: $main-color;
+    color: $text-dark-color;
+    font-weight: bold;
+    outline: none;
+}
+
+.show-chats.active {
+    opacity: 1;
+    border-radius: 0;
+    background-color: $gradient-to-color;
+    border-left: 1px solid $gradient-from-color;
+}
+
+.show-chats:hover {
+    opacity: 0.9;
+}
+
+.show-chats.active:hover {
+    background-color: $main-color;
+}
+
+.chats-list-wrapper {
+    position: fixed;
+    bottom: 40px;
+    right: 0;
+    width: 200px;
+    height: calc(100vh - 110px);
+    background-color: $gradient-to-color;
+    z-index: 10;
+    transform: translateX(300px);
+    transition: transform 0.7s;
+    border-bottom: 1px solid $gradient-from-color;
+    border-left: 1px solid $gradient-from-color;
+}
+
+.chats-list-wrapper.active {
+    transform: translateX(0px);
+}
+
+.users-wrapper {
+
+    padding: 10px 0;
+
+    .user-wrapper {
+        height: 44px;
+        width: 100%;
+        padding: 2px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        cursor: pointer;
+
+        .user-image {
+            border-radius: 50%;
+            height: 34px;
+            width: 34px;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .user-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 34px;
+            margin-left: 10px;
+        }
+    }
+
+    .user-wrapper:hover {
+        background-color: $dark-main-color;
+    }
+}

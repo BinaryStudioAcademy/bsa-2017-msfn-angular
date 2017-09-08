@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
 import {IHttpReq} from '../../../models/http-req';
 import {EncryptService} from '../../../services/encrypt.service';
+import {WindowObj} from '../../../services/window.service';
 
 @Component({
     selector: 'app-plans',
@@ -29,9 +30,11 @@ export class PlansComponent implements OnInit {
     };
     private searchTimeout = 0;
     private lastSearch = '';
+    public userId = (this.window.data._injectedData as any).userId;
 
     constructor(private httpHandler: HttpService,
-                private encryptService: EncryptService) {
+                private encryptService: EncryptService,
+                private window: WindowObj) {
     }
 
     ngOnInit() {
@@ -47,7 +50,7 @@ export class PlansComponent implements OnInit {
         switch (tab) {
             case 'follow':
                 const followersRequest: IHttpReq = {
-                    url: '/api/user/subscribe/following',
+                    url: '/api/user/subscribe/following/' + this.userId,
                     method: 'GET'
                 };
                 this.loading = true;
