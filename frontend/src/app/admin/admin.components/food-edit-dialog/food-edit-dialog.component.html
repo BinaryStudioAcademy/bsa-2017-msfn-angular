@@ -48,10 +48,10 @@
                 Description should contain less than 300 characters
             </md-error>
         </md-input-container>
-        <md-slide-toggle
+        <!--<md-slide-toggle
         id="load-type"
         (change)="loadTypeToggle($event.checked)"
-        [checked]="false">By URL</md-slide-toggle>
+        [checked]="false">By URL</md-slide-toggle>-->
         <button class="btn upload-container" *ngIf="hideCropper" (click)="loadImage()">
         <span>Upload food image</span>
         <input *ngIf="!byURL" type="file" accept="image/*" id="upload" (change)="fileChangeListener($event)"/>
