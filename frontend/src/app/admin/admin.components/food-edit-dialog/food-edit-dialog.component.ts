@@ -96,7 +96,7 @@ export class FoodEditDialogComponent implements OnInit {
                     } else {
                         this.food.picture = './resources/' + folder + '/' + fileName + '.' + fileType;
                         this.foodService.updateFood(this.food, (res) => { });
-                        this.upd = (+new Date).toString(36); 
+                        this.upd = (+new Date).toString(36);
                     }
                 });
             }
