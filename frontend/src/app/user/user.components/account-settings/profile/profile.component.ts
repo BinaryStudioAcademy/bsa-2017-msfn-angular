@@ -102,6 +102,9 @@ export class ProfileComponent implements OnInit {
             'gender': [this.user.gender, Validators.compose([
                     Validators.required
             ])],
+            'about': [this.user.about, Validators.compose([
+                    Validators.maxLength(500),
+            ])]
     });
     }
 
