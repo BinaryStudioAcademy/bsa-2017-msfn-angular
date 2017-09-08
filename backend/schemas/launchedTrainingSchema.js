@@ -17,16 +17,7 @@ const LaunchedTraining = new Schema({
         },
         calories: Number
     },
-    exercisesList: [{
-        name: String,
-        sets: [{
-            value: String,
-            value2: String
-        }],
-        id: String,
-        exerciseType: String,
-        description: String,
-    }],
+    exercisesList: Array,
     intervals: Array,
     trainingType: 'general' | 'interval',
     userID: String,

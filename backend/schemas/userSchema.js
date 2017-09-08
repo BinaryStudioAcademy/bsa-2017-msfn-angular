@@ -32,6 +32,8 @@ const User = new Schema({
     birthday: String,
     height: Number,
     weight: Number,
+    location: String,
+    about: String,
     activateToken: String,
     settings: {
         weight: String,

@@ -1,0 +1,62 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/text.scss';
+@import "../../../../globalStyles/indentations";
+
+.training-detail {
+    width: 80%;
+    margin: 10px auto;
+    padding: 15px;
+    background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
+
+    .title {
+        font-size: 24px;
+
+        &-date {
+            font-size: 12px;
+            margin: 5px 0;
+        }
+    }
+
+    .properties {
+        display: flex;
+        flex-flow: row wrap;
+        
+        div {
+            margin: 15px;
+            font-size: 12px;
+
+            p {
+                font-size: 24px;
+                margin: 5px 0;
+            }
+        }
+    }
+
+    .intervals {
+        font-size: 24px;
+
+        &-item {
+            display: flex;
+            flex-flow: row wrap;
+
+            div {
+                margin: 15px;
+                font-size: 12px;
+                p {
+                    font-size: 24px;
+                    margin: 5px 0;
+                }
+            }
+
+            button {
+                height: 35px;
+                margin: auto 0;
+            }
+
+            .item-exercises {
+                flex: 100%;
+                margin: 0 25px;
+            }
+        }
+    }
+}

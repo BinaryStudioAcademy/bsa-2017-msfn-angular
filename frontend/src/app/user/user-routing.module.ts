@@ -26,6 +26,7 @@ import { CoachComponent } from './user.components/coach/coach.component';
 import { ArticleAddComponent } from './user.components/article-add/article-add.component';
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
+import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
 
 
@@ -128,6 +129,10 @@ const userRoutes: Routes = [
             {
                 path: 'training-history',
                 component: TrainingHistoryComponent
+            },
+            {
+                path: 'training-history/:id',
+                component: TrainingHistoryDetailComponent
             },
         ]
     }

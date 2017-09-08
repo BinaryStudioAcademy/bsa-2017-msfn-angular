@@ -2,27 +2,27 @@
     <div id="general-coach-info">
         <div id="name-location">
             <h2 id="coach-name">{{ userData.fullName }}</h2>
-            <p id="coach-location">{{ coachInfo.location }}</p>
+            <p id="coach-location">{{ userData.location }}</p>
         </div>
         <div id="follow-button">
             <button
                 md-icon-button
                 type="button"
                 (click)="followAction()">
-                {{ isFollowed ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ userData.follow.length }}</span>
+                {{ isFollowed ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ followers.length || ''}}</span>
             </button>
         </div>
     </div>
 
     <div id="coach-photo">
-        <img src="{{ coachInfo.photo }}">
+        <img src="{{ userData.userPhoto }}">
     </div>
 
     <div id="social-links">
         <a
             *ngFor="let link of coachInfo.socialLinks"
             href="link.link"
-            [ngStyle]="{'color': link.color }">
+            [ngStyle]="{'color': link.color}">
             {{ link.name }}
         </a>
     </div>
@@ -30,7 +30,7 @@
 
 <div id="coach-about">
     <h3>About me</h3>
-    <p>{{ coachInfo.about }}</p>
+    <p>{{ userData.about }}</p>
 </div>
 
 <div id="testimonials">

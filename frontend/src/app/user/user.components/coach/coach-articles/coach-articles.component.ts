@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material';
+import { CoachService } from '../coach.service';
+import { DateService } from '../../../../services/date.service';
 
 @Component({
     selector: 'app-coach-articles',
@@ -7,38 +9,22 @@ import { PageEvent } from '@angular/material';
     styleUrls: [
         './coach-articles.component.scss',
         '../coach.component.scss'
+    ],
+    providers: [
+        CoachService,
+        DateService
     ]
 })
 export class CoachArticlesComponent implements OnInit {
 
-    constructor() {
+    constructor(private coachService: CoachService,
+                private dateService: DateService) {
     }
 
     @Input() userData;
 
     title = 'Articles';
-
-    articles = [
-        {
-            title: 'Praesent feugiat',
-            date: 'Sep 6, 2017',
-            image: '../../resources/default.png',
-            text: 'Cras ac erat mattis, elementum ipsum sit amet, feugiat ante.' +
-            'Aliquam velit turpis, sollicitudin ut ullamcorper tristique, eleifend ac turpis.' +
-            'Ut molestie est at ex consectetur, eu gravida lectus suscipit.' +
-            'In in leo sit amet felis venenatis faucibus. Mauris sapien ex, malesuada id turpis at.'
-        },
-        {
-            title: 'Duis aliquet',
-            date: 'Sep 4, 2017',
-            image: '../../resources/default.png',
-            text: 'Maecenas consectetur scelerisque orci.' +
-                'Vestibulum sagittis dictum velit, posuere iaculis lorem egestas nec.' +
-            'Donec ligula odio, sollicitudin eleifend arcu nec, rhoncus semper felis.' +
-            'Aliquam dignissim in arcu quis tincidunt.' +
-            'Praesent non hendrerit leo. Sed imperdiet id quam sed vestibulum.'
-        }
-    ];
+    articles = [];
 
     paginatorOutput: any[];
 
@@ -50,7 +36,15 @@ export class CoachArticlesComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.makePaginatorOutput();
+        this.coachService.getArticles(this.userData._id, res => {
+            this.articles = res;
+            this.makePaginatorOutput();
+
+            for (const article of this.articles) {
+                article.dateOutput = this.dateService
+                    .convertDateToIso(new Date(article.date));
+            }
+        });
     }
 
     makePaginatorOutput() {

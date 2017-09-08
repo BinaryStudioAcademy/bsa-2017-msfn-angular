@@ -201,7 +201,7 @@ label {
 .email {
     display: inline-block;
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
@@ -297,6 +297,11 @@ label {
         width: 100%;
         margin: $content-between-margin 0;
     }
+}
+
+.profile-about {
+    width: 100%;
+    margin: $content-between-margin auto;
 }
 
 .profile-physparam {
