@@ -152,7 +152,6 @@ export class PlansComponent implements OnInit {
             this.searchPlans(this.lastSearch);
             return;
         }
-        console.log('load');
         this.filter.offset = this.plans.length;
         const request: IHttpReq = {
             url: `/api/training-plan/public/${encodeURIComponent(this.encryptService.encrypt(this.filter))}`,
