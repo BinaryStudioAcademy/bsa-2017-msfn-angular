@@ -54,6 +54,11 @@ import { ArticleDetailComponent } from './user.components/article-detail/article
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
+import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
+import { SearchComponent } from './user.components/food-plan/search/search.component';
+import { WeeklyComponent } from './user.components/food-plan/weekly/weekly.component';
+import { DailyComponent } from './user.components/food-plan/daily/daily.component';
+import { ProductListComponent } from './user.components/food-plan/product-list/product-list.component';
 
 @NgModule({
     imports: [
@@ -111,6 +116,11 @@ import {ArticleListComponent} from './user.components/article-list/article-list.
         ArticleDetailComponent,
         TrainingHistoryComponent,
         TrainingHistoryDetailComponent,
+        FoodPlanComponent,
+        SearchComponent,
+        WeeklyComponent,
+        DailyComponent,
+        ProductListComponent
     ],
     providers: [
         ForAllUserGuard,

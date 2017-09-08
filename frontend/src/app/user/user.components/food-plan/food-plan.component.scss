@@ -1,0 +1,40 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+.container{
+    width: 100%;
+    min-height: 100%;
+    padding: 20px 6%;
+    .general-info{
+        display: flex;
+        flex-direction: column;
+        .title-container{
+            width: 20%;
+        }
+        .type-container{
+            .toggle-button{
+                color:#fff;
+            }
+            .toggle-button.mat-button-toggle-checked{
+                background-color: $btn-color;
+                color: #111;
+                font-weight: bold;
+            }
+        }
+    }
+    .main-content{
+        display: flex;
+        margin-top: $content-between-margin;
+        .plan-side{
+            width: 25%;
+        }
+        .food-side{
+            padding: 0 20px;
+            width: 75%;
+            height: 60vh;
+            border: 1px solid #424242;
+            margin-left: 5px;
+        }
+    }
+}
