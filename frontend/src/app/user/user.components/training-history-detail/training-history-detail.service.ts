@@ -46,16 +46,6 @@ export class TrainingHistoryDetailService {
             this.addZeroToNum(d.getMinutes()) + ' )';
     }
 
-    beautifyTime(min) {
-        const sec = min * 60;
-
-        const hour = Math.floor(sec / 3600);
-        const minutes = Math.floor((sec - hour * 3600) / 60 );
-        const seconds = (sec - hour * 3600 - minutes * 60);
-
-        return this.addZeroToNum(hour) + ':' + this.addZeroToNum(minutes) + ':' + this.addZeroToNum(seconds);
-    }
-
     private addZeroToNum(num: number): string {
         if (num < 10) {
             return '0' + num;
