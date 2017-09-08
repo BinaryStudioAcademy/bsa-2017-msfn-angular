@@ -32,6 +32,7 @@ const User = new Schema({
     birthday: String,
     height: Number,
     weight: Number,
+    about: String,
     activateToken: String,
     settings: {
         weight: String,

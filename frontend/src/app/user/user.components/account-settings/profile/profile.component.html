@@ -144,6 +144,13 @@
                 </div>
             </div>
         -->
+            <md-input-container class="profile-about">
+                <textarea mdInput placeholder="About" formControlName="about" md-tooltip="Add some info about you">
+                </textarea>
+                <md-error>
+                    Must contain less than 500 characters
+                </md-error>
+            </md-input-container>
         <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
         </form>
     </div>
