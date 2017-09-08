@@ -3,7 +3,7 @@ const apiResponse = require('express-api-response'),
 const express = require('express');
 const router = express.Router();
 
-router.get('/following', function (req, res, next) {
+router.get('/following/:id', function (req, res, next) {
     subscribeService.getFollowing(req, function (err, data) {
         res.data = data;
         res.err = err;
@@ -11,7 +11,7 @@ router.get('/following', function (req, res, next) {
     });
 }, apiResponse);
 
-router.get('/followers', function (req, res, next) {
+router.get('/followers/:id', function (req, res, next) {
     subscribeService.getFollowers(req, function (err, data) {
         res.data = data;
         res.err = err;

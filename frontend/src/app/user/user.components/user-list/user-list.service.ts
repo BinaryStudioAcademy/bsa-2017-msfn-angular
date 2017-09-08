@@ -27,9 +27,9 @@ export class UserListService {
         });
     }
 
-    getFollowers(callback) {
+    getFollowers(id, callback) {
         const getFollowersReq: IHttpReq = {
-            url: '/api/user/subscribe/followers',
+            url: '/api/user/subscribe/followers/' + id,
             method: 'GET',
             body: {},
             failMessage: 'Can\'t show followers'
@@ -39,9 +39,9 @@ export class UserListService {
         });
     }
 
-    getFollowing(callback) {
+    getFollowing(id, callback) {
         const getFollowingReq: IHttpReq = {
-            url: '/api/user/subscribe/following',
+            url: '/api/user/subscribe/following/' + id,
             method: 'GET',
             body: {},
             failMessage: 'Can\'t show following'

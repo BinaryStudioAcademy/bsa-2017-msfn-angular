@@ -27,6 +27,8 @@ import { ArticleAddComponent } from './user.components/article-add/article-add.c
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
+import {ArticleListComponent} from './user.components/article-list/article-list.component';
+
 
 const userRoutes: Routes = [
     {
@@ -113,8 +115,8 @@ const userRoutes: Routes = [
                 component: SharedPlanDetailComponent
             },
             {
-                path: 'coach',
-                component: CoachComponent
+                path: 'articles',
+                component: ArticleListComponent
             },
             {
                 path: 'articles/create',

@@ -53,6 +53,7 @@ import { ArticleAddComponent } from './user.components/article-add/article-add.c
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
+import {ArticleListComponent} from './user.components/article-list/article-list.component';
 
 @NgModule({
     imports: [
@@ -99,6 +100,7 @@ import { TrainingHistoryDetailComponent } from './user.components/training-histo
         GoalEditDialogComponent,
         PlansComponent,
         SharedPlanDetailComponent,
+        ArticleListComponent,
         CoachComponent,
         CoachSidebarComponent,
         CoachPostsComponent,

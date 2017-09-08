@@ -103,8 +103,8 @@ class subscribeService {
     }
 
     getFollowing(data, callback) {
-        const currentUserId = data.session.passport.user;
-        userRepository.findById(currentUserId, (err, currentUser) => {
+        const userId = data.params.id;
+        userRepository.findById(userId, (err, currentUser) => {
             const params = {
                 fields: '_id firstName lastName userPhoto'
             };
@@ -115,15 +115,15 @@ class subscribeService {
     }
 
     getFollowers(data, callback) {
-        const currentUserId = data.session.passport.user;
+        const userId = data.params.id;
         const params = {
             filter: {
-                follow: currentUserId
+                follow: userId
             },
             fields: '_id firstName lastName userPhoto'
         };
         params.filter = {
-            follow: currentUserId
+            follow: userId
         };
         userRepository.get(params, (err, users) => {
             callback(err, users);
