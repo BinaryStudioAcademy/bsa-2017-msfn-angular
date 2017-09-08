@@ -10,13 +10,12 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
-import {DateService} from '../../../services/date.service';
 
 @Component({
     selector: 'app-training-history',
     templateUrl: './training-history.component.html',
     styleUrls: ['./training-history.component.scss'],
-    providers: [TrainingHistoryService, DateService]
+    providers: [TrainingHistoryService]
 })
 export class TrainingHistoryComponent implements OnInit {
     displayedColumns = [
@@ -26,6 +25,8 @@ export class TrainingHistoryComponent implements OnInit {
         'totalTime',
         'calories'
     ];
+    totalTrainingTime;
+    totalBurnedCalories;
 
     period = {
         to: new Date(),
@@ -47,6 +48,7 @@ export class TrainingHistoryComponent implements OnInit {
 
         this.trainingHistoryService.getLaunchedTrainings(res => {
             this.tableDatabase.addList(res);
+            this.createInfo();
         });
 
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
@@ -63,6 +65,17 @@ export class TrainingHistoryComponent implements OnInit {
     updateData() {
         this.dataSource.filterDate = this.period;
     }
+
+    createInfo() {
+        this.totalBurnedCalories = 0;
+        this.totalTrainingTime = 0;
+        this.tableDatabase.data.forEach(el => {
+            this.totalTrainingTime = this.totalTrainingTime + el.totalTime.seconds;
+            this.totalBurnedCalories = this.totalBurnedCalories + el.calories;
+        });
+
+        this.totalTrainingTime = this.trainingHistoryService.beautifyTotalTime(this.totalTrainingTime);
+    }
 }
 
 export class TableDatabase {
@@ -76,7 +89,7 @@ export class TableDatabase {
     addList(data) {
         const copiedData = [];
         data.forEach(el => {
-            if (el.results) {
+            if (el.results.time.total) {
                 copiedData.push({
                     name: el.name,
                     date: {
@@ -88,7 +101,7 @@ export class TableDatabase {
                         seconds: this.trainingHistoryService.getSeconds(el.results.time.total)
                     },
                     calories: el.results.calories,
-                    trainingPlanID: el.trainingPlanID,
+                    id: el._id,
                     type: el.trainingType,
                 });
             }
@@ -125,11 +138,11 @@ export class ExampleDataSource extends DataSource<any> {
         return Observable.merge(...displayDataChanges).map(() => {
             return this.getSortedData().slice().filter((item) => {
                 const query = this.filter.toLowerCase(),
-                      itemName = (item.name).toLowerCase();
+                    itemName = (item.name).toLowerCase();
                 return itemName
-                                .includes(query) &&
-                                Date.parse(item.date.raw) > Date.parse(this.filterDate.from) &&
-                                Date.parse(item.date.raw) < Date.parse(this.filterDate.to);
+                    .includes(query) &&
+                    Date.parse(item.date.raw) > Date.parse(this.filterDate.from) &&
+                    Date.parse(item.date.raw) < Date.parse(this.filterDate.to);
             });
         });
     }

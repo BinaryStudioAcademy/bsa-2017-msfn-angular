@@ -75,4 +75,13 @@ export class TrainingHistoryService {
         const arr = string.split(':');
         return Number(arr[2]) + Number(arr[1]) * 60 + Number(arr[0]) * 3600;
     }
+
+    beautifyTotalTime(number) {
+        const hour = Math.floor(number / 3600);
+        const minutes = Math.floor((number - hour * 3600) / 60 );
+        const seconds = (number - hour * 3600 - minutes * 60);
+        const displayHour = hour ? hour + 'h ' : '';
+        const displayMinutes = minutes ? minutes + 'm ' : '';
+        return displayHour + displayMinutes + seconds + 's';
+    }
 }
