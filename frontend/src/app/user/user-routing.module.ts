@@ -1,3 +1,4 @@
+import { AchivememtsListComponent } from './user.components/achivememts-list/achivememts-list.component';
 import { GoalComponent } from './user.components/goal/goal.component';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { MetricsComponent } from './user.components/account-settings/metrics/metrics.component';
@@ -133,6 +134,10 @@ const userRoutes: Routes = [
             {
                 path: 'training-history/:id',
                 component: TrainingHistoryDetailComponent
+            },
+            {
+                path: 'achivements',
+                component: AchivememtsListComponent
             },
         ]
     }

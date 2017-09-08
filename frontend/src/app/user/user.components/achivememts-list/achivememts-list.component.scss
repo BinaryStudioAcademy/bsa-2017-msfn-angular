@@ -1,0 +1,61 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
+#achivements-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    position: relative;
+    width: 70vw;
+    min-height: 500px;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 260px;
+    height: 180px;
+    margin: 10px;
+        color: $btn-color;
+    background-color: $gradient-to-color;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.achivement-main-text {
+    font-size: 18px;
+    margin: 5px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+
+.achivements-item-text {
+    font-size: 16px;
+    margin: 5px;
+    color: $text-main-color;
+    letter-spacing: 1px;
+}
+
+
+.item-container:hover {
+    background-color: #353535;
+    cursor: pointer;
+}
+.material-icons{
+    margin: 8px;
+    font-size: 40px;
+}
