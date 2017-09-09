@@ -41,6 +41,7 @@ $message-border-radius: 5px;
             display: flex;
             align-items: center;
             height: $header-height;
+            margin-right: 5px;
 
             .icon.minimize {
                 line-height: $header-height-total;

@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {WindowObj} from '../../../../services/window.service';
+import {ChatService} from '../../../../services/chat.service';
 
 @Component({
     selector: 'app-chat-window',
@@ -11,11 +13,13 @@ export class ChatWindowComponent implements OnInit {
     @Input() chat;
     private lastMessage = '';
     private keysPressed: any[] = [];
+    private userId = (this.window.data._injectedData as any).userId;
 
-    constructor() {
-    }
+    constructor(private window: WindowObj,
+                private chatService: ChatService) {}
 
     ngOnInit() {
+        console.log('init');
     }
 
     public resizeInput(shadowInput, input, event) {
@@ -59,7 +63,7 @@ export class ChatWindowComponent implements OnInit {
     }
 
     private sendMessage(message) {
-        console.log(message);
+        this.chatService.sendMessage(this.chat, message);
     }
 
     public toogleMinimized() {

@@ -15,6 +15,8 @@ export class ChatService {
     public data: Subject<any[]> = new Subject();
     public activeData: Subject<any[]> = new Subject();
 
+    private messagesPerPage = 20;
+
 
     constructor(private socketService: SocketService,
                 private encryptService: EncryptService,
@@ -30,8 +32,9 @@ export class ChatService {
                 return chat;
             });
 
-            data.forEach(room => {
-                this.socketService.joinRoom(room.room);
+            data.forEach(chat => {
+                this.socketService.joinRoom(chat.room);
+                this.loadMessages(chat);
             });
 
             this.chats = data;
@@ -50,6 +53,21 @@ export class ChatService {
                 }
             });
             this.changeChats();
+        });
+        this.socketService.addListener('get_messages:success', (result) => {
+            const data = JSON.parse(result);
+            console.log(data);
+            const chat = this.findRoomById(data.room);
+            if (!chat.messages) {
+                chat.messages = [];
+            }
+            chat.messages = chat.messages.concat(data.result);
+        });
+        this.socketService.addListener('new_message:success', (result) => {
+            const data = JSON.parse(result);
+            const chat = this.findRoomById(data.room);
+            chat.messages.push(data);
+            console.log(data);
         });
 
         this.loadChats();
@@ -84,6 +102,17 @@ export class ChatService {
         return chat.shift();
     }
 
+    public findRoomById(room) {
+        const chat = this.chats.filter(item => {
+            if (!item) {
+                return false;
+            }
+            return (item.room === room);
+        });
+
+        return chat.shift();
+    }
+
     public createRoom(reciever) {
         const data = {
             senderId: this.userId,
@@ -101,6 +130,7 @@ export class ChatService {
     }
 
     public openChat(chat) {
+        this.loadMessages(chat);
         if (this.activeChats.indexOf(chat) !== -1) {
             chat.minimized = false;
             this.changeActiveChats();
@@ -119,5 +149,27 @@ export class ChatService {
         room.active = false;
         this.activeChats.splice(this.activeChats.indexOf(room), 1);
         this.changeActiveChats();
+    }
+
+    public loadMessages(chat) {
+        const data = {
+            room: chat.room,
+            limit: this.messagesPerPage,
+            offset: 0
+        };
+        if (chat.messages && chat.messages.length > 0) {
+            data.offset = chat.messages.length;
+        }
+        this.socketService.send('get_messages', this.encryptService.encrypt(data));
+    }
+
+    public sendMessage(chat, message) {
+        console.log(chat, message);
+        const data = {
+            message: message,
+            sender: this.userId,
+            room: chat.room
+        };
+        this.socketService.send('new_message', this.encryptService.encrypt(data));
     }
 }

@@ -10,8 +10,7 @@ const ChatMessage = new Schema({
         index: true
     },
     room: {
-        type: ObjectId,
-        ref: 'chat'
+        type: String
     },
     date: {
         type: Date,

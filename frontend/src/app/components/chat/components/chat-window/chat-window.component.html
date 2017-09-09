@@ -8,74 +8,8 @@
         </div>
     </div>
     <div class="messages-wrapper">
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>tesfqwefqwfweqfqwfqwefqwfqwefqwefqwefwefwqef weqf wqef qwf qwef wqef weqt</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>tewqefqwfweqfwqefwfwq efqw ef qwef wqef wqef qwefw efqw efqw qefwqefwqefwqefst</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message left">
-            <div class='message-text'>test</div>
-        </div>
-        <div class="message">
-            <div class='message-text'>test</div>
+        <div *ngFor="let message of chat.messages" class="message" [class.left]="message.sender !== userId">
+            <div class='message-text'>message.message</div>
         </div>
     </div>
     <div class="new-message-wrap">

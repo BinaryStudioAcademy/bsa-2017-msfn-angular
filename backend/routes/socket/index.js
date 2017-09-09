@@ -25,6 +25,12 @@ module.exports = (function () {
         'check_user_online': (data, callback) => {
             const socketService = require('../../services/socketService');
             socketService.CheckUserOnline(data, callback);
+        },
+        'get_messages': (data, callback) => {
+            chatService.GetMessages(data, callback);
+        },
+        'new_message': (data, callback) => {
+            chatService.NewMessage(data, callback);
         }
     };
 })();

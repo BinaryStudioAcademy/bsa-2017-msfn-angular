@@ -30,9 +30,7 @@ SocketService.prototype.Broadcast = function(event, data) {
 };
 
 SocketService.prototype.BroadcastRoom = function(event, room, data) {
-    if (this.socket) {
-        this.io.sockets.in(room).emit(event, data);
-    }
+    this.io.sockets.in(room).emit(event, data);
 };
 
 SocketService.prototype.SetIO = function(io) {

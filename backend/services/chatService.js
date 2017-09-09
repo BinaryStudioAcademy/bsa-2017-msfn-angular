@@ -53,6 +53,42 @@ ChatService.prototype.GetRooms = function(data, callback) {
     })
 };
 
+ChatService.prototype.GetMessages = function(data, callback) {
+    const decryptedData = decryptService(data);
+
+    const {room, offset, limit} = decryptedData;
+
+    chatMessageRepository.get({
+        'filter': {
+            room: room
+        },
+        'limit': limit,
+        'offset': offset
+    }, (err, result) => {
+        if (err) return callback(err);
+
+        const newResult = {
+            room: room,
+            result: result
+        };
+
+        callback(null, newResult);
+    });
+};
+
+ChatService.prototype.NewMessage = function(data, callback) {
+    const decryptedData = decryptService(data);
+
+    chatMessageRepository.add(decryptedData, (err, result) => {
+         if (err) return callback(err);
+
+         console.log(result);
+
+         socketService.BroadcastRoom('new_message:success', result.room, result);
+
+         callback(null, result);
+    });
+};
 
 
 module.exports = new ChatService();
