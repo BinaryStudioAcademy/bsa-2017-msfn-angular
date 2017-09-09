@@ -9,7 +9,7 @@
     </div>
     <div class="messages-wrapper">
         <div *ngFor="let message of chat.messages" class="message" [class.left]="message.sender !== userId">
-            <div class='message-text'>message.message</div>
+            <div class='message-text'>{{message.message}}</div>
         </div>
     </div>
     <div class="new-message-wrap">

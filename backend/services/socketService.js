@@ -1,10 +1,13 @@
+function SocketService() {
+    this.users = [];
+}
+
+module.exports = new SocketService();
+
 const ApiError = require('./apiErrorService');
 const config = require('../routes/socket');
 const decryptService = require('./decryptService');
 
-function SocketService() {
-    this.users = [];
-}
 SocketService.prototype.addListener = function(event, callback) {
     if (this.socket) {
         this.socket.on(event, (data) => {
@@ -96,17 +99,3 @@ SocketService.prototype.InitListeners = function(socket) {
         }
     }
 };
-
-SocketService.prototype.CheckUserOnline = function(data, callback) {
-    const decryptedData = decryptService(data);
-    const userId = decryptedData.user;
-
-    const userSocket = this.GetUserById(userId);
-
-    if (!userSocket) {
-        return callback(null, {user: userId, online: false});
-    }
-    callback(null, {user: userId, online: true});
-};
-
-module.exports = new SocketService();

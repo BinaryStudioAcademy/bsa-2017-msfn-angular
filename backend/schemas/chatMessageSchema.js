@@ -19,6 +19,10 @@ const ChatMessage = new Schema({
     isRemoved: {
         type: Boolean,
         default: false
+    },
+    read: {
+        type: Boolean,
+        default: false
     }
 });
 

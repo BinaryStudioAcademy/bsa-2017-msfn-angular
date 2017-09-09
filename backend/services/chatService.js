@@ -1,3 +1,9 @@
+function ChatService() {
+
+}
+
+module.exports = new ChatService();
+
 const ApiError = require('./apiErrorService');
 const decryptService = require('./decryptService');
 const userRepository = require('../repositories/userRepository');
@@ -5,10 +11,6 @@ const chatRepository = require('../repositories/chatsRepository');
 const chatMessageRepository = require('../repositories/chatMessageRepository');
 const socketService = require('../services/socketService');
 const cryptojs = require("crypto-js");
-
-function ChatService() {
-
-}
 
 ChatService.prototype.CreateRoom = function(data, callback) {
     const decryptedData = decryptService(data);
@@ -82,13 +84,23 @@ ChatService.prototype.NewMessage = function(data, callback) {
     chatMessageRepository.add(decryptedData, (err, result) => {
          if (err) return callback(err);
 
-         console.log(result);
+        console.log(result);
 
-         socketService.BroadcastRoom('new_message:success', result.room, result);
+         socketService.BroadcastRoom('new_message:success', result.room, JSON.stringify(result));
 
-         callback(null, result);
+         // callback(null, result);
     });
 };
 
+ChatService.prototype.CheckUserOnline = function(data, callback) {
+    const decryptedData = decryptService(data);
+    const userId = decryptedData.user;
 
-module.exports = new ChatService();
+    const userSocket = socketService.GetUserById(userId);
+
+    if (!userSocket) {
+        return callback(null, {user: userId, online: false});
+    }
+    callback(null, {user: userId, online: true});
+};
+
