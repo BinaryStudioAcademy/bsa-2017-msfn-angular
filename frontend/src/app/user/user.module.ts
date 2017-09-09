@@ -54,6 +54,7 @@ import { ArticleDetailComponent } from './user.components/article-detail/article
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
+import { MessagePostingComponent } from './user.components/message-posting/message-posting.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 import { AchievementReceivedDialogComponent } from './user.components/achievement-received-dialog/achievement-received-dialog.component';
 import { AchievementInfoDialogComponent } from './user.components/achievement-info-dialog/achievement-info-dialog.component';
@@ -114,6 +115,7 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
         ArticleDetailComponent,
         TrainingHistoryComponent,
         TrainingHistoryDetailComponent,
+        MessagePostingComponent,
         AchievementsListComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,

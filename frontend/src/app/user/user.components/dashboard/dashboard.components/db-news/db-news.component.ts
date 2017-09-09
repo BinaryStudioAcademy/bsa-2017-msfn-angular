@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { WindowObj } from '../../../../../services/window.service';
+import { IMessage } from '../../../../../models/message';
+import { MessagePostingService } from '../../../message-posting/message-posting.service';
 import { PageEvent } from '@angular/material';
+import { DateService } from '../../../../../services/date.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-db-news',
@@ -7,38 +12,120 @@ import { PageEvent } from '@angular/material';
     styleUrls: [
         './db-news.component.scss',
         '../../dashboard.component.scss'
-    ]
+    ],
+    providers: [MessagePostingService]
 })
 export class DbNewsComponent implements OnInit {
 
-    constructor() { }
+    constructor(private window: WindowObj,
+                private messagePostingService: MessagePostingService,
+                private dateService: DateService) { }
 
     title = 'News Feed';
+    userId = (this.window.data._injectedData as any).userId;
 
-    news = [
-        {
-            title: 'Lorem',
-            date: '2017-08-23',
-            text: 'Sed scelerisque pretium turpis, varius euismod nunc malesuada sit amet.' +
-            'Ut ultricies eleifend consequat. Morbi elementum arcu ipsum, id maximus sem porttitor quis.'
-        },
-        {
-            title: 'Ipsum',
-            date: '2017-08-22',
-            text: 'Donec quis lorem non ante ultrices porta.' +
-            'Cras ac rhoncus mauris. Fusce ac vestibulum est, ultricies tincidunt justo.'
-        },
-        {
-            title: 'Dolor sit',
-            date: '2017-08-21',
-            text: 'Aliquam ullamcorper lacus et dui interdum, quis lobortis lorem fringilla.' +
-            'Aenean auctor porttitor est, eget euismod sapien gravida posuere.'
-        }
-    ];
+    news = [];
+    messages = [];
 
-    selIndex = 0;
-    indexes = [...Array(this.news.length).keys()];
+    paginatorOutput: any[];
+
+    pageSizeOptions = [2, 4, 5];
+    pageEvent: PageEvent = {
+        pageIndex: 0,
+        pageSize: 2,
+        length: this.news.length
+    };
+
+    posting: boolean = false;
+    postData: IMessage;
+
+    postFormControl = new FormControl('', [
+        Validators.required,
+        Validators.maxLength(300)
+    ]);
+
 
     ngOnInit() {
+        this.getData();
+    }
+
+    getData() {
+        this.messagePostingService.getMessages(this.userId, data => {
+            if (data[0].hasOwnProperty('userId')) {
+                this.messages = data;
+
+                for (const message of this.messages) {
+                    message.avatar = this.window.data._injectedData.userPhoto;
+                    message.user = this.window.data._injectedData.userFirstName +
+                        this.window.data._injectedData.userLastName;
+                    message.dateOutput = this.dateService
+                        .convertDateToIso(new Date(message.date), true);
+                    message.editing = false;
+                }
+                this.news = this.news.concat(this.messages);
+
+                this.makePaginatorOutput();
+            }
+        });
+    }
+
+    makePaginatorOutput() {
+        this.paginatorOutput = [];
+        const startPos = this.pageEvent.pageIndex * this.pageEvent.pageSize;
+        let pageSize = startPos + this.pageEvent.pageSize;
+        pageSize = pageSize > this.news.length ? this.news.length : pageSize;
+
+        for (let i = startPos; i < pageSize; i++) {
+            this.paginatorOutput.push(this.news[i]);
+        }
+    }
+
+    openMessageInput(): void {
+        this.posting = true;
+    }
+
+    closeMessageInput() {
+        this.posting = false;
+    }
+
+    updateData() {
+        this.news = [];
+        this.getData();
+    }
+
+    updateMessage(post): void {
+        if (post.editing) {
+            if (post.body && this.postFormControl.valid) {
+                this.postData = {
+                    userId: this.userId,
+                    date: new Date(),
+                    body: post.body
+                };
+
+                this.messagePostingService.updateMessage(post._id, this.postData, () => {
+                    setTimeout(() => {
+                        this.updateData();
+                    }, 500);
+                    post.editing = false;
+                });
+            }
+        } else {
+            post.editing = true;
+            post.oldBody = post.body;
+        }
+    }
+
+    deleteMessage(id): void {
+        this.messagePostingService.deleteMessage(id, () => {
+            setTimeout(() => {
+                this.updateData();
+            }, 500);
+        });
+    }
+
+    closeEditInput(post) {
+        post.editing = false;
+        post.body = post.oldBody;
+        delete post.oldBody;
     }
 }

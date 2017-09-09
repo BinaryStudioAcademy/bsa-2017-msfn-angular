@@ -22,7 +22,7 @@ module.exports = function (app) {
         foodRoutes: require('./foodRoutes')(app),
         foodTypeRoutes: require('./foodTypeRoutes')(app),
         articlesRoutes: require('./articlesRoutes')(app),
-        postRoutes: require('./postRoutes')(app),
+        messageRoutes: require('./messageRoutes')(app),
         achievementsRoutes: require('./achievementsRoutes')(app),
     };
 };

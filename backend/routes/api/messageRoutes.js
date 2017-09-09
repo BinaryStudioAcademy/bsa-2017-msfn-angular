@@ -1,12 +1,11 @@
 const
     apiResponse = require('express-api-response'),
-    postRepository = require('../../repositories/postRepository'),
-    postService = require('../../services/postService'),
-    baseUrl = '/api/post/';
+    messageService = require('../../services/messageService'),
+    baseUrl = '/api/message/';
 
 module.exports = app => {
-    app.get(baseUrl, (req, res, next) => {
-        postService.getItemsByUserId(req._id, (err, data) => {
+    app.get(`${baseUrl}user/:id`, (req, res, next) => {
+        messageService.getItemsByUserId(req, (err, data) => {
             if (!data.length) {
                 data = [{}];
             }
@@ -17,23 +16,23 @@ module.exports = app => {
     }, apiResponse);
 
     app.post(baseUrl, (req, res, next) => {
-        postService.addItem(req, (err, data) => {
+        messageService.addItem(req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.put(`${baseUrl}edit/:id`, (req, res, next) => {
-        postService.updateItem(req.params.id, req.body, (err, data) => {
+    app.put(`${baseUrl}:id`, (req, res, next) => {
+        messageService.updateItem(req.params.id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.delete(`${baseUrl}delete/:id`, (req, res, next) => {
-        postService.deleteItem(req.params.id, (err, data) => {
+    app.delete(`${baseUrl}:id`, (req, res, next) => {
+        messageService.deleteItem(req.params.id, req.session.passport.user, (err, data) => {
             res.data = data;
             res.err = err;
             next();

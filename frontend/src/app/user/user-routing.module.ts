@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
+=======
+>>>>>>> c63f660860764a8e9d1d42afa33623e871e0cc3f
 import { GoalComponent } from './user.components/goal/goal.component';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { MetricsComponent } from './user.components/account-settings/metrics/metrics.component';
@@ -23,13 +26,12 @@ import { ExerciseTableComponent } from './user.components/exercise-table/exercis
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 import { PlansComponent } from './user.components/plans/plans.component';
 import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
-import { CoachComponent } from './user.components/coach/coach.component';
 import { ArticleAddComponent } from './user.components/article-add/article-add.component';
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
-
+import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 
 const userRoutes: Routes = [
     {
@@ -136,7 +138,11 @@ const userRoutes: Routes = [
                 component: TrainingHistoryDetailComponent
             },
             {
+<<<<<<< HEAD
                 path: 'achievements',
+=======
+                path: 'achivements',
+>>>>>>> c63f660860764a8e9d1d42afa33623e871e0cc3f
                 component: AchievementsListComponent
             },
         ]
