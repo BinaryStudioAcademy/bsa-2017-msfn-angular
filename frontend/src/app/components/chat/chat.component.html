@@ -4,12 +4,20 @@
 </button>
 <div class="chats-list-wrapper active" [class.active]="chatListVisible">
     <div class="users-wrapper">
-        <div class="user-wrapper" *ngFor="let chat of chats">
-            <div class="user-image" [style.background-image]="'url(' + chat.user.userPhoto + ')'"></div>
-            <div class="user-name">{{chat.user.fullName}}</div>
+        <div class="user-wrapper"
+             *ngFor="let chat of chats"
+             (click)="startChat(chat)">
+            <div *ngIf="chat.user"
+                 class="user-image"
+                 [style.background-image]="'url(' + chat.user.userPhoto + ')'"></div>
+            <div *ngIf="chat.user"
+                 class="user-name">{{chat.user.fullName}}</div>
         </div>
     </div>
 </div>
 <div class="chat-windows">
-    <app-chat-window class="chat-window"></app-chat-window>
+    <app-chat-window *ngFor="let activeChat of activeChats"
+                     [chat]="activeChat"
+                     (close)="closeChat($event)"
+                     class="chat-window"></app-chat-window>
 </div>

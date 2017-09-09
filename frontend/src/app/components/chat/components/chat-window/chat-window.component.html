@@ -1,10 +1,10 @@
 <div class="chat-wrapper" [class.minimized]="minimized">
     <div class="chat-header">
-        <span class="chat-user" (click)="toogleMinimized()">Scarlett Johanson</span>
+        <span class="chat-user" (click)="toogleMinimized()">{{chat.user.fullName}}</span>
         <div class="chat-header-icons">
             <md-icon class="minimize icon" (click)="toogleMinimized()">{{(minimized) ? 'crop_square' : 'remove'}}
             </md-icon>
-            <md-icon class="close icon">clear</md-icon>
+            <md-icon class="close icon" (click)="closeChat()">clear</md-icon>
         </div>
     </div>
     <div class="messages-wrapper">

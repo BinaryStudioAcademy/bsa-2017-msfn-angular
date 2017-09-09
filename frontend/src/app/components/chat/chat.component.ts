@@ -13,13 +13,18 @@ export class ChatComponent implements OnInit, OnChanges {
     private userId = (this.window.data._injectedData as any).userId;
 
     public chats: any[] = [];
+    public activeChats: any[] = [];
 
     constructor(private window: WindowObj,
                 private chatService: ChatService) {
         const changesSubscribe = this.chatService.data.subscribe(
             value => {
-                console.log(value);
                 this.chats = value;
+            }
+        );
+        const activeChangesSubscribe = this.chatService.activeData.subscribe(
+            value => {
+                this.activeChats = value;
             }
         );
     }
@@ -40,5 +45,13 @@ export class ChatComponent implements OnInit, OnChanges {
 
     public hideChat() {
         this.chatListVisible = false;
+    }
+
+    public startChat(chat) {
+        this.chatService.startChat(chat.user._id);
+    }
+
+    public closeChat(chat) {
+        this.chatService.closeChat(chat);
     }
 }

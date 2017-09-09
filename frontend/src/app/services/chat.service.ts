@@ -10,8 +10,10 @@ export class ChatService {
 
     public userId = (this.window.data._injectedData as any).userId;
     public chats: any[] = [];
+    public activeChats: any[] = [];
 
     public data: Subject<any[]> = new Subject();
+    public activeData: Subject<any[]> = new Subject();
 
 
     constructor(private socketService: SocketService,
@@ -67,12 +69,16 @@ export class ChatService {
             return;
         }
         this.socketService.joinRoom(room.room);
-        console.log(room);
+        this.openChat(room);
+        this.changeChats();
     }
 
     public findRoom(reciever) {
         const chat = this.chats.filter(item => {
-            return (item.users[0]._id === reciever || item.users[1]._id === reciever);
+            if (!item || !item.user) {
+                return false;
+            }
+            return (item.user._id === reciever);
         });
 
         return chat.shift();
@@ -88,5 +94,28 @@ export class ChatService {
 
     public changeChats() {
         this.data.next(this.chats);
+    }
+
+    public changeActiveChats() {
+        this.activeData.next(this.activeChats);
+    }
+
+    public openChat(chat) {
+        if (this.activeChats.indexOf(chat) !== -1) {
+            return;
+        }
+        chat.active = true;
+        this.activeChats.push(chat);
+        if (this.activeChats.length > 3) {
+            this.activeChats.shift();
+        }
+        this.changeActiveChats();
+    }
+
+    public closeChat(chat) {
+        const room = this.findRoom(chat.user._id);
+        room.active = false;
+        this.activeChats.splice(this.activeChats.indexOf(room), 1);
+        this.changeActiveChats();
     }
 }

@@ -4,7 +4,7 @@
 
 $header-height: 25px;
 $header-height-total: 30px;
-$icons-width: 20px;
+$icons-width: 14px;
 $message-border-radius: 5px;
 
 .chat-wrapper {
@@ -16,6 +16,7 @@ $message-border-radius: 5px;
     color: $text-dark-color;
     box-shadow: 0 0 3px 1px $text-dark-color;
     transition: height 0.3s, width 0.3s;
+    position: relative;
 
     .chat-header {
         width: 100%;
@@ -41,10 +42,8 @@ $message-border-radius: 5px;
             align-items: center;
             height: $header-height;
 
-            .minimize {
+            .icon.minimize {
                 line-height: $header-height-total;
-            }
-            .close {
             }
             .icon {
                 width: $icons-width;
@@ -53,6 +52,7 @@ $message-border-radius: 5px;
                 opacity: 0.5;
                 cursor: pointer;
                 transition: opacity 0.3s;
+                line-height: $header-height;
             }
             .icon:hover {
                 opacity: 0.8;
@@ -140,8 +140,8 @@ $message-border-radius: 5px;
 
     .chat-header {
         .chat-header-icons {
-            .minimize {
-                line-height: initial;
+            .icon.minimize {
+                line-height: inherit;
             }
         }
     }

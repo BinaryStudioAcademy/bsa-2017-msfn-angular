@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'app-chat-window',
@@ -7,6 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ChatWindowComponent implements OnInit {
 
+    @Output() close: EventEmitter<any> = new EventEmitter<any>();
+    @Input() chat;
     private lastMessage = '';
     private keysPressed: any[] = [];
     public minimized = false;
@@ -61,15 +63,11 @@ export class ChatWindowComponent implements OnInit {
         console.log(message);
     }
 
-    public minimize() {
-        this.minimized = true;
-    }
-
-    public maximize() {
-        this.minimized = false;
-    }
-
     public toogleMinimized() {
         this.minimized = !this.minimized;
+    }
+
+    public closeChat() {
+        this.close.emit(this.chat);
     }
 }
