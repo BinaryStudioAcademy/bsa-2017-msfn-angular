@@ -102,6 +102,8 @@ export class ChatService {
 
     public openChat(chat) {
         if (this.activeChats.indexOf(chat) !== -1) {
+            chat.minimized = false;
+            this.changeActiveChats();
             return;
         }
         chat.active = true;

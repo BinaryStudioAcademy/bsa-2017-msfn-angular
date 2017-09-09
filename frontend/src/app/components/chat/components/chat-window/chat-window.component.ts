@@ -11,7 +11,6 @@ export class ChatWindowComponent implements OnInit {
     @Input() chat;
     private lastMessage = '';
     private keysPressed: any[] = [];
-    public minimized = false;
 
     constructor() {
     }
@@ -64,7 +63,7 @@ export class ChatWindowComponent implements OnInit {
     }
 
     public toogleMinimized() {
-        this.minimized = !this.minimized;
+        this.chat.minimized = !this.chat.minimized;
     }
 
     public closeChat() {
