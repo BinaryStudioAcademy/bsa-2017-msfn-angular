@@ -3,13 +3,9 @@ const Repository = require('./generalRepository'),
 
 function AchievementsRepository() {
     Repository.prototype.constructor.call(this);
-    AchievementsRepository.prototype.addAchievement = addAchievement;
     this.model = Achievements;
-
-    function addAchievement(data, callback) {
-        const model = this.model;
-        const newItem = new model(data);
-        newItem.save(callback);
-    }
 }
+
+AchievementsRepository.prototype = new Repository();
+
 module.exports = new AchievementsRepository();

@@ -6,7 +6,7 @@
     background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
     background: linear-gradient($direction, $color-stops);
 }
-#achivements-container {
+#achievements-container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -32,8 +32,8 @@
     background-color: $gradient-to-color;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.achivement-main-text {
-    font-size: 18px;
+.achievement-main-text {
+    font-size: 24px;
     margin: 5px;
     letter-spacing: 1px;
     white-space: nowrap;
@@ -43,19 +43,12 @@
 }
 
 
-.achivements-item-text {
-    font-size: 16px;
-    margin: 5px;
-    color: $text-main-color;
-    letter-spacing: 1px;
-}
-
 
 .item-container:hover {
     background-color: #353535;
     cursor: pointer;
 }
-.material-icons{
-    margin: 8px;
-    font-size: 40px;
+.achievement-img {
+    width: 128px;
+    height: 128px;
 }

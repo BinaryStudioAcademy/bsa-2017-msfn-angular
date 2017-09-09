@@ -1,15 +1,22 @@
+import { AchievementsListService } from './achievements-list.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-achievements-list',
   templateUrl: './achievements-list.component.html',
-  styleUrls: ['./achievements-list.component.scss']
+  styleUrls: ['./achievements-list.component.scss'],
+  providers: [AchievementsListService]
 })
 export class AchievementsListComponent implements OnInit {
 
-  constructor() { }
+  achievements = [];
+
+  constructor(private achievementsListService: AchievementsListService) { }
 
   ngOnInit() {
+    this.achievementsListService.getAllAchievements((data) => {
+      this.achievements = data;
+    });
   }
   openDialog(id) {
     console.log(id);

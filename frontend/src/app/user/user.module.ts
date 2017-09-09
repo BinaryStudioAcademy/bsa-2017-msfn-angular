@@ -55,6 +55,8 @@ import { TrainingHistoryComponent } from './user.components/training-history/tra
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
+import { AchievementReceivedDialogComponent } from './user.components/achievement-received-dialog/achievement-received-dialog.component';
+import { AchievementInfoDialogComponent } from './user.components/achievement-info-dialog/achievement-info-dialog.component';
 
 @NgModule({
     imports: [
@@ -113,6 +115,8 @@ import { AchievementsListComponent } from './user.components/achievements-list/a
         TrainingHistoryComponent,
         TrainingHistoryDetailComponent,
         AchievementsListComponent,
+        AchievementReceivedDialogComponent,
+        AchievementInfoDialogComponent,
     ],
     providers: [
         ForAllUserGuard,
@@ -122,7 +126,9 @@ import { AchievementsListComponent } from './user.components/achievements-list/a
         FinishDialogComponent,
         ChooseTrainDialogComponent,
         ExerciseDescriptionComponent,
-        GoalEditDialogComponent
+        GoalEditDialogComponent,
+        AchievementReceivedDialogComponent,
+        AchievementInfoDialogComponent,
     ]
 })
 export class UserModule {

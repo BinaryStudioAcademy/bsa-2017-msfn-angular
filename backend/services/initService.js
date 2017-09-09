@@ -70,8 +70,14 @@ const mongoose = require('mongoose'),
     achievements = [{
         name: 'Be fit',
         message: 'Cool message',
-        icon: 'some moked url',
-        goalType: 'Weight'
+        icon: './resources/achievement-image/older_2.png',
+        measureName: 'weight'
+    },
+    {
+        name: 'Sprinter',
+        message: 'Cool message',
+        icon: './resources/achievement-image/level_1.png',
+        measureName: 'distance'
     }],
     measurments = [
         {
@@ -384,8 +390,12 @@ module.exports = function () {
     goals.forEach((elem) => {
         goalService.createGoal(elem, () => { });
     });
-    achievements.forEach((elem) => {
-        achievementsRepository.addAchievement(elem, () => { });
-    });
+    achievementsRepository.getAll((err, data)=> {
+        if(data === []){
+            achievements.forEach((elem) => {
+                achievementsRepository.add(elem, () => { });
+            });
+        }
+    })
 
 };

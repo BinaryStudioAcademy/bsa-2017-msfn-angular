@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Achivements = new Schema({
+const Achievements = new Schema({
    name: String,
    message: String,
    icon: String,
-   goalType: String,
+   measureName: String,
    isRemoved: {
        type: Boolean,
        default: false
@@ -14,4 +14,4 @@ const Achivements = new Schema({
 
 
 
-module.exports = mongoose.model('Achivements', Achivements);
+module.exports = mongoose.model('Achievements', Achievements);
