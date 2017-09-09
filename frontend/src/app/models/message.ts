@@ -1,7 +1,7 @@
 export interface IMessage {
-    userId: string;
     date: Date;
     body: string;
+    userId?: string;
     _id?: string;
     isRemoved?: boolean;
 }

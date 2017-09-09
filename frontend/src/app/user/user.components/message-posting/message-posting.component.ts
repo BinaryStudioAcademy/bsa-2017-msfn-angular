@@ -5,7 +5,7 @@ import { WindowObj } from '../../../services/window.service';
 import { MessagePostingService } from './message-posting.service';
 
 @Component({
-    selector: 'app-post-dialog',
+    selector: 'app-message-posting',
     templateUrl: './message-posting.component.html',
     styleUrls: ['./message-posting.component.scss'],
     providers: [MessagePostingService]

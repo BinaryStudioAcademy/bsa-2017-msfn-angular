@@ -13,12 +13,34 @@
                 <div class="post-text-block">
                     <p class="post-name">{{ post.user }}</p>
                     <p class="post-date">{{ post.dateOutput }}</p>
-
                     <div class="message-handler">
-                        <p class="post-edit" (click)="updateMessage(post._id)">Edit</p>
-                        <p class="post-delete" (click)="deleteMessage(post._id)">Delete</p>
+                        <p class="post-edit" (click)="updateMessage(post)">{{ post.editing ? 'Save' : 'Edit' }}</p>
+                        <p class="post-delete" (click)="deleteMessage(post)">Delete</p>
                     </div>
-                    <p class="post-text">{{ post.body }}</p>
+
+                    <div id="edit-container" *ngIf="post.editing">
+                        <button class="material-icons close" (click)="closeEditInput(post)">close</button>
+                        <md-input-container class="input-row">
+                        <textarea
+                            mdInput
+                            autofocus
+                            type="text"
+                            name="post"
+                            placeholder="Message text"
+                            required
+                            [(ngModel)]="post.body"
+                            [formControl]="postFormControl">
+                        </textarea>
+                            <md-error *ngIf="postFormControl.hasError('required')">
+                                Message text is required
+                            </md-error>
+                            <md-error *ngIf="postFormControl.hasError('maxlength')">
+                                Message should contain no more than 300 characters
+                            </md-error>
+                        </md-input-container>
+                    </div>
+
+                    <p class="post-text" *ngIf="!post.editing">{{ post.body }}</p>
                 </div>
             </div>
         </div>
@@ -32,7 +54,7 @@
             (click)="makePaginatorOutput()">
         </md-paginator>
 
-        <app-post-dialog *ngIf="posting" (hideInput)="updateData(); closeMessageInput()"></app-post-dialog>
+        <app-message-posting *ngIf="posting" (hideInput)="updateData(); closeMessageInput()"></app-message-posting>
 
         <div id="message-button" *ngIf="!posting">
             <button md-icon-button type="button" (click)="openMessageInput()">

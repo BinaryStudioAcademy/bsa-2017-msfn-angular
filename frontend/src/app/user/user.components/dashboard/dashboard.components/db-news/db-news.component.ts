@@ -4,6 +4,7 @@ import { IMessage } from '../../../../../models/message';
 import { MessagePostingService } from '../../../message-posting/message-posting.service';
 import { PageEvent } from '@angular/material';
 import { DateService } from '../../../../../services/date.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-db-news',
@@ -38,6 +39,12 @@ export class DbNewsComponent implements OnInit {
     posting: boolean = false;
     postData: IMessage;
 
+    postFormControl = new FormControl('', [
+        Validators.required,
+        Validators.maxLength(300)
+    ]);
+
+
     ngOnInit() {
         this.getData();
     }
@@ -53,9 +60,9 @@ export class DbNewsComponent implements OnInit {
                         this.window.data._injectedData.userLastName;
                     message.dateOutput = this.dateService
                         .convertDateToIso(new Date(message.date), true);
+                    message.editing = false;
                 }
                 this.news = this.news.concat(this.messages);
-                console.log(this.news);
 
                 this.makePaginatorOutput();
             }
@@ -86,9 +93,26 @@ export class DbNewsComponent implements OnInit {
         this.getData();
     }
 
-    updateMessage(id): void {
-        console.log('UPDATE', id);
+    updateMessage(post): void {
+        if (post.editing) {
+            if (post.body && this.postFormControl.valid) {
+                this.postData = {
+                    userId: this.userId,
+                    date: new Date(),
+                    body: post.body
+                };
 
+                this.messagePostingService.updateMessage(post._id, this.postData, () => {
+                    setTimeout(() => {
+                        this.updateData();
+                    }, 500);
+                    post.editing = false;
+                });
+            }
+        } else {
+            post.editing = true;
+            post.oldBody = post.body;
+        }
     }
 
     deleteMessage(id): void {
@@ -97,5 +121,11 @@ export class DbNewsComponent implements OnInit {
                 this.updateData();
             }, 500);
         });
+    }
+
+    closeEditInput(post) {
+        post.editing = false;
+        post.body = post.oldBody;
+        delete post.oldBody;
     }
 }

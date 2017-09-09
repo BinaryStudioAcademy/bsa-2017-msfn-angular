@@ -25,6 +25,7 @@
 
     p {
         display: inline-block;
+        word-break: break-word;
     }
 
     .post-name {
@@ -52,6 +53,10 @@
             cursor: pointer;
             text-decoration: underline;
         }
+
+        .post-delete {
+            margin-left: $mini-indent;
+        }
     }
 
     .post-text {
@@ -65,6 +70,28 @@
     margin-bottom: $standard-indent;
     padding-bottom: $standard-indent;
     border-bottom: 1px solid $text-main-color;
+}
+
+md-input-container {
+    width: 90%;
+
+    textarea {
+        height: 100px;
+    }
+}
+
+.close {
+    float: right;
+    padding: 0;
+    border: 0;
+    font-size: 18px;
+    color: $text-second-color;
+    background-color: transparent;
+}
+
+.close:hover {
+    cursor: pointer;
+    color: $text-main-color;
 }
 
 #message-button {
@@ -83,7 +110,7 @@
     }
 }
 
-app-post-dialog {
+app-message-posting {
     width: 100%;
     margin-top: $standard-indent;
 }
