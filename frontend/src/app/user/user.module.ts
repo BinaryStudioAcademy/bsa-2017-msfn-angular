@@ -54,7 +54,7 @@ import { ArticleDetailComponent } from './user.components/article-detail/article
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
-import { AchivememtsListComponent } from './user.components/achivememts-list/achivememts-list.component';
+import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 
 @NgModule({
     imports: [
@@ -112,7 +112,7 @@ import { AchivememtsListComponent } from './user.components/achivememts-list/ach
         ArticleDetailComponent,
         TrainingHistoryComponent,
         TrainingHistoryDetailComponent,
-        AchivememtsListComponent,
+        AchievementsListComponent,
     ],
     providers: [
         ForAllUserGuard,
