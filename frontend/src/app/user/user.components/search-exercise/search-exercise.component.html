@@ -14,7 +14,7 @@
     <div *ngIf="exercsesShow" class="exercise-wrap">
         <div *ngFor="let exercise of exercisesList" class="exercise-item">
             <h4 md-line (click)="showDescription(exercise)">{{exercise.name}}</h4>
-            <md-checkbox [id]="exercise._id" [checked]="exercise.checked" (change)="selectExercise($event)" class="add">Add to my plan</md-checkbox>
+            <md-checkbox [id]="exercise._id" [checked]="exercise.checked" (change)="selectExercise($event)" class="add"></md-checkbox>
         </div>
     </div>
     <button *ngIf="exercsesShow" md-button class="btn" md-dialog-close>ok</button>
