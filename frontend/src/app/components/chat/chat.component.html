@@ -1,6 +1,7 @@
 <button md-raised-button class="show-chats"
         [class.active]="chatListVisible"
-        (click)="toggleChat()">{{(chatListVisible) ? 'Hide' : 'Show'}} chats list</button>
+        (click)="toggleChat()">{{(chatListVisible) ? 'Hide' : 'Show'}} chats list
+</button>
 <div class="chats-list-wrapper active" [class.active]="chatListVisible">
     <div class="users-wrapper">
         <div class="user-wrapper" *ngFor="let chat of chats">
@@ -8,4 +9,7 @@
             <div class="user-name">{{chat.user.fullName}}</div>
         </div>
     </div>
+</div>
+<div class="chat-windows">
+    <app-chat-window class="chat-window"></app-chat-window>
 </div>

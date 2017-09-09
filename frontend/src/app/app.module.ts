@@ -44,6 +44,7 @@ import { ExerciseEditDialogComponent } from './user/user.components/exercise-edi
 import {ConstantsService} from './services/constants.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatService } from './services/chat.service';
+import { ChatWindowComponent } from './components/chat/components/chat-window/chat-window.component';
 
 @NgModule({
     imports: [
@@ -75,6 +76,7 @@ import { ChatService } from './services/chat.service';
         NotificationDataDialogComponent,
         HeaderNotificationsComponent,
         ChatComponent,
+        ChatWindowComponent,
     ],
     providers: [
         ToasterService,

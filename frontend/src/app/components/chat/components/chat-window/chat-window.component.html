@@ -1,0 +1,89 @@
+<div class="chat-wrapper" [class.minimized]="minimized">
+    <div class="chat-header">
+        <span class="chat-user" (click)="toogleMinimized()">Scarlett Johanson</span>
+        <div class="chat-header-icons">
+            <md-icon class="minimize icon" (click)="toogleMinimized()">{{(minimized) ? 'crop_square' : 'remove'}}
+            </md-icon>
+            <md-icon class="close icon">clear</md-icon>
+        </div>
+    </div>
+    <div class="messages-wrapper">
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>tesfqwefqwfweqfqwfqwefqwfqwefqwefqwefwefwqef weqf wqef qwf qwef wqef weqt</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>tewqefqwfweqfwqefwfwq efqw ef qwef wqef wqef qwefw efqw efqw qefwqefwqefwqefst</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message left">
+            <div class='message-text'>test</div>
+        </div>
+        <div class="message">
+            <div class='message-text'>test</div>
+        </div>
+    </div>
+    <div class="new-message-wrap">
+        <textarea name="message"
+                  #input
+                  class="new-message-input"
+                  (keydown)="sendMessageInit($event, input)"
+                  (keyup)="resizeInput(shadowInput, input, $event)"></textarea>
+        <div #shadowInput [innerHTML]="input.value" class="new-message-input hidden"></div>
+    </div>
+</div>

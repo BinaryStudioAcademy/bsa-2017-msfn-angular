@@ -40,9 +40,6 @@ ChatService.prototype.GetRooms = function(data, callback) {
                 $in: [userId]
             }
         },
-        unwind: {
-
-        },
         populate: [
             {
                 path: 'users',

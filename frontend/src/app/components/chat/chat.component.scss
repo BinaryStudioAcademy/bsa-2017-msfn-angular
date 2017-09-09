@@ -51,7 +51,9 @@
 
 .users-wrapper {
 
+    max-height: 100%;
     padding: 10px 0;
+    overflow-y: auto;
 
     .user-wrapper {
         height: 44px;
@@ -82,4 +84,11 @@
     .user-wrapper:hover {
         background-color: $dark-main-color;
     }
+}
+
+.chat-windows {
+    position: fixed;
+    right: 250px;
+    bottom: 0;
+    z-index: 100;
 }
