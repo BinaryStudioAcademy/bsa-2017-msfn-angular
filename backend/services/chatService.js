@@ -21,7 +21,7 @@ ChatService.prototype.CreateRoom = function(data, callback) {
     }, (err, result) => {
         if (err) return callback(err);
 
-        chatRepository.model.populate(result, {path: 'users'}, (err, populatedResult) => {
+        chatRepository.model.populate(result, {path: 'users', select: ['firstName', 'lastName', 'fullName', '_id', 'userPhoto']}, (err, populatedResult) => {
             if (err) return callback(err);
 
             callback(null, populatedResult);

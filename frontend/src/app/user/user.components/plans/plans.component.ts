@@ -145,7 +145,6 @@ export class PlansComponent implements OnInit {
                     }
                 });
             }).then(() => {
-            console.log(this);
             this.loading = false;
         });
     }
@@ -194,7 +193,6 @@ export class PlansComponent implements OnInit {
                     }
                 });
             }).then(() => {
-            console.log(this);
             this.loading = false;
         });
     }

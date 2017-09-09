@@ -12,20 +12,22 @@ export class ChatComponent implements OnInit, OnChanges {
     public chatListVisible = false;
     private userId = (this.window.data._injectedData as any).userId;
 
-    public chats = [];
+    public chats: any[] = [];
 
     constructor(private window: WindowObj,
                 private chatService: ChatService) {
+        const changesSubscribe = this.chatService.data.subscribe(
+            value => {
+                console.log(value);
+                this.chats = value;
+            }
+        );
     }
 
     ngOnInit() {
-        setTimeout(() => {
-            this.loadChats();
-        }, 500);
     }
 
     ngOnChanges() {
-        this.loadChats();
     }
 
     public toggleChat() {
@@ -38,17 +40,5 @@ export class ChatComponent implements OnInit, OnChanges {
 
     public hideChat() {
         this.chatListVisible = false;
-    }
-
-    public loadChats() {
-        this.chats = this.chatService.chats.map(chat => {
-            const users = chat.users.filter(user => {
-                return (user._id !== this.userId);
-            });
-            chat.user = users.shift();
-            return chat;
-        });
-        console.log('UPDATE CHATS IN COMPONENT');
-        console.log(this.chats);
     }
 }

@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {SocketService} from './socket.service';
 import {WindowObj} from './window.service';
 import {EncryptService} from './encrypt.service';
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class ChatService {
@@ -9,28 +11,43 @@ export class ChatService {
     public userId = (this.window.data._injectedData as any).userId;
     public chats: any[] = [];
 
+    public data: Subject<any[]> = new Subject();
+
+
     constructor(private socketService: SocketService,
                 private encryptService: EncryptService,
                 private window: WindowObj) {
         this.socketService.addListener('get_chat_rooms:success', (result) => {
-            const data = JSON.parse(result);
+            let data = JSON.parse(result);
+
+            data = data.map(chat => {
+                const users = chat.users.filter(user => {
+                    return (user._id !== this.userId);
+                });
+                chat.user = users.shift();
+                return chat;
+            });
 
             data.forEach(room => {
                 this.socketService.joinRoom(room.room);
             });
 
-            console.log(data);
-
             this.chats = data;
+            this.changeChats();
         });
         this.socketService.addListener('create_room:success', (result) => {
             const data = JSON.parse(result);
+            const users = data.users.filter(user => {
+                return (user._id !== this.userId);
+            });
+            data.user = users.shift();
             this.chats.push(data);
             data.users.forEach(user => {
                 if (user._id !== this.userId) {
                     this.startChat(user._id);
                 }
             });
+            this.changeChats();
         });
 
         this.loadChats();
@@ -69,4 +86,7 @@ export class ChatService {
         this.socketService.send('create_room', this.encryptService.encrypt(data));
     }
 
+    public changeChats() {
+        this.data.next(this.chats);
+    }
 }
