@@ -10,14 +10,9 @@
     header {
       display: flex;
       flex-flow: column nowrap;
-      
-      .sport-types{
-          width: 300px;
-          margin-bottom: 20px;
-        }
 
-        input{
-            width: 300px;
+      .sport-types{
+          margin-bottom: 20px;
         }
     } 
 

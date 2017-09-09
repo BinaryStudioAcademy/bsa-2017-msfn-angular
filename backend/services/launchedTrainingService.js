@@ -2,7 +2,7 @@ const ApiError = require('./apiErrorService');
 const launchedTrainingRepository = require('../repositories/launchedTrainingRepository');
 const mongoose = require('mongoose')
 
-function LaunchedTrainingService() {}
+function LaunchedTrainingService() { }
 
 LaunchedTrainingService.prototype.getLaunchedTrainingsByUserId = getLaunchedTrainingsByUserId;
 LaunchedTrainingService.prototype.updateLaunchedTraining = updateLaunchedTraining;
@@ -42,8 +42,17 @@ function createLaunchedTraining(body, callback) {
     });
 }
 
-function getLaunchedTraining(id, callback) {
-    launchedTrainingRepository.getById(id, (err, trainingData) => {
+function getLaunchedTraining(data, callback) {
+    const params = {
+        filter: {
+            isRemoved: false,
+        },
+        populate: 'exercisesList.exercise'
+    };
+    if (data) {
+        params.filter = Object.assign(params.filter, data);
+    }
+    launchedTrainingRepository.get(params, (err, trainingData) => {
         if (err) return callback(err);
         if (trainingData === null) {
             callback(null, new ApiError('Training not found'));

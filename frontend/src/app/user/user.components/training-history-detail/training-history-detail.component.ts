@@ -18,9 +18,9 @@ export class TrainingHistoryDetailComponent implements OnInit {
 
     ngOnInit() {
         this.detailService.getLaunchedTraining(res => {
-            this.training = res;
+            this.training = res[0];
             this.date = this.detailService.beautifyDate(this.training.startDate);
-            if (res.trainingType === 'interval') {
+            if (this.training.trainingType === 'interval') {
                 this.getIntevalInfo();
             }
         });

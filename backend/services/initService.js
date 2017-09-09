@@ -1,5 +1,6 @@
 const mongoose = require('mongoose'),
     userRepository = require('../repositories/userRepository'),
+    achievementsRepository = require('../repositories/achievementsRepository'),
     goalTypeService = require('../services/goalTypeService'),
     goalService = require('../services/goalService'),
     passportOAuthStrategyInit = require('../middleware/passportOAuthMiddleware')(),
@@ -66,6 +67,12 @@ const mongoose = require('mongoose'),
             type: 'Improve results',
         }
     ],
+    achievements = [{
+        name: 'Be fit',
+        message: 'Cool message',
+        icon: 'some moked url',
+        goalType: 'Weight'
+    }],
     measurments = [
         {
             "measureName": "weight",
@@ -376,6 +383,9 @@ module.exports = function () {
 
     goals.forEach((elem) => {
         goalService.createGoal(elem, () => { });
+    });
+    achievements.forEach((elem) => {
+        achievementsRepository.addAchievement(elem, () => { });
     });
 
 };

@@ -24,19 +24,6 @@ export class TrainingHistoryDetailService {
             });
     }
 
-    getExercise(id, callback) {
-        const sendData: IHttpReq = {
-            url: '/api/exercise/' + id,
-            method: 'GET',
-            body: {},
-        };
-
-        this.httpService.sendRequest(sendData)
-            .then(data => {
-                callback(data);
-            });
-    }
-
     beautifyDate(date): string {
         const d = new Date(date);
         return this.addZeroToNum(d.getDate()) + '.' +

@@ -42,7 +42,7 @@
                 Warming time
                 <p>{{training.results.time.timeIntervals[i * 2 + 1]}}</p>
             </div>
-            <button md-button (click)="item.showIntervalExercises ? item.showIntervalExercises = false : item.showIntervalExercises = true">{{item.showIntervalExercises ? 'Hide' : 'Show' }} exercises</button>
+            <button md-raised-button (click)="item.showIntervalExercises ? item.showIntervalExercises = false : item.showIntervalExercises = true">{{item.showIntervalExercises ? 'Hide' : 'Show' }} exercises</button>
             <app-exercises
                 *ngIf="item.showIntervalExercises"
                 class="item-exercises"

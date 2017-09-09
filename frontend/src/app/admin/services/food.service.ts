@@ -4,12 +4,13 @@ import { IHttpReq } from '../../models/http-req';
 import { IFood } from '../../models/food';
 import { IFoodType } from '../../models/food-type';
 import { CropperSettings } from 'ng2-img-cropper';
+import { WindowObj } from '../../services/window.service';
 
 
 @Injectable()
 export class FoodService {
 
-    constructor(private httpService: HttpService) {}
+    constructor(private httpService: HttpService, private window: WindowObj) {}
 
     getAllFoodTypes(callback): void {
         const request: IHttpReq = {
@@ -51,6 +52,7 @@ export class FoodService {
             );
     }
     addFood(body: IFood, callback): void {
+        body.measure = this.updateMeasure(body.measure);
         const request: IHttpReq = {
             url: 'api/food',
             method: 'POST',
@@ -100,6 +102,7 @@ export class FoodService {
 
     }
     updateFood(body: IFood, callback) {
+        body.measure = this.updateMeasure(body.measure);
         const request: IHttpReq = {
             url: 'api/food',
             method: 'PUT',
@@ -149,6 +152,26 @@ export class FoodService {
             callback(data);
         });
     }
+
+    updateMeasure(measure) {
+        if (measure === 'Liquid') {
+            return 'l';
+        } else if (measure === 'Weight') {
+            return (this.window.data._injectedData as any).settings.weight || 'kg';
+        } else if (measure === 'Quantity') {
+            return 'pieces';
+        }
+    }
+    updateMeasureBack(measure) {
+        if (measure === 'l') {
+            return 'Liquid';
+        } else if (measure === 'pieces') {
+            return 'Quantity';
+        } else  {
+            return 'Weight';
+        }
+    }
+
     getCropperSettings(): CropperSettings {
         const cropperSettings = new CropperSettings();
         cropperSettings.noFileInput = true;
@@ -162,4 +185,19 @@ export class FoodService {
         cropperSettings.touchRadius = 10;
         return cropperSettings;
     }
+
+        getImage(URL, callback): void {
+        const request: IHttpReq = {
+            url: URL,
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then( data => {
+                callback(data);
+            });
+    }
+
 }
+
+

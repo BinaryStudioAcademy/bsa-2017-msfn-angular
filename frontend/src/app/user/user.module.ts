@@ -55,6 +55,7 @@ import { TrainingHistoryComponent } from './user.components/training-history/tra
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
 import { MessagePostingComponent } from './user.components/message-posting/message-posting.component';
+import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 
 @NgModule({
     imports: [
@@ -113,6 +114,7 @@ import { MessagePostingComponent } from './user.components/message-posting/messa
         TrainingHistoryComponent,
         TrainingHistoryDetailComponent,
         MessagePostingComponent,
+        AchievementsListComponent,
     ],
     providers: [
         ForAllUserGuard,

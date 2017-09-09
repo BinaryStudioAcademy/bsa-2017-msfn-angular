@@ -17,6 +17,7 @@ export class FoodTypeComponent implements OnInit {
     displayedColumns = [
         'name',
         'description',
+        'parent',
         'delete'
     ];
     tableDatabase = new TableDatabase();

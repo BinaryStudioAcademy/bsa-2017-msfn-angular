@@ -12,6 +12,7 @@ md-input-container {
     margin: 0 $content-between-margin;
     width: 300px;
 }
+
 .btn {
     border: none;
     color: $text-main-color;
@@ -26,7 +27,7 @@ md-input-container {
 
 .energy-container {
     display: flex;
-    widrh: 100%;
+    width: 100%;
     min-height: 40px;
     flex-direction: row;
     md-input-container {
@@ -50,8 +51,21 @@ md-input-container {
     }
 }
 
+#measure-select {
+    margin-top: 30px;
+}
+
+#load-type {
+    align-self: center;
+}
+
 #vendor{
-    margin-top: 10px;
+    margin-top: 20px;
+}
+
+.num-error{
+    margin-top: 20px;
+    margin-bottom: 0;
 }
 
 
@@ -79,6 +93,7 @@ md-input-container {
         position: relative;
         min-height: 40px;
         margin: 0;
+        margin-top: 20px;
         margin-bottom: 10px;
     }
 
@@ -114,4 +129,8 @@ md-input-container {
         &:hover {
             cursor: pointer;
         }
+    }
+
+    .select-type{
+        margin-top: 20px;
     }
