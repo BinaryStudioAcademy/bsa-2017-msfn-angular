@@ -39,3 +39,24 @@
 md-radio-group {
     margin-top: $content-tb-margin;
 }
+
+#message-button {
+    margin: $standard-indent auto;
+
+    button {
+        display: block;
+        width: 180px;
+        height: 40px;
+        border: none;
+        border-radius: 15px;
+        outline: none;
+        font-size: $main-text;
+        font-weight: 600;
+        background: #82ca9c;
+    }
+}
+
+app-post-dialog {
+    width: 100%;
+    margin-top: $standard-indent;
+}

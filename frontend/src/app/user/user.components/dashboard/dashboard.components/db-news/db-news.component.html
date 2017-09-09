@@ -26,5 +26,13 @@
                 [value]="index">
             </md-radio-button>
         </md-radio-group>
+
+        <app-post-dialog *ngIf="posting" (hideInput)="closeMessageInput()"></app-post-dialog>
+
+        <div id="message-button" *ngIf="!posting">
+            <button md-icon-button type="button" (click)="openMessageInput()">
+                Post a message
+            </button>
+        </div>
     </div>
 </div>

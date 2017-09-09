@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material';
+import { WindowObj } from '../../../../../services/window.service';
 
 @Component({
     selector: 'app-db-news',
@@ -11,9 +11,10 @@ import { PageEvent } from '@angular/material';
 })
 export class DbNewsComponent implements OnInit {
 
-    constructor() { }
+    constructor(private window: WindowObj) { }
 
     title = 'News Feed';
+    userId = (this.window.data._injectedData as any).userId;
 
     news = [
         {
@@ -39,6 +40,16 @@ export class DbNewsComponent implements OnInit {
     selIndex = 0;
     indexes = [...Array(this.news.length).keys()];
 
+    posting: boolean = false;
+
     ngOnInit() {
+    }
+
+    openMessageInput(): void {
+        this.posting = true;
+    }
+
+    closeMessageInput() {
+        this.posting = false;
     }
 }

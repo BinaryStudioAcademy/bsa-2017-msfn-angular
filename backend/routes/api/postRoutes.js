@@ -17,7 +17,7 @@ module.exports = app => {
     }, apiResponse);
 
     app.post(baseUrl, (req, res, next) => {
-        postService.addItem(req, (err, data) => {
+        postService.addItem(req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();

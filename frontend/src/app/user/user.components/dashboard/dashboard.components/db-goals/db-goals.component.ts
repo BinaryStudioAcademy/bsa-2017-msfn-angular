@@ -107,7 +107,6 @@ export class DbGoalsComponent implements OnInit, OnChanges {
     ngOnChanges() {
         if (this.goalItems.length > 0 && !this.gotData.goal) {
             this.gotData.goal = true;
-            console.log('GOALS INIT', this.goalItems);
 
             for (const goal of this.goalItems) {
                 goal.startDateOutput = this.dateService.convertDateToIso(

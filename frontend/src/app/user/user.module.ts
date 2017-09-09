@@ -54,6 +54,7 @@ import { ArticleDetailComponent } from './user.components/article-detail/article
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
+import { MessagePostingComponent } from './user.components/message-posting/message-posting.component';
 
 @NgModule({
     imports: [
@@ -111,6 +112,7 @@ import {ArticleListComponent} from './user.components/article-list/article-list.
         ArticleDetailComponent,
         TrainingHistoryComponent,
         TrainingHistoryDetailComponent,
+        MessagePostingComponent,
     ],
     providers: [
         ForAllUserGuard,

@@ -1,0 +1,28 @@
+<div id="post-container">
+    <button class="material-icons close" (click)="hideInput.emit()">close</button>
+
+    <md-input-container class="input-row">
+        <textarea
+            mdInput
+            autofocus
+            type="text"
+            name="post"
+            placeholder="Message text"
+            required
+            [(ngModel)]="messageText"
+            [formControl]="postFormControl">
+        </textarea>
+        <md-error *ngIf="postFormControl.hasError('required')">
+            Message text is required
+        </md-error>
+        <md-error *ngIf="postFormControl.hasError('maxlength')">
+            Message should contain no more than 300 characters
+        </md-error>
+    </md-input-container>
+
+    <div id="post-button">
+        <button md-icon-button type="button" (click)="postMessage()">
+            Post a message
+        </button>
+    </div>
+</div>
