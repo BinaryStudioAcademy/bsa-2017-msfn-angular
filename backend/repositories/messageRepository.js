@@ -1,17 +1,17 @@
 const Repository = require('./generalRepository'),
-    Post = require('../schemas/postSchema');
+    Message = require('../schemas/messageSchema');
 
-function PostRepository() {
+function MessageRepository() {
     Repository.prototype.constructor.call(this);
-    this.model = Post;
+    this.model = Message;
 }
 
-PostRepository.prototype = new Repository();
+MessageRepository.prototype = new Repository();
 
-PostRepository.prototype.findById = findById;
-PostRepository.prototype.deleteById = deleteById;
+MessageRepository.prototype.findByUserId = findByUserId;
+MessageRepository.prototype.deleteById = deleteById;
 
-function findById(userId, callback) {
+function findByUserId(userId, callback) {
     const query = this.model.find({
         $and: [
             {
@@ -29,7 +29,7 @@ function deleteById(id, userId, callback) {
     const query = this.model.update(
         { $and: [
             {
-                createdByUser: userId
+                userId: userId
             },
             {
                 _id: id,
@@ -42,4 +42,4 @@ function deleteById(id, userId, callback) {
     query.exec(callback);
 }
 
-module.exports = new PostRepository();
+module.exports = new MessageRepository();

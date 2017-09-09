@@ -1,15 +1,15 @@
 const ApiError = require('./apiErrorService');
-const postRepository = require('../repositories/postRepository');
+const messageRepository = require('../repositories/messageRepository');
 
-function PostService() { }
+function MessageService() { }
 
-PostService.prototype.getItemsByUserId = getItemsByUserId;
-PostService.prototype.addItem = addItem;
-PostService.prototype.updateItem = updateItem;
-PostService.prototype.deleteItem = deleteItem;
+MessageService.prototype.getItemsByUserId = getItemsByUserId;
+MessageService.prototype.addItem = addItem;
+MessageService.prototype.updateItem = updateItem;
+MessageService.prototype.deleteItem = deleteItem;
 
-function getItemsByUserId(userId, callback) {
-    postRepository.findById(userId, (err, data) => {
+function getItemsByUserId(data, callback) {
+    messageRepository.findByUserId(data.params.id, (err, data) => {
         if (err) return callback(err);
         if (data === null) {
             callback(null, []);
@@ -21,7 +21,7 @@ function getItemsByUserId(userId, callback) {
 
 function addItem(body, callback) {
     if (body.userId && body.body) {
-        postRepository.add(body, (err, data) => {
+        messageRepository.add(body, (err, data) => {
             if (err) return callback(err);
             if (data === null) {
                 callback(null, []);
@@ -30,13 +30,13 @@ function addItem(body, callback) {
             }
         });
     } else {
-        callback(new ApiError('Invalid post data'));
+        callback(new ApiError('Invalid message data'));
     }
 }
 
 function updateItem(id, body, callback) {
     if (body.userId && body.body) {
-        postRepository.update(id, body, (err, data) => {
+        messageRepository.update(id, body, (err, data) => {
             if (err) return callback(err);
             if (data === null) {
                 callback(null, []);
@@ -45,12 +45,12 @@ function updateItem(id, body, callback) {
             }
         });
     } else {
-        callback(new ApiError('Invalid post data'));
+        callback(new ApiError('Invalid message data'));
     }
 }
 
 function deleteItem(id, userId, callback) {
-    postRepository.deleteById(id, userId, (err, data) => {
+    messageRepository.deleteById(id, userId, (err, data) => {
         if (err) return callback(err);
         if (data === null) {
             callback(null, []);
@@ -60,4 +60,4 @@ function deleteItem(id, userId, callback) {
     });
 }
 
-module.exports = new PostService();
+module.exports = new MessageService();

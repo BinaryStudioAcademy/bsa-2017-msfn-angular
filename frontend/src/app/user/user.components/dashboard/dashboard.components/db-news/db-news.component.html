@@ -2,32 +2,37 @@
     <h2 class="drag-handle">{{ title }}</h2>
     <div class="content">
         <div class="no-items" *ngIf="news.length === 0">
-            There are no news.
+            There are neither posts nor news.
         </div>
 
-        <div class="news-item" *ngIf="news.length > 0">
-            <div class="news-title">
-                {{ news[selIndex].title }}
-            </div>
-            <div class="news-date">
-                {{ news[selIndex].date }}
-            </div>
-            <div class="news-text">
-                {{ news[selIndex].text }}
+        <div id="posts" *ngIf="news.length > 0">
+            <div class="post" *ngFor="let post of paginatorOutput">
+                <div class="post-avatar">
+                    <img src="{{ post.avatar }}">
+                </div>
+                <div class="post-text-block">
+                    <p class="post-name">{{ post.user }}</p>
+                    <p class="post-date">{{ post.dateOutput }}</p>
+
+                    <div class="message-handler">
+                        <p class="post-edit" (click)="updateMessage(post._id)">Edit</p>
+                        <p class="post-delete" (click)="deleteMessage(post._id)">Delete</p>
+                    </div>
+                    <p class="post-text">{{ post.body }}</p>
+                </div>
             </div>
         </div>
 
-        <md-radio-group
-            class="selection"
+        <md-paginator
             *ngIf="news.length > 0"
-            [(ngModel)]="selIndex">
-            <md-radio-button class="radio-option"
-                *ngFor="let index of indexes"
-                [value]="index">
-            </md-radio-button>
-        </md-radio-group>
+            [length]="news.length"
+            [pageSize]="pageEvent.pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageEvent = $event"
+            (click)="makePaginatorOutput()">
+        </md-paginator>
 
-        <app-post-dialog *ngIf="posting" (hideInput)="closeMessageInput()"></app-post-dialog>
+        <app-post-dialog *ngIf="posting" (hideInput)="updateData(); closeMessageInput()"></app-post-dialog>
 
         <div id="message-button" *ngIf="!posting">
             <button md-icon-button type="button" (click)="openMessageInput()">

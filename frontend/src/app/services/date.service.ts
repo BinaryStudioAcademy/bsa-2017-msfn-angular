@@ -47,7 +47,7 @@ export class DateService {
     convertDateToIso(dateObject, getTime?: boolean) {
         let isoDate;
         if (dateObject instanceof Date) {
-            isoDate = `${dateObject.getUTCFullYear()}-${dateObject.getUTCMonth()}-${dateObject.getUTCDate()}`;
+            isoDate = `${dateObject.getUTCFullYear()}/${dateObject.getUTCMonth() + 1}/${dateObject.getUTCDate()}`;
             if (getTime) {
                 isoDate += this.getTimeString(dateObject.getHours(), dateObject.getMinutes());
             }

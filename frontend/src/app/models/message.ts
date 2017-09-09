@@ -1,4 +1,4 @@
-export interface IPost {
+export interface IMessage {
     userId: string;
     date: Date;
     body: string;

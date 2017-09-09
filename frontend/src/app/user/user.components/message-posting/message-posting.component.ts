@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { IPost } from '../../../models/post';
+import { IMessage } from '../../../models/message';
 import { WindowObj } from '../../../services/window.service';
 import { MessagePostingService } from './message-posting.service';
 
@@ -17,7 +17,7 @@ export class MessagePostingComponent implements OnInit {
     }
 
     userId = (this.window.data._injectedData as any).userId;
-    postData: IPost;
+    postData: IMessage;
     messageText: string = '';
 
     @Output() hideInput: EventEmitter<any> = new EventEmitter<any>();
@@ -30,12 +30,13 @@ export class MessagePostingComponent implements OnInit {
     ngOnInit() {
     }
 
-    postMessage() {
+    postMessage(): void {
         if (this.messageText && this.postFormControl.valid) {
             this.postData = {
                 userId: this.userId,
                 date: new Date(),
-                body: this.messageText
+                body: this.messageText,
+                isRemoved: false
             };
 
             this.messagePostingService.postMessage(this.postData, data => {
