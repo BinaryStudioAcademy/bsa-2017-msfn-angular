@@ -1,3 +1,9 @@
-<p>
-  achievement-info-dialog works!
-</p>
+<div class="container">
+    <button [md-dialog-close]="false" class="cls-btn"><i class="material-icons" id="close">close</i></button>
+    
+    <div class="text i">Achievement</div>
+    <div class="header">{{data.name}}</div>
+    <img [src]="data.icon" class="icon"/>
+    <div class="text">{{data.message}}</div>
+    <button md-raised-button [md-dialog-close]="false">Okey</button>
+</div>

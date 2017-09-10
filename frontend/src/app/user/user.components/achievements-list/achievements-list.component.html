@@ -1,5 +1,5 @@
 <div id="achievements-container">
-    <div class="item-container" *ngFor="let achievement of achievements" (click)="openDialog(achievement._id)">
+    <div class="item-container" *ngFor="let achievement of achievements" (click)="openDialog(achievement)">
         <p class="achievement-main-text">{{achievement.name}}</p>
         <img [src]="achievement.icon" class="achievement-img"/>
     </div>
