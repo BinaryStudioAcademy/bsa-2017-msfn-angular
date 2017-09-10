@@ -22,13 +22,14 @@ import { ExerciseTableComponent } from './user.components/exercise-table/exercis
 import { ActiveTrainingComponent } from './user.components/active-training/active-training.component';
 import { PlansComponent } from './user.components/plans/plans.component';
 import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/shared-plan-detail.component';
-import { CoachComponent } from './user.components/coach/coach.component';
 import { ArticleAddComponent } from './user.components/article-add/article-add.component';
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { ArticleListComponent } from './user.components/article-list/article-list.component';
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
 
+import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
+import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 
 const userRoutes: Routes = [
     {
@@ -133,6 +134,13 @@ const userRoutes: Routes = [
             {
                 path: 'food/plan/add',
                 component: FoodPlanComponent
+            }, {
+                path: 'training-history/:id',
+                component: TrainingHistoryDetailComponent
+            },
+            {
+                path: 'achivements',
+                component: AchievementsListComponent
             },
         ]
     }

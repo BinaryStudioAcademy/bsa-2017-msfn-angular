@@ -16,6 +16,7 @@ const Food = new Schema({
     carbons: Number,
     vendor: String,
     description: String,
+    measure: String,
     picture: String,
     customUserId: String,
     isPublished: {

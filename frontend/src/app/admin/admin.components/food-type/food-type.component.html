@@ -44,6 +44,17 @@
             </md-cell>
         </ng-container>
 
+        <!-- parent -->
+        <ng-container cdkColumnDef="parent">
+            <md-header-cell *cdkHeaderCellDef
+                            md-sort-header>Parent
+            </md-header-cell>
+            <md-cell *cdkCellDef="let row"
+                    [ngClass]="{'removed': row.isRemoved}"
+                    (click)="openFoodTypeEditDialog(false, row)"
+                     class="active">{{row.parentType}}</md-cell>
+        </ng-container>
+
         <!-- delete-->
         <ng-container cdkColumnDef="delete">
             <md-header-cell *cdkHeaderCellDef></md-header-cell>

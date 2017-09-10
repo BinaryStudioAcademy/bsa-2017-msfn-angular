@@ -52,12 +52,17 @@ import { CoachPlansComponent } from './user.components/coach/coach-plans/coach-p
 import { ArticleAddComponent } from './user.components/article-add/article-add.component';
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
+import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
 import { SearchComponent } from './user.components/food-plan/search/search.component';
 import { WeeklyComponent } from './user.components/food-plan/weekly/weekly.component';
 import { DailyComponent } from './user.components/food-plan/daily/daily.component';
 import { ProductListComponent } from './user.components/food-plan/product-list/product-list.component';
+import { MessagePostingComponent } from './user.components/message-posting/message-posting.component';
+import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
+import { AchievementReceivedDialogComponent } from './user.components/achievement-received-dialog/achievement-received-dialog.component';
+import { AchievementInfoDialogComponent } from './user.components/achievement-info-dialog/achievement-info-dialog.component';
 
 @NgModule({
     imports: [
@@ -119,6 +124,11 @@ import { ProductListComponent } from './user.components/food-plan/product-list/p
         WeeklyComponent,
         DailyComponent,
         ProductListComponent,
+        TrainingHistoryDetailComponent,
+        MessagePostingComponent,
+        AchievementsListComponent,
+        AchievementReceivedDialogComponent,
+        AchievementInfoDialogComponent,
     ],
     providers: [
         ForAllUserGuard,
@@ -128,7 +138,9 @@ import { ProductListComponent } from './user.components/food-plan/product-list/p
         FinishDialogComponent,
         ChooseTrainDialogComponent,
         ExerciseDescriptionComponent,
-        GoalEditDialogComponent
+        GoalEditDialogComponent,
+        AchievementReceivedDialogComponent,
+        AchievementInfoDialogComponent,
     ]
 })
 export class UserModule {

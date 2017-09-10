@@ -1,12 +1,8 @@
-<div >
+<div>
     <h2 class="title" md-dialog-title>Food details</h2>
     <md-dialog-content class="food-edit-dialog-container">
         <md-input-container>
-            <input mdInput
-                   placeholder="Name"
-                   [(ngModel)]="food.name"
-                   [formControl]="nameFormControl"
-                   name="name">
+            <input mdInput placeholder="Name" [(ngModel)]="food.name" [formControl]="nameFormControl" name="name">
             <md-error *ngIf="nameFormControl.hasError('required')">
                 Name is required
             </md-error>
@@ -16,97 +12,72 @@
         </md-input-container>
 
         <md-select [(ngModel)]="food.foodType" class="select-type" placeholder="Type">
-            <md-option *ngFor="let type of foodTypes"
-                       [value]="type"
-            >{{type}}</md-option>
+            <md-option *ngFor="let type of foodTypes" [value]="type">{{type}}</md-option>
         </md-select>
-        
+
 
         <div class="energy-container">
             <md-input-container class="energy-item">
-                <input mdInput
-                       [(ngModel)]="food.kcal"
-                       placeholder="Kcal"
-                       name="kcal"
-                       [formControl]="numberFormControl">
-                <md-error *ngIf="numberFormControl.hasError('pattern')">
-                    Must be a numeric value
-                </md-error>
+                <input mdInput [(ngModel)]="food.kcal" placeholder="Kcal" name="kcal" [formControl]="numberFormControl">
             </md-input-container>
             <md-input-container class="energy-item">
-                <input mdInput
-                       [(ngModel)]="food.protein"
-                       placeholder="Proteins"
-                       name="protein"
-                       [formControl]="numberFormControl">
-            </md-input-container>
-            <md-input-container class="energy-item">
-                <input mdInput
-                       [(ngModel)]="food.fat"
-                       placeholder="Fats"
-                       name="fat"
-                       [formControl]="numberFormControl">
-                <md-error *ngIf="numberFormControl.hasError('pattern')">
-                    Must be a numeric value
-                </md-error>
-            </md-input-container>
-            <md-input-container class="energy-item">
-                <input mdInput
-                       [(ngModel)]="food.carbons"
-                       placeholder="Carbons"
-                       name="carbons"
-                       [formControl]="numberFormControl">
-                <md-error *ngIf="numberFormControl.hasError('pattern')">
-                    Must be a numeric value
-                </md-error>
-            </md-input-container>
-        </div>
+                <input mdInput [(ngModel)]="food.protein" placeholder="Proteins" name="protein" [formControl]="numberFormControl">
 
+            </md-input-container>
+            <md-input-container class="energy-item">
+                <input mdInput [(ngModel)]="food.fat" placeholder="Fats" name="fat" [formControl]="numberFormControl">
+            </md-input-container>
+            <md-input-container class="energy-item">
+                <input mdInput [(ngModel)]="food.carbons" placeholder="Carbons" name="carbons" [formControl]="numberFormControl">
+            </md-input-container>
+
+        </div>
+            <md-error *ngIf="numberFormControl.hasError('pattern')" class="num-error">
+                    Must be a numeric value
+            </md-error>
+        <md-select [(ngModel)]="food.measure" placeholder="Measure" id="measure-select">
+            <md-option *ngFor="let measure of measures" [value]="measure">{{measure}}</md-option>
+        </md-select>
 
         <md-input-container id="vendor">
-            <input mdInput
-                   type="text"
-                   name="vendor"
-                   placeholder="Vendor"
-                   [(ngModel)]="food.vendor"
-            >
+            <input mdInput type="text" name="vendor" placeholder="Vendor" [(ngModel)]="food.vendor">
         </md-input-container>
         <md-input-container>
-            <textarea mdInput
-                      type="text"
-                      name="description"
-                      placeholder="Food description"
-                      [(ngModel)]="food.description"
-                      [formControl]="descriptionFormControl"></textarea>
+            <textarea mdInput type="text" name="description" placeholder="Food description" [(ngModel)]="food.description" [formControl]="descriptionFormControl"></textarea>
             <md-error *ngIf="descriptionFormControl.hasError('maxlength')">
                 Description should contain less than 300 characters
             </md-error>
         </md-input-container>
-        
-            <button class="btn upload-container" *ngIf="hideCropper">
+        <!--<md-slide-toggle
+        id="load-type"
+        (change)="loadTypeToggle($event.checked)"
+        [checked]="false">By URL</md-slide-toggle>-->
+        <button class="btn upload-container" *ngIf="hideCropper" (click)="loadImage()">
         <span>Upload food image</span>
-        <input type="file" accept="image/*" id="upload" (change)="fileChangeListener($event)"/>
+        <input *ngIf="!byURL" type="file" accept="image/*" id="upload" (change)="fileChangeListener($event)"/>
     </button>
-    <div class="preview-header" *ngIf="hideCropper">Preview</div>
-    <div class="preview">
-        <div class="image-preview">
-            <img *ngIf="!hideCropper" [src]='outputImage.image' [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-            <img *ngIf="hideCropper && food.picture" src="{{food.picture.length > 500 ? food.picture : food.picture + '?' + upd}}">
+        <md-input-container id="url" *ngIf="byURL">
+            <input mdInput type="text" name="url" placeholder="Your url" [(ngModel)]="url">
+        </md-input-container>
+        <div class="preview-header" *ngIf="hideCropper">Preview</div>
+        <div class="preview">
+            <div class="image-preview">
+                <img *ngIf="!hideCropper" [src]='outputImage.image' [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                <img *ngIf="hideCropper && food.picture" src="{{food.picture.length > 500 ? food.picture : food.picture + '?' + upd}}">
+            </div>
+            <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="outputImage" [settings]="cropperSettings"></img-cropper>
+            <div class="cropper-buttons" *ngIf="!hideCropper">
+                <button class="cropper-btn" (click)="cropperBtn('save')">Ok</button>
+                <button class="cropper-btn" (click)="cropperBtn('cancel')">Cancel</button>
+            </div>
+            <div class="description" *ngIf="hideCropper" [innerHtml]="convertedDescription"></div>
         </div>
-        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="outputImage" [settings]="cropperSettings"></img-cropper>
-        <div class="cropper-buttons" *ngIf="!hideCropper">
-            <button class="cropper-btn" (click)="cropperBtn('save')">Ok</button>
-            <button class="cropper-btn" (click)="cropperBtn('cancel')">Cancel</button>
-        </div>
-        <div class="description" *ngIf="hideCropper" [innerHtml]="convertedDescription"></div>
-    </div>
 
     </md-dialog-content>
     <md-dialog-actions>
-        <button md-button 
-        class="btn" 
-        (click)="save()" 
-        [disabled]="food.customUserId !== '' && !newItem"
-        [md-dialog-close]="true">Save</button>
+        <button md-button class="btn" (click)="save()" [disabled]="(food.customUserId !== '' && !newItem)
+        || !nameFormControl.valid
+        || !numberFormControl.valid
+        || !descriptionFormControl.valid" [md-dialog-close]="true">Save</button>
     </md-dialog-actions>
 </div>

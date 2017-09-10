@@ -1,0 +1,59 @@
+<div class="training-detail" *ngIf="training">
+    <div class="title">
+        {{training.name}} ({{training.trainingType}})
+        <p class="title-date">{{date}}</p>
+    </div>
+    <div class="properties">
+        <div class="calories">
+            Calories
+            <p>{{training.results.calories}}</p>
+        </div>
+        <div class="totalTime">
+            Total training time 
+            <p>{{training.results.time.total}}</p>
+        </div>
+        <div class="warmingTime">
+            Total warming time
+            <p>{{training.results.time.warming}}</p>
+        </div>
+        <div class="exercise">
+            Exercises
+            <p>{{training.exercisesList.length}}</p>
+        </div>
+        <div class="exercise" *ngIf="training.intervals.length > 0">
+            Intervals
+            <p>{{training.intervals.length}}</p>
+        </div>
+    </div>
+    <div class="intervals" *ngIf="training.intervals.length > 0">
+        <div class="intervals-item" *ngFor="let item of training.intervals; let i = index">
+            <div>
+                {{i + 1}}. 
+            </div>
+            <div>
+                Name
+                <p>{{item.name}}</p>
+            </div>
+            <div>
+                Time
+                <p>{{training.results.time.timeIntervals[i * 2]}}</p>
+            </div>
+            <div>
+                Warming time
+                <p>{{training.results.time.timeIntervals[i * 2 + 1]}}</p>
+            </div>
+            <button md-raised-button (click)="item.showIntervalExercises ? item.showIntervalExercises = false : item.showIntervalExercises = true">{{item.showIntervalExercises ? 'Hide' : 'Show' }} exercises</button>
+            <app-exercises
+                *ngIf="item.showIntervalExercises"
+                class="item-exercises"
+                [disableActions]="true"
+                [exercisesList]="item.exList">
+            </app-exercises>
+        </div>
+    </div>
+    <app-exercises
+        *ngIf="training.intervals.length === 0"
+        [disableActions]="true"
+        [exercisesList]="training.exercisesList">
+    </app-exercises>
+</div>

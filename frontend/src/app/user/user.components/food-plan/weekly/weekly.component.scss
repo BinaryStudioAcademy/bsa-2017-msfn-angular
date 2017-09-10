@@ -19,7 +19,7 @@
             padding: 10px 20px;
             border: 1px solid #424242;
             height: calc(60vh - 280px);
-            overflow: scroll;
+            overflow-y: scroll;
             .add-item {
                 display: flex;
                 align-items: center;

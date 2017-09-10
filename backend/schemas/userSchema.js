@@ -32,6 +32,8 @@ const User = new Schema({
     birthday: String,
     height: Number,
     weight: Number,
+    location: String,
+    about: String,
     activateToken: String,
     settings: {
         weight: String,
@@ -43,6 +45,15 @@ const User = new Schema({
         dateFormat: String,
         startWeek: String,
     },
+    achievements: [{
+        goal: { 
+            type: Schema.Types.ObjectId, 
+            ref: 'Acievements' 
+        },
+        finished: Date,
+        value: Number,
+        startValue: Number
+    }],
     weightControl: [
         {
             weight: Number,

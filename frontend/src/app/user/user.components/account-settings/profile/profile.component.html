@@ -46,7 +46,7 @@
                 </div>
             -->
 
-                <div class="profile-gender" *ngIf="!user.gender">
+                <div class="profile-gender">
                     <h3 class="gender-header">Gender:</h3>
                     <input formControlName="gender" id="Male" type="radio" value="Male" name="gender">
                     <label for="Male">Male</label>
@@ -144,6 +144,18 @@
                 </div>
             </div>
         -->
+            <md-input-container class="profile-location">
+                <input id="location" class="input" mdInput placeholder="Location" formControlName="location">
+                <md-error>Location can`t consist less than two characters, and more than 30</md-error>
+            </md-input-container>
+
+            <md-input-container class="profile-about">
+                <textarea mdInput placeholder="About" formControlName="about" md-tooltip="Add some info about you">
+                </textarea>
+                <md-error>
+                    Must contain less than 500 characters
+                </md-error>
+            </md-input-container>
         <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
         </form>
     </div>

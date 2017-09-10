@@ -102,6 +102,13 @@ export class ProfileComponent implements OnInit {
             'gender': [this.user.gender, Validators.compose([
                     Validators.required
             ])],
+            'location': [this.user.location, Validators.compose([
+                Validators.minLength(2),
+                Validators.maxLength(30)
+            ])],
+            'about': [this.user.about, Validators.compose([
+                    Validators.maxLength(500),
+            ])]
     });
     }
 
@@ -138,23 +145,28 @@ export class ProfileComponent implements OnInit {
             }
         });
     }
+
     onSubmit(user) {
-        const monthNumber = this.months.indexOf(this.birthday.month) + 1;
-        const birthday = this.dateService.convertDateToIso({
-            year: this.birthday.year,
-            month: monthNumber,
-            day: this.birthday.day,
-        });
-        user.birthday = birthday;
-        this.profileService.updateUser(user, this.user._id, res => {
-            if (typeof(res) === 'object') {
-                this.toasterService.showMessage('success', null);
-            } else {
-                this.toasterService.showMessage('error', null);
-            }
-        });
-        this.window.data._injectedData.userFirstName = user.firstName;
-        this.window.data._injectedData.userLastName = user.lastName;
+        if (this.profileForm.valid) {
+            const monthNumber = this.months.indexOf(this.birthday.month) + 1;
+            const birthday = this.dateService.convertDateToIso({
+                year: this.birthday.year,
+                month: monthNumber,
+                day: this.birthday.day,
+            });
+            user.birthday = birthday;
+            this.profileService.updateUser(user, this.user._id, res => {
+                if (typeof(res) === 'object') {
+                    this.toasterService.showMessage('success', null);
+                } else {
+                    this.toasterService.showMessage('error', null);
+                }
+            });
+            this.window.data._injectedData.userFirstName = user.firstName;
+            this.window.data._injectedData.userLastName = user.lastName;
+        } else {
+            this.toasterService.showMessage('error', null);
+        }
     }
 
     openConfirmPasswordDialog() {

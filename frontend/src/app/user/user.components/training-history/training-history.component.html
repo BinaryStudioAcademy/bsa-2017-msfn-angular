@@ -1,6 +1,11 @@
 <div class="training-history">
     <h2>Training history</h2>
 
+    <div class="info">
+        <p>Total training time: {{totalTrainingTime}}</p>
+        <p>Total burned calories: {{totalBurnedCalories}}</p>
+    </div>
+
     <div class="navigate">
         <div class="search">
             <md-input-container>
@@ -38,7 +43,7 @@
             <md-header-cell *cdkHeaderCellDef md-sort-header>
                 Name
             </md-header-cell>
-            <md-cell *cdkCellDef="let row" class="name" routerLink="/user/training-plan/{{row.trainingPlanID}}">
+            <md-cell *cdkCellDef="let row" class="name" routerLink="/user/training-history/{{row.id}}">
                 {{ row.name }}
             </md-cell>
         </ng-container>
@@ -47,7 +52,7 @@
             <md-header-cell *cdkHeaderCellDef md-sort-header>
                 Type
             </md-header-cell>
-            <md-cell *cdkCellDef="let row" routerLink="/user/training-plan/{{row.trainingPlanID}}">
+            <md-cell *cdkCellDef="let row" routerLink="/user/training-history/{{row.id}}">
                 {{ row.type }}
             </md-cell>
         </ng-container>
@@ -56,7 +61,7 @@
             <md-header-cell *cdkHeaderCellDef md-sort-header>
                 Date
             </md-header-cell>
-            <md-cell *cdkCellDef="let row" routerLink="/user/training-plan/{{row.trainingPlanID}}">
+            <md-cell *cdkCellDef="let row" routerLink="/user/training-history/{{row.id}}">
                 {{ row.date.display }}
             </md-cell>
         </ng-container>
@@ -65,7 +70,7 @@
             <md-header-cell *cdkHeaderCellDef md-sort-header>
                 Total time
             </md-header-cell>
-            <md-cell *cdkCellDef="let row" routerLink="/user/training-plan/{{row.trainingPlanID}}">
+            <md-cell *cdkCellDef="let row" routerLink="/user/training-history/{{row.id}}">
                 {{ row.totalTime.display }}
             </md-cell>
         </ng-container>
@@ -74,7 +79,7 @@
             <md-header-cell *cdkHeaderCellDef md-sort-header>
                 Calories burned
             </md-header-cell>
-            <md-cell *cdkCellDef="let row" routerLink="/user/training-plan/{{row.trainingPlanID}}">
+            <md-cell *cdkCellDef="let row" routerLink="/user/training-history/{{row.id}}">
                 {{ row.calories }}
             </md-cell>
         </ng-container>
@@ -83,11 +88,11 @@
         <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
     </md-table>
 
-    <md-paginator 
+    <md-paginator
+        [hidden]="(tableDatabase.data.length / 25) < 1"
         #paginator
         [length]="tableDatabase.data.length"
         [pageIndex]="0"
-        [pageSize]="25"
-        [pageSizeOptions]="[5, 10, 25, 100]">
-</md-paginator>
+        [pageSize]="25">
+    </md-paginator>
 </div>

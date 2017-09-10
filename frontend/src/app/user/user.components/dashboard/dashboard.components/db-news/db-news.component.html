@@ -2,29 +2,64 @@
     <h2 class="drag-handle">{{ title }}</h2>
     <div class="content">
         <div class="no-items" *ngIf="news.length === 0">
-            There are no news.
+            There are neither posts nor news.
         </div>
 
-        <div class="news-item" *ngIf="news.length > 0">
-            <div class="news-title">
-                {{ news[selIndex].title }}
-            </div>
-            <div class="news-date">
-                {{ news[selIndex].date }}
-            </div>
-            <div class="news-text">
-                {{ news[selIndex].text }}
+        <div id="posts" *ngIf="news.length > 0">
+            <div class="post" *ngFor="let post of paginatorOutput">
+                <div class="post-avatar">
+                    <img src="{{ post.avatar }}">
+                </div>
+                <div class="post-text-block">
+                    <p class="post-name">{{ post.user }}</p>
+                    <p class="post-date">{{ post.dateOutput }}</p>
+                    <div class="message-handler">
+                        <p class="post-edit" (click)="updateMessage(post)">{{ post.editing ? 'Save' : 'Edit' }}</p>
+                        <p class="post-delete" (click)="deleteMessage(post)">Delete</p>
+                    </div>
+
+                    <div id="edit-container" *ngIf="post.editing">
+                        <button class="material-icons close" (click)="closeEditInput(post)">close</button>
+                        <md-input-container class="input-row">
+                        <textarea
+                            mdInput
+                            autofocus
+                            type="text"
+                            name="post"
+                            placeholder="Message text"
+                            required
+                            [(ngModel)]="post.body"
+                            [formControl]="postFormControl">
+                        </textarea>
+                            <md-error *ngIf="postFormControl.hasError('required')">
+                                Message text is required
+                            </md-error>
+                            <md-error *ngIf="postFormControl.hasError('maxlength')">
+                                Message should contain no more than 300 characters
+                            </md-error>
+                        </md-input-container>
+                    </div>
+
+                    <p class="post-text" *ngIf="!post.editing">{{ post.body }}</p>
+                </div>
             </div>
         </div>
 
-        <md-radio-group
-            class="selection"
+        <md-paginator
             *ngIf="news.length > 0"
-            [(ngModel)]="selIndex">
-            <md-radio-button class="radio-option"
-                *ngFor="let index of indexes"
-                [value]="index">
-            </md-radio-button>
-        </md-radio-group>
+            [length]="news.length"
+            [pageSize]="pageEvent.pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageEvent = $event"
+            (click)="makePaginatorOutput()">
+        </md-paginator>
+
+        <app-message-posting *ngIf="posting" (hideInput)="updateData(); closeMessageInput()"></app-message-posting>
+
+        <div id="message-button" *ngIf="!posting">
+            <button md-icon-button type="button" (click)="openMessageInput()">
+                Post a message
+            </button>
+        </div>
     </div>
 </div>

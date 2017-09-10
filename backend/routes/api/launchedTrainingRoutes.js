@@ -30,7 +30,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl + '/:id', function (req, res, next) {
-        launchedTrainingService.getLaunchedTraining(req.params.id, (err, data) => {
+        launchedTrainingService.getLaunchedTraining({_id: req.params.id}, (err, data) => {
             if (data instanceof Array && !data.length) {
                 data = [];
             }
