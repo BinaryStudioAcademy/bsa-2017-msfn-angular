@@ -1,3 +1,5 @@
+import { AchievementInfoDialogComponent } from './../achievement-info-dialog/achievement-info-dialog.component';
+import { MdDialog } from '@angular/material';
 import { AchievementsListService } from './achievements-list.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,15 +13,18 @@ export class AchievementsListComponent implements OnInit {
 
   achievements = [];
 
-  constructor(private achievementsListService: AchievementsListService) { }
+  constructor(private achievementsListService: AchievementsListService,
+  private dialog: MdDialog) { }
 
   ngOnInit() {
     this.achievementsListService.getAllAchievements((data) => {
       this.achievements = data;
     });
   }
-  openDialog(id) {
-    console.log(id);
+  openDialog(data) {
+    this.dialog.open(AchievementInfoDialogComponent, {
+            data: data
+        });
   }
 
 }
