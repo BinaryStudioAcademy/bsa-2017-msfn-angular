@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UserListService } from '../../user-list/user-list.service';
 import { WindowObj } from '../../../../services/window.service';
 import { MessagePostingService } from '../../message-posting/message-posting.service';
-import { IMessage } from '../../../../models/message';
+import { CoachService } from '../coach.service';
 
 @Component({
     selector: 'app-coach-sidebar',
@@ -20,7 +20,8 @@ export class CoachSidebarComponent implements OnInit {
 
     constructor(private window: WindowObj,
                 private userListService: UserListService,
-                private messagePostingService: MessagePostingService) {
+                private messagePostingService: MessagePostingService,
+                private coachService: CoachService) {
     }
 
     @Input() userData;
@@ -68,7 +69,7 @@ export class CoachSidebarComponent implements OnInit {
         });
     }
 
-    followAction() {
+    followAction(): void {
         if (this.isFollowed) {
             this.unfollowUser();
         } else {
@@ -94,26 +95,25 @@ export class CoachSidebarComponent implements OnInit {
         });
     }
 
-    getTestimonialData() {
+    getTestimonialData(): void {
         this.messagePostingService.getMessages(this.userData._id, data => {
             if (data[0].hasOwnProperty('user')) {
                 this.testimonials = data;
+                this.testimonials = this.coachService.getRandomTestimonials(this.testimonials);
             }
-            console.log(this.testimonials);
         }, true);
     }
 
-    addFeedback() {
+    addFeedback(): void {
         this.posting = true;
     }
 
-    closeFeedback() {
+    closeFeedback(): void {
         this.posting = false;
     }
 
-    updateTestimonialData() {
+    updateTestimonialData(): void {
         this.testimonials = [];
         this.getTestimonialData();
     }
-
 }

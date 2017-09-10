@@ -33,4 +33,15 @@ export class CoachService {
                 callback(data);
             });
     }
+
+    getRandomTestimonials(testimonialData: any[]): any[] {
+        const max = Math.floor(testimonialData.length);
+        const index1 = Math.floor(Math.random() * max);
+        let index2 = index1;
+        while (index2 === index1) {
+            index2 = Math.floor(Math.random() * max);
+        }
+
+        return [testimonialData[index1], testimonialData[index2]];
+    }
 }
