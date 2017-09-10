@@ -3,6 +3,8 @@ import { EncryptService } from '../services/encrypt.service';
 import { HttpService } from '../services/http.service';
 import { IHttpReq } from '../models/http-req';
 import { WindowObj } from '../services/window.service';
+import { MdDialog } from '@angular/material';
+import { AchievementInfoDialogComponent } from './user.components/achievement-info-dialog/achievement-info-dialog.component';
 
 @Component ({
     selector: 'app-user',
@@ -19,6 +21,7 @@ export class UserComponent implements OnInit {
     constructor(private httpHandler: HttpService,
         private _windowObj: WindowObj,
         private encryptService: EncryptService,
+        private dialog: MdDialog
     ) {}
 
     ngOnInit() {
@@ -87,10 +90,19 @@ export class UserComponent implements OnInit {
         });
     }
 
+    getUserAchievemnts(callback) {
+        const request: IHttpReq = {
+            url: '/api/achievements/user/' + this.userId,
+            method: 'GET',
+            body: {}
+        };
+
+        this.httpHandler.sendRequest(request).then(res => {
+            callback(res);
+        });
+    }
+
     checkAchievement() {
-        console.log(this.countFollowers);
-        console.log(this.countArticles);
-        console.log(this.countLaunchedTraining);
         const resAch = [];
         this.achievements.forEach(element => {
             if (element.measureName === 'train' && this.countLaunchedTraining >= element.value) {
@@ -113,7 +125,16 @@ export class UserComponent implements OnInit {
                 }
             }
         });
-        console.log('achievents checked');
-        console.log(resAch);
+        if (resAch.length) {
+            this.getUserAchievemnts((userAchievments) => {
+                console.log('userAchievments');
+                console.log(userAchievments);
+                // here must be func of filter two arrays to unique
+                resAch.forEach(element => {
+                    this.dialog.open(AchievementInfoDialogComponent, { data: element });
+                });
+                // here must be func of send request for add achievements to user
+            });
+        }
     }
 }
