@@ -119,6 +119,7 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
         ArticleAddComponent,
         ArticleDetailComponent,
         TrainingHistoryComponent,
+        TrainingHistoryDetailComponent,
         FoodPlanComponent,
         SearchComponent,
         WeeklyComponent,
@@ -129,6 +130,7 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
         AchievementsListComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
+        ProductListComponent
     ],
     providers: [
         ForAllUserGuard,

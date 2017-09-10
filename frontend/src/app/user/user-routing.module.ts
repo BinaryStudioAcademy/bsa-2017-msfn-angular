@@ -25,10 +25,9 @@ import { SharedPlanDetailComponent } from './user.components/shared-plan-detail/
 import { ArticleAddComponent } from './user.components/article-add/article-add.component';
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
+import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import { ArticleListComponent } from './user.components/article-list/article-list.component';
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
-
-import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 
 const userRoutes: Routes = [
@@ -141,6 +140,12 @@ const userRoutes: Routes = [
             {
                 path: 'achivements',
                 component: AchievementsListComponent
+            },{
+                path: 'training-history/:id',
+                component: TrainingHistoryDetailComponent
+            }, {
+                path: 'food/plan/add',
+                component: FoodPlanComponent
             },
         ]
     }
