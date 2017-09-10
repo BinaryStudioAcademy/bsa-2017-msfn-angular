@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
-=======
->>>>>>> c63f660860764a8e9d1d42afa33623e871e0cc3f
 import { GoalComponent } from './user.components/goal/goal.component';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { MetricsComponent } from './user.components/account-settings/metrics/metrics.component';
@@ -138,11 +134,7 @@ const userRoutes: Routes = [
                 component: TrainingHistoryDetailComponent
             },
             {
-<<<<<<< HEAD
-                path: 'achievements',
-=======
                 path: 'achivements',
->>>>>>> c63f660860764a8e9d1d42afa33623e871e0cc3f
                 component: AchievementsListComponent
             },
         ]
