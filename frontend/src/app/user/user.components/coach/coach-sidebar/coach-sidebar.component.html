@@ -9,7 +9,7 @@
                 md-icon-button
                 type="button"
                 (click)="followAction()">
-                {{ isFollowed ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ followers.length || ''}}</span>
+                {{ isFollowed ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ coachData.followers.length || ''}}</span>
             </button>
         </div>
     </div>
@@ -20,8 +20,8 @@
 
     <div id="social-links">
         <a
-            *ngFor="let link of coachInfo.socialLinks"
-            href="link.link"
+            *ngFor="let link of coachData.socialLinks"
+            href="{{ link.link }}"
             [ngStyle]="{'color': link.color}">
             {{ link.name }}
         </a>
@@ -55,7 +55,7 @@
     </app-message-posting>
 
     <div id="testimonial-wrapper" *ngIf="!posting">
-        <div class="testimonial" *ngFor="let testimonial of testimonials">
+        <div class="testimonial" *ngFor="let testimonial of coachData.testimonials">
             <div class="testimonial-photo" routerLink="">
                 <img src="{{ testimonial.user.userPhoto }}">
             </div>
