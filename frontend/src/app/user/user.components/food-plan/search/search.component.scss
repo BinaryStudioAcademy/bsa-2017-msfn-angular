@@ -1,19 +1,67 @@
 @import '../../../../../globalStyles/variables';
 @import '../../../../../globalStyles/indentations';
 @import '../../../../../globalStyles/text';
-.side-content {
-    max-width: 15vw;
-    height: 100%;
-    padding: 10px 0;
-    overflow-y: scroll;
-    .section{
-        margin: 5px 0;
+.content {
+    width: 100%;
+    display: flex;
+    .side-content {
+        max-width: 25%;
+        height: 100%;
+        padding: 10px;
+        padding-left: 0;
+        overflow-y: scroll;
+        border-right: 1px solid #424242;
+        .section {
+            margin: 5px 0;
+        }
+        .name {
+            font-size: 16px;
+        }
+        .subsections {
+            padding-left: 15px;
+            margin: 5px 0;
+        }
     }
-    .name{
-        font-size: 16px;
-    }
-    .subsections{
-        padding-left: 15px;
-        margin: 5px 0;
+    .product-content {
+        width: 75%;
+
+        md-list-item {
+            md-checkbox {
+                order: -1;
+            }
+            md-input-container {
+                width: 10%;
+            }
+        }
+        .product-upper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 $content-between-margin;
+        }
+        .btn {
+            border: none;
+            color: $text-main-color;
+            background-color: $btn-color;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 50px;
+            width: auto;
+            height: 40px;
+            margin-top: 20px;
+        }
+        .food-part {
+            width: 15%;
+            text-align: center;
+        }
+        .food-name {
+            width: 20%
+        }
+        .add-food-item {
+            margin-left: auto;
+        }
+        .hidden {
+            visibility: hidden;
+        }
     }
 }
