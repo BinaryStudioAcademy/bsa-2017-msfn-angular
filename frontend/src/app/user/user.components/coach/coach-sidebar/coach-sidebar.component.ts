@@ -24,46 +24,25 @@ export class CoachSidebarComponent implements OnInit {
                 private coachService: CoachService) {
     }
 
+    private _id = this.window.data._injectedData.userId;
     @Input() userData;
 
-    private _id = this.window.data._injectedData.userId;
-    followers = [];
-    isFollowed: boolean = false;
-
-    coachInfo = {
-        socialLinks: [
-            {
-                name: 'Facebook',
-                link: '',
-                color: '#5081e8'
-            },
-            {
-                name: 'Twitter',
-                link: '',
-                color: '#36b9ff'
-            },
-            {
-                name: 'Instagram',
-                link: '',
-                color: '#d520cd'
-            },
-            {
-                name: 'Youtube',
-                link: '',
-                color: '#f12727'
-            }
-        ]
+    coachData = {
+        followers: [],
+        socialLinks: [],
+        testimonials: [],
     };
 
-    testimonials = [];
+    isFollowed: boolean = false;
     posting: boolean = false;
 
     ngOnInit() {
         this.getTestimonialData();
+        this.coachData.socialLinks = this.coachService.getSocialLinks(this.userData);
 
         this.userListService.getFollowers(this.userData._id, data => {
-            this.followers = data;
-            this.isFollowed = this.followers.find(item => {
+            this.coachData.followers = data;
+            this.isFollowed = this.coachData.followers.find(item => {
                 return item.id === this._id;
             });
         });
@@ -81,7 +60,7 @@ export class CoachSidebarComponent implements OnInit {
         this.userListService.follow(this.userData._id, () => {
             this.isFollowed = true;
             this.userListService.getFollowers(this.userData._id, data => {
-                this.followers = data;
+                this.coachData.followers = data;
             });
         });
     }
@@ -90,7 +69,7 @@ export class CoachSidebarComponent implements OnInit {
         this.userListService.unfollow(this.userData._id, () => {
             this.isFollowed = false;
             this.userListService.getFollowers(this.userData._id, data => {
-                this.followers = data;
+                this.coachData.followers = data;
             });
         });
     }
@@ -98,8 +77,8 @@ export class CoachSidebarComponent implements OnInit {
     getTestimonialData(): void {
         this.messagePostingService.getMessages(this.userData._id, data => {
             if (data[0].hasOwnProperty('user')) {
-                this.testimonials = data;
-                this.testimonials = this.coachService.getRandomTestimonials(this.testimonials);
+                this.coachData.testimonials = data;
+                this.coachData.testimonials = this.coachService.getRandomTestimonials(this.coachData.testimonials);
             }
         }, true);
     }
@@ -113,7 +92,7 @@ export class CoachSidebarComponent implements OnInit {
     }
 
     updateTestimonialData(): void {
-        this.testimonials = [];
+        this.coachData.testimonials = [];
         this.getTestimonialData();
     }
 }
