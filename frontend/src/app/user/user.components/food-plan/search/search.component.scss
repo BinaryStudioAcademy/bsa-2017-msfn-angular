@@ -1,0 +1,47 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+
+md-list-item {
+    md-checkbox {
+        order: -1;
+    }
+    md-input-container {
+        width: 10%;
+    }
+}
+
+.product-upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 $content-between-margin;
+}
+
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    width: auto;
+    height: 40px;
+    margin-top: 20px;
+}
+
+.food-part {
+    width: 15%;
+    text-align: center;
+}
+
+.food-name {
+    width: 20%
+}
+.add-food-item {
+    margin-left: auto;
+}
+
+.hidden {
+    visibility: hidden;
+}
