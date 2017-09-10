@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserListService } from '../../user-list/user-list.service';
 import { WindowObj } from '../../../../services/window.service';
+import { MessagePostingService } from '../../message-posting/message-posting.service';
+import { IMessage } from '../../../../models/message';
 
 @Component({
     selector: 'app-coach-sidebar',
@@ -9,12 +11,16 @@ import { WindowObj } from '../../../../services/window.service';
         './coach-sidebar.component.scss',
         '../coach.component.scss'
     ],
-    providers: [UserListService]
+    providers: [
+        UserListService,
+        MessagePostingService
+    ]
 })
 export class CoachSidebarComponent implements OnInit {
 
     constructor(private window: WindowObj,
-                private userListService: UserListService) {
+                private userListService: UserListService,
+                private messagePostingService: MessagePostingService) {
     }
 
     @Input() userData;
@@ -45,22 +51,15 @@ export class CoachSidebarComponent implements OnInit {
                 link: '',
                 color: '#f12727'
             }
-        ],
-        testimonials: [
-            {
-                name: 'Ellie',
-                text: 'Phasellus nec metus a orci ullamcorper viverra. Duis lacinia luctus tellus elementum posuere.',
-                photo: '../../resources/default.png'
-            },
-            {
-                name: 'Handsome Jack',
-                text: 'Morbi augue neque, aliquam et fermentum eget, sodales id mauris. Mauris semper arcu ac maximus mattis.',
-                photo: '../../resources/default.png'
-            }
         ]
     };
 
+    testimonials = [];
+    posting: boolean = false;
+
     ngOnInit() {
+        this.getTestimonialData();
+
         this.userListService.getFollowers(this.userData._id, data => {
             this.followers = data;
             this.isFollowed = this.followers.find(item => {
@@ -95,7 +94,26 @@ export class CoachSidebarComponent implements OnInit {
         });
     }
 
-    addFeedback() {
-
+    getTestimonialData() {
+        this.messagePostingService.getMessages(this.userData._id, data => {
+            if (data[0].hasOwnProperty('user')) {
+                this.testimonials = data;
+            }
+            console.log(this.testimonials);
+        }, true);
     }
+
+    addFeedback() {
+        this.posting = true;
+    }
+
+    closeFeedback() {
+        this.posting = false;
+    }
+
+    updateTestimonialData() {
+        this.testimonials = [];
+        this.getTestimonialData();
+    }
+
 }

@@ -58,7 +58,7 @@ function getTestimonialsByCoachId(body, callback) {
 }
 
 function addTestimonial(body, callback) {
-    if (body.userId && body.coachId && body.body) {
+    if (body.user && body.coach && body.body) {
         testimonialRepository.add(body, (err, data) => {
             if (err) return callback(err);
             if (data === null) {
@@ -73,7 +73,7 @@ function addTestimonial(body, callback) {
 }
 
 function updateTestimonial(id, userId, body, callback) {
-    if (body.userId && body.body) {
+    if (body.user && body.body) {
         testimonialRepository.updateById(id, userId, body, (err, data) => {
             if (err) return callback(err);
             if (data === null) {

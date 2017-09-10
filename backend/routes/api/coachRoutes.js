@@ -4,7 +4,7 @@ const
     baseUrl = '/api/coach/';
 
 module.exports = app => {
-    app.get(`${baseUrl}testimonials/:id`, (req, res, next) => {
+    app.get(`${baseUrl}testimonial/:id`, (req, res, next) => {
         coachService.getTestimonialsByCoachId(req, (err, data) => {
             if (!data.length) {
                 data = [{}];
@@ -15,7 +15,7 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.post(`${baseUrl}testimonials`, (req, res, next) => {
+    app.post(`${baseUrl}testimonial`, (req, res, next) => {
         coachService.addTestimonial(req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -23,7 +23,7 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.put(`${baseUrl}testimonials/:id`, (req, res, next) => {
+    app.put(`${baseUrl}testimonial/:id`, (req, res, next) => {
         coachService.updateTestimonial(req.params.id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -31,7 +31,7 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.delete(`${baseUrl}testimonials/:id`, (req, res, next) => {
+    app.delete(`${baseUrl}testimonial/:id`, (req, res, next) => {
         coachService.deleteTestimonial(req.params.id, req.session.passport.user, (err, data) => {
             res.data = data;
             res.err = err;

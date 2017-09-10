@@ -16,13 +16,14 @@ function findByCoachId(coachId, callback) {
     const query = this.model.find({
         $and: [
             {
-                coachId: coachId
+                coach: coachId
             },
             {
                 isRemoved: false
             }
         ]
-    });
+    })
+        .populate('user');
     query.exec(callback);
 }
 
@@ -30,7 +31,7 @@ function updateById(id, userId, body, callback) {
     const query = this.model.update(
         { $and: [
             {
-                userId: userId
+                user: userId
             },
             {
                 _id: id,
@@ -47,7 +48,7 @@ function deleteById(id, userId, callback) {
     const query = this.model.update(
         { $and: [
             {
-                userId: userId
+                user: userId
             },
             {
                 _id: id,
