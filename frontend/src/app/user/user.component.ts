@@ -26,7 +26,7 @@ export class UserComponent implements OnInit {
         this.getFollowers();
         this.loadArticles();
         this.getLaunchedTrainings();
-        setTimeout(() => this.checkAchievement(), 2000);
+        setTimeout(() => this.checkAchievement(), 5000);
     }
 
     getFollowers() {
@@ -88,22 +88,25 @@ export class UserComponent implements OnInit {
     }
 
     checkAchievement() {
+        console.log(this.countFollowers);
+        console.log(this.countArticles);
+        console.log(this.countLaunchedTraining);
         const resAch = [];
         this.achievements.forEach(element => {
             if (element.measureName === 'train' && this.countLaunchedTraining >= element.value) {
-                if (resAch[resAch.length - 1].measureName === 'train') {
+                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'train') {
                     resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
                 } else {
                     resAch.push(element);
                 }
             } else if (element.measureName === 'follower' && this.countFollowers >= element.value) {
-                if (resAch[resAch.length - 1].measureName === 'follower') {
+                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'follower') {
                     resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
                 } else {
                     resAch.push(element);
                 }
             } else if (element.measureName === 'articles' && this.countArticles >= element.value) {
-                if (resAch[resAch.length - 1].measureName === 'articles') {
+                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'articles') {
                     resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
                 } else {
                     resAch.push(element);
