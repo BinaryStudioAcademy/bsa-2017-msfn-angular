@@ -4,7 +4,7 @@ import { HttpService } from '../services/http.service';
 import { IHttpReq } from '../models/http-req';
 import { WindowObj } from '../services/window.service';
 import { MdDialog } from '@angular/material';
-import { AchievementInfoDialogComponent } from './user.components/achievement-info-dialog/achievement-info-dialog.component';
+import { AchievementReceivedDialogComponent } from './user.components/achievement-received-dialog/achievement-received-dialog.component';
 
 @Component ({
     selector: 'app-user',
@@ -131,7 +131,7 @@ export class UserComponent implements OnInit {
                 console.log(userAchievments);
                 // here must be func of filter two arrays to unique
                 resAch.forEach(element => {
-                    this.dialog.open(AchievementInfoDialogComponent, { data: element });
+                    this.dialog.open(AchievementReceivedDialogComponent, { data: element });
                 });
                 // here must be func of send request for add achievements to user
             });

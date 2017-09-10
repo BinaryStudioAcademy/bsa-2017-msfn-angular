@@ -22,4 +22,20 @@ module.exports = function (app) {
             next();
         })
     }, apiResponse);
+
+    app.get(baseUrl + '/user/:id', function (req, res, next) {
+        achievementsService.getUserAchievements(req.params.id, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        })
+    }, apiResponse);
+
+        app.post(baseUrl + '/user/:id', function (req, res, next) {
+        achievementsService.addUserAchievement(req.params.id, req.body, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        })
+    }, apiResponse);
 };
