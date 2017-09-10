@@ -94,4 +94,8 @@ export class CoachSidebarComponent implements OnInit {
             });
         });
     }
+
+    addFeedback() {
+
+    }
 }
