@@ -24,17 +24,15 @@ md-paginator /deep/ .mat-paginator-range-label {
 
 #sidebar-wrapper {
     order: 1;
-    display: inline-block;
-    float: right;
     width: 90%;
-    padding: $standard-indent;
-    background: linear-gradient($bg-color 75%, $gradient-from-color);
-    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
 
     app-coach-sidebar {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        padding: $standard-indent;
+        background: linear-gradient($bg-color 75%, $gradient-from-color);
+        box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
     }
 }
 
@@ -126,20 +124,16 @@ md-paginator /deep/ .mat-paginator-range-label {
 
     #sidebar-wrapper {
         order: 2;
-        display: inline-block;
-        float: right;
-        width: 20%;
-        max-width: 300px;
-        min-height: 100%;
-        padding: $standard-indent;
-        background: linear-gradient($bg-color 75%, $gradient-from-color);
-        box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
+        width: 0;
 
         app-coach-sidebar {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: calc(100vh - 110px);
+            position: fixed;
+            width: 20%;
+            max-width: 300px;
+            height: calc(100vh - 70px);
         }
     }
 
