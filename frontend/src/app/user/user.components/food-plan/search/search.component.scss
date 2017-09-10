@@ -11,6 +11,19 @@
         padding-left: 0;
         overflow-y: scroll;
         border-right: 1px solid #424242;
+
+        .types {
+            .types-depth1,
+            .types-depth2,
+            .types-depth3 {
+                margin: 10px;
+            }
+
+            .icon-arrow {
+                cursor: pointer;
+                margin: auto 0;
+            }
+        }
         .section {
             margin: 5px 0;
         }
