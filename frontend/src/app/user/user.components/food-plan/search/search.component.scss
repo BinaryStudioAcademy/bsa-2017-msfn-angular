@@ -1,0 +1,19 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+.side-content {
+    max-width: 15vw;
+    height: 100%;
+    padding: 10px 0;
+    overflow-y: scroll;
+    .section{
+        margin: 5px 0;
+    }
+    .name{
+        font-size: 16px;
+    }
+    .subsections{
+        padding-left: 15px;
+        margin: 5px 0;
+    }
+}

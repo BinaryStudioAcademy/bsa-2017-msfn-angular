@@ -1,13 +1,49 @@
 <h2>Search products</h2>
 <div class="content">
 
-  <md-tab-group>
-    <md-tab label="By name"></md-tab>
-    <md-tab label="By type">
-        <div class="side-content">
-          </div>
-          <div class="product-content"></div>
-    </md-tab>
-  </md-tab-group>
-  
+    <md-tab-group>
+        <md-tab label="By name"></md-tab>
+        <md-tab label="By type">
+            <div class="side-content">
+                <md-input-container class="">
+                    <input mdInput placeholder="Search section" name="sectionName" required value="">
+                </md-input-container>
+                <div class="sections-list">
+                    <div class="section">
+                        <div class="name">Dairy</div>
+                        <div class="subsections">
+                            <div class="section">
+                                <div class="name">Milk</div>
+                                <div class="subsections">
+                                    <div class="section">
+                                        <div class="name">Milk</div>
+                                    </div>
+                                    <div class="section">
+                                        <div class="name">Milk</div>
+                                    </div>
+                                    <div class="section">
+                                        <div class="name">Milk</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div class="name">Butter</div>
+                                <div class="subsections">
+
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div class="name">Cheese</div>
+                                <div class="subsections">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-content"></div>
+        </md-tab>
+    </md-tab-group>
+
 </div>
