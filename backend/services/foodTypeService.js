@@ -72,7 +72,13 @@ function updateFoodType(id, body, callback) {
 }
 
 function getAllFoodTypes(callback) {
-    FoodTypeRepository.getAll((err, foodTypeData) => {
+    const params = {
+        filter: {
+            isRemoved: false,
+        },
+        populate: {path: 'parentType', select: ['name', '_id', 'depthLvl']},
+    };
+    FoodTypeRepository.get(params,(err, foodTypeData) => {
         if (err) {
             return callback(err);
         }

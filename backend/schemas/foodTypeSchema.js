@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const FoodType = new Schema({
     name: { 
@@ -7,7 +8,10 @@ const FoodType = new Schema({
         unique : true, 
         required : true 
     },
-    parentType: String,
+    parentType: {
+        type: ObjectId,
+        ref: 'FoodType'
+    },
     depthLvl: Number,
     description: String,
     parentFood: String,
