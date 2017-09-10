@@ -134,7 +134,7 @@ const userRoutes: Routes = [
                 component: TrainingHistoryDetailComponent
             },
             {
-                path: 'achivements',
+                path: 'achievements',
                 component: AchievementsListComponent
             },
         ]

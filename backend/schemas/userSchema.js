@@ -46,9 +46,9 @@ const User = new Schema({
         startWeek: String,
     },
     achievements: [{
-        goal: { 
+        achievement: { 
             type: Schema.Types.ObjectId, 
-            ref: 'Acievements' 
+            ref: 'Acievements'
         },
         finished: Date,
         value: Number,
