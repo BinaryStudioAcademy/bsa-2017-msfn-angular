@@ -1,22 +1,22 @@
 const Repository = require('./generalRepository'),
-    Message = require('../schemas/messageSchema');
+    Testimonial = require('../schemas/testimonialSchema');
 
-function MessageRepository() {
+function TestimonialRepository() {
     Repository.prototype.constructor.call(this);
-    this.model = Message;
+    this.model = Testimonial;
 }
 
-MessageRepository.prototype = new Repository();
+TestimonialRepository.prototype = new Repository();
 
-MessageRepository.prototype.findByUserId = findByUserId;
-MessageRepository.prototype.updateById = updateById;
-MessageRepository.prototype.deleteById = deleteById;
+TestimonialRepository.prototype.findByCoachId = findByCoachId;
+TestimonialRepository.prototype.updateById = updateById;
+TestimonialRepository.prototype.deleteById = deleteById;
 
-function findByUserId(userId, callback) {
+function findByCoachId(coachId, callback) {
     const query = this.model.find({
         $and: [
             {
-                user: userId
+                coach: coachId
             },
             {
                 isRemoved: false
@@ -61,4 +61,4 @@ function deleteById(id, userId, callback) {
     query.exec(callback);
 }
 
-module.exports = new MessageRepository();
+module.exports = new TestimonialRepository();

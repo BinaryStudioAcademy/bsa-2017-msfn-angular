@@ -24,5 +24,6 @@ module.exports = function (app) {
         articlesRoutes: require('./articlesRoutes')(app),
         messageRoutes: require('./messageRoutes')(app),
         achievementsRoutes: require('./achievementsRoutes')(app),
+        coachRoutes: require('./coachRoutes')(app),
     };
 };

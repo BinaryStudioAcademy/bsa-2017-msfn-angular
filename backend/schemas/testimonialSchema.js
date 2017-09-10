@@ -2,8 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const Message = new Schema({
+const Testimonial = new Schema({
     user: {
+        type: ObjectId,
+        ref: 'User'
+    },
+    coach: {
         type: ObjectId,
         ref: 'User'
     },
@@ -12,4 +16,4 @@ const Message = new Schema({
     isRemoved: Boolean
 });
 
-module.exports = mongoose.model('Message', Message);
+module.exports = mongoose.model('Testimonial', Testimonial);

@@ -47,13 +47,22 @@
         </div>
     </div>
 
-    <div class="testimonial" *ngFor="let testimonial of coachInfo.testimonials">
-        <div class="testimonial-photo" routerLink="">
-            <img src="{{ testimonial.photo }}">
-        </div>
-        <div class="testimonial-text-block">
-            <p class="testimonial-name" routerLink="">{{ testimonial.name }}</p>
-            <p class="testimonial-text">{{ testimonial.text }}</p>
+    <app-message-posting
+        *ngIf="posting"
+        [parentElement]="'coachPage'"
+        [coachId]="userData._id"
+        (hideInput)="updateTestimonialData(); closeFeedback()">
+    </app-message-posting>
+
+    <div id="testimonial-wrapper" *ngIf="!posting">
+        <div class="testimonial" *ngFor="let testimonial of testimonials">
+            <div class="testimonial-photo" routerLink="">
+                <img src="{{ testimonial.user.userPhoto }}">
+            </div>
+            <div class="testimonial-text-block">
+                <p class="testimonial-name" routerLink="">{{ testimonial.user.fullName }}</p>
+                <p class="testimonial-text">{{ testimonial.body }}</p>
+            </div>
         </div>
     </div>
 </div>

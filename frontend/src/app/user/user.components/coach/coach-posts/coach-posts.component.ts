@@ -41,7 +41,7 @@ export class CoachPostsComponent implements OnInit {
 
     getData() {
         this.messagePostingService.getMessages(this.userData._id, data => {
-            if (data[0].hasOwnProperty('userId')) {
+            if (data[0].hasOwnProperty('user')) {
                 this.posts = data;
 
                 for (const message of this.posts) {
