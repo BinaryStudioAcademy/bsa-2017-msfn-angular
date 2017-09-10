@@ -116,7 +116,7 @@ export class DbGoalsComponent implements OnInit, OnChanges {
 
                 if (!this.goalTypes.includes(goal.type)) {
                     this.goalTypes.push(goal.type);
-                    setTimeout(() => this.getGoalData[goal.type](goal));
+                    setTimeout(() => this.getGoalData[goal.type](goal), 200);
                 }
             }
         }

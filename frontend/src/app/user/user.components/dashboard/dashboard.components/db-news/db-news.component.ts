@@ -57,7 +57,7 @@ export class DbNewsComponent implements OnInit {
                 for (const message of this.messages) {
                     message.avatar = this.window.data._injectedData.userPhoto;
                     message.user = this.window.data._injectedData.userFirstName +
-                        this.window.data._injectedData.userLastName;
+                        ' ' + this.window.data._injectedData.userLastName;
                     message.dateOutput = this.dateService
                         .convertDateToIso(new Date(message.date), true);
                     message.editing = false;
