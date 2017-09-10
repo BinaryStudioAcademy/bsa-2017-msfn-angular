@@ -74,7 +74,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 1,
             icon: './resources/achievements_icon/difficult_1.png',
-            measureName: 'other'
+            measureName: 'articles'
         },
         {
             name: 'Teacher',
@@ -82,7 +82,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 20,
             icon: './resources/achievements_icon/difficult_2.png',
-            measureName: 'other'
+            measureName: 'articles'
         },
         {
             name: 'Sciencist',
@@ -90,7 +90,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 50,
             icon: './resources/achievements_icon/difficult_3.png',
-            measureName: 'other'
+            measureName: 'articles'
         },
         {
             name: 'Homo Sapiens',
@@ -98,7 +98,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 10,
             icon: './resources/achievements_icon/level_1.png',
-            measureName: 'other'
+            measureName: 'follower'
         },
         {
             name: 'Homo 2000',
@@ -106,7 +106,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 50,
             icon: './resources/achievements_icon/level_2.png',
-            measureName: 'other'
+            measureName: 'follower'
         },
         {
             name: 'Space Homo',
@@ -114,7 +114,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 100,
             icon: './resources/achievements_icon/level_3.png',
-            measureName: 'other'
+            measureName: 'follower'
         },
         {
             name: 'Little Groot',
@@ -122,7 +122,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 0,
             icon: './resources/achievements_icon/older_1.png',
-            measureName: 'other'
+            measureName: 'day'
         },
         {
             name: 'Groot',
@@ -130,7 +130,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 30,
             icon: './resources/achievements_icon/older_2.png',
-            measureName: 'other'
+            measureName: 'day'
         },
         {
             name: 'I\'m Groot',
@@ -138,7 +138,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 120,
             icon: './resources/achievements_icon/older_3.png',
-            measureName: 'other'
+            measureName: 'day'
         },
         {
             name: 'Supermarket runner',
@@ -170,7 +170,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 5,
             icon: './resources/achievements_icon/time_1.png',
-            measureName: 'other'
+            measureName: 'train'
         },
         {
             name: 'Watchmaker',
@@ -178,7 +178,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 10,
             icon: './resources/achievements_icon/time_2.png',
-            measureName: 'other'
+            measureName: 'train'
         },
         {
             name: 'Mr Sandman',
@@ -186,7 +186,7 @@ const mongoose = require('mongoose'),
             principle: 'f>v',
             value: 30,
             icon: './resources/achievements_icon/time_3.png',
-            measureName: 'other'
+            measureName: 'train'
         },
     ],
     measurments = [

@@ -14,6 +14,7 @@ export class UserComponent implements OnInit {
     private achievements: Array<any>;
     private countFollowers: Number;
     private countArticles: Number;
+    private countLaunchedTraining: Number;
 
     constructor(private httpHandler: HttpService,
         private _windowObj: WindowObj,
@@ -21,9 +22,11 @@ export class UserComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.getFollowers();
         this.getAchievemnts();
+        this.getFollowers();
         this.loadArticles();
+        this.getLaunchedTrainings();
+        setTimeout(() => this.checkAchievement(), 2000);
     }
 
     getFollowers() {
@@ -59,6 +62,19 @@ export class UserComponent implements OnInit {
             });
     }
 
+    getLaunchedTrainings() {
+        const sendData: IHttpReq = {
+            url: '/api/launchedtraining/user/' + this.userId,
+            method: 'GET',
+            body: {},
+        };
+
+        this.httpHandler.sendRequest(sendData)
+            .then(data => {
+                this.countLaunchedTraining = data.length;
+        });
+    }
+
     getAchievemnts() {
         const request: IHttpReq = {
             url: '/api/achievements',
@@ -69,5 +85,32 @@ export class UserComponent implements OnInit {
         this.httpHandler.sendRequest(request).then(res => {
             this.achievements = res;
         });
+    }
+
+    checkAchievement() {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            if (element.measureName === 'train' && this.countLaunchedTraining >= element.value) {
+                if (resAch[resAch.length - 1].measureName === 'train') {
+                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
+                } else {
+                    resAch.push(element);
+                }
+            } else if (element.measureName === 'follower' && this.countFollowers >= element.value) {
+                if (resAch[resAch.length - 1].measureName === 'follower') {
+                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
+                } else {
+                    resAch.push(element);
+                }
+            } else if (element.measureName === 'articles' && this.countArticles >= element.value) {
+                if (resAch[resAch.length - 1].measureName === 'articles') {
+                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
+                } else {
+                    resAch.push(element);
+                }
+            }
+        });
+        console.log('achievents checked');
+        console.log(resAch);
     }
 }
