@@ -23,7 +23,15 @@ function findByCoachId(coachId, callback) {
             }
         ]
     })
-        .populate('user');
+        .populate({
+            path: 'user',
+            select: [
+                'firstName',
+                'lastName',
+                'fullName',
+                'userPhoto',
+            ]
+        });
     query.exec(callback);
 }
 

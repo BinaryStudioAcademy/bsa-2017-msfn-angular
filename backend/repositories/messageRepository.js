@@ -23,7 +23,15 @@ function findByUserId(userId, callback) {
             }
         ]
     })
-        .populate('user');
+        .populate({
+            path: 'user',
+            select: [
+                'firstName',
+                'lastName',
+                'fullName',
+                'userPhoto',
+            ]
+        });
     query.exec(callback);
 }
 

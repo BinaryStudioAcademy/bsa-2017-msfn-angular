@@ -122,9 +122,6 @@ class subscribeService {
             },
             fields: '_id firstName lastName userPhoto'
         };
-        params.filter = {
-            follow: userId
-        };
         userRepository.get(params, (err, users) => {
             callback(err, users);
         });
