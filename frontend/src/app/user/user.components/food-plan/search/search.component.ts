@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
     showItem = {};
     typesDepth = [];
     filtered = null;
+    selectedType = '';
 
     constructor(
         public foodPlanService: FoodPlanService,
@@ -59,6 +60,7 @@ export class SearchComponent implements OnInit {
             this.foodsStatic = res;
         });
         this.foodPlanService.getFoodTypes(res => {
+            this.types = res;
             this.createTypesDepth(res);
         });
     }
@@ -82,7 +84,7 @@ export class SearchComponent implements OnInit {
                                 if (!this.typesDepth[parentIndex].children[parentIndex2].hasOwnProperty('children')) {
                                     this.typesDepth[parentIndex].children[parentIndex2].children = [];
                                 }
-                                this.typesDepth[parentIndex].children[parentIndex2].children.push(child1);
+                                this.typesDepth[parentIndex].children[parentIndex2].children.push(child2);
                             }
                         });
                     }
@@ -99,10 +101,10 @@ export class SearchComponent implements OnInit {
         }
     }
 
-    searchType(string) {
-        if (string.length > 0) {
+    searchType(query) {
+        if (query.length > 0) {
             this.filtered = this.types.filter(el => {
-                return el.name.toLowerCase().includes(string.toLowerCase());
+                return el.name.toLowerCase().includes(query.toLowerCase());
             });
         } else {
             this.filtered = null;
@@ -110,10 +112,36 @@ export class SearchComponent implements OnInit {
     }
 
     chooseType(type) {
-   /*      console.log(type);
+        this.selectedType = type._id;
+        const arrOfTypeNames = this.getArrOfTypeNames(type);
         this.foods = this.foodsStatic.filter(el => {
-            return el.foodType = type;
-        }); */
+            if (arrOfTypeNames.includes(el.foodType.name.toLowerCase())) {
+                return true;
+            }
+        });
+    }
+
+    getArrOfTypeNames(type) {
+        const arrOfTypes = [];
+        arrOfTypes.push(type.name.toLowerCase());
+        if (type.children) {
+            type.children.forEach(el => {
+                arrOfTypes.push(el.name.toLowerCase());
+                if (el.children) {
+                    el.children.forEach(el2 => {
+                        arrOfTypes.push(el2.name.toLowerCase());
+                    });
+                }
+            });
+        }
+        return arrOfTypes;
+    }
+
+    searchName(query) {
+        this.selectedType = '';
+        this.foods = this.foodsStatic.filter(el => {
+            return el.name.toLowerCase().includes(query.toLowerCase());
+        });
     }
 
 }
