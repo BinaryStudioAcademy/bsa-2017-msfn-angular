@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {DataSource} from '@angular/cdk';
+import {DataSource} from '@angular/cdk/table';
 import {Observable} from 'rxjs/Observable';
 import {MeasureListService} from '../measure-list/measure-list.service';
 import {ActivatedRoute} from '@angular/router';
