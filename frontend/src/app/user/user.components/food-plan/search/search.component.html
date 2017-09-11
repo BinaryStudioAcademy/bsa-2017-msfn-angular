@@ -7,16 +7,20 @@
         <div class="types">
             <div class="types-depth" *ngFor="let type of filtered || typesDepth">
                 <div class="depth-wrap">
-                    <span class="type-name" [ngClass]="(selectedType === type._id) ? 'selected' : ''" (click)="chooseType(type)">
-                        {{type.name}}
-                    </span>
-                    <md-icon class="icon-arrow" *ngIf="type.children && !filtered" (click)="toggleChild(type._id)">{{showItem[type._id] ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</md-icon>
+                    <div class="name-wrap">
+                        <span class="type-name" [ngClass]="(selectedType === type._id) ? 'selected' : ''" (click)="chooseType(type)">
+                            {{type.name}}
+                        </span>
+                        <md-icon class="icon-arrow" *ngIf="type.children && !filtered" (click)="toggleChild(type._id)">{{showItem[type._id] ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</md-icon>
+                    </div>
                     <div *ngIf="type.children && showItem[type._id]  && !filtered">
                         <div class="depth-wrap" *ngFor="let type2 of type.children">
-                            <span class="type-name" [ngClass]="(selectedType === type2._id) ? 'selected' : ''" (click)="chooseType(type2)">
-                                {{type2.name}}
-                            </span>
-                            <md-icon class="icon-arrow" *ngIf="type2.children" (click)="toggleChild(type2._id)">{{showItem[type2._id] ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</md-icon>
+                            <div class="name-wrap">
+                                <span class="type-name" [ngClass]="(selectedType === type2._id) ? 'selected' : ''" (click)="chooseType(type2)">
+                                    {{type2.name}}
+                                </span>
+                                <md-icon class="icon-arrow" *ngIf="type2.children" (click)="toggleChild(type2._id)">{{showItem[type2._id] ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</md-icon>
+                            </div>
                             <div *ngIf="type2.children && showItem[type2._id]">
                                 <div class="depth-wrap" *ngFor="let type3 of type2.children">
                                     <span class="type-name" [ngClass]="(selectedType === type3._id) ? 'selected' : ''" (click)="chooseType(type3)">
@@ -38,7 +42,7 @@
                 <input mdInput placeholder="Search name" #searchInputName (keyup)="searchName(searchInputName.value)">
             </md-input-container>
         </div>
-        <md-list *ngIf="foods">
+        <md-list class="product-list" *ngIf="foods">
             <md-list-item *ngFor="let food of foods" [hidden]="food.isRemoved">
                 <md-checkbox #checkFood class="food-part "></md-checkbox>
                 <div class="food-part">

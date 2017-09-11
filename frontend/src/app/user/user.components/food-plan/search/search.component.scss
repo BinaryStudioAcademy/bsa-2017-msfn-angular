@@ -3,10 +3,11 @@
 @import '../../../../../globalStyles/text';
 .content {
     width: 100%;
+    height: 90%;
     display: flex;
     .side-content {
         width: 25%;
-        height: 100%;
+        height: 90%;
         padding: 10px;
         padding-left: 0;
         overflow-y: scroll;
@@ -15,13 +16,17 @@
         .types {
             .depth-wrap {
                 display: flex;
-                flex-flow: row wrap;
-                align-items: center;
+                flex-flow: column nowrap;
                 flex: 100%;
                 margin: 10px;
 
+                .name-wrap {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    align-items: center;
+                }
+
                 .type-name {
-                    font-size: $large-text;
                     cursor: pointer;
                 }
 
@@ -48,6 +53,7 @@
     }
     .product-content {
         width: 75%;
+        height: 90%;
 
         md-list-item {
             md-checkbox {
@@ -63,6 +69,12 @@
             align-items: center;
             margin: 0 $content-between-margin;
         }
+
+        .product-list {
+            height: 80%;
+            overflow-y: scroll;
+        }
+
         .btn {
             border: none;
             color: $text-main-color;
