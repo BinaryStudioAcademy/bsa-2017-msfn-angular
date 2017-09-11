@@ -32,39 +32,39 @@ const mongoose = require('mongoose'),
     goals = [
         {
             name: 'Lose weight',
-            type: 'Weight',
+            category: 'Weight',
         },
         {
             name: 'Increase weight',
-            type: 'Weight',
+            category: 'Weight',
         },
         {
             name: 'Burn calories',
-            type: 'Activity',
+            category: 'Activity',
         },
         {
             name: 'Run distance',
-            type: 'Activity',
+            category: 'Activity',
         },
         {
             name: 'Do some count of exercises',
-            type: 'Activity',
+            category: 'Activity',
         },
         {
             name: 'Do trainings count per week',
-            type: 'Activity',
+            category: 'Activity',
         },
         {
             name: 'Eat calories per day',
-            type: 'Food',
+            category: 'Food',
         },
         {
             name: 'Gain muscles',
-            type: 'Appearance',
+            category: 'Appearance',
         },
         {
             name: 'Beat your records',
-            type: 'Improve results',
+            category: 'Improve results',
         }
     ],
     achievements = [

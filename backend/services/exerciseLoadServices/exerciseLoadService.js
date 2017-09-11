@@ -15,10 +15,10 @@ class exerciseLoadService {
                 return callback('import exercises types first. /api/load/types', '');
             }
             for (let i = 0; i < data.length; i++) {
-                const currentExercise = data[i];                
+                const currentExercise = data[i];
                 const exercise = {
                     name: currentExercise.name,
-                    type: typesId[currentExercise.category],
+                    category: typesId[currentExercise.category],
                     externalId: currentExercise.id,
                     measure: 'weight',
                     description: currentExercise.description,
@@ -45,7 +45,7 @@ class exerciseLoadService {
                         callback(err, {status: `Created ${results.length} exercises`});
                     });
             });
-            
+
         });
     }
 

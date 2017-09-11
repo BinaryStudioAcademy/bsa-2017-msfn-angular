@@ -15,7 +15,7 @@ export class ExerciseListService {
         this.httpService.sendRequest(request)
             .then(data => {
                 data.forEach(element => {
-                    element.type = element.type.name;
+                    element.category = element.category.name;
                 });
                 callback(data);
         });
@@ -30,8 +30,8 @@ export class ExerciseListService {
                 case 'name':
                     [propA, propB] = [a.name, b.name];
                     break;
-                case 'type':
-                    [propA, propB] = [a.type, b.type];
+                case 'category':
+                    [propA, propB] = [a.category, b.category];
                     break;
             }
 

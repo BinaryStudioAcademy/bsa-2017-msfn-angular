@@ -22,7 +22,7 @@ declare module ExerciseApi {
 
     export interface IExercise {
         name: string;
-        type: string;
+        category: string;
         measure: string;
         isRemoved: boolean;
         sports?: Array<SportApi.ISport>;
@@ -34,7 +34,7 @@ declare module ExerciseApi {
 declare module GoalApi{
     export interface IGoal {
         name?: string;
-        type?: string;
+        category?: string;
         isRemoved?: string;
     }
 }
@@ -62,7 +62,7 @@ declare module SportApi {
 declare module ArticleApi {
     export interface IArticle {
         _id?: string;
-        title: string;        
+        title: string;
         preview: string;
         detail: string;
         image?: string;
