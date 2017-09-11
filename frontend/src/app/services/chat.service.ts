@@ -21,6 +21,16 @@ export class ChatService {
     constructor(private socketService: SocketService,
                 private encryptService: EncryptService,
                 private window: WindowObj) {
+        this.socketService.addListener('check_user_online:success', (result => {
+                const data = JSON.parse(result);
+
+                const room = this.findRoomById(data.room);
+                if (room && room.user && data.user !== this.userId) {
+                    room.user.online = data.online;
+                    this.changeChats();
+                    this.changeActiveChats();
+                }
+        }));
         this.socketService.addListener('get_chat_rooms:success', (result) => {
             let data = JSON.parse(result);
 
@@ -29,6 +39,11 @@ export class ChatService {
                     return (user._id !== this.userId);
                 });
                 chat.user = users.shift();
+                if (chat.user) {
+                    this.socketService.send('check_user_online',
+                        this.encryptService.encrypt({room: chat.room, user: chat.user._id})
+                    );
+                }
                 return chat;
             });
 
@@ -56,7 +71,6 @@ export class ChatService {
         });
         this.socketService.addListener('get_messages:success', (result) => {
             const data = JSON.parse(result);
-            console.log(data);
             const chat = this.findRoomById(data.room);
             if (!chat.messages) {
                 chat.messages = [];
@@ -67,7 +81,6 @@ export class ChatService {
             const data = JSON.parse(result);
             const chat = this.findRoomById(data.room);
             chat.messages.push(data);
-            console.log(data);
         });
 
         this.loadChats();
@@ -164,7 +177,6 @@ export class ChatService {
     }
 
     public sendMessage(chat, message) {
-        console.log(chat, message);
         const data = {
             message: message,
             sender: this.userId,

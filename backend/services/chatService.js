@@ -84,8 +84,6 @@ ChatService.prototype.NewMessage = function(data, callback) {
     chatMessageRepository.add(decryptedData, (err, result) => {
          if (err) return callback(err);
 
-        console.log(result);
-
          socketService.BroadcastRoom('new_message:success', result.room, JSON.stringify(result));
 
          // callback(null, result);
@@ -99,8 +97,8 @@ ChatService.prototype.CheckUserOnline = function(data, callback) {
     const userSocket = socketService.GetUserById(userId);
 
     if (!userSocket) {
-        return callback(null, {user: userId, online: false});
+        return callback(null, {room: decryptedData.room, user: userId, online: false});
     }
-    callback(null, {user: userId, online: true});
+    callback(null, {room: decryptedData.room, user: userId, online: true});
 };
 

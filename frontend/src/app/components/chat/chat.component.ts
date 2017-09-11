@@ -1,13 +1,16 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnChanges, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {WindowObj} from '../../services/window.service';
 import {ChatService} from '../../services/chat.service';
+import {ChatWindowComponent} from './components/chat-window/chat-window.component';
 
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
     styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnChanges {
+export class ChatComponent implements OnInit, OnChanges, AfterViewInit {
+
+    @ViewChildren('window') chatWindows: QueryList<ChatWindowComponent>;
 
     public chatListVisible = false;
     private userId = (this.window.data._injectedData as any).userId;
@@ -33,6 +36,14 @@ export class ChatComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
+    }
+
+    ngAfterViewInit() {
+        console.log(this.chatWindows);
+        console.log(this.chatWindows.toArray());
+        this.chatWindows.toArray().forEach(item => {
+            console.log(item);
+        });
     }
 
     public toggleChat() {

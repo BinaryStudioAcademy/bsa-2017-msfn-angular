@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, AfterViewInit, DoCheck} from '@angular/core';
 import {WindowObj} from '../../../../services/window.service';
 import {ChatService} from '../../../../services/chat.service';
 
@@ -7,19 +7,28 @@ import {ChatService} from '../../../../services/chat.service';
     templateUrl: './chat-window.component.html',
     styleUrls: ['./chat-window.component.scss']
 })
-export class ChatWindowComponent implements OnInit {
+export class ChatWindowComponent implements OnInit, AfterViewInit {
 
     @Output() close: EventEmitter<any> = new EventEmitter<any>();
     @Input() chat;
     private lastMessage = '';
     private keysPressed: any[] = [];
     private userId = (this.window.data._injectedData as any).userId;
+    private chatWrapper: any;
+    private messagesWrapper: any;
+    private messagesCount: number;
 
     constructor(private window: WindowObj,
                 private chatService: ChatService) {}
 
     ngOnInit() {
-        console.log('init');
+        this.messagesCount = this.chat.messages.length;
+    }
+
+    ngAfterViewInit() {
+        this.chatWrapper = document.getElementById(this.chat.room);
+        this.messagesWrapper = this.chatWrapper.querySelector('.messages-wrapper');
+        this.scrollToBottom();
     }
 
     public resizeInput(shadowInput, input, event) {
@@ -72,5 +81,14 @@ export class ChatWindowComponent implements OnInit {
 
     public closeChat() {
         this.close.emit(this.chat);
+    }
+
+    private scrollToBottom() {
+        if (this.messagesWrapper) {
+            setTimeout(() => {
+                const height = this.messagesWrapper.scrollHeight;
+                this.messagesWrapper.scrollTop = height;
+            });
+        }
     }
 }

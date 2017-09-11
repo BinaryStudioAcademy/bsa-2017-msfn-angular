@@ -9,7 +9,9 @@
              (click)="startChat(chat)">
             <div *ngIf="chat.user"
                  class="user-image"
-                 [style.background-image]="'url(' + chat.user.userPhoto + ')'"></div>
+                 [style.background-image]="'url(' + chat.user.userPhoto + ')'">
+                <div class="status-circle online" *ngIf="chat.user.online"></div>
+            </div>
             <div *ngIf="chat.user"
                  class="user-name">{{chat.user.fullName}}</div>
         </div>
@@ -17,6 +19,7 @@
 </div>
 <div class="chat-windows">
     <app-chat-window *ngFor="let activeChat of activeChats"
+                     #window
                      [chat]="activeChat"
                      (close)="closeChat($event)"
                      class="chat-window"></app-chat-window>

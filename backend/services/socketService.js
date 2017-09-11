@@ -33,6 +33,7 @@ SocketService.prototype.Broadcast = function(event, data) {
 };
 
 SocketService.prototype.BroadcastRoom = function(event, room, data) {
+    console.log(room);
     this.io.sockets.in(room).emit(event, data);
 };
 
@@ -78,6 +79,7 @@ SocketService.prototype.JoinRoom = function(json, callback) {
     if (!room) return callback(new ApiError('No room specified'));
 
     this.socket.join(room);
+    this.BroadcastRoom('check_user_online:success', room, JSON.stringify({room: room, user: this.socket.user._id, online: true}));
     callback(null, true);
 };
 

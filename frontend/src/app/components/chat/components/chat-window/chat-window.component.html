@@ -1,4 +1,4 @@
-<div class="chat-wrapper" [class.minimized]="chat.minimized">
+<div class="chat-wrapper" [class.minimized]="chat.minimized" id="{{chat.room}}">
     <div class="chat-header">
         <span class="chat-user" (click)="toogleMinimized()">{{chat.user.fullName}}</span>
         <div class="chat-header-icons">
