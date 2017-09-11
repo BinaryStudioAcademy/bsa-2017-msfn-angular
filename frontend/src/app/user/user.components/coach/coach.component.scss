@@ -40,7 +40,6 @@ md-paginator /deep/ .mat-paginator-range-label {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
     flex-wrap: wrap;
     margin: 0 auto;
 
@@ -95,7 +94,7 @@ md-paginator /deep/ .mat-paginator-range-label {
 
     #main-content {
         div {
-            margin: $mini-indent 0;
+            margin: 1% 0;
         }
     }
 
@@ -132,20 +131,19 @@ md-paginator /deep/ .mat-paginator-range-label {
             justify-content: space-between;
             position: fixed;
             width: 20%;
-            max-width: 300px;
+            max-width: 320px;
             height: calc(100vh - 70px);
         }
     }
 
     #main-content {
         flex-direction: row;
-        align-items: baseline;
-        height: 100%;
-        padding: $mini-indent 3%;
+        height: calc(100vh - 70px);
+        padding: $mini-indent 1%;
 
         div {
             width: 48%;
-            min-height: 26%;
+            min-height: 47%;
             padding: $large-indent;
         }
 
