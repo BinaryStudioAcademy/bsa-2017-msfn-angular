@@ -23,7 +23,7 @@ export class FoodPlanService {
 
     getFood(callback): void {
         const request: IHttpReq = {
-            url: 'api/food/all',
+            url: 'api/food',
             method: 'GET',
             body: {}
         };

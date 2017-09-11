@@ -19,8 +19,6 @@ export class FoodPlanComponent implements OnInit {
     ngOnInit() {
     }
     currentType(currentType) {
-        console.log(currentType);
         this.foodplan.type = currentType;
-        console.log(this.foodplan);
     }
 }

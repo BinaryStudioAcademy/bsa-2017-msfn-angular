@@ -3,61 +3,52 @@
         <div class="day" *ngFor="let day of days">
             <div class="head" (click)="selectDay(day.name)">{{day.name}}</div>
             <div class="day-plan" *ngIf="day.selected">
-                <div class="add-item">
+                <div class="add-item" (click)="showForm(day);" *ngIf="!day.editMeal">
                     <i class="material-icons">add</i>
                     <span>Add meal</span>
                 </div>
-                <div class="meal-form">
+                <div class="meal-form" *ngIf="day.editMeal">
                     <md-input-container class="meal-name">
-                        <input mdInput placeholder="Meal name" name="Meal name" required value="">
+                        <input mdInput placeholder="Meal name" name="Meal name" required [(value)]="day.editMealObj.name">
                     </md-input-container>
-                    <div class="products">
+                    <div class="products" *ngIf="day.editMealObj.products.length">
                         <h4>Product list</h4>
                         <div class="list">
-                            <div class="item">
-                                <div class="name">Milk</div>
-                                <div class="quantity"> 160 ml</div>
-                                <div class="del"><i class="material-icons">close</i> </div>
-                            </div>
-                            <div class="item">
-                                <div class="name">nesquik cereal</div>
-                                <div class="quantity"> 150 g</div>
-                                <div class="del"><i class="material-icons">close</i> </div>
-                            </div>
-                            <div class="item">
-                                <div class="name">Orange</div>
-                                <div class="quantity"> 1 pc</div>
-                                <div class="del"><i class="material-icons">close</i> </div>
+                            <div class="item" *ngFor="let product of day.editMealObj.products; let i = index;">
+                                <div class="name">{{product.name}}</div>
+                                <div class="quantity">{{product.quantity}}</div>
+                                <div class="del" (click)="delItem(day.editMealObj.products, i)"><i class="material-icons">close</i> </div>
                             </div>
                         </div>
                     </div>
-                    <div class="save">
+                    <div class="add-product">
+                            <i class="material-icons">add</i>
+                            <span>Add product</span>
+                        </div>
+                    <div class="buttons">
+                    <div class="save" (click)="saveMeal(day);">
                         <span>  
-                        Save meal</span></div>
+                                <i class="material-icons">check</i></span></div>
+                    <div class="cancel" (click)="day.editMeal = false;">
+                        <span>  
+                                <i class="material-icons">close</i></span></div>
+                            </div>
                 </div>
-                <div class="saved-meals">
-                    <div class="meal">
-                        <h4>Dinner</h4>
+                <div class="saved-meals" *ngIf="day.meals.length">
+                    <div class="meal" *ngFor="let meal of day.meals; let i = index;">
+                        <h4>{{meal.name}}</h4>
                         <div class="kcal">369 kcal</div>
                         <div class="products">
-                            <div class="list">
-                                <div class="item">
-                                    <div class="name">Borscht</div>
-                                    <div class="quantity"> 300 ml</div>
-                                    <div class="kcal">171 kcal</div>
-                                </div>
-                                <div class="item">
-                                    <div class="name">Sour cream</div>
-                                    <div class="quantity"> 100 g</div>
-                                    <div class="kcal">160 kcal</div>
-
-                                </div>
-                                <div class="item">
-                                    <div class="name">Juice</div>
-                                    <div class="quantity"> 250 ml</div>
-                                    <div class="kcal">38 kcal</div>
+                            <div class="list" *ngIf="meal.products">
+                                <div class="item" *ngFor="let product of meal.products">
+                                    <div class="name">{{product.name}}</div>
+                                    <div class="quantity">{{product.quantity}}</div>
+                                    <div class="kcal">{{product.kcal}} kcal</div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="edit" (click)="showForm(day, i)">
+                                <i class="material-icons">mode_edit</i>
                         </div>
                     </div>
                 </div>
