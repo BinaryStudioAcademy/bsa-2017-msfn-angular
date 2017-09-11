@@ -588,7 +588,7 @@ foodList = [
         picture: 'resources/food/icons8-mushroom.png',
     },
     {
-        name: 'Noodless',
+        name: 'Noodles',
         foodType: 'Pasta',
         kcal: 352,
         protein: 12.3,
@@ -598,7 +598,7 @@ foodList = [
         description: '',
         measure: 'Weight',
         isPublished: true,
-        picture: 'resources/food/icons8-noodless.png',
+        picture: 'resources/food/icons8-noodles.png',
     },
     {
         name: 'Octopus grilled',
