@@ -13,7 +13,6 @@ export class AchievementReceivedDialogComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.data);
     }
 
 }
