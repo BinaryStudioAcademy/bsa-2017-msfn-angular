@@ -1,7 +1,7 @@
 <div class="container">
     <button [md-dialog-close]="false" class="cls-btn"><i class="material-icons" id="close">close</i></button>
     <div class="header">{{data.name}}</div>
-    <img [src]="data.icon" class="icon"/>
+    <img [src]="data.achieved ? data.icon : './resources/achievement_icons/blocked.png'" class="icon"/>
     <div class="text">{{data.message}}</div>
     <button md-raised-button [md-dialog-close]="false">Okay</button>
 </div>
