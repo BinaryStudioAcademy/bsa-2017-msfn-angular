@@ -115,7 +115,7 @@ export class SearchComponent implements OnInit {
         this.selectedType = type._id;
         const arrOfTypeNames = this.getArrOfTypeNames(type);
         this.foods = this.foodsStatic.filter(el => {
-            if (arrOfTypeNames.includes(el.foodType.name.toLowerCase())) {
+            if (arrOfTypeNames.includes(el.foodType._id)) {
                 return true;
             }
         });
@@ -123,13 +123,13 @@ export class SearchComponent implements OnInit {
 
     getArrOfTypeNames(type) {
         const arrOfTypes = [];
-        arrOfTypes.push(type.name.toLowerCase());
+        arrOfTypes.push(type._id);
         if (type.children) {
             type.children.forEach(el => {
-                arrOfTypes.push(el.name.toLowerCase());
+                arrOfTypes.push(el._id);
                 if (el.children) {
                     el.children.forEach(el2 => {
-                        arrOfTypes.push(el2.name.toLowerCase());
+                        arrOfTypes.push(el2._id);
                     });
                 }
             });

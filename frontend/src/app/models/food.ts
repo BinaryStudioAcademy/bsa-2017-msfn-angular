@@ -2,7 +2,7 @@ export interface IFood {
     _id?: string;
     name: string;
     measure: string;
-    foodType: string;
+    foodType: any;
     kcal?: number;
     protein?: number;
     fat?: number;
