@@ -116,7 +116,7 @@ export class WeeklyComponent implements OnInit {
       if (day.name === currentDay.name) {
         day.editMeal = true;
         if (mealId >= 0) {
-          day.editMealObj = day.meals[mealId];
+          day.editMealObj = Object.assign({},day.meals[mealId]);
           day.editMealId = mealId;
         } else {
           day.editMealObj = {
@@ -132,13 +132,14 @@ export class WeeklyComponent implements OnInit {
 
   saveMeal(day) {
     const meal2Save = day.editMealObj;
-    console.log(day);
-    const mealId = day.editMealId;
-    if (mealId) {
+    console.log(day.editMealObj);
+    const mealId: number = day.editMealId;
+    if (mealId >= 0) {
       day.meals[mealId] = meal2Save;
-      day.editMealId = false;
+      delete day.editMealId;
     } else {
-      day.meals = Object.assign(day.meals, meal2Save);
+      console.log(meal2Save);
+      day.meals.push(meal2Save);
     }
     day.editMeal = false;
     console.log(this.days);

@@ -9,6 +9,8 @@ const mongoose = require('mongoose'),
     exerciseLoadService = require('../services/exerciseLoadServices/exerciseLoadService'),
     exerciseImagesLoadService = require('../services/exerciseLoadServices/exerciseImagesLoadService'),
     exerciseTypeLoadService = require('../services/exerciseLoadServices/exerciseTypeLoadService'),
+    foodTypeService = require('./foodTypeService'),
+    foodService = require('./foodService'),
 
     adminData = {
         firstName: 'Arnold',
@@ -124,8 +126,8 @@ const mongoose = require('mongoose'),
             ]
         }
     ];
-    exerciseRepository = require('./../repositories/exerciseRepository');
-    exerciseTypeRepository = require('./../repositories/exerciseTypeRepository');
+exerciseRepository = require('./../repositories/exerciseRepository');
+exerciseTypeRepository = require('./../repositories/exerciseTypeRepository');
 
 exercises = [
     {
@@ -319,6 +321,418 @@ exerciseTypeExample = {
     isRemoved: false
 };
 
+foodTypes1 = [
+    {
+        name: 'Fruits && Vegetables',
+        depthLvl: 1
+    },
+    {
+        name: 'Meat && Fish',
+        depthLvl: 1
+    },
+    {
+        name: 'Drocery',
+        depthLvl: 1
+    },
+    {
+        name: 'Dairy',
+        depthLvl: 1
+    },
+    {
+        name: 'Desserts',
+        depthLvl: 1
+    }];
+
+foodTypes2 = [
+    {
+        name: 'Pasta',
+        depthLvl: 2,
+        parentType: 'Drocery'
+    },
+    {
+        name: 'Grains',
+        depthLvl: 2,
+        parentType: 'Drocery'
+    },
+    {
+        name: 'Fruits',
+        depthLvl: 2,
+        parentType: 'Fruits && Vegetables'
+    },
+    {
+        name: 'Vegetables',
+        depthLvl: 2,
+        parentType: 'Fruits && Vegetables'
+    },
+    {
+        name: 'Berries',
+        depthLvl: 2,
+        parentType: 'Fruits && Vegetables'
+    },
+    {
+        name: 'Meat',
+        depthLvl: 2,
+        parentType: 'Meat && Fish'
+    },
+    {
+        name: 'Seafood',
+        depthLvl: 2,
+        parentType: 'Meat && Fish'
+    },
+    {
+        name: 'Milk',
+        depthLvl: 2,
+        parentType: 'Dairy'
+    },
+    {
+        name: 'Cheese',
+        depthLvl: 2,
+        parentType: 'Dairy'
+    },
+];
+
+foodList = [
+    {
+        name: 'Asparagus',
+        foodType: 'Vegetables',
+        kcal: 40,
+        protein: 2,
+        fat: 0,
+        carbons: 3,
+        vendor: 'Kroger',
+        description: 'Asparagus is one of the top-20 foods listed on the Aggregate Nutrient Density Index (ANDI). The index aims to give an idea of the overall health benefit of foods by measuring vitamin, mineral, and phytonutrient content in relation to the caloric content.',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-asparagus.png',
+    },
+    {
+        name: 'Avocado',
+        foodType: 'Fruits',
+        kcal: 160,
+        protein: 8.5,
+        fat: 14.7,
+        carbons: 3,
+        vendor: 'Usda',
+        description: 'Avocados are high in antioxidants and many important nutrients, some of which are rare in the modern diet. For this reason, it is not surprising to see that avocados have numerous health benefits.',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-avocado.png',
+    },
+    {
+        name: 'Bacon',
+        foodType: 'Meat',
+        kcal: 40,
+        protein: 2.5,
+        fat: 3.5,
+        carbons: 0.5,
+        vendor: 'Bacon',
+        description: '',
+        measure: 'Quantity',
+        isPublished: true,
+        picture: 'resources/food/icons8-bacon.png',
+    },
+    {
+        name: 'Banana split',
+        foodType: 'Desserts',
+        kcal: 141,
+        protein: 2.4,
+        fat: 3.5,
+        carbons: 26,
+        vendor: 'Dairy Queen',
+        description: 'This fun dessert is a healthy, kid-friendly spin on a classic.',
+        measure: 'Quantity',
+        isPublished: true,
+        picture: 'resources/food/icons8-banana_split.png',
+    },
+    {
+        name: 'Strawberry',
+        foodType: 'Berries',
+        kcal: 32,
+        protein: 0.7,
+        fat: 0.3,
+        carbons: 0.7,
+        vendor: 'Strawberry',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-berry.png',
+    },
+    {
+        name: 'Broccoli',
+        foodType: 'Vegetables',
+        kcal: 34,
+        protein: 2.8,
+        fat: 0.4,
+        carbons: 6.6,
+        vendor: 'Broccoli',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-broccoli.png',
+    },
+    {
+        name: 'Cheese cheddar',
+        foodType: 'Cheese',
+        kcal: 406,
+        protein: 24,
+        fat: 33.8,
+        carbons: 1.3,
+        vendor: 'Trader Joe\'s',
+        description: 'Cheddar cheese is a go-to snack, but it also has a well-deserved place in grilled cheese sandwiches, macaroni and cheese, nachos, chili, and so much more. So it was high time we took a trip to the store and tested all the big brands of cheddar we could find.',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-cheese.png',
+    },
+    {
+        name: 'Cherry',
+        foodType: 'Berries',
+        kcal: 50,
+        protein: 0,
+        fat: 0.3,
+        carbons: 12,
+        vendor: 'Cherry tree',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-cherry.png',
+    },
+    {
+        name: 'Cucumber',
+        foodType: 'Vegetables',
+        kcal: 12,
+        protein: 0.6,
+        fat: 0.2,
+        carbons: 2.2,
+        vendor: 'Garden',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-cucumber.png',
+    },
+    {
+        name: 'Cupcake',
+        foodType: 'Desserts',
+        kcal: 200,
+        protein: 2,
+        fat: 6,
+        carbons: 35,
+        vendor: 'Cupcake',
+        description: '',
+        measure: 'Quantity',
+        isPublished: true,
+        picture: 'resources/food/icons8-cupcake.png',
+    },
+    {
+        name: 'Doughnut',
+        foodType: 'Desserts',
+        kcal: 260,
+        protein: 3,
+        fat: 14,
+        carbons: 31,
+        vendor: 'Simpson production',
+        description: '',
+        measure: 'Quantity',
+        isPublished: true,
+        picture: 'resources/food/icons8-doughnut.png',
+    },
+    {
+        name: 'Perch',
+        foodType: 'Seafood',
+        kcal: 100,
+        protein: 23,
+        fat: 2,
+        carbons: 0,
+        vendor: 'Mariano\'s',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-fish_food.png',
+    },
+    {
+        name: 'Ice cream',
+        foodType: 'Desserts',
+        kcal: 120,
+        protein: 2,
+        fat: 7,
+        carbons: 13,
+        vendor: 'Baskin robbins',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-ice_cream_bowl.png',
+    },
+    {
+        name: 'Milk',
+        foodType: 'Milk',
+        kcal: 60,
+        protein: 4.2,
+        fat: 2.1,
+        carbons: 6,
+        vendor: 'Milka',
+        description: '',
+        measure: 'Liquid',
+        isPublished: true,
+        picture: 'resources/food/icons8-milk_bottle.png',
+    },
+    {
+        name: 'Champignons',
+        foodType: 'Vegetables',
+        kcal: 16,
+        protein: 2.7,
+        fat: 0,
+        carbons: 0.3,
+        vendor: 'VWT',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-mushroom.png',
+    },
+    {
+        name: 'Noodless',
+        foodType: 'Pasta',
+        kcal: 352,
+        protein: 12.3,
+        fat: 1.75,
+        carbons: 74,
+        vendor: 'Mivina',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-noodless.png',
+    },
+    {
+        name: 'Octopus grilled',
+        foodType: 'Seafood',
+        kcal: 82,
+        protein: 15,
+        fat: 1,
+        carbons: 2.2,
+        vendor: 'Octopus',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-octopus.png',
+    },
+    {
+        name: 'Porridge',
+        foodType: 'Grains',
+        kcal: 355,
+        protein: 11,
+        fat: 8,
+        carbons: 60,
+        vendor: 'Axa',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-porridge.png',
+    },
+    {
+        name: 'Prawn',
+        foodType: 'Seafood',
+        kcal: 67,
+        protein: 21,
+        fat: 1,
+        carbons: 0,
+        vendor: 'Prawn',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-prawn.png',
+    },
+    {
+        name: 'Raspberry',
+        foodType: 'Berries',
+        kcal: 52,
+        protein: 1.2,
+        fat: 0.6,
+        carbons: 12,
+        vendor: 'Raspberry',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-raspberry.png',
+    },
+    {
+        name: 'Rice',
+        foodType: 'Grains',
+        kcal: 97,
+        protein: 2,
+        fat: 0.2,
+        carbons: 21.1,
+        vendor: 'Rice',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-rice_bowl.png',
+    },
+    {
+        name: 'Salmon',
+        foodType: 'Seafood',
+        kcal: 100,
+        protein: 20.9,
+        fat: 1,
+        carbons: 2,
+        vendor: 'Norven',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-sashimi.png',
+    },
+    {
+        name: 'Spaghetti',
+        foodType: 'Pasta',
+        kcal: 220,
+        protein: 6,
+        fat: 1,
+        carbons: 42,
+        vendor: 'Pasta La Vista!',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-spaghetti.png',
+    },
+    {
+        name: 'Steak',
+        foodType: 'Meat',
+        kcal: 212,
+        protein: 14.6,
+        fat: 5,
+        carbons: 1.2,
+        vendor: 'Steak',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-steak.png',
+    },
+    {
+        name: 'Turkey',
+        foodType: 'Meat',
+        kcal: 123,
+        protein: 16.3,
+        fat: 4.3,
+        carbons: 3.7,
+        vendor: 'thanksgiving',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-thanksgiving.png',
+    },
+    {
+        name: 'Tomato',
+        foodType: 'Vegetables',
+        kcal: 18,
+        protein: 0.9,
+        fat: 0.2,
+        carbons: 3.9,
+        vendor: 'Garden',
+        description: '',
+        measure: 'Weight',
+        isPublished: true,
+        picture: 'resources/food/icons8-tomato.png',
+    },
+];
+
+
 module.exports = function () {
     // add exercises
     exerciseRepository.get({ limit: 1, filter: { isRemoved: false } }, (err, data) => {
@@ -390,12 +804,43 @@ module.exports = function () {
     goals.forEach((elem) => {
         goalService.createGoal(elem, () => { });
     });
-    achievementsRepository.getAll((err, data)=> {
-        if(data === []){
+
+    achievementsRepository.getAll((err, data) => {
+        if (data === []) {
             achievements.forEach((elem) => {
                 achievementsRepository.add(elem, () => { });
             });
         }
-    })
+    });
+
+    foodTypeService.getFoodTypeByName(foodTypes1[0].name, (err, data) => {
+        
+        if (data.length === 0) {
+            foodTypeService.addAll(foodTypes1, (err, data) => {
+                let types = data.types;
+                foodTypes2.forEach((el, ind) => {
+                    let parent = types.find((created)=>{
+                        return el.parentType === created.name;
+                    });
+                    el.parentType = parent._id;
+                });
+                foodTypeService.addAll(foodTypes2, (err, data2) => {
+                    types = types.concat(data2.types);
+                    foodList.forEach((el, ind) => {
+                        let parent = types.find((created)=>{
+                            return el.foodType === created.name;
+                        });
+                        el.foodType = parent._id;
+                    });
+                    foodService.addAll(foodList, (err, dataFood)=>{
+                        console.log(dataFood);
+                    });
+                });
+            });
+
+        }
+    });
+
+
 
 };

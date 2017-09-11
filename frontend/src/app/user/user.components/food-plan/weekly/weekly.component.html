@@ -9,7 +9,7 @@
                 </div>
                 <div class="meal-form" *ngIf="day.editMeal">
                     <md-input-container class="meal-name">
-                        <input mdInput placeholder="Meal name" name="Meal name" required [(value)]="day.editMealObj.name">
+                        <input mdInput placeholder="Meal name" name="meal-name" required [(ngModel)]="day.editMealObj.name">
                     </md-input-container>
                     <div class="products" *ngIf="day.editMealObj.products.length">
                         <h4>Product list</h4>
