@@ -56,9 +56,9 @@ export class SearchComponent implements OnInit {
 
     ngOnInit() {
         this.foodPlanService.getFood(res => {
-            console.log(res);
             this.foods = res;
         });
+        
         this.foodPlanService.getFoodTypes(res => {
             console.log(res);
             this.types = res;

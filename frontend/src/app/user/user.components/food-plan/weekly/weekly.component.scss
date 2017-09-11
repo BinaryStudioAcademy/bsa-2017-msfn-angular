@@ -50,17 +50,43 @@
                     cursor: pointer;
                     outline: none;
                 }
-                .save {
+                .add-product {
                     display: flex;
-                    justify-content: center;
-                    margin-top: 10px;
-                    span {
-                        cursor: pointer;
-                        padding: 5px 10px;
-                        border: 1px solid $main-color;
-                        border-radius: 20px;
-                        &:hover {
-                            background-color: $main-color;
+                    align-items: center;
+                }
+                .buttons {
+                    display: flex;
+                    justify-content: space-around;
+                    .save,
+                    .cancel {
+                        display: flex;
+                        justify-content: center;
+                        margin-top: 10px;
+                        span {
+                            cursor: pointer;
+                            padding: 5px;
+                            border-radius: 20px;
+                            height: 40px;
+                            width: 40px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                    }
+                    .save {
+                        span {
+                            border: 1px solid $main-color;
+                            &:hover {
+                                background-color: $main-color;
+                            }
+                        }
+                    }
+                    .cancel {
+                        span {
+                            border: 1px solid $error-color;
+                            &:hover {
+                                background-color: $error-color;
+                            }
                         }
                     }
                 }
@@ -70,7 +96,19 @@
                 h4+.kcal {
                     position: absolute;
                     top: 3px;
-                    right: 10px;
+                    right: 30px;
+                }
+                .edit {
+                    position: absolute;
+                    top: 0px;
+                    right: 0;
+                    cursor: pointer;
+                    i {
+                        font-size: 17px;
+                        &:hover {
+                            color: $main-color
+                        }
+                    }
                 }
             }
             .kcal {
