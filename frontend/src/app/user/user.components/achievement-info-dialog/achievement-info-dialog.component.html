@@ -3,5 +3,6 @@
     <div class="header">{{data.name}}</div>
     <img [src]="data.achieved ? data.icon : './resources/achievements_icon/blocked.png'" class="icon"/>
     <div class="text">{{data.message}}</div>
-    <button md-raised-button [md-dialog-close]="false">Okay</button>
+    <div class="data" *ngIf="data.achieved">Achieved: {{data.finished | date: 'yMd'}}</div>
+    <button md-raised-button [md-dialog-close]="false">OK</button>
 </div>
