@@ -90,7 +90,7 @@ export class UserComponent implements OnInit {
         });
     }
 
-    getUserAchievemnts(callback) {
+    getUserAchievements(callback) {
         const request: IHttpReq = {
             url: '/api/achievements/user/' + this.userId,
             method: 'GET',
@@ -100,6 +100,16 @@ export class UserComponent implements OnInit {
         this.httpHandler.sendRequest(request).then(res => {
             callback(res);
         });
+    }
+
+    addUserAchievements(achievment) {
+        const request: IHttpReq = {
+            url: '/api/achievements/user/' + this.userId,
+            method: 'POST',
+            body: achievment
+        };
+
+        this.httpHandler.sendRequest(request);
     }
 
     checkAchievement() {
@@ -126,15 +136,43 @@ export class UserComponent implements OnInit {
             }
         });
         if (resAch.length) {
-            this.getUserAchievemnts((userAchievments) => {
+            this.getUserAchievements((userAchievments) => {
                 console.log('userAchievments');
                 console.log(userAchievments);
-                // here must be func of filter two arrays to unique
-                resAch.forEach(element => {
-                    this.dialog.open(AchievementReceivedDialogComponent, { data: element });
+                const resArr = this.diffArr(userAchievments, resAch);
+
+                resArr.forEach(element => {
+                    this.dialog.open(AchievementReceivedDialogComponent, { data: element })
+                    .afterClosed().subscribe(() => {
+                        this.addUserAchievements(element);
+                    });
                 });
-                // here must be func of send request for add achievements to user
             });
         }
+    }
+
+    diffArr(idArr, achArr) {
+        let cacheArr = [];
+        idArr.forEach((element, i) => {
+            if (i === 0) {
+                cacheArr = achArr.filter(el => {
+                    if (element._id === el._id) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
+            } else {
+                cacheArr = cacheArr.filter(elem => {
+                    if (element._id === elem._id) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
+            }
+        });
+
+        return (cacheArr.length) ? cacheArr : achArr;
     }
 }

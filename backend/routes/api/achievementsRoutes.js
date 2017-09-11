@@ -23,7 +23,7 @@ module.exports = function (app) {
         })
     }, apiResponse);
 
-    app.get(baseUrl + '/user/:id', function (req, res, next) {
+    app.get(baseUrl + 'user/:id', function (req, res, next) {
         achievementsService.getUserAchievements(req.params.id, (err, data) => {
             res.data = data;
             res.err = err;
@@ -31,7 +31,7 @@ module.exports = function (app) {
         })
     }, apiResponse);
 
-        app.post(baseUrl + '/user/:id', function (req, res, next) {
+    app.post(baseUrl + 'user/:id', function (req, res, next) {
         achievementsService.addUserAchievement(req.params.id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
