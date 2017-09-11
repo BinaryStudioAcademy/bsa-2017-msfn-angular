@@ -5,8 +5,30 @@
             <input mdInput placeholder="Search type" #searchInput (keyup)="searchType(searchInput.value)">
         </md-input-container>
         <div class="types">
-            <div class="types-depth1" *ngFor="let type of filtered || depth1; let i = index">
+            <div class="types-depth1" *ngFor="let type of filtered || typesDepth">
                 <div>
+                    <span (click)="chooseType(type.name)">
+                        {{type.name}}
+                    </span>
+                    <md-icon class="icon-arrow" *ngIf="type.children && !filtered" (click)="toggleChild(type._id)">{{showItem[type._id] ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</md-icon>
+                    <div *ngIf="type.children && showItem[type._id]  && !filtered">
+                        <div *ngFor="let type2 of type.children">
+                            <span (click)="chooseType(type2.name)">
+                                {{type2.name}}
+                            </span>
+                            <md-icon class="icon-arrow" *ngIf="type2.children" (click)="toggleChild(type2._id)">{{showItem[type2._id] ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</md-icon>
+                            <div *ngIf="type2.children && showItem[type2._id]">
+                                <div *ngFor="let type3 of type2.children">
+                                    <span (click)="chooseType(type3.name)">
+                                         {{type3.name}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--                 <div>
                     {{type.name}}
                     <md-icon class="icon-arrow" (click)="toggleChild(type._id)">{{showItem[type._id] ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</md-icon>
                     <div *ngIf="showItem[type._id]">
@@ -22,7 +44,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
