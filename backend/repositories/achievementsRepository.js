@@ -1,5 +1,5 @@
 const Repository = require('./generalRepository'),
-    Achievements = require('../schemas/AchievementsSchema');
+    Achievements = require('../schemas/achievementsSchema');
 
 function AchievementsRepository() {
     Repository.prototype.constructor.call(this);
