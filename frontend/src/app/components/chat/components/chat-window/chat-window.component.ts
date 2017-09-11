@@ -25,9 +25,6 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.messagesCount = this.chat.messages.length;
-        setInterval(() => {
-            console.log(this);
-        }, 20000);
     }
 
     ngAfterViewInit() {

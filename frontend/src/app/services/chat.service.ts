@@ -76,7 +76,6 @@ export class ChatService {
                 chat.messages = [];
             }
             chat.messages = chat.messages.concat(data.result);
-            console.log(chat);
             this.changeChats();
         });
         this.socketService.addListener('new_message:success', (result) => {
