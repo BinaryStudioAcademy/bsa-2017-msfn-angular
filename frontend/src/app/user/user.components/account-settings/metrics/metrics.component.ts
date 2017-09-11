@@ -13,9 +13,9 @@ export class MetricsComponent implements OnInit {
     timeZone;
     settings;
     unitTypeData = [
-        { type: 'metric', name: 'Metric units' },
-        { type: 'imperial', name: 'Imperial units' },
-        { type: 'default', name: 'mix units' }
+        { category: 'metric', name: 'Metric units' },
+        { category: 'imperial', name: 'Imperial units' },
+        { category: 'default', name: 'mix units' }
     ];
     userSettingsDefault = {
         weight: 'kg',

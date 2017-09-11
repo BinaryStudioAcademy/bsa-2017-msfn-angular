@@ -42,7 +42,7 @@ export class SettingsService {
             if (!el.isRemoved) {
                 settings[el.measureName] = [];
                 el.measureUnits.forEach(unit => {
-                    settings[el.measureName].push({ type: unit.unitType, name: unit.unitName });
+                    settings[el.measureName].push({ category: unit.unitType, name: unit.unitName });
                 });
             }
         });
@@ -55,7 +55,7 @@ export class SettingsService {
                 if (userSettings.hasOwnProperty(key) && settings.hasOwnProperty(key)) {
                     let value;
                     settings[key].forEach(el => {
-                        if (el.type === userSettings.unitType) {
+                        if (el.category === userSettings.unitType) {
                             value = el.name;
                         }
                     });
@@ -73,7 +73,7 @@ export class SettingsService {
             if (userSettings.hasOwnProperty(key) && settings.hasOwnProperty(key)) {
                 settings[key].forEach(el => {
                     if (el.name === userSettings[key]) {
-                        typesArray.push(el.type);
+                        typesArray.push(el.category);
                     }
                 });
             }

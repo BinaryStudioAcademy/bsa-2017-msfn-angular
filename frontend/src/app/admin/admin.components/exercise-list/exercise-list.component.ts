@@ -46,8 +46,8 @@ export class ExerciseListComponent implements OnInit {
         this.exerciseListService.getExercises((result) => {
             this.tableDatabase.addExercises(result);
             for (const item of result) {
-                if (!this.options.includes(item.type)) {
-                    this.options.push(item.type);
+                if (!this.options.includes(item.category)) {
+                    this.options.push(item.category);
                 }
             }
         });
@@ -116,7 +116,7 @@ export class ExampleDataSource extends DataSource<any> {
         return Observable.merge(...displayDataChanges).map(() => {
             return this.getSortedData().slice().filter((item) => {
                 const searchStr = (item.name).toLowerCase();
-                const searchType = (item.type).toLowerCase();
+                const searchType = (item.category).toLowerCase();
 
                 if (this.itemFilter) {
                     const filterList = this.itemFilter.toLowerCase().split(',');

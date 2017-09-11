@@ -7,7 +7,7 @@
             <md-header-cell *cdkHeaderCellDef> Type </md-header-cell>
             <md-cell *cdkCellDef="let row">
                 <div class="row-center-container">
-                    <md-select placeholder="Goal type" [(ngModel)]="row.type" name="-elem" [hidden]="row.isRemoved" (change)="updateRow(row._id, {name: row.name, type: row.type})">
+                    <md-select placeholder="Goal type" [(ngModel)]="row.category" name="-elem" [hidden]="row.isRemoved" (change)="updateRow(row._id, {name: row.name, category: row.category})">
                         <md-option *ngFor="let type of goalTypes" [value]="type.name">
                             {{type.name}}
                         </md-option>
@@ -26,17 +26,17 @@
                             {{row.name ? row.name : "Goal cannot be empty"}}</div>
 
                         <md-input-container class="input-container" *ngIf="((!row._id && firstShow) || row._id == focusedRowId) && !row.isRemoved">
-                            <input mdInput #goal type="text" (blur)="updateRow(row._id, {name: goal.value, type: row.type})" value="{{row.name}}" [ngClass]="{'input-focused' : !row._id}"
-                                (keyup.enter)="updateRow(row._id, {name: goal.value, type: row.type})">
+                            <input mdInput #goal type="text" (blur)="updateRow(row._id, {name: goal.value, type: row.category})" value="{{row.name}}" [ngClass]="{'input-focused' : !row._id}"
+                                (keyup.enter)="updateRow(row._id, {name: goal.value, category: row.category})">
                         </md-input-container>
                     </div>
                     <div *ngIf="!row.isRemoved">
-                        <i class="material-icons ico" (click)="updateRow(row._id, {isRemoved: true, name: row.name, type: row.type})">
+                        <i class="material-icons ico" (click)="updateRow(row._id, {isRemoved: true, name: row.name, category: row.category})">
                                 delete
                             </i>
                     </div>
                     <div *ngIf="row.isRemoved">
-                        <i class="material-icons ico" (click)="updateRow(row._id, {isRemoved: false, name: row.name, type: row.type})">
+                        <i class="material-icons ico" (click)="updateRow(row._id, {isRemoved: false, name: row.name, category: row.category})">
                                 add
                             </i>
                     </div>

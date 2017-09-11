@@ -26,7 +26,7 @@
     <div class="btn-container">
         <button md-raised-button [md-dialog-close]="false">Close</button>
         <button md-raised-button
-        (click)="addUpdateUserGoal({value: value, type: selectedType, deadline: deadline, _id: id})"
+        (click)="addUpdateUserGoal({value: value, category: selectedType, deadline: deadline, _id: id})"
         [md-dialog-close]="true"
         [disabled]="!validValue">Save</button>
     </div>

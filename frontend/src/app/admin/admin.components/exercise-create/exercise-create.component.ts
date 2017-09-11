@@ -21,7 +21,7 @@ import { SelectSportComponent } from '../select-sport/select-sport.component';
 export class ExerciseCreateComponent implements OnInit {
     exercise: IExercise = {
         name: '',
-        type: '',
+        category: '',
         isRemoved: false,
         sports: [],
         measure: '',
@@ -85,7 +85,7 @@ export class ExerciseCreateComponent implements OnInit {
             if (this.data.image) {
                 const folder = 'exercise-image';
                 const fileType = 'img';
-                const fileName = this.exercise.type;
+                const fileName = this.exercise.category;
                 this.exerciseCreateService.saveImg(this.data.image, fileName, fileType, folder, result => {
                     if (result.err) {
                         this.exercise.image = this.oldImg;

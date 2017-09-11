@@ -124,7 +124,7 @@ export class TableDatabase {
         copiedData.push({
             _id: body._id,
             name: body.name,
-            type: body.type,
+            category: body.category,
             isRemoved: false
         });
         console.log('AddRow: ', body);
@@ -140,7 +140,7 @@ export class TableDatabase {
         }
         copiedData.push({
             id: null,
-            type: defaultType,
+            category: defaultType,
             name: '',
             isRemoved: false
         });

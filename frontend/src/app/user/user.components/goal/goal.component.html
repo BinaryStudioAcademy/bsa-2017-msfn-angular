@@ -4,7 +4,7 @@
 <div id="goal-container" [sortablejs]="data" [sortablejsOptions]="dragOptions">
     <div class="item-container" *ngFor="let item of data" (click)="openDialog(item)">
         <i class="material-icons" id="delete" (click)="deleteGoal(item, $event)">delete</i>
-        <p class="goal-main-text">{{ item.type }}</p>
+        <p class="goal-main-text">{{ item.category }}</p>
         <i class="material-icons">stars</i>
         <p class="goal-item-text">Value: {{ item.value }}</p>
         <p class="goal-item-text">Due {{ item.deadline | date: 'yMd'}}</p>
