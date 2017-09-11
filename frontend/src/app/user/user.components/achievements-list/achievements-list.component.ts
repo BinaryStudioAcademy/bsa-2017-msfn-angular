@@ -17,23 +17,24 @@ export class AchievementsListComponent implements OnInit {
         private dialog: MdDialog) { }
 
     ngOnInit() {
-        this.achievementsListService.getAllAchievements((data) => {
-            this.achievements = data;
-        });
-        this.achievementsListService.getUserAchievements((data) => {
-            if (!data) {
+        this.achievementsListService.getAllAchievements((allAchieves) => {
+            this.achievements = allAchieves;
+            this.achievementsListService.getUserAchievements((userAchieves) => {
+            if (!userAchieves) {
                 return;
             }
             this.achievements.forEach(ach => {
-                ach.achieved = data.some(userAch => {
+                ach.achieved = userAchieves.some(userAch => {
                     // tslint:disable-next-line:triple-equals
                     if (ach._id == userAch.achievement) {
+                        ach.finished = userAch.finished;
                         return true;
                     } else {
                         return false;
                     }
                 });
             });
+        });
         });
     }
     openDialog(data) {

@@ -25,11 +25,8 @@ export class UserComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        console.log('UserComponent LOADED');
         this.getAchievemnts();
-        this.getFollowers();
-        this.loadArticles();
-        this.getLaunchedTrainings();
-        setTimeout(() => this.checkAchievement(), 5000);
     }
 
     getFollowers() {
@@ -41,7 +38,9 @@ export class UserComponent implements OnInit {
         };
         this.httpHandler.sendRequest(getFollowersReq).then(data => {
             this.countFollowers = data.length;
+            this.checkFollowerAchievement();
         });
+
     }
 
     loadArticles() {
@@ -62,6 +61,7 @@ export class UserComponent implements OnInit {
                     });
                 }
                 this.countArticles = result.length;
+                this.checkArticlesAchievement();
             });
     }
 
@@ -75,10 +75,102 @@ export class UserComponent implements OnInit {
         this.httpHandler.sendRequest(sendData)
             .then(data => {
                 this.countLaunchedTraining = data.length;
+                this.checkTrainAchievement();
         });
     }
 
-    getAchievemnts() {
+    addUserAchievements(achievment) {
+        achievment.achievement = achievment._id;
+        achievment._id = undefined;
+        achievment.finished = new Date();
+
+        const request: IHttpReq = {
+            url: '/api/achievements/user/',
+            method: 'POST',
+            body: achievment
+        };
+
+        this.httpHandler.sendRequest(request);
+    }
+
+    checkTrainAchievement() {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            if (element.measureName === 'train' && this.countLaunchedTraining >= element.value) {
+                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'train') {
+                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
+                } else {
+                    resAch.push(element);
+                }
+            }
+        });
+        this.getUnreceivedArray(resAch);
+    }
+
+    checkFollowerAchievement() {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            if (element.measureName === 'follower' && this.countFollowers >= element.value) {
+                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'follower') {
+                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
+                } else {
+                    resAch.push(element);
+                }
+            }
+        });
+        this.getUnreceivedArray(resAch);
+    }
+
+    checkArticlesAchievement() {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            if (element.measureName === 'articles' && this.countArticles >= element.value) {
+                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'articles') {
+                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
+                } else {
+                    resAch.push(element);
+                }
+            }
+        });
+        this.getUnreceivedArray(resAch);
+    }
+
+    getUnreceivedArray(resAch) {
+        if (resAch.length) {
+            this.getUserAchievements((userAchievments) => {
+                const resArr = this.diffArr(userAchievments, resAch);
+                resArr.forEach(element => {
+                    this.dialog.open(AchievementReceivedDialogComponent, { data: element })
+                    .afterClosed().subscribe(() => {
+                        this.addUserAchievements(element);
+                    });
+                });
+            });
+        }
+    }
+
+    diffArr(userArr, achArr) {
+                console.log(userArr, achArr);
+                if (!userArr) {
+                    return achArr;
+                }
+                achArr.forEach(ach => {
+                ach.achieved = userArr.some(userAch => {
+                    // tslint:disable-next-line:triple-equals
+                    if (ach._id == userAch.achievement) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+            });
+            achArr = achArr.filter(elem => {
+                return !elem.achieved;
+            });
+            return achArr;
+    }
+
+        getAchievemnts() {
         const request: IHttpReq = {
             url: '/api/achievements',
             method: 'GET',
@@ -87,6 +179,9 @@ export class UserComponent implements OnInit {
 
         this.httpHandler.sendRequest(request).then(res => {
             this.achievements = res;
+            this.getFollowers();
+            this.loadArticles();
+            this.getLaunchedTrainings();
         });
     }
 
@@ -100,79 +195,5 @@ export class UserComponent implements OnInit {
         this.httpHandler.sendRequest(request).then(res => {
             callback(res);
         });
-    }
-
-    addUserAchievements(achievment) {
-        const request: IHttpReq = {
-            url: '/api/achievements/user/',
-            method: 'POST',
-            body: achievment
-        };
-
-        this.httpHandler.sendRequest(request);
-    }
-
-    checkAchievement() {
-        const resAch = [];
-        this.achievements.forEach(element => {
-            if (element.measureName === 'train' && this.countLaunchedTraining >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'train') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
-            } else if (element.measureName === 'follower' && this.countFollowers >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'follower') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
-            } else if (element.measureName === 'articles' && this.countArticles >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'articles') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
-            }
-        });
-        if (resAch.length) {
-            this.getUserAchievements((userAchievments) => {
-                console.log('userAchievments');
-                console.log(userAchievments);
-                const resArr = this.diffArr(userAchievments, resAch);
-
-                resArr.forEach(element => {
-                    this.dialog.open(AchievementReceivedDialogComponent, { data: element })
-                    .afterClosed().subscribe(() => {
-                        this.addUserAchievements(element);
-                    });
-                });
-            });
-        }
-    }
-
-    diffArr(idArr, achArr) {
-        let cacheArr = [];
-        idArr.forEach((element, i) => {
-            if (i === 0) {
-                cacheArr = achArr.filter(el => {
-                    if (element._id === el._id) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                });
-            } else {
-                cacheArr = cacheArr.filter(elem => {
-                    if (element._id === elem._id) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                });
-            }
-        });
-
-        return (cacheArr.length) ? cacheArr : achArr;
     }
 }
