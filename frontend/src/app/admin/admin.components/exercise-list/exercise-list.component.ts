@@ -24,7 +24,7 @@ export class ExerciseListComponent implements OnInit {
     name = '';
     displayedColumns = [
         'name',
-        'category',
+        'type',
         'description'
     ];
     tableDatabase = new TableDatabase();
