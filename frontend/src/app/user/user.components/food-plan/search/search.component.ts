@@ -58,7 +58,6 @@ export class SearchComponent implements OnInit {
             this.foods = res;
             this.foodsStatic = res;
         });
-        
         this.foodPlanService.getFoodTypes(res => {
             this.createTypesDepth(res);
         });

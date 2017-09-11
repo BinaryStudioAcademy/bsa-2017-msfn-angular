@@ -57,7 +57,7 @@ export class FoodEditDialogComponent implements OnInit {
         this.food.measure = this.foodService.updateMeasureBack(this.food.measure);
         this.newItem = this.data.newItem;
         this.foodService.getAllFoodTypes((data) => {
-            this.foodTypes = data.map((item) => item.name);
+            this.foodTypes = data;
         });
         this.outputImage = {};
         this.upd = (+new Date).toString(36);
