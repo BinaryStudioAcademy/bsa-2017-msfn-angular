@@ -98,11 +98,12 @@ $message-border-radius: 5px;
         padding: 5px 0;
 
         .message {
-            margin-right: 15px;
+            margin-right: 5px;
             display: flex;
             justify-content: flex-end;
             margin-bottom: 1px;
             margin-top: 1px;
+            flex-direction: column;
 
             .message-text {
                 padding: 5px;
@@ -113,12 +114,20 @@ $message-border-radius: 5px;
                 color: $text-dark-color;
                 max-width: 150px;
                 word-wrap: break-word;
+                margin-left: auto;
+                margin-right: 10px;
+                display: flex;
+            }
+            .message-date {
+                font-size: 10px;
+                margin-left: auto;
+                display: flex;
             }
         }
 
         .message.left {
             margin-right: 0;
-            margin-left: 15px;
+            margin-left: 5px;
             justify-content: flex-start;
 
             .message-text {
@@ -127,6 +136,12 @@ $message-border-radius: 5px;
                 border-bottom-left-radius: 0;
                 border-top-right-radius: $message-border-radius;
                 background-color: $secondary-color;
+                margin-left: 10px;
+                margin-right: auto;
+            }
+            .message-date {
+                margin-left: 0;
+                margin-right: auto;
             }
         }
     }

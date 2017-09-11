@@ -19,6 +19,7 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
     private newMessageInput: any;
     private messagesCount: number;
     private focused: boolean;
+    private loading = false;
 
     constructor(private window: WindowObj,
                 private chatService: ChatService) {}
@@ -39,6 +40,7 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
             }
         });
         this.newMessageInput.focus();
+        console.log(this);
     }
 
     public resizeInput(shadowInput, input, event) {
@@ -123,5 +125,16 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
                 message.read = true;
             }
         });
+    }
+
+    public checkLoadMessages() {
+        if (this.messagesWrapper.scrollTop < 150 && !this.loading) {
+            this.loading = true;
+            this.chatService.loadMessages(this.chat);
+            setTimeout(() => {
+                this.loading = false;
+                this.checkLoadMessages();
+            }, 500);
+        }
     }
 }

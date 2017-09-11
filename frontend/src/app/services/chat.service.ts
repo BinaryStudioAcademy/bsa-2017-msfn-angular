@@ -15,7 +15,7 @@ export class ChatService {
     public data: Subject<any[]> = new Subject();
     public activeData: Subject<any[]> = new Subject();
 
-    private messagesPerPage = 20;
+    private messagesPerPage = 50;
 
 
     constructor(private socketService: SocketService,
@@ -75,7 +75,10 @@ export class ChatService {
             if (!chat.messages) {
                 chat.messages = [];
             }
-            chat.messages = chat.messages.concat(data.result);
+            if (data.result.length < this.messagesPerPage) {
+                chat.notAbleToLoad = true;
+            }
+            chat.messages = data.result.reverse().concat(chat.messages);
             this.changeChats();
         });
         this.socketService.addListener('new_message:success', (result) => {
@@ -176,15 +179,17 @@ export class ChatService {
     }
 
     public loadMessages(chat) {
-        const data = {
-            room: chat.room,
-            limit: this.messagesPerPage,
-            offset: 0
-        };
-        if (chat.messages && chat.messages.length > 0) {
-            data.offset = chat.messages.length;
+        if (!chat.notAbleToLoad) {
+            const data = {
+                room: chat.room,
+                limit: this.messagesPerPage,
+                offset: 0
+            };
+            if (chat.messages && chat.messages.length > 0) {
+                data.offset = chat.messages.length;
+            }
+            this.socketService.send('get_messages', this.encryptService.encrypt(data));
         }
-        this.socketService.send('get_messages', this.encryptService.encrypt(data));
     }
 
     public sendMessage(chat, message) {

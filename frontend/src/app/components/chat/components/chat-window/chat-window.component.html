@@ -1,7 +1,7 @@
 <div class="chat-wrapper" [class.minimized]="chat.minimized" id="{{chat.room}}">
     <div class="chat-header">
         <div class="chat-user" (click)="toogleMinimized()">
-            <span class="status-circle" *ngIf="!((chat.messages | unread: userId) !== 0)" [class.online]="chat.user.online"></span>
+            <span class="status-circle" *ngIf="(!((chat.messages | unread: userId) !== 0) || !minimized)" [class.online]="chat.user.online"></span>
             <span class="new-messages-count" *ngIf="(chat.messages | unread: userId) !== 0">{{chat.messages | unread: userId}}</span>
             <span class="chat-user-text" [title]="chat.user.fullName">{{chat.user.fullName}}</span>
         </div>
@@ -9,9 +9,9 @@
             <md-icon class="close icon" (click)="closeChat()">clear</md-icon>
         </div>
     </div>
-    <div class="messages-wrapper">
+    <div class="messages-wrapper" (scroll)="checkLoadMessages()">
         <div *ngFor="let message of chat.messages" class="message" [class.left]="message.sender !== userId">
-            <div class='message-text'>{{message.message}}</div>
+            <div class='message-text' mdTooltipShowDelay="500" mdTooltipPosition="above" [mdTooltip]="message.date | date: 'short'">{{message.message}}</div>
         </div>
     </div>
     <div class="new-message-wrap">
