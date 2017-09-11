@@ -45,6 +45,8 @@ import {ConstantsService} from './services/constants.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatService } from './services/chat.service';
 import { ChatWindowComponent } from './components/chat/components/chat-window/chat-window.component';
+import { UnreadPipe } from './components/chat/pipes/unread.pipe';
+import { TotalUnreadPipe } from './components/chat/pipes/total-unread.pipe';
 
 @NgModule({
     imports: [
@@ -77,6 +79,8 @@ import { ChatWindowComponent } from './components/chat/components/chat-window/ch
         HeaderNotificationsComponent,
         ChatComponent,
         ChatWindowComponent,
+        UnreadPipe,
+        TotalUnreadPipe,
     ],
     providers: [
         ToasterService,

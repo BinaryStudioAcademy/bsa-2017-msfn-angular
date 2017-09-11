@@ -27,7 +27,6 @@ function getFoodTypeByName(name, callback) {
 
 function addFoodType(body, callback) {
     this.getFoodTypeByName(body.name, (err, data) => {
-        console.log(data);
         if (data.name) {
             callback(new ApiError('Food type with such name already exists'));
         } else {

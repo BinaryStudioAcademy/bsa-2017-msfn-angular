@@ -62,10 +62,14 @@ ChatService.prototype.GetMessages = function(data, callback) {
 
     chatMessageRepository.get({
         'filter': {
-            room: room
+            room: room,
+            isRemoved: false
         },
         'limit': limit,
-        'offset': offset
+        'offset': offset,
+        'sort': {
+            date: -1
+        }
     }, (err, result) => {
         if (err) return callback(err);
 
@@ -100,5 +104,21 @@ ChatService.prototype.CheckUserOnline = function(data, callback) {
         return callback(null, {room: decryptedData.room, user: userId, online: false});
     }
     callback(null, {room: decryptedData.room, user: userId, online: true});
+};
+
+ChatService.prototype.ReadMessage = function(data, callback) {
+    const decryptedData = decryptService(data);
+    const {messageId, room} = decryptedData;
+
+    chatMessageRepository.update(messageId, {read: true}, (err, result) => {
+        if (err) return callback(err);
+
+        const callbackData = {
+            messageId: messageId,
+            room: room
+        };
+
+        socketService.BroadcastRoom('read_message:success', room, JSON.stringify(callbackData));
+    });
 };
 

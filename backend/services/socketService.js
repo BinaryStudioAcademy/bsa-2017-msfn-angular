@@ -33,7 +33,6 @@ SocketService.prototype.Broadcast = function(event, data) {
 };
 
 SocketService.prototype.BroadcastRoom = function(event, room, data) {
-    console.log(room);
     this.io.sockets.in(room).emit(event, data);
 };
 

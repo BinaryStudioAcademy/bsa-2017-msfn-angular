@@ -10,8 +10,6 @@ import {ChatWindowComponent} from './components/chat-window/chat-window.componen
 })
 export class ChatComponent implements OnInit, OnChanges, AfterViewInit {
 
-    @ViewChildren('window') chatWindows: QueryList<ChatWindowComponent>;
-
     public chatListVisible = false;
     private userId = (this.window.data._injectedData as any).userId;
 
@@ -39,11 +37,6 @@ export class ChatComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        console.log(this.chatWindows);
-        console.log(this.chatWindows.toArray());
-        this.chatWindows.toArray().forEach(item => {
-            console.log(item);
-        });
     }
 
     public toggleChat() {

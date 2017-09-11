@@ -1,6 +1,9 @@
 <button md-raised-button class="show-chats"
         [class.active]="chatListVisible"
-        (click)="toggleChat()">{{(chatListVisible) ? 'Hide' : 'Show'}} chats list
+        [class.got-messages]="(chats | totalUnread: userId) !== 0"
+        (click)="toggleChat()">
+    <span class="no-messages">{{(chatListVisible) ? 'Hide' : 'Show'}} chats list</span>
+    <span class="got-messages">{{chats | totalUnread: userId}} New Messages</span>
 </button>
 <div class="chats-list-wrapper active" [class.active]="chatListVisible">
     <div class="users-wrapper">
@@ -14,6 +17,7 @@
             </div>
             <div *ngIf="chat.user"
                  class="user-name">{{chat.user.fullName}}</div>
+            <div class="new-messages" *ngIf="chat.messages && (chat.messages | unread: userId) !== 0">{{chat.messages | unread: userId}}</div>
         </div>
     </div>
 </div>

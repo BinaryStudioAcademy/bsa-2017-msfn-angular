@@ -14,6 +14,21 @@
     color: $text-dark-color;
     font-weight: bold;
     outline: none;
+
+    .got-messages {
+        display: none;
+    }
+}
+
+.show-chats.got-messages {
+    opacity: 0.9;
+
+    .got-messages {
+        display: inline;
+    }
+    .no-messages {
+        display: none;
+    }
 }
 
 .show-chats.active {
@@ -92,6 +107,17 @@
             white-space: nowrap;
             line-height: 34px;
             margin-left: 10px;
+            margin-right: 1px;
+        }
+
+        .new-messages {
+            border-radius: 3px;
+            padding: 4px 5px 4px 4px;
+            background: $secondary-color;
+            text-align: center;
+            box-shadow: 0 0 2px 1px $secondary-color;
+            margin-left: auto;
+            font-weight: bold;
         }
     }
 

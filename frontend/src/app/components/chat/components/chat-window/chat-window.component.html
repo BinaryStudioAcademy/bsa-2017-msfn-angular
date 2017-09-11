@@ -1,9 +1,11 @@
 <div class="chat-wrapper" [class.minimized]="chat.minimized" id="{{chat.room}}">
     <div class="chat-header">
-        <span class="chat-user" (click)="toogleMinimized()">{{chat.user.fullName}}</span>
+        <div class="chat-user" (click)="toogleMinimized()">
+            <span class="status-circle" *ngIf="!((chat.messages | unread: userId) !== 0)" [class.online]="chat.user.online"></span>
+            <span class="new-messages-count" *ngIf="(chat.messages | unread: userId) !== 0">{{chat.messages | unread: userId}}</span>
+            <span class="chat-user-text" [title]="chat.user.fullName">{{chat.user.fullName}}</span>
+        </div>
         <div class="chat-header-icons">
-            <md-icon class="minimize icon" (click)="toogleMinimized()">{{(chat.minimized) ? 'crop_square' : 'remove'}}
-            </md-icon>
             <md-icon class="close icon" (click)="closeChat()">clear</md-icon>
         </div>
     </div>
@@ -14,8 +16,11 @@
     </div>
     <div class="new-message-wrap">
         <textarea name="message"
+                  placeholder="Enter your message"
                   #input
                   class="new-message-input"
+                  (focus)="setFocused()"
+                  (focusout)="setUnfocused()"
                   (keydown)="sendMessageInit($event, input)"
                   (keyup)="resizeInput(shadowInput, input, $event)"></textarea>
         <div #shadowInput [innerHTML]="input.value" class="new-message-input hidden"></div>

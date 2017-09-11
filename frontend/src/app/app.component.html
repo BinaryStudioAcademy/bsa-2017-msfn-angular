@@ -2,4 +2,4 @@
 <div [ngClass]="isLoggedIn ? 'login-child' : 'index-child'">
     <router-outlet></router-outlet>
 </div>
-<app-chat></app-chat>
+<app-chat *ngIf="isLoggedIn"></app-chat>

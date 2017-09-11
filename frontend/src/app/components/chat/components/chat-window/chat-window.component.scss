@@ -35,6 +35,38 @@ $message-border-radius: 5px;
             text-overflow: ellipsis;
             white-space: nowrap;
             cursor: pointer;
+            position: relative;
+
+            .chat-user-text {
+                margin-left: 15px;
+            }
+
+            .status-circle {
+                height: 10px;
+                width: 10px;
+                z-index: 1;
+                border-radius: 50%;
+                display: block;
+                top: 7px;
+                position: absolute;
+                left: 0;
+                background-color: $error-color;
+            }
+            .status-circle.online {
+                background-color: $main-color;
+            }
+        }
+        .new-messages-count {
+            border-radius: 3px;
+            padding: 0px 2px 0px 3px;
+            position: absolute;
+            background: $secondary-color;
+            text-align: center;
+            margin-left: auto;
+            font-weight: bold;
+            display: none;
+            left: 0;
+            bottom: 0;
         }
 
         .chat-header-icons {
@@ -43,9 +75,6 @@ $message-border-radius: 5px;
             height: $header-height;
             margin-right: 5px;
 
-            .icon.minimize {
-                line-height: $header-height-total;
-            }
             .icon {
                 width: $icons-width;
                 height: $header-height;
@@ -141,9 +170,18 @@ $message-border-radius: 5px;
 
     .chat-header {
         .chat-header-icons {
-            .icon.minimize {
-                line-height: inherit;
+            display: none;
+        }
+
+        .chat-user {
+            .new-messages-count {
+                display: block;
             }
+        }
+    }
+    .chat-header:hover {
+        .chat-header-icons {
+            display: flex;
         }
     }
 

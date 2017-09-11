@@ -7,7 +7,6 @@ const
 module.exports = function (app) {
 
     app.post(baseUrl, isLoggedIn, function (req, res, next) {
-        console.log(req.user);
       body = {
                type: req.body.type,
                createdByUser: req.user._id,

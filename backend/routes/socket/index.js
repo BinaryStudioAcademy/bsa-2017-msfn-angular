@@ -30,6 +30,9 @@ module.exports = (function () {
         },
         'new_message': (data, callback) => {
             chatService.NewMessage(data, callback);
+        },
+        'read_message': (data, callback) => {
+            chatService.ReadMessage(data, callback);
         }
     };
 })();

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {SocketService} from './socket.service';
 import {WindowObj} from './window.service';
 import {EncryptService} from './encrypt.service';
@@ -76,11 +76,21 @@ export class ChatService {
                 chat.messages = [];
             }
             chat.messages = chat.messages.concat(data.result);
+            console.log(chat);
+            this.changeChats();
         });
         this.socketService.addListener('new_message:success', (result) => {
             const data = JSON.parse(result);
             const chat = this.findRoomById(data.room);
             chat.messages.push(data);
+            if (chat.new_messages) {
+                chat.new_messages.next(true);
+            }
+            this.changeChats();
+        });
+        this.socketService.addListener('read_message:success', (result) => {
+            const data = JSON.parse(result);
+            this.setMessageRead(data.messageId, data.room);
         });
 
         this.loadChats();
@@ -150,6 +160,8 @@ export class ChatService {
             return;
         }
         chat.active = true;
+        chat.new_messages = new Subject();
+
         this.activeChats.push(chat);
         if (this.activeChats.length > 3) {
             this.activeChats.shift();
@@ -183,5 +195,28 @@ export class ChatService {
             room: chat.room
         };
         this.socketService.send('new_message', this.encryptService.encrypt(data));
+    }
+
+    public readMessage(message) {
+        if (message.sender === this.userId) {
+            return;
+        }
+        const data = {
+            messageId: message._id,
+            room: message.room
+        };
+        this.socketService.send('read_message', this.encryptService.encrypt(data));
+    }
+
+    private setMessageRead(messageId, room) {
+        const chat = this.findRoomById(room);
+        const messages = chat.messages.filter(item => {
+            return (item._id === messageId);
+        });
+        const message = messages.shift();
+        if (message) {
+            message.read = true;
+        }
+        this.changeChats();
     }
 }

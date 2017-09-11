@@ -13,22 +13,35 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
     @Input() chat;
     private lastMessage = '';
     private keysPressed: any[] = [];
-    private userId = (this.window.data._injectedData as any).userId;
+    public userId = (this.window.data._injectedData as any).userId;
     private chatWrapper: any;
     private messagesWrapper: any;
+    private newMessageInput: any;
     private messagesCount: number;
+    private focused: boolean;
 
     constructor(private window: WindowObj,
                 private chatService: ChatService) {}
 
     ngOnInit() {
         this.messagesCount = this.chat.messages.length;
+        setInterval(() => {
+            console.log(this);
+        }, 20000);
     }
 
     ngAfterViewInit() {
         this.chatWrapper = document.getElementById(this.chat.room);
         this.messagesWrapper = this.chatWrapper.querySelector('.messages-wrapper');
+        this.newMessageInput = this.chatWrapper.querySelector('.new-message-input');
         this.scrollToBottom();
+        this.chat.new_messages.subscribe(value => {
+            this.scrollToBottom();
+            if (this.focused) {
+                this.readNewMessages();
+            }
+        });
+        this.newMessageInput.focus();
     }
 
     public resizeInput(shadowInput, input, event) {
@@ -77,18 +90,41 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
 
     public toogleMinimized() {
         this.chat.minimized = !this.chat.minimized;
+        if (!this.chat.minimized) {
+            setTimeout(() => {
+                this.newMessageInput.focus();
+            });
+        }
     }
 
     public closeChat() {
         this.close.emit(this.chat);
     }
 
-    private scrollToBottom() {
+    public scrollToBottom() {
         if (this.messagesWrapper) {
             setTimeout(() => {
                 const height = this.messagesWrapper.scrollHeight;
                 this.messagesWrapper.scrollTop = height;
             });
         }
+    }
+
+    public setFocused() {
+        this.focused = true;
+        this.readNewMessages();
+    }
+
+    public setUnfocused() {
+        this.focused = false;
+    }
+
+    private readNewMessages() {
+        this.chat.messages.forEach(message => {
+            if (!message.read && message.sender !== this.userId) {
+                this.chatService.readMessage(message);
+                message.read = true;
+            }
+        });
     }
 }
