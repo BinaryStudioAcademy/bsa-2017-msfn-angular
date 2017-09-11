@@ -21,7 +21,7 @@ export class AchievementsListComponent implements OnInit {
             this.achievements = data;
         });
         this.achievementsListService.getUserAchievements((data) => {
-            if (data === []) {
+            if (!data) {
                 return;
             }
             this.achievements.forEach(ach => {
@@ -35,7 +35,6 @@ export class AchievementsListComponent implements OnInit {
                 });
             });
         });
-
     }
     openDialog(data) {
         this.dialog.open(AchievementInfoDialogComponent, {
