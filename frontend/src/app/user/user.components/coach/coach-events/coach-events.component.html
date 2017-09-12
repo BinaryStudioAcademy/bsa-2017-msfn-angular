@@ -17,8 +17,8 @@
                     placeholder="Start Date"
                     [(ngModel)]="interval.startDate"
                     (ngModelChange)="processDates()">
-                <button mdSuffix [mdDatepickerToggle]="startPicker"></button>
             </md-input-container>
+            <md-datepicker-toggle [for]="startPicker"></md-datepicker-toggle>
             <md-datepicker #startPicker></md-datepicker>
         </div>
 
@@ -31,8 +31,8 @@
                     placeholder="End Date"
                     [(ngModel)]="interval.endDate"
                     (ngModelChange)="processDates()">
-                <button mdSuffix [mdDatepickerToggle]="endPicker"></button>
             </md-input-container>
+            <md-datepicker-toggle [for]="endPicker"></md-datepicker-toggle>
             <md-datepicker #endPicker></md-datepicker>
         </div>
 
