@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 import { HttpService } from '../../../services/http.service';
 import { IHttpReq } from '../../../models/http-req';
 import { MdDialog } from '@angular/material';

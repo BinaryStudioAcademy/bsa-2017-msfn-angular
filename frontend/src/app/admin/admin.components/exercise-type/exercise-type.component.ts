@@ -2,7 +2,7 @@ import { HttpService } from '../../../services/http.service';
 import { IHttpReq } from '../../../models/http-req';
 import { ExerciseTypeService } from './exercise-type.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 

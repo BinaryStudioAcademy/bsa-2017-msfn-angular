@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 import 'rxjs/add/observable/of';
 
 @Component({
