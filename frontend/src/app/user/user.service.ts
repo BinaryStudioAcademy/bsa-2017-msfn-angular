@@ -33,6 +33,19 @@ export class UserService {
         });
     }
 
+    getUserOldStatus(callback) {
+        const request: IHttpReq = {
+            url: '/api/user/me/oldstatus',
+            method: 'GET',
+            body: {}
+        };
+
+        this.httpHandler.sendRequest(request).then(oldstatus => {
+            callback(oldstatus);
+        });
+
+    }
+
     getMeasures(callback) {
         const request: IHttpReq = {
             url: '/api/measurement',

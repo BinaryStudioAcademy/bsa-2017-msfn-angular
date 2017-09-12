@@ -17,9 +17,11 @@ export class UserComponent implements OnInit {
     private achievements: Array<any>;
     private measures = {};
     private settings;
-    private countFollowers: Number;
-    private countArticles: Number;
-    private countLaunchedTraining: Number;
+    private countFollowers: number;
+    private countArticles: number;
+    private countLaunchedTraining: number;
+    private comboCount: number;
+    private registrationDate: string;
 
     constructor(
         private dialog: MdDialog,
@@ -55,6 +57,11 @@ export class UserComponent implements OnInit {
                 this.checkTrainAchievement();
                 this.userService.getTotalMeasures(trainings);
             });
+            this.userService.getUserOldStatus((data) => {
+                this.comboCount = data.comboCount;
+                this.registrationDate = data.registrationDate;
+                this.checkOldStatusAchievement();
+            });
         });
     }
 
@@ -80,6 +87,35 @@ export class UserComponent implements OnInit {
         this.achievements.forEach(element => {
             if (element.measureName === 'follower' && this.countFollowers >= element.value) {
                 if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'follower') {
+                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
+                } else {
+                    resAch.push(element);
+                }
+            }
+        });
+        this.getUnreceivedArray(resAch);
+    }
+
+    // checkComboDaysAchievement() {
+    //     const resAch = [];
+    //     this.achievements.forEach(element => {
+    //         if (element.measureName === 'combodays' && this.comboCount >= element.value) {
+    //             if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'combodays') {
+    //                 resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
+    //             } else {
+    //                 resAch.push(element);
+    //             }
+    //         }
+    //     });
+    //     this.getUnreceivedArray(resAch);
+    // }
+
+    checkOldStatusAchievement() {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            // tslint:disable-next-line:max-line-length
+            if (element.measureName === 'day' && Math.floor((new Date().valueOf() - new Date(this.registrationDate).valueOf()) / (24 * 60 * 60 * 1000)) >= element.value) {
+                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'day') {
                     resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
                 } else {
                     resAch.push(element);
