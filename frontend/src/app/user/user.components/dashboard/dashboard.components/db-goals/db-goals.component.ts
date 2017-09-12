@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { DateService } from '../../../../../services/date.service';
-import { GoalProgressService } from '../../../../../services/goal-progress.service';
+import { GoalProgressService } from '../../../../services/goal-progress.service';
 import { WindowObj } from '../../../../../services/window.service';
 
 @Component({
