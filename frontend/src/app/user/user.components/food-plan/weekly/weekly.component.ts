@@ -116,7 +116,7 @@ export class WeeklyComponent implements OnInit {
       if (day.name === currentDay.name) {
         day.editMeal = true;
         if (mealId >= 0) {
-          day.editMealObj = Object.assign({},day.meals[mealId]);
+          day.editMealObj = Object.assign({}, day.meals[mealId]);
           day.editMealId = mealId;
         } else {
           day.editMealObj = {
@@ -143,7 +143,6 @@ export class WeeklyComponent implements OnInit {
     }
     day.editMeal = false;
     console.log(this.days);
-    
     return true;
   }
 

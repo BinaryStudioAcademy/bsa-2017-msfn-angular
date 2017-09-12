@@ -140,7 +140,8 @@ const userRoutes: Routes = [
             {
                 path: 'achivements',
                 component: AchievementsListComponent
-            },{
+            },
+            {
                 path: 'training-history/:id',
                 component: TrainingHistoryDetailComponent
             }, {
