@@ -60,7 +60,7 @@
                           [(ngModel)]="foods"
                           ngDefaultControl
                           name="foods">
-                <md-checkbox #checkFood class="food-part "></md-checkbox>
+                <md-checkbox #checkFood [id]="food._id" [checked]="selectedFoodID.includes(food._id)" class="food-part" (change)="selectFood($event)"></md-checkbox>
                 <div class="food-part">
                     <img md-list-avatar [src]="food.picture || './resources/default.png'">
                 </div>

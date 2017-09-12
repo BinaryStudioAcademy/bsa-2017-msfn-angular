@@ -20,6 +20,8 @@ export class SearchComponent implements OnInit {
         food: '',
         vendor: ''
     };
+    selectedFood = [];
+    selectedFoodID = [];
 
     constructor(
         public foodPlanService: FoodPlanService,
@@ -119,8 +121,6 @@ export class SearchComponent implements OnInit {
     sortFood(key: string) {
         this.toggleSortDirection(key);
         this.foodPlanService.sortData(this.foods, key, this.sortDirection[key]);
-        console.log(this.foods);
-        console.log(this.sortDirection[key]);
     }
 
     toggleSortDirection(key: string) {
@@ -128,6 +128,30 @@ export class SearchComponent implements OnInit {
             this.sortDirection[key] = 'asc';
         } else {
             this.sortDirection[key] = 'desc';
+        }
+    }
+
+    selectFood(event) {
+        const id = event.source.id;
+        let selectedFoodID = '';
+
+        const food = this.foods.find(function (el) {
+            if (el._id === id) {
+                selectedFoodID = el._id;
+                return true;
+            }
+        });
+
+        if (event.source.checked) {
+            this.selectedFood.push(food);
+            this.selectedFoodID.push(selectedFoodID);
+        } else {
+            this.selectedFood = this.selectedFood.filter(function (el) {
+                return el._id !== id;
+            });
+            this.selectedFoodID = this.selectedFoodID.filter(function (el) {
+                return el !== id;
+            });
         }
     }
 }
