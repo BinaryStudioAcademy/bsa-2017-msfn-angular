@@ -1,0 +1,41 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/indentations.scss';
+@import '../../../../globalStyles/text.scss';
+
+.close {
+    float: right;
+    padding: 0;
+    border: 0;
+    font-size: 18px;
+    color: $text-second-color;
+    background-color: transparent;
+}
+
+.close:hover {
+    cursor: pointer;
+    color: $text-main-color;
+}
+
+md-input-container {
+    width: 90%;
+
+    textarea {
+        height: 100px;
+    }
+}
+
+#post-button {
+    margin: $standard-indent auto;
+    text-align: center;
+
+    button {
+        width: 180px;
+        height: 40px;
+        border: none;
+        border-radius: 15px;
+        outline: none;
+        font-size: $main-text;
+        font-weight: 600;
+        background: #82ca9c;
+    }
+}

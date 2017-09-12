@@ -31,7 +31,6 @@ export class CoachPlansComponent implements OnInit {
         this.coachService.getTrainingPlans(this.userData._id, res => {
             this.plans = res;
             this.makePaginatorOutput();
-            console.log(this.plans);
         });
     }
 

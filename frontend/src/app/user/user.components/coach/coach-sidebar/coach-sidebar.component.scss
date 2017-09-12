@@ -2,46 +2,27 @@
 @import '../../../../../globalStyles/indentations';
 @import '../../../../../globalStyles/text';
 
-h3 {
-    margin: 0 0 $standard-indent;
-    font-size: $main-text;
-    font-weight: 600;
-}
-
-#general-coach-info {
+.head-block {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
-    #name-location {
-        display: inline-block;
-        width: 50%;
-
-        h2 {
-            margin-bottom: $mini-indent;
-            font-size: $macro-text;
-        }
-
-        #coach-location {
-            font-size: $usual-text;
-            font-weight: 300;
-        }
-    }
-
-    #follow-button {
-        display: inline-block;
-        width: 40%;
-        margin: 0 auto;
+    #follow-button,
+    #feedback-button {
+        display: block;
+        margin-top: $mini-indent;
 
         button {
             display: block;
-            width: 120px;
+            width: 140px;
             height: 40px;
             border: none;
             border-radius: 20px;
             outline: none;
             font-size: $main-text;
             font-weight: 600;
-            background: #82ca9c;
+            background: $main-color;
 
             span {
                 text-align: right;
@@ -50,10 +31,29 @@ h3 {
     }
 }
 
+h3 {
+    font-size: $main-text;
+    font-weight: 600;
+}
+
+#name-location {
+    display: inline-block;
+
+    h2 {
+        margin-bottom: $mini-indent;
+        font-size: $macro-text;
+    }
+
+    #coach-location {
+        font-size: $usual-text;
+        font-weight: 300;
+    }
+}
+
 #coach-photo {
     display: inline-block;
     width: 45%;
-    margin: $macro-indent 10% $macro-indent auto;
+    margin: $macro-indent 5% $macro-indent auto;
     text-align: right;
 
     img {
@@ -64,9 +64,9 @@ h3 {
 
 #social-links {
     display: inline-block;
-    flex-wrap: wrap;
     margin: $macro-indent auto;
     vertical-align: middle;
+    text-align: right;
 
     a {
         display: block;
@@ -81,6 +81,10 @@ h3 {
 }
 
 #coach-about {
+    h3 {
+        margin: 0 0 $standard-indent;
+    }
+
     margin-bottom: $macro-indent;
 
     p {
@@ -89,14 +93,23 @@ h3 {
 }
 
 #testimonials {
+    .head-block {
+        margin-bottom: $standard-indent;
+
+        h3 {
+            margin: 0;
+        }
+    }
+
     .testimonial:not(:last-child) {
         margin-bottom: $standard-indent;
     }
 
     .testimonial-photo {
         display: inline-block;
-        width: 20%;
+        width: 22%;
         vertical-align: top;
+        margin-right: $mini-indent;
 
         img {
             width: 44px;
@@ -110,7 +123,7 @@ h3 {
 
     .testimonial-text-block {
         display: inline-block;
-        width: 78%;
+        width: 70%;
 
         .testimonial-name {
             display: inline-block;
@@ -129,10 +142,28 @@ h3 {
     }
 }
 
+app-message-posting {
+    width: 100%;
+    margin-top: $standard-indent;
+}
+
 
 @media only screen and (min-width: $small-screen) {
 
+    .head-block {
+        flex-wrap: nowrap;
+
+        #follow-button,
+        #feedback-button {
+            display: inline-block;
+            float: right;
+            margin-top: initial;
+        }
+    }
+
     #coach-photo {
+        margin: $macro-indent 10% $macro-indent auto;
+
         img {
             width: 170px;
             border-radius: 85px;
@@ -143,41 +174,11 @@ h3 {
 
 @media only screen and (min-width: $large-screen) {
 
-    #general-coach-info {
-        #name-location {
-            display: inline-block;
-            width: 50%;
-
-            h2 {
-                margin-bottom: $mini-indent;
-            }
-        }
-
-        #follow-button {
-            display: inline-block;
-            width: 40%;
-            margin: 0 auto;
-
-            button {
-                display: block;
-                width: 120px;
-                height: 40px;
-                border-radius: 20px;
-                font-size: $main-text;
-            }
-        }
-    }
-
     #coach-photo {
         display: block;
         width: initial;
         margin: $macro-indent auto;
         text-align: center;
-
-        img {
-            width: 170px;
-            border-radius: 85px;
-        }
     }
 
     #social-links {
@@ -189,7 +190,6 @@ h3 {
         a {
             display: inline-block;
             margin-bottom: initial;
-            text-decoration: none;
             font-size: $main-text;
         }
 
@@ -199,30 +199,6 @@ h3 {
 
         a:not(:nth-last-child(-n+2)) {
             margin-bottom: $mini-indent;
-        }
-    }
-
-    #coach-about {
-        margin-bottom: $macro-indent;
-    }
-
-    #testimonials {
-        .testimonial:not(:last-child) {
-            margin-bottom: $standard-indent;
-        }
-
-        .testimonial-photo {
-            display: inline-block;
-            width: 20%;
-        }
-
-        .testimonial-text-block {
-            display: inline-block;
-            width: 78%;
-
-            .testimonial-name {
-                display: inline-block;
-            }
         }
     }
 }

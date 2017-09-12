@@ -12,6 +12,9 @@
                 Name should contain less than 50 characters
             </md-error>
         </md-input-container>
+        <md-select [(ngModel)]="foodType.parentType" placeholder="Parent type" id="parent-select">
+            <md-option *ngFor="let type of types" [value]="type.name">{{type.name}}</md-option>
+        </md-select>
         <md-input-container>
             <textarea mdInput
                       type="text"

@@ -20,6 +20,30 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+    app.get(baseUrl + 'me/measures', function (req, res, next) {
+        userRepository.getById(req.session.passport.user, function (err, data) {
+            if(data.settings){
+                res.data = data.settings;
+            } else{
+                res.data = {};
+            }
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(baseUrl + 'me/oldstatus', function (req, res, next) {
+        userRepository.getById(req.session.passport.user, function (err, data) {
+            res.data = {
+                registrationDate: data.registrationDate,
+                lastActivityDate: data.lastActivityDate,
+                comboCount: data.comboCount
+            };
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.use(baseUrl + 'activate', activateRoutes);
 
     app.use(baseUrl + 'changemail', changeMailRoutes);

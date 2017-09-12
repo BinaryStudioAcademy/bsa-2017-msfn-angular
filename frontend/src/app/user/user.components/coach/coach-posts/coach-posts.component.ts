@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material';
+import { MessagePostingService } from '../../message-posting/message-posting.service';
+import { DateService } from '../../../../services/date.service';
 
 @Component({
     selector: 'app-coach-posts',
@@ -7,52 +9,22 @@ import { PageEvent } from '@angular/material';
     styleUrls: [
         './coach-posts.component.scss',
         '../coach.component.scss'
+    ],
+    providers: [
+        MessagePostingService,
+        DateService
     ]
 })
 export class CoachPostsComponent implements OnInit {
 
-    constructor() {
+    constructor(private messagePostingService: MessagePostingService,
+                private dateService: DateService) {
     }
 
     @Input() userData;
 
     title = 'Posts';
-
-    posts = [
-        {
-            name: 'Brick',
-            avatar: '../../resources/default.png',
-            date: '2h ago',
-            text: 'Vivamus vel diam non mauris euismod commodo.' +
-                'Etiam massa dolor, placerat at luctus vitae, elementum sit amet erat.'
-        },
-        {
-            name: 'Brick',
-            avatar: '../../resources/default.png',
-            date: '9h ago',
-            text: 'Nam maximus at augue at mollis.' +
-                'Etiam et felis vitae ligula luctus efficitur vitae eu nibh.' +
-            'Aenean dapibus pellentesque libero nec lacinia.'
-        },
-        {
-            name: 'Brick',
-            avatar: '../../resources/default.png',
-            date: '20h ago',
-            text: 'Quisque quis dui iaculis, pulvinar leo eget, mollis metus.'
-        },
-        {
-            name: 'Brick',
-            avatar: '../../resources/default.png',
-            date: 'Sep 5, 2017',
-            text: 'Morbi augue neque, aliquam et fermentum eget, sodales id mauris.'
-        },
-        {
-            name: 'Brick',
-            avatar: '../../resources/default.png',
-            date: 'Sep 1, 2017',
-            text: 'Proin viverra.'
-        }
-    ];
+    posts = [];
 
     paginatorOutput: any[];
 
@@ -64,7 +36,23 @@ export class CoachPostsComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.makePaginatorOutput();
+        this.getData();
+    }
+
+    getData() {
+        this.messagePostingService.getMessages(this.userData._id, data => {
+            if (data[0].hasOwnProperty('user')) {
+                this.posts = data;
+
+                for (const message of this.posts) {
+                    message.dateOutput = this.dateService
+                        .convertDateToIso(new Date(message.date), true);
+                    message.editing = false;
+                }
+
+                this.makePaginatorOutput();
+            }
+        });
     }
 
     makePaginatorOutput() {

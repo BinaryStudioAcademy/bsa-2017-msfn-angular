@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserGoal = new Schema({
-    type: String,
+    category: String,
     value: Number,
     isRemoved: {
         type: Boolean,

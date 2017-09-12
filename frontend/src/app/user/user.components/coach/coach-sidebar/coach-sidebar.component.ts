@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserListService } from '../../user-list/user-list.service';
 import { WindowObj } from '../../../../services/window.service';
+import { MessagePostingService } from '../../message-posting/message-posting.service';
+import { CoachService } from '../coach.service';
 
 @Component({
     selector: 'app-coach-sidebar',
@@ -9,75 +11,44 @@ import { WindowObj } from '../../../../services/window.service';
         './coach-sidebar.component.scss',
         '../coach.component.scss'
     ],
-    providers: [UserListService]
+    providers: [
+        UserListService,
+        MessagePostingService
+    ]
 })
 export class CoachSidebarComponent implements OnInit {
 
     constructor(private window: WindowObj,
-                private userListService: UserListService) {
+                private userListService: UserListService,
+                private messagePostingService: MessagePostingService,
+                private coachService: CoachService) {
     }
 
+    private _id = this.window.data._injectedData.userId;
     @Input() userData;
 
-    private _id = this.window.data._injectedData.userId;
-    followers = [];
-    isFollowed: boolean = false;
-
-    coachInfo = {
-        name: 'Brick',
-        location: 'Pandora, The Vault',
-        followers: '1M',
-        photo: '../../resources/default.png',
-        socialLinks: [
-            {
-                name: 'Facebook',
-                link: '',
-                color: '#5081e8'
-            },
-            {
-                name: 'Twitter',
-                link: '',
-                color: '#36b9ff'
-            },
-            {
-                name: 'Instagram',
-                link: '',
-                color: '#d520cd'
-            },
-            {
-                name: 'Youtube',
-                link: '',
-                color: '#f12727'
-            }
-        ],
-        about: 'Phasellus dignissim condimentum metus vel egestas.' +
-            'Quisque quis dui iaculis, pulvinar leo eget, mollis metus.' +
-            'Suspendisse fermentum tempor purus, ac lacinia nunc facilisis ac.' +
-            'Morbi augue neque, aliquam et fermentum eget, sodales id mauris. Proin viverra.',
-        testimonials: [
-            {
-                name: 'Ellie',
-                text: 'Phasellus nec metus a orci ullamcorper viverra. Duis lacinia luctus tellus elementum posuere.',
-                photo: '../../resources/default.png'
-            },
-            {
-                name: 'Handsome Jack',
-                text: 'Morbi augue neque, aliquam et fermentum eget, sodales id mauris. Mauris semper arcu ac maximus mattis.',
-                photo: '../../resources/default.png'
-            }
-        ]
+    coachData = {
+        followers: [],
+        socialLinks: [],
+        testimonials: [],
     };
 
+    isFollowed: boolean = false;
+    posting: boolean = false;
+
     ngOnInit() {
+        this.getTestimonialData();
+        this.coachData.socialLinks = this.coachService.getSocialLinks(this.userData);
+
         this.userListService.getFollowers(this.userData._id, data => {
-            this.followers = data;
-            this.isFollowed = this.followers.find(item => {
+            this.coachData.followers = data;
+            this.isFollowed = this.coachData.followers.find(item => {
                 return item.id === this._id;
             });
         });
     }
 
-    followAction() {
+    followAction(): void {
         if (this.isFollowed) {
             this.unfollowUser();
         } else {
@@ -89,7 +60,7 @@ export class CoachSidebarComponent implements OnInit {
         this.userListService.follow(this.userData._id, () => {
             this.isFollowed = true;
             this.userListService.getFollowers(this.userData._id, data => {
-                this.followers = data;
+                this.coachData.followers = data;
             });
         });
     }
@@ -98,8 +69,30 @@ export class CoachSidebarComponent implements OnInit {
         this.userListService.unfollow(this.userData._id, () => {
             this.isFollowed = false;
             this.userListService.getFollowers(this.userData._id, data => {
-                this.followers = data;
+                this.coachData.followers = data;
             });
         });
+    }
+
+    getTestimonialData(): void {
+        this.messagePostingService.getMessages(this.userData._id, data => {
+            if (data[0].hasOwnProperty('user')) {
+                this.coachData.testimonials = data;
+                this.coachData.testimonials = this.coachService.getRandomTestimonials(this.coachData.testimonials);
+            }
+        }, true);
+    }
+
+    addFeedback(): void {
+        this.posting = true;
+    }
+
+    closeFeedback(): void {
+        this.posting = false;
+    }
+
+    updateTestimonialData(): void {
+        this.coachData.testimonials = [];
+        this.getTestimonialData();
     }
 }

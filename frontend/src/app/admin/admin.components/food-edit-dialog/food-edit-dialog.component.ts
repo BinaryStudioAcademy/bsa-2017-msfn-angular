@@ -17,17 +17,19 @@ export class FoodEditDialogComponent implements OnInit {
     public newItem: boolean;
     foodTypes;
 
-
+    byURL = false;
     // for cropperImg:
     image: any = new Image();
     type: string;
     upd;
+    url;
     cropperSettings: CropperSettings;
     outputImage: any;
     @ViewChild('cropper', undefined)
     cropper: ImageCropperComponent;
     hideCropper = true;
     oldImg;
+    measures = ['Weight', 'Quantity', 'Liquid'];
 
     constructor(
         @Inject(MD_DIALOG_DATA) public data: { food: IFood, newItem: boolean },
@@ -47,25 +49,48 @@ export class FoodEditDialogComponent implements OnInit {
     ]);
 
     numberFormControl = new FormControl('', [
-        Validators.pattern('^(\d+\.?\d+|\d+)$')
+        Validators.pattern(/^(\d+|\d+.\d+)$/)
     ]);
 
     ngOnInit() {
         this.food = this.data.food;
+        this.food.measure = this.foodService.updateMeasureBack(this.food.measure);
         this.newItem = this.data.newItem;
         this.foodService.getAllFoodTypes((data) => {
             this.foodTypes = data.map((item) => item.name);
         });
         this.outputImage = {};
         this.upd = (+new Date).toString(36);
+        if (!this.food.measure) {
+            this.food.measure = this.measures[0];
+        }
+    }
+
+    loadTypeToggle(value: boolean) {
+        this.byURL = value;
+    }
+
+    loadImage() {
+        if (this.byURL) {
+            /*this.foodService.getImage(this.url, (data) => {
+                console.log(data);
+            });*/
+            /*
+            const img = new Image();
+            img.src = this.url;
+            img.onload = () => {
+                console.log('cool');
+                this.hideCropper = false;
+                this.cropper.setImage(img.src);
+            };
+            img.onerror = () => {
+                this.toasterService.showMessage('error', 'Wrong URL');
+            };*/
+        }
     }
 
 
     save() {
-        if (!(this.nameFormControl.valid && this.descriptionFormControl.valid)) {
-            this.toasterService.showMessage('error', 'Invalid data', 'Food not updated');
-            return;
-        }
         if (this.outputImage.image) {
             if (this.newItem) {
                 this.food.picture = undefined;

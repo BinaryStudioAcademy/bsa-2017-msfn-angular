@@ -8,7 +8,7 @@ module.exports = function (app) {
 
     app.post(baseUrl, isAdmin, function (req, res, next) {
         body = req.body;
-        body.isRemoved = false;    
+        body.isRemoved = false;
         exerciseService.createExercise(body, function (err, data) {
             res.data = data;
             res.err = err;
@@ -28,7 +28,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl+'type/:type', function (req, res, next) {
-        exerciseService.getExercisesByType(req.params.type, function (err, data) {
+        exerciseService.getExercisesByType(req.params.category, function (err, data) {
             if (!data.length) {
                 data = [{}];
             }

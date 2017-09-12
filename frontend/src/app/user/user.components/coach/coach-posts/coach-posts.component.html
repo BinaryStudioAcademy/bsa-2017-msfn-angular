@@ -8,12 +8,12 @@
         <div id="posts">
             <div class="post" *ngFor="let post of paginatorOutput">
                 <div class="post-avatar">
-                    <img src="{{ post.avatar }}">
+                    <img src="{{ post.user.userPhoto }}">
                 </div>
                 <div class="post-text-block">
-                    <p class="post-name">{{ post.name }}</p>
-                    <p class="post-date">{{ post.date }}</p>
-                    <p class="post-text">{{ post.text }}</p>
+                    <p class="post-name">{{ post.user.fullName }}</p>
+                    <p class="post-date">{{ post.dateOutput }}</p>
+                    <p class="post-text">{{ post.body }}</p>
                 </div>
             </div>
         </div>

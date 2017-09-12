@@ -6,10 +6,10 @@
 /out-tsc
 
 #Users photo
-/resources
 /resources/usersImg
 /resources/exercise-image/loaded
 /resources/articles-image/
+/resources/food-image
 
 # dependencies
 /node_modules

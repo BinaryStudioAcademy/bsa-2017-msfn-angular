@@ -24,41 +24,41 @@ function getUserGoalById(userId, callback) {
 }
 
 function createUserGoal(body, callback) {
-            if(body.createdByUser && body.value && body.value > 0 && body.deadline && body.type && body.startTime){
-            userGoalRepository.add(body, (err, userGoalData) => {
-                if (err) return callback(err);
+    if (body.createdByUser && body.value && body.value > 0 && body.deadline && body.category && body.startTime) {
+        userGoalRepository.add(body, (err, userGoalData) => {
+            if (err) return callback(err);
                 if (userGoalData === null) {
                     callback(null, []);
                 } else {
                     callback(null, userGoalData);
-                }
-            });
-            } else {
-                callback(new ApiError('Invalid data passed'));
             }
+        });
+    } else {
+        callback(new ApiError('Invalid data passed'));
+    }
 }
 
 
 function updateUserGoal(id, body, callback) {
-if(body.createdByUser && body.value && body.value > 0 && body.deadline && body.type){
-            userGoalRepository.update(id, body, (err, userGoalData) => {
+    if(body.createdByUser && body.value && body.value > 0 && body.deadline && body.category){
+        userGoalRepository.update(id, body, (err, userGoalData) => {
 
-                if (err) return callback(err);
-                if (userGoalData === null) {
-                    callback(null, []);
-                } else {
-                    callback(null, userGoalData);
-                }
-            });
+            if (err) return callback(err);
+            if (userGoalData === null) {
+                callback(null, []);
             } else {
-                callback(new ApiError('Invalid data passed'));
+                callback(null, userGoalData);
             }
+        });
+    } else {
+        callback(new ApiError('Invalid data passed'));
+    }
 }
 
 function deleteUserGoal(id, userId, callback) {
     if(mongoose.Types.ObjectId.isValid(id)) {
 
-    
+
     userGoalRepository.deleteById(id, userId, (err, userGoalData)=>{
 
         if (err) return callback(err);
@@ -69,8 +69,8 @@ function deleteUserGoal(id, userId, callback) {
         }
     });
 
-    } else{
-            callback(new ApiError('Invalid id'));
+    } else {
+        callback(new ApiError('Invalid id'));
     }
 }
 

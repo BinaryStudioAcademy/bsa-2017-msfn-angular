@@ -12,7 +12,7 @@ export class GoalListService {
             method: 'POST',
             body: {
                 name: body.name,
-                type: body.type
+                category: body.category
             }
         };
         this.httpService.sendRequest(request).then(data => {

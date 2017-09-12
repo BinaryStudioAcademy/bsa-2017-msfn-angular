@@ -1,5 +1,6 @@
 const passport = require('passport'),
-      decrypt = require('./decryptService');
+    userService = require('./userService'),
+    decrypt = require('./decryptService');
 
 function LoginService() {
 
@@ -23,7 +24,13 @@ function login(req, res, next) {
                     if (err) {
                         return next(err)
                     } else {
-                        return res.send({access: true});
+                        const data = {
+                            lastActivityDate: new Date().toISOString(),
+                            comboCount: (user.lastActivityDate && Math.floor((new Date() - new Date(user.lastActivityDate))/(24*60*60*1000)) !== 1) ? (Math.floor((new Date() - new Date(user.lastActivityDate))/(24*60*60*1000)) !== 0) ? 0 : user.comboCount : ++user.comboCount
+                        }
+                        userService.updateItem(user.id, data, () => {
+                            res.send({access: true});
+                        })
                     }
                 })
             } else {

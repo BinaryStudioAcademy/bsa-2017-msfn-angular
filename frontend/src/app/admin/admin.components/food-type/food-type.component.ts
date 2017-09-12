@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FoodService } from '../../services/food.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 import { MdDialog, MdSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { IFoodType } from '../../../models/food-type';
@@ -17,6 +17,7 @@ export class FoodTypeComponent implements OnInit {
     displayedColumns = [
         'name',
         'description',
+        'parent',
         'delete'
     ];
     tableDatabase = new TableDatabase();

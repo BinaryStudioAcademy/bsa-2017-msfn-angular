@@ -48,8 +48,14 @@
                 }
             }
 
+            button {
+                height: 35px;
+                margin: auto 0;
+            }
+
             .item-exercises {
                 flex: 100%;
+                margin: 0 25px;
             }
         }
     }

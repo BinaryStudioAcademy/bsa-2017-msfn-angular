@@ -58,13 +58,13 @@ export class GoalProgressService {
     }
 
     getLaunchedTrainingData(id, callback) {
-        const sendData: IHttpReq = {
+        const req: IHttpReq = {
             url: `/api/launchedtraining/user/${id}`,
             method: 'GET',
             body: {},
         };
 
-        this.httpService.sendRequest(sendData)
+        this.httpService.sendRequest(req)
             .then(data => {
                 callback(data);
             });

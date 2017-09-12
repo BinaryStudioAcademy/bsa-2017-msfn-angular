@@ -13,6 +13,7 @@ import {FormControl, Validators} from '@angular/forms';
 export class FoodTypeEditDialogComponent implements OnInit {
     public foodType: IFoodType;
     public newItem: boolean;
+    types = [];
     constructor(@Inject(MD_DIALOG_DATA) public data: { foodType: IFoodType, newItem: boolean},
                 private foodService: FoodService
     ) { }
@@ -29,6 +30,9 @@ export class FoodTypeEditDialogComponent implements OnInit {
     ngOnInit() {
         this.foodType = this. data.foodType;
         this.newItem = this.data.newItem;
+        this.foodService.getAllFoodTypes((data) => {
+            this.types = data;
+        });
     }
 
     save() {

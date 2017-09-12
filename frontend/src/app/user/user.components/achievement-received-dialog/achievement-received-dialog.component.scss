@@ -1,0 +1,45 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+#star {
+    width: 140px;
+    height: 60px;
+}
+#close {
+    color:$text-main-color;
+    &:hover{
+        color: $btn-color;
+        cursor: pointer;
+    }
+    
+}
+.container {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cls-btn{
+    margin-top: -10px;
+    margin-right: -10px;
+    border:none;
+    background-color: inherit;
+    align-self: flex-end;
+    &:focus {outline:0;}
+}
+.text {
+    text-align: center;
+    margin: 10px;
+    color: $text-main-color;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+.header {
+    font-size: 24px;
+    margin: 10px;
+    color: $btn-color;
+}
+.icon{
+    width: 128px;
+    height: 128px;
+}

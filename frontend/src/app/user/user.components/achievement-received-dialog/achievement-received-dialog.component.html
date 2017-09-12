@@ -1,0 +1,9 @@
+<div class="container">
+    <button [md-dialog-close]="false" class="cls-btn"><i class="material-icons" id="close">close</i></button>
+    
+    <img src="./resources/achievements_icon/star.png" alt="" id="star"/>
+    <div class="header">{{data.name}}</div>
+    <img [src]="data.icon" class="icon"/>
+    <div class="text">{{data.message}}</div>
+    <button md-raised-button [md-dialog-close]="false">OK</button>
+</div>

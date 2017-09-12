@@ -7,27 +7,27 @@ const
 module.exports = function (app) {
 
     app.post(baseUrl, isLoggedIn, function (req, res, next) {
-      body = {
-               type: req.body.type,
-               createdByUser: req.user._id,
-               value: req.body.value,
-               deadline: req.body.deadline,
-               startTime: req.body.startTime
-           }
-       userGoalService.createUserGoal(body, function(err, data) {
+        body = {
+            category: req.body.category,
+            createdByUser: req.user._id,
+            value: req.body.value,
+            deadline: req.body.deadline,
+            startTime: req.body.startTime
+        };
+        userGoalService.createUserGoal(body, function(err, data) {
             res.data = data;
             res.err = err;
             next();
-       });
+        });
     }, apiResponse);
 
     app.put(baseUrl, isLoggedIn, function (req, res, next) {
-            body = {
-               type: req.body.type,
-               createdByUser: req.user._id,
-               value: req.body.value,
-               deadline: req.body.deadline
-           }
+        body = {
+            category: req.body.category,
+            createdByUser: req.user._id,
+            value: req.body.value,
+            deadline: req.body.deadline
+        };
         userGoalService.updateUserGoal(req.body._id, body, function(err, data) {
             res.data = data;
             res.err = err;
@@ -40,7 +40,7 @@ module.exports = function (app) {
             res.err = err;
             res.data = data;
             next();
-       });
+        });
     }, apiResponse);
 
     app.get(baseUrl, isLoggedIn, function (req, res, next) {

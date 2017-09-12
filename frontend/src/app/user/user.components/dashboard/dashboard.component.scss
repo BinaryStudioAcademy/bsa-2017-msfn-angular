@@ -2,13 +2,17 @@
 @import '../../../../globalStyles/indentations';
 @import '../../../../globalStyles/text';
 
+* /deep/ .drag-handle {
+    cursor: move;
+}
+
 #dashboard-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
     min-height: 100%;
-    padding: 20px 6%;
+    padding: 20px 1%;
 
     .child {
         padding: 20px;
@@ -58,6 +62,14 @@
                 background: #82ca9c;
             }
         }
+
+        md-paginator {
+            flex-wrap: wrap;
+        }
+
+        md-paginator /deep/ .mat-paginator-range-label {
+            margin: 0;
+        }
     }
 }
 
@@ -69,9 +81,6 @@
     font-size: $header-text;
 }
 
-* /deep/ .drag-handle {
-	cursor: move;
-}
 
 @media only screen and (min-width: $small-screen) {
 
@@ -107,8 +116,24 @@
     }
 }
 
+@media only screen and (min-width: $large-screen) {
+
+    .inner-container {
+        .content {
+            md-paginator {
+                flex-wrap: initial;
+            }
+
+            md-paginator /deep/ .mat-paginator-range-label {
+                margin: initial;
+            }
+        }
+    }
+}
+
 
 @media only screen and (max-width: $large-screen) {
+
     #dashboard-container {
         .child {
             width: 90%;
