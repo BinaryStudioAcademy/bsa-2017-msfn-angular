@@ -175,6 +175,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this.userService.promiseFunc) {
+            console.log(this.userService.promiseFunc);
             this.userService.promiseFunc.unsubscribe();
         }
 
