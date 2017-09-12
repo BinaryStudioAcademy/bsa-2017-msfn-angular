@@ -16,7 +16,12 @@ import { AchievementReceivedDialogComponent } from './user.components/achievemen
 export class UserComponent implements OnInit, OnDestroy {
     private achievements: Array<any>;
     private measures = {};
+    private achievementMeasures = {
+        distance: 1000,
+        weight: 1
+    };
     private total = {};
+    private maxTrainings = {};
     private settings;
     private countFollowers: number;
     private countArticles: number;
@@ -55,8 +60,10 @@ export class UserComponent implements OnInit, OnDestroy {
             this.userService.getLaunchedTrainings(trainings => {
                 this.countLaunchedTraining = trainings.length;
                 this.checkTrainAchievement();
-                this.total = this.userService.getTotalMeasures(trainings);
-                this.checkTotalWeightAchievement();
+                const result = this.userService.getTotalMeasures(trainings);
+                this.total = result[0];
+                this.maxTrainings = result[1];
+                this.checkTrainingMaxAchievement('distance');
             });
             this.userService.getUserOldStatus((data) => {
                 this.comboCount = data.comboCount;
@@ -73,11 +80,7 @@ export class UserComponent implements OnInit, OnDestroy {
         const resAch = [];
         this.achievements.forEach(element => {
             if (element.measureName === 'train' && this.countLaunchedTraining >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'train') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
+                resAch.push(element);
             }
         });
         this.getUnreceivedArray(resAch);
@@ -87,11 +90,7 @@ export class UserComponent implements OnInit, OnDestroy {
         const resAch = [];
         this.achievements.forEach(element => {
             if (element.measureName === 'follower' && this.countFollowers >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'follower') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
+                resAch.push(element);
             }
         });
         this.getUnreceivedArray(resAch);
@@ -101,11 +100,7 @@ export class UserComponent implements OnInit, OnDestroy {
     //     const resAch = [];
     //     this.achievements.forEach(element => {
     //         if (element.measureName === 'combodays' && this.comboCount >= element.value) {
-    //             if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'combodays') {
-    //                 resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-    //             } else {
-    //                 resAch.push(element);
-    //             }
+    //             resAch.push(element);
     //         }
     //     });
     //     this.getUnreceivedArray(resAch);
@@ -116,11 +111,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.achievements.forEach(element => {
             // tslint:disable-next-line:max-line-length
             if (element.measureName === 'day' && Math.floor((new Date().valueOf() - new Date(this.registrationDate).valueOf()) / (24 * 60 * 60 * 1000)) >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'day') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
+                resAch.push(element);
             }
         });
         this.getUnreceivedArray(resAch);
@@ -130,19 +121,22 @@ export class UserComponent implements OnInit, OnDestroy {
         const resAch = [];
         this.achievements.forEach(element => {
             if (element.measureName === 'articles' && this.countArticles >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'articles') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
+                resAch.push(element);
             }
         });
         this.getUnreceivedArray(resAch);
     }
 
 
-    checkTotalWeightAchievement() {
-        console.log(this.total);
+    checkTrainingMaxAchievement(measureName) {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            if (element.measureName === measureName && (this.maxTrainings[measureName] * this.achievementMeasures[measureName]
+            >= element.value * this.measures[measureName])) {
+                resAch.push(element);
+            }
+        });
+        this.getUnreceivedArray(resAch);
     }
 
     getUnreceivedArray(resAch) {
@@ -180,7 +174,10 @@ export class UserComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.userService.promiseFunc.unsubscribe();
+        if (this.userService.promiseFunc) {
+            this.userService.promiseFunc.unsubscribe();
+        }
+
     }
 
 }
