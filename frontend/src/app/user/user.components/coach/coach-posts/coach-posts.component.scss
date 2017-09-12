@@ -12,7 +12,8 @@
 
 .post-text-block {
     display: inline-block;
-    width: 86%;
+    width: 80%;
+    float: right;
 
     p {
         display: inline-block;
@@ -50,6 +51,7 @@
     .post-avatar {
         display: inline-block;
         width: 12%;
+        margin-right: $mini-indent;
         vertical-align: top;
 
         img {
