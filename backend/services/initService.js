@@ -190,6 +190,158 @@ const mongoose = require('mongoose'),
             icon: './resources/achievements_icon/time_3.png',
             measureName: 'train'
         },
+        {
+            name: 'Lazy',
+            message: 'Open the app everyday x5',
+            principle: 'f>v',
+            value: 5,
+            icon: './resources/achievements_icon/comboDays_1.png',
+            measureName: 'combodays'
+        },
+        {
+            name: 'Serious',
+            message: 'Open the app everyday x10',
+            principle: 'f>v',
+            value: 10,
+            icon: './resources/achievements_icon/comboDays_2.png',
+            measureName: 'combodays'
+        },
+        {
+            name: 'Pedant',
+            message: 'Open the app everyday x30',
+            principle: 'f>v',
+            value: 30,
+            icon: './resources/achievements_icon/comboDays_3.png',
+            measureName: 'combodays'
+        },
+        {
+            name: 'Beach ball',
+            message: 'Lose 2kg',
+            principle: 'f>v',
+            value: 2,
+            icon: './resources/achievements_icon/loseWeight_1.png',
+            measureName: 'loseweight'
+        },
+        {
+            name: 'Air ball',
+            message: 'Lose 5kg',
+            principle: 'f>v',
+            value: 5,
+            icon: './resources/achievements_icon/loseWeight_2.png',
+            measureName: 'loseweight'
+        },
+        {
+            name: 'Bubble',
+            message: 'Lose 10kg',
+            principle: 'f>v',
+            value: 10,
+            icon: './resources/achievements_icon/loseWeight_3.png',
+            measureName: 'loseweight'
+        },
+        {
+            name: 'Kilo',
+            message: 'Total lift of all trainings 50 000 kg',
+            principle: 'f>v',
+            value: 50 * 1000,
+            icon: './resources/achievements_icon/totalWeight_1.png',
+            measureName: 'totalweight'
+        },
+        {
+            name: 'Mega',
+            message: 'Total lift of all trainings 100 000 kg',
+            principle: 'f>v',
+            value: 100 * 1000,
+            icon: './resources/achievements_icon/totalWeight_2.png',
+            measureName: 'totalweight'
+        },
+        {
+            name: 'Terra',
+            message: 'Total lift of all trainings 200 000 kg',
+            principle: 'f>v',
+            value: 200 * 1000,
+            icon: './resources/achievements_icon/totalWeight_3.png',
+            measureName: 'totalweight'
+        },
+        {
+            name: 'Soilder',
+            message: 'Total lift of one training 1 000 kg',
+            principle: 'f>v',
+            value: 1000,
+            icon: './resources/achievements_icon/trainWeight_1.png',
+            measureName: 'trainweight'
+        },
+        {
+            name: 'Major',
+            message: 'Total lift of one training 5 000 kg',
+            principle: 'f>v',
+            value: 5 * 1000,
+            icon: './resources/achievements_icon/trainWeight_2.png',
+            measureName: 'trainweight'
+        },
+        {
+            name: 'General',
+            message: 'Total lift of one training 10 000 kg',
+            principle: 'f>v',
+            value: 10 * 1000,
+            icon: './resources/achievements_icon/trainWeight_3.png',
+            measureName: 'trainweight'
+        },
+        {
+            name: 'Wind',
+            message: 'Total cross of all trainings 20 000 m',
+            principle: 'f>v',
+            value: 20 * 1000,
+            icon: './resources/achievements_icon/totalDistance_1.png',
+            measureName: 'totaldistance'
+        },
+        {
+            name: 'Soundwave',
+            message: 'Total cross of all trainings 50 000 m',
+            principle: 'f>v',
+            value: 50 * 1000,
+            icon: './resources/achievements_icon/totalDistance_2.png',
+            measureName: 'totaldistance'
+        },
+        {
+            name: 'Light',
+            message: 'Total cross of all trainings 100 000 m',
+            principle: 'f>v',
+            value: 100 * 1000,
+            icon: './resources/achievements_icon/totalDistance_3.png',
+            measureName: 'totaldistance'
+        },
+        {
+            name: 'Boyscout',
+            message: 'Collect 25% of achievements',
+            principle: 'f>v',
+            value: 0.25,
+            icon: './resources/achievements_icon/achievementsCount_1.png',
+            measureName: 'achieivcount'
+        },
+        {
+            name: 'Collectionare',
+            message: 'Collect 50% of achievements',
+            principle: 'f>v',
+            value: 0.5,
+            icon: './resources/achievements_icon/achievementsCount_2.png',
+            measureName: 'achieivcount'
+        },
+        {
+            name: 'God',
+            message: 'Collect 100% of achievements',
+            principle: 'f>v',
+            value: 1,
+            icon: './resources/achievements_icon/achievementsCount_3.png',
+            measureName: 'achieivcount'
+        },
+        {
+            name: 'Wish-maker',
+            message: 'Complete all plans of the week',
+            principle: 'f>v',
+            value: 1,
+            icon: './resources/achievements_icon/perfectWeek.png',
+            measureName: 'perfectweek'
+        },
     ],
     measurments = [
         {

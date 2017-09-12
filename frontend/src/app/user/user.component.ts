@@ -96,15 +96,15 @@ export class UserComponent implements OnInit, OnDestroy {
         this.getUnreceivedArray(resAch);
     }
 
-    // checkComboDaysAchievement() {
-    //     const resAch = [];
-    //     this.achievements.forEach(element => {
-    //         if (element.measureName === 'combodays' && this.comboCount >= element.value) {
-    //             resAch.push(element);
-    //         }
-    //     });
-    //     this.getUnreceivedArray(resAch);
-    // }
+    checkComboDaysAchievement() {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            if (element.measureName === 'combodays' && this.comboCount >= element.value) {
+                resAch.push(element);
+            }
+        });
+        this.getUnreceivedArray(resAch);
+    }
 
     checkOldStatusAchievement() {
         const resAch = [];
