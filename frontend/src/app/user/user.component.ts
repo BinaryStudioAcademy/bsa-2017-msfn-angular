@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { UserService } from './user.service';
+import { Component, OnInit } from '@angular/core';
 import { EncryptService } from '../services/encrypt.service';
 import { HttpService } from '../services/http.service';
 import { IHttpReq } from '../models/http-req';
@@ -6,92 +7,59 @@ import { WindowObj } from '../services/window.service';
 import { MdDialog } from '@angular/material';
 import { AchievementReceivedDialogComponent } from './user.components/achievement-received-dialog/achievement-received-dialog.component';
 
-@Component ({
+@Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
-    styleUrls: ['./user.component.scss']
+    styleUrls: ['./user.component.scss'],
+    providers: [UserService]
 })
 export class UserComponent implements OnInit {
-    private userId = (this._windowObj.data._injectedData as any).userId;
     private achievements: Array<any>;
+    private measures = {};
+    private settings;
     private countFollowers: Number;
     private countArticles: Number;
     private countLaunchedTraining: Number;
 
-    constructor(private httpHandler: HttpService,
-        private _windowObj: WindowObj,
-        private encryptService: EncryptService,
-        private dialog: MdDialog
-    ) {}
+    constructor(
+        private dialog: MdDialog,
+        private userService: UserService
+    ) { }
 
     ngOnInit() {
-        console.log('UserComponent LOADED');
-        this.getAchievemnts();
-    }
-
-    getFollowers() {
-        const getFollowersReq: IHttpReq = {
-            url: '/api/user/subscribe/followers/' + this.userId,
-            method: 'GET',
-            body: {},
-            failMessage: 'Can\'t show followers'
-        };
-        this.httpHandler.sendRequest(getFollowersReq).then(data => {
-            this.countFollowers = data.length;
-            this.checkFollowerAchievement();
-        });
-
-    }
-
-    loadArticles() {
-        const request: IHttpReq = {
-            url: `/api/articles/filter/${encodeURIComponent(this.encryptService.encrypt({userId: this.userId}))}`,
-            method: 'GET',
-            body: {}
-        };
-
-        this.httpHandler.sendRequest(request)
-            .then((result) => {
-                if (result.length !== 0) {
-                    result = result.map(item => {
-                        if (item.userId) {
-                            item.user = item.userId;
-                        }
-                        return item;
-                    });
-                }
-                this.countArticles = result.length;
+        this.userService.getBasicInfo((achieves, measures, settings) => {
+            this.achievements = achieves;
+            this.settings = settings;
+            ['distance', 'weight'].forEach(measureName => {
+                measures.forEach(element => {
+                    if (element.measureName === measureName) {
+                        element.measureUnits.forEach(unit => {
+                            if (unit.unitName === this.settings[measureName]) {
+                                this.measures[measureName] = unit.conversionFactor;
+                            }
+                        });
+                    }
+                });
+            });
+            console.log(this.measures);
+            this.userService.getFollowers(followers => {
+                this.countFollowers = followers;
+                this.checkFollowerAchievement();
+            });
+            this.userService.loadArticles(articles => {
+                this.countArticles = articles;
                 this.checkArticlesAchievement();
             });
-    }
-
-    getLaunchedTrainings() {
-        const sendData: IHttpReq = {
-            url: '/api/launchedtraining/user/' + this.userId,
-            method: 'GET',
-            body: {},
-        };
-
-        this.httpHandler.sendRequest(sendData)
-            .then(data => {
-                this.countLaunchedTraining = data.length;
+            this.userService.getLaunchedTrainings(trainings => {
+                this.countLaunchedTraining = trainings.length;
                 this.checkTrainAchievement();
+                this.userService.getTotalMeasures(trainings);
+            });
         });
     }
 
-    addUserAchievements(achievment) {
-        achievment.achievement = achievment._id;
-        achievment._id = undefined;
-        achievment.finished = new Date();
 
-        const request: IHttpReq = {
-            url: '/api/achievements/user/',
-            method: 'POST',
-            body: achievment
-        };
 
-        this.httpHandler.sendRequest(request);
-    }
 
     checkTrainAchievement() {
         const resAch = [];
@@ -137,63 +105,36 @@ export class UserComponent implements OnInit {
 
     getUnreceivedArray(resAch) {
         if (resAch.length) {
-            this.getUserAchievements((userAchievments) => {
+            this.userService.getUserAchievements((userAchievments) => {
                 const resArr = this.diffArr(userAchievments, resAch);
                 resArr.forEach(element => {
                     this.dialog.open(AchievementReceivedDialogComponent, { data: element })
-                    .afterClosed().subscribe(() => {
-                        this.addUserAchievements(element);
-                    });
+                        .afterClosed().subscribe(() => {
+                            this.userService.addUserAchievements(element);
+                        });
                 });
             });
         }
     }
 
     diffArr(userArr, achArr) {
-                console.log(userArr, achArr);
-                if (!userArr) {
-                    return achArr;
-                }
-                achArr.forEach(ach => {
-                ach.achieved = userArr.some(userAch => {
-                    // tslint:disable-next-line:triple-equals
-                    if (ach._id == userAch.achievement) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
-            });
-            achArr = achArr.filter(elem => {
-                return !elem.achieved;
-            });
+        if (!userArr) {
             return achArr;
-    }
-
-        getAchievemnts() {
-        const request: IHttpReq = {
-            url: '/api/achievements',
-            method: 'GET',
-            body: {}
-        };
-
-        this.httpHandler.sendRequest(request).then(res => {
-            this.achievements = res;
-            this.getFollowers();
-            this.loadArticles();
-            this.getLaunchedTrainings();
+        }
+        achArr.forEach(ach => {
+            ach.achieved = userArr.some(userAch => {
+                // tslint:disable-next-line:triple-equals
+                if (ach._id == userAch.achievement) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
         });
-    }
-
-    getUserAchievements(callback) {
-        const request: IHttpReq = {
-            url: '/api/achievements/user/',
-            method: 'GET',
-            body: {}
-        };
-
-        this.httpHandler.sendRequest(request).then(res => {
-            callback(res);
+        achArr = achArr.filter(elem => {
+            return !elem.achieved;
         });
+        return achArr;
     }
+
 }
