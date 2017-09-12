@@ -7,6 +7,7 @@ import { WindowObj } from '../services/window.service';
 @Injectable()
 export class UserService {
     private userId = (this._windowObj.data._injectedData as any).userId;
+    public promiseFunc;
 
 
     constructor(private httpHandler: HttpService,
@@ -36,7 +37,7 @@ export class UserService {
             body: {}
         };
         const promise3 = this.httpHandler.sendRequest(request3);
-        Promise.all([promise1, promise2, promise3]).then(result => {
+        this.promiseFunc = Promise.all([promise1, promise2, promise3]).then(result => {
             callback(...result);
         });
     }

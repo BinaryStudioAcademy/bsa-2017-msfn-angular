@@ -1,5 +1,5 @@
 import { UserService } from './user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EncryptService } from '../services/encrypt.service';
 import { HttpService } from '../services/http.service';
 import { IHttpReq } from '../models/http-req';
@@ -13,7 +13,7 @@ import { AchievementReceivedDialogComponent } from './user.components/achievemen
     styleUrls: ['./user.component.scss'],
     providers: [UserService]
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
     private achievements: Array<any>;
     private measures = {};
     private settings;
@@ -170,6 +170,10 @@ export class UserComponent implements OnInit {
             return !elem.achieved;
         });
         return achArr;
+    }
+
+    ngOnDestroy() {
+        this.userService.promiseFunc.unsubscribe();
     }
 
 }
