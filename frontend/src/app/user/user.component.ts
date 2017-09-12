@@ -16,6 +16,7 @@ import { AchievementReceivedDialogComponent } from './user.components/achievemen
 export class UserComponent implements OnInit {
     private achievements: Array<any>;
     private measures = {};
+    private total = {};
     private settings;
     private countFollowers: Number;
     private countArticles: Number;
@@ -52,7 +53,8 @@ export class UserComponent implements OnInit {
             this.userService.getLaunchedTrainings(trainings => {
                 this.countLaunchedTraining = trainings.length;
                 this.checkTrainAchievement();
-                this.userService.getTotalMeasures(trainings);
+                this.total = this.userService.getTotalMeasures(trainings);
+                this.checkTotalWeightAchievement();
             });
         });
     }
@@ -100,6 +102,11 @@ export class UserComponent implements OnInit {
             }
         });
         this.getUnreceivedArray(resAch);
+    }
+
+
+    checkTotalWeightAchievement() {
+        console.log(this.total);
     }
 
     getUnreceivedArray(resAch) {

@@ -10,8 +10,8 @@ export class UserService {
 
 
     constructor(private httpHandler: HttpService,
-    private encryptService: EncryptService,
-    private _windowObj: WindowObj) { }
+        private encryptService: EncryptService,
+        private _windowObj: WindowObj) { }
 
     getBasicInfo(callback) {
         const request1: IHttpReq = {
@@ -101,7 +101,7 @@ export class UserService {
             });
     }
 
-        addUserAchievements(achievment) {
+    addUserAchievements(achievment) {
         achievment.achievement = achievment._id;
         achievment._id = undefined;
         achievment.finished = new Date();
@@ -117,5 +117,34 @@ export class UserService {
 
     getTotalMeasures(trainings) {
         console.log(trainings);
+        const total = {};
+        ['weight', 'distance'].forEach(measureName => {
+            total[measureName] = 0;
+            if (!(trainings instanceof Array)) {
+                return total;
+            }
+            trainings.forEach(training => {
+
+                if (!(training.intervals && training.intervals instanceof Array)) {
+                    return total;
+                }
+                training.intervals.forEach(interval => {
+                    if (!(interval.exList && interval.exList instanceof Array)) {
+                        return total;
+                    }
+                    interval.exList.forEach(exList => {
+                        if (!(exList.sets && exList.sets instanceof Array)) {
+                            return total;
+                        }
+                        if (exList.exercise.measure === measureName) {
+                            exList.sets.forEach(set => {
+                                total[measureName] += set.value * set.value2;
+                            });
+                        }
+                    });
+                });
+            });
+        });
+        return total;
     }
 }
