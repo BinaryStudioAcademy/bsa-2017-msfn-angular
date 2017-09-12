@@ -3,20 +3,36 @@
 @import '../../../../../globalStyles/text';
 .content {
     width: 100%;
+    height: 90%;
     display: flex;
     .side-content {
-        max-width: 25%;
-        height: 100%;
+        width: 25%;
+        height: 90%;
         padding: 10px;
         padding-left: 0;
         overflow-y: scroll;
         border-right: 1px solid #424242;
 
         .types {
-            .types-depth1,
-            .types-depth2,
-            .types-depth3 {
+            .depth-wrap {
+                display: flex;
+                flex-flow: column nowrap;
+                flex: 100%;
                 margin: 10px;
+
+                .name-wrap {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    align-items: center;
+                }
+
+                .type-name {
+                    cursor: pointer;
+                }
+
+                .selected {
+                    font-weight: 900;
+                }
             }
 
             .icon-arrow {
@@ -37,6 +53,7 @@
     }
     .product-content {
         width: 75%;
+        height: 90%;
 
         md-list-item {
             md-checkbox {
@@ -52,6 +69,12 @@
             align-items: center;
             margin: 0 $content-between-margin;
         }
+
+        .product-list {
+            height: 80%;
+            overflow-y: scroll;
+        }
+
         .btn {
             border: none;
             color: $text-main-color;
@@ -76,5 +99,10 @@
         .hidden {
             visibility: hidden;
         }
+
+        .product-nofood {
+            text-align: center;
+        }
     }
+
 }
