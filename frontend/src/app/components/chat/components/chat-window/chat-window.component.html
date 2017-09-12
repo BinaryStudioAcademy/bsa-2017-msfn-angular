@@ -1,6 +1,7 @@
 <div class="chat-wrapper" [class.minimized]="chat.minimized" id="{{chat.room}}">
     <div class="chat-header">
         <div class="chat-user" (click)="toogleMinimized()">
+            <span class="user-photo" [style.background-image]="'url(' + chat.user.userPhoto + ')'"></span>
             <span class="status-circle" *ngIf="(!((chat.messages | unread: userId) !== 0) || !minimized)" [class.online]="chat.user.online"></span>
             <span class="new-messages-count" *ngIf="(chat.messages | unread: userId) !== 0">{{chat.messages | unread: userId}}</span>
             <span class="chat-user-text" [title]="chat.user.fullName">{{chat.user.fullName}}</span>

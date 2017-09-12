@@ -163,10 +163,11 @@ export class ChatService {
         }
         chat.active = true;
         chat.new_messages = new Subject();
+        chat.minimized = false;
 
-        this.activeChats.push(chat);
+        this.activeChats.unshift(chat);
         if (this.activeChats.length > 3) {
-            this.activeChats.shift();
+            this.activeChats.pop();
         }
         this.changeActiveChats();
     }

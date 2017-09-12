@@ -15,6 +15,7 @@ export class ChatComponent implements OnInit, OnChanges, AfterViewInit {
 
     public chats: any[] = [];
     public activeChats: any[] = [];
+    private chatToggleTimeout: any;
 
     constructor(private window: WindowObj,
                 private chatService: ChatService) {
@@ -40,7 +41,12 @@ export class ChatComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     public toggleChat() {
-        this.chatListVisible = !this.chatListVisible;
+        if (!this.chatToggleTimeout) {
+            this.chatListVisible = !this.chatListVisible;
+            this.chatToggleTimeout = setTimeout(() => {
+                this.chatToggleTimeout = null;
+            }, 500);
+        }
     }
 
     public showChat() {

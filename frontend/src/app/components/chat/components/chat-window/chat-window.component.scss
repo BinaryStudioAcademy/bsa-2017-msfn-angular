@@ -6,6 +6,7 @@ $header-height: 25px;
 $header-height-total: 30px;
 $icons-width: 14px;
 $message-border-radius: 5px;
+$mobile-minized-size: 40px;
 
 .chat-wrapper {
     width: 250px;
@@ -17,6 +18,7 @@ $message-border-radius: 5px;
     box-shadow: 0 0 3px 1px $text-dark-color;
     transition: height 0.3s, width 0.3s;
     position: relative;
+    pointer-events: auto;
 
     .chat-header {
         width: 100%;
@@ -36,6 +38,12 @@ $message-border-radius: 5px;
             white-space: nowrap;
             cursor: pointer;
             position: relative;
+
+            .user-photo {
+                display: none;
+                background-position: center;
+                background-size: cover;
+            }
 
             .chat-user-text {
                 margin-left: 15px;
@@ -205,5 +213,62 @@ $message-border-radius: 5px;
     }
     .new-message-wrap {
         display: none;
+    }
+}
+
+@media screen and (max-width: $large-screen) {
+    .chat-wrapper.minimized {
+        display: none;
+    }
+}
+
+@media screen and (max-width: $medium-screen) {
+    .chat-wrapper {
+        width: calc(100vw - 55px);
+        height: calc(100vh - 70px);
+
+        .messages-wrapper {
+            height: calc(100vh - 70px - 35px - 30px);
+        }
+    }
+    .chat-wrapper.minimized {
+        height: $mobile-minized-size;
+        width: $mobile-minized-size;
+        border-radius: 50%;
+        border: none;
+        box-shadow: none;
+        margin-left: 20px;
+        background-color: transparent;
+        transition: none;
+
+
+        .chat-header {
+            height: $mobile-minized-size;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background-color: transparent;
+            border: none;
+
+            .chat-user {
+
+                .user-photo {
+                    display: block;
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+                }
+                .status-circle {
+                    display: none;
+                }
+                .chat-user-text {
+                    display: none;
+                }
+            }
+            .chat-header-icons {
+                display: none!important;
+            }
+        }
     }
 }

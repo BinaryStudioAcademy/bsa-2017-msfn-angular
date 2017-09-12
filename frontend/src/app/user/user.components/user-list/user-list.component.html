@@ -33,7 +33,7 @@
                         <button md-icon-button
                                 class="action-button"
                                 (click)="user.isFollowed ? unfollow(user) : follow(user)">
-                            <md-icon>{{user.isFollowed ? 'add_circle' : 'remove_circle'}}</md-icon>
+                            <md-icon>{{!user.isFollowed ? 'add_circle' : 'remove_circle'}}</md-icon>
                         </button>
                     </md-list-item>
                 </md-list>
@@ -74,7 +74,7 @@
                             <button md-icon-button
                                     class="action-button"
                                     (click)="user.isFollowed ? unfollow(user) : follow(user)">
-                                <md-icon>{{user.isFollowed ? 'add_circle' : 'remove_circle'}}</md-icon>
+                                <md-icon>{{!user.isFollowed ? 'add_circle' : 'remove_circle'}}</md-icon>
                             </button>
                         </md-list-item>
                     </md-list>
@@ -116,7 +116,7 @@
                             <button md-icon-button
                                     class="action-button"
                                     (click)="user.isFollowed ? unfollow(user) : follow(user)">
-                                <md-icon>{{user.isFollowed ? 'add_circle' : 'remove_circle'}}</md-icon>
+                                <md-icon>{{!user.isFollowed ? 'add_circle' : 'remove_circle'}}</md-icon>
                             </button>
                         </md-list-item>
                     </md-list>

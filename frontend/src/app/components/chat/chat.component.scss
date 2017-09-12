@@ -14,9 +14,14 @@
     color: $text-dark-color;
     font-weight: bold;
     outline: none;
+    z-index: 10;
 
     .got-messages {
         display: none;
+    }
+    .mobile {
+        display: none;
+        position: relative;
     }
 }
 
@@ -135,8 +140,104 @@
     height: 315px;
     flex-wrap: wrap;
     align-items: flex-end;
+    pointer-events: none;
 
     .chat-window {
         margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: $large-screen) {
+    .chat-windows .chat-window {
+        display: none;
+    }
+    .chat-windows .chat-window:nth-child(1) {
+        display: block;
+    }
+}
+
+@media screen and (max-width: $medium-screen) {
+    .show-chats {
+        right: initial;
+        left: 0;
+        width: 55px;
+        height: 55px;
+        min-width: 55px;
+        max-width: 55px;
+
+        .no-messages,
+        .got-messages {
+            display: none;
+        }
+
+        .mobile {
+            display: flex;
+            align-items: center;
+            color: $text-main-color;
+
+            .open {
+                display: inline-block;
+            }
+            .close {
+                display: none;
+            }
+        }
+    }
+    .show-chats.got-messages {
+        .got-messages {
+            display: none;
+        }
+
+        .mobile {
+            .got-messages {
+                display: block;
+                position: absolute;
+                right: -4px;
+                top: -4px;
+                line-height: 12px;
+                border-radius: 50%;
+                font-size: 10px;
+                background-color: #7da7d9;
+                width: 12px;
+                height: 12px;
+                box-shadow: 0 0 2px 1px #7da7d9;
+            }
+        }
+    }
+    .show-chats.active {
+        border: none;
+        background: transparent;
+
+        .mobile {
+            .open {
+                display: none;
+            }
+            .close {
+                display: inline-block;
+            }
+            .got-messages {
+                display: none;
+            }
+        }
+    }
+
+    .chats-list-wrapper {
+        bottom: 0;
+        width: calc(100vw - 55px);
+        height: calc(100vh - 70px);
+        border: none;
+        transform: translateX(calc(100vw - 55px));
+    }
+
+    .chat-windows {
+        right: 0;
+        width: calc(100vw - 55px);
+        height: calc(100vh - 70px);
+
+        .chat-window {
+            margin: 0;
+            display: flex;
+            align-items: flex-end;
+        }
     }
 }
