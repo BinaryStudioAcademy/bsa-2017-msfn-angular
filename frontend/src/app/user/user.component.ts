@@ -43,7 +43,6 @@ export class UserComponent implements OnInit {
                     }
                 });
             });
-            console.log(this.measures);
             this.userService.getFollowers(followers => {
                 this.countFollowers = followers;
                 this.checkFollowerAchievement();

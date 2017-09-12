@@ -13,17 +13,37 @@ export class UserService {
     private encryptService: EncryptService,
     private _windowObj: WindowObj) { }
 
+
     getBasicInfo(callback) {
-        this.getAchievemnts((data) => {
-            this.getMeasures((measure, settings) => {
-                callback(data, measure, settings);
-            });
+        const request1: IHttpReq = {
+            url: '/api/achievements',
+            method: 'GET',
+            body: {}
+        };
+        const promise1 = this.httpHandler.sendRequest(request1);
+
+        const request2: IHttpReq = {
+            url: '/api/measurement',
+            method: 'GET',
+            body: {}
+        };
+        const promise2 = this.httpHandler.sendRequest(request2);
+
+
+        const request3: IHttpReq = {
+            url: '/api/user/me/measures',
+            method: 'GET',
+            body: {}
+        };
+        const promise3 = this.httpHandler.sendRequest(request3);
+        Promise.all([promise1, promise2, promise3]).then(result => {
+            callback(...result);
         });
     }
 
-    getAchievemnts(callback) {
+    getUserAchievements(callback) {
         const request: IHttpReq = {
-            url: '/api/achievements',
+            url: '/api/achievements/user/',
             method: 'GET',
             body: {}
         };
@@ -45,46 +65,6 @@ export class UserService {
         });
 
     }
-
-    getMeasures(callback) {
-        const request: IHttpReq = {
-            url: '/api/measurement',
-            method: 'GET',
-            body: {}
-        };
-
-        this.httpHandler.sendRequest(request).then(res => {
-            this.getUserSettings((settings) => {
-                callback(res, settings);
-            });
-        });
-    }
-
-    getUserSettings(callback) {
-        const request: IHttpReq = {
-            url: '/api/user/me/measures',
-            method: 'GET',
-            body: {}
-        };
-
-        this.httpHandler.sendRequest(request).then(settings => {
-            callback(settings);
-        });
-
-    }
-
-    getUserAchievements(callback) {
-        const request: IHttpReq = {
-            url: '/api/achievements/user/',
-            method: 'GET',
-            body: {}
-        };
-
-        this.httpHandler.sendRequest(request).then(res => {
-            callback(res);
-        });
-    }
-
 
     getFollowers(callback) {
         const getFollowersReq: IHttpReq = {
