@@ -49,6 +49,9 @@ function addItem(body, callback) {
                     body.advicedCalories = res
                 }
             });
+            // add start date
+            body.registrationDate = new Date().toISOString();
+            body.comboCount = 0;
             // Generating registration confirmation "TOKEN" for user
             body.activateToken = makeid();
             // Add newly created user into DB
@@ -77,6 +80,9 @@ function addItem(body, callback) {
 
 // Edit user in DB
 function updateItem(id, body, callback) {
+    console.log(id);
+    console.log(body);
+    console.log('===========================================');
     userRepository.getById(id, (err, data) => {
         if (err) return callback(err);
 

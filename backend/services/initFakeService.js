@@ -22,6 +22,8 @@ const mongoose = require('mongoose'),
                 startWeek : "Monday",
                 timeZone : "+2"
             },
+            registrationDate: '2017-07-01T21:00:00.000Z',
+            comboCount: 2,
             userPhoto: 'https://www.looktothestars.org/photo/192-scarlett-johansson/teaser-1379520673.jpg'
         },
         {
@@ -45,6 +47,8 @@ const mongoose = require('mongoose'),
                 startWeek : "Monday",
                 timeZone : "+2"
             },
+            registrationDate: '2017-09-10T21:00:00.000Z',
+            comboCount: 0,
             userPhoto: 'http://www.hotstarz.info/wp-content/uploads/2015/06/3528213-milla-jovovich-051-929926108-150x150.jpg'
         },
         {
@@ -68,6 +72,8 @@ const mongoose = require('mongoose'),
                 startWeek : "Monday",
                 timeZone : "+2"
             },
+            registrationDate: '2017-06-11T21:00:00.000Z',
+            comboCount: 5,
             userPhoto: 'https://www.looktothestars.org/photo/4718-jackie-chan/teaser-1379520542.jpg'
         },
         {
@@ -91,6 +97,8 @@ const mongoose = require('mongoose'),
                 startWeek : "Monday",
                 timeZone : "+2"
             },
+            registrationDate: '2017-06-21T21:00:00.000Z',
+            comboCount: 0,
             userPhoto: 'http://jarviscity.com/wp-content/uploads/2016/09/lionheart-jean-claude-van-damme-150x150.jpg'
         },
         {
@@ -114,6 +122,8 @@ const mongoose = require('mongoose'),
                 startWeek : "Monday",
                 timeZone : "+2"
             },
+            registrationDate: '2017-08-16T21:00:00.000Z',
+            comboCount: 0,
             userPhoto: 'https://www.looktothestars.org/photo/812-chuck-norris/teaser-1379525363.jpg'
         },
         {
@@ -137,6 +147,8 @@ const mongoose = require('mongoose'),
                 startWeek : "Monday",
                 timeZone : "+2"
             },
+            registrationDate: '2017-08-26T21:00:00.000Z',
+            comboCount: 0,
             userPhoto: 'https://www.looktothestars.org/photo/392-jared-leto/teaser-1379522441.jpg'
         },
         {
@@ -160,6 +172,8 @@ const mongoose = require('mongoose'),
                 startWeek : "Monday",
                 timeZone : "+2"
             },
+            registrationDate: '2017-08-15T21:00:00.000Z',
+            comboCount: 8,
             userPhoto: 'https://www.looktothestars.org/photo/20-angelina-jolie/teaser-1379520759.jpg'
         },
         {
@@ -182,6 +196,8 @@ const mongoose = require('mongoose'),
                 startWeek : "Monday",
                 timeZone : "+2"
             },
+            registrationDate: '2017-08-25T21:00:00.000Z',
+            comboCount: 2,
             userPhoto: 'https://www.looktothestars.org/photo/68-johnny-depp/teaser-1379520640.jpg'
         },
         {
@@ -205,6 +221,8 @@ const mongoose = require('mongoose'),
                 startWeek : "Monday",
                 timeZone : "+2"
             },
+            registrationDate: '2017-08-05T21:00:00.000Z',
+            comboCount: 2,
             userPhoto: 'https://www.looktothestars.org/photo/498-jim-carrey/teaser-1379527674.jpg'
         },
         {
@@ -228,6 +246,8 @@ const mongoose = require('mongoose'),
                 timeZone : "+2"
             },
             birthday: '1968-10-12',
+            registrationDate: '2017-07-17T21:00:00.000Z',
+            comboCount: 0,
             userPhoto: 'https://www.looktothestars.org/photo/7594-hugh-jackman/teaser-1379521690.jpg'
         }
     ];

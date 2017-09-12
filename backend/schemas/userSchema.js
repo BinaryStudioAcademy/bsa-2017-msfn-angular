@@ -34,6 +34,9 @@ const User = new Schema({
     weight: Number,
     location: String,
     about: String,
+    registrationDate: String,
+    lastActivityDate: String,
+    comboCount: Number,
     activateToken: String,
     settings: {
         weight: String,

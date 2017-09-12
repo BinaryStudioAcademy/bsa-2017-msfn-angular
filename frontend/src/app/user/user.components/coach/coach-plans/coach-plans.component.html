@@ -16,7 +16,7 @@
                         </li>
                     </ol>
                 </div>
-                <div class="plan-text-block">
+                <div class="plan-text-block" *ngIf="plan.description">
                     <p class="plan-description">{{ plan.description }}</p>
                     <a class="open-plan" routerLink="">more ></a>
                 </div>
