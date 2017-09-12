@@ -42,6 +42,11 @@ import { HeaderNotificationsComponent } from './components/header-notifications/
 import { SearchExerciseComponent } from './user/user.components/search-exercise/search-exercise.component';
 import { ExerciseEditDialogComponent } from './user/user.components/exercise-edit-dialog/exercise-edit-dialog.component';
 import {ConstantsService} from './services/constants.service';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatService } from './services/chat.service';
+import { ChatWindowComponent } from './components/chat/components/chat-window/chat-window.component';
+import { UnreadPipe } from './components/chat/pipes/unread.pipe';
+import { TotalUnreadPipe } from './components/chat/pipes/total-unread.pipe';
 
 @NgModule({
     imports: [
@@ -72,6 +77,10 @@ import {ConstantsService} from './services/constants.service';
         LoginDialogComponent,
         NotificationDataDialogComponent,
         HeaderNotificationsComponent,
+        ChatComponent,
+        ChatWindowComponent,
+        UnreadPipe,
+        TotalUnreadPipe,
     ],
     providers: [
         ToasterService,
@@ -86,7 +95,8 @@ import {ConstantsService} from './services/constants.service';
         SocketService,
         NotificationsService,
         ConfirmedPageService,
-        ConstantsService
+        ConstantsService,
+        ChatService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,

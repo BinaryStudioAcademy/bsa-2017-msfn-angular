@@ -25,7 +25,6 @@ function findById(userId, callback) {
 };
 
 function deleteById(id, userId, callback) {
-    console.log(id, userId);
     const query = this.model.update({
         $and: [{
                 createdByUser: userId

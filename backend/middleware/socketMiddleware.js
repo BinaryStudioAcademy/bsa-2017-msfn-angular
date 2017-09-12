@@ -47,6 +47,14 @@ module.exports = function(io, MongoStore) {
             socketService.JoinRoom('admin', () => {});
         }
 
+        socket.on('disconnecting', (reason) => {
+            const rooms = Object.keys(socket.rooms);
+
+            rooms.forEach(room => {
+                socketService.BroadcastRoom('check_user_online:success', room, JSON.stringify({room: room, user: socket.user._id, online: false}));
+            });
+        });
+
         socket.on('disconnect', (data) => {
             socketService.RemoveUser(socket);
         });

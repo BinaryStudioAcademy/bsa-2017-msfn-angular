@@ -18,8 +18,6 @@ module.exports = function (app) {
 
     app.get(baseUrl + ':id', function (req, res, next) {
         articlesService.get({_id: req.params.id}, function (err, data) {
-            console.log(err);
-            console.log(data);
             res.data = data;
             res.err = err;
             next();
@@ -36,7 +34,6 @@ module.exports = function (app) {
 
     app.get(baseUrl + 'filter/:filter', function(req, res, next) {
         const params = decrypt(req.params.filter);
-        console.log(params);
         articlesService.get(
             params,
             (err, data) => {
