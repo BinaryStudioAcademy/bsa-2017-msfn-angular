@@ -1,5 +1,5 @@
 import { UserService } from './user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EncryptService } from '../services/encrypt.service';
 import { HttpService } from '../services/http.service';
 import { IHttpReq } from '../models/http-req';
@@ -13,14 +13,16 @@ import { AchievementReceivedDialogComponent } from './user.components/achievemen
     styleUrls: ['./user.component.scss'],
     providers: [UserService]
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
     private achievements: Array<any>;
     private measures = {};
     private total = {};
     private settings;
-    private countFollowers: Number;
-    private countArticles: Number;
-    private countLaunchedTraining: Number;
+    private countFollowers: number;
+    private countArticles: number;
+    private countLaunchedTraining: number;
+    private comboCount: number;
+    private registrationDate: string;
 
     constructor(
         private dialog: MdDialog,
@@ -56,6 +58,11 @@ export class UserComponent implements OnInit {
                 this.total = this.userService.getTotalMeasures(trainings);
                 this.checkTotalWeightAchievement();
             });
+            this.userService.getUserOldStatus((data) => {
+                this.comboCount = data.comboCount;
+                this.registrationDate = data.registrationDate;
+                this.checkOldStatusAchievement();
+            });
         });
     }
 
@@ -81,6 +88,35 @@ export class UserComponent implements OnInit {
         this.achievements.forEach(element => {
             if (element.measureName === 'follower' && this.countFollowers >= element.value) {
                 if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'follower') {
+                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
+                } else {
+                    resAch.push(element);
+                }
+            }
+        });
+        this.getUnreceivedArray(resAch);
+    }
+
+    // checkComboDaysAchievement() {
+    //     const resAch = [];
+    //     this.achievements.forEach(element => {
+    //         if (element.measureName === 'combodays' && this.comboCount >= element.value) {
+    //             if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'combodays') {
+    //                 resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
+    //             } else {
+    //                 resAch.push(element);
+    //             }
+    //         }
+    //     });
+    //     this.getUnreceivedArray(resAch);
+    // }
+
+    checkOldStatusAchievement() {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            // tslint:disable-next-line:max-line-length
+            if (element.measureName === 'day' && Math.floor((new Date().valueOf() - new Date(this.registrationDate).valueOf()) / (24 * 60 * 60 * 1000)) >= element.value) {
+                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'day') {
                     resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
                 } else {
                     resAch.push(element);
@@ -141,6 +177,10 @@ export class UserComponent implements OnInit {
             return !elem.achieved;
         });
         return achArr;
+    }
+
+    ngOnDestroy() {
+        this.userService.promiseFunc.unsubscribe();
     }
 
 }

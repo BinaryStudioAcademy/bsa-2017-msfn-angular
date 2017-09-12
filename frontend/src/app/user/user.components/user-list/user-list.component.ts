@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { UserListService } from './user-list.service';
+import {Component, OnInit} from '@angular/core';
+import {UserListService} from './user-list.service';
 import ISubscribeUser = SubscribeApi.ISubscribeUser;
-import { WindowObj } from '../../../services/window.service';
+import {WindowObj} from '../../../services/window.service';
+import {ChatService} from '../../../services/chat.service';
 
 @Component({
     selector: 'app-user-list',
@@ -33,8 +34,8 @@ export class UserListComponent implements OnInit {
     userPerPage = 20;
 
     constructor(private userListService: UserListService,
-        private window: WindowObj
-    ) {
+                private window: WindowObj,
+                private chatService: ChatService) {
         this.users = {
             all: [],
             filtered: [],
@@ -106,7 +107,6 @@ export class UserListComponent implements OnInit {
         }
     }
 
-
     unfollow(user: ISubscribeUser) {
         this.userListService.unfollow(user._id, (err, data) => {
             user.isFollowed = false;
@@ -128,7 +128,10 @@ export class UserListComponent implements OnInit {
                 this.following.show = this.following.all.slice(0, this.userPerPage);
             }
         });
+    }
 
+    initChat(user) {
+        this.chatService.startChat(user._id);
     }
 
 }

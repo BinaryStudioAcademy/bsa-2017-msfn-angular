@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ToasterService {
 
     constructor(public toastr: ToastrService) {
-        this.toastr.toastrConfig.positionClass = 'toast-bottom-right';
+        this.toastr.toastrConfig.positionClass = 'toast-bottom-left';
      }
 
     // Method showMessage() expects to get 3 arguments:

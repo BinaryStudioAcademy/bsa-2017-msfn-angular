@@ -57,7 +57,6 @@ export class NotificationsService {
         });
 
         this.socketService.addListener('join_room:success', (json) => {
-            console.log(json);
         });
 
         this.socketService.addListener('new_coach_request', (json) => {

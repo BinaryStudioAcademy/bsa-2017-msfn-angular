@@ -72,7 +72,6 @@
 }
 
 .user-list {
-    height: calc(100vh - 300px);
     overflow: auto;
 }
 
@@ -90,6 +89,10 @@
     align-items: center;
 }
 
+.action-button {
+    outline: none;
+}
+
 a {
     text-decoration: none;
     color: $text-main-color;
@@ -103,7 +106,7 @@ a {
 }
 
 .user-container {
-    button {
+    .first-button {
         margin-left: auto;
     }
 }

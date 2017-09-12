@@ -7,11 +7,13 @@ import { WindowObj } from '../services/window.service';
 @Injectable()
 export class UserService {
     private userId = (this._windowObj.data._injectedData as any).userId;
+    public promiseFunc;
 
 
     constructor(private httpHandler: HttpService,
         private encryptService: EncryptService,
         private _windowObj: WindowObj) { }
+
 
     getBasicInfo(callback) {
         const request1: IHttpReq = {
@@ -20,7 +22,6 @@ export class UserService {
             body: {}
         };
         const promise1 = this.httpHandler.sendRequest(request1);
-
 
         const request2: IHttpReq = {
             url: '/api/measurement',
@@ -36,7 +37,7 @@ export class UserService {
             body: {}
         };
         const promise3 = this.httpHandler.sendRequest(request3);
-        Promise.all([promise1, promise2, promise3]).then(result => {
+        this.promiseFunc = Promise.all([promise1, promise2, promise3]).then(result => {
             callback(...result);
         });
     }
@@ -53,6 +54,18 @@ export class UserService {
         });
     }
 
+    getUserOldStatus(callback) {
+        const request: IHttpReq = {
+            url: '/api/user/me/oldstatus',
+            method: 'GET',
+            body: {}
+        };
+
+        this.httpHandler.sendRequest(request).then(oldstatus => {
+            callback(oldstatus);
+        });
+
+    }
 
     getFollowers(callback) {
         const getFollowersReq: IHttpReq = {
