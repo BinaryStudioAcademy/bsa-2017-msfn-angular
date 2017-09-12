@@ -20,6 +20,8 @@ const mongoose = require('mongoose'),
         isAdmin: true,
         position: 1,
         birthday: '2001-9-11',
+        registrationDate: '2017-07-01T21:00:00.000Z',
+        comboCount: 0,
     },
     goalTypes = [
         'Weight',

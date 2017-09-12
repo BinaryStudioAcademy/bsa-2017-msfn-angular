@@ -20,6 +20,14 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+    app.get(baseUrl + 'me/measures', function (req, res, next) {
+        userRepository.getById(req.session.passport.user, function (err, data) {
+            res.data = data.settings;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.use(baseUrl + 'activate', activateRoutes);
 
     app.use(baseUrl + 'changemail', changeMailRoutes);
