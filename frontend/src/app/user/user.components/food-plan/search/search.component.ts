@@ -16,42 +16,14 @@ export class SearchComponent implements OnInit {
     typesDepth = [];
     filtered = null;
     selectedType = '';
+    sortDirection = {
+        food: '',
+        vendor: ''
+    };
 
     constructor(
         public foodPlanService: FoodPlanService,
     ) {
-        /*  this.foods = [
-             {
-               name: 'Banana',
-               foodType: 'Fruit',
-               kcal: 132,
-               protein: 34,
-               fat: 12,
-               carbons: 56,
-               measure: '',
-               vendor: 'FFF',
-             }, {
-               name: 'Appleapple',
-               foodType: 'Fruit',
-               kcal: 54,
-               protein: 12,
-               fat: 9,
-               carbons: 56,
-               measure: '',
-               vendor: 'Простоквашино',
-             } , {
-             name: 'Peach',
-             foodType: 'Fruit',
-             kcal: 124,
-             protein: 10,
-             fat: 0,
-             carbons: 87,
-             measure: '',
-             vendor: 'Basfffld',
-             }
-         ];
-         this.types = [ {name: 'Dairy products', parentType: '', depthLvl: 1, isRemoved: false},
-         { name: 'Fruit', parentType: '', depthLvl:1, isRemoved: false}]; */
     }
 
     ngOnInit() {
@@ -144,4 +116,18 @@ export class SearchComponent implements OnInit {
         });
     }
 
+    sortFood(key: string) {
+        this.toggleSortDirection(key);
+        this.foodPlanService.sortData(this.foods, key, this.sortDirection[key]);
+        console.log(this.foods);
+        console.log(this.sortDirection[key]);
+    }
+
+    toggleSortDirection(key: string) {
+        if (this.sortDirection[key] === 'desc') {
+            this.sortDirection[key] = 'asc';
+        } else {
+            this.sortDirection[key] = 'desc';
+        }
+    }
 }
