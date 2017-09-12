@@ -32,13 +32,13 @@ export class ActiveTrainingService {
 
     getMeasures(callback) {
         const sendData: IHttpReq = {
-            url: '/api/user/me',
+            url: '/api/user/me/measures',
             method: 'GET',
-            body: {},
+            body: {}
         };
 
         this.httpService.sendRequest(sendData).then(data => {
-            callback(data.settings);
+            callback(data);
         });
     }
 
