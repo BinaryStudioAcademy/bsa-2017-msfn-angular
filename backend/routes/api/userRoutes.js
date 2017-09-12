@@ -22,7 +22,11 @@ module.exports = function (app) {
 
     app.get(baseUrl + 'me/measures', function (req, res, next) {
         userRepository.getById(req.session.passport.user, function (err, data) {
-            res.data = data.settings;
+            if(data.settings){
+                res.data = data.settings;
+            } else{
+                res.data = {};
+            }
             res.err = err;
             next();
         });
