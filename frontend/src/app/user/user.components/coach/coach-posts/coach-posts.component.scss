@@ -4,41 +4,46 @@
 
 #posts {
     width: 100%;
+    margin-bottom: $mini-indent;
 }
 
-.post-avatar {
-    display: none;
-}
+.post {
+    display: flex;
+    justify-content: space-between;
 
-.post-text-block {
-    display: inline-block;
-    width: 80%;
-    float: right;
+    .post-avatar {
+        display: none;
+    }
 
-    p {
+    .post-text-block {
         display: inline-block;
-        word-break: break-word;
-    }
+        flex-basis: 80%;
+        float: right;
 
-    .post-name {
-        display: inline-block;
-        width: 70%;
-        margin-bottom: $mini-indent;
-        font-size: $main-text;
-    }
+        p {
+            display: inline-block;
+            word-break: break-word;
+        }
 
-    .post-date {
-        width: 100%;
-        margin-bottom: $mini-indent;
-        font-size: $minor-text;
-    }
+        .post-name {
+            display: inline-block;
+            width: 70%;
+            margin-bottom: $mini-indent;
+            font-size: $main-text;
+        }
 
-    .post-text {
-        width: 100%;
-        font-size: $usual-text;
+        .post-date {
+            width: 100%;
+            margin-bottom: $mini-indent;
+            font-size: $minor-text;
+        }
+
+        .post-text {
+            width: 100%;
+            font-size: $usual-text;
+        }
     }
 }
-
 
 .post:not(:last-child) {
     margin-bottom: $standard-indent;
@@ -46,26 +51,28 @@
     border-bottom: 1px solid $text-main-color;
 }
 
+
 @media only screen and (min-width: $small-screen) {
+    .post {
+        .post-avatar {
+            display: inline-block;
+            flex-basis: 20%;
+            margin-right: $mini-indent;
+            vertical-align: top;
 
-    .post-avatar {
-        display: inline-block;
-        width: 12%;
-        margin-right: $mini-indent;
-        vertical-align: top;
-
-        img {
-            width: 44px;
-            border-radius: 22px;
+            img {
+                width: 44px;
+                border-radius: 22px;
+            }
         }
-    }
 
-    .post-text-block {
-        .post-date {
-            width: 30%;
-            margin-bottom: initial;
-            float: right;
-            text-align: right;
+        .post-text-block {
+            .post-date {
+                width: 30%;
+                margin-bottom: initial;
+                float: right;
+                text-align: right;
+            }
         }
     }
 }
