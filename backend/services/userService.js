@@ -80,9 +80,6 @@ function addItem(body, callback) {
 
 // Edit user in DB
 function updateItem(id, body, callback) {
-    console.log(id);
-    console.log(body);
-    console.log('===========================================');
     userRepository.getById(id, (err, data) => {
         if (err) return callback(err);
 

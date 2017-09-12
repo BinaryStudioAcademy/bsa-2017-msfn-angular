@@ -24,10 +24,9 @@ function login(req, res, next) {
                     if (err) {
                         return next(err)
                     } else {
-                        console.log(Math.floor((new Date() - new Date(user.lastActivityDate))/(24*60*60*1000)));
                         const data = {
                             lastActivityDate: new Date().toISOString(),
-                            comboCount: (user.lastActivityDate && Math.floor((new Date() - new Date(user.lastActivityDate))/(24*60*60*1000)) === 1) ? (Math.floor((new Date() - new Date(user.lastActivityDate))/(24*60*60*1000)) === 0) ? 0 : user.comboCount : ++user.comboCount
+                            comboCount: (user.lastActivityDate && Math.floor((new Date() - new Date(user.lastActivityDate))/(24*60*60*1000)) !== 1) ? (Math.floor((new Date() - new Date(user.lastActivityDate))/(24*60*60*1000)) !== 0) ? 0 : user.comboCount : ++user.comboCount
                         }
                         userService.updateItem(user.id, data, () => {
                             res.send({access: true});
