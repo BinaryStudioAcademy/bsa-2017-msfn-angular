@@ -4,8 +4,21 @@
 
 .article {
     display: flex;
-    flex-direction: column;
+    //flex-direction: column;
     justify-content: space-between;
+    flex-wrap: wrap;
+
+    h3 {
+        width: 100%;
+        margin: 0 0 $standard-indent;
+        text-align: center;
+        font-size: $main-text;
+        font-weight: 600;
+    }
+
+    h3:hover {
+        cursor: pointer;
+    }
 }
 
 .article:not(:last-child) {
@@ -14,12 +27,19 @@
     border-bottom: 1px solid $text-main-color;
 }
 
+.article-date {
+    width: 100%;
+    float: right;
+    text-align: right;
+    font-size: $minor-text;
+}
+
 .article-image {
     display: block;
     width: 90%;
     max-width: 170px;
     vertical-align: top;
-    margin: 0 auto $standard-indent;
+    margin: $standard-indent auto;
 
     img {
         width: 100%;
@@ -33,21 +53,6 @@
         display: inline-block;
     }
 
-    .article-title {
-        display: inline-block;
-        width: 70%;
-        margin-bottom: $mini-indent;
-        font-size: $main-text;
-        font-weight: 600;
-    }
-
-    .article-date {
-        width: 30%;
-        float: right;
-        text-align: right;
-        font-size: $minor-text;
-    }
-
     .article-text {
         width: 100%;
         font-size: $usual-text;
@@ -55,7 +60,8 @@
 
     a {
         float: right;
-        font-size: $usual-text;
+        margin: $mini-indent 0;
+        font-size: $main-text;
         color: $text-main-color;
     }
 }
@@ -64,17 +70,34 @@
 @media only screen and (min-width: $medium-screen) {
 
     .article {
-        flex-direction: row;
+        h3 {
+            width: 50%;
+            margin: 0 0 $standard-indent;
+            font-size: $main-text;
+            font-weight: 600;
+        }
+    }
+
+    .article-date {
+        width: 50%;
+        float: right;
+        text-align: right;
+        font-size: $minor-text;
     }
 
     .article-image {
         display: inline-block;
         width: initial;
-        margin: 0 $standard-indent 0 0;
 
         img {
             width: initial;
             max-width: 170px;
+        }
+    }
+
+    .article-text-block {
+        a {
+            margin: $micro-indent 0 initial 0;
         }
     }
 }

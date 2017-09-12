@@ -8,7 +8,6 @@ p {
 
 md-paginator {
     flex-wrap: wrap;
-
 }
 
 md-paginator /deep/ .mat-paginator-range-label {
@@ -117,7 +116,7 @@ md-paginator /deep/ .mat-paginator-range-label {
     #coach-container {
         order: 1;
         display: inline-block;
-        width: 80%;
+        width: 70%;
         min-height: 100%;
     }
 
@@ -130,8 +129,8 @@ md-paginator /deep/ .mat-paginator-range-label {
             flex-direction: column;
             justify-content: space-between;
             position: fixed;
-            width: 20%;
-            max-width: 320px;
+            width: 30%;
+            max-width: 270px;
             height: calc(100vh - 70px);
         }
     }
@@ -142,13 +141,49 @@ md-paginator /deep/ .mat-paginator-range-label {
         padding: $mini-indent 1%;
 
         div {
-            width: 48%;
+            width: 100%;
             min-height: 47%;
             padding: $large-indent;
         }
 
         div:not(:first-child) {
             padding-bottom: 0;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $hd-screen) {
+
+    #coach-container {
+        width: 75%;
+    }
+
+    #sidebar-wrapper {
+        app-coach-sidebar {
+            width: 25%;
+            max-width: 300px;
+        }
+    }
+
+    #main-content {
+        div {
+            width: 48%;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $full-hd-screen) {
+
+    #coach-container {
+        width: 80%;
+    }
+
+    #sidebar-wrapper {
+        app-coach-sidebar {
+            width: 20%;
+            max-width: 320px;
         }
     }
 }

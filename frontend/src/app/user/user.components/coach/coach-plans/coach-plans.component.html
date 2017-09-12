@@ -7,7 +7,7 @@
 
         <div id="plans">
             <div class="plan" *ngFor="let plan of paginatorOutput">
-                <h3 class="plan-title">{{ plan.name }}</h3>
+                <h3 class="plan-title" routerLink="/user/plans/{{  plan._id}}">{{ plan.name }}</h3>
                 <div class="plan-exercises">
                     <p>Exercise List</p>
                     <ol>
@@ -16,9 +16,9 @@
                         </li>
                     </ol>
                 </div>
-                <div class="plan-text-block" *ngIf="plan.description">
+                <div class="plan-text-block">
                     <p class="plan-description">{{ plan.description }}</p>
-                    <a class="open-plan" routerLink="">more ></a>
+                    <a class="open-plan" routerLink="/user/plans/{{  plan._id}}">more ></a>
                 </div>
             </div>
         </div>

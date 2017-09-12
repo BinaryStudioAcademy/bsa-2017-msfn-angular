@@ -25,7 +25,6 @@
 
     p {
         display: inline-block;
-        word-break: break-word;
     }
 
     .post-name {
@@ -61,6 +60,7 @@
 
     .post-text {
         width: 100%;
+        word-break: break-word;
         font-size: $usual-text;
     }
 }

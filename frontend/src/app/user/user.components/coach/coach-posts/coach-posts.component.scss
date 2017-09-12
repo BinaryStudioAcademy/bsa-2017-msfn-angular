@@ -27,9 +27,8 @@
     }
 
     .post-date {
-        width: 30%;
-        float: right;
-        text-align: right;
+        width: 100%;
+        margin-bottom: $mini-indent;
         font-size: $minor-text;
     }
 
@@ -56,6 +55,15 @@
         img {
             width: 44px;
             border-radius: 22px;
+        }
+    }
+
+    .post-text-block {
+        .post-date {
+            width: 30%;
+            margin-bottom: initial;
+            float: right;
+            text-align: right;
         }
     }
 }
