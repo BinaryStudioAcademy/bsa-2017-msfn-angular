@@ -4,7 +4,6 @@
 
 .article {
     display: flex;
-    //flex-direction: column;
     justify-content: space-between;
     flex-wrap: wrap;
 
@@ -19,6 +18,45 @@
     h3:hover {
         cursor: pointer;
     }
+
+    .article-date {
+        width: 100%;
+        float: right;
+        text-align: right;
+        font-size: $minor-text;
+    }
+
+    .article-image {
+        display: block;
+        width: 90%;
+        max-width: 170px;
+        vertical-align: top;
+        margin: $standard-indent auto;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .article-text-block {
+        display: inline-block;
+
+        p {
+            display: inline-block;
+        }
+
+        .article-text {
+            width: 100%;
+            font-size: $usual-text;
+        }
+
+        a {
+            float: right;
+            margin: $mini-indent 0;
+            font-size: $main-text;
+            color: $text-main-color;
+        }
+    }
 }
 
 .article:not(:last-child) {
@@ -27,42 +65,22 @@
     border-bottom: 1px solid $text-main-color;
 }
 
-.article-date {
-    width: 100%;
-    float: right;
-    text-align: right;
-    font-size: $minor-text;
-}
 
-.article-image {
-    display: block;
-    width: 90%;
-    max-width: 170px;
-    vertical-align: top;
-    margin: $standard-indent auto;
+@media only screen and (min-width: $small-screen) {
 
-    img {
-        width: 100%;
-    }
-}
+    .article {
+        h3 {
+            width: 50%;
+            text-align: left;
+        }
 
-.article-text-block {
-    display: inline-block;
+        .article-date {
+            width: 50%;
+        }
 
-    p {
-        display: inline-block;
-    }
-
-    .article-text {
-        width: 100%;
-        font-size: $usual-text;
-    }
-
-    a {
-        float: right;
-        margin: $mini-indent 0;
-        font-size: $main-text;
-        color: $text-main-color;
+        .article-image {
+            margin: 0 auto $standard-indent;
+        }
     }
 }
 
@@ -70,34 +88,69 @@
 @media only screen and (min-width: $medium-screen) {
 
     .article {
-        h3 {
+        .article-image {
+            display: inline-block;
             width: 50%;
-            margin: 0 0 $standard-indent;
-            font-size: $main-text;
-            font-weight: 600;
+            margin: 0;
+
+            img {
+                width: initial;
+                max-width: 170px;
+            }
+        }
+
+        .article-text-block {
+            width: 50%;
+
+            a {
+                margin: $micro-indent 0 initial 0;
+            }
         }
     }
+}
 
-    .article-date {
-        width: 50%;
-        float: right;
-        text-align: right;
-        font-size: $minor-text;
-    }
 
-    .article-image {
-        display: inline-block;
-        width: initial;
+@media only screen and (min-width: $large-screen) {
 
-        img {
+    .article {
+        .article-image {
+            display: inline-block;
             width: initial;
-            max-width: 170px;
+
+            img {
+                width: initial;
+                max-width: 170px;
+            }
         }
     }
+}
 
-    .article-text-block {
-        a {
-            margin: $micro-indent 0 initial 0;
+
+@media only screen and (min-width: $hd-screen) {
+
+    .article {
+        .article-image {
+            width: 100%;
+            margin: 0 auto $standard-indent;
+        }
+
+        .article-text-block {
+            width: 100%;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $full-hd-screen) {
+
+    .article {
+        .article-image {
+            width: 50%;
+            margin: 0;
+        }
+
+        .article-text-block {
+            width: 50%;
         }
     }
 }
