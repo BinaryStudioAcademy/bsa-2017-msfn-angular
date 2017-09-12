@@ -10,7 +10,11 @@
 
         .start-date,
         .end-date {
-            width: 50%;
+            width: 100%;
+
+            .mat-form-field {
+                width: 100px;
+            }
         }
 
         .end-date {
@@ -77,6 +81,34 @@ md-radio-group {
     .event {
         div {
             display: inline-block;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $medium-screen) {
+
+    .events {
+        .content {
+            .start-date,
+            .end-date {
+                width: 50%;
+            }
+        }
+    }
+}
+
+
+@media only screen and (min-width: $hd-screen) {
+
+    .events {
+        .content {
+            .start-date,
+            .end-date {
+                .mat-form-field {
+                    width: 200px;
+                }
+            }
         }
     }
 }
