@@ -48,6 +48,8 @@ export class ActiveTrainingService {
         delete plan.count;
         delete plan.days;
         plan.startDate = new Date().toISOString();
+        // plan.planned = new Date().getDay() === plan.startDate;
+        // console.log(plan);
         const sendData: IHttpReq = {
             url: '/api/launchedtraining',
             method: 'POST',

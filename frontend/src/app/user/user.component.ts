@@ -58,6 +58,7 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.checkArticlesAchievement();
             });
             this.userService.getLaunchedTrainings(trainings => {
+                console.log(trainings);
                 this.countLaunchedTraining = trainings.length;
                 this.checkTrainAchievement();
                 const result = this.userService.getTotalMeasures(trainings);
@@ -69,6 +70,7 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.comboCount = data.comboCount;
                 this.registrationDate = data.registrationDate;
                 this.checkOldStatusAchievement();
+                this.checkComboDaysAchievement();
             });
         });
     }

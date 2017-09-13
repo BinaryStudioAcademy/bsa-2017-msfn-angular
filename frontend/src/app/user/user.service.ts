@@ -129,7 +129,6 @@ export class UserService {
     }
 
     getTotalMeasures(trainings) {
-        console.log(trainings);
         const total = {};
         const maxTraining = {};
         const sum = {};
