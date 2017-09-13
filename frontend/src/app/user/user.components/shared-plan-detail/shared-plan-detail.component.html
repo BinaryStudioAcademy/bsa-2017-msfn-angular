@@ -25,7 +25,7 @@
                 class="save-button"
                 (click)="savePlan()">Copy to my plans
         </button>
-        <div class="plan-description">
+        <div class="plan-description" *ngIf="trainingPlan.description">
             <div class="description-heading">Description:</div>
             <div class="description-text">{{trainingPlan.description}}</div>
         </div>
