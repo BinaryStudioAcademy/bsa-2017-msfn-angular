@@ -1,5 +1,29 @@
 export interface IFoodPlan {
     _id?: string;
-    name: string;    
-    planType: string,    
+    title: string;
+    type: 'weekly' | 'daily';
+    days: [{
+        kcal: number,
+        name: 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday',
+        meals: [{
+            kcal: number,
+            name: string,
+            products: [{
+                kcal: number,
+                name: string,
+                quantity: number,
+                _id: string,
+            }]
+        }]
+    }];
+    meals: [{
+        kcal: number,
+        name: string,
+        products: [{
+            kcal: number,
+            name: string,
+            quantity: number,
+            _id: string,
+        }]
+    }];
 }

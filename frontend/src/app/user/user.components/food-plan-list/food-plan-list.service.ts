@@ -10,6 +10,16 @@ export class FoodPlanListService {
     ) { }
 
     getPlans(callback) {
+        const sendData: IHttpReq = {
+            url: '/api/food-plan/',
+            method: 'GET',
+            body: {},
+        };
+
+        this.httpService.sendRequest(sendData)
+            .then(data => {
+                callback(data);
+            });
     }
 
 }

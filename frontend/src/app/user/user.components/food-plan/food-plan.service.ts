@@ -68,13 +68,36 @@ export class FoodPlanService {
         this.subject.next();
     }
 
-    save(foodPlan, method) {
+    save(foodPlan) {
         const request: IHttpReq = {
-            url: '/api/foodplan/add',
-            method: method,
+            url: 'api/food-plan/',
+            method: 'POST',
             body: foodPlan,
             successMessage: 'Added'
         };
         this.httpService.sendRequest(request);
+    }
+
+    update(foodPlan) {
+        const request: IHttpReq = {
+            url: 'api/food-plan/',
+            method: 'PUT',
+            body: foodPlan,
+            successMessage: 'Updated'
+        };
+        this.httpService.sendRequest(request);
+    }
+
+    getFoodPlanByID(id, callback): void {
+        const request: IHttpReq = {
+            url: 'api/food-plan/' + id,
+            method: 'GET',
+            body: {}
+        };
+
+        this.httpService.sendRequest(request)
+            .then(data => {
+                callback(data);
+            });
     }
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FoodPlanService } from './food-plan.service';
 import { WeeklyComponent } from './weekly/weekly.component';
 import { DailyComponent } from './daily/daily.component';
+import { IFoodPlan } from './../../../models/foodPlan';
 
 @Component({
     selector: 'app-food-plan',
@@ -16,6 +18,7 @@ export class FoodPlanComponent implements OnInit {
         type: '',
         days: [],
         meals: [],
+        _id: '',
     };
     @ViewChild(WeeklyComponent)
     private weeklyData: WeeklyComponent;
@@ -23,9 +26,19 @@ export class FoodPlanComponent implements OnInit {
     @ViewChild(DailyComponent)
     private dailyData: DailyComponent;
 
-    constructor(public foodPlanService: FoodPlanService) { }
+    constructor(
+        public foodPlanService: FoodPlanService,
+        public activatedRoute: ActivatedRoute,
+    ) { }
 
     ngOnInit() {
+        if (this.activatedRoute.snapshot.params.id) {
+            const planID = this.activatedRoute.snapshot.params.id;
+            this.foodPlanService.getFoodPlanByID(planID, res => {
+                console.log(res);
+                this.foodplan = res[0];
+            });
+        }
     }
     currentType(currentType) {
         this.foodplan.type = currentType;
@@ -51,7 +64,11 @@ export class FoodPlanComponent implements OnInit {
             this.foodplan.meals = this.dailyData.meals;
         }
         console.log(this.foodplan);
-        this.foodPlanService.save(this.foodplan, 'POST');
+        if (!this.foodplan._id.length) {
+            this.foodPlanService.save(this.foodplan);
+        } else {
+            this.foodPlanService.update(this.foodplan);
+        }
 
     }
 }
