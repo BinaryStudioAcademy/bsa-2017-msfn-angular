@@ -70,7 +70,7 @@ export class FoodPlanService {
 
     save(foodPlan, method) {
         const request: IHttpReq = {
-            url: '/api/user/food-list/add',
+            url: '/api/foodplan/add',
             method: method,
             body: foodPlan,
             successMessage: 'Added'

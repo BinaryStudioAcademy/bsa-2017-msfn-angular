@@ -28,6 +28,7 @@ import { TrainingHistoryComponent } from './user.components/training-history/tra
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import { ArticleListComponent } from './user.components/article-list/article-list.component';
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
+import { FoodPlanListComponent } from './user.components/food-plan-list/food-plan-list.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 
 const userRoutes: Routes = [
@@ -133,7 +134,8 @@ const userRoutes: Routes = [
             {
                 path: 'food/plan/add',
                 component: FoodPlanComponent
-            }, {
+            },
+            {
                 path: 'training-history/:id',
                 component: TrainingHistoryDetailComponent
             },
@@ -145,7 +147,15 @@ const userRoutes: Routes = [
                 path: 'training-history/:id',
                 component: TrainingHistoryDetailComponent
             }, {
-                path: 'food/plan/add',
+                path: 'food-list',
+                component: FoodPlanListComponent
+            },
+            {
+                path: 'food-list/add',
+                component: FoodPlanComponent
+            },
+            {
+                path: 'food-list/:id',
                 component: FoodPlanComponent
             },
         ]
