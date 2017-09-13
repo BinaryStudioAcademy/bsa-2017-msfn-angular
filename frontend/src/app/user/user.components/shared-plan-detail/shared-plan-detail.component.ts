@@ -125,6 +125,11 @@ export class SharedPlanDetailComponent implements OnInit {
             successMessage: 'Plan created',
         };
 
+        sendData.body.additional = {
+            author: (<any>this.trainingPlan.user)._id,
+            date: Date.now()
+        };
+
         if (this.gcalendar.authorized) {
             let recurrence = 'RRULE:FREQ=WEEKLY;';
             const newCalendarEvent = {

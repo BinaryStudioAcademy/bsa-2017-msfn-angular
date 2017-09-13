@@ -30,6 +30,7 @@ const LaunchedTraining = new Schema({
         }
     ],
     intervals: Array,
+    planned: Boolean,
     trainingType: 'general' | 'interval',
     userID: String,
     isRemoved: {

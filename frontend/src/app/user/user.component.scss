@@ -2,6 +2,8 @@
 @import '../../globalStyles/indentations.scss';
 @import '../../globalStyles/text.scss';
 
+$height: calc(100vh - 70px);
+
 .body-container {
     display: flex;
 }
@@ -12,7 +14,7 @@
     position: fixed;
     left: 0;
     top: 70px;
-    height: 100%;
+    height: $height;
 }
 
 .child-container {

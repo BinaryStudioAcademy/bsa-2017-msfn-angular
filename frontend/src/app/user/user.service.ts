@@ -32,12 +32,22 @@ export class UserService {
 
 
         const request3: IHttpReq = {
-            url: '/api/user/me',
+            url: '/api/user/me/measures',
             method: 'GET',
             body: {}
         };
         const promise3 = this.httpHandler.sendRequest(request3);
-        this.promiseFunc = Promise.all([promise1, promise2, promise3]).then(result => {
+
+
+        const request4: IHttpReq = {
+            url: '/api/user/me/weights',
+            method: 'GET',
+            body: {}
+        };
+        const promise4 = this.httpHandler.sendRequest(request4);
+
+
+        this.promiseFunc = Promise.all([promise1, promise2, promise3, promise4]).then(result => {
             callback(...result);
         });
     }
@@ -114,9 +124,23 @@ export class UserService {
             });
     }
 
+    getWeekTrainCout(callback) {
+        const sendData: IHttpReq = {
+            url: '/api/training-plan/weekplanscount',
+            method: 'GET',
+            body: {},
+        };
+
+        this.httpHandler.sendRequest(sendData)
+            .then(data => {
+                callback(data);
+            });
+    }
+
     addUserAchievements(achievment) {
         achievment.achievement = achievment._id;
-        achievment._id = undefined;
+        achievment._id = null;
+        achievment.value = null;
         achievment.finished = new Date();
 
         const request: IHttpReq = {

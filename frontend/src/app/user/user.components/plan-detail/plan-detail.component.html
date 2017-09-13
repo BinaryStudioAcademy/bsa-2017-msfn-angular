@@ -32,7 +32,7 @@
                 <div class="field-item days">
                     <div class="item" *ngFor="let day of days">
                         <input type="checkbox" id="day-{{day.key}}" value="{{day.key}}" [(ngModel)]="day.checked" name="weekdays[]" (change)="selectDays()">
-                        <label class="centerContent" for="day-{{day.key}}">{{day.value}}</label>
+                        <label class="centerContent" for="day-{{day.key}}">{{weekDayNames[day.key]}}</label>
                     </div>
                 </div>
             </div>
