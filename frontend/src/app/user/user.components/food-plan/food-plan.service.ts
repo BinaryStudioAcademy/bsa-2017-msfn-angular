@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
 import { IHttpReq } from '../../../models/http-req';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
@@ -80,7 +80,7 @@ export class FoodPlanService {
 
     update(foodPlan) {
         const request: IHttpReq = {
-            url: '/api/food-plan/'+foodPlan._id,
+            url: '/api/food-plan/' + foodPlan._id,
             method: 'PUT',
             body: foodPlan,
             successMessage: 'Updated'

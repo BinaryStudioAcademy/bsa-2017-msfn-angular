@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { FoodPlanService } from './../food-plan.service';
@@ -8,7 +8,7 @@ import { FoodPlanService } from './../food-plan.service';
     templateUrl: './daily.component.html',
     styleUrls: ['./daily.component.scss']
 })
-export class DailyComponent implements OnInit {
+export class DailyComponent implements OnInit, OnDestroy {
 
     @Input() meals;
     editableMeal: any;
@@ -22,9 +22,8 @@ export class DailyComponent implements OnInit {
 
     ngOnInit() {
         if (!this.meals.length) {
-
             this.meals = [];
-        };
+        }
 
         this.meals.forEach(meal => {
             let mealKcal = 0;
@@ -46,20 +45,17 @@ export class DailyComponent implements OnInit {
             };
             this.editableMealId = NaN;
         }
-        let sendData = {
+        const sendData = {
             show: true,
             list: []
         };
-        // if (this.products) { 
-        //     sendData = this.products.data;
-        //     sendData.show = true; 
-        // } 
+
         this.foodPlanService.sendProductList(sendData);
     }
 
     closeForm() {
         this.editableMeal = false;
-        let sendData = {
+        const sendData = {
             show: false,
             list: []
         };
@@ -84,7 +80,7 @@ export class DailyComponent implements OnInit {
             } else {
                 this.meals.push(meal2Save);
             }
-            let sendData = {
+            const sendData = {
                 show: false,
                 list: []
             };
@@ -107,7 +103,7 @@ export class DailyComponent implements OnInit {
     delNewItem(source, i) {
         if (source[i]) {
             source.splice(i, 1);
-            let sendData = this.products.data;
+            const sendData = this.products.data;
             sendData.list = source;
             this.foodPlanService.sendProductList(this.products);
             return true;

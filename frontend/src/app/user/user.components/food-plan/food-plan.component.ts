@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoodPlanService } from './food-plan.service';
 import { WeeklyComponent } from './weekly/weekly.component';
 import { DailyComponent } from './daily/daily.component';
 import { IFoodPlan } from './../../../models/foodPlan';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-food-plan',
@@ -20,6 +21,7 @@ export class FoodPlanComponent implements OnInit {
         meals: [],
         _id: '',
     };
+
     @ViewChild(WeeklyComponent)
     private weeklyData: WeeklyComponent;
 
@@ -46,14 +48,14 @@ export class FoodPlanComponent implements OnInit {
             this.foodplan.meals = this.dailyData.meals;
         }
         if (this.weeklyData) {
-            let daysPlan = this.weeklyData.days;
+            const daysPlan = this.weeklyData.days;
             this.foodplan.days = daysPlan;
         }
         return true;
     }
     savePlan() {
         if (this.weeklyData) {
-            let daysPlan = this.weeklyData.days;
+            const daysPlan = this.weeklyData.days;
             daysPlan.forEach(day => {
                 delete day.editMeal;
                 delete day.editMealObj;

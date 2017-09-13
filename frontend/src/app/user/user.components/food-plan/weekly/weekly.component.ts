@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { FoodPlanService } from './../food-plan.service';
@@ -8,7 +8,7 @@ import { FoodPlanService } from './../food-plan.service';
     templateUrl: './weekly.component.html',
     styleUrls: ['./weekly.component.scss']
 })
-export class WeeklyComponent implements OnInit {
+export class WeeklyComponent implements OnInit, OnDestroy {
 
     @Input() days;
 
@@ -65,7 +65,7 @@ export class WeeklyComponent implements OnInit {
                     meals: [],
                 }
             ];
-        };
+        }
 
         this.days.forEach(day => {
             let dayKcal = 0;
@@ -108,20 +108,17 @@ export class WeeklyComponent implements OnInit {
                 day.editMeal = false;
             }
         });
-        let sendData = {
+        const sendData = {
             show: true,
             list: []
         };
-        // if (this.products) { 
-        //     sendData = this.products.data;
-        //     sendData.show = true; 
-        // } 
+
         this.foodPlanService.sendProductList(sendData);
     }
 
     closeForm(day) {
         day.editMeal = false;
-        let sendData = {
+        const sendData = {
             show: false,
             list: []
         };
@@ -148,7 +145,7 @@ export class WeeklyComponent implements OnInit {
                 day.meals.push(meal2Save);
             }
             day.editMeal = false;
-            let sendData = {
+            const sendData = {
                 show: false,
                 list: []
             };
@@ -168,7 +165,7 @@ export class WeeklyComponent implements OnInit {
     delNewItem(source, i) {
         if (source[i]) {
             source.splice(i, 1);
-            let sendData = this.products.data;
+            const sendData = this.products.data;
             sendData.list = source;
             this.foodPlanService.sendProductList(sendData);
             return true;
