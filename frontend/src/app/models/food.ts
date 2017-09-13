@@ -12,4 +12,6 @@ export interface IFood {
     picture?: string;
     customUserId?: string;
     isRemoved?: boolean;
+    checked?: boolean;
+    count?: number;
 }

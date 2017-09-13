@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IFood } from '../../../../models/food';
 import { IFoodType } from '../../../../models/food-type';
 import { FoodPlanService } from './../food-plan.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-search',
@@ -22,14 +23,27 @@ export class SearchComponent implements OnInit {
     };
     selectedFood = [];
     selectedFoodID = [];
+    currenpMealProducts: any;
+    subscription: Subscription;
+    measurements = {
+        'Weight': 'g',
+        'Liquid': 'ml',
+        'Quantity': 'pc',
 
+    };
     constructor(
         public foodPlanService: FoodPlanService,
     ) {
+        this.subscription = this.foodPlanService.getProductList().subscribe(products => { this.currenpMealProducts = products; });   
     }
 
     ngOnInit() {
         this.foodPlanService.getFood(res => {
+            res.forEach((el, ind) => {
+                el.checked = false;
+                el.count = 0;
+                return true;
+            });
             this.foods = res;
             this.foodsStatic = res;
         });
@@ -155,5 +169,48 @@ export class SearchComponent implements OnInit {
         }
         console.log(this.selectedFood);
         this.foodPlanService.sendProductList(this.selectedFood);
+    }
+
+    addOne(id) {
+        let formatedItem = {};
+        this.foods.forEach((food) => {
+            if(food._id === id){
+                formatedItem = this.formateFoodItem(food);
+                food.checked = false;
+                food.count = 0;
+                console.log(food);
+            }
+            return true;
+            
+        });
+        // const formatedItem = this.formateFoodItem(item);
+
+        let sendList = {
+            list: [],
+            show: true
+        };
+        if(this.currenpMealProducts){
+            sendList = this.currenpMealProducts.data;
+        }
+        sendList.list.push(formatedItem);
+        
+        this.foodPlanService.sendProductList(sendList);
+    }
+
+    formateFoodItem(item){
+        let kcal = 0;
+        if(item.measure === 'Weight' || item.measure === 'Liquid') {
+            kcal = item.kcal*item.count/100;
+        } else {
+            kcal = item.kcal;
+        }
+        kcal = Math.round(kcal);
+        
+        return {
+            _id: item._id,
+            name: item.name,
+            quantity: item.count,
+            kcal: kcal
+        };
     }
 }

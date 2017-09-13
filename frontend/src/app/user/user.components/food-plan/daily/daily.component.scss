@@ -1,0 +1,283 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+.meals {
+    height: 60vh;
+    overflow-y: scroll;
+    .add-item {
+        display: flex;
+        align-items: center;
+        i {
+            background-color: $main-color;
+            border-radius: 15px;
+        }
+        span {
+            font-size: $usual-text;
+            margin-left: $mini-indent;
+        }
+    }
+    .meal-form {
+        .meal-name {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn-save {
+            display: block;
+            border: none;
+            width: 70px;
+            padding: 5px;
+            color: $text-main-color;
+            background-color: $btn-color;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            outline: none;
+        }
+        .add-product {
+            display: flex;
+            align-items: center;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            .save,
+            .cancel {
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+                span {
+                    cursor: pointer;
+                    padding: 5px;
+                    border-radius: 20px;
+                    height: 40px;
+                    width: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+            .save {
+                span {
+                    border: 1px solid $main-color;
+                    &:hover {
+                        background-color: $main-color;
+                    }
+                }
+            }
+            .cancel {
+                span {
+                    border: 1px solid $error-color;
+                    &:hover {
+                        background-color: $error-color;
+                    }
+                }
+            }
+        }
+    }
+    .meal {
+        position: relative;
+        padding: 10px 20px;
+        border: 1px solid #424242;
+        margin: 10px 0;
+        h4{
+            margin-top: 0;
+        }
+        h4+.kcal {
+            position: absolute;
+            top: 10px;
+            right: 50px;
+        }
+        .edit {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            i {
+                font-size: 17px;
+                &:hover {
+                    color: $main-color
+                }
+            }
+        }
+    }
+    .kcal {
+        font-size: 13px;
+        color: $text-second-color;
+    }
+    .products {
+        h4 {
+            margin: 10px 0px;
+        }
+        .list {
+            .item {
+                display: flex;
+                flex-direction: row;
+                line-height: 20px;
+                .quantity {
+                    margin: 0 10px;
+                    color: $main-color;
+                }
+                .del {
+                    display: none;
+                    margin-left: 20px;
+                    i {
+                        font-size: 14px;
+                    }
+                }
+                &:hover {
+                    .del {
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+    }
+    .day {
+        .head {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #424242;
+            text-align: center;
+            cursor: pointer;
+            &:hover {
+                background-color: $gradient-to-color;
+            }
+        }
+        .day-plan {
+            transition: all linear 0.5s;
+            padding: 10px 20px;
+            border: 1px solid #424242;
+            height: calc(60vh - 280px);
+            overflow-y: scroll;
+            .add-item {
+                display: flex;
+                align-items: center;
+                i {
+                    background-color: $main-color;
+                    border-radius: 15px;
+                }
+                span {
+                    font-size: $usual-text;
+                    margin-left: $mini-indent;
+                }
+            }
+            .meal-form {
+                .meal-name {
+                    width: 100%;
+                    margin-top: 10px;
+                }
+                .btn-save {
+                    display: block;
+                    border: none;
+                    width: 70px;
+                    padding: 5px;
+                    color: $text-main-color;
+                    background-color: $btn-color;
+                    font-weight: bold;
+                    font-size: 14px;
+                    border-radius: 50px;
+                    cursor: pointer;
+                    outline: none;
+                }
+                .add-product {
+                    display: flex;
+                    align-items: center;
+                }
+                .buttons {
+                    display: flex;
+                    justify-content: space-around;
+                    .save,
+                    .cancel {
+                        display: flex;
+                        justify-content: center;
+                        margin-top: 10px;
+                        span {
+                            cursor: pointer;
+                            padding: 5px;
+                            border-radius: 20px;
+                            height: 40px;
+                            width: 40px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                    }
+                    .save {
+                        span {
+                            border: 1px solid $main-color;
+                            &:hover {
+                                background-color: $main-color;
+                            }
+                        }
+                    }
+                    .cancel {
+                        span {
+                            border: 1px solid $error-color;
+                            &:hover {
+                                background-color: $error-color;
+                            }
+                        }
+                    }
+                }
+            }
+            .meal {
+                position: relative;
+                h4+.kcal {
+                    position: absolute;
+                    top: 3px;
+                    right: 30px;
+                }
+                .edit {
+                    position: absolute;
+                    top: 0px;
+                    right: 0;
+                    cursor: pointer;
+                    i {
+                        font-size: 17px;
+                        &:hover {
+                            color: $main-color
+                        }
+                    }
+                }
+            }
+            .kcal {
+                font-size: 13px;
+                color: $text-second-color;
+            }
+            .products {
+                h4 {
+                    margin: 10px 0px;
+                }
+                .list {
+                    .item {
+                        display: flex;
+                        flex-direction: row;
+                        line-height: 20px;
+                        .quantity {
+                            margin: 0 10px;
+                            color: $main-color;
+                        }
+                        .del {
+                            display: none;
+                            margin-left: 20px;
+                            i {
+                                font-size: 14px;
+                            }
+                        }
+                        &:hover {
+                            .del {
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

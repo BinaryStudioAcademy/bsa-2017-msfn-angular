@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { FoodPlanService } from './../food-plan.service';
@@ -10,95 +10,8 @@ import { FoodPlanService } from './../food-plan.service';
 })
 export class WeeklyComponent implements OnInit {
 
-    days = [
-        {
-            name: 'Monday',
-            selected: false,
-            meals: [
-                {
-                    name: 'Breakfast',
-                    products: [
-                        {
-                            name: 'Milk',
-                            quantity: '100ml',
-                            kcal: '30'
-                        },
-                        {
-                            name: 'Nesquik cereal',
-                            quantity: '100g',
-                            kcal: '30'
-                        },
-                        {
-                            name: 'Orange',
-                            quantity: '1pc',
-                            kcal: '30'
-                        }
-                    ],
-                },
-                {
-                    name: 'Lunch',
-                    products: [
-                        {
-                            name: 'Cheese soup',
-                            quantity: '300ml',
-                            kcal: '200'
-                        },
-                        {
-                            name: 'toast',
-                            quantity: '2 pc',
-                            kcal: '80'
-                        }
-                    ],
-                },
-                {
-                    name: 'Dinner',
-                    products: [
-                        {
-                            name: 'lasagna',
-                            quantity: '200g',
-                            kcal: '270'
-                        },
-                        {
-                            name: 'salad',
-                            quantity: '150g',
-                            kcal: '80'
-                        }
-                    ],
-                },
+    @Input() days;
 
-            ],
-        },
-        {
-            name: 'Tuesday',
-            selected: false,
-            meals: [],
-        },
-        {
-            name: 'Wednesday',
-            selected: false,
-            meals: [],
-        },
-        {
-            name: 'Thursday',
-            selected: false,
-            meals: [],
-        },
-        {
-            name: 'Friday',
-            selected: false,
-            meals: [],
-        },
-        {
-            name: 'Saturday',
-            selected: false,
-            meals: [],
-        },
-        {
-            name: 'Sunday',
-            selected: false,
-            meals: [],
-        }
-    ];
     activeDay: number;
     products: any;
     subscription: Subscription;
@@ -107,6 +20,65 @@ export class WeeklyComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (!this.days.length) {
+            this.days = [
+                {
+                    name: 'Monday',
+                    selected: false,
+                    kcal: 0,
+                    meals: [],
+                },
+                {
+                    name: 'Tuesday',
+                    selected: false,
+                    meals: [],
+                    kcal: 0,
+                },
+                {
+                    name: 'Wednesday',
+                    selected: false,
+                    kcal: 0,
+                    meals: [],
+                },
+                {
+                    name: 'Thursday',
+                    selected: false,
+                    kcal: 0,
+                    meals: [],
+                },
+                {
+                    name: 'Friday',
+                    selected: false,
+                    kcal: 0,
+                    meals: [],
+                },
+                {
+                    name: 'Saturday',
+                    selected: false,
+                    kcal: 0,
+                    meals: [],
+                },
+                {
+                    name: 'Sunday',
+                    selected: false,
+                    kcal: 0,
+                    meals: [],
+                }
+            ];
+        };
+
+        this.days.forEach(day => {
+            let dayKcal = 0;
+            day.meals.forEach(meal => {
+                let mealKcal = 0;
+                meal.products.forEach(product => {
+                    mealKcal += parseFloat(product.kcal);
+                });
+                dayKcal += mealKcal;
+                meal.kcal = Math.round(mealKcal);
+            });
+            day.kcal = Math.round(dayKcal);
+        });
     }
 
     selectDay(dayName) {
@@ -136,27 +108,68 @@ export class WeeklyComponent implements OnInit {
                 day.editMeal = false;
             }
         });
+        let sendData = {
+            show: true,
+            list: []
+        };
+        // if (this.products) { 
+        //     sendData = this.products.data;
+        //     sendData.show = true; 
+        // } 
+        this.foodPlanService.sendProductList(sendData);
+    }
+
+    closeForm(day) {
+        day.editMeal = false;
+        let sendData = {
+            show: false,
+            list: []
+        };
+        this.foodPlanService.sendProductList(sendData);
     }
 
     saveMeal(day) {
         const meal2Save = day.editMealObj;
-        console.log(day.editMealObj);
-        const mealId: number = day.editMealId;
-        if (mealId >= 0) {
-            day.meals[mealId] = meal2Save;
-            delete day.editMealId;
-        } else {
-            console.log(meal2Save);
-            day.meals.push(meal2Save);
+        if (meal2Save.name.length > 0) {
+
+            if (this.products.data.list) {
+                meal2Save.products = meal2Save.products.concat(this.products.data.list);
+            }
+            let mealKcal = 0;
+            meal2Save.products.forEach(element => {
+                mealKcal += parseFloat(element.kcal);
+            });
+            meal2Save.kcal = mealKcal;
+            const mealId: number = day.editMealId;
+            if (mealId >= 0) {
+                day.meals[mealId] = meal2Save;
+                delete day.editMealId;
+            } else {
+                day.meals.push(meal2Save);
+            }
+            day.editMeal = false;
+            let sendData = {
+                show: false,
+                list: []
+            };
+            this.foodPlanService.sendProductList(sendData);
         }
-        day.editMeal = false;
-        console.log(this.days);
         return true;
     }
 
     delItem(source, i) {
         if (source[i]) {
             source.splice(i, 1);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    delNewItem(source, i) {
+        if (source[i]) {
+            source.splice(i, 1);
+            this.products.list = source;
+            this.foodPlanService.sendProductList(this.products);
             return true;
         } else {
             return false;

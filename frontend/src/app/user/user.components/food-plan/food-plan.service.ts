@@ -57,11 +57,24 @@ export class FoodPlanService {
         });
     }
 
-    sendProductList(products: object) {
-        this.subject.next({ products: products });
+    sendProductList(data: object) {
+        this.subject.next({ data: data });
     }
 
     getProductList(): Observable<any> {
         return this.subject.asObservable();
+    }
+    clearMessage() {
+        this.subject.next();
+    }
+
+    save(foodPlan, method) {
+        const request: IHttpReq = {
+            url: '/api/user/food-list/add',
+            method: method,
+            body: foodPlan,
+            successMessage: 'Added'
+        };
+        this.httpService.sendRequest(request);
     }
 }
