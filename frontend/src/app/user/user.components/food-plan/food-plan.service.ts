@@ -70,7 +70,7 @@ export class FoodPlanService {
 
     save(foodPlan) {
         const request: IHttpReq = {
-            url: 'api/food-plan/',
+            url: '/api/food-plan/',
             method: 'POST',
             body: foodPlan,
             successMessage: 'Added'
@@ -80,7 +80,7 @@ export class FoodPlanService {
 
     update(foodPlan) {
         const request: IHttpReq = {
-            url: 'api/food-plan/',
+            url: '/api/food-plan/'+foodPlan._id,
             method: 'PUT',
             body: foodPlan,
             successMessage: 'Updated'
@@ -89,8 +89,9 @@ export class FoodPlanService {
     }
 
     getFoodPlanByID(id, callback): void {
+        console.log(id);
         const request: IHttpReq = {
-            url: 'api/food-plan/' + id,
+            url: '/api/food-plan/' + id,
             method: 'GET',
             body: {}
         };

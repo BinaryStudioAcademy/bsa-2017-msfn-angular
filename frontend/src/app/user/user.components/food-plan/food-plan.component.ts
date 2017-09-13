@@ -15,7 +15,7 @@ export class FoodPlanComponent implements OnInit {
 
     foodplan = {
         title: '',
-        type: '',
+        type: 'weekly',
         days: [],
         meals: [],
         _id: '',
@@ -34,7 +34,7 @@ export class FoodPlanComponent implements OnInit {
     ngOnInit() {
         if (this.activatedRoute.snapshot.params.id) {
             const planID = this.activatedRoute.snapshot.params.id;
-            this.foodPlanService.getFoodPlanByID(planID, res => {
+            this.foodPlanService.getFoodPlanByID(planID, (res) => {
                 console.log(res);
                 this.foodplan = res[0];
             });
@@ -52,8 +52,6 @@ export class FoodPlanComponent implements OnInit {
         return true;
     }
     savePlan() {
-        console.log(this.weeklyData);
-        console.log(this.dailyData);
         if (this.weeklyData) {
             let daysPlan = this.weeklyData.days;
             daysPlan.forEach(day => {
@@ -65,7 +63,6 @@ export class FoodPlanComponent implements OnInit {
         } else if (this.dailyData) {
             this.foodplan.meals = this.dailyData.meals;
         }
-        console.log(this.foodplan);
         if (!this.foodplan._id.length) {
             this.foodPlanService.save(this.foodplan);
         } else {

@@ -15,10 +15,10 @@
             </md-input-container>
             <div class="type-container">
                 <md-button-toggle-group #group="mdButtonToggleGroup" (change)="currentType(group.value)" class="type-container">
-                    <md-button-toggle value="weekly" class="toggle-button" checked="true">
+                    <md-button-toggle value="weekly" class="toggle-button" checked="{{foodplan.type === 'weekly' ? 'true' : ''}}">
                         Weekly
                     </md-button-toggle>
-                    <md-button-toggle value="daily" class="toggle-button">
+                    <md-button-toggle value="daily" class="toggle-button"  checked="{{foodplan.type === 'daily' ? 'true' : ''}}">
                         Daily
                     </md-button-toggle>
                 </md-button-toggle-group>
@@ -28,8 +28,8 @@
     </div>
     <div class="main-content">
         <div class="plan-side">
-            <app-weekly *ngIf="group.value === 'weekly'" [days]="foodplan.days"></app-weekly>
-            <app-daily *ngIf="group.value === 'daily'" [meals]="foodplan.meals"></app-daily>
+            <app-weekly *ngIf="foodplan.type === 'weekly'" [days]="foodplan.days"></app-weekly>
+            <app-daily *ngIf="foodplan.type === 'daily'" [meals]="foodplan.meals"></app-daily>
         </div>
         <div class="food-side">
             <app-search></app-search>
