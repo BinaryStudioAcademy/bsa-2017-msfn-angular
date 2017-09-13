@@ -1,35 +1,51 @@
 @import '../../../../globalStyles/variables';
 @import '../../../../globalStyles/indentations';
 @import '../../../../globalStyles/text';
-
-.container{
+.container {
     width: 100%;
     min-height: 100%;
     padding: 20px 6%;
-    .general-info{
+    .general-info {
         display: flex;
         flex-direction: column;
-        .title-container{
-            width: 20%;
-        }
-        .type-container{
-            .toggle-button{
-                color:#fff;
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            .title-container {
+                width: 20%;
             }
-            .toggle-button.mat-button-toggle-checked{
+            .btn-save {
+                display: inline-block;
+                border: none;
+                width: 150px;
+                padding: 5px;
+                color: $text-main-color;
                 background-color: $btn-color;
-                color: #111;
                 font-weight: bold;
+                font-size: 14px;
+                border-radius: 50px;
+                cursor: pointer;
+                outline: none;
+            }
+            .type-container {
+                .toggle-button {
+                    color: #fff;
+                }
+                .toggle-button.mat-button-toggle-checked {
+                    background-color: $btn-color;
+                    color: #111;
+                    font-weight: bold;
+                }
             }
         }
     }
-    .main-content{
+    .main-content {
         display: flex;
         margin-top: $content-between-margin;
-        .plan-side{
+        .plan-side {
             width: 25%;
         }
-        .food-side{
+        .food-side {
             padding: 0 20px;
             width: 75%;
             height: 60vh;

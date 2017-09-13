@@ -144,6 +144,9 @@ const userRoutes: Routes = [
                 component: AchievementsListComponent
             },
             {
+                path: 'training-history/:id',
+                component: TrainingHistoryDetailComponent
+            }, {
                 path: 'food-list',
                 component: FoodPlanListComponent
             },

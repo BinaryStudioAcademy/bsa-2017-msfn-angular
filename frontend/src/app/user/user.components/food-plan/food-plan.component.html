@@ -9,28 +9,30 @@
         </md-slide-toggle>
         <div class="type-name">Daily</div>
     </div> -->
-
-        <md-input-container class="title-container">
-            <input mdInput placeholder="Plan title" [(ngModel)]="foodplan.title" name="title" required>
-        </md-input-container>
-        <div class="type-container">
-            <md-button-toggle-group #group="mdButtonToggleGroup" (change)="currentType(group.value)" class="type-container">
-                <md-button-toggle value="weekly" class="toggle-button" checked="true">
-                    Weekly
-                </md-button-toggle>
-                <md-button-toggle value="daily" class="toggle-button">
-                    Daily
-                </md-button-toggle>
-            </md-button-toggle-group>
+        <div class="controls">
+            <md-input-container class="title-container">
+                <input mdInput placeholder="Plan title" [(ngModel)]="foodplan.title" name="title" required>
+            </md-input-container>
+            <div class="type-container">
+                <md-button-toggle-group #group="mdButtonToggleGroup" (change)="currentType(group.value)" class="type-container">
+                    <md-button-toggle value="weekly" class="toggle-button" checked="true">
+                        Weekly
+                    </md-button-toggle>
+                    <md-button-toggle value="daily" class="toggle-button">
+                        Daily
+                    </md-button-toggle>
+                </md-button-toggle-group>
+            </div>
+            <button md-button class="btn-save" (click)="savePlan()">Save</button>
         </div>
     </div>
     <div class="main-content">
         <div class="plan-side">
-                <app-weekly *ngIf="group.value === 'weekly'"></app-weekly>
-                <app-daily *ngIf="group.value === 'daily'"></app-daily>
+            <app-weekly *ngIf="group.value === 'weekly'" [days]="foodplan.days"></app-weekly>
+            <app-daily *ngIf="group.value === 'daily'" [meals]="foodplan.meals"></app-daily>
         </div>
         <div class="food-side">
-                <app-search></app-search>
+            <app-search></app-search>
         </div>
     </div>
 </div>
