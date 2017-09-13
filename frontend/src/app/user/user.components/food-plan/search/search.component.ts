@@ -153,5 +153,7 @@ export class SearchComponent implements OnInit {
                 return el !== id;
             });
         }
+        console.log(this.selectedFood);
+        this.foodPlanService.sendProductList(this.selectedFood);
     }
 }
