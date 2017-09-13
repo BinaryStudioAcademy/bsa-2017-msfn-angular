@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoodPlanService } from './food-plan.service';
 import { WeeklyComponent } from './weekly/weekly.component';
@@ -66,7 +66,7 @@ export class FoodPlanComponent implements OnInit {
             this.foodplan.meals = this.dailyData.meals;
         }
         if (!this.foodplan._id.length) {
-            this.foodPlanService.save(this.foodplan, (err, data)=>{
+            this.foodPlanService.save(this.foodplan, (err, data) => {
                 this.foodplan._id = data._id;
             });
         } else {

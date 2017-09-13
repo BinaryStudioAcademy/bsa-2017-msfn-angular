@@ -75,10 +75,10 @@ export class FoodPlanService {
             body: foodPlan,
             successMessage: 'Added'
         };
-        this.httpService.sendRequest(request) 
-        .then(data => {
-            callback(null, data);
-        });
+        this.httpService.sendRequest(request)
+            .then(data => {
+                callback(null, data);
+            });
     }
 
     update(foodPlan) {
@@ -92,7 +92,6 @@ export class FoodPlanService {
     }
 
     getFoodPlanByID(id, callback): void {
-        console.log(id);
         const request: IHttpReq = {
             url: '/api/food-plan/' + id,
             method: 'GET',
