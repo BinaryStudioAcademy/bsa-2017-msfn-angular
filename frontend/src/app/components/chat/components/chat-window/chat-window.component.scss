@@ -13,7 +13,7 @@ $mobile-minized-size: 40px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     height: 315px;
-    background-color: $text-second-color;
+    background-color: #ccc;
     color: $text-dark-color;
     box-shadow: 0 0 3px 1px $text-dark-color;
     transition: height 0.3s, width 0.3s;
@@ -162,7 +162,7 @@ $mobile-minized-size: 40px;
         bottom: 0;
         left: 0;
         border-top: 1px solid $gradient-from-color;
-        background-color: $text-second-color;
+        background-color: #ccc;
         z-index: 20;
 
         .new-message-input {
