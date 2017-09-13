@@ -23,7 +23,7 @@ export class UserComponent implements OnInit, OnDestroy {
     private total = {};
     private maxTrainings = {};
     private settings;
-    private user;
+    private weights;
     private countFollowers: number;
     private countArticles: number;
     private countLaunchedTraining: number;
@@ -38,11 +38,11 @@ export class UserComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.userService.getBasicInfo((achieves, measures, user) => {
+        this.userService.getBasicInfo((achieves, measures, settings, weights) => {
             this.achievements = achieves;
-            this.settings = user.settings;
-            this.user = user;
-            // console.log(this.achievements, this.user, this.settings);
+            this.settings = settings;
+            this.weights = weights;
+            console.log(this.weights, this.settings);
             ['distance', 'weight'].forEach(measureName => {
                 measures.forEach(element => {
                     if (element.measureName === measureName) {
@@ -74,7 +74,6 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.checkTrainingsAchievement('weight', 'trainweight', this.maxTrainings);
                 this.checkTrainingsAchievement('distance', 'totaldistance', this.total);
                 this.checkTrainingsAchievement('weight', 'totalweight', this.total);
-                // console.log(this.user);
                 this.checkLosingWeight();
             });
             if (new Date().getDay() === 1) {
@@ -97,9 +96,9 @@ export class UserComponent implements OnInit, OnDestroy {
         const resAch = [];
         this.achievements.forEach(element => {
             if (element.measureName === 'loseweight') {
-                if (this.user.weightControl.length > 0) {
-                    this.user.weightControl.some(weightControl => {
-                        if (this.user.weight - weightControl.weight >= element.value) {
+                if (this.weights.weightControl.length > 0) {
+                    this.weights.weightControl.some(weightControl => {
+                        if (this.weights.weight - weightControl.weight >= element.value) {
                             resAch.push(element);
                             return true;
                         } else {
