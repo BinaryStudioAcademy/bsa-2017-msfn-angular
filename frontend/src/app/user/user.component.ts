@@ -42,12 +42,12 @@ export class UserComponent implements OnInit, OnDestroy {
             this.achievements = achieves;
             this.settings = user.settings;
             this.user = user;
-            console.log(this.achievements, this.user, this.settings);
+            // console.log(this.achievements, this.user, this.settings);
             ['distance', 'weight'].forEach(measureName => {
                 measures.forEach(element => {
                     if (element.measureName === measureName) {
                         element.measureUnits.forEach(unit => {
-                            console.log(unit.unitName, this.settings);
+                            // console.log(unit.unitName, this.settings);
                             if (unit.unitName === this.settings[measureName]) {
                                 this.measures[measureName] = unit.conversionFactor;
                             }
@@ -74,7 +74,7 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.checkTrainingsAchievement('weight', 'trainweight', this.maxTrainings);
                 this.checkTrainingsAchievement('distance', 'totaldistance', this.total);
                 this.checkTrainingsAchievement('weight', 'totalweight', this.total);
-                console.log(this.user);
+                // console.log(this.user);
                 this.checkLosingWeight();
             });
             if (new Date().getDay() === 1) {
@@ -182,10 +182,10 @@ export class UserComponent implements OnInit, OnDestroy {
     checkTrainingsAchievement(measureName, achievementName, array) {
         const resAch = [];
         this.achievements.forEach(element => {
-            if (achievementName === element.measureName) {
-                console.log(array[measureName] * this.achievementMeasures[measureName],
-                    element.value * this.measures[measureName], achievementName);
-            }
+            // if (achievementName === element.measureName) {
+            //     console.log(array[measureName] * this.achievementMeasures[measureName],
+            //         element.value * this.measures[measureName], achievementName);
+            // }
             if (element.measureName === achievementName && (array[measureName] * this.achievementMeasures[measureName]
                 >= element.value * this.measures[measureName])) {
                 resAch.push(element);
