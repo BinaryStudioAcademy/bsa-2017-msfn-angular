@@ -1,3 +1,35 @@
-<p>
-  event-create works!
-</p>
+<div id="article-container">
+    <h2>Creating an event</h2>
+    <div>
+        <md-input-container class="input-row">
+            <input autofocus mdInput type="text" name="title" placeholder="Title" required [(ngModel)]="event.title" [formControl]="titleFormControl">
+            <md-error *ngIf="titleFormControl.hasError('required')">
+                Title is required
+            </md-error>
+            <md-error *ngIf="titleFormControl.hasError('maxlength')">
+                Title should contain less than 30 characters
+            </md-error>
+        </md-input-container>
+
+        <md-input-container class="input-row">
+            <textarea
+                mdInput
+                autofocus
+                type="text"
+                name="description"
+                placeholder="Description"
+                required
+                [(ngModel)]="event.description">
+            </textarea>
+        </md-input-container>
+
+        <div id="event-location">
+            <md-input-container class="input-row">
+                <input autofocus mdInput type="text" name="location" placeholder="Location" required [(ngModel)]="event.location">
+            </md-input-container>
+            <div id="map"></div>
+        </div>
+
+
+    </div>
+</div>

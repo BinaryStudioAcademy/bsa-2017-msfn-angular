@@ -28,6 +28,9 @@ import { TrainingHistoryComponent } from './user.components/training-history/tra
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
+import { EventListComponent } from './user.components/event-list/event-list.component';
+import { EventCreateComponent } from './user.components/event-create/event-create.component';
+import { EventItemComponent } from './user.components/event-item/event-item.component';
 
 const userRoutes: Routes = [
     {
@@ -136,6 +139,18 @@ const userRoutes: Routes = [
             {
                 path: 'achievements',
                 component: AchievementsListComponent
+            },
+            {
+                path: 'events',
+                component: EventListComponent
+            },
+            {
+                path: 'events/create',
+                component: EventCreateComponent
+            },
+            {
+                path: 'events/:id',
+                component: EventItemComponent
             },
         ]
     }

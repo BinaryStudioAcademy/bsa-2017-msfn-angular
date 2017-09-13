@@ -1,5 +1,5 @@
-import { EncryptService } from './../services/encrypt.service';
-import { HttpService } from './../services/http.service';
+import { EncryptService } from '../services/encrypt.service';
+import { HttpService } from '../services/http.service';
 import { Injectable } from '@angular/core';
 import { IHttpReq } from '../models/http-req';
 import { WindowObj } from '../services/window.service';
