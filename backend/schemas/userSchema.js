@@ -53,9 +53,7 @@ const User = new Schema({
             type: Schema.Types.ObjectId, 
             ref: 'Acievements'
         },
-        finished: Date,
-        value: Number,
-        startValue: Number
+        finished: Date
     }],
     weightControl: [
         {

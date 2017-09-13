@@ -116,7 +116,8 @@ export class UserService {
 
     addUserAchievements(achievment) {
         achievment.achievement = achievment._id;
-        achievment._id = undefined;
+        achievment._id = null;
+        achievment.value = null;
         achievment.finished = new Date();
 
         const request: IHttpReq = {

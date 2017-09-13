@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const Achievements = new Schema({
    name: String,
    message: String,
+   hiddenMessage: String,
    icon: String,
    measureName: String,
    principle: 's>f' | 's<f' | 'f>v' | 'f<v', // s - startValue, f - finalValue, v - value field
