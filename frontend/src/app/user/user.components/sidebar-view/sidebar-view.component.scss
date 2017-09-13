@@ -22,7 +22,7 @@ aside {
     background: linear-gradient($bg-color 75%, $gradient-from-color);
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
 
-    nav {
+    .navigation {
         float: right;
         width: 100%;
         position: relative;
@@ -71,5 +71,9 @@ aside {
         .navigation__title, .navigation__subheader {
             display: none;
         }
+    }
+
+    .navigation__your-section {
+        padding-bottom: 55px;
     }
 }
