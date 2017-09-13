@@ -19,6 +19,7 @@ export class AchievementsListComponent implements OnInit {
     ngOnInit() {
         this.achievementsListService.getAllAchievements((allAchieves) => {
             this.achievements = allAchieves;
+            console.log(this.achievements);
             this.achievementsListService.getUserAchievements((userAchieves) => {
             if (!userAchieves) {
                 return;

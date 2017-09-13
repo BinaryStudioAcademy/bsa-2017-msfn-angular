@@ -23,6 +23,7 @@ export class UserComponent implements OnInit, OnDestroy {
     private total = {};
     private maxTrainings = {};
     private settings;
+    private user;
     private countFollowers: number;
     private countArticles: number;
     private countLaunchedTraining: number;
@@ -37,13 +38,16 @@ export class UserComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.userService.getBasicInfo((achieves, measures, settings) => {
+        this.userService.getBasicInfo((achieves, measures, user) => {
             this.achievements = achieves;
-            this.settings = settings;
+            this.settings = user.settings;
+            this.user = user;
+            console.log(this.achievements, this.user, this.settings);
             ['distance', 'weight'].forEach(measureName => {
                 measures.forEach(element => {
                     if (element.measureName === measureName) {
                         element.measureUnits.forEach(unit => {
+                            console.log(unit.unitName, this.settings);
                             if (unit.unitName === this.settings[measureName]) {
                                 this.measures[measureName] = unit.conversionFactor;
                             }
@@ -66,7 +70,12 @@ export class UserComponent implements OnInit, OnDestroy {
                 const result = this.userService.getTotalMeasures(trainings);
                 this.total = result[0];
                 this.maxTrainings = result[1];
-                this.checkTrainingMaxAchievement('distance');
+                this.checkTrainingsAchievement('distance', 'distance', this.maxTrainings);
+                this.checkTrainingsAchievement('weight', 'trainweight', this.maxTrainings);
+                this.checkTrainingsAchievement('distance', 'totaldistance', this.total);
+                this.checkTrainingsAchievement('weight', 'totalweight', this.total);
+                console.log(this.user);
+                this.checkLosingWeight();
             });
             if (new Date().getDay() === 1) {
                 this.userService.getWeekTrainCout(count => {
@@ -79,8 +88,28 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.registrationDate = data.registrationDate;
                 this.checkOldStatusAchievement();
                 this.checkComboDaysAchievement();
+                this.checkAchievementLength();
             });
         });
+    }
+
+    checkLosingWeight() {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            if (element.measureName === 'loseweight') {
+                if (this.user.weightControl.length > 0) {
+                    this.user.weightControl.some(weightControl => {
+                        if (this.user.weight - weightControl.weight >= element.value) {
+                            resAch.push(element);
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    });
+                }
+            }
+        });
+        this.getUnreceivedArray(resAch);
     }
 
 
@@ -102,6 +131,18 @@ export class UserComponent implements OnInit, OnDestroy {
             if (element.measureName === 'follower' && this.countFollowers >= element.value) {
                 resAch.push(element);
             }
+        });
+        this.getUnreceivedArray(resAch);
+    }
+
+    checkAchievementLength() {
+        const resAch = [];
+        this.userService.getUserAchievements((userAchievments) => {
+            this.achievements.forEach(element => {
+                if (element.measureName === 'achieivcount' && userAchievments.length / (this.achievements.length - 1) >= element.value) {
+                    resAch.push(element);
+                }
+            });
         });
         this.getUnreceivedArray(resAch);
     }
@@ -138,11 +179,15 @@ export class UserComponent implements OnInit, OnDestroy {
     }
 
 
-    checkTrainingMaxAchievement(measureName) {
+    checkTrainingsAchievement(measureName, achievementName, array) {
         const resAch = [];
         this.achievements.forEach(element => {
-            if (element.measureName === measureName && (this.maxTrainings[measureName] * this.achievementMeasures[measureName]
-            >= element.value * this.measures[measureName])) {
+            if (achievementName === element.measureName) {
+                console.log(array[measureName] * this.achievementMeasures[measureName],
+                    element.value * this.measures[measureName], achievementName);
+            }
+            if (element.measureName === achievementName && (array[measureName] * this.achievementMeasures[measureName]
+                >= element.value * this.measures[measureName])) {
                 resAch.push(element);
             }
         });
@@ -202,7 +247,7 @@ export class UserComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.userService.promiseFunc) {
+        if (this.userService.promiseFunc.unsubscribe) {
             this.userService.promiseFunc.unsubscribe();
         }
 

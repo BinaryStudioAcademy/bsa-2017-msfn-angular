@@ -32,7 +32,7 @@ export class UserService {
 
 
         const request3: IHttpReq = {
-            url: '/api/user/me/measures',
+            url: '/api/user/me',
             method: 'GET',
             body: {}
         };
@@ -129,7 +129,8 @@ export class UserService {
 
     addUserAchievements(achievment) {
         achievment.achievement = achievment._id;
-        achievment._id = undefined;
+        achievment._id = null;
+        achievment.value = null;
         achievment.finished = new Date();
 
         const request: IHttpReq = {
