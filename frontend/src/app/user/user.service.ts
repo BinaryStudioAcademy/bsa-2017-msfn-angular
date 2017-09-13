@@ -32,12 +32,22 @@ export class UserService {
 
 
         const request3: IHttpReq = {
-            url: '/api/user/me',
+            url: '/api/user/me/measures',
             method: 'GET',
             body: {}
         };
         const promise3 = this.httpHandler.sendRequest(request3);
-        this.promiseFunc = Promise.all([promise1, promise2, promise3]).then(result => {
+
+
+        const request4: IHttpReq = {
+            url: '/api/user/me/weights',
+            method: 'GET',
+            body: {}
+        };
+        const promise4 = this.httpHandler.sendRequest(request4);
+
+
+        this.promiseFunc = Promise.all([promise1, promise2, promise3, promise4]).then(result => {
             callback(...result);
         });
     }
