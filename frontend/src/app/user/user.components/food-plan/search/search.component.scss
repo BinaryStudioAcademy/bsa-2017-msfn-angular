@@ -71,7 +71,7 @@
         }
 
         .product-list {
-            height: 80%;
+            height: 70%;
             overflow-y: scroll;
         }
 
@@ -102,6 +102,19 @@
 
         .product-nofood {
             text-align: center;
+        }
+
+        .sorting-options {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-right: $content-lr-margin;
+            span {
+                padding-right: $content-between-margin;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
         }
     }
 

@@ -16,42 +16,16 @@ export class SearchComponent implements OnInit {
     typesDepth = [];
     filtered = null;
     selectedType = '';
+    sortDirection = {
+        food: '',
+        vendor: ''
+    };
+    selectedFood = [];
+    selectedFoodID = [];
 
     constructor(
         public foodPlanService: FoodPlanService,
     ) {
-        /*  this.foods = [
-             {
-               name: 'Banana',
-               foodType: 'Fruit',
-               kcal: 132,
-               protein: 34,
-               fat: 12,
-               carbons: 56,
-               measure: '',
-               vendor: 'FFF',
-             }, {
-               name: 'Appleapple',
-               foodType: 'Fruit',
-               kcal: 54,
-               protein: 12,
-               fat: 9,
-               carbons: 56,
-               measure: '',
-               vendor: 'Простоквашино',
-             } , {
-             name: 'Peach',
-             foodType: 'Fruit',
-             kcal: 124,
-             protein: 10,
-             fat: 0,
-             carbons: 87,
-             measure: '',
-             vendor: 'Basfffld',
-             }
-         ];
-         this.types = [ {name: 'Dairy products', parentType: '', depthLvl: 1, isRemoved: false},
-         { name: 'Fruit', parentType: '', depthLvl:1, isRemoved: false}]; */
     }
 
     ngOnInit() {
@@ -144,4 +118,40 @@ export class SearchComponent implements OnInit {
         });
     }
 
+    sortFood(key: string) {
+        this.toggleSortDirection(key);
+        this.foodPlanService.sortData(this.foods, key, this.sortDirection[key]);
+    }
+
+    toggleSortDirection(key: string) {
+        if (this.sortDirection[key] === 'desc') {
+            this.sortDirection[key] = 'asc';
+        } else {
+            this.sortDirection[key] = 'desc';
+        }
+    }
+
+    selectFood(event) {
+        const id = event.source.id;
+        let selectedFoodID = '';
+
+        const food = this.foods.find(function (el) {
+            if (el._id === id) {
+                selectedFoodID = el._id;
+                return true;
+            }
+        });
+
+        if (event.source.checked) {
+            this.selectedFood.push(food);
+            this.selectedFoodID.push(selectedFoodID);
+        } else {
+            this.selectedFood = this.selectedFood.filter(function (el) {
+                return el._id !== id;
+            });
+            this.selectedFoodID = this.selectedFoodID.filter(function (el) {
+                return el !== id;
+            });
+        }
+    }
 }
