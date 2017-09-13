@@ -11,6 +11,7 @@ import {ToasterService} from '../../../../services/toastr.service';
 import {AddNewEmailDialogComponent} from '../../../../components/add-new-email-dialog/add-new-email-dialog.component';
 import {ChangeRootEmailDialogComponent} from '../../../../components/change-root-email-dialog/change-root-email-dialog.component';
 import {GCalendarService} from '../../../../services/gcalendar.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
     selector: 'app-login-settings',
@@ -52,13 +53,16 @@ export class LoginSettingsComponent implements OnInit {
     requestForCoaching = false;
     coachingMessage: string;
 
+    public gcalendarAuthorized: boolean = null;
+
     constructor(private profileService: LoginSettingsService,
                 private formBuilder: FormBuilder,
                 private dialog: MdDialog,
                 private window: WindowObj,
                 private dateService: DateService,
                 private toasterService: ToasterService,
-                private gcalendarService: GCalendarService) {
+                private gcalendarService: GCalendarService,
+                private changeDetector: ChangeDetectorRef) {
         this.cropperSettings = profileService.getCropperSettings();
         this.data = {
             image: this.image
@@ -76,6 +80,12 @@ export class LoginSettingsComponent implements OnInit {
             this.requestForCoaching = this.user.hasOwnProperty('requestForCoaching');
             this.buildForm();
         });
+
+        this.gcalendarService.statusObservable.subscribe(
+            result => {
+                this.gcalendarAuthorized = result;
+            }
+        );
     }
 
     buildForm() {
@@ -188,5 +198,9 @@ export class LoginSettingsComponent implements OnInit {
             console.log(err);
             console.log(result);
         });
+    }
+
+    disableGoogleCalendar() {
+        this.gcalendarService.signOut();
     }
 }
