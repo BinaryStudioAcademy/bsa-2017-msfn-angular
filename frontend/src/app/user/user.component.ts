@@ -28,6 +28,8 @@ export class UserComponent implements OnInit, OnDestroy {
     private countLaunchedTraining: number;
     private comboCount: number;
     private registrationDate: string;
+    private launchTrain: Array<any>;
+    private countWeekTrain: number;
 
     constructor(
         private dialog: MdDialog,
@@ -58,7 +60,7 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.checkArticlesAchievement();
             });
             this.userService.getLaunchedTrainings(trainings => {
-                console.log(trainings);
+                this.launchTrain = trainings;
                 this.countLaunchedTraining = trainings.length;
                 this.checkTrainAchievement();
                 const result = this.userService.getTotalMeasures(trainings);
@@ -66,6 +68,12 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.maxTrainings = result[1];
                 this.checkTrainingMaxAchievement('distance');
             });
+            if (new Date().getDay() === 1) {
+                this.userService.getWeekTrainCout(count => {
+                    this.countWeekTrain = count;
+                    this.checkPerfectWeek();
+                });
+            }
             this.userService.getUserOldStatus((data) => {
                 this.comboCount = data.comboCount;
                 this.registrationDate = data.registrationDate;
@@ -139,6 +147,24 @@ export class UserComponent implements OnInit, OnDestroy {
             }
         });
         this.getUnreceivedArray(resAch);
+    }
+
+    checkPerfectWeek() {
+        let counter = 0;
+        this.launchTrain.forEach(element => {
+            if ((new Date().valueOf() - new Date(element.startDate).valueOf() < (1000 * 60 * 60 * 24 * 7)) && (element.planned)) {
+                ++counter;
+            }
+        });
+        if (this.countWeekTrain === counter) {
+            const resAch = [];
+            this.achievements.forEach(element => {
+                if (element.measureName === 'perfectweek') {
+                    resAch.push(element);
+                }
+            });
+            this.getUnreceivedArray(resAch);
+        }
     }
 
     getUnreceivedArray(resAch) {
