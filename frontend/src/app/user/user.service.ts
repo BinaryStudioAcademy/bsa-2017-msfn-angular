@@ -32,7 +32,7 @@ export class UserService {
 
 
         const request3: IHttpReq = {
-            url: '/api/user/me/measures',
+            url: '/api/user/me',
             method: 'GET',
             body: {}
         };
