@@ -113,6 +113,10 @@
         }
         .add-food-item {
             margin-left: auto;
+            margin-left: auto;
+            width: 60px;
+            min-width: 0;
+            border: 1px solid #82ca9c;
         }
         .hidden {
             visibility: hidden;
