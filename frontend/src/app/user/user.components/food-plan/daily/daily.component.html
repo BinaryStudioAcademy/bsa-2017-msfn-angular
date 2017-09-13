@@ -20,7 +20,7 @@
             <div class="item" *ngFor="let product of products.data.list; let i = index;">
               <div class="name">{{product.name}}</div>
               <div class="quantity">{{product.quantity}}</div>
-              <div class="del" (click)="delNewItem(products.list, i)"><i class="material-icons">close</i> </div>
+              <div class="del" (click)="delNewItem(products.data.list, i)"><i class="material-icons">close</i> </div>
             </div>
           </div>
         </div>

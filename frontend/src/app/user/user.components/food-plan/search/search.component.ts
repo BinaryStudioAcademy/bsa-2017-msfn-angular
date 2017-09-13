@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
     };
     selectedFood = [];
     selectedFoodID = [];
-    currenpMealProducts: any;
+    currentMealProducts: any;
     subscription: Subscription;
     measurements = {
         'Weight': 'g',
@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
     constructor(
         public foodPlanService: FoodPlanService,
     ) {
-        this.subscription = this.foodPlanService.getProductList().subscribe(products => { this.currenpMealProducts = products; });   
+        this.subscription = this.foodPlanService.getProductList().subscribe(products => { this.currentMealProducts = products; });
     }
 
     ngOnInit() {
@@ -174,38 +174,37 @@ export class SearchComponent implements OnInit {
     addOne(id) {
         let formatedItem = {};
         this.foods.forEach((food) => {
-            if(food._id === id){
+            if (food._id === id && food.count > 0) {
                 formatedItem = this.formateFoodItem(food);
                 food.checked = false;
                 food.count = 0;
-                console.log(food);
+                let sendList = {
+                    list: [],
+                    show: true
+                };
+                if (this.currentMealProducts) {
+                    sendList = this.currentMealProducts.data;
+                }
+                sendList.list.push(formatedItem);
+                this.foodPlanService.sendProductList(sendList);
+
             }
             return true;
-            
+
         });
         // const formatedItem = this.formateFoodItem(item);
 
-        let sendList = {
-            list: [],
-            show: true
-        };
-        if(this.currenpMealProducts){
-            sendList = this.currenpMealProducts.data;
-        }
-        sendList.list.push(formatedItem);
-        
-        this.foodPlanService.sendProductList(sendList);
     }
 
-    formateFoodItem(item){
+    formateFoodItem(item) {
         let kcal = 0;
-        if(item.measure === 'Weight' || item.measure === 'Liquid') {
-            kcal = item.kcal*item.count/100;
+        if (item.measure === 'Weight' || item.measure === 'Liquid') {
+            kcal = item.kcal * item.count / 100;
         } else {
             kcal = item.kcal;
         }
         kcal = Math.round(kcal);
-        
+
         return {
             _id: item._id,
             name: item.name,

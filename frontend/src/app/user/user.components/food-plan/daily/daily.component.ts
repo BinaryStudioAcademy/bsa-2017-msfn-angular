@@ -107,7 +107,8 @@ export class DailyComponent implements OnInit {
     delNewItem(source, i) {
         if (source[i]) {
             source.splice(i, 1);
-            this.products.list = source;
+            let sendData = this.products.data;
+            sendData.list = source;
             this.foodPlanService.sendProductList(this.products);
             return true;
         } else {

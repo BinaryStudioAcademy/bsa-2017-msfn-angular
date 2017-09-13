@@ -39,7 +39,9 @@ export class FoodPlanComponent implements OnInit {
         return true;
     }
     savePlan() {
-        if (this.weeklyData.days) {
+        console.log(this.weeklyData);
+        console.log(this.dailyData);
+        if (this.weeklyData) {
             let daysPlan = this.weeklyData.days;
             daysPlan.forEach(day => {
                 delete day.editMeal;
@@ -47,7 +49,7 @@ export class FoodPlanComponent implements OnInit {
                 delete day.selected;
             });
             this.foodplan.days = daysPlan;
-        } else if (this.dailyData.meals) {
+        } else if (this.dailyData) {
             this.foodplan.meals = this.dailyData.meals;
         }
         console.log(this.foodplan);

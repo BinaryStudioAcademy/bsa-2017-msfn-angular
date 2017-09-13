@@ -168,8 +168,9 @@ export class WeeklyComponent implements OnInit {
     delNewItem(source, i) {
         if (source[i]) {
             source.splice(i, 1);
-            this.products.list = source;
-            this.foodPlanService.sendProductList(this.products);
+            let sendData = this.products.data;
+            sendData.list = source;
+            this.foodPlanService.sendProductList(sendData);
             return true;
         } else {
             return false;
