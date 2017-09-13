@@ -80,6 +80,7 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.registrationDate = data.registrationDate;
                 this.checkOldStatusAchievement();
                 this.checkComboDaysAchievement();
+                this.checkAchievementLength();
             });
         });
     }
@@ -126,6 +127,18 @@ export class UserComponent implements OnInit, OnDestroy {
         this.getUnreceivedArray(resAch);
     }
 
+    checkAchievementLength() {
+        const resAch = [];
+        this.userService.getUserAchievements((userAchievments) => {
+            this.achievements.forEach(element => {
+                if (element.measureName === 'achieivcount' && userAchievments.length / (this.achievements.length - 1) >= element.value) {
+                    resAch.push(element);
+                }
+            });
+        });
+        this.getUnreceivedArray(resAch);
+    }
+
     checkComboDaysAchievement() {
         const resAch = [];
         this.achievements.forEach(element => {
@@ -162,11 +175,11 @@ export class UserComponent implements OnInit, OnDestroy {
         const resAch = [];
         this.achievements.forEach(element => {
             if (achievementName === element.measureName) {
-            console.log(array[measureName] * this.achievementMeasures[measureName],
-            element.value * this.measures[measureName], achievementName);
+                console.log(array[measureName] * this.achievementMeasures[measureName],
+                    element.value * this.measures[measureName], achievementName);
             }
             if (element.measureName === achievementName && (array[measureName] * this.achievementMeasures[measureName]
-            >= element.value * this.measures[measureName])) {
+                >= element.value * this.measures[measureName])) {
                 resAch.push(element);
             }
         });
