@@ -66,7 +66,9 @@ export class FoodPlanComponent implements OnInit {
             this.foodplan.meals = this.dailyData.meals;
         }
         if (!this.foodplan._id.length) {
-            this.foodPlanService.save(this.foodplan);
+            this.foodPlanService.save(this.foodplan, (err, data)=>{
+                this.foodplan._id = data._id;
+            });
         } else {
             this.foodPlanService.update(this.foodplan);
         }

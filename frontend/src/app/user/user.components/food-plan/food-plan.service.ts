@@ -68,14 +68,17 @@ export class FoodPlanService {
         this.subject.next();
     }
 
-    save(foodPlan) {
+    save(foodPlan, callback) {
         const request: IHttpReq = {
             url: '/api/food-plan/',
             method: 'POST',
             body: foodPlan,
             successMessage: 'Added'
         };
-        this.httpService.sendRequest(request);
+        this.httpService.sendRequest(request) 
+        .then(data => {
+            callback(null, data);
+        });
     }
 
     update(foodPlan) {

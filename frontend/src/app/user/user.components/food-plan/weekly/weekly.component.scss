@@ -23,6 +23,7 @@
             .add-item {
                 display: flex;
                 align-items: center;
+                cursor: pointer;
                 i {
                     background-color: $main-color;
                     border-radius: 15px;
