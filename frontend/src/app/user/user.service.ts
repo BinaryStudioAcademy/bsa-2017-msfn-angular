@@ -124,6 +124,19 @@ export class UserService {
             });
     }
 
+    getWeekTrainCout(callback) {
+        const sendData: IHttpReq = {
+            url: '/api/training-plan/weekplanscount',
+            method: 'GET',
+            body: {},
+        };
+
+        this.httpHandler.sendRequest(sendData)
+            .then(data => {
+                callback(data);
+            });
+    }
+
     addUserAchievements(achievment) {
         achievment.achievement = achievment._id;
         achievment._id = null;

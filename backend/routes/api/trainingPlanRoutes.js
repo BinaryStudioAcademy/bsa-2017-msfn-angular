@@ -29,6 +29,23 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+    app.get(baseUrl + '/weekplanscount', function (req, res, next) {
+        trainingPlanService.get({userID: req.session.passport.user}, function (err, data) {
+            if (!data.length) {
+                data = [];
+            }
+            let count = 0;
+            data.forEach(element => {
+                if (element.days && element.days.length) {
+                    count += element.days.length;
+                }
+            });
+            res.data = count;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.get(baseUrl + '/public/:params', function (req, res, next) {
         const params = decrypt(req.params.params);
         params.filter.isRemoved = false;
