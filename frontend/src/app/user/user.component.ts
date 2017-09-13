@@ -1,5 +1,5 @@
 import { UserService } from './user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EncryptService } from '../services/encrypt.service';
 import { HttpService } from '../services/http.service';
 import { IHttpReq } from '../models/http-req';
@@ -13,10 +13,17 @@ import { AchievementReceivedDialogComponent } from './user.components/achievemen
     styleUrls: ['./user.component.scss'],
     providers: [UserService]
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
     private achievements: Array<any>;
     private measures = {};
+    private achievementMeasures = {
+        distance: 1000,
+        weight: 1
+    };
+    private total = {};
+    private maxTrainings = {};
     private settings;
+    private user;
     private countFollowers: number;
     private countArticles: number;
     private countLaunchedTraining: number;
@@ -29,13 +36,16 @@ export class UserComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.userService.getBasicInfo((achieves, measures, settings) => {
+        this.userService.getBasicInfo((achieves, measures, user) => {
             this.achievements = achieves;
-            this.settings = settings;
+            this.settings = user.settings;
+            this.user = user;
+            console.log(this.achievements, this.user, this.settings);
             ['distance', 'weight'].forEach(measureName => {
                 measures.forEach(element => {
                     if (element.measureName === measureName) {
                         element.measureUnits.forEach(unit => {
+                            console.log(unit.unitName, this.settings);
                             if (unit.unitName === this.settings[measureName]) {
                                 this.measures[measureName] = unit.conversionFactor;
                             }
@@ -52,16 +62,46 @@ export class UserComponent implements OnInit {
                 this.checkArticlesAchievement();
             });
             this.userService.getLaunchedTrainings(trainings => {
+                console.log(trainings);
                 this.countLaunchedTraining = trainings.length;
                 this.checkTrainAchievement();
-                this.userService.getTotalMeasures(trainings);
+                const result = this.userService.getTotalMeasures(trainings);
+                this.total = result[0];
+                this.maxTrainings = result[1];
+                this.checkTrainingsAchievement('distance', 'distance', this.maxTrainings);
+                this.checkTrainingsAchievement('weight', 'trainweight', this.maxTrainings);
+                this.checkTrainingsAchievement('distance', 'totaldistance', this.total);
+                this.checkTrainingsAchievement('weight', 'totalweight', this.total);
+                console.log(this.user);
+                this.checkLosingWeight();
             });
             this.userService.getUserOldStatus((data) => {
                 this.comboCount = data.comboCount;
                 this.registrationDate = data.registrationDate;
                 this.checkOldStatusAchievement();
+                this.checkComboDaysAchievement();
+                this.checkAchievementLength();
             });
         });
+    }
+
+    checkLosingWeight() {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            if (element.measureName === 'loseweight') {
+                if (this.user.weightControl.length > 0) {
+                    this.user.weightControl.some(weightControl => {
+                        if (this.user.weight - weightControl.weight >= element.value) {
+                            resAch.push(element);
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    });
+                }
+            }
+        });
+        this.getUnreceivedArray(resAch);
     }
 
 
@@ -71,11 +111,7 @@ export class UserComponent implements OnInit {
         const resAch = [];
         this.achievements.forEach(element => {
             if (element.measureName === 'train' && this.countLaunchedTraining >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'train') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
+                resAch.push(element);
             }
         });
         this.getUnreceivedArray(resAch);
@@ -85,40 +121,40 @@ export class UserComponent implements OnInit {
         const resAch = [];
         this.achievements.forEach(element => {
             if (element.measureName === 'follower' && this.countFollowers >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'follower') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
+                resAch.push(element);
             }
         });
         this.getUnreceivedArray(resAch);
     }
 
-    // checkComboDaysAchievement() {
-    //     const resAch = [];
-    //     this.achievements.forEach(element => {
-    //         if (element.measureName === 'combodays' && this.comboCount >= element.value) {
-    //             if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'combodays') {
-    //                 resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-    //             } else {
-    //                 resAch.push(element);
-    //             }
-    //         }
-    //     });
-    //     this.getUnreceivedArray(resAch);
-    // }
+    checkAchievementLength() {
+        const resAch = [];
+        this.userService.getUserAchievements((userAchievments) => {
+            this.achievements.forEach(element => {
+                if (element.measureName === 'achieivcount' && userAchievments.length / (this.achievements.length - 1) >= element.value) {
+                    resAch.push(element);
+                }
+            });
+        });
+        this.getUnreceivedArray(resAch);
+    }
+
+    checkComboDaysAchievement() {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            if (element.measureName === 'combodays' && this.comboCount >= element.value) {
+                resAch.push(element);
+            }
+        });
+        this.getUnreceivedArray(resAch);
+    }
 
     checkOldStatusAchievement() {
         const resAch = [];
         this.achievements.forEach(element => {
             // tslint:disable-next-line:max-line-length
             if (element.measureName === 'day' && Math.floor((new Date().valueOf() - new Date(this.registrationDate).valueOf()) / (24 * 60 * 60 * 1000)) >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'day') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
+                resAch.push(element);
             }
         });
         this.getUnreceivedArray(resAch);
@@ -128,11 +164,23 @@ export class UserComponent implements OnInit {
         const resAch = [];
         this.achievements.forEach(element => {
             if (element.measureName === 'articles' && this.countArticles >= element.value) {
-                if (resAch[resAch.length - 1] && resAch[resAch.length - 1].measureName === 'articles') {
-                    resAch[resAch.length - 1] = (resAch[resAch.length - 1].value > element.value) ? resAch[resAch.length - 1] : element;
-                } else {
-                    resAch.push(element);
-                }
+                resAch.push(element);
+            }
+        });
+        this.getUnreceivedArray(resAch);
+    }
+
+
+    checkTrainingsAchievement(measureName, achievementName, array) {
+        const resAch = [];
+        this.achievements.forEach(element => {
+            if (achievementName === element.measureName) {
+                console.log(array[measureName] * this.achievementMeasures[measureName],
+                    element.value * this.measures[measureName], achievementName);
+            }
+            if (element.measureName === achievementName && (array[measureName] * this.achievementMeasures[measureName]
+                >= element.value * this.measures[measureName])) {
+                resAch.push(element);
             }
         });
         this.getUnreceivedArray(resAch);
@@ -170,6 +218,13 @@ export class UserComponent implements OnInit {
             return !elem.achieved;
         });
         return achArr;
+    }
+
+    ngOnDestroy() {
+        if (this.userService.promiseFunc.unsubscribe) {
+            this.userService.promiseFunc.unsubscribe();
+        }
+
     }
 
 }

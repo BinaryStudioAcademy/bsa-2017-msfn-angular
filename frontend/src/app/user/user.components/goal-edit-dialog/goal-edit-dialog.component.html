@@ -17,10 +17,9 @@
     </div>
     <div class="item-container">
         <md-input-container>
-            <input mdInput [mdDatepicker]="startPicker" placeholder="Deadline" [min]="minDate" [(ngModel)]="deadline" [disabled]="true">
-            <!-- <button mdSuffix [mdDatepickerToggle]="startPicker"></button> -->
+            <input mdInput [mdDatepicker]="startPicker" placeholder="Deadline" [min]="minDate" [(ngModel)]="deadline">
+            <md-datepicker-toggle mdSuffix [for]="startPicker"></md-datepicker-toggle>
         </md-input-container>
-        <md-datepicker-toggle [for]="startPicker"></md-datepicker-toggle>
         <md-datepicker touchUi="true" #startPicker></md-datepicker>
     </div>
 
