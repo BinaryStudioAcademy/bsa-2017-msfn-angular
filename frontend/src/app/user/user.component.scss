@@ -2,27 +2,34 @@
 @import '../../globalStyles/indentations.scss';
 @import '../../globalStyles/text.scss';
 
+$height: calc(100vh - 70px);
+
 .body-container {
     display: flex;
 }
 
 .sidebar-container {
-    flex: 0 0 20vw;
-    width: calc(20vw - 20px);
+    flex: 0 0 15vw;
+    width: calc(15vw - 20px);
     position: fixed;
     left: 0;
     top: 70px;
-    height: 100%;
+    height: $height;
 }
 
 .child-container {
-    width: 80%;
-    margin-left: 20%;
-    overflow-y: auto;
+    width: 85%;
+    margin-left: 15%;
+    //overflow-y: auto;
 }
 
 @media only screen and (max-width: $medium-screen) {
     .sidebar-container {
         width: 55px;
+    }
+
+    .child-container {
+        margin-left: 55px;
+        //overflow-y: auto;
     }
 }

@@ -23,12 +23,14 @@ export class UserComponent implements OnInit, OnDestroy {
     private total = {};
     private maxTrainings = {};
     private settings;
-    private user;
+    private weights;
     private countFollowers: number;
     private countArticles: number;
     private countLaunchedTraining: number;
     private comboCount: number;
     private registrationDate: string;
+    private launchTrain: Array<any>;
+    private countWeekTrain: number;
 
     constructor(
         private dialog: MdDialog,
@@ -36,16 +38,16 @@ export class UserComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.userService.getBasicInfo((achieves, measures, user) => {
+        this.userService.getBasicInfo((achieves, measures, settings, weights) => {
             this.achievements = achieves;
-            this.settings = user.settings;
-            this.user = user;
-            console.log(this.achievements, this.user, this.settings);
+            this.settings = settings;
+            this.weights = weights;
+            console.log(this.weights, this.settings);
             ['distance', 'weight'].forEach(measureName => {
                 measures.forEach(element => {
                     if (element.measureName === measureName) {
                         element.measureUnits.forEach(unit => {
-                            console.log(unit.unitName, this.settings);
+                            // console.log(unit.unitName, this.settings);
                             if (unit.unitName === this.settings[measureName]) {
                                 this.measures[measureName] = unit.conversionFactor;
                             }
@@ -62,7 +64,7 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.checkArticlesAchievement();
             });
             this.userService.getLaunchedTrainings(trainings => {
-                console.log(trainings);
+                this.launchTrain = trainings;
                 this.countLaunchedTraining = trainings.length;
                 this.checkTrainAchievement();
                 const result = this.userService.getTotalMeasures(trainings);
@@ -72,14 +74,20 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.checkTrainingsAchievement('weight', 'trainweight', this.maxTrainings);
                 this.checkTrainingsAchievement('distance', 'totaldistance', this.total);
                 this.checkTrainingsAchievement('weight', 'totalweight', this.total);
-                console.log(this.user);
                 this.checkLosingWeight();
             });
+            if (new Date().getDay() === 1) {
+                this.userService.getWeekTrainCout(count => {
+                    this.countWeekTrain = count;
+                    this.checkPerfectWeek();
+                });
+            }
             this.userService.getUserOldStatus((data) => {
                 this.comboCount = data.comboCount;
                 this.registrationDate = data.registrationDate;
                 this.checkOldStatusAchievement();
                 this.checkComboDaysAchievement();
+                this.checkAchievementLength();
             });
         });
     }
@@ -88,9 +96,9 @@ export class UserComponent implements OnInit, OnDestroy {
         const resAch = [];
         this.achievements.forEach(element => {
             if (element.measureName === 'loseweight') {
-                if (this.user.weightControl.length > 0) {
-                    this.user.weightControl.some(weightControl => {
-                        if (this.user.weight - weightControl.weight >= element.value) {
+                if (this.weights.weightControl.length > 0) {
+                    this.weights.weightControl.some(weightControl => {
+                        if (this.weights.weight - weightControl.weight >= element.value) {
                             resAch.push(element);
                             return true;
                         } else {
@@ -122,6 +130,18 @@ export class UserComponent implements OnInit, OnDestroy {
             if (element.measureName === 'follower' && this.countFollowers >= element.value) {
                 resAch.push(element);
             }
+        });
+        this.getUnreceivedArray(resAch);
+    }
+
+    checkAchievementLength() {
+        const resAch = [];
+        this.userService.getUserAchievements((userAchievments) => {
+            this.achievements.forEach(element => {
+                if (element.measureName === 'achieivcount' && userAchievments.length / (this.achievements.length - 1) >= element.value) {
+                    resAch.push(element);
+                }
+            });
         });
         this.getUnreceivedArray(resAch);
     }
@@ -161,16 +181,34 @@ export class UserComponent implements OnInit, OnDestroy {
     checkTrainingsAchievement(measureName, achievementName, array) {
         const resAch = [];
         this.achievements.forEach(element => {
-            if (achievementName === element.measureName) {
-            console.log(array[measureName] * this.achievementMeasures[measureName],
-            element.value * this.measures[measureName], achievementName);
-            }
+            // if (achievementName === element.measureName) {
+            //     console.log(array[measureName] * this.achievementMeasures[measureName],
+            //         element.value * this.measures[measureName], achievementName);
+            // }
             if (element.measureName === achievementName && (array[measureName] * this.achievementMeasures[measureName]
-            >= element.value * this.measures[measureName])) {
+                >= element.value * this.measures[measureName])) {
                 resAch.push(element);
             }
         });
         this.getUnreceivedArray(resAch);
+    }
+
+    checkPerfectWeek() {
+        let counter = 0;
+        this.launchTrain.forEach(element => {
+            if ((new Date().valueOf() - new Date(element.startDate).valueOf() < (1000 * 60 * 60 * 24 * 7)) && (element.planned)) {
+                ++counter;
+            }
+        });
+        if (this.countWeekTrain === counter) {
+            const resAch = [];
+            this.achievements.forEach(element => {
+                if (element.measureName === 'perfectweek') {
+                    resAch.push(element);
+                }
+            });
+            this.getUnreceivedArray(resAch);
+        }
     }
 
     getUnreceivedArray(resAch) {

@@ -21,27 +21,30 @@
 
 .post-text-block {
     display: inline-block;
-    width: 86%;
+    width: 100%;
 
     p {
         display: inline-block;
+        margin: 0;
     }
 
     .post-name {
         display: inline-block;
-        width: 58%;
+        width: 100%;
         margin-bottom: $mini-indent;
         font-size: $main-text;
     }
 
     .post-date {
-        width: 20%;
+        width: 100%;
+        text-align: right;
         font-size: $minor-text;
     }
 
     .message-handler {
         display: inline-block;
-        width: 20%;
+        width: 100%;
+        margin: $mini-indent 0;
         text-align: right;
 
         p {
@@ -54,7 +57,7 @@
         }
 
         .post-delete {
-            margin-left: $mini-indent;
+            margin-left: $standard-indent;
         }
     }
 
@@ -64,7 +67,6 @@
         font-size: $usual-text;
     }
 }
-
 
 .post:not(:last-child) {
     margin-bottom: $standard-indent;
@@ -120,12 +122,88 @@ app-message-posting {
 
     .post-avatar {
         display: inline-block;
-        width: 12%;
+        width: 44px;
+        margin-right: 5%;
         vertical-align: top;
 
         img {
             width: 44px;
             border-radius: 22px;
+        }
+    }
+
+    .post-text-block {
+        width: calc(92% - 44px);
+
+        .post-name {
+            width: 50%;
+        }
+
+        .post-date {
+            width: 45%;
+            float: right;
+        }
+
+        .message-handler {
+            margin: 0 0 $mini-indent;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $medium-screen) {
+
+    .post-text-block {
+        .post-name {
+            width: 100%;
+        }
+
+        .post-date {
+            width: 100%;
+            float: initial;
+        }
+
+        .message-handler {
+            margin: $mini-indent 0;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $large-screen) {
+
+    .post-text-block {
+        .post-name {
+            width: 50%;
+        }
+
+        .post-date {
+            width: 45%;
+            float: right;
+        }
+
+        .message-handler {
+            margin: 0 0 $mini-indent;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $hd-screen) {
+
+    .post-text-block {
+        .post-date {
+            width: 28%;
+            float: initial;
+        }
+
+        .message-handler {
+            width: 20%;
+            margin: $mini-indent 0;
+
+            .post-delete {
+                margin-left: $mini-indent;
+            }
         }
     }
 }

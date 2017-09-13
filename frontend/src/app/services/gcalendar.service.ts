@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import 'moment';
 import * as moment from 'moment-timezone';
+import {Subject} from 'rxjs/Subject';
 
 declare const gapi: any;
 
@@ -13,6 +14,8 @@ export class GCalendarService {
     public client: any;
     public authorized: boolean;
     public inited = false;
+
+    public statusObservable: Subject<any> = new Subject();
 
     constructor() {
         gapi.load('client:auth2', () => {
@@ -27,7 +30,9 @@ export class GCalendarService {
             scope: this._apiUrl
         }).then(() => {
             // Listen for sign-in state changes.
-            gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSigninStatus);
+            gapi.auth2.getAuthInstance().isSignedIn.listen((status) => {
+                this.updateSigninStatus(status);
+            });
 
             this.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
         });
@@ -36,6 +41,7 @@ export class GCalendarService {
     updateSigninStatus(status) {
         this.authorized = status;
         this.inited = true;
+        this.statusObservable.next(status);
     }
 
     checkAuthorized(callback) {
@@ -196,7 +202,7 @@ export class GCalendarService {
      *  Sign out the user upon button click.
      */
     signOut() {
-        gapi.auth2.getAuthInstance().signOut();
+        return gapi.auth2.getAuthInstance().signOut();
     }
 
     makeDate(date?: Date) {

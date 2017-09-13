@@ -35,6 +35,15 @@ const TrainingPlan = new Schema({
     isRemoved: {
         type: Boolean,
         default: false
+    },
+    additional: {
+        author: {
+            type: ObjectId,
+            ref: 'User'
+        },
+        date: {
+            type: Date
+        }
     }
 });
 

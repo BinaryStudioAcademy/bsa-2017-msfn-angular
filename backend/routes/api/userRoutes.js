@@ -32,6 +32,23 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+
+    app.get(baseUrl + 'me/weights', function (req, res, next) {
+        userRepository.getById(req.session.passport.user, function (err, data) {
+            res.data = {};
+            if(data.weight){
+                res.data.weight = data.weight;
+            }
+            if(data.weightControl){
+                res.data.weightControl = data.weightControl;
+            } else{
+                res.data.weightControl = [];
+            }
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.get(baseUrl + 'me/oldstatus', function (req, res, next) {
         userRepository.getById(req.session.passport.user, function (err, data) {
             res.data = {

@@ -55,9 +55,13 @@
                     class="">Loading</button>
             <button md-raised-button
                     *ngIf="gcalendarService.inited"
-                    [disabled]="gcalendarService.authorized"
+                    [disabled]="gcalendarAuthorized"
                     (click)="enableGoogleCalendar()"
-                    class="">{{(gcalendarService.authorized) ? 'Google calendar integration enabled' : 'Enable google calendar integration'}}</button>
+                    class="">{{(gcalendarAuthorized) ? 'Google calendar integration enabled' : 'Enable google calendar integration'}}</button>
+            <button md-raised-button
+                    *ngIf="gcalendarService.inited && gcalendarAuthorized"
+                    (click)="disableGoogleCalendar()"
+                    class="">Disable</button>
             <div class="addition-info">
                 Check your plans on any device
             </div>
