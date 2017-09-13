@@ -301,7 +301,12 @@ label {
 
 .profile-about {
     width: 100%;
-    margin: $content-between-margin auto;
+    margin: $content-between-margin $content-between-margin auto;
+}
+
+.profile-location {
+    width: 35%;
+    margin: $content-between-margin $content-between-margin auto;
 }
 
 .profile-physparam {

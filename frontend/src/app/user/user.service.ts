@@ -32,7 +32,7 @@ export class UserService {
 
 
         const request3: IHttpReq = {
-            url: '/api/user/me/measures',
+            url: '/api/user/me',
             method: 'GET',
             body: {}
         };
@@ -129,15 +129,17 @@ export class UserService {
     }
 
     getTotalMeasures(trainings) {
-        console.log(trainings);
         const total = {};
+        const maxTraining = {};
+        const sum = {};
         ['weight', 'distance'].forEach(measureName => {
             total[measureName] = 0;
+            maxTraining[measureName] = 0;
             if (!(trainings instanceof Array)) {
                 return total;
             }
             trainings.forEach(training => {
-
+                sum[measureName] = 0;
                 if (!(training.intervals && training.intervals instanceof Array)) {
                     return total;
                 }
@@ -152,12 +154,14 @@ export class UserService {
                         if (exList.exercise.measure === measureName) {
                             exList.sets.forEach(set => {
                                 total[measureName] += set.value * set.value2;
+                                sum[measureName] += set.value * set.value2;
                             });
                         }
                     });
                 });
+                maxTraining[measureName] = maxTraining[measureName] > sum[measureName] ? maxTraining[measureName] : sum[measureName];
             });
         });
-        return total;
+        return [total, maxTraining];
     }
 }

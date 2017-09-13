@@ -46,7 +46,7 @@
                 </div>
             -->
 
-                <div class="profile-gender">
+                <div *ngIf="!user.gender" class="profile-gender">
                     <h3 class="gender-header">Gender:</h3>
                     <input formControlName="gender" id="Male" type="radio" value="Male" name="gender">
                     <label for="Male">Male</label>
