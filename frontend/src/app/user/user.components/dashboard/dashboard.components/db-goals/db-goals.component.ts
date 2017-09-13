@@ -114,9 +114,9 @@ export class DbGoalsComponent implements OnInit, OnChanges {
                 goal.deadlineOutput = this.dateService.convertDateToIso(
                     new Date(goal.deadline), true);
 
-                if (!this.goalTypes.includes(goal.type)) {
-                    this.goalTypes.push(goal.type);
-                    setTimeout(() => this.getGoalData[goal.type](goal), 200);
+                if (!this.goalTypes.includes(goal.category)) {
+                    this.goalTypes.push(goal.category);
+                    setTimeout(() => this.getGoalData[goal.category](goal), 200);
                 }
             }
         }

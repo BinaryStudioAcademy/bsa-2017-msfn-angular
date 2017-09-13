@@ -18,15 +18,16 @@
     <div class="item-container">
         <md-input-container>
             <input mdInput [mdDatepicker]="startPicker" placeholder="Deadline" [min]="minDate" [(ngModel)]="deadline" [disabled]="true">
-            <button mdSuffix [mdDatepickerToggle]="startPicker"></button>
+            <!-- <button mdSuffix [mdDatepickerToggle]="startPicker"></button> -->
         </md-input-container>
+        <md-datepicker-toggle [for]="startPicker"></md-datepicker-toggle>
         <md-datepicker touchUi="true" #startPicker></md-datepicker>
     </div>
 
     <div class="btn-container">
         <button md-raised-button [md-dialog-close]="false">Close</button>
         <button md-raised-button
-        (click)="addUpdateUserGoal({value: value, type: selectedType, deadline: deadline, _id: id})"
+        (click)="addUpdateUserGoal({value: value, category: selectedType, deadline: deadline, _id: id})"
         [md-dialog-close]="true"
         [disabled]="!validValue">Save</button>
     </div>

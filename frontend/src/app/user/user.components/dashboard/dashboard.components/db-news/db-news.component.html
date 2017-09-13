@@ -8,14 +8,14 @@
         <div id="posts" *ngIf="news.length > 0">
             <div class="post" *ngFor="let post of paginatorOutput">
                 <div class="post-avatar">
-                    <img src="{{ post.avatar }}">
+                    <img src="{{ post.user.userPhoto }}">
                 </div>
                 <div class="post-text-block">
-                    <p class="post-name">{{ post.user }}</p>
+                    <p class="post-name">{{ post.user.fullName }}</p>
                     <p class="post-date">{{ post.dateOutput }}</p>
                     <div class="message-handler">
                         <p class="post-edit" (click)="updateMessage(post)">{{ post.editing ? 'Save' : 'Edit' }}</p>
-                        <p class="post-delete" (click)="deleteMessage(post)">Delete</p>
+                        <p class="post-delete" (click)="deleteMessage(post._id)">Delete</p>
                     </div>
 
                     <div id="edit-container" *ngIf="post.editing">
@@ -54,7 +54,11 @@
             (click)="makePaginatorOutput()">
         </md-paginator>
 
-        <app-message-posting *ngIf="posting" (hideInput)="updateData(); closeMessageInput()"></app-message-posting>
+        <app-message-posting
+            *ngIf="posting"
+            [parentElement]="'userDb'"
+            (hideInput)="updateData(); closeMessageInput()">
+        </app-message-posting>
 
         <div id="message-button" *ngIf="!posting">
             <button md-icon-button type="button" (click)="openMessageInput()">

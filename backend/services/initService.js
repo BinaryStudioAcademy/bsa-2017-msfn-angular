@@ -22,6 +22,8 @@ const mongoose = require('mongoose'),
         isAdmin: true,
         position: 1,
         birthday: '2001-9-11',
+        registrationDate: '2017-07-01T21:00:00.000Z',
+        comboCount: 0,
     },
     goalTypes = [
         'Weight',
@@ -34,53 +36,315 @@ const mongoose = require('mongoose'),
     goals = [
         {
             name: 'Lose weight',
-            type: 'Weight',
+            category: 'Weight',
         },
         {
             name: 'Increase weight',
-            type: 'Weight',
+            category: 'Weight',
         },
         {
             name: 'Burn calories',
-            type: 'Activity',
+            category: 'Activity',
         },
         {
             name: 'Run distance',
-            type: 'Activity',
+            category: 'Activity',
         },
         {
             name: 'Do some count of exercises',
-            type: 'Activity',
+            category: 'Activity',
         },
         {
             name: 'Do trainings count per week',
-            type: 'Activity',
+            category: 'Activity',
         },
         {
             name: 'Eat calories per day',
-            type: 'Food',
+            category: 'Food',
         },
         {
             name: 'Gain muscles',
-            type: 'Appearance',
+            category: 'Appearance',
         },
         {
             name: 'Beat your records',
-            type: 'Improve results',
+            category: 'Improve results',
         }
     ],
-    achievements = [{
-        name: 'Be fit',
-        message: 'Cool message',
-        icon: './resources/achievement-image/older_2.png',
-        measureName: 'weight'
-    },
-    {
-        name: 'Sprinter',
-        message: 'Cool message',
-        icon: './resources/achievement-image/level_1.png',
-        measureName: 'distance'
-    }],
+    achievements = [
+        {
+            name: 'Student',
+            message: 'Write first article',
+            principle: 'f>v',
+            value: 1,
+            icon: './resources/achievements_icon/difficult_1.png',
+            measureName: 'articles'
+        },
+        {
+            name: 'Teacher',
+            message: 'Write more 20 useful articles',
+            principle: 'f>v',
+            value: 20,
+            icon: './resources/achievements_icon/difficult_2.png',
+            measureName: 'articles'
+        },
+        {
+            name: 'Sciencist',
+            message: 'Write and post more 50 interest articles',
+            principle: 'f>v',
+            value: 50,
+            icon: './resources/achievements_icon/difficult_3.png',
+            measureName: 'articles'
+        },
+        {
+            name: 'Homo Sapiens',
+            message: 'Become famous among 10 friends',
+            principle: 'f>v',
+            value: 10,
+            icon: './resources/achievements_icon/level_1.png',
+            measureName: 'follower'
+        },
+        {
+            name: 'Homo 2000',
+            message: 'Have a more 50 subscribers',
+            principle: 'f>v',
+            value: 50,
+            icon: './resources/achievements_icon/level_2.png',
+            measureName: 'follower'
+        },
+        {
+            name: 'Space Homo',
+            message: 'Conquer the world, and become famous, have more 100 followers',
+            principle: 'f>v',
+            value: 100,
+            icon: './resources/achievements_icon/level_3.png',
+            measureName: 'follower'
+        },
+        {
+            name: 'Little Groot',
+            message: 'First steps in this app',
+            principle: 'f>v',
+            value: 0,
+            icon: './resources/achievements_icon/older_1.png',
+            measureName: 'day'
+        },
+        {
+            name: 'Groot',
+            message: 'Use our app one mounth',
+            principle: 'f>v',
+            value: 30,
+            icon: './resources/achievements_icon/older_2.png',
+            measureName: 'day'
+        },
+        {
+            name: 'I\'m Groot',
+            message: 'Be the user of our application more three month',
+            principle: 'f>v',
+            value: 120,
+            icon: './resources/achievements_icon/older_3.png',
+            measureName: 'day'
+        },
+        {
+            name: 'Supermarket runner',
+            message: 'Crossing first 100 meters',
+            principle: 'f>v',
+            value: 100,
+            icon: './resources/achievements_icon/speed_1.png',
+            measureName: 'distance'
+        },
+        {
+            name: 'Sprinter',
+            message: '1 km per training',
+            principle: 'f>v',
+            value: 1000,
+            icon: './resources/achievements_icon/speed_2.png',
+            measureName: 'distance'
+        },
+        {
+            name: 'Marathon runner',
+            message: 'Run for one workout more 41 km',
+            principle: 'f>v',
+            value: 41000,
+            icon: './resources/achievements_icon/speed_3.png',
+            measureName: 'distance'
+        },
+        {
+            name: 'English gentleman',
+            message: 'Do more than 5 workouts at the scheduled time',
+            principle: 'f>v',
+            value: 5,
+            icon: './resources/achievements_icon/time_1.png',
+            measureName: 'train'
+        },
+        {
+            name: 'Watchmaker',
+            message: 'Do more than 10 workouts at the scheduled time',
+            principle: 'f>v',
+            value: 10,
+            icon: './resources/achievements_icon/time_2.png',
+            measureName: 'train'
+        },
+        {
+            name: 'Mr Sandman',
+            message: 'Do more than 30 workouts at the scheduled time',
+            principle: 'f>v',
+            value: 30,
+            icon: './resources/achievements_icon/time_3.png',
+            measureName: 'train'
+        },
+        {
+            name: 'Lazy',
+            message: 'Open the app everyday x5',
+            principle: 'f>v',
+            value: 5,
+            icon: './resources/achievements_icon/comboDays_1.png',
+            measureName: 'combodays'
+        },
+        {
+            name: 'Serious',
+            message: 'Open the app everyday x10',
+            principle: 'f>v',
+            value: 10,
+            icon: './resources/achievements_icon/comboDays_2.png',
+            measureName: 'combodays'
+        },
+        {
+            name: 'Pedant',
+            message: 'Open the app everyday x30',
+            principle: 'f>v',
+            value: 30,
+            icon: './resources/achievements_icon/comboDays_3.png',
+            measureName: 'combodays'
+        },
+        {
+            name: 'Beach ball',
+            message: 'Lose 2kg',
+            principle: 'f>v',
+            value: 2,
+            icon: './resources/achievements_icon/loseWeight_1.png',
+            measureName: 'loseweight'
+        },
+        {
+            name: 'Air ball',
+            message: 'Lose 5kg',
+            principle: 'f>v',
+            value: 5,
+            icon: './resources/achievements_icon/loseWeight_2.png',
+            measureName: 'loseweight'
+        },
+        {
+            name: 'Bubble',
+            message: 'Lose 10kg',
+            principle: 'f>v',
+            value: 10,
+            icon: './resources/achievements_icon/loseWeight_3.png',
+            measureName: 'loseweight'
+        },
+        {
+            name: 'Kilo',
+            message: 'Total lift of all trainings 50 000 kg',
+            principle: 'f>v',
+            value: 50 * 1000,
+            icon: './resources/achievements_icon/totalWeight_1.png',
+            measureName: 'totalweight'
+        },
+        {
+            name: 'Mega',
+            message: 'Total lift of all trainings 100 000 kg',
+            principle: 'f>v',
+            value: 100 * 1000,
+            icon: './resources/achievements_icon/totalWeight_2.png',
+            measureName: 'totalweight'
+        },
+        {
+            name: 'Terra',
+            message: 'Total lift of all trainings 200 000 kg',
+            principle: 'f>v',
+            value: 200 * 1000,
+            icon: './resources/achievements_icon/totalWeight_3.png',
+            measureName: 'totalweight'
+        },
+        {
+            name: 'Soilder',
+            message: 'Total lift of one training 1 000 kg',
+            principle: 'f>v',
+            value: 1000,
+            icon: './resources/achievements_icon/trainWeight_1.png',
+            measureName: 'trainweight'
+        },
+        {
+            name: 'Major',
+            message: 'Total lift of one training 5 000 kg',
+            principle: 'f>v',
+            value: 5 * 1000,
+            icon: './resources/achievements_icon/trainWeight_2.png',
+            measureName: 'trainweight'
+        },
+        {
+            name: 'General',
+            message: 'Total lift of one training 10 000 kg',
+            principle: 'f>v',
+            value: 10 * 1000,
+            icon: './resources/achievements_icon/trainWeight_3.png',
+            measureName: 'trainweight'
+        },
+        {
+            name: 'Wind',
+            message: 'Total cross of all trainings 20 000 m',
+            principle: 'f>v',
+            value: 20 * 1000,
+            icon: './resources/achievements_icon/totalDistance_1.png',
+            measureName: 'totaldistance'
+        },
+        {
+            name: 'Soundwave',
+            message: 'Total cross of all trainings 50 000 m',
+            principle: 'f>v',
+            value: 50 * 1000,
+            icon: './resources/achievements_icon/totalDistance_2.png',
+            measureName: 'totaldistance'
+        },
+        {
+            name: 'Light',
+            message: 'Total cross of all trainings 100 000 m',
+            principle: 'f>v',
+            value: 100 * 1000,
+            icon: './resources/achievements_icon/totalDistance_3.png',
+            measureName: 'totaldistance'
+        },
+        {
+            name: 'Boyscout',
+            message: 'Collect 25% of achievements',
+            principle: 'f>v',
+            value: 0.25,
+            icon: './resources/achievements_icon/achievementsCount_1.png',
+            measureName: 'achieivcount'
+        },
+        {
+            name: 'Collectionare',
+            message: 'Collect 50% of achievements',
+            principle: 'f>v',
+            value: 0.5,
+            icon: './resources/achievements_icon/achievementsCount_2.png',
+            measureName: 'achieivcount'
+        },
+        {
+            name: 'God',
+            message: 'Collect 100% of achievements',
+            principle: 'f>v',
+            value: 1,
+            icon: './resources/achievements_icon/achievementsCount_3.png',
+            measureName: 'achieivcount'
+        },
+        {
+            name: 'Wish-maker',
+            message: 'Complete all plans of the week',
+            principle: 'f>v',
+            value: 1,
+            icon: './resources/achievements_icon/perfectWeek.png',
+            measureName: 'perfectweek'
+        },
+    ],
     measurments = [
         {
             "measureName": "weight",
@@ -804,12 +1068,14 @@ module.exports = function () {
     goals.forEach((elem) => {
         goalService.createGoal(elem, () => { });
     });
-
-    achievementsRepository.getAll((err, data) => {
-        if (data === []) {
+    achievementsRepository.getAll((err, data)=> {
+        if (!data || !data.length){
             achievements.forEach((elem) => {
                 achievementsRepository.add(elem, () => { });
             });
+            console.log('[InitService] - Achievements added');
+        } else {
+            console.log('[InitService] - Achievements are available');
         }
     });
 

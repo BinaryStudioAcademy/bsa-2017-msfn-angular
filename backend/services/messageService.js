@@ -20,7 +20,7 @@ function getItemsByUserId(data, callback) {
 }
 
 function addItem(body, callback) {
-    if (body.userId && body.body) {
+    if (body.user && body.body) {
         messageRepository.add(body, (err, data) => {
             if (err) return callback(err);
             if (data === null) {
@@ -34,9 +34,9 @@ function addItem(body, callback) {
     }
 }
 
-function updateItem(id, body, callback) {
-    if (body.userId && body.body) {
-        messageRepository.update(id, body, (err, data) => {
+function updateItem(id, userId, body, callback) {
+    if (body.user && body.body) {
+        messageRepository.updateById(id, userId, body.body, (err, data) => {
             if (err) return callback(err);
             if (data === null) {
                 callback(null, []);

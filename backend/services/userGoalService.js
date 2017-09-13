@@ -24,7 +24,7 @@ function getUserGoalById(userId, callback) {
 }
 
 function createUserGoal(body, callback) {
-    if (body.createdByUser && body.value && body.value > 0 && body.deadline && body.type && body.startTime) {
+    if (body.createdByUser && body.value && body.value > 0 && body.deadline && body.category && body.startTime) {
         userGoalRepository.add(body, (err, userGoalData) => {
             if (err) return callback(err);
                 if (userGoalData === null) {
@@ -40,7 +40,7 @@ function createUserGoal(body, callback) {
 
 
 function updateUserGoal(id, body, callback) {
-    if(body.createdByUser && body.value && body.value > 0 && body.deadline && body.type){
+    if(body.createdByUser && body.value && body.value > 0 && body.deadline && body.category){
         userGoalRepository.update(id, body, (err, userGoalData) => {
 
             if (err) return callback(err);
@@ -58,7 +58,7 @@ function updateUserGoal(id, body, callback) {
 function deleteUserGoal(id, userId, callback) {
     if(mongoose.Types.ObjectId.isValid(id)) {
 
-    
+
     userGoalRepository.deleteById(id, userId, (err, userGoalData)=>{
 
         if (err) return callback(err);

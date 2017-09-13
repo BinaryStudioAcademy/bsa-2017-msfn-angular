@@ -1,0 +1,29 @@
+<div class="chat-wrapper" [class.minimized]="chat.minimized" id="{{chat.room}}">
+    <div class="chat-header">
+        <div class="chat-user" (click)="toogleMinimized()">
+            <span class="user-photo" [style.background-image]="'url(' + chat.user.userPhoto + ')'"></span>
+            <span class="status-circle" *ngIf="(!((chat.messages | unread: userId) !== 0) || !minimized)" [class.online]="chat.user.online"></span>
+            <span class="new-messages-count" *ngIf="(chat.messages | unread: userId) !== 0">{{chat.messages | unread: userId}}</span>
+            <span class="chat-user-text" [title]="chat.user.fullName">{{chat.user.fullName}}</span>
+        </div>
+        <div class="chat-header-icons">
+            <md-icon class="close icon" (click)="closeChat()">clear</md-icon>
+        </div>
+    </div>
+    <div class="messages-wrapper" (scroll)="checkLoadMessages()">
+        <div *ngFor="let message of chat.messages" class="message" [class.left]="message.sender !== userId">
+            <div class='message-text' mdTooltipShowDelay="500" mdTooltipPosition="above" [mdTooltip]="message.date | date: 'short'">{{message.message}}</div>
+        </div>
+    </div>
+    <div class="new-message-wrap">
+        <textarea name="message"
+                  placeholder="Enter your message"
+                  #input
+                  class="new-message-input"
+                  (focus)="setFocused()"
+                  (focusout)="setUnfocused()"
+                  (keydown)="sendMessageInit($event, input)"
+                  (keyup)="resizeInput(shadowInput, input, $event)"></textarea>
+        <div #shadowInput [innerHTML]="input.value" class="new-message-input hidden"></div>
+    </div>
+</div>

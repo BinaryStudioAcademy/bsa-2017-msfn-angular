@@ -8,9 +8,11 @@ export class MessagePostingService {
     constructor(private httpService: HttpService) {
     }
 
-    getMessages(userId: string, callback): void {
+    getMessages(userId: string, callback, isTestimonial?: boolean): void {
         const req: IHttpReq = {
-            url: `/api/message/user/${userId}`,
+            url: isTestimonial ?
+                `/api/coach/testimonial/${userId}` :
+                `/api/message/user/${userId}`,
             method: 'GET',
             body: {}
         };
@@ -23,7 +25,9 @@ export class MessagePostingService {
 
     postMessage(message, callback): void {
         const req: IHttpReq = {
-            url: '/api/message',
+            url: message.hasOwnProperty('coach') ?
+                '/api/coach/testimonial' :
+                '/api/message',
             method: 'POST',
             body: message,
             successMessage: 'Message hass been posted',

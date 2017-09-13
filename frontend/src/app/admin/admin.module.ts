@@ -25,7 +25,7 @@ import { MeasureTypeComponent } from './admin.components/measure-type/measure-ty
 import { FoodTypeComponent } from './admin.components/food-type/food-type.component';
 import { FoodListComponent } from './admin.components/food-list/food-list.component';
 import { FoodEditDialogComponent } from './admin.components/food-edit-dialog/food-edit-dialog.component';
-import { CdkTableModule } from '@angular/cdk';
+import { CdkTableModule } from '@angular/cdk/table';
 import { FoodTypeEditDialogComponent } from './admin.components/food-type-edit-dialog/food-type-edit-dialog.component';
 import { SelectSportComponent } from './admin.components/select-sport/select-sport.component';
 

@@ -15,6 +15,10 @@
         font-weight: 600;
     }
 
+    h3:hover {
+        cursor: pointer;
+    }
+
     .plan-exercises {
         display: inline-block;
         width: 100%;
@@ -43,8 +47,8 @@
 
         a {
             float: right;
-            margin-top: $mini-indent;
-            font-size: $usual-text;
+            margin: $mini-indent 0;
+            font-size: $main-text;
             color: $text-main-color;
         }
     }
@@ -67,6 +71,10 @@
 
         .plan-text-block {
             width: 45%;
+
+            a {
+                margin: $micro-indent 0 initial 0;
+            }
         }
     }
 }

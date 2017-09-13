@@ -64,13 +64,13 @@ aside {
 }
 
 .sidebar-container {
-    flex: 0 0 calc(20vw);
-    min-width: 20vw; /*need -20px for scrollbar*/
+    flex: 0 0 calc(15vw);
+    min-width: 15vw; /*need -20px for scrollbar*/
 }
 
 .child-container {
-    flex: 0 0 80vw;
-    min-width: 80vw;
+    flex: 0 0 85vw;
+    min-width: 85vw;
     overflow-y: auto;
 }
 
@@ -85,6 +85,11 @@ aside {
 
 
 @media screen and (max-width: $medium-screen) {
+    .sidebar-container {
+        flex: 0 0 55px;
+        width: 55px;
+    }
+
     aside {
         width: auto;
 
@@ -92,7 +97,8 @@ aside {
             display: none;
         }
     }
+
     .child-container {
-        width: calc(100vw - 80px);
+        width: calc(100vw - 55px);
     }
 }

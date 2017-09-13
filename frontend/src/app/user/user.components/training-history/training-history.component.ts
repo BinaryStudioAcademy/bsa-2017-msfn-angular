@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TrainingHistoryService } from './training-history.service';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 import { MdSort, MdPaginator } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -32,6 +32,7 @@ export class TrainingHistoryComponent implements OnInit {
         to: new Date(),
         from: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 7)
     };
+    minMaxCalendarDate = new Date();
 
     tableDatabase = new TableDatabase(this.trainingHistoryService);
     dataSource: ExampleDataSource | null;
@@ -62,7 +63,10 @@ export class TrainingHistoryComponent implements OnInit {
         this.dataSource.filterDate = this.period;
     }
 
-    updateData() {
+    updateData(event) {
+        if (event === 'to') {
+            this.period.to = new Date(this.period.to.getTime() + 1000 * 60 * 60 * 24 - 1000 * 60);
+        }
         this.dataSource.filterDate = this.period;
     }
 
