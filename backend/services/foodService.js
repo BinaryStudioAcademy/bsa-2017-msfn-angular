@@ -132,7 +132,6 @@ function updateFood(id, body, userId, callback) {
 
 
 function publishFood(id, isPublished, callback) {
-            console.log(id, isPublished);
             foodRepository.updateIsPublished(id, isPublished, (err, foodData) => {
                 if (err) {
                     return err;

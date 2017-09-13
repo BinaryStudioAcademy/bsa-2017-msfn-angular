@@ -8,7 +8,6 @@ p {
 
 md-paginator {
     flex-wrap: wrap;
-
 }
 
 md-paginator /deep/ .mat-paginator-range-label {
@@ -24,17 +23,15 @@ md-paginator /deep/ .mat-paginator-range-label {
 
 #sidebar-wrapper {
     order: 1;
-    display: inline-block;
-    float: right;
     width: 90%;
-    padding: $standard-indent;
-    background: linear-gradient($bg-color 75%, $gradient-from-color);
-    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
 
     app-coach-sidebar {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        padding: $standard-indent;
+        background: linear-gradient($bg-color 75%, $gradient-from-color);
+        box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
     }
 }
 
@@ -42,7 +39,6 @@ md-paginator /deep/ .mat-paginator-range-label {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
     flex-wrap: wrap;
     margin: 0 auto;
 
@@ -97,7 +93,7 @@ md-paginator /deep/ .mat-paginator-range-label {
 
     #main-content {
         div {
-            margin: $mini-indent 0;
+            margin: 1% 0;
         }
     }
 
@@ -120,43 +116,74 @@ md-paginator /deep/ .mat-paginator-range-label {
     #coach-container {
         order: 1;
         display: inline-block;
-        width: 80%;
+        width: 70%;
         min-height: 100%;
     }
 
     #sidebar-wrapper {
         order: 2;
-        display: inline-block;
-        float: right;
-        width: 20%;
-        max-width: 300px;
-        min-height: 100%;
-        padding: $standard-indent;
-        background: linear-gradient($bg-color 75%, $gradient-from-color);
-        box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
+        width: 0;
 
         app-coach-sidebar {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: calc(100vh - 110px);
+            position: fixed;
+            width: 30%;
+            max-width: 270px;
+            height: calc(100vh - 70px);
         }
     }
 
     #main-content {
         flex-direction: row;
-        align-items: baseline;
-        height: 100%;
-        padding: $mini-indent 3%;
+        height: calc(100vh - 70px);
+        padding: $mini-indent 1%;
 
         div {
-            width: 48%;
-            min-height: 26%;
+            width: 100%;
+            min-height: 47%;
             padding: $large-indent;
         }
 
         div:not(:first-child) {
             padding-bottom: 0;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $hd-screen) {
+
+    #coach-container {
+        width: 75%;
+    }
+
+    #sidebar-wrapper {
+        app-coach-sidebar {
+            width: 25%;
+            max-width: 300px;
+        }
+    }
+
+    #main-content {
+        div {
+            width: 48%;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $full-hd-screen) {
+
+    #coach-container {
+        width: 80%;
+    }
+
+    #sidebar-wrapper {
+        app-coach-sidebar {
+            width: 20%;
+            max-width: 320px;
         }
     }
 }

@@ -3,7 +3,7 @@ const mongoose = require('mongoose'),
 
 const Exercise = new Schema({
     name: String,
-    type: {
+    category: {
         type: Schema.Types.ObjectId,
         ref: 'ExerciseType'
     },

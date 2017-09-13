@@ -37,7 +37,7 @@ class subscribeService {
                         title: 'New follower',
                         message: 'New follower - ' + currentUser.email,
                         creator: currentUserId,
-                        type: 'follow'
+                        category: 'follow'
                     },
                     (err, res) => {
                         if (err) return callback(err);
@@ -75,7 +75,7 @@ class subscribeService {
                     filter: {
                         userId: userToFollow,
                         creator: currentUserId,
-                        type: 'follow',
+                        category: 'follow',
                         read: false,
                         isRemoved: false
                     }
@@ -121,9 +121,6 @@ class subscribeService {
                 follow: userId
             },
             fields: '_id firstName lastName userPhoto'
-        };
-        params.filter = {
-            follow: userId
         };
         userRepository.get(params, (err, users) => {
             callback(err, users);

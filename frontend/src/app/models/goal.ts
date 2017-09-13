@@ -1,10 +1,7 @@
 export interface IGoal {
-    type: string;
+    category: string;
     value: number;
-    isRemoved: {
-        type: boolean,
-        def: boolean
-    };
+    isRemoved: boolean;
     deadline: Date;
     startTime: Date;
     createdByUser: string;

@@ -32,8 +32,11 @@
                 <div class="preview-text" [innerHTML]="article.previewHTML"></div>
             </div>
         </div>
-        <div class="articles-empty item-container" *ngIf="articles.length === 0">
+        <div class="articles-empty item-container" *ngIf="articles.length === 0 && selectedTab !== 0">
             <p class="train-item-text">Nothing found</p>
+        </div>
+        <div class="add-container item-container" *ngIf="selectedTab === 0" [routerLink]="'/user/articles/create'">
+            <i class="material-icons add-item-ico">add</i>
         </div>
         <div class="loader-wrap" *ngIf="loading">
             <div class="cssload-container">

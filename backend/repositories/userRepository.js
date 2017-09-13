@@ -15,6 +15,7 @@ UserRepository.prototype.getUserByToken = getUserByToken;
 UserRepository.prototype.addEmail = addEmail;
 UserRepository.prototype.processRequest = processRequest;
 UserRepository.prototype.getUsersFromArrayID = getUsersFromArrayID;
+UserRepository.prototype.addAchievementByUserId = addAchievementByUserId;
 
 function getUserByEmail(email, callback) {
     const query = this.model.findOne({email: email});
@@ -79,6 +80,15 @@ function getUsersFromArrayID(array, params, callback) {
         params.fields = null;
     }
     const query = this.model.find().where('_id').in(array).select(params.fields);
+    query.exec(callback);
+}
+
+function addAchievementByUserId(id, body, callback) {
+    const query = this.model.update({
+        _id: id
+    }, {
+        $push: { 'achievements': body}
+    });
     query.exec(callback);
 }
 

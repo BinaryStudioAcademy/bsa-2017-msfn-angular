@@ -6,6 +6,7 @@ import {ToasterService} from './toastr.service';
 export class SocketService {
 
     private _socket = io.connect('http://localhost:3060');
+    private rooms: any[] = [];
 
     constructor(private toast: ToasterService) {
         this._socket.on('connect', () => {
@@ -27,6 +28,8 @@ export class SocketService {
     }
 
     public joinRoom(roomName: string) {
+        if (this.rooms.indexOf(roomName) !== -1) { return; }
         this.send('join_room', JSON.stringify({'room': roomName}));
+        this.rooms.push(roomName);
     }
 }

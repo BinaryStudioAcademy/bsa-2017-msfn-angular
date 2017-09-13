@@ -21,14 +21,20 @@
                 <md-list>
                     <md-list-item *ngFor="let user of users.show" class="user-container">
                         <img md-list-avatar
-                             [src]="user.userPhoto || './resources/default.png'"
-                        >
+                             [src]="user.userPhoto || './resources/default.png'">
                         <a [routerLink]="'/user/profile/'+user._id">
                             <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
                         </a>
-                        <button md-button
-                                (click)="user.isFollowed ? unfollow(user) : follow(user)"
-                        >{{user.isFollowed?'Unfollow':'Follow'}}</button>
+                        <button md-icon-button
+                                (click)="initChat(user)"
+                                class="first-button action-button">
+                            <md-icon>mail</md-icon>
+                        </button>
+                        <button md-icon-button
+                                class="action-button"
+                                (click)="user.isFollowed ? unfollow(user) : follow(user)">
+                            <md-icon>{{!user.isFollowed ? 'add_circle' : 'remove_circle'}}</md-icon>
+                        </button>
                     </md-list-item>
                 </md-list>
             </div>
@@ -56,14 +62,20 @@
                     <md-list>
                         <md-list-item *ngFor="let user of followers.show" class="user-container">
                             <img md-list-avatar
-                                 [src]="user.userPhoto || './resources/default.png'"
-                            >
+                                 [src]="user.userPhoto || './resources/default.png'">
                             <a [routerLink]="'/user/profile/'+user._id">
                                 <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
                             </a>
-                            <button md-button
-                                    (click)="user.isFollowed ? unfollow(user) : follow(user)"
-                            >{{user.isFollowed?'Unfollow':'Follow'}}</button>
+                            <button md-icon-button
+                                    (click)="initChat(user)"
+                                    class="first-button action-button">
+                                <md-icon>mail</md-icon>
+                            </button>
+                            <button md-icon-button
+                                    class="action-button"
+                                    (click)="user.isFollowed ? unfollow(user) : follow(user)">
+                                <md-icon>{{!user.isFollowed ? 'add_circle' : 'remove_circle'}}</md-icon>
+                            </button>
                         </md-list-item>
                     </md-list>
                 </div>
@@ -92,14 +104,20 @@
                     <md-list>
                         <md-list-item *ngFor="let user of following.show" class="user-container">
                             <img md-list-avatar
-                                [src]="user.userPhoto || './resources/default.png'"
-                            >
+                                 [src]="user.userPhoto || './resources/default.png'">
                             <a [routerLink]="'/user/profile/'+user._id">
                                 <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
                             </a>
-                            <button md-button
-                                    (click)="user.isFollowed ? unfollow(user) : follow(user)"
-                            >{{user.isFollowed?'Unfollow':'Follow'}}</button>
+                            <button md-icon-button
+                                    (click)="initChat(user)"
+                                    class="first-button action-button">
+                                <md-icon>mail</md-icon>
+                            </button>
+                            <button md-icon-button
+                                    class="action-button"
+                                    (click)="user.isFollowed ? unfollow(user) : follow(user)">
+                                <md-icon>{{!user.isFollowed ? 'add_circle' : 'remove_circle'}}</md-icon>
+                            </button>
                         </md-list-item>
                     </md-list>
                 </div>

@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Message = new Schema({
-    userId: ObjectId,
+    user: {
+        type: ObjectId,
+        ref: 'User'
+    },
     date: Date,
     body: String,
     isRemoved: Boolean

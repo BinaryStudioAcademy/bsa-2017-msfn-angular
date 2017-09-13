@@ -12,7 +12,7 @@ md-list {
 }
 aside {
     width: 100%;
-    height: calc(100vh - 70px);
+    height: 100%;
     overflow-y: auto;
     min-height: $height;
     font-family: $font-general;
@@ -24,13 +24,14 @@ aside {
 
     nav {
         float: right;
-        width: 90%;
+        width: 100%;
         position: relative;
 
         a {
             line-height: $header-text;
             text-decoration: none;
             color: #aaa;
+            transition: transform 0.3s;
         }
 
         .navigation__icon {
@@ -48,6 +49,7 @@ aside {
             }
             color: #fff;
             font-weight: bold;
+            transform: translateX(7px);
         }
 
         .active-link::before {
@@ -55,7 +57,7 @@ aside {
             position: absolute;
             display: block;
             font-size: 30px;
-            left: 0;
+            left: -13px;
             line-height: $header-text;
             color: #82A690;
         }

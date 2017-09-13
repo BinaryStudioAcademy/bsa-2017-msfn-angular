@@ -35,7 +35,7 @@ export class GoalEditDialogComponent implements OnInit {
                 this.value = 10;
             } else {
                 this.deadline = new Date(this.data.item.deadline);
-                this.selectedType = this.data.item.type;
+                this.selectedType = this.data.item.category;
                 this.value = this.data.item.value;
             }
         });

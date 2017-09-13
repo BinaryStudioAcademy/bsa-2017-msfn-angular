@@ -28,7 +28,7 @@ const Notification = new Schema({
     creator: {
         type: ObjectId
     },
-    type: {
+    category: {
         type: String,
         enum: ['follow']
     }

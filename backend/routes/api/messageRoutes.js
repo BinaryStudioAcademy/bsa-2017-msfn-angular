@@ -24,7 +24,7 @@ module.exports = app => {
     }, apiResponse);
 
     app.put(`${baseUrl}:id`, (req, res, next) => {
-        messageService.updateItem(req.params.id, req.body, (err, data) => {
+        messageService.updateItem(req.params.id, req.session.passport.user, req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();

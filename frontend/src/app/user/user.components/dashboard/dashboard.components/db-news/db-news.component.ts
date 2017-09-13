@@ -44,20 +44,16 @@ export class DbNewsComponent implements OnInit {
         Validators.maxLength(300)
     ]);
 
-
     ngOnInit() {
         this.getData();
     }
 
     getData() {
         this.messagePostingService.getMessages(this.userId, data => {
-            if (data[0].hasOwnProperty('userId')) {
+            if (data[0].hasOwnProperty('user')) {
                 this.messages = data;
 
                 for (const message of this.messages) {
-                    message.avatar = this.window.data._injectedData.userPhoto;
-                    message.user = this.window.data._injectedData.userFirstName +
-                        ' ' + this.window.data._injectedData.userLastName;
                     message.dateOutput = this.dateService
                         .convertDateToIso(new Date(message.date), true);
                     message.editing = false;
@@ -97,7 +93,7 @@ export class DbNewsComponent implements OnInit {
         if (post.editing) {
             if (post.body && this.postFormControl.valid) {
                 this.postData = {
-                    userId: this.userId,
+                    user: this.userId,
                     date: new Date(),
                     body: post.body
                 };
@@ -105,7 +101,7 @@ export class DbNewsComponent implements OnInit {
                 this.messagePostingService.updateMessage(post._id, this.postData, () => {
                     setTimeout(() => {
                         this.updateData();
-                    }, 500);
+                    }, 200);
                     post.editing = false;
                 });
             }

@@ -1,6 +1,6 @@
 export interface IExercise {
     name: string;
-    type: string;
+    category: string;
     description: string;
     _id?: string;
     image: string;

@@ -1,0 +1,243 @@
+@import '../../../globalStyles/variables.scss';
+@import '../../../globalStyles/indentations.scss';
+@import '../../../globalStyles/text.scss';
+
+.show-chats {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 30px;
+    opacity: 0.2;
+    transition: opacity 0.3s, border-radius 0.5s, background-color 0.5s;
+    background-color: $main-color;
+    color: $text-dark-color;
+    font-weight: bold;
+    outline: none;
+    z-index: 10;
+
+    .got-messages {
+        display: none;
+    }
+    .mobile {
+        display: none;
+        position: relative;
+    }
+}
+
+.show-chats.got-messages {
+    opacity: 0.9;
+
+    .got-messages {
+        display: inline;
+    }
+    .no-messages {
+        display: none;
+    }
+}
+
+.show-chats.active {
+    opacity: 1;
+    border-radius: 0;
+    background-color: $gradient-to-color;
+    border-left: 1px solid $gradient-from-color;
+}
+
+.show-chats:hover {
+    opacity: 0.9;
+}
+
+.show-chats.active:hover {
+    background-color: $main-color;
+}
+
+.chats-list-wrapper {
+    position: fixed;
+    bottom: 30px;
+    right: 0;
+    width: 200px;
+    height: calc(100vh - 70px - 30px);
+    background-color: $gradient-to-color;
+    z-index: 10;
+    transform: translateX(300px);
+    transition: transform 0.7s;
+    border-bottom: 1px solid $gradient-from-color;
+    border-left: 1px solid $gradient-from-color;
+}
+
+.chats-list-wrapper.active {
+    transform: translateX(0px);
+}
+
+.users-wrapper {
+
+    max-height: 100%;
+    padding: 10px 0;
+    overflow-y: auto;
+
+    .user-wrapper {
+        height: 44px;
+        width: 100%;
+        padding: 2px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        cursor: pointer;
+
+        .user-image {
+            border-radius: 50%;
+            height: 34px;
+            width: 34px;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+
+            .status-circle {
+                height: 10px;
+                width: 10px;
+                position: absolute;
+                z-index: 1;
+                border-radius: 50%;
+                right: 0;
+                bottom: 0;
+            }
+            .status-circle.online {
+                background-color: $main-color;
+            }
+        }
+
+        .user-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 34px;
+            margin-left: 10px;
+            margin-right: 1px;
+        }
+
+        .new-messages {
+            border-radius: 3px;
+            padding: 4px 5px 4px 4px;
+            background: $secondary-color;
+            text-align: center;
+            box-shadow: 0 0 2px 1px $secondary-color;
+            margin-left: auto;
+            font-weight: bold;
+        }
+    }
+
+    .user-wrapper:hover {
+        background-color: $dark-main-color;
+    }
+}
+
+.chat-windows {
+    position: fixed;
+    right: 250px;
+    bottom: 0;
+    z-index: 100;
+    display: flex;
+    height: 315px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    pointer-events: none;
+
+    .chat-window {
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: $large-screen) {
+    .chat-windows .chat-window {
+        display: none;
+    }
+    .chat-windows .chat-window:nth-child(1) {
+        display: block;
+    }
+}
+
+@media screen and (max-width: $medium-screen) {
+    .show-chats {
+        right: initial;
+        left: 0;
+        width: 55px;
+        height: 55px;
+        min-width: 55px;
+        max-width: 55px;
+
+        .no-messages,
+        .got-messages {
+            display: none;
+        }
+
+        .mobile {
+            display: flex;
+            align-items: center;
+            color: $text-main-color;
+
+            .open {
+                display: inline-block;
+            }
+            .close {
+                display: none;
+            }
+        }
+    }
+    .show-chats.got-messages {
+        .got-messages {
+            display: none;
+        }
+
+        .mobile {
+            .got-messages {
+                display: block;
+                position: absolute;
+                right: -4px;
+                top: -4px;
+                line-height: 12px;
+                border-radius: 50%;
+                font-size: 10px;
+                background-color: #7da7d9;
+                width: 12px;
+                height: 12px;
+                box-shadow: 0 0 2px 1px #7da7d9;
+            }
+        }
+    }
+    .show-chats.active {
+        border: none;
+        background: transparent;
+
+        .mobile {
+            .open {
+                display: none;
+            }
+            .close {
+                display: inline-block;
+            }
+            .got-messages {
+                display: none;
+            }
+        }
+    }
+
+    .chats-list-wrapper {
+        bottom: 0;
+        width: calc(100vw - 55px);
+        height: calc(100vh - 70px);
+        border: none;
+        transform: translateX(calc(100vw - 55px));
+    }
+
+    .chat-windows {
+        right: 0;
+        width: calc(100vw - 55px);
+        height: calc(100vh - 70px);
+
+        .chat-window {
+            margin: 0;
+            display: flex;
+            align-items: flex-end;
+        }
+    }
+}

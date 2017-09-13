@@ -10,8 +10,8 @@
                    [mdDatepicker]="period_min"
                    placeholder="Period start"
                    (change)="updateData()">
-            <button mdSuffix [mdDatepickerToggle]="period_min"></button>
         </md-input-container>
+        <md-datepicker-toggle [for]="period_min"></md-datepicker-toggle>
         <md-datepicker #period_min (selectedChanged)="updateData()"></md-datepicker>
         <md-input-container>
             <input mdInput
@@ -19,8 +19,8 @@
                    [mdDatepicker]="period_max"
                    placeholder="Period end"
                    (change)="updateData()">
-            <button mdSuffix [mdDatepickerToggle]="period_max"></button>
         </md-input-container>
+        <md-datepicker-toggle [for]="period_max"></md-datepicker-toggle>
         <md-datepicker #period_max (selectedChanged)="updateData()"></md-datepicker>
     </div>
 

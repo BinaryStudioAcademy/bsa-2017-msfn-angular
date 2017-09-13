@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const Goal = new Schema({
     name: String,
-    type: String,
-    isRemoved: { 
+    category: String,
+    isRemoved: {
         type: Boolean,
-        default: false 
+        default: false
     }
 });
 

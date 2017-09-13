@@ -19,4 +19,16 @@ export class AchievementsListService {
         });
     }
 
+        getUserAchievements(callback) {
+            const sendData: IHttpReq = {
+            url: '/api/achievements/user',
+            method: 'GET',
+            body: {},
+        };
+
+        this.httpService.sendRequest(sendData).then(data => {
+            callback(data);
+        });
+    }
+
 }

@@ -1,5 +1,5 @@
 <div id="main-sidebar-block">
-    <div id="general-coach-info">
+    <div class="head-block">
         <div id="name-location">
             <h2 id="coach-name">{{ userData.fullName }}</h2>
             <p id="coach-location">{{ userData.location }}</p>
@@ -9,7 +9,7 @@
                 md-icon-button
                 type="button"
                 (click)="followAction()">
-                {{ isFollowed ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ followers.length || ''}}</span>
+                {{ isFollowed ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ coachData.followers.length || ''}}</span>
             </button>
         </div>
     </div>
@@ -20,8 +20,8 @@
 
     <div id="social-links">
         <a
-            *ngFor="let link of coachInfo.socialLinks"
-            href="link.link"
+            *ngFor="let link of coachData.socialLinks"
+            href="{{ link.link }}"
             [ngStyle]="{'color': link.color}">
             {{ link.name }}
         </a>
@@ -34,14 +34,35 @@
 </div>
 
 <div id="testimonials">
-    <h3>Testimonials</h3>
-    <div class="testimonial" *ngFor="let testimonial of coachInfo.testimonials">
-        <div class="testimonial-photo" routerLink="">
-            <img src="{{ testimonial.photo }}">
+    <div class="head-block">
+        <h3>Testimonials</h3>
+        <div id="feedback-button">
+            <button
+                *ngIf="isFollowed"
+                md-icon-button
+                type="button"
+                (click)="addFeedback()">
+                Add feedback
+            </button>
         </div>
-        <div class="testimonial-text-block">
-            <p class="testimonial-name" routerLink="">{{ testimonial.name }}</p>
-            <p class="testimonial-text">{{ testimonial.text }}</p>
+    </div>
+
+    <app-message-posting
+        *ngIf="posting"
+        [parentElement]="'coachPage'"
+        [coachId]="userData._id"
+        (hideInput)="updateTestimonialData(); closeFeedback()">
+    </app-message-posting>
+
+    <div id="testimonial-wrapper" *ngIf="!posting">
+        <div class="testimonial" *ngFor="let testimonial of coachData.testimonials">
+            <div class="testimonial-photo" routerLink="">
+                <img src="{{ testimonial.user.userPhoto }}">
+            </div>
+            <div class="testimonial-text-block">
+                <p class="testimonial-name" routerLink="">{{ testimonial.user.fullName }}</p>
+                <p class="testimonial-text">{{ testimonial.body }}</p>
+            </div>
         </div>
     </div>
 </div>

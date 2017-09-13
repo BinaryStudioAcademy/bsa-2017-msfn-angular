@@ -9,10 +9,10 @@
         </div>
 
         <div class="start-date" *ngIf="events.length > 0">
+            <span>{{interval.startDate}}</span>
             <md-input-container>
                 <input
                     mdInput
-                    value="startDate"
                     [mdDatepicker]="startPicker"
                     placeholder="Start Date"
                     [(ngModel)]="interval.startDate"
@@ -21,6 +21,7 @@
                 <button mdSuffix [mdDatepickerToggle]="startPicker"></button>
 -->
             </md-input-container>
+            <md-datepicker-toggle [for]="startPicker"></md-datepicker-toggle>
             <md-datepicker #startPicker></md-datepicker>
         </div>
 
@@ -28,7 +29,6 @@
             <md-input-container>
                 <input
                     mdInput
-                    value="endDate"
                     [mdDatepicker]="endPicker"
                     placeholder="End Date"
                     [(ngModel)]="interval.endDate"
@@ -37,6 +37,7 @@
                 <button mdSuffix [mdDatepickerToggle]="endPicker"></button>
 -->
             </md-input-container>
+            <md-datepicker-toggle [for]="endPicker"></md-datepicker-toggle>
             <md-datepicker #endPicker></md-datepicker>
         </div>
 

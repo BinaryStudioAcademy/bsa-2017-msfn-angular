@@ -20,20 +20,22 @@
                        [(ngModel)]="period.from"
                        [mdDatepicker]="period_from"
                        placeholder="from"
-                       (ngModelChange)="updateData()">
-                <button mdSuffix [mdDatepickerToggle]="period_from"></button>
+                       (ngModelChange)="updateData('from')"
+                       [max]="minMaxCalendarDate">
             </md-input-container>
             <md-datepicker #period_from></md-datepicker>
+            <md-datepicker-toggle [for]="period_from"></md-datepicker-toggle>
             <md-input-container>
                 <input mdInput
                        #filterDateTo
                        [(ngModel)]="period.to"
                        [mdDatepicker]="period_to"
                        placeholder="to"
-                       (ngModelChange)="updateData()">
-                <button mdSuffix [mdDatepickerToggle]="period_to"></button>
+                       (ngModelChange)="updateData('to')"
+                       [min]="minMaxCalendarDate">
             </md-input-container>
             <md-datepicker #period_to></md-datepicker>
+            <md-datepicker-toggle [for]="period_to"></md-datepicker-toggle>
         </div>
     </div>
 
