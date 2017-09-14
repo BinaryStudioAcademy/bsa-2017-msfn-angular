@@ -61,6 +61,7 @@
     "moment-timezone": "^0.5.13",
     "mongoose": "^4.11.5",
     "mongoose-ttl": "0.0.3",
+    "ng2-file-drop": "^1.1.0",
     "ng2-img-cropper": "^0.9.0",
     "ngx-toastr": "^6.0.1",
     "node-fetch": "^1.7.3",

@@ -10,6 +10,7 @@ import { IUser } from '../../../../models/user';
 import { ToasterService } from '../../../../services/toastr.service';
 import { AddNewEmailDialogComponent } from '../../../../components/add-new-email-dialog/add-new-email-dialog.component';
 import { ChangeRootEmailDialogComponent } from '../../../../components/change-root-email-dialog/change-root-email-dialog.component';
+import { Ng2FileDropAcceptedFile }  from 'ng2-file-drop';
 
 @Component({
     selector: 'app-profile',
@@ -44,6 +45,32 @@ export class ProfileComponent implements OnInit {
     requestForCoaching = false;
     coachingMessage: string;
 
+    private supportedFileTypes: string[] = ['image/png', 'image/jpeg', 'image/gif'];
+    /* tslint:enable:no-unused-variable */
+
+    private imageShown: boolean = false;
+    private currentProfileImage: string = 'assets/profile-placeholder.png';
+
+    //
+    // File being dragged has been dropped and is valid
+    //
+    /* tslint:disable:no-unused-variable */
+    private dragFileAccepted(acceptedFile: Ng2FileDropAcceptedFile) {
+        /* tslint:enable:no-unused-variable */
+
+        // Load the image in
+        let fileReader = new FileReader();
+        fileReader.onload = () => {
+
+            // Set and show the image
+            this.currentProfileImage = fileReader.result;
+            this.imageShown = true;
+        };
+
+        // Read in the file
+        fileReader.readAsDataURL(acceptedFile.file);
+    }
+
     constructor(private profileService: ProfileService,
                 private formBuilder: FormBuilder,
                 private dialog: MdDialog,
@@ -54,6 +81,19 @@ export class ProfileComponent implements OnInit {
         this.data = {
             image: this.image
         };
+    }
+
+    dragFileOverStart() {
+        console.log('start');
+    }
+
+    dragFileOverEnd() {
+        console.log('end');
+    }
+
+    dragFilesDropped(e) {
+        e.preventDefault();
+        console.log('drop');
     }
 
 

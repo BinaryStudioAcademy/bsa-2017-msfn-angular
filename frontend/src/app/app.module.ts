@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 // @angular
 import { ImportModule } from './import.module';
 import { NgModule } from '@angular/core';
+import { Ng2FileDropModule } from 'ng2-file-drop';
 
 // other components
 import { IsLoggedInGuard } from './guards/is-logged-in.guard';
@@ -54,7 +55,8 @@ import { TotalUnreadPipe } from './components/chat/pipes/total-unread.pipe';
         AdminModule,
         UserModule,
         AppRoutingModule,
-        CommonModule
+        CommonModule,
+        Ng2FileDropModule
     ],
     declarations: [
         AppComponent,
