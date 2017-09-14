@@ -9,6 +9,7 @@ const
     initFakeService = require('../../services/initFakeService'),
     isUserSessionUser = require('../../middleware/isUserSessionUser.js'),
     isAdmin = require('../../middleware/isAdminMiddleware'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     changeMailRoutes = require('./changeMailRoutes');
 
 module.exports = function (app) {
@@ -20,7 +21,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + 'me/measures', function (req, res, next) {
+    app.get(baseUrl + 'me/measures', isLoggedIn, function (req, res, next) {
         userRepository.getById(req.session.passport.user, function (err, data) {
             if(data.settings){
                 res.data = data.settings;
@@ -33,7 +34,7 @@ module.exports = function (app) {
     }, apiResponse);
 
 
-    app.get(baseUrl + 'me/weights', function (req, res, next) {
+    app.get(baseUrl + 'me/weights', isLoggedIn, function (req, res, next) {
         userRepository.getById(req.session.passport.user, function (err, data) {
             res.data = {};
             if(data.weight){
@@ -49,7 +50,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + 'me/oldstatus', function (req, res, next) {
+    app.get(baseUrl + 'me/oldstatus', isLoggedIn, function (req, res, next) {
         userRepository.getById(req.session.passport.user, function (err, data) {
             res.data = {
                 registrationDate: data.registrationDate,

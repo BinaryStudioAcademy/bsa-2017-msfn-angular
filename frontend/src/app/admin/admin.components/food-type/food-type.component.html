@@ -52,7 +52,7 @@
             <md-cell *cdkCellDef="let row"
                     [ngClass]="{'removed': row.isRemoved}"
                     (click)="openFoodTypeEditDialog(false, row)"
-                     class="active">{{row.parentType}}</md-cell>
+                     class="active">{{row.parentType && row.parentType.name}}</md-cell>
         </ng-container>
 
         <!-- delete-->

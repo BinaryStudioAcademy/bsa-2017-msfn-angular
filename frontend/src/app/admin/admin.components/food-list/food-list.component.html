@@ -32,7 +32,7 @@
                 <md-card-header>
                     <img md-card-avatar src="{{food.picture.length > 500 ? food.picture : food.picture + '?' + upd}}" *ngIf="food.picture"/>
                     <md-card-title>{{food.name}}</md-card-title>
-                    <md-card-subtitle>{{food.foodType}}</md-card-subtitle>
+                    <md-card-subtitle>{{food.foodType.name}}</md-card-subtitle>
                     <md-card-subtitle>{{food.vendor}}</md-card-subtitle>
                 </md-card-header>
                 <md-card-content>

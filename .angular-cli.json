@@ -18,9 +18,13 @@
             "tsconfig": "tsconfig.app.json",
             "prefix": "app",
             "styles": [
-                "styles.scss"
+                "styles.scss",
+                "../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"
             ],
-            "scripts": [],
+            "scripts": [
+                "../node_modules/jquery/dist/jquery.min.js",
+                "../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"
+            ],
             "environmentSource": "environments/environment.ts",
             "environments": {
                 "dev": "environments/environment.ts",

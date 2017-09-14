@@ -2,7 +2,7 @@ export interface IFood {
     _id?: string;
     name: string;
     measure: string;
-    foodType: string;
+    foodType: any;
     kcal?: number;
     protein?: number;
     fat?: number;
@@ -12,4 +12,6 @@ export interface IFood {
     picture?: string;
     customUserId?: string;
     isRemoved?: boolean;
+    checked?: boolean;
+    count?: number;
 }

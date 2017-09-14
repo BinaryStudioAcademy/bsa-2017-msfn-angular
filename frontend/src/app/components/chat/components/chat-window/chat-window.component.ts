@@ -25,7 +25,9 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
                 private chatService: ChatService) {}
 
     ngOnInit() {
-        this.messagesCount = this.chat.messages.length;
+        if (this.chat) {
+            this.messagesCount = this.chat.messages.length;
+        }
     }
 
     ngAfterViewInit() {

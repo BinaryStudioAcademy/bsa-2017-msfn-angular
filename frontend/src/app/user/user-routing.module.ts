@@ -26,7 +26,9 @@ import { ArticleAddComponent } from './user.components/article-add/article-add.c
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
-import {ArticleListComponent} from './user.components/article-list/article-list.component';
+import { ArticleListComponent } from './user.components/article-list/article-list.component';
+import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
+import { FoodPlanListComponent } from './user.components/food-plan-list/food-plan-list.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventCreateComponent } from './user.components/event-create/event-create.component';
@@ -133,6 +135,10 @@ const userRoutes: Routes = [
                 component: TrainingHistoryComponent
             },
             {
+                path: 'food/plan/add',
+                component: FoodPlanComponent
+            },
+            {
                 path: 'training-history/:id',
                 component: TrainingHistoryDetailComponent
             },
@@ -151,6 +157,18 @@ const userRoutes: Routes = [
             {
                 path: 'events/:id',
                 component: EventItemComponent
+            },
+            {
+                path: 'food-list',
+                component: FoodPlanListComponent
+            },
+            {
+                path: 'food-list/add',
+                component: FoodPlanComponent
+            },
+            {
+                path: 'food-list/:id',
+                component: FoodPlanComponent
             },
         ]
     }

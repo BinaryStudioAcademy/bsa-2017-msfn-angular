@@ -54,6 +54,12 @@ import { ArticleDetailComponent } from './user.components/article-detail/article
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import {ArticleListComponent} from './user.components/article-list/article-list.component';
+import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
+import { FoodPlanListComponent } from './user.components/food-plan-list/food-plan-list.component';
+import { SearchComponent } from './user.components/food-plan/search/search.component';
+import { WeeklyComponent } from './user.components/food-plan/weekly/weekly.component';
+import { DailyComponent } from './user.components/food-plan/daily/daily.component';
+import { ProductListComponent } from './user.components/food-plan/product-list/product-list.component';
 import { MessagePostingComponent } from './user.components/message-posting/message-posting.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 import { AchievementReceivedDialogComponent } from './user.components/achievement-received-dialog/achievement-received-dialog.component';
@@ -117,6 +123,13 @@ import { EventItemComponent } from './user.components/event-item/event-item.comp
         ArticleAddComponent,
         ArticleDetailComponent,
         TrainingHistoryComponent,
+        TrainingHistoryDetailComponent,
+        FoodPlanComponent,
+        FoodPlanListComponent,
+        SearchComponent,
+        WeeklyComponent,
+        DailyComponent,
+        ProductListComponent,
         TrainingHistoryDetailComponent,
         MessagePostingComponent,
         AchievementsListComponent,
