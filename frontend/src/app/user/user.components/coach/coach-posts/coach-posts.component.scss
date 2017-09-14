@@ -29,18 +29,19 @@
             display: inline-block;
             width: 70%;
             margin-bottom: $mini-indent;
-            font-size: $main-text;
+            font-size: $usual-text;
         }
 
         .post-date {
             width: 100%;
             margin-bottom: $mini-indent;
             font-size: $minor-text;
+            color: $text-shadowed-color;
         }
 
         .post-text {
             width: 100%;
-            font-size: $usual-text;
+            font-size: $main-text;
         }
     }
 }

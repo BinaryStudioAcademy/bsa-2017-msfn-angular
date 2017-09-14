@@ -128,7 +128,7 @@ h3 {
         .testimonial-name {
             display: inline-block;
             margin-bottom: $micro-indent;
-            font-size: $usual-text;
+            font-size: $minor-text;
         }
 
         .testimonial-name:hover {
@@ -137,7 +137,7 @@ h3 {
         }
 
         .testimonial-text {
-            font-size: $minor-text;
+            font-size: $usual-text;
         }
     }
 }
