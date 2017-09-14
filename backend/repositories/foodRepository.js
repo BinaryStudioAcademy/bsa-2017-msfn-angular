@@ -31,7 +31,7 @@ function getOnlyPublished(userId, callback) {
                 isPublished: true
             }
         ]
-    });
+    }).populate('foodType');
     query.exec(callback);
 
 }
@@ -54,7 +54,7 @@ function deleteById(id, userId, callback) {
 function getById(id, callback) {
     const query = this.model.find({
         _id: id,
-    });
+    }).populate('foodType');
     query.exec(callback);
 }
 
@@ -99,7 +99,7 @@ function getAllByType(userId, foodType, callback) {
                 foodType: foodType
             }
         ]
-    });
+    }).populate('foodType');
     query.exec(callback);
 }
 

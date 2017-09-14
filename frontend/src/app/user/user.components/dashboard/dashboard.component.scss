@@ -12,13 +12,13 @@
     justify-content: center;
     width: 100%;
     min-height: 100%;
-    padding: 20px 1%;
+    padding: $standard-indent 1%;
 
     .child {
-        padding: 20px;
-        flex: 48%;
         display: flex;
+        flex: 48%;
         margin: 5px;
+        padding: 15px;
         background: $gradient-to-color;
 
         .child-app {
@@ -107,18 +107,11 @@
 }
 
 
-@media only screen and (min-width: $medium-screen) {
-
-    #dashboard-container {
-        .child {
-            width: 90%;
-        }
-    }
-}
-
 @media only screen and (min-width: $large-screen) {
 
     .inner-container {
+        padding: $standard-indent;
+
         .content {
             md-paginator {
                 flex-wrap: initial;
@@ -128,18 +121,5 @@
                 margin: initial;
             }
         }
-    }
-}
-
-
-@media only screen and (max-width: $large-screen) {
-
-    #dashboard-container {
-        .child {
-            width: 90%;
-        }
-    }
-    .inner-container {
-        padding: 25px;
     }
 }

@@ -1,0 +1,57 @@
+<div class="content">
+  <div class="meals">
+    <div class="add-item" (click)="showForm();" *ngIf="!editableMeal">
+      <i class="material-icons">add</i>
+      <span>Add meal</span>
+    </div>
+    <div class="meal-form" *ngIf="editableMeal">
+      <md-input-container class="meal-name">
+        <input mdInput placeholder="Meal name" name="meal-name" required [(ngModel)]="editableMeal.name">
+      </md-input-container>
+      <div class="products" *ngIf="editableMeal.products.length || products">
+        <h4>Product list</h4>
+        <div class="list">
+          <div class="item" *ngFor="let product of editableMeal.products; let i = index;">
+            <div class="name">{{product.name}}</div>
+            <div class="quantity">{{product.quantity}}</div>
+            <div class="del" (click)="delItem(editableMeal.products, i)"><i class="material-icons">close</i> </div>
+          </div>
+          <div *ngIf="products">
+            <div class="item" *ngFor="let product of products.data.list; let i = index;">
+              <div class="name">{{product.name}}</div>
+              <div class="quantity">{{product.quantity}}</div>
+              <div class="del" (click)="delNewItem(products.data.list, i)"><i class="material-icons">close</i> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="add-product">
+                            <i class="material-icons">add</i>
+                            <span>Add product</span>
+                        </div> -->
+      <div class="buttons">
+        <div class="save" (click)="saveMeal();">
+          <span>  
+                                <i class="material-icons">check</i></span></div>
+        <div class="cancel" (click)="closeForm()">
+          <span>  
+                                <i class="material-icons">close</i></span></div>
+      </div>
+    </div>
+    <div class="meal" *ngFor="let meal of meals; let i = index;">
+      <h4>{{meal.name}}</h4>
+      <div class="kcal">{{meal.kcal}}</div>
+      <div class="products">
+        <div class="list" *ngIf="meal.products">
+          <div class="item" *ngFor="let product of meal.products">
+            <div class="name">{{product.name}}</div>
+            <div class="quantity">{{product.quantity}}</div>
+            <div class="kcal">{{product.kcal}} kcal</div>
+          </div>
+        </div>
+      </div>
+      <div class="edit" (click)="showForm(i)">
+        <i class="material-icons">mode_edit</i>
+      </div>
+    </div>
+  </div>

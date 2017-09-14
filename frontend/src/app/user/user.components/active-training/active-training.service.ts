@@ -44,12 +44,22 @@ export class ActiveTrainingService {
 
 
     addTraining(plan, callback) {
+        function checkDays(daysArr) {
+            if (!daysArr) { return false; }
+            const today = new Date().getDay();
+            let result = false;
+            daysArr.forEach(element => {
+                if (+element.key === today) {
+                    result = true;
+                }
+            });
+            return result;
+        }
         delete plan._id;
         delete plan.count;
-        delete plan.days;
         plan.startDate = new Date().toISOString();
-        // plan.planned = new Date().getDay() === plan.startDate;
-        // console.log(plan);
+        plan.planned = checkDays(plan.days);
+        delete plan.days;
         const sendData: IHttpReq = {
             url: '/api/launchedtraining',
             method: 'POST',

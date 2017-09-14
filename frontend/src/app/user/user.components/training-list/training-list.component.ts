@@ -16,7 +16,7 @@ export class TrainingListComponent implements OnInit {
 
     ngOnInit() {
         this.trainingListService.getPlans((response) => {
-            console.log(response);
+            // console.log(response);
             this.data = response;
         });
     }

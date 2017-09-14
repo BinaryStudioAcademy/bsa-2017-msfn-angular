@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Food = new Schema({
     name: {
@@ -7,8 +8,8 @@ const Food = new Schema({
         required: true
     },
     foodType: {
-        type: String,
-        default: 'Other'
+        type: ObjectId,
+        ref: 'FoodType'
     },
     kcal: Number,
     protein: Number,

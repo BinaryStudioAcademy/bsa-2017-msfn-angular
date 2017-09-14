@@ -1,9 +1,12 @@
 const ApiError = require('./apiErrorService');
 const foodRepository = require('../repositories/foodRepository');
 const mongoose = require('mongoose');
+const async = require('async');
+const parallel = require('async/parallel');
 
 function FoodService() {}
 
+FoodService.prototype.addAll = addAll;
 FoodService.prototype.getAllFood = getAllFood;
 FoodService.prototype.getOnlyPublishedFood = getOnlyPublishedFood;
 FoodService.prototype.deleteAllFood = deleteAllFood;
@@ -14,7 +17,25 @@ FoodService.prototype.updateFood = updateFood;
 FoodService.prototype.publishFood = publishFood;
 FoodService.prototype.deleteFood = deleteFood;
 
-
+function addAll(types, callback) {
+    let funcArray = [];
+    for (let i = 0; i < types.length; i++) {
+        const currentType = types[i];
+        const addFunc = (callback) => {
+            foodRepository.add(currentType, callback);
+        }
+        funcArray.push(addFunc);
+    }
+    async.parallel(funcArray,
+        (err, results) => {
+            let createdItems = [];
+            for (let i = 0; i < results.length; i++) {
+                let currentRes = results[i];
+                createdItems.push(currentRes[0]);
+            }
+            callback(err, {status: `Created ${results.length} food items `, items: createdItems});
+        });
+}
 function getOnlyPublishedFood(userId, callback) {
     foodRepository.getOnlyPublished(userId,(err, foodData) => {
         if (err) {

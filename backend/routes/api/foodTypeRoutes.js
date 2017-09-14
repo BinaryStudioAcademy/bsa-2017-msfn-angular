@@ -6,7 +6,7 @@ const
 
 module.exports = function(app) {
 
-    app.get(baseUrl, isAdmin, (req, res, next) => {
+    app.get(baseUrl, (req, res, next) => {
         foodTypeService.getAllFoodTypes((err, data) => {
             if (!data.length) {
                 data = [{}];

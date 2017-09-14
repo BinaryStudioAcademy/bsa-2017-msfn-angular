@@ -1,0 +1,10 @@
+<div id="train-container">
+    <h2>Food Plans</h2>
+    <div class="item-container" *ngFor="let item of data" (click)="openPlan(item._id)">
+        <md-icon>room_service</md-icon>
+        <p class="train-item-text">{{ item.title }}</p>
+    </div>
+    <div class="add-container" (click)="createPlan()">
+        <i class="material-icons add-item-ico">add</i>
+    </div>
+</div>

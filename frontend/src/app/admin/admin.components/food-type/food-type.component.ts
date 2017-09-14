@@ -44,6 +44,7 @@ export class FoodTypeComponent implements OnInit {
         );
         setTimeout(() => this.cd.markForCheck());
         this.foodService.getAllFoodTypes( (response) => {
+            console.log(response);
             this.tableDatabase.addFoodTypes(response);
         });
 

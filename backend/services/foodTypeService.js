@@ -1,10 +1,13 @@
 const ApiError = require('./apiErrorService');
 const FoodTypeRepository = require('../repositories/foodTypeRepository');
+const async = require('async');
+const parallel = require('async/parallel');
 
-function FoodTypeService() {}
+function FoodTypeService() { }
 
 FoodTypeService.prototype.getFoodTypeByName = getFoodTypeByName;
 FoodTypeService.prototype.addFoodType = addFoodType;
+FoodTypeService.prototype.addAll = addAll;
 FoodTypeService.prototype.updateFoodType = updateFoodType;
 FoodTypeService.prototype.deleteFoodType = deleteFoodType;
 FoodTypeService.prototype.getAllFoodTypes = getAllFoodTypes;
@@ -30,7 +33,7 @@ function addFoodType(body, callback) {
         if (data.name) {
             callback(new ApiError('Food type with such name already exists'));
         } else {
-            FoodTypeRepository.add( body, (err, foodTypeData) => {
+            FoodTypeRepository.add(body, (err, foodTypeData) => {
                 if (err) {
                     return callback(err);
                 }
@@ -42,6 +45,26 @@ function addFoodType(body, callback) {
             });
         }
     });
+}
+
+function addAll(types, callback) {
+    let funcArray = [];
+    for (let i = 0; i < types.length; i++) {
+        const currentType = types[i];
+        const addFunc = (callback) => {
+            FoodTypeRepository.add(currentType, callback);
+        }
+        funcArray.push(addFunc);
+    }
+    async.parallel(funcArray,
+        (err, results) => {
+            let createdTypes = [];
+            for (let i = 0; i < results.length; i++) {
+                let currentRes = results[i];
+                createdTypes.push(currentRes[0]);
+            }
+            callback(err, {status: `Created ${results.length} food types `, types: createdTypes});
+        });
 }
 
 function deleteFoodType(id, callback) {
@@ -71,7 +94,13 @@ function updateFoodType(id, body, callback) {
 }
 
 function getAllFoodTypes(callback) {
-    FoodTypeRepository.getAll((err, foodTypeData) => {
+    const params = {
+        filter: {
+            isRemoved: false,
+        },
+        populate: { path: 'parentType', select: ['name', '_id', 'depthLvl'] },
+    };
+    FoodTypeRepository.get(params, (err, foodTypeData) => {
         if (err) {
             return callback(err);
         }

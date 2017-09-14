@@ -21,14 +21,16 @@ export class PlanDetailComponent implements OnInit {
     exercisesList = [];
 
     days = [
-        {'key': '1', 'value': 'Mon', 'checked': false, code: 'MO'},
-        {'key': '2', 'value': 'Tue', 'checked': false, code: 'TU'},
-        {'key': '3', 'value': 'Wed', 'checked': false, code: 'WE'},
-        {'key': '4', 'value': 'Thu', 'checked': false, code: 'TH'},
-        {'key': '5', 'value': 'Fri', 'checked': false, code: 'FR'},
-        {'key': '6', 'value': 'Sat', 'checked': false, code: 'SA'},
-        {'key': '0', 'value': 'Sun', 'checked': false, code: 'SU'}
+        {'key': '1', 'checked': false},
+        {'key': '2', 'checked': false},
+        {'key': '3', 'checked': false},
+        {'key': '4', 'checked': false},
+        {'key': '5', 'checked': false},
+        {'key': '6', 'checked': false},
+        {'key': '0', 'checked': false}
     ];
+
+    weekDayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
     // sportTypeValue doesn't use.. ?
     sportTypeValue: string;
