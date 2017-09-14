@@ -63,6 +63,7 @@
     "mongoose-ttl": "0.0.3",
     "ng2-img-cropper": "^0.9.0",
     "ngx-malihu-scrollbar": "^1.2.1",
+    "ngx-slimscroll": "^3.3.3",
     "ngx-toastr": "^6.0.1",
     "node-fetch": "^1.7.3",
     "nodemailer": "^4.0.1",
