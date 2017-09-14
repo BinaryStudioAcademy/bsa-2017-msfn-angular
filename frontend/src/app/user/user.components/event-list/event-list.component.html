@@ -1,3 +1,26 @@
-<p>
-  event-list works!
-</p>
+<div id="event-list-container">
+    <h1>Event List</h1>
+    <div id="event-list">
+        <div class="event-item" *ngFor="let event of events">
+            <div id="event-text-block">
+                <p class="title">{{ event.title }}</p>
+                <div class="creator">
+                    <p>Event creator:</p>
+                    <div class="creator-avatar">
+                        <img src="{{ event.creator.userPhoto }}">
+                    </div>
+                    <p class="creator-name">{{ event.creator.fullName }}</p>
+                </div>
+                <div class="dates">
+                    <p class="startDate">From: {{ event.startDateOutput }}</p>
+                    <p class="endDate">Till: {{ event.endDateOutput }}</p>
+                </div>
+                <p class="location">Location: {{ event.location.name }}</p>
+            </div>
+
+            <div class="event-image">
+                <img src="{{ event.image }}">
+            </div>
+        </div>
+    </div>
+</div>

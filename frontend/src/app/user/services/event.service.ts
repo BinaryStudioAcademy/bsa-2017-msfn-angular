@@ -9,6 +9,19 @@ export class EventService {
     constructor(private httpService: HttpService) {
     }
 
+    getAllItems(callback) {
+        const req: IHttpReq = {
+            url: '/api/event',
+            method: 'GET',
+            body: {}
+        };
+
+        this.httpService.sendRequest(req)
+            .then(data => {
+                callback(data);
+            });
+    }
+
     createEvent(eventData, callback): void {
         const req: IHttpReq = {
             url: '/api/event',
@@ -17,8 +30,6 @@ export class EventService {
             successMessage: 'Event has been created',
             failMessage: 'Event creation has been failed'
         };
-
-        console.log(eventData);
 
         this.httpService.sendRequest(req)
             .then(data => callback(data));

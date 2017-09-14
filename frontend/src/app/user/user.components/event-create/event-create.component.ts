@@ -137,7 +137,7 @@ export class EventCreateComponent implements OnInit {
             this.hideCropper = true;
             return;
         }
-
+        console.log(file);
         const myReader: FileReader = new FileReader();
         this.type = file.type.split('/')[1];
 

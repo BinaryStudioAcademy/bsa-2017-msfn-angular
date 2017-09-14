@@ -5,6 +5,17 @@ const
     baseUrl = '/api/event/';
 
 module.exports = app => {
+    app.get(`${baseUrl}`, (req, res, next) => {
+        eventService.getAllItems((err, data) => {
+            if (!data.length) {
+                data = [{}];
+            }
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.get(`${baseUrl}user/:id`, (req, res, next) => {
         eventService.getItemsByUserId(req, (err, data) => {
             if (!data.length) {

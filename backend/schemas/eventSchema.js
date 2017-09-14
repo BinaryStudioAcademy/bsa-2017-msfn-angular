@@ -28,7 +28,7 @@ const Event = new Schema({
         name: String,
         coords: {
             lat: Number,
-            lng: Number
+            long: Number
         }
     },
     description: String,

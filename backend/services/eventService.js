@@ -3,11 +3,23 @@ const eventRepository = require('../repositories/eventRepository');
 
 function EventService() { }
 
+EventService.prototype.getAllItems = getAllItems;
 EventService.prototype.getItemsByUserId = getItemsByUserId;
 EventService.prototype.getItemsByDates = getItemsByDates;
 EventService.prototype.addItem = addItem;
 EventService.prototype.updateByOther = updateByOther;
 EventService.prototype.deleteItem = deleteItem;
+
+function getAllItems(callback) {
+    eventRepository.getAll((err, data) => {
+        if (err) return callback(err);
+        if (data === null) {
+            callback(null, []);
+        } else {
+            callback(null, data);
+        }
+    });
+}
 
 function getItemsByUserId(body, callback) {
     eventRepository.findByUserId(body.params.id, (err, data) => {

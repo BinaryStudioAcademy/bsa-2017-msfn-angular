@@ -8,10 +8,25 @@ function EventRepository() {
 
 EventRepository.prototype = new Repository();
 
+EventRepository.prototype.getAll = getAll;
 EventRepository.prototype.findByUserId = findByUserId;
 EventRepository.prototype.findByDates = findByDates;
 EventRepository.prototype.updateByOther = updateByOther;
 EventRepository.prototype.deleteById = deleteById;
+
+function getAll(callback) {
+    const query = this.model.find({})
+        .populate({
+            path: 'creator',
+            select: [
+                'firstName',
+                'lastName',
+                'fullName',
+                'userPhoto',
+            ]
+        });
+    query.exec(callback);
+}
 
 function findByUserId(userId, callback) {
     const query = this.model.find({
