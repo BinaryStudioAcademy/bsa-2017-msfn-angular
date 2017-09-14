@@ -58,6 +58,9 @@ import { MessagePostingComponent } from './user.components/message-posting/messa
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 import { AchievementReceivedDialogComponent } from './user.components/achievement-received-dialog/achievement-received-dialog.component';
 import { AchievementInfoDialogComponent } from './user.components/achievement-info-dialog/achievement-info-dialog.component';
+import { EventCreateComponent } from './user.components/event-create/event-create.component';
+import { EventListComponent } from './user.components/event-list/event-list.component';
+import { EventItemComponent } from './user.components/event-item/event-item.component';
 
 @NgModule({
     imports: [
@@ -119,6 +122,9 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
         AchievementsListComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
+        EventCreateComponent,
+        EventListComponent,
+        EventItemComponent,
     ],
     providers: [
         ForAllUserGuard,

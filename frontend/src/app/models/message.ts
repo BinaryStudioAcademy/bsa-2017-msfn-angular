@@ -3,5 +3,6 @@ export interface IMessage {
     body: string;
     user?: string;
     _id?: string;
+    event?: string;
     isRemoved?: boolean;
 }
