@@ -1,35 +1,123 @@
-<div id="article-container">
-    <h2>Creating an event</h2>
-    <div>
+<div id="event-container">
+    <h1>Creating an event</h1>
+    <div id="event-text-block">
         <md-input-container class="input-row">
-            <input autofocus mdInput type="text" name="title" placeholder="Title" required [(ngModel)]="event.title" [formControl]="titleFormControl">
-            <md-error *ngIf="titleFormControl.hasError('required')">
+            <input
+                mdInput
+                type="text"
+                name="title"
+                placeholder="Title"
+                required
+                [(ngModel)]="event.title"
+                [formControl]="titleInputControl">
+            <md-error *ngIf="titleInputControl.hasError('required')">
                 Title is required
             </md-error>
-            <md-error *ngIf="titleFormControl.hasError('maxlength')">
+            <md-error *ngIf="titleInputControl.hasError('maxlength')">
                 Title should contain less than 30 characters
             </md-error>
         </md-input-container>
 
-        <md-input-container class="input-row">
+        <md-input-container id="event-description" class="input-row">
             <textarea
                 mdInput
-                autofocus
                 type="text"
                 name="description"
                 placeholder="Description"
-                required
                 [(ngModel)]="event.description">
             </textarea>
         </md-input-container>
 
-        <div id="event-location">
-            <md-input-container class="input-row">
-                <input autofocus mdInput type="text" name="location" placeholder="Location" required [(ngModel)]="event.location">
-            </md-input-container>
-            <div id="map"></div>
+        <md-input-container class="input-row">
+            <input
+                mdInput
+                type="text"
+                name="location"
+                placeholder="Location"
+                [(ngModel)]="event.location.name">
+        </md-input-container>
+
+        <div id="event-dates">
+            <div class="date">
+                <md-input-container>
+                    <input
+                        mdInput
+                        [mdDatepicker]="startPicker"
+                        placeholder="Start Date"
+                        [(ngModel)]="event.startDate">
+                </md-input-container>
+                <md-datepicker-toggle [for]="startPicker"></md-datepicker-toggle>
+                <md-datepicker #startPicker></md-datepicker>
+            </div>
+
+            <div class="date">
+                <md-input-container>
+                    <input
+                        mdInput
+                        [mdDatepicker]="endPicker"
+                        placeholder="End Date"
+                        [(ngModel)]="event.endDate">
+                </md-input-container>
+                <md-datepicker-toggle [for]="endPicker"></md-datepicker-toggle>
+                <md-datepicker #endPicker></md-datepicker>
+            </div>
+        </div>
+    </div>
+
+    <div id="event-map">
+        <div class="tips">
+            <p>Drag the marker or click on the map to set a location</p>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <div id="image-button" *ngIf="hideCropper">
+        <button id="upload-image" md-button *ngIf="hideCropper">
+            <span>Upload image</span>
+            <input
+                class="upload"
+                type="file"
+                accept="image/*"
+                (change)="fileChangeListener($event)">
+        </button>
+    </div>
+
+    <div id="image-handler">
+        <img-cropper
+            class="img-cropper"
+            *ngIf="!hideCropper"
+            #cropper
+            [image]="data"
+            [settings]="cropperSettings">
+        </img-cropper>
+
+        <div class="cropper-buttons" *ngIf="!hideCropper">
+            <button class="cropper-btn save" (click)="cropperBtn('save')">
+                <i class="material-icons">check</i>
+            </button>
+            <button class="cropper-btn cancel" (click)="cropperBtn('cancel')">
+                <i class="material-icons">close</i>
+            </button>
         </div>
 
+        <div class="image-preview" *ngIf="data.image || event.image">
+            <img
+                *ngIf="!hideCropper"
+                [src]="data.image"
+                [width]="cropperSettings.croppedWidth"
+                [height]="cropperSettings.croppedHeight">
+            <img *ngIf="hideCropper" [src]="event.image">
+        </div>
+    </div>
 
+    <div id="submit-button">
+        <button
+            md-icon-button
+            type="submit"
+            (click)="createEvent()"
+            [disabled]="!event.title"
+            [style.background-color]="event.title ? '' : '#666'">
+            Create event
+        </button>
     </div>
 </div>

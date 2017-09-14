@@ -8,10 +8,11 @@ export interface IEvent {
         name: string,
         coords: {
             lat: number,
-            long: number
+            lng: number
         }
     };
     description?: string,
+    image?: string;
     participants?: [string];
     followers?: [string];
     messages?: [string];

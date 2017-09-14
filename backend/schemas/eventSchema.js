@@ -28,10 +28,11 @@ const Event = new Schema({
         name: String,
         coords: {
             lat: Number,
-            long: Number
+            lng: Number
         }
     },
     description: String,
+    image: String,
     participants: [
         {
             type: ObjectId,

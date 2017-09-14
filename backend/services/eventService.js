@@ -32,8 +32,10 @@ function getItemsByDates(body, callback) {
 }
 
 function addItem(body, callback) {
+    console.log('SERVICE1', body);
     if (body.creator && body.title && body.startDate) {
         eventRepository.add(body, (err, data) => {
+            console.log('SERVICE2', body);
             if (err) return callback(err);
             if (data === null) {
                 callback(null, []);
