@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import { WeightControlService } from '../../../weight-control/weight-control.service';
 import { DateService } from '../../../../../services/date.service';
 
@@ -21,6 +21,7 @@ export class DbWeightControlComponent implements OnChanges {
     @Input() weightItems: any[];
     gotData = false;
     weeklyItems = [];
+    destroy: boolean = false;
 
     diff = {
         recent: {
