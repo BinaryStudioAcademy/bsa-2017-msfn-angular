@@ -30,6 +30,9 @@ import { ArticleListComponent } from './user.components/article-list/article-lis
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
 import { FoodPlanListComponent } from './user.components/food-plan-list/food-plan-list.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
+import { EventListComponent } from './user.components/event-list/event-list.component';
+import { EventCreateComponent } from './user.components/event-create/event-create.component';
+import { EventItemComponent } from './user.components/event-item/event-item.component';
 
 const userRoutes: Routes = [
     {
@@ -144,9 +147,18 @@ const userRoutes: Routes = [
                 component: AchievementsListComponent
             },
             {
-                path: 'training-history/:id',
-                component: TrainingHistoryDetailComponent
-            }, {
+                path: 'events',
+                component: EventListComponent
+            },
+            {
+                path: 'events/create',
+                component: EventCreateComponent
+            },
+            {
+                path: 'events/:id',
+                component: EventItemComponent
+            },
+            {
                 path: 'food-list',
                 component: FoodPlanListComponent
             },

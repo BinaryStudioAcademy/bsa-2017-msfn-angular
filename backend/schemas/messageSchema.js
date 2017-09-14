@@ -9,6 +9,10 @@ const Message = new Schema({
     },
     date: Date,
     body: String,
+    event: {
+        type: ObjectId,
+        ref: 'Event'
+    },
     isRemoved: Boolean
 });
 
