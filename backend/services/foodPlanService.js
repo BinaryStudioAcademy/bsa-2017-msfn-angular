@@ -1,8 +1,7 @@
 const ApiError = require('./apiErrorService');
-const userRepository = require('../repositories/userRepository');
+const userService = require('./userService');
 const foodPlanRepository = require('../repositories/foodPlanRepository');
 const mongoose = require('mongoose');
-const objID = mongoose.Types;
 
 class foodPlanService {
 

@@ -53,9 +53,10 @@ import { ArticleAddComponent } from './user.components/article-add/article-add.c
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
-import {ArticleListComponent} from './user.components/article-list/article-list.component';
+import { ArticleListComponent } from './user.components/article-list/article-list.component';
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
 import { FoodPlanListComponent } from './user.components/food-plan-list/food-plan-list.component';
+import { FoodTrackingComponent } from './user.components/food-tracking/food-tracking.component';
 import { SearchComponent } from './user.components/food-plan/search/search.component';
 import { WeeklyComponent } from './user.components/food-plan/weekly/weekly.component';
 import { DailyComponent } from './user.components/food-plan/daily/daily.component';
@@ -126,6 +127,7 @@ import { EventItemComponent } from './user.components/event-item/event-item.comp
         TrainingHistoryDetailComponent,
         FoodPlanComponent,
         FoodPlanListComponent,
+        FoodTrackingComponent,
         SearchComponent,
         WeeklyComponent,
         DailyComponent,
