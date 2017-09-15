@@ -44,6 +44,7 @@
                         mdInput
                         [mdDatepicker]="startPicker"
                         placeholder="Start Date"
+                        [min]="datePickerMinMax"
                         [(ngModel)]="event.startDate">
                 </md-input-container>
                 <md-datepicker-toggle [for]="startPicker"></md-datepicker-toggle>
@@ -56,6 +57,7 @@
                         mdInput
                         [mdDatepicker]="endPicker"
                         placeholder="End Date"
+                        [min]="datePickerMinMax"
                         [(ngModel)]="event.endDate">
                 </md-input-container>
                 <md-datepicker-toggle [for]="endPicker"></md-datepicker-toggle>

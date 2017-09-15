@@ -1,15 +1,68 @@
 <div id="event-list-container">
     <h1>Event List</h1>
-    <div id="event-list">
+
+    <div id="event-period">
+        <div id="all-events-button" class="apply-button">
+            <button
+                md-icon-button
+                type="button"
+                (click)="getAllEvents()">
+                Show all events
+            </button>
+        </div>
+
+        <p>Select period:</p>
+
+        <div class="date">
+            <md-input-container>
+                <input
+                    mdInput
+                    [mdDatepicker]="startPicker"
+                    placeholder="Start Date"
+                    [(ngModel)]="period.startDate">
+            </md-input-container>
+            <md-datepicker-toggle [for]="startPicker"></md-datepicker-toggle>
+            <md-datepicker #startPicker></md-datepicker>
+        </div>
+
+        <div class="date">
+            <md-input-container>
+                <input
+                    mdInput
+                    [mdDatepicker]="endPicker"
+                    placeholder="End Date"
+                    [(ngModel)]="period.endDate">
+            </md-input-container>
+            <md-datepicker-toggle [for]="endPicker"></md-datepicker-toggle>
+            <md-datepicker #endPicker></md-datepicker>
+        </div>
+
+        <div id="period-events-button" class="apply-button">
+            <button
+                md-icon-button
+                type="button"
+                (click)="getPeriodEvents()">
+                Apply
+            </button>
+        </div>
+    </div>
+
+    <div id="event-list" *ngIf="events.length > 0">
         <div class="event-item" *ngFor="let event of events">
             <div id="event-text-block">
-                <p class="title">{{ event.title }}</p>
+                <a routerLink="/user/events/{{ event._id }}" routerLinkActive="active-link">
+                    <p class="title">{{ event.title }}</p>
+                </a>
                 <div class="creator">
                     <p>Event creator:</p>
                     <div class="creator-avatar">
-                        <img src="{{ event.creator.userPhoto }}">
+                        <a routerLink="/user/profile/{{ event.creator._id }}">
+                            <img src="{{ event.creator.userPhoto }}">
+                        </a>
                     </div>
-                    <p class="creator-name">{{ event.creator.fullName }}</p>
+                    <a routerLink="/user/profile/{{ event.creator._id }}">
+                        <p class="creator-name">{{ event.creator.fullName }}</p>
+                    </a>
                 </div>
                 <div class="dates">
                     <p class="startDate">From: {{ event.startDateOutput }}</p>
@@ -20,6 +73,24 @@
 
             <div class="event-image">
                 <img src="{{ event.image }}">
+            </div>
+
+            <div class="event-handle">
+                <div class="event-buttons">
+                        <button
+                            md-icon-button
+                            type="button"
+                            (click)="participatingAction(event)">
+                            {{ event.isParticipating ? 'UNPARTICIPATE' : 'PARTICIPATE' }} <span>{{ event.participants.length || ''}}</span>
+                        </button>
+                        <button
+                            md-icon-button
+                            type="button"
+                            (click)="followAction(event)">
+                            {{ event.isFollowing ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ event.followers.length || ''}}</span>
+                        </button>
+                </div>
+                <a class="more-link" routerLink="/user/events/{{ event._id }}" routerLinkActive="active-link">more ></a>
             </div>
         </div>
     </div>

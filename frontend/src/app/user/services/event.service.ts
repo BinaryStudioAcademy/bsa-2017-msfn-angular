@@ -9,6 +9,25 @@ export class EventService {
     constructor(private httpService: HttpService) {
     }
 
+    getItem(id: string, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/' + id,
+            method: 'GET',
+            body: {}
+        };
+
+        console.log(req);
+
+        this.httpService.sendRequest(req)
+            .then(data => {
+                if (!data[0].hasOwnProperty('creator')) {
+                    data = [];
+                }
+                console.log('SERVICE', data);
+                callback(data);
+            });
+    }
+
     getAllItems(callback) {
         const req: IHttpReq = {
             url: '/api/event',
@@ -18,6 +37,27 @@ export class EventService {
 
         this.httpService.sendRequest(req)
             .then(data => {
+                if (!data[0].hasOwnProperty('creator')) {
+                    data = [];
+                }
+                callback(data);
+            });
+    }
+
+    getPeriodItems(dates, callback) {
+        const startTimeStamp = dates.startDate.getTime();
+        const endTimeStamp = dates.endDate.getTime();
+        const req: IHttpReq = {
+            url: `/api/event/period/${startTimeStamp}/${endTimeStamp}`,
+            method: 'GET',
+            body: dates
+        };
+
+        this.httpService.sendRequest(req)
+            .then(data => {
+                if (!data[0].hasOwnProperty('creator')) {
+                    data = [];
+                }
                 callback(data);
             });
     }
@@ -75,5 +115,91 @@ export class EventService {
         cropperSettings.preserveSize = true;
         cropperSettings.touchRadius = 10;
         return cropperSettings;
+    }
+
+    getParticipants(id, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/participants/' + id,
+            method: 'GET',
+            body: {},
+            failMessage: 'Can\'t show participants'
+        };
+        this.httpService.sendRequest(req).then(data => {
+            console.log('PART DATA', data);
+            callback(data);
+        });
+    }
+
+    getFollowers(id, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/followers/' + id,
+            method: 'GET',
+            body: {},
+            failMessage: 'Can\'t show followers'
+        };
+        this.httpService.sendRequest(req).then(data => {
+            callback(data);
+        });
+    }
+
+    participate(eventId: string, userId: string, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/apply/' + eventId,
+            method: 'PUT',
+            body: {
+                fieldName: 'participants',
+                userId
+            }
+        };
+        this.httpService.sendRequest(req).then(data => {
+            if (data) {
+                callback(null, data);
+            }
+        });
+    }
+
+    unparticipate(eventId: string, userId: string, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/unparticipate/' + eventId,
+            method: 'PUT',
+            body: {
+                userId
+            }
+        };
+        this.httpService.sendRequest(req).then(data => {
+            if (data) {
+                callback(null, data);
+            }
+        });
+    }
+
+    follow(eventId: string, userId: string, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/follow/' + eventId,
+            method: 'PUT',
+            body: {
+                userId
+            }
+        };
+        this.httpService.sendRequest(req).then(data => {
+            if (data) {
+                callback(null, data);
+            }
+        });
+    }
+
+    unfollow(eventId: string, userId: string, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/unfollow/' + eventId,
+            method: 'PUT',
+            body: {
+                userId
+            }
+        };
+        this.httpService.sendRequest(req).then(data => {
+            if (data) {
+                callback(null, data);
+            }
+        });
     }
 }

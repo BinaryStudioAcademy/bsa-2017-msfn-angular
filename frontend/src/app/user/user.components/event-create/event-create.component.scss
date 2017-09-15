@@ -45,6 +45,8 @@
             width: 100%;
 
             .date {
+                display: flex;
+                flex-flow: row nowrap;
             }
         }
     }
