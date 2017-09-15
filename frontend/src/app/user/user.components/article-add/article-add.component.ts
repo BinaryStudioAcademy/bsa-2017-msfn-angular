@@ -16,19 +16,14 @@ import { ArticleDetailComponent } from './../article-detail/article-detail.compo
     styleUrls: ['./article-add.component.scss']
 })
 export class ArticleAddComponent implements OnInit {
-    article: IArticle = {
-        title: '',
-        detail: '',
-        preview: '',
-        image: ''
-    };
+    article: IArticle;
     image: any = new Image();
     type: string;
     cropperSettings: CropperSettings;
     data: any;
     converted: {
-        detail: '',
-        preview: ''
+        detail: string,
+        preview: string
     };
     @ViewChild('cropper', undefined)
     cropper: ImageCropperComponent;
@@ -54,6 +49,17 @@ export class ArticleAddComponent implements OnInit {
                 };
 
             });
+        } else {
+            this.article = {
+                title: '',
+                detail: '',
+                preview: '',
+                image: ''
+            };
+            this.converted = {
+                preview: '',
+                detail: ''
+            };
         }
     }
 
