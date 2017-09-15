@@ -37,6 +37,10 @@
             cursor: pointer;
             outline: none;
         }
+        .products-error {
+            text-align: center;
+            color: $error-color;
+        }
         .add-product {
             display: flex;
             align-items: center;

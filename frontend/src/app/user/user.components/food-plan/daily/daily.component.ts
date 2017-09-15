@@ -55,6 +55,8 @@ export class DailyComponent implements OnInit, OnDestroy {
 
     closeForm() {
         this.editableMeal = false;
+        this.editableMeal.errorName = false;
+        this.editableMeal.errorProducts = false;
         const sendData = {
             show: false,
             list: []
@@ -63,31 +65,38 @@ export class DailyComponent implements OnInit, OnDestroy {
     }
 
     saveMeal() {
-        const meal2Save = this.editableMeal;
-        if (meal2Save.name.length > 0) {
+        if (this.editableMeal.name.length > 0) {
+            this.editableMeal.errorName = false;
+            const meal2Save = this.editableMeal;
             if (this.products.data.list) {
                 meal2Save.products = meal2Save.products.concat(this.products.data.list);
             }
-            let mealKcal = 0;
-            meal2Save.products.forEach(element => {
-                mealKcal += parseFloat(element.kcal);
-            });
-            meal2Save.kcal = mealKcal;
-            const mealId: number = this.editableMealId;
-            if (mealId >= 0) {
-                this.meals[mealId] = meal2Save;
-                this.editableMealId = NaN;
+            if (meal2Save.product) {
+                let mealKcal = 0;
+                meal2Save.products.forEach(element => {
+                    mealKcal += parseFloat(element.kcal);
+                });
+                meal2Save.kcal = mealKcal;
+                const mealId: number = this.editableMealId;
+                if (mealId >= 0) {
+                    this.meals[mealId] = meal2Save;
+                    this.editableMealId = NaN;
+                } else {
+                    this.meals.push(meal2Save);
+                }
+                const sendData = {
+                    show: false,
+                    list: []
+                };
+
+                this.editableMeal = false;
+
+                this.foodPlanService.sendProductList(sendData);
             } else {
-                this.meals.push(meal2Save);
+                this.editableMeal.errorProducts = true;
             }
-            const sendData = {
-                show: false,
-                list: []
-            };
-
-            this.editableMeal = false;
-
-            this.foodPlanService.sendProductList(sendData);
+        } else {
+            this.editableMeal.errorName = true;
         }
         return true;
     }

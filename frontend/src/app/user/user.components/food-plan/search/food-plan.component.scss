@@ -5,10 +5,7 @@
     width: 100%;
     min-height: 100%;
     padding: 20px 6%;
-    .error .mat-input-underline.mat-form-field-underline{
-        border-bottom: 1px solid $error-color;
-    }
-    .error .mat-input-placeholder{
+    .error input{
         color: $error-color;
     }
     .general-info {

@@ -19,6 +19,11 @@
     margin: $content-tb-margin auto;
 }
 
+.title {
+    flex: 100%;
+    text-align: center;
+}
+
 .item-container {
     display: flex;
     align-items: center;
