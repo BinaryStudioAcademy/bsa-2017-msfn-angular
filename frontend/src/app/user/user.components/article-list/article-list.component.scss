@@ -5,6 +5,10 @@
 .articles-container {
     padding: 0 15px 10px 15px;
 
+    .title {
+        text-align: center;
+    }
+
     .articles-header {
         position: relative;
         display: flex;
