@@ -15,7 +15,6 @@ export class AdminComponent implements OnInit {
     }
 
     swipe(sidebar, swypetype) {
-        console.log('sas');
         if (swypetype === 'swiperight') {
             sidebar.classList.remove('hide');
         } else if (swypetype === 'swipeleft') {
