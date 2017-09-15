@@ -59,7 +59,7 @@ export class ArticleAddComponent implements OnInit {
             this.converted = {
                 preview: '',
                 detail: ''
-            }
+            };
         }
     }
 

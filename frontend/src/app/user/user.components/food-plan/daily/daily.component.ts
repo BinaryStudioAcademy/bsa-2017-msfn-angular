@@ -68,10 +68,12 @@ export class DailyComponent implements OnInit, OnDestroy {
         if (this.editableMeal.name.length > 0) {
             this.editableMeal.errorName = false;
             const meal2Save = this.editableMeal;
-            if (this.products.data.list) {
-                meal2Save.products = meal2Save.products.concat(this.products.data.list);
-            }
-            if (meal2Save.product) {
+            if ((meal2Save.products.length > 0) || this.products.data.list.length) {
+
+                if (this.products.data.list) {
+                    meal2Save.products = meal2Save.products.concat(this.products.data.list);
+                }
+
                 let mealKcal = 0;
                 meal2Save.products.forEach(element => {
                     mealKcal += parseFloat(element.kcal);

@@ -131,11 +131,11 @@ export class WeeklyComponent implements OnInit, OnDestroy {
         const meal2Save = day.editMealObj;
         if (meal2Save.name.length > 0) {
             day.errorName = false;
+            if ((meal2Save.products.length > 0) || this.products.data.list.length) {
+                if (this.products.data.list) {
+                    meal2Save.products = meal2Save.products.concat(this.products.data.list);
+                }
 
-            if (this.products.data.list) {
-                meal2Save.products = meal2Save.products.concat(this.products.data.list);
-            }
-            if (meal2Save.product) {
                 day.errorProducts = false;
                 let mealKcal = 0;
                 meal2Save.products.forEach(element => {
