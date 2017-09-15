@@ -63,13 +63,13 @@ function findByUserId(userId, callback) {
     query.exec(callback);
 }
 
-function findByDates(fromDate, toDate, callback) {
+function findByDates(startDate, endDate, callback) {
     const query = this.model.find({
         $and: [
             {
                 startDate: {
-                    $gt: fromDate,
-                    $lt: toDate
+                    $gt: startDate,
+                    $lt: endDate
                 }
             },
             {

@@ -18,6 +18,27 @@ export class EventService {
 
         this.httpService.sendRequest(req)
             .then(data => {
+                if (!data[0].hasOwnProperty('creator')) {
+                    data = [];
+                }
+                callback(data);
+            });
+    }
+
+    getPeriodItems(dates, callback) {
+        const startTimeStamp = dates.startDate.getTime();
+        const endTimeStamp = dates.endDate.getTime();
+        const req: IHttpReq = {
+            url: `/api/event/period/${startTimeStamp}/${endTimeStamp}`,
+            method: 'GET',
+            body: dates
+        };
+
+        this.httpService.sendRequest(req)
+            .then(data => {
+                if (!data[0].hasOwnProperty('creator')) {
+                    data = [];
+                }
                 callback(data);
             });
     }

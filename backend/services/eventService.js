@@ -33,7 +33,9 @@ function getItemsByUserId(body, callback) {
 }
 
 function getItemsByDates(body, callback) {
-    eventRepository.findByDates(body, (err, data) => {
+    const startDate = new Date(parseInt(body.startTimeStamp));
+    const endDate = new Date(parseInt(body.endTimeStamp));
+    eventRepository.findByDates(startDate, endDate, (err, data) => {
         if (err) return callback(err);
         if (data === null) {
             callback(null, []);
@@ -44,10 +46,8 @@ function getItemsByDates(body, callback) {
 }
 
 function addItem(body, callback) {
-    console.log('SERVICE1', body);
     if (body.creator && body.title && body.startDate) {
         eventRepository.add(body, (err, data) => {
-            console.log('SERVICE2', body);
             if (err) return callback(err);
             if (data === null) {
                 callback(null, []);

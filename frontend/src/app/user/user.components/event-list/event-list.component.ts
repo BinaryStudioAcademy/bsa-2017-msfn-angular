@@ -17,23 +17,41 @@ export class EventListComponent implements OnInit {
                 private dateService: DateService) {
     }
 
-    events = [];
+    period = {
+        startDate: new Date,
+        endDate:  new Date(new Date().getTime() + 604800000)
+    };
+    events: any[] = [];
 
     ngOnInit() {
-        this.getEvents();
+        this.getAllEvents();
+        console.log(this.period);
     }
 
-    getEvents() {
+    getAllEvents(): void {
+        this.events = [];
         this.eventService.getAllItems(data => {
             this.events = data;
             console.log(data);
-
-            for (const event of this.events) {
-                event.startDateOutput = this.dateService
-                    .convertDateToIso(new Date(event.startDate), true);
-                event.endDateOutput = this.dateService
-                    .convertDateToIso(new Date(event.endDate), true);
-            }
+            this.setDateOutput(this.events);
         });
+    }
+
+    getPeriodEvents(): void {
+        this.events = [];
+        this.eventService.getPeriodItems(this.period, data => {
+            this.events = data;
+            console.log(data);
+            this.setDateOutput(this.events);
+        });
+    }
+
+    setDateOutput(items: any[]): void {
+        for (const item of items) {
+            item.startDateOutput = this.dateService
+                .convertDateToIso(new Date(item.startDate), true);
+            item.endDateOutput = this.dateService
+                .convertDateToIso(new Date(item.endDate), true);
+        }
     }
 }

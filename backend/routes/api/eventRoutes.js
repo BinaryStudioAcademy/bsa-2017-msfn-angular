@@ -27,8 +27,8 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.get(`${baseUrl}dates`, (req, res, next) => {
-        eventService.getItemsByDates(req, (err, data) => {
+    app.get(`${baseUrl}period/:startTimeStamp/:endTimeStamp`, (req, res, next) => {
+        eventService.getItemsByDates(req.params, (err, data) => {
             if (!data.length) {
                 data = [{}];
             }
