@@ -118,6 +118,8 @@ export class WeeklyComponent implements OnInit, OnDestroy {
 
     closeForm(day) {
         day.editMeal = false;
+        day.errorName = false;
+        day.errorProducts = false;
         const sendData = {
             show: false,
             list: []
@@ -128,28 +130,36 @@ export class WeeklyComponent implements OnInit, OnDestroy {
     saveMeal(day) {
         const meal2Save = day.editMealObj;
         if (meal2Save.name.length > 0) {
+            day.errorName = false;
 
             if (this.products.data.list) {
                 meal2Save.products = meal2Save.products.concat(this.products.data.list);
             }
-            let mealKcal = 0;
-            meal2Save.products.forEach(element => {
-                mealKcal += parseFloat(element.kcal);
-            });
-            meal2Save.kcal = mealKcal;
-            const mealId: number = day.editMealId;
-            if (mealId >= 0) {
-                day.meals[mealId] = meal2Save;
-                delete day.editMealId;
+            if (meal2Save.product) {
+                day.errorProducts = false;
+                let mealKcal = 0;
+                meal2Save.products.forEach(element => {
+                    mealKcal += parseFloat(element.kcal);
+                });
+                meal2Save.kcal = mealKcal;
+                const mealId: number = day.editMealId;
+                if (mealId >= 0) {
+                    day.meals[mealId] = meal2Save;
+                    delete day.editMealId;
+                } else {
+                    day.meals.push(meal2Save);
+                }
+                day.editMeal = false;
+                const sendData = {
+                    show: false,
+                    list: []
+                };
+                this.foodPlanService.sendProductList(sendData);
             } else {
-                day.meals.push(meal2Save);
+                day.errorProducts = true;
             }
-            day.editMeal = false;
-            const sendData = {
-                show: false,
-                list: []
-            };
-            this.foodPlanService.sendProductList(sendData);
+        } else {
+            day.errorName = true;
         }
         return true;
     }

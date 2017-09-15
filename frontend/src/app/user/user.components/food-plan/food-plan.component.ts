@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoodPlanService } from './food-plan.service';
 import { WeeklyComponent } from './weekly/weekly.component';
@@ -10,7 +10,9 @@ import { Subscription } from 'rxjs/Subscription';
     selector: 'app-food-plan',
     templateUrl: './food-plan.component.html',
     styleUrls: ['./food-plan.component.scss'],
-    providers: [FoodPlanService]
+    providers: [FoodPlanService],
+    encapsulation: ViewEncapsulation.None
+    
 })
 export class FoodPlanComponent implements OnInit {
 
@@ -20,6 +22,7 @@ export class FoodPlanComponent implements OnInit {
         days: [],
         meals: [],
         _id: '',
+        errorName: false
     };
 
     @ViewChild(WeeklyComponent)
@@ -54,6 +57,10 @@ export class FoodPlanComponent implements OnInit {
         return true;
     }
     savePlan() {
+        if(this.foodplan.title.length === 0){
+            this.foodplan.errorName = true;
+            return false;
+        }
         if (this.weeklyData) {
             const daysPlan = this.weeklyData.days;
             daysPlan.forEach(day => {

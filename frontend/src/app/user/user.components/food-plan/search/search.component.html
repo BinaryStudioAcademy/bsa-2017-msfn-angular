@@ -69,7 +69,7 @@
                       {{food.vendor.length > 5 ? food.vendor.substring(0,3)+'...' : food.vendor}}
                   </span>
                     <span class="food-part">{{food.carbons}}, {{food.protein}}, {{food.fat}}</span>
-                    <md-input-container>
+                    <md-input-container [ngClass]="(food.errorCount) ? 'error' : '' ">
                         <input mdInput type="number" [(ngModel)]="food.count">
                     </md-input-container>
                     <span>{{measurements[food.measure]}}</span>

@@ -14,4 +14,5 @@ export interface IFood {
     isRemoved?: boolean;
     checked?: boolean;
     count?: number;
+    errorCount?: boolean;
 }

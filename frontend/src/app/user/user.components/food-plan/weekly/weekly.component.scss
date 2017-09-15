@@ -55,6 +55,10 @@
                     display: flex;
                     align-items: center;
                 }
+                .products-error {
+                    text-align: center;
+                    color: $error-color;
+                }
                 .buttons {
                     display: flex;
                     justify-content: space-around;

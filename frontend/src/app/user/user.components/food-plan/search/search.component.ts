@@ -41,7 +41,7 @@ export class SearchComponent implements OnInit {
         this.foodPlanService.getFood(res => {
             res.forEach((el, ind) => {
                 el.checked = false;
-                el.count = 0;
+                el.count = undefined;
                 return true;
             });
             this.foods = res;
@@ -174,20 +174,25 @@ export class SearchComponent implements OnInit {
     addOne(id) {
         let formatedItem = {};
         this.foods.forEach((food) => {
-            if (food._id === id && food.count > 0) {
-                formatedItem = this.formateFoodItem(food);
-                food.checked = false;
-                food.count = 0;
-                let sendList = {
-                    list: [],
-                    show: true
-                };
-                if (this.currentMealProducts) {
-                    sendList = this.currentMealProducts.data;
-                }
-                sendList.list.push(formatedItem);
-                this.foodPlanService.sendProductList(sendList);
+            if (food._id === id) {
+                if (food.count > 0) {
+                    food.errorCount = false;
+                    formatedItem = this.formateFoodItem(food);
+                    food.checked = false;
+                    food.count = undefined;
+                    let sendList = {
+                        list: [],
+                        show: true
+                    };
+                    if (this.currentMealProducts) {
+                        sendList = this.currentMealProducts.data;
+                    }
+                    sendList.list.push(formatedItem);
+                    this.foodPlanService.sendProductList(sendList);
 
+                } else {
+                    food.errorCount = true;
+                }
             }
             return true;
 

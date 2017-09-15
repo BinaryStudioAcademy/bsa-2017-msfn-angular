@@ -5,10 +5,10 @@
       <span>Add meal</span>
     </div>
     <div class="meal-form" *ngIf="editableMeal">
-      <md-input-container class="meal-name">
+      <md-input-container class="meal-name" [ngClass]="(editableMeal.errorName) ? 'error' : '' ">
         <input mdInput placeholder="Meal name" name="meal-name" required [(ngModel)]="editableMeal.name">
       </md-input-container>
-      <div class="products" *ngIf="editableMeal.products.length || products">
+      <div class="products" *ngIf="editableMeal.products.length || products.data.list.length">
         <h4>Product list</h4>
         <div class="list">
           <div class="item" *ngFor="let product of editableMeal.products; let i = index;">
@@ -24,6 +24,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="products-error" *ngIf="editableMeal.errorProducts">
+        Please select some products
       </div>
       <!-- <div class="add-product">
                             <i class="material-icons">add</i>
