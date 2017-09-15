@@ -1,0 +1,93 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/text.scss';
+@import '../../../../globalStyles/indentations';
+
+#event-list-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 70%;
+    margin: 0 auto;
+
+    h1 {
+        width: 100%;
+        margin: $macro-indent auto;
+        text-align: center;
+    }
+
+    #event-list {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .event-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: $macro-indent;
+        padding: $standard-indent 0;
+        border-bottom: 1px solid $text-main-color;
+    }
+
+    #event-text-block {
+        width: 45%;
+        margin-right: 50px;
+        font-size: $main-text;
+
+        p {
+            width: 100%;
+            margin-bottom: $large-indent;
+        }
+
+        .title {
+            margin-top: 0;
+            font-size: $large-text;
+            font-weight: 600;
+        }
+
+        .creator {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: $main-text;
+
+            .creator-avatar {
+                display: inline-block;
+                width: 12%;
+                margin-right: $standard-indent;
+                vertical-align: top;
+
+                img {
+                    width: 44px;
+                    border-radius: 22px;
+                }
+            }
+
+            .creator-name {
+                text-align: right;
+            }
+        }
+
+        #event-location {
+            width: 100%;
+        }
+
+        .dates {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            .endDate {
+                text-align: right;
+            }
+        }
+    }
+
+    .event-image {
+        width: 45%;
+
+        img {
+            height: 200px;
+            float: right;
+        }
+    }
+}

@@ -24,6 +24,7 @@
         float: right;
         text-align: right;
         font-size: $minor-text;
+        color: $text-shadowed-color;
     }
 
     .article-image {
@@ -54,7 +55,7 @@
             float: right;
             margin: $mini-indent 0;
             font-size: $main-text;
-            color: $text-main-color;
+            color: $text-shadowed-color;
         }
     }
 }

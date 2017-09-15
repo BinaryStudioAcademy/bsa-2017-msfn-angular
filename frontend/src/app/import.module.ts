@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { SortablejsModule } from 'angular-sortablejs';
 import { ToastrModule } from 'ngx-toastr';
+import { NgSlimScrollModule, ISlimScrollOptions, SlimScrollEvent  } from 'ngx-slimscroll';
 import {
     MdSnackBarModule,
     MdChipsModule,
@@ -55,7 +56,8 @@ import { GCalendarService } from './services/gcalendar.service';
         MdAutocompleteModule,
         MdInputModule,
         MdTabsModule,
-        SortablejsModule
+        SortablejsModule,
+        NgSlimScrollModule
     ],
     exports: [
         MdIconModule,
@@ -91,15 +93,16 @@ import { GCalendarService } from './services/gcalendar.service';
         MdNativeDateModule,
         SortablejsModule,
         MdSliderModule,
-        MdProgressBarModule
+        MdProgressBarModule,
+        NgSlimScrollModule
     ],
     declarations: [
         ListComponent,
-        AutocompletePipe
+        AutocompletePipe,
     ],
     providers: [
         D3Service,
-        GCalendarService
+        GCalendarService,
     ]
 })
 

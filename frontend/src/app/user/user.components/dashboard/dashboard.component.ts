@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './dashboard.service';
-import { GoalProgressService } from '../../../services/goal-progress.service';
+import { GoalProgressService } from '../../services/goal-progress.service';
 import { WeightControlService } from '../weight-control/weight-control.service';
 import { DateService } from '../../../services/date.service';
 import { IUser } from '../../../models/user';

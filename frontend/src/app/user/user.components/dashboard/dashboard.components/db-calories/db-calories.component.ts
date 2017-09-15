@@ -154,7 +154,7 @@ export class DbCaloriesComponent implements OnInit {
             })
             .attr('width', barWidth)
             .attr('fill', () => {
-                return '#7da7d9';
+                return '#82ca9c';
             })
             .on('mouseover', d => {
                 this.showTip(d, svg);
@@ -211,7 +211,7 @@ export class DbCaloriesComponent implements OnInit {
 
         this.d3.select(target).transition()
             .duration(100)
-            .attr('fill', '#82ca9c');
+            .attr('fill', '#556d5b');
     }
 
     hideTip() {
@@ -224,6 +224,6 @@ export class DbCaloriesComponent implements OnInit {
 
         this.d3.select(target).transition()
             .duration(100)
-            .attr('fill', '#7da7d9');
+            .attr('fill', '#82ca9c');
     }
 }

@@ -15,10 +15,19 @@ import {ConstantsService} from './services/constants.service';
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     isLoggedIn = false;
     constructor(private _windowObj: WindowObj,
                 public constantsService: ConstantsService) {
         this.isLoggedIn = this._windowObj.data._injectedData.isLoggedIn;
+    }
+
+    ngOnInit() {
+        setTimeout(() => {
+            const scroll = document.getElementsByClassName('slimscroll-wrapper');
+            for (let i = 0; i < scroll.length; i++) {
+                scroll[i]['style'].height = '100%';
+            }
+        }, 2000);
     }
 }
