@@ -140,14 +140,35 @@
         }
     }
 
-    .more-link {
+    .event-handle {
         width: 100%;
-        text-align: right;
         font-size: $main-text;
         color: $text-main-color;
 
+        .event-buttons {
+            display: inline-block;
+            width: 50%;
+
+            button {
+                width: 90%;
+                max-width: 160px;
+                height: 40px;
+                margin-right: $macro-indent;
+                border: none;
+                border-radius: 20px;
+                outline: none;
+                font-size: $main-text;
+                font-weight: 600;
+                background: $main-color;
+            }
+        }
+
         a {
+            width: 50%;
+            float: right;
+            text-align: right;
             text-decoration: underline;
+            color: $text-main-color;
         }
 
         a:hover {

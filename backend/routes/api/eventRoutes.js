@@ -38,6 +38,22 @@ module.exports = app => {
         });
     }, apiResponse);
 
+    app.get(`${baseUrl}participants/:id`, (req, res, next) => {
+        eventService.getParticipants(req, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(`${baseUrl}followers/:id`, (req, res, next) => {
+        eventService.getFollowers(req, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.post(baseUrl, (req, res, next) => {
         eventService.addItem(req.body, (err, data) => {
             res.data = data;
@@ -54,8 +70,8 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.put(`${baseUrl}:id/apply`, (req, res, next) => {
-        EventService.updateByOther(req.params.id, req.body, (err, data) => {
+    app.put(`${baseUrl}apply/:id`, (req, res, next) => {
+        eventService.applyUser(req.params.id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();

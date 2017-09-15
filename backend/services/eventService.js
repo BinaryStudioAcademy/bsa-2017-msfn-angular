@@ -5,9 +5,11 @@ function EventService() { }
 
 EventService.prototype.getAllItems = getAllItems;
 EventService.prototype.getItemsByUserId = getItemsByUserId;
+EventService.prototype.getFollowers = getFollowers;
+EventService.prototype.getParticipants = getParticipants;
 EventService.prototype.getItemsByDates = getItemsByDates;
 EventService.prototype.addItem = addItem;
-EventService.prototype.updateByOther = updateByOther;
+EventService.prototype.applyUser = applyUser;
 EventService.prototype.deleteItem = deleteItem;
 
 function getAllItems(callback) {
@@ -45,6 +47,20 @@ function getItemsByDates(body, callback) {
     });
 }
 
+function getParticipants(body, callback) {
+    const eventId = body.params.id;
+    eventRepository.getParticipants(eventId, (err, data) => {
+        callback(err, data);
+    });
+}
+
+function getFollowers(body, callback) {
+    const eventId = body.params.id;
+    eventRepository.getFollowers(eventId, (err, data) => {
+        callback(err, data);
+    });
+}
+
 function addItem(body, callback) {
     if (body.creator && body.title && body.startDate) {
         eventRepository.add(body, (err, data) => {
@@ -60,15 +76,16 @@ function addItem(body, callback) {
     }
 }
 
-function updateByOther(id, body, callback) {
-    eventRepository.updateByOther(id, body, (err, data) => {
+function applyUser(eventId, body, callback) {
+    eventRepository.getById(eventId, (err, data) => {
         if (err) return callback(err);
-        if (data === null) {
-            callback(null, []);
+
+        if (data === null){
+            callback(new ApiError('Event not found'));
         } else {
-            callback(null, data);
+            eventRepository.applyUser(eventId, body, callback);
         }
-    });
+    })
 }
 
 function deleteItem(id, userId, callback) {

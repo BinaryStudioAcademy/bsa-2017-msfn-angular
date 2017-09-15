@@ -97,4 +97,90 @@ export class EventService {
         cropperSettings.touchRadius = 10;
         return cropperSettings;
     }
+
+    getParticipants(id, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/participants/' + id,
+            method: 'GET',
+            body: {},
+            failMessage: 'Can\'t show participants'
+        };
+        this.httpService.sendRequest(req).then(data => {
+            console.log('PART DATA', data);
+            callback(data);
+        });
+    }
+
+    getFollowers(id, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/followers/' + id,
+            method: 'GET',
+            body: {},
+            failMessage: 'Can\'t show followers'
+        };
+        this.httpService.sendRequest(req).then(data => {
+            callback(data);
+        });
+    }
+
+    participate(eventId: string, userId: string, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/apply/' + eventId,
+            method: 'PUT',
+            body: {
+                fieldName: 'participants',
+                userId
+            }
+        };
+        this.httpService.sendRequest(req).then(data => {
+            if (data) {
+                callback(null, data);
+            }
+        });
+    }
+
+    unparticipate(eventId: string, userId: string, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/unparticipate/' + eventId,
+            method: 'PUT',
+            body: {
+                userId
+            }
+        };
+        this.httpService.sendRequest(req).then(data => {
+            if (data) {
+                callback(null, data);
+            }
+        });
+    }
+
+    follow(eventId: string, userId: string, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/follow/' + eventId,
+            method: 'PUT',
+            body: {
+                userId
+            }
+        };
+        this.httpService.sendRequest(req).then(data => {
+            if (data) {
+                callback(null, data);
+            }
+        });
+    }
+
+    unfollow(eventId: string, userId: string, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/unfollow/' + eventId,
+            method: 'PUT',
+            body: {
+                userId
+            }
+        };
+        this.httpService.sendRequest(req).then(data => {
+            if (data) {
+                callback(null, data);
+            }
+        });
+    }
 }
