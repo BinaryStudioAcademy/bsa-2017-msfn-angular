@@ -17,21 +17,20 @@ $height: calc(100vh - 70px);
     top: 70px;
     height: $height;
     transition: 1s;
+    z-index: 99;
 }
 
 .child-container {
     width: 85%;
     margin-left: 15%;
-    //overflow-y: auto;
 }
 
-@media only screen and (max-width: $medium-screen) {
+@media screen and (max-width: $medium-screen) {
     .hide {
         left: -190px;
     }
-
     .child-container {
-        margin-left: 55px;
-        //overflow-y: auto;
+        width: 100%;
+        margin-left: 0;
     }
 }

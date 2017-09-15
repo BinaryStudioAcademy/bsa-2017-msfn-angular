@@ -63,17 +63,3 @@ aside {
         }
     }
 }
-
-@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {}
-
-@media screen and (max-width: $medium-screen) {
-    // aside {
-    //     .navigation__title, .navigation__subheader {
-    //         display: none;
-    //     }
-    // }
-
-    // .navigation__your-section {
-    //     padding-bottom: 55px;
-    // }
-}
