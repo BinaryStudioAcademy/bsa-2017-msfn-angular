@@ -8,6 +8,7 @@ function EventRepository() {
 
 EventRepository.prototype = new Repository();
 
+EventRepository.prototype.getById = getById;
 EventRepository.prototype.getAll = getAll;
 EventRepository.prototype.findByUserId = findByUserId;
 EventRepository.prototype.findByDates = findByDates;
@@ -15,6 +16,23 @@ EventRepository.prototype.getParticipants = getParticipants;
 EventRepository.prototype.getFollowers = getFollowers;
 EventRepository.prototype.applyUser = applyUser;
 EventRepository.prototype.deleteById = deleteById;
+
+function getById(id, callback) {
+    console.log('REPO', id);
+    const query = this.model.findOne({
+        _id: id
+    })
+        .populate({
+            path: 'creator',
+            select: [
+                'firstName',
+                'lastName',
+                'fullName',
+                'userPhoto',
+            ]
+        });
+    query.exec(callback);
+}
 
 function getAll(callback) {
     const query = this.model.find({})

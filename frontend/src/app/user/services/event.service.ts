@@ -9,6 +9,25 @@ export class EventService {
     constructor(private httpService: HttpService) {
     }
 
+    getItem(id: string, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/' + id,
+            method: 'GET',
+            body: {}
+        };
+
+        console.log(req);
+
+        this.httpService.sendRequest(req)
+            .then(data => {
+                if (!data[0].hasOwnProperty('creator')) {
+                    data = [];
+                }
+                console.log('SERVICE', data);
+                callback(data);
+            });
+    }
+
     getAllItems(callback) {
         const req: IHttpReq = {
             url: '/api/event',

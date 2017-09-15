@@ -50,7 +50,7 @@
     <div id="event-list" *ngIf="events.length > 0">
         <div class="event-item" *ngFor="let event of events">
             <div id="event-text-block">
-                <a routerLink="/user/events/{{ event._id }}">
+                <a routerLink="/user/events/{{ event._id }}" routerLinkActive="active-link">
                     <p class="title">{{ event.title }}</p>
                 </a>
                 <div class="creator">
@@ -90,7 +90,7 @@
                             {{ event.isFollowing ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ event.followers.length || ''}}</span>
                         </button>
                 </div>
-                <a class="more-link" routerLink="/user/events/{{ event._id }}">more ></a>
+                <a class="more-link" routerLink="/user/events/{{ event._id }}" routerLinkActive="active-link">more ></a>
             </div>
         </div>
     </div>
