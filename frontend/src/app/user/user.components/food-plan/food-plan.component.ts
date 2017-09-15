@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs/Subscription';
     styleUrls: ['./food-plan.component.scss'],
     providers: [FoodPlanService],
     encapsulation: ViewEncapsulation.None
-    
 })
 export class FoodPlanComponent implements OnInit {
 
@@ -57,7 +56,7 @@ export class FoodPlanComponent implements OnInit {
         return true;
     }
     savePlan() {
-        if(this.foodplan.title.length === 0){
+        if (this.foodplan.title.length === 0) {
             this.foodplan.errorName = true;
             return false;
         }
