@@ -1,10 +1,41 @@
 const fs = require('fs'),
+    https = require('https'),
+    http = require('http'),
     userService = require('./userService'),
     ApiError = require('./apiErrorService');
 
 function FileService() { }
 
 FileService.prototype.save = save;
+
+FileService.prototype.SaveFileByUrl = function(url, callback) {
+    if (!url) {
+        return;
+    }
+    const protocol = (url.substring(0, 5) === 'https') ? https : http;
+    const fileName = url.split('/').pop();
+    const folderPath = './resources/user-images/';
+    const dest = folderPath + fileName;
+    const result = {
+        url: dest
+    };
+    checkAndCreateFolder(folderPath, () => {
+        checkAndRemoveDublicatFile(folderPath, fileName, () => {
+            const file = fs.createWriteStream(dest);
+            const request = protocol.get(url, function (response) {
+                response.pipe(file);
+            }).on('error', function (err) { // Handle errors
+                fs.unlink(dest); // Delete the file async. (But we don't check the result)
+                if (err) callback(err);
+            });
+            file.on('finish', function () {
+                file.close();
+                callback(null, result);
+            });
+        });
+    })
+};
+
 
 function save(req, res, callback) {
     if (req.body.data) {
@@ -31,22 +62,18 @@ function save(req, res, callback) {
                     writeStream.write(buf);
 
                     // error processing
-                    req
-                        .on('close', () => {
+                    req.on('close', () => {
                             writeStream.destroy();
                             fs.unlink(filepath, err => { });
                             return callback(new ApiError('error'));
-                        })
-                        .pipe(writeStream);
-                    writeStream
-                        .on('error', err => {
+                        }).pipe(writeStream);
+                    writeStream.on('error', err => {
                             console.error(err);
                             fs.unlink(filepath, err => { });
                             return callback(new ApiError('conection close'));
-                        })
-                        .on('close', () => {
+                        }).on('close', () => {
                             // add/update userPhotoPath in database
-                            savePathInDb(folderName, fileName, type)
+                            savePathInDb(folderName, fileName, type);
                             return callback(null, 'done')
                         })
                 })
@@ -74,7 +101,7 @@ function checkAndRemoveDublicatFile(folderPath, userId, callback) {
                     console.log(err, res);
                 });
             }
-        })
+        });
         callback();
     })
 }

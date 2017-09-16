@@ -10,6 +10,8 @@ import { IUser } from '../../../../models/user';
 import { ToasterService } from '../../../../services/toastr.service';
 import { AddNewEmailDialogComponent } from '../../../../components/add-new-email-dialog/add-new-email-dialog.component';
 import { ChangeRootEmailDialogComponent } from '../../../../components/change-root-email-dialog/change-root-email-dialog.component';
+import {HttpService} from '../../../../services/http.service';
+import {IHttpReq} from '../../../../models/http-req';
 
 @Component({
     selector: 'app-profile',
@@ -46,6 +48,7 @@ export class ProfileComponent implements OnInit {
 
     constructor(private profileService: ProfileService,
                 private formBuilder: FormBuilder,
+                private httpService: HttpService,
                 private dialog: MdDialog,
                 private window: WindowObj,
                 private dateService: DateService,
@@ -171,6 +174,18 @@ export class ProfileComponent implements OnInit {
 
     openConfirmPasswordDialog() {
         this.dialog.open(ConfirmPasswordDialogComponent);
+    }
+
+    handleFileUrl(url) {
+        const options: IHttpReq = {
+            url: '/api/file/remote/' + encodeURIComponent(url),
+            method: 'POST'
+        };
+        this.httpService.sendRequest(options).then(
+            (result) => {
+            console.log(result);
+        });
+
     }
 
     // for cropperImg:
