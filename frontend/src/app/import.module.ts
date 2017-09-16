@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 // module
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -44,6 +44,13 @@ import { ListComponent } from './components/list/list.component';
 import { AutocompletePipe } from './components/list/autocomplete.pipe';
 import { CommonModule } from '@angular/common';
 import { GCalendarService } from './services/gcalendar.service';
+
+export class MyHammerConfig extends HammerGestureConfig {
+    overrides = <any> {
+        'pinch': { enable: false },
+        'rotate': { enable: false }
+    };
+}
 
 @NgModule({
     imports: [
@@ -103,6 +110,10 @@ import { GCalendarService } from './services/gcalendar.service';
     providers: [
         D3Service,
         GCalendarService,
+        {
+            provide: HAMMER_GESTURE_CONFIG,
+            useClass: MyHammerConfig
+        }
     ]
 })
 
