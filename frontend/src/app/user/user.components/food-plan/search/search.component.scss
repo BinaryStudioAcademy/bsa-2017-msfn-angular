@@ -4,7 +4,6 @@
 .search-container {
     position: relative;
     height: 100%;
-    
     .overlay {
         display: flex;
         height: calc(60vh - 4px);
@@ -132,3 +131,32 @@
         }
     }
 }
+
+@media only screen and (max-width: $large-screen) {
+    .search-container {
+        .content {
+            .side-content{
+                .depth-wrap{
+                    margin-left: 5px; 
+                }
+            }
+            .product-content {
+                .hidden-md {
+                    display: none!important;
+                }
+                .food-part.food-name {
+                    width: 30%;
+                }
+                .food-part {
+                    width: 20%;
+                }
+                md-list-item {
+                    md-input-container {
+                        width: 20%;
+                    }
+                }
+            }
+        }
+    }
+}
+

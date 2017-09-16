@@ -154,3 +154,31 @@
     }
 }
 
+@media only screen and (max-width: $large-screen) {
+    .days {
+        height: auto;
+        max-height: 60vh;
+    }
+    .meal {
+        h4 {
+            margin-bottom: 5px;
+        }
+        h4+.kcal {
+            position: initial!important;
+            border-bottom: 1px solid #9f9f9f;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+        .list {
+            .item {
+                flex-wrap: wrap;
+                .name {
+                    width: 100%;
+                }
+                .quantity {
+                    margin-left: 0!important;
+                }
+            }
+        }
+    }
+}

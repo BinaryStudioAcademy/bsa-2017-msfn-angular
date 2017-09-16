@@ -84,8 +84,12 @@ export class WeeklyComponent implements OnInit, OnDestroy {
     selectDay(dayName) {
         this.days.forEach((day: any, index: number) => {
             if (day.name === dayName) {
-                day.selected = true;
-                this.activeDay = index;
+                if (day.selected) {
+                    day.selected = false;
+                } else {
+                    day.selected = true;
+                    this.activeDay = index;
+                }
             } else {
                 day.selected = false;
             }
@@ -106,6 +110,7 @@ export class WeeklyComponent implements OnInit, OnDestroy {
                 }
             } else {
                 day.editMeal = false;
+                day.editMealObj = undefined;
             }
         });
         const sendData = {

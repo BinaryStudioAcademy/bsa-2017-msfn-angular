@@ -39,7 +39,6 @@ export class FoodPlanComponent implements OnInit {
         if (this.activatedRoute.snapshot.params.id) {
             const planID = this.activatedRoute.snapshot.params.id;
             this.foodPlanService.getFoodPlanByID(planID, (res) => {
-                console.log(res);
                 this.foodplan = res[0];
             });
         }
@@ -48,6 +47,12 @@ export class FoodPlanComponent implements OnInit {
         this.foodplan.type = currentType;
         if (this.dailyData) {
             this.foodplan.meals = this.dailyData.meals;
+            this.foodplan.days.forEach((day, ind) => {
+                if (day.editMeal) {
+                    day.editMeal = false;
+                    day.editMealObj = undefined;
+                }
+            });
         }
         if (this.weeklyData) {
             const daysPlan = this.weeklyData.days;

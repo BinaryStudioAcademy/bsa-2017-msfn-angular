@@ -50,7 +50,7 @@
                     sort_by_alpha
                 </md-icon>
             </span>
-                <span (click)="sortFood('vendor')">Vendor
+                <span (click)="sortFood('vendor')" class="hidden-md">Vendor
                 <md-icon md-suffix [ngClass]="{ 'hidden': !sortDirection['vendor'] }">
                 sort_by_alpha
                 </md-icon>
@@ -65,10 +65,10 @@
                     <span class="food-part food-name" *ngIf="food.name" md-tooltip="{{food.name}}" [mdTooltipDisabled]="food.name.length < 9">
                       {{food.name.length > 8 ? food.name.substring(0,6)+'...' : food.name}}
                   </span>
-                    <span class="food-part" *ngIf="food.vendor" md-tooltip="{{ food.vendor}}" [mdTooltipDisabled]="food.vendor.length < 6">
+                    <span class="food-part hidden-md" *ngIf="food.vendor" md-tooltip="{{ food.vendor}}" [mdTooltipDisabled]="food.vendor.length < 6">
                       {{food.vendor.length > 5 ? food.vendor.substring(0,3)+'...' : food.vendor}}
                   </span>
-                    <span class="food-part">{{food.carbons}}, {{food.protein}}, {{food.fat}}</span>
+                    <span class="food-part hidden-md">{{food.carbons}}, {{food.protein}}, {{food.fat}}</span>
                     <md-input-container [ngClass]="(food.errorCount) ? 'error' : '' ">
                         <input mdInput type="number" [(ngModel)]="food.count">
                     </md-input-container>
