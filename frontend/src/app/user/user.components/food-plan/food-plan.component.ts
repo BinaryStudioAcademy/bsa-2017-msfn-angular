@@ -17,7 +17,7 @@ export class FoodPlanComponent implements OnInit {
 
     foodplan = {
         title: '',
-        type: 'weekly',
+        kind: 'weekly',
         days: [],
         meals: [],
         _id: '',
@@ -39,20 +39,30 @@ export class FoodPlanComponent implements OnInit {
         if (this.activatedRoute.snapshot.params.id) {
             const planID = this.activatedRoute.snapshot.params.id;
             this.foodPlanService.getFoodPlanByID(planID, (res) => {
-                console.log(res);
                 this.foodplan = res[0];
             });
         }
     }
-    currentType(currentType) {
-        this.foodplan.type = currentType;
+    currentKind(currentKind) {
+        this.foodplan.kind = currentKind;
         if (this.dailyData) {
             this.foodplan.meals = this.dailyData.meals;
+            this.foodplan.days.forEach((day, ind) => {
+                if (day.editMeal) {
+                    day.editMeal = false;
+                    day.editMealObj = undefined;
+                    day.selected = false;
+                }
+                if (day.selected) {
+                    day.selected = false;
+                }
+            });
         }
         if (this.weeklyData) {
             const daysPlan = this.weeklyData.days;
             this.foodplan.days = daysPlan;
         }
+        console.log(this.foodplan);
         return true;
     }
     savePlan() {
