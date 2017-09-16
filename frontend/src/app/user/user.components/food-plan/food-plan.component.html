@@ -16,7 +16,7 @@
                 </md-input-container>
             </div>
             <div class="type-container">
-                <md-button-toggle-group #group="mdButtonToggleGroup" (change)="currentKind(group.value)" class="type-container">
+                <md-button-toggle-group #group="mdButtonToggleGroup" (change)="currentKind(group.value)">
                     <md-button-toggle value="weekly" class="toggle-button" checked="{{foodplan.kind === 'weekly' ? 'true' : ''}}">
                         Weekly
                     </md-button-toggle>

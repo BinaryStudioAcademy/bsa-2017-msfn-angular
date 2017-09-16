@@ -5,6 +5,10 @@
     width: 100%;
     min-height: 100%;
     padding: 20px 6%;
+    .slimscroll-bar{
+        height: 100px;
+        border: 1px solid #424242;
+    }
     .error .mat-input-underline.mat-form-field-underline {
         border-bottom: 1px solid $error-color;
     }
@@ -90,13 +94,36 @@
             .food-side {
                 width: 100%;
                 padding: 0 10px;
+                margin-left: 0;
             }
         }
     }
 }
 
-@media screen and (min-width: $small-screen + 1) and (max-width: $medium-screen) {
+@media screen and (max-width: $small-screen) {
+
+}
+@media screen and (max-width: $small-screen) {
     .food-plan-container{
-        
+        h1{
+            font-size: 18px;
+            margin: 5px 0 10px;
+        }
+        .general-info{
+            .controls{
+                .type-container{
+                    display: flex;
+                    height: 30px;
+                    .mat-button-toggle-label-content{
+                        line-height: 30px;
+                        padding: 0 10px;
+                    }
+                }
+                .btn-save{
+                    width: 100px;
+                    padding: 0;
+                }
+            }
+        } 
     } 
 }    

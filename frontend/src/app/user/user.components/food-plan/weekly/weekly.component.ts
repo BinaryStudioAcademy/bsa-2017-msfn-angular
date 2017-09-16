@@ -15,6 +15,7 @@ export class WeeklyComponent implements OnInit, OnDestroy {
     activeDay: number;
     products: any;
     subscription: Subscription;
+    daySelected = false;
     constructor(public foodPlanService: FoodPlanService, ) {
         this.subscription = this.foodPlanService.getProductList().subscribe(products => { this.products = products; });
     }
@@ -86,14 +87,18 @@ export class WeeklyComponent implements OnInit, OnDestroy {
             if (day.name === dayName) {
                 if (day.selected) {
                     day.selected = false;
+                    this.daySelected = false;
                 } else {
                     day.selected = true;
                     this.activeDay = index;
+                    this.daySelected = true;
                 }
             } else {
                 day.selected = false;
+                // this.daySelected = false;
             }
         });
+        console.log(this.daySelected);
     }
     showForm(currentDay, mealId?: number) {
         this.days.forEach((day: any) => {

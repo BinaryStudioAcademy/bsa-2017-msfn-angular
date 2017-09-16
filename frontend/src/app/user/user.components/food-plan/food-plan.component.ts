@@ -17,7 +17,7 @@ export class FoodPlanComponent implements OnInit {
 
     foodplan = {
         title: '',
-        type: 'weekly',
+        kind: 'weekly',
         days: [],
         meals: [],
         _id: '',
@@ -43,14 +43,18 @@ export class FoodPlanComponent implements OnInit {
             });
         }
     }
-    currentType(currentType) {
-        this.foodplan.type = currentType;
+    currentKind(currentKind) {
+        this.foodplan.kind = currentKind;
         if (this.dailyData) {
             this.foodplan.meals = this.dailyData.meals;
             this.foodplan.days.forEach((day, ind) => {
                 if (day.editMeal) {
                     day.editMeal = false;
                     day.editMealObj = undefined;
+                    day.selected = false;
+                }
+                if (day.selected) {
+                    day.selected = false;
                 }
             });
         }
@@ -58,6 +62,7 @@ export class FoodPlanComponent implements OnInit {
             const daysPlan = this.weeklyData.days;
             this.foodplan.days = daysPlan;
         }
+        console.log(this.foodplan);
         return true;
     }
     savePlan() {
