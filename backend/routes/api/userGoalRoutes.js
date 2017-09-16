@@ -60,4 +60,13 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
+        app.post(baseUrl + 'update', isLoggedIn, function (req, res, next) {
+        console.log(req.body);
+        userGoalService.updateUserGoalValue(req.body._id, req.user._id, req.body.value, function(err, data) {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
 };

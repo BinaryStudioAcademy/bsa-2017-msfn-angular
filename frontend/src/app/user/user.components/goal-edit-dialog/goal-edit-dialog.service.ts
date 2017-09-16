@@ -26,7 +26,6 @@ export class GoalEditDialogService {
     addUserGoal(body, callback) {
         body.startTime = new Date();
         body.currentValue = body.startValue;
-        console.log(body, 'ADD');
         const sendData: IHttpReq = {
             url: '/api/user-goal/',
             method: 'POST',
@@ -41,7 +40,6 @@ export class GoalEditDialogService {
 
     updateUserGoal(body, callback) {
         body.currentValue = body.startValue;
-        console.log(body, 'UPDAT');
         const sendData: IHttpReq = {
             url: '/api/user-goal/',
             method: 'PUT',
@@ -53,16 +51,4 @@ export class GoalEditDialogService {
             });
     }
 
-
-    addGoalCategory(goalId, callback) {
-        const sendData: IHttpReq = {
-            url: '/api/goal/' + goalId,
-            method: 'GET',
-            body: {},
-        };
-        this.httpService.sendRequest(sendData)
-            .then(data => {
-                callback(data);
-            });
-    }
 }

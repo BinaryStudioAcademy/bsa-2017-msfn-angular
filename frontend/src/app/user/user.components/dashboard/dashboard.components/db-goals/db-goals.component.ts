@@ -102,7 +102,11 @@ export class DbGoalsComponent implements OnInit, OnChanges {
         weightControl: false
     };
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.goalProgressService.getUserGoals(goals => {
+            console.log(goals, 'IMPORTANT!');
+        });
+    }
 
     ngOnChanges() {
         if (this.goalItems.length > 0 && !this.gotData.goal) {

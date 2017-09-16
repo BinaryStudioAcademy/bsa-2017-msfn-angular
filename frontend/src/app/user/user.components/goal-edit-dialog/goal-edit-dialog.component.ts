@@ -37,7 +37,7 @@ export class GoalEditDialogComponent implements OnInit {
         this.id = this.data.item._id;
         this.minDate = new Date();
 
-        this.userService.getBasicInfo((achieves, measures, settings, weights) => {
+        this.userService.getBasicInfo((achieves, measures, settings, weights, goals) => {
             this.settings = settings;
             this.weights = weights;
             ['distance', 'weight'].forEach(measureName => {
@@ -98,7 +98,7 @@ export class GoalEditDialogComponent implements OnInit {
     }
 
     getStartValue() {
-        this.goalEditDialogService.addGoalCategory(this.selectedType, (goal) => {
+        this.userService.addGoalCategory(this.selectedType, (goal) => {
         this.name = goal.name;
         if (goal.category === 'totalweight' || goal.category === 'totaldistance') {
             this.userService.getLaunchedTrainings(trainings => {
