@@ -370,6 +370,24 @@ const mongoose = require('mongoose'),
             icon: './resources/achievements_icon/perfectWeek.png',
             measureName: 'perfectweek'
         },
+        {
+            name: 'Double wish-maker',
+            message: 'Complete all plans of the two weeks',
+            hiddenMessage: 'Good week, you done all your plans. Do you have some secret?',
+            principle: 'f>v',
+            value: 1,
+            icon: './resources/achievements_icon/perfectWeek.png',
+            measureName: 'perfectweek'
+        },
+        {
+            name: 'Triple wish-maker',
+            message: 'Complete all plans of the three weeks',
+            hiddenMessage: 'Good week, you done all your plans. Do you have some secret?',
+            principle: 'f>v',
+            value: 1,
+            icon: './resources/achievements_icon/perfectWeek.png',
+            measureName: 'perfectweek'
+        },
     ],
     measurments = [
         {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { IFood } from '../../../../models/food';
 import { IFoodType } from '../../../../models/food-type';
 import { FoodPlanService } from './../food-plan.service';
@@ -7,7 +7,9 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',
-    styleUrls: ['./search.component.scss']
+    styleUrls: ['./search.component.scss'],
+    encapsulation: ViewEncapsulation.None
+    
 })
 export class SearchComponent implements OnInit {
     foods: IFood[];

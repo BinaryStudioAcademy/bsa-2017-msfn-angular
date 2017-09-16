@@ -32,7 +32,7 @@ header {
             align-items: center;
         }
 
-        .logo__icon {
+        .logo__text {
             width: 125px;
             height: 50px;
             background: url('../../../globalStyles/img/logo.png');
@@ -117,19 +117,13 @@ $small-screen: 440px;
 
 @media screen and (max-width: $small-screen) {
     header {
-        .settings__photo, .settings__name, .logo__title {
+        .settings__photo, .settings__name, .logo__text {
             display: none;
         }
         .logo {
             .logo-mini__icon {
                 width: 40px;
                 height: 40px;
-            }
-            .logo__icon {
-                width: 75px;
-                height: 30px;
-                background: url('../../../globalStyles/img/logo.png');
-                background-size: contain;
             }
         }
     }
