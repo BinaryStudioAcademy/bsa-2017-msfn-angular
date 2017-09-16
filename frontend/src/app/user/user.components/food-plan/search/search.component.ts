@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs/Subscription';
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss'],
     encapsulation: ViewEncapsulation.None
-    
 })
 export class SearchComponent implements OnInit {
     foods: IFood[];
