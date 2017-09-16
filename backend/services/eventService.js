@@ -3,12 +3,27 @@ const eventRepository = require('../repositories/eventRepository');
 
 function EventService() { }
 
+EventService.prototype.getItemById = getItemById;
 EventService.prototype.getAllItems = getAllItems;
 EventService.prototype.getItemsByUserId = getItemsByUserId;
+EventService.prototype.getFollowers = getFollowers;
+EventService.prototype.getParticipants = getParticipants;
 EventService.prototype.getItemsByDates = getItemsByDates;
 EventService.prototype.addItem = addItem;
-EventService.prototype.updateByOther = updateByOther;
+EventService.prototype.applyUser = applyUser;
 EventService.prototype.deleteItem = deleteItem;
+
+function getItemById(req, callback) {
+    console.log('SERVICE', req.params.id);
+    eventRepository.getById(req.params.id, (err, data) => {
+        if (err) return callback(err);
+        if (data === null) {
+            callback(null, []);
+        } else {
+            callback(null, data);
+        }
+    });
+}
 
 function getAllItems(callback) {
     eventRepository.getAll((err, data) => {
@@ -33,7 +48,9 @@ function getItemsByUserId(body, callback) {
 }
 
 function getItemsByDates(body, callback) {
-    eventRepository.findByDates(body, (err, data) => {
+    const startDate = new Date(parseInt(body.startTimeStamp));
+    const endDate = new Date(parseInt(body.endTimeStamp));
+    eventRepository.findByDates(startDate, endDate, (err, data) => {
         if (err) return callback(err);
         if (data === null) {
             callback(null, []);
@@ -43,11 +60,23 @@ function getItemsByDates(body, callback) {
     });
 }
 
+function getParticipants(body, callback) {
+    const eventId = body.params.id;
+    eventRepository.getParticipants(eventId, (err, data) => {
+        callback(err, data);
+    });
+}
+
+function getFollowers(body, callback) {
+    const eventId = body.params.id;
+    eventRepository.getFollowers(eventId, (err, data) => {
+        callback(err, data);
+    });
+}
+
 function addItem(body, callback) {
-    console.log('SERVICE1', body);
     if (body.creator && body.title && body.startDate) {
         eventRepository.add(body, (err, data) => {
-            console.log('SERVICE2', body);
             if (err) return callback(err);
             if (data === null) {
                 callback(null, []);
@@ -60,15 +89,16 @@ function addItem(body, callback) {
     }
 }
 
-function updateByOther(id, body, callback) {
-    eventRepository.updateByOther(id, body, (err, data) => {
+function applyUser(eventId, body, callback) {
+    eventRepository.getById(eventId, (err, data) => {
         if (err) return callback(err);
-        if (data === null) {
-            callback(null, []);
+
+        if (data === null){
+            callback(new ApiError('Event not found'));
         } else {
-            callback(null, data);
+            eventRepository.applyUser(eventId, body, callback);
         }
-    });
+    })
 }
 
 function deleteItem(id, userId, callback) {

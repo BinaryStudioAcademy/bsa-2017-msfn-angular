@@ -14,7 +14,7 @@
     color: $text-dark-color;
     font-weight: bold;
     outline: none;
-    z-index: 10;
+    z-index: 5;
 
     .got-messages {
         display: none;
@@ -58,7 +58,7 @@
     width: 200px;
     height: calc(100vh - 70px - 30px);
     background-color: $gradient-to-color;
-    z-index: 10;
+    z-index: 5;
     transform: translateX(300px);
     transition: transform 0.7s;
     border-bottom: 1px solid $gradient-from-color;
@@ -135,7 +135,7 @@
     position: fixed;
     right: 250px;
     bottom: 0;
-    z-index: 100;
+    z-index: 6;
     display: flex;
     height: 315px;
     flex-wrap: wrap;

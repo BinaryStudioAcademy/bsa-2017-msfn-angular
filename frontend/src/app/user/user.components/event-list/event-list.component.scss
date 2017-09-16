@@ -3,10 +3,7 @@
 @import '../../../../globalStyles/indentations';
 
 #event-list-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    max-width: 70%;
+    max-width: 60%;
     margin: 0 auto;
 
     h1 {
@@ -15,14 +12,52 @@
         text-align: center;
     }
 
+    #event-period {
+        position: absolute;
+        left: 17vw;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 12%;
+
+        .apply-button {
+            width: 100%;
+
+            button {
+                width: 90%;
+                max-width: 160px;
+                height: 40px;
+                border: none;
+                border-radius: 20px;
+                outline: none;
+                font-size: $main-text;
+                font-weight: 600;
+                background: $main-color;
+            }
+        }
+
+        #all-events-button {
+            margin-bottom: 40px;
+        }
+
+        #period-events-button {
+            margin-top: $standard-indent;
+        }
+
+        md-input-container {
+            width: 130px;
+        }
+    }
+
     #event-list {
-        width: 70%;
+        width: 100%;
         margin: 0 auto;
     }
 
     .event-item {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
         margin-bottom: $macro-indent;
         padding: $standard-indent 0;
         border-bottom: 1px solid $text-main-color;
@@ -33,8 +68,16 @@
         margin-right: 50px;
         font-size: $main-text;
 
+        a {
+            color: $text-main-color;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
         p {
-            width: 100%;
             margin-bottom: $large-indent;
         }
 
@@ -42,6 +85,12 @@
             margin-top: 0;
             font-size: $large-text;
             font-weight: 600;
+        }
+
+        .title:hover,
+        .creator-avatar:hover,
+        .creator-name:hover {
+            cursor: pointer;
         }
 
         .creator {
@@ -88,6 +137,42 @@
         img {
             height: 200px;
             float: right;
+        }
+    }
+
+    .event-handle {
+        width: 100%;
+        font-size: $main-text;
+        color: $text-main-color;
+
+        .event-buttons {
+            display: inline-block;
+            width: 70%;
+
+            button {
+                width: 90%;
+                max-width: 160px;
+                height: 40px;
+                margin-right: $macro-indent;
+                border: none;
+                border-radius: 20px;
+                outline: none;
+                font-size: $main-text;
+                font-weight: 600;
+                background: $main-color;
+            }
+        }
+
+        a {
+            width: 30%;
+            float: right;
+            text-align: right;
+            text-decoration: underline;
+            color: $text-main-color;
+        }
+
+        a:hover {
+            text-decoration: none;
         }
     }
 }

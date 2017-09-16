@@ -2,16 +2,16 @@
     <form #form="ngForm">
         <h1>Create new article</h1>
         <md-input-container class="input">
-            <input mdInput placeholder="Article Title" [(ngModel)]="article.title" name="title" required>
+            <input mdInput placeholder="Article Title" [(ngModel)]="article.title" name="title" required value="article.title">
         </md-input-container>
         <md-input-container class="example-full-width" class="input">
             <textarea mdInput placeholder="Article preview text" [(ngModel)]="article.preview" maxlength="350"
-                      name="preview" required (keyup)="updateOutput($event.target.value, 'preview')"></textarea>
+                      name="preview" required (keyup)="updateOutput($event.target.value, 'preview')">{{article.preview}}</textarea>
             <md-hint align="end">{{article.preview.length}} / 350</md-hint>
         </md-input-container>
         <md-input-container class="example-full-width" class="input">
             <textarea mdInput placeholder="Article text" [(ngModel)]="article.detail" name="detail" required
-                      (keyup)="updateOutput($event.target.value, 'detail')"></textarea>
+                      (keyup)="updateOutput($event.target.value, 'detail')">{{article.detail}}</textarea>
         </md-input-container>
         <div class="image-button" *ngIf="hideCropper">
             <span>Upload article picture</span>

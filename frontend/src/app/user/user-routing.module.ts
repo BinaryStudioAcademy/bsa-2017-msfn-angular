@@ -127,6 +127,10 @@ const userRoutes: Routes = [
                 component: ArticleAddComponent
             },
             {
+                path: 'articles/edit/:id',
+                component: ArticleAddComponent
+            },
+            {
                 path: 'articles/:id',
                 component: ArticleDetailComponent
             },

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService} from '../../services/event.service';
 import {DateService} from '../../../services/date.service';
+import {WindowObj} from '../../../services/window.service';
 
 @Component({
     selector: 'app-event-list',
@@ -14,26 +15,112 @@ import {DateService} from '../../../services/date.service';
 export class EventListComponent implements OnInit {
 
     constructor(private eventService: EventService,
-                private dateService: DateService) {
+                private dateService: DateService,
+                private window: WindowObj) {
     }
 
-    events = [];
+    private _userId = this.window.data._injectedData.userId;
+    events: any[] = [];
+    period = {
+        startDate: new Date,
+        endDate:  new Date(new Date().getTime() + 604800000)
+    };
 
     ngOnInit() {
-        this.getEvents();
+        this.getAllEvents();
+        console.log(this.period);
     }
 
-    getEvents() {
+    getAllEvents(): void {
+        this.events = [];
         this.eventService.getAllItems(data => {
             this.events = data;
             console.log(data);
-
             for (const event of this.events) {
-                event.startDateOutput = this.dateService
-                    .convertDateToIso(new Date(event.startDate), true);
-                event.endDateOutput = this.dateService
-                    .convertDateToIso(new Date(event.endDate), true);
+                this.setDateOutput(event);
+                this.isUserApplied(event);
             }
+        });
+    }
+
+    getPeriodEvents(): void {
+        this.events = [];
+        this.eventService.getPeriodItems(this.period, data => {
+            this.events = data;
+            console.log(data);
+            for (const event of this.events) {
+                this.setDateOutput(event);
+                this.isUserApplied(event);
+            }
+        });
+    }
+
+    setDateOutput(item): void {
+        item.startDateOutput = this.dateService
+            .convertDateToIso(new Date(item.startDate), true);
+        item.endDateOutput = this.dateService
+            .convertDateToIso(new Date(item.endDate), true);
+    }
+
+    isUserApplied(event) {
+        if (event.participants.includes(this._userId)) {
+            event.isParticipating = true;
+        }
+        if (event.followers.includes(this._userId)) {
+            event.isParticipating = true;
+        }
+    }
+
+    participatingAction(event): void {
+        if (event.isParticipating) {
+            this.unparticipate(event);
+        } else {
+            this.participate(event);
+        }
+    }
+
+    followAction(event): void {
+        if (event.isFollowing) {
+            this.unfollow(event);
+        } else {
+            this.follow(event);
+        }
+    }
+
+    participate(event): void {
+        console.log('PART EVENT', event._id);
+        this.eventService.participate(event._id, this._userId, () => {
+            event.isParticipating = true;
+            this.eventService.getParticipants(event._id, data => {
+                event.participants = data;
+            });
+        });
+    }
+
+    unparticipate(event): void {
+        this.eventService.unparticipate(event._id, this._userId, () => {
+            event.isParticipating = false;
+            this.eventService.getParticipants(event._id, data => {
+                event.participants = data;
+            });
+        });
+    }
+
+    follow(event): void {
+        this.eventService.follow(event._id, this._userId, () => {
+            event.isFollowing = true;
+            this.eventService.getFollowers(event._id, data => {
+                event.followers = data;
+            });
+        });
+    }
+
+    unfollow(event): void {
+        this.eventService.unfollow(event._id, this._userId, () => {
+            event.isFollowing = false;
+            this.eventService.getFollowers(event._id, data => {
+                event.followers = data;
+            });
         });
     }
 }

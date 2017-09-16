@@ -92,6 +92,13 @@ export class UserComponent implements OnInit, OnDestroy {
         });
     }
 
+    swipe(sidebar, swypetype) {
+        if (swypetype === 'swiperight') {
+            sidebar.classList.remove('hide');
+        } else if (swypetype === 'swipeleft') {
+            sidebar.classList.add('hide');
+        }
+    }
     checkLosingWeight() {
         const resAch = [];
         this.achievements.forEach(element => {

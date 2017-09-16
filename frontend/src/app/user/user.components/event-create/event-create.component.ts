@@ -32,6 +32,7 @@ export class EventCreateComponent implements OnInit {
     cropper: ImageCropperComponent;
     hideCropper = true;
     oldImg;
+    datePickerMinMax = new Date();
 
     titleInputControl = new FormControl('', [
         Validators.required,

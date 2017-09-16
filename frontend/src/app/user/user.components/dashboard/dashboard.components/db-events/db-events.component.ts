@@ -17,7 +17,7 @@ export class DbEventsComponent implements OnInit {
     title = 'Planned Events';
     interval = {
         startDate: new Date,
-        endDate:  new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7)
+        endDate:  new Date(new Date().getTime() + 604800000)
     };
 
     events = [

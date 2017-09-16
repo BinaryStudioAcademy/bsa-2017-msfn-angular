@@ -1,5 +1,5 @@
-<div class="body-container">
-    <div class="sidebar-container">
+<div class="body-container" (swiperight)="swipe(sidebarAdmin, $event.type)" (swipeleft)="swipe(sidebarAdmin, $event.type)">
+    <div #sidebarAdmin class="sidebar-container hide">
         <app-sidebar-admin-view></app-sidebar-admin-view>
     </div>
     <div class="child-container">

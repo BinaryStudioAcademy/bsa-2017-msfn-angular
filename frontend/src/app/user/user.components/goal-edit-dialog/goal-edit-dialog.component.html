@@ -2,7 +2,7 @@
     <h2 class="title" md-dialog-title>{{id === '-1' ? 'Create' : 'Update'}} Goal</h2>
     <div class="item-container">
         <md-select placeholder="I want to" [(ngModel)]="selectedType">
-            <md-option *ngFor="let type of types" [value]="type.name">
+            <md-option *ngFor="let type of types" [value]="type._id">
                 {{type.name}}
             </md-option>
         </md-select>

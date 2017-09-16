@@ -26,49 +26,41 @@ const mongoose = require('mongoose'),
         comboCount: 0,
     },
     goalTypes = [
-        'Weight',
-        'Activity',
-        'Food',
-        'Appearance',
-        'Improve results',
-        'Others',
+        'totalweight',
+        'totaldistance',
+        'changeweight',
+        'combo',
+        'followers',
+        'launchedtrainings',
     ],
     goals = [
         {
             name: 'Lose weight',
-            category: 'Weight',
+            category: 'changeweight',
         },
         {
             name: 'Increase weight',
-            category: 'Weight',
+            category: 'changeweight',
         },
         {
-            name: 'Burn calories',
-            category: 'Activity',
+            name: 'Raise some weight in total',
+            category: 'totalweight',
         },
         {
-            name: 'Run distance',
-            category: 'Activity',
+            name: 'Run some distance in total',
+            category: 'totaldistance',
         },
         {
-            name: 'Do some count of exercises',
-            category: 'Activity',
+            name: 'Launch some count of trainings',
+            category: 'launchedtrainings',
         },
         {
-            name: 'Do trainings count per week',
-            category: 'Activity',
+            name: 'Open app some count of day in a row',
+            category: 'combo',
         },
         {
-            name: 'Eat calories per day',
-            category: 'Food',
-        },
-        {
-            name: 'Gain muscles',
-            category: 'Appearance',
-        },
-        {
-            name: 'Beat your records',
-            category: 'Improve results',
+            name: 'Get followers',
+            category: 'followers',
         }
     ],
     achievements = [
@@ -372,6 +364,24 @@ const mongoose = require('mongoose'),
         {
             name: 'Wish-maker',
             message: 'Complete all plans of the week',
+            hiddenMessage: 'Good week, you done all your plans. Do you have some secret?',
+            principle: 'f>v',
+            value: 1,
+            icon: './resources/achievements_icon/perfectWeek.png',
+            measureName: 'perfectweek'
+        },
+        {
+            name: 'Double wish-maker',
+            message: 'Complete all plans of the two weeks',
+            hiddenMessage: 'Good week, you done all your plans. Do you have some secret?',
+            principle: 'f>v',
+            value: 1,
+            icon: './resources/achievements_icon/perfectWeek.png',
+            measureName: 'perfectweek'
+        },
+        {
+            name: 'Triple wish-maker',
+            message: 'Complete all plans of the three weeks',
             hiddenMessage: 'Good week, you done all your plans. Do you have some secret?',
             principle: 'f>v',
             value: 1,

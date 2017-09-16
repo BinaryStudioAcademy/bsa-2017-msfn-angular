@@ -5,6 +5,14 @@ const
     baseUrl = '/api/event/';
 
 module.exports = app => {
+    app.get(baseUrl + ':id', function (req, res, next) {
+        eventService.getItemById(req, function (err, data) {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
     app.get(`${baseUrl}`, (req, res, next) => {
         eventService.getAllItems((err, data) => {
             if (!data.length) {
@@ -27,11 +35,27 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.get(`${baseUrl}dates`, (req, res, next) => {
-        eventService.getItemsByDates(req, (err, data) => {
+    app.get(`${baseUrl}period/:startTimeStamp/:endTimeStamp`, (req, res, next) => {
+        eventService.getItemsByDates(req.params, (err, data) => {
             if (!data.length) {
                 data = [{}];
             }
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(`${baseUrl}participants/:id`, (req, res, next) => {
+        eventService.getParticipants(req, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(`${baseUrl}followers/:id`, (req, res, next) => {
+        eventService.getFollowers(req, (err, data) => {
             res.data = data;
             res.err = err;
             next();
@@ -54,8 +78,8 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.put(`${baseUrl}:id/apply`, (req, res, next) => {
-        EventService.updateByOther(req.params.id, req.body, (err, data) => {
+    app.put(`${baseUrl}apply/:id`, (req, res, next) => {
+        eventService.applyUser(req.params.id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();

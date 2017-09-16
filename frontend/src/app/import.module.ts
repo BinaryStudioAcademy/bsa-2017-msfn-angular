@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 // module
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { SortablejsModule } from 'angular-sortablejs';
 import { ToastrModule } from 'ngx-toastr';
-import { NgSlimScrollModule, ISlimScrollOptions, SlimScrollEvent  } from 'ngx-slimscroll';
+import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import {
     MdSnackBarModule,
     MdChipsModule,
@@ -45,6 +45,18 @@ import { AutocompletePipe } from './components/list/autocomplete.pipe';
 import { CommonModule } from '@angular/common';
 import { GCalendarService } from './services/gcalendar.service';
 
+export class MyHammerConfig extends HammerGestureConfig {
+    overrides = <any> {
+        'pinch': { enable: false },
+        'rotate': { enable: false }
+    };
+}
+
+
+const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+    suppressScrollX: true
+};
+
 @NgModule({
     imports: [
         CommonModule,
@@ -57,7 +69,7 @@ import { GCalendarService } from './services/gcalendar.service';
         MdInputModule,
         MdTabsModule,
         SortablejsModule,
-        NgSlimScrollModule
+        PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
     ],
     exports: [
         MdIconModule,
@@ -94,7 +106,7 @@ import { GCalendarService } from './services/gcalendar.service';
         SortablejsModule,
         MdSliderModule,
         MdProgressBarModule,
-        NgSlimScrollModule
+        PerfectScrollbarModule
     ],
     declarations: [
         ListComponent,
@@ -103,6 +115,10 @@ import { GCalendarService } from './services/gcalendar.service';
     providers: [
         D3Service,
         GCalendarService,
+        {
+            provide: HAMMER_GESTURE_CONFIG,
+            useClass: MyHammerConfig
+        }
     ]
 })
 

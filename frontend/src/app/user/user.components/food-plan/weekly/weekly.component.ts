@@ -15,6 +15,7 @@ export class WeeklyComponent implements OnInit, OnDestroy {
     activeDay: number;
     products: any;
     subscription: Subscription;
+    daySelected = false;
     constructor(public foodPlanService: FoodPlanService, ) {
         this.subscription = this.foodPlanService.getProductList().subscribe(products => { this.products = products; });
     }
@@ -84,12 +85,20 @@ export class WeeklyComponent implements OnInit, OnDestroy {
     selectDay(dayName) {
         this.days.forEach((day: any, index: number) => {
             if (day.name === dayName) {
-                day.selected = true;
-                this.activeDay = index;
+                if (day.selected) {
+                    day.selected = false;
+                    this.daySelected = false;
+                } else {
+                    day.selected = true;
+                    this.activeDay = index;
+                    this.daySelected = true;
+                }
             } else {
                 day.selected = false;
+                // this.daySelected = false;
             }
         });
+        console.log(this.daySelected);
     }
     showForm(currentDay, mealId?: number) {
         this.days.forEach((day: any) => {
@@ -106,6 +115,7 @@ export class WeeklyComponent implements OnInit, OnDestroy {
                 }
             } else {
                 day.editMeal = false;
+                day.editMealObj = undefined;
             }
         });
         const sendData = {
@@ -118,6 +128,8 @@ export class WeeklyComponent implements OnInit, OnDestroy {
 
     closeForm(day) {
         day.editMeal = false;
+        day.errorName = false;
+        day.errorProducts = false;
         const sendData = {
             show: false,
             list: []
@@ -128,28 +140,36 @@ export class WeeklyComponent implements OnInit, OnDestroy {
     saveMeal(day) {
         const meal2Save = day.editMealObj;
         if (meal2Save.name.length > 0) {
+            day.errorName = false;
+            if ((meal2Save.products.length > 0) || this.products.data.list.length) {
+                if (this.products.data.list) {
+                    meal2Save.products = meal2Save.products.concat(this.products.data.list);
+                }
 
-            if (this.products.data.list) {
-                meal2Save.products = meal2Save.products.concat(this.products.data.list);
-            }
-            let mealKcal = 0;
-            meal2Save.products.forEach(element => {
-                mealKcal += parseFloat(element.kcal);
-            });
-            meal2Save.kcal = mealKcal;
-            const mealId: number = day.editMealId;
-            if (mealId >= 0) {
-                day.meals[mealId] = meal2Save;
-                delete day.editMealId;
+                day.errorProducts = false;
+                let mealKcal = 0;
+                meal2Save.products.forEach(element => {
+                    mealKcal += parseFloat(element.kcal);
+                });
+                meal2Save.kcal = mealKcal;
+                const mealId: number = day.editMealId;
+                if (mealId >= 0) {
+                    day.meals[mealId] = meal2Save;
+                    delete day.editMealId;
+                } else {
+                    day.meals.push(meal2Save);
+                }
+                day.editMeal = false;
+                const sendData = {
+                    show: false,
+                    list: []
+                };
+                this.foodPlanService.sendProductList(sendData);
             } else {
-                day.meals.push(meal2Save);
+                day.errorProducts = true;
             }
-            day.editMeal = false;
-            const sendData = {
-                show: false,
-                list: []
-            };
-            this.foodPlanService.sendProductList(sendData);
+        } else {
+            day.errorName = true;
         }
         return true;
     }
