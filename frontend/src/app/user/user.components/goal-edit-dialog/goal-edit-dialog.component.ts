@@ -31,7 +31,7 @@ export class GoalEditDialogComponent implements OnInit {
             if (this.id === '-1') {
                 this.deadline = new Date();
                 this.deadline.setFullYear(this.deadline.getFullYear() + 1);
-                this.selectedType = this.types[0].name;
+                this.selectedType = this.types[0]._id;
                 this.value = 10;
             } else {
                 this.deadline = new Date(this.data.item.deadline);

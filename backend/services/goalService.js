@@ -7,6 +7,7 @@ function GoalService() {}
 GoalService.prototype.createGoal = createGoal;
 GoalService.prototype.getGoalByName = getGoalByName;
 GoalService.prototype.getGoals = getGoals;
+GoalService.prototype.getGoal = getGoal;
 GoalService.prototype.updateGoal = updateGoal;
 GoalService.prototype.deleteGoal = deleteGoal;
 
@@ -93,6 +94,18 @@ function getGoals(callback) {
             callback(null, []);
         } else {
             callback(null, goalsData);
+        }
+    });
+}
+
+
+function getGoal(id, callback) {
+    goalRepository.getById(id, (err, goalData) => {
+        if (err) return callback(err);
+        if (goalData === null) {
+            callback(null, {});
+        } else {
+            callback(null, goalData);
         }
     });
 }
