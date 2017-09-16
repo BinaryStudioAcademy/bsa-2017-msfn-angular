@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { SortablejsModule } from 'angular-sortablejs';
 import { ToastrModule } from 'ngx-toastr';
-import { NgSlimScrollModule, ISlimScrollOptions, SlimScrollEvent  } from 'ngx-slimscroll';
+import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import {
     MdSnackBarModule,
     MdChipsModule,
@@ -52,6 +52,12 @@ export class MyHammerConfig extends HammerGestureConfig {
     };
 }
 
+
+const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+    suppressScrollX: true,
+    swipePropagation: false
+};
+
 @NgModule({
     imports: [
         CommonModule,
@@ -64,7 +70,7 @@ export class MyHammerConfig extends HammerGestureConfig {
         MdInputModule,
         MdTabsModule,
         SortablejsModule,
-        NgSlimScrollModule
+        PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
     ],
     exports: [
         MdIconModule,
@@ -101,7 +107,7 @@ export class MyHammerConfig extends HammerGestureConfig {
         SortablejsModule,
         MdSliderModule,
         MdProgressBarModule,
-        NgSlimScrollModule
+        PerfectScrollbarModule
     ],
     declarations: [
         ListComponent,
