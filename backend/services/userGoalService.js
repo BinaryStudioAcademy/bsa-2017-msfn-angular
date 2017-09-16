@@ -24,7 +24,8 @@ function getUserGoalById(userId, callback) {
 }
 
 function createUserGoal(body, callback) {
-    if (body.createdByUser && body.value && body.value > 0 && body.deadline && body.category && body.startTime) {
+    if (body.createdByUser && body.startValue >= 0 && body.deadline && body.category && body.startTime &&
+    body.endValue && body.endValue > 0 && body.currentValue >= 0 && body.name) {
         userGoalRepository.add(body, (err, userGoalData) => {
             if (err) return callback(err);
                 if (userGoalData === null) {
@@ -40,7 +41,8 @@ function createUserGoal(body, callback) {
 
 
 function updateUserGoal(id, body, callback) {
-    if(body.createdByUser && body.value && body.value > 0 && body.deadline && body.category){
+    if(body.createdByUser && body.startValue >= 0 && body.deadline && body.category &&
+    body.endValue && body.endValue > 0 && body.currentValue >= 0 && body.name){
         userGoalRepository.update(id, body, (err, userGoalData) => {
 
             if (err) return callback(err);

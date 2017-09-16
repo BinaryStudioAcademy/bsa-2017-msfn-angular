@@ -8,9 +8,12 @@ module.exports = function (app) {
 
     app.post(baseUrl, isLoggedIn, function (req, res, next) {
         body = {
+            name: req.body.name,
             category: req.body.category,
             createdByUser: req.user._id,
-            value: req.body.value,
+            startValue: req.body.startValue,
+            endValue: req.body.endValue,
+            currentValue: req.body.currentValue,
             deadline: req.body.deadline,
             startTime: req.body.startTime
         };
@@ -23,9 +26,12 @@ module.exports = function (app) {
 
     app.put(baseUrl, isLoggedIn, function (req, res, next) {
         body = {
+            name: req.body.name,
             category: req.body.category,
             createdByUser: req.user._id,
-            value: req.body.value,
+            startValue: req.body.startValue,
+            endValue: req.body.endValue,
+            currentValue: req.body.currentValue,
             deadline: req.body.deadline
         };
         userGoalService.updateUserGoal(req.body._id, body, function(err, data) {

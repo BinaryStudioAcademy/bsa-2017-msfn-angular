@@ -2,11 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserGoal = new Schema({
-    goal: {
+    category: {
         type: Schema.Types.ObjectId,
         ref: 'Goal'
     },
+    name: String,
     startValue: Number,
+    currentValue: Number,
     endValue: Number,
     isRemoved: {
         type: Boolean,

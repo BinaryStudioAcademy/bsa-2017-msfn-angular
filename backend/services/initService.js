@@ -35,11 +35,7 @@ const mongoose = require('mongoose'),
     ],
     goals = [
         {
-            name: 'Lose weight',
-            category: 'changeweight',
-        },
-        {
-            name: 'Increase weight',
+            name: 'Change weight',
             category: 'changeweight',
         },
         {
