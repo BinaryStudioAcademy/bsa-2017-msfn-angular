@@ -22,12 +22,5 @@ export class AppComponent implements OnInit {
         this.isLoggedIn = this._windowObj.data._injectedData.isLoggedIn;
     }
 
-    ngOnInit() {
-        setTimeout(() => {
-            const scroll = document.getElementsByClassName('slimscroll-wrapper');
-            for (let i = 0; i < scroll.length; i++) {
-                scroll[i]['style'].height = '100%';
-            }
-        }, 2000);
-    }
+    ngOnInit() {}
 }
