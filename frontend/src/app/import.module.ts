@@ -54,8 +54,7 @@ export class MyHammerConfig extends HammerGestureConfig {
 
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-    suppressScrollX: true,
-    swipePropagation: false
+    suppressScrollX: true
 };
 
 @NgModule({

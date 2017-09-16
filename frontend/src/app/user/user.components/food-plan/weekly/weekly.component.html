@@ -6,7 +6,7 @@
                 <span class="short-form">{{day.name.substring(0,3)}}</span>
             </div>
             <div class="day-content" [ngClass]="(day.selected) ? 'show' : 'hidden' ">
-                <div class="day-plan"  slimScroll [options]="{barBackground: '#111',barWidth: '8', gridBackground: 'rgba(0,0,0,0)', gridBorderRadius: '1px'}">
+                <div class="day-plan"  perfect-scrollbar>
                     <div class="add-item" (click)="showForm(day);" *ngIf="!day.editMeal">
                         <i class="material-icons">add</i>
                         <span>Add meal</span>
