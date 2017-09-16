@@ -1,18 +1,16 @@
-@import "../../globalStyles/variables.scss";
-@import '../../globalStyles/text.scss';
+@import '../../globalStyles/variables.scss';
 @import '../../globalStyles/indentations.scss';
+@import '../../globalStyles/text.scss';
 
 $height: calc(100vh - 70px);
 
 .body-container {
     display: flex;
-    height: 100%;
 }
 
 .sidebar-container {
     flex: 0 0 15vw;
     width: calc(15vw - 20px);
-    min-width: 190px;
     position: fixed;
     left: 0;
     top: 70px;
@@ -25,8 +23,19 @@ $height: calc(100vh - 70px);
     width: 85%;
     margin-left: 15%;
 }
-
-@media screen and (max-width: $large-screen) {
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
+    .sidebar-container {
+        min-width: calc(190px - 20px);
+    }
+    .child-container {
+        width: calc(100% - 190px);
+        margin-left: 190px;
+    }
+}
+@media screen and (max-width: $medium-screen) {
+    .sidebar-container {
+        width: 170px;
+    }
     .hide {
         left: -190px;
     }
