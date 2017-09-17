@@ -14,7 +14,6 @@ EventService.prototype.applyUser = applyUser;
 EventService.prototype.deleteItem = deleteItem;
 
 function getItemById(req, callback) {
-    console.log('SERVICE', req.params.id);
     eventRepository.getById(req.params.id, (err, data) => {
         if (err) return callback(err);
         if (data === null) {

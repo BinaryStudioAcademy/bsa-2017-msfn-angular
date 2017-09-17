@@ -1,0 +1,18 @@
+@import '../../../../../globalStyles/variables.scss';
+@import '../../../../../globalStyles/text.scss';
+@import '../../../../../globalStyles/indentations';
+
+#message-container {
+    a {
+        width: 50%;
+        float: right;
+        text-align: right;
+        text-decoration: none;
+        color: $text-main-color;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
