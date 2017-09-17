@@ -19,12 +19,17 @@ md-input-container {
 
 .item-container {
     display: flex;
-    margin-top: 10px;
+    flex-direction: column;
+    margin-top: 20px;
     font-family: $font-general;
     align-items: baseline;
     justify-content: space-between;
     width: 100%;
 }
+
+.smaller-margin{
+    margin-top: 0px !important;
+} 
 
 md-select {
     width: 100%;

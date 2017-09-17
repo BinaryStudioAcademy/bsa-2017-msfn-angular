@@ -1,10 +1,9 @@
 @import '../../../../../globalStyles/variables';
 @import '../../../../../globalStyles/indentations';
 @import '../../../../../globalStyles/text';
-.search-container {
+.food-search-container {
     position: relative;
     height: 100%;
-    
     .overlay {
         display: flex;
         height: calc(60vh - 4px);
@@ -132,3 +131,69 @@
         }
     }
 }
+
+@media only screen and (max-width: $hd-screen) {
+    .food-search-container {
+        .content {
+            .side-content {
+                .depth-wrap {
+                    margin-left: 5px;
+                }
+            }
+            .product-content {
+                .hidden-md {
+                    display: none!important;
+                }
+                .food-part.food-name {
+                    width: 30%;
+                }
+                .food-part {
+                    width: 20%;
+                }
+                md-list-item {
+                    md-input-container {
+                        width: 20%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $small-screen) {
+    .food-search-container {
+        h2{
+            display: none;
+        }
+        .overlay {
+            height: 60vh;
+            top:0;
+            span {
+                font-size: 25px;
+                font-weight: bold;
+            }
+        }
+        .content {
+            height: 100%;
+            .side-content {
+                display: none;
+            }
+            .product-content {
+                height: 100%;
+                width: 100%;
+                .sorting-options{
+                    display: none;
+                }
+                md-input-container{
+                    width: 100%;
+                }
+                md-list-item {
+                    .mat-list-item-content{
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+

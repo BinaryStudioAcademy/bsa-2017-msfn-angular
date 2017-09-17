@@ -10,7 +10,7 @@ AchievementsService.prototype.getUserAchievements = getUserAchievements;
 AchievementsService.prototype.addUserAchievement = addUserAchievement;
 
 function getAllAchievements(callback) {
-    achievementsRepository.getAll((err, data) => {
+    achievementsRepository.getAllAchievements((err, data) => {
         if (err) {
             return err;
         }

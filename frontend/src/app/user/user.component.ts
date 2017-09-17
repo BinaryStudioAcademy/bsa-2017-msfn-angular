@@ -16,6 +16,7 @@ import { AchievementReceivedDialogComponent } from './user.components/achievemen
 export class UserComponent implements OnInit, OnDestroy {
     private achievements: Array<any>;
     private measures = {};
+    private goals = [];
     private achievementMeasures = {
         distance: 1000,
         weight: 1
@@ -38,60 +39,85 @@ export class UserComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.userService.getBasicInfo((achieves, measures, settings, weights) => {
+        this.userService.getBasicInfo((achieves, measures, settings, weights, goals) => {
             this.achievements = achieves;
             this.settings = settings;
             this.weights = weights;
-            console.log(this.weights, this.settings);
-            ['distance', 'weight'].forEach(measureName => {
-                measures.forEach(element => {
-                    if (element.measureName === measureName) {
-                        element.measureUnits.forEach(unit => {
-                            // console.log(unit.unitName, this.settings);
-                            if (unit.unitName === this.settings[measureName]) {
-                                this.measures[measureName] = unit.conversionFactor;
-                            }
-                        });
-                    }
+            this.goals = goals;
+            this.userService.getCategories(categories => {
+                categories.forEach(category => {
+                    this.goals.forEach(goal => {
+                        // tslint:disable-next-line:triple-equals
+                        if (category._id == goal.category) {
+                            goal.tmpCategory = category.category;
+                        }
+                    });
                 });
-            });
-            this.userService.getFollowers(followers => {
-                this.countFollowers = followers;
-                this.checkFollowerAchievement();
-            });
-            this.userService.loadArticles(articles => {
-                this.countArticles = articles;
-                this.checkArticlesAchievement();
-            });
-            this.userService.getLaunchedTrainings(trainings => {
-                this.launchTrain = trainings;
-                this.countLaunchedTraining = trainings.length;
-                this.checkTrainAchievement();
-                const result = this.userService.getTotalMeasures(trainings);
-                this.total = result[0];
-                this.maxTrainings = result[1];
-                this.checkTrainingsAchievement('distance', 'distance', this.maxTrainings);
-                this.checkTrainingsAchievement('weight', 'trainweight', this.maxTrainings);
-                this.checkTrainingsAchievement('distance', 'totaldistance', this.total);
-                this.checkTrainingsAchievement('weight', 'totalweight', this.total);
-                this.checkLosingWeight();
-            });
-            if (new Date().getDay() === 1) {
-                this.userService.getWeekTrainCout(count => {
-                    this.countWeekTrain = count;
-                    this.checkPerfectWeek();
+                console.log(this.goals);
+                ['distance', 'weight'].forEach(measureName => {
+                    measures.forEach(element => {
+                        if (element.measureName === measureName) {
+                            element.measureUnits.forEach(unit => {
+                                // console.log(unit.unitName, this.settings);
+                                if (unit.unitName === this.settings[measureName]) {
+                                    this.measures[measureName] = unit.conversionFactor;
+                                }
+                            });
+                        }
+                    });
                 });
-            }
-            this.userService.getUserOldStatus((data) => {
-                this.comboCount = data.comboCount;
-                this.registrationDate = data.registrationDate;
-                this.checkOldStatusAchievement();
-                this.checkComboDaysAchievement();
-                this.checkAchievementLength();
+                this.userService.getFollowers(followers => {
+                    this.countFollowers = followers;
+                    this.checkFollowerAchievement();
+                });
+                this.userService.loadArticles(articles => {
+                    this.countArticles = articles;
+                    this.checkArticlesAchievement();
+                });
+                this.userService.getLaunchedTrainings(trainings => {
+                    this.launchTrain = trainings;
+                    this.countLaunchedTraining = trainings.length;
+                    this.checkTrainAchievement();
+                    const result = this.userService.getTotalMeasures(trainings);
+                    this.total = result[0];
+                    this.maxTrainings = result[1];
+                    this.checkTrainingsAchievement('distance', 'distance', this.maxTrainings);
+                    this.checkTrainingsAchievement('weight', 'trainweight', this.maxTrainings);
+                    this.checkTrainingsAchievement('distance', 'totaldistance', this.total);
+                    this.checkTrainingsAchievement('weight', 'totalweight', this.total);
+                    this.checkLosingWeight();
+                    this.checkWeightGoal();
+                    this.checkGoal('followers', this.countFollowers);
+                    this.checkGoal('launchedtrainings', this.countLaunchedTraining);
+                    this.checkGoal('totaldistance', this.total['distance']);
+                    this.checkGoal('totalweight', this.total['weight']);
+                });
+                if (new Date().getDay() === 1) {
+                    this.userService.getWeekTrainCout(count => {
+                        this.countWeekTrain = count;
+                        this.checkPerfectWeek();
+                    });
+                }
+                this.userService.getUserOldStatus((data) => {
+                    this.comboCount = data.comboCount;
+                    this.registrationDate = data.registrationDate;
+                    this.checkOldStatusAchievement();
+                    this.checkComboDaysAchievement();
+                    this.checkAchievementLength();
+
+                    this.checkGoal('combo', this.comboCount);
+                });
             });
         });
     }
 
+    swipe(sidebar, swypetype) {
+        if (swypetype === 'swiperight') {
+            sidebar.classList.remove('hide');
+        } else if (swypetype === 'swipeleft') {
+            sidebar.classList.add('hide');
+        }
+    }
     checkLosingWeight() {
         const resAch = [];
         this.achievements.forEach(element => {
@@ -249,7 +275,50 @@ export class UserComponent implements OnInit, OnDestroy {
         if (this.userService.promiseFunc.unsubscribe) {
             this.userService.promiseFunc.unsubscribe();
         }
+    }
 
+
+    checkGoal(category, value) {
+        if (!this.goals) {
+            return;
+        }
+        const what = this.goals.filter(elem => {
+            return elem.tmpCategory === category;
+        });
+        if (!what) {
+            return;
+        }
+        what.forEach(element => {
+            this.userService.updateCurrentValue({
+                _id: element._id,
+                value: value
+            }, () => { });
+        });
+    }
+
+
+    checkWeightGoal() {
+        if (!this.goals) {
+            return;
+        }
+        const what = this.goals.filter(elem => {
+            return elem.tmpCategory === 'changeweight';
+        });
+        if (!what) {
+            return;
+        }
+        let weight;
+        if (this.weights.weightControl.length > 0) {
+            weight = this.weights.weightControl[this.weights.weightControl.length - 1].weight;
+        } else {
+            weight = this.weights.weight;
+        }
+        what.forEach(element => {
+            this.userService.updateCurrentValue({
+                _id: element._id,
+                value: weight
+            }, () => { });
+        });
     }
 
 }

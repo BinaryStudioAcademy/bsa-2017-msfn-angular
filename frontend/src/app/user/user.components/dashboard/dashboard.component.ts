@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { GoalProgressService } from '../../services/goal-progress.service';
 import { WeightControlService } from '../weight-control/weight-control.service';
@@ -23,9 +23,11 @@ export class DashboardComponent implements OnInit {
                 private goalProgressService: GoalProgressService,
                 private dateService: DateService) { }
 
+    public innerWidth: any;
     dragOptions = {
         animation: 500,
-        handle: '.drag-handle'
+        handle: '.drag-handle',
+        disabled: (this.innerWidth < 440)
     };
 
     goalItems = [];
@@ -36,6 +38,12 @@ export class DashboardComponent implements OnInit {
         this.getGoalItems();
         this.getWeightItems();
         this.getUser();
+        this.innerWidth = window.innerWidth;
+    }
+    @HostListener('window:resize', ['$event'])
+
+    onResize(event) {
+        this.innerWidth = window.innerWidth;
     }
 
     getGoalItems(): void {
