@@ -107,7 +107,6 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SortablejsModule,
         MdSliderModule,
         MdProgressBarModule,
-        NgSlimScrollModule,
         MdExpansionModule,
         PerfectScrollbarModule
     ],
