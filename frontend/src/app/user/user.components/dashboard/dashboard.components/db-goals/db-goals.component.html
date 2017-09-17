@@ -26,7 +26,7 @@
                     <p class="start-value">
                         initial: {{ goal.startValue }}
                     </p>
-                    <p class="current-value" [ngStyle]="{'left': (goal.progress * 0.85) + '%'}">
+                    <p class="current-value" [ngStyle]="{'left': getProgress(goal.progress, goal.currentValue)}">
                         current: {{ goal.currentValue }}
                     </p>
                     <p class="end-value">
