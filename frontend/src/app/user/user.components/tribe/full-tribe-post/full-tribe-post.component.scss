@@ -1,0 +1,40 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+
+img {
+    width: 70%;
+    display: block;
+    margin: $content-tb-margin auto;
+}
+.post-container {
+    margin: 40px auto 0;
+    padding: $content-between-margin;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2), 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12);
+}
+
+.meta-info {
+    display: flex;
+    justify-content: space-between;
+    a {
+        color: #b9ef95;
+        text-decoration: none;
+    }
+}
+
+.post-text {
+    text-align: justify;
+}
+
+.more-info {
+    color: $secondary-color;
+    text-decoration: none;
+}
+
+.user-reaction {
+    display: flex;
+    align-items: center;
+}

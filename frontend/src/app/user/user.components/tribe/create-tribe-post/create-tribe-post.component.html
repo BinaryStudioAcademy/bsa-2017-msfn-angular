@@ -1,0 +1,34 @@
+<form #form="ngForm" class="post-create-form">
+    <h2>Create post</h2>
+    <md-input-container>
+        <input mdInput
+               placeholder="Title"
+               [(ngModel)]="tribePost.title"
+               name="title"
+               required>
+    </md-input-container>
+    <md-input-container>
+        <textarea mdInput
+                  placeholder="Text"
+                  name="text"
+                  [(ngModel)]="tribePost.text"
+        ></textarea>
+    </md-input-container>
+    <button class="btn upload-container" *ngIf="hideCropper">
+        <span>Upload post image</span>
+        <input type="file" accept="image/*" class="upload" (change)="fileChangeListener($event)"/>
+    </button>
+    <div class="preview-header" *ngIf="hideCropper">Preview</div>
+    <div class="preview">
+        <div class="image-preview">
+            <img *ngIf="!hideCropper" [src]='data.image' [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+            <img *ngIf="hideCropper" [src]='tribePost.image'>
+        </div>
+        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
+        <div class="cropper-buttons" *ngIf="!hideCropper">
+            <button class="cropper-btn" (click)="cropperBtn('save')">Ok</button>
+            <button class="cropper-btn" (click)="cropperBtn('cancel')">Cancel</button>
+        </div>
+    </div>
+        <button class="btn" *ngIf="hideCropper" (click)="save(form)">Add post</button>
+</form>

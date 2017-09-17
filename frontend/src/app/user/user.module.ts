@@ -53,11 +53,17 @@ import { ArticleAddComponent } from './user.components/article-add/article-add.c
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
-import {ArticleListComponent} from './user.components/article-list/article-list.component';
+import { ArticleListComponent } from './user.components/article-list/article-list.component';
 import { MessagePostingComponent } from './user.components/message-posting/message-posting.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 import { AchievementReceivedDialogComponent } from './user.components/achievement-received-dialog/achievement-received-dialog.component';
 import { AchievementInfoDialogComponent } from './user.components/achievement-info-dialog/achievement-info-dialog.component';
+import { TribePageComponent } from './user.components/tribe/tribe-page/tribe-page.component';
+import { TribePostComponent } from './user.components/tribe/tribe-post/tribe-post.component';
+import { TribeSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.component';
+import { CreateTribePostComponent } from './user.components/tribe/create-tribe-post/create-tribe-post.component';
+import { FullTribePostComponent } from './user.components/tribe/full-tribe-post/full-tribe-post.component';
+import {TribeMembersDialogComponent} from './user.components/tribe/tribe-members-dialog/tribe-members-dialog.component';
 
 @NgModule({
     imports: [
@@ -119,6 +125,12 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
         AchievementsListComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
+        TribePageComponent,
+        TribePostComponent,
+        TribeSettingsComponent,
+        CreateTribePostComponent,
+        FullTribePostComponent,
+        TribeMembersDialogComponent
     ],
     providers: [
         ForAllUserGuard,
@@ -131,6 +143,8 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
         GoalEditDialogComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
+        FullTribePostComponent,
+        TribeMembersDialogComponent,
     ]
 })
 export class UserModule {

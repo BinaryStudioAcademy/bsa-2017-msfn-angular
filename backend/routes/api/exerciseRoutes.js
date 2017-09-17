@@ -1,7 +1,7 @@
 const
     apiResponse = require('express-api-response'),
     exerciseService = require('../../services/exerciseService'),
-    exerciseRepository = require('../../repositories/exerciseRepository');
+    exerciseRepository = require('../../repositories/exerciseRepository'),
     isAdmin = require('../../middleware/isAdminMiddleware'),
     baseUrl = '/api/exercise/';
 module.exports = function (app) {

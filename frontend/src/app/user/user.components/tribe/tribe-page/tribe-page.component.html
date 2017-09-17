@@ -1,0 +1,17 @@
+<div class="page-container">
+    <div class="general">
+        <img src="https://pbs.twimg.com/profile_images/805545477760552960/ktKI2KU8_400x400.jpg" class="tribe-logo">
+        <h1>{{tribe.name}}</h1>
+        <span class="mid-text menu-option">Send message</span>
+        <span class="mid-text menu-option" (click)="showFollowers()">Followers</span>
+        <button md-button class="btn">Follow</button>
+    </div>
+    <div class="content">
+        <div class="description">
+            <h2 class="mid-text">About</h2>
+            <span>{{tribe.description}}</span>
+        </div>
+        <app-tribe-post *ngFor="let post of posts"></app-tribe-post>
+    </div>
+
+</div>
