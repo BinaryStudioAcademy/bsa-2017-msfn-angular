@@ -53,10 +53,10 @@
 
 .chats-list-wrapper {
     position: fixed;
-    bottom: 30px;
+    bottom: 0;
     right: 0;
     width: 200px;
-    height: calc(100vh - 70px - 30px);
+    height: calc(100vh - 70px);
     background-color: $gradient-to-color;
     z-index: 5;
     transform: translateX(300px);
@@ -224,7 +224,6 @@
     .chats-list-wrapper {
         bottom: 0;
         width: calc(100vw - 55px);
-        height: calc(100vh - 70px);
         border: none;
         transform: translateX(calc(100vw - 55px));
     }

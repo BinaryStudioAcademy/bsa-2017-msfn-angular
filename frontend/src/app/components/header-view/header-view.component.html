@@ -1,24 +1,27 @@
-<header (mouseleave)="showUserMenu = false">
+<header *ngIf="thereIsLoggedInUser">
     <div class="logo">
         <a [routerLink]='"/"'>
             <div class="logo-mini__icon"></div>
             <div class="logo__text"></div>
         </a>
     </div>
-    <div class="notifications" *ngIf="thereIsLoggedInUser">
-        <app-header-notifications class="header-notifications"></app-header-notifications>
-    </div>
-    <div class="settings header__navigation-panel" *ngIf="thereIsLoggedInUser">
-        <img class="settings__photo" [src]="userPhotoUrl">
-        <span [routerLink]="'/user/profile/'+userId" class="settings__name">{{displayName}}</span>
-        <md-icon [mdMenuTriggerFor]="appMenu">menu</md-icon>
+    <div class="panel">
+        <div class="chat icons">
+            <md-icon (click)="toggleringChat.emit()">forum</md-icon>
+            <span class="got-messages" *ngIf="chats && chats | totalUnread: userId">{{chats | totalUnread: userId}}</span>
+        </div>
+        <app-header-notifications class="icons"></app-header-notifications>
+        <div [mdMenuTriggerFor]="appMenu" class="settings">
+            <img class="settings__photo" [src]="userPhotoUrl">
+            <span class="settings__name">{{displayName}}</span>
+        </div>
+        <div class="burger icons">
+            <md-icon >menu</md-icon>
+        </div>
     </div>
     <md-menu class="user_menu" #appMenu="mdMenu" yPosition="below" [overlapTrigger]="false">
+        <button md-menu-item *ngIf="window.data._injectedData.role != 'admin'" routerLink="{{'/user/profile/' + userId}}">My Profile</button>
         <button md-menu-item *ngIf="window.data._injectedData.role != 'admin'" routerLink="/user/account-settings/profile">Settings</button>
         <button md-menu-item (click)="logout()">Logout</button>
     </md-menu>
-    <!--<div class="user-forms header__navigation-panel" *ngIf="!thereIsLoggedInUser">-->
-    <!--<button md-button routerLink="/register" class="header__button">Register</button>-->
-    <!--<button md-button routerLink="/login" class="header__button">Login</button>-->
-    <!--</div>-->
 </header>
