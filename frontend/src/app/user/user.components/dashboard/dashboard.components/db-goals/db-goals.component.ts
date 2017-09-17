@@ -38,7 +38,7 @@ export class DbGoalsComponent implements OnInit {
     }
 
     getProgress(progress: number, curr: number) {
-        const minimum = 45;
+        const minimum = 50;
         const width = curr.toString().length * 9 + minimum;
         return 'calc(' + progress + '% - (' + Math.round(width * progress / 100) + 'px))';
     }
