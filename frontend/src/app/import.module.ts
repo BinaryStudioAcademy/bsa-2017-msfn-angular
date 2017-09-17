@@ -34,7 +34,8 @@ import {
     MdNativeDateModule,
     MdButtonToggleModule,
     MdSliderModule,
-    MdProgressBarModule
+    MdProgressBarModule,
+    MdExpansionModule
 } from '@angular/material';
 import 'hammerjs';
 import { D3Service } from 'd3-ng2-service';
@@ -94,7 +95,8 @@ import { GCalendarService } from './services/gcalendar.service';
         SortablejsModule,
         MdSliderModule,
         MdProgressBarModule,
-        NgSlimScrollModule
+        NgSlimScrollModule,
+        MdExpansionModule
     ],
     declarations: [
         ListComponent,

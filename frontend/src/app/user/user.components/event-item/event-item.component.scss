@@ -3,143 +3,42 @@
 @import '../../../../globalStyles/indentations';
 
 #event-container {
-    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 65vw;
     margin: 0 auto;
+}
 
-    h1 {
-        width: 100%;
-        margin: $macro-indent auto;
-        text-align: center;
-    }
+#event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: $macro-indent auto;
 
-    .event-item {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        width: 100%;
-        margin: 0 auto;
-        padding: $standard-indent 0;
-    }
+    .event-buttons {
+        flex-basis: 50%;
+        text-align: right;
 
-    #event-text-block {
-        width: 45%;
-        margin-right: 50px;
-        font-size: $main-text;
-
-        a {
-            color: $text-main-color;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        p {
-            margin-bottom: $large-indent;
-        }
-
-        .title {
-            margin-top: 0;
-            font-size: $large-text;
-            font-weight: 600;
-        }
-
-        .title:hover,
-        .creator-avatar:hover,
-        .creator-name:hover {
-            cursor: pointer;
-        }
-
-        .creator {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
+        button {
+            width: 90%;
+            max-width: 160px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
             font-size: $main-text;
-
-            .creator-avatar {
-                display: inline-block;
-                width: 12%;
-                margin-right: $standard-indent;
-                vertical-align: top;
-
-                img {
-                    width: 44px;
-                    border-radius: 22px;
-                }
-            }
-
-            .creator-name {
-                text-align: right;
-            }
+            font-weight: 600;
+            background: $main-color;
         }
 
-        #event-location {
-            width: 100%;
-        }
-
-        .dates {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-
-            .endDate {
-                text-align: right;
-            }
-        }
-    }
-
-    .event-image {
-        width: 45%;
-
-        img {
-            height: 200px;
-            float: right;
-        }
-    }
-
-    .event-handle {
-        width: 100%;
-        font-size: $main-text;
-        color: $text-main-color;
-
-        .event-buttons {
-            display: inline-block;
-            width: 50%;
-
-            button {
-                width: 90%;
-                max-width: 160px;
-                height: 40px;
-                margin-right: $macro-indent;
-                border: none;
-                border-radius: 20px;
-                outline: none;
-                font-size: $main-text;
-                font-weight: 600;
-                background: $main-color;
-            }
-        }
-
-        a {
-            width: 50%;
-            float: right;
-            text-align: right;
-            text-decoration: underline;
-            color: $text-main-color;
-        }
-
-        a:hover {
-            text-decoration: none;
+        button:first-child {
+            margin-right: $macro-indent;
         }
     }
 }
 
-#event-map {
-    width: 45%;
-
-    #map {
-        width: 100%;
-        height: 400px;
-    }
+router-outlet {
+    margin-top: $macro-indent;
 }

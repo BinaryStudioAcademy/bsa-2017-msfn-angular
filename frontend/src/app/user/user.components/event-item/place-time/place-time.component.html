@@ -1,0 +1,13 @@
+<div id="event-map">
+    <div class="text-block" *ngIf="event">
+        <div class="dates">
+            <p class="start-date">From: {{ event.startDateOutput }}</p>
+            <p class="end-date">Till: {{ event.endDateOutput }}</p>
+        </div>
+        <div class="location">
+            <p class="secondary-text">Location: </p>
+            <p>{{ event.location.name }}</p>
+        </div>
+    </div>
+    <div id="map"></div>
+</div>

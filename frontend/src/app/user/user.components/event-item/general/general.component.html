@@ -1,0 +1,65 @@
+<div id="general-container" *ngIf="event">
+    <div class="text-block">
+        <div class="creator">
+            <div class="creator-name">
+                <p class="secondary-text">Event creator:</p>
+                <a routerLink="/user/profile/{{ event.creator._id }}">
+                    <p>{{ event.creator.fullName }}</p>
+                </a>
+            </div>
+            <div class="creator-avatar">
+                <a routerLink="/user/profile/{{ event.creator._id }}">
+                    <img src="{{ event.creator.userPhoto }}">
+                </a>
+            </div>
+        </div>
+
+        <p class="description">{{ event.description }}</p>
+
+        <div id="participants">
+            <md-expansion-panel>
+                <md-expansion-panel-header>
+                    <md-panel-title>
+                        Participants
+                    </md-panel-title>
+                </md-expansion-panel-header>
+
+                <div class="user" *ngFor="let user of event.participants">
+                    <div class="user-avatar">
+                        <a routerLink="/user/profile/{{ user._id }}">
+                            <img src="{{ user.userPhoto }}">
+                        </a>
+                    </div>
+                    <a routerLink="/user/profile/{{ user._id }}">
+                        <p class="user-name">{{ user.fullName }}</p>
+                    </a>
+                </div>
+            </md-expansion-panel>
+        </div>
+
+        <div id="followers">
+            <md-expansion-panel>
+                <md-expansion-panel-header>
+                    <md-panel-title>
+                        Followers
+                    </md-panel-title>
+                </md-expansion-panel-header>
+
+                <div class="user" *ngFor="let user of event.followers">
+                    <div class="user-avatar">
+                        <a routerLink="/user/profile/{{ user._id }}">
+                            <img src="{{ user.userPhoto }}">
+                        </a>
+                    </div>
+                    <a routerLink="/user/profile/{{ user._id }}">
+                        <p class="user-name">{{ user.fullName }}</p>
+                    </a>
+                </div>
+            </md-expansion-panel>
+        </div>
+    </div>
+
+    <div id="event-image">
+        <img src="{{ event.image }}">
+    </div>
+</div>

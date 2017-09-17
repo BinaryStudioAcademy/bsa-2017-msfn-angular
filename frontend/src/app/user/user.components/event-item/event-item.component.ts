@@ -5,8 +5,6 @@ import {IEvent} from '../../../models/event';
 import {ActivatedRoute} from '@angular/router';
 import {WindowObj} from '../../../services/window.service';
 
-declare const google: any;
-
 @Component({
     selector: 'app-event-item',
     templateUrl: './event-item.component.html',
@@ -25,31 +23,26 @@ export class EventItemComponent implements OnInit {
     }
 
     private _userId = this.window.data._injectedData.userId;
-    event = {
-        title: '',
-        creator: {
-            _id: '',
-            userPhoto: '',
-            fullName: ''
+
+    navLinks = [
+        {
+            link: 'general',
+            label: 'General'
         },
-        startDate: '',
-        endDate: '',
-        location: {
-            name: '',
-            coords: {
-                lat: null,
-                lng: null
-            }
+        {
+            link: 'place-time',
+            label: 'Place & Time'
         },
-        description: '',
-        image: '',
-        participants: [],
-        followers: [],
-        messages: []
-    };
+        {
+            link: 'discuss',
+            label: 'Discuss'
+        }
+    ];
+
+    event: IEvent;
 
     ngOnInit() {
-        if (this.activatedRoute.snapshot.params.id && !this.event) {
+        if (this.activatedRoute.snapshot.params.id) {
             const eventId = this.activatedRoute.snapshot.params.id;
             this.getEvent(eventId);
         }
@@ -59,47 +52,9 @@ export class EventItemComponent implements OnInit {
         this.eventService.getItem(id, data => {
             this.event = data;
             console.log(data);
-            this.setDateOutput(this.event);
-            this.isUserApplied(this.event);
-            this.initMap();
+            this.eventService.setDateOutput(this.event);
+            this.eventService.isUserApplied(this.event, this._userId);
         });
     }
 
-    setDateOutput(item): void {
-        item.startDateOutput = this.dateService
-            .convertDateToIso(new Date(item.startDate), true);
-        item.endDateOutput = this.dateService
-            .convertDateToIso(new Date(item.endDate), true);
-    }
-
-    isUserApplied(event) {
-        if (event.participants.includes(this._userId)) {
-            event.isParticipating = true;
-        }
-        if (event.followers.includes(this._userId)) {
-            event.isParticipating = true;
-        }
-    }
-
-    initMap(): void {
-        const centerCoords = {
-            lat: this.event.location.coords.lat,
-            lng: this.event.location.coords.lng
-        };
-
-        const map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 12,
-            center: centerCoords
-        });
-
-        const marker = new google.maps.Marker({
-            position: centerCoords,
-            map: map,
-            animation: google.maps.Animation.DROP,
-        });
-
-        map.addListener('mouseout', () => {
-            map.setOptions({center: centerCoords});
-        });
-    }
 }
