@@ -9,7 +9,8 @@ import { FoodTrackingService } from './food-tracking.service';
     providers: [FoodTrackingService]
 })
 export class FoodTrackingComponent implements OnInit {
-    foodplan;
+    foodPlans;
+    launchedFoodFlan;
 
     constructor(
         public foodTrackingService: FoodTrackingService,
@@ -17,12 +18,27 @@ export class FoodTrackingComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        /* this.foodTrackingService.getFoodPlan( foodPlan => {
-            console.log(foodPlan);
-            this.foodplan = foodPlan[0];
-            if (this.foodplan.type === 'weekly') {
-                this.foodplan.meals = this.foodplan.days[new Date().getDay() - 1].meals;
+        this.foodTrackingService.getCurentLaunchedFoodPlan(res => {
+            if (res._id) {
+                this.launchedFoodFlan = res;
+            } else {
+                this.getAllFoodPlans();
             }
-        }); */
+            console.log(this.launchedFoodFlan);
+        });
+    }
+
+    getAllFoodPlans() {
+        this.foodTrackingService.getFoodPlans( foodPlans => {
+            this.foodPlans = foodPlans;
+            console.log(this.foodPlans);
+        });
+    }
+
+    startTracking(foodPlan) {
+        this.foodTrackingService.createLaunchedFoodPlan( foodPlan, res => {
+            this.launchedFoodFlan = res;
+            console.log(this.launchedFoodFlan);
+        });
     }
 }

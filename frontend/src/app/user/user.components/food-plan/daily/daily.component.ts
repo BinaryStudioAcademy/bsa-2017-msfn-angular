@@ -6,7 +6,8 @@ import { FoodPlanService } from './../food-plan.service';
 @Component({
     selector: 'app-daily',
     templateUrl: './daily.component.html',
-    styleUrls: ['./daily.component.scss']
+    styleUrls: ['./daily.component.scss'],
+    providers: [FoodPlanService]
 })
 export class DailyComponent implements OnInit, OnDestroy {
 

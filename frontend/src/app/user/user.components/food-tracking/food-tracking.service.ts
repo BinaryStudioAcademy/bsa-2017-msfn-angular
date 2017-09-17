@@ -10,7 +10,7 @@ export class FoodTrackingService {
         private httpService: HttpService,
     ) { }
 
-    getFoodPlan(callback): void {
+    getFoodPlans(callback): void {
         const request: IHttpReq = {
             url: '/api/food-plan/',
             method: 'GET',
@@ -19,6 +19,32 @@ export class FoodTrackingService {
         this.httpService.sendRequest(request)
             .then(data => {
                 callback(data);
+            });
+    }
+
+    getCurentLaunchedFoodPlan(callback): void {
+        const request: IHttpReq = {
+            url: '/api/launchedfoodplan/current',
+            method: 'GET',
+            body: {}
+        };
+
+        this.httpService.sendRequest(request)
+            .then(data => {
+                callback(data);
+            });
+    }
+
+    createLaunchedFoodPlan(data, callback): void {
+        const request: IHttpReq = {
+            url: '/api/launchedfoodplan',
+            method: 'POST',
+            body: data
+        };
+
+        this.httpService.sendRequest(request)
+            .then(res => {
+                callback(res);
             });
     }
 }

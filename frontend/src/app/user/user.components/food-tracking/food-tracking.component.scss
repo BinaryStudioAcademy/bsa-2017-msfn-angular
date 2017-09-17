@@ -1,6 +1,74 @@
 @import '../../../../globalStyles/variables';
 @import '../../../../globalStyles/indentations';
 @import '../../../../globalStyles/text';
-.container {
- 
+
+.container-foodPlans {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 70vw;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+
+    h2 {
+        flex: 100%;
+        margin-bottom: 0;
+        text-align: center;
+        font-size: $header-text;
+    }
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 260px;
+    height: 180px;
+    margin: 10px;
+    color: $btn-color;
+    background-color: $gradient-to-color;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.train-item-text {
+    font-size: $flat-item-text;
+    margin: 5px;
+    letter-spacing: 1px;
+}
+
+.item-container:hover {
+    background-color: #353535;
+    cursor: pointer;
+}
+
+md-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+}
+
+.material-icons.add-item-ico{
+    font-size: 40px;
+}
+.add-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 260px;
+    height: 180px;
+    margin: 10px;
+    color: #CCCCCC;
+    background-color: #353535;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.add-container:hover {
+    color: $btn-color;
+    cursor: pointer;
 }

@@ -1,6 +1,17 @@
 <div class="container">
-    <!-- <app-daily *ngIf="foodplan" [meals]="foodplan.meals"></app-daily> -->
-    <div *ngIf="!foodplan">
-        You haven't started food plan yet. 
+    <div class="container-foodPlans" *ngIf="!launchedFoodFlan && foodPlans">
+        <h2>Start tracking plan</h2>
+        <div class="item-container" *ngFor="let item of foodPlans">
+            <md-icon>room_service</md-icon>
+            <p class="train-item-text">{{ item.title }}</p>
+            <button md-button (click)="startTracking(item)">start traking</button>
+        </div>
+        <div class="add-container" routerLink="/user/food-list/add">
+            <i class="material-icons add-item-ico">add</i>
+        </div>
+    </div>
+    <div class="container-launched" *ngIf="launchedFoodFlan">
+        <app-weekly *ngIf="launchedFoodFlan.type === 'weekly'" [days]="launchedFoodFlan.days"></app-weekly>
+        <app-daily *ngIf="launchedFoodFlan.type === 'daily'" [meals]="launchedFoodFlan.meals"></app-daily>
     </div>
 </div>

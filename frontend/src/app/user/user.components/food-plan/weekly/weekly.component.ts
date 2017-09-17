@@ -6,7 +6,8 @@ import { FoodPlanService } from './../food-plan.service';
 @Component({
     selector: 'app-weekly',
     templateUrl: './weekly.component.html',
-    styleUrls: ['./weekly.component.scss']
+    styleUrls: ['./weekly.component.scss'],
+    providers: [FoodPlanService]
 })
 export class WeeklyComponent implements OnInit, OnDestroy {
 
