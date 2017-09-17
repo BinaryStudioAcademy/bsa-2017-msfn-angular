@@ -1,5 +1,6 @@
 const ApiError = require('./apiErrorService');
 const eventRepository = require('../repositories/eventRepository');
+const messageRepository = require('../repositories/messageRepository');
 
 function EventService() { }
 
@@ -9,6 +10,7 @@ EventService.prototype.getItemsByUserId = getItemsByUserId;
 EventService.prototype.getFollowers = getFollowers;
 EventService.prototype.getParticipants = getParticipants;
 EventService.prototype.getItemsByDates = getItemsByDates;
+EventService.prototype.getMessages = getMessages;
 EventService.prototype.addItem = addItem;
 EventService.prototype.applyUser = applyUser;
 EventService.prototype.deleteItem = deleteItem;
@@ -70,6 +72,17 @@ function getFollowers(body, callback) {
     const eventId = body.params.id;
     eventRepository.getFollowers(eventId, (err, data) => {
         callback(err, data);
+    });
+}
+
+function getMessages(body, callback) {
+    messageRepository.findByEventId(body.params.id, (err, data) => {
+        if (err) return callback(err);
+        if (data === null) {
+            callback(null, []);
+        } else {
+            callback(null, data);
+        }
     });
 }
 

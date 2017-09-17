@@ -16,7 +16,7 @@ export interface IEvent {
     image?: string;
     participants?: [any];
     followers?: [any];
-    messages?: [any];
+    // messages?: [any];
     isRemoved?: boolean;
     startDateOutput?: string;
     endDateOutput?: string;

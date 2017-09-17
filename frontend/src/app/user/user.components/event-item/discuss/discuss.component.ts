@@ -34,10 +34,10 @@ export class DiscussComponent implements OnInit {
 
     paginatorOutput: any[];
 
-    pageSizeOptions = [2, 4, 5];
+    pageSizeOptions = [10, 20, 30];
     pageEvent: PageEvent = {
         pageIndex: 0,
-        pageSize: 2,
+        pageSize: 10,
         length: this.messages.length
     };
 
@@ -50,17 +50,19 @@ export class DiscussComponent implements OnInit {
     ]);
 
     ngOnInit() {
-        if (this.activatedRoute.snapshot.params.id) {
+        if (this.activatedRoute.snapshot.parent.params.id) {
             this.eventId = this.activatedRoute.snapshot.parent.params.id;
-            this.getEvent(this.eventId);
+            this.getMessages(this.eventId);
         }
     }
 
-    getEvent(id: string): void {
-        this.eventService.getItem(id, data => {
-            this.event = data;
+    getMessages(id: string): void {
+        this.eventService.getMessages(id, data => {
             console.log(data);
-            this.messages = this.event;
+            this.messages = data;
+            for (const message of this.messages) {
+                this.eventService.setDateOutput(message, true);
+            }
             this.makePaginatorOutput();
         });
     }
@@ -86,7 +88,7 @@ export class DiscussComponent implements OnInit {
 
     updateData() {
         this.messages = [];
-        this.getEvent(this.eventId);
+        this.getMessages(this.eventId);
     }
 
     updateMessage(post): void {

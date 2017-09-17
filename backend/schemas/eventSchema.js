@@ -45,12 +45,12 @@ const Event = new Schema({
             ref: 'User'
         }
     ],
-    messages: [
-        {
-            type: ObjectId,
-            ref: 'Message'
-        }
-    ],
+    // messages: [
+    //     {
+    //         type: ObjectId,
+    //         ref: 'Message'
+    //     }
+    // ],
     isRemoved: {
         type: Boolean,
         default: false

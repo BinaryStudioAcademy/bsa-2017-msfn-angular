@@ -15,9 +15,6 @@ module.exports = app => {
 
     app.get(`${baseUrl}`, (req, res, next) => {
         eventService.getAllItems((err, data) => {
-            if (!data.length) {
-                data = [{}];
-            }
             res.data = data;
             res.err = err;
             next();
@@ -26,9 +23,6 @@ module.exports = app => {
 
     app.get(`${baseUrl}user/:id`, (req, res, next) => {
         eventService.getItemsByUserId(req, (err, data) => {
-            if (!data.length) {
-                data = [{}];
-            }
             res.data = data;
             res.err = err;
             next();
@@ -37,9 +31,6 @@ module.exports = app => {
 
     app.get(`${baseUrl}period/:startTimeStamp/:endTimeStamp`, (req, res, next) => {
         eventService.getItemsByDates(req.params, (err, data) => {
-            if (!data.length) {
-                data = [{}];
-            }
             res.data = data;
             res.err = err;
             next();
@@ -56,6 +47,14 @@ module.exports = app => {
 
     app.get(`${baseUrl}followers/:id`, (req, res, next) => {
         eventService.getFollowers(req, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(`${baseUrl}messages/:id`, (req, res, next) => {
+        eventService.getMessages(req, (err, data) => {
             res.data = data;
             res.err = err;
             next();

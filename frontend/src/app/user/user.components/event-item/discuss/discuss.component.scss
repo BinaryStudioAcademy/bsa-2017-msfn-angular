@@ -3,10 +3,9 @@
 @import '../../../../../globalStyles/indentations';
 
 #message-container {
+    width: 80vw;
+
     a {
-        width: 50%;
-        float: right;
-        text-align: right;
         text-decoration: none;
         color: $text-main-color;
     }
@@ -14,5 +13,170 @@
     a:hover {
         text-decoration: underline;
     }
+
+    .no-items {
+        margin-bottom: $macro-indent;
+    }
+
+    #message-button {
+        margin: 0 auto $standard-indent;
+
+        button {
+            display: block;
+            width: 180px;
+            height: 40px;
+            margin: 0 auto;
+            border: none;
+            border-radius: 15px;
+            outline: none;
+            font-size: $main-text;
+            font-weight: 600;
+            background: #82ca9c;
+        }
+    }
+
+    md-input-container {
+        width: 90%;
+
+        textarea {
+            height: 100px;
+        }
+    }
+
+    md-paginator {
+        flex-wrap: wrap;
+        margin-top: $macro-indent;
+    }
+
+    md-paginator /deep/ .mat-paginator-range-label {
+        margin: 0;
+    }
 }
 
+#posts {
+    width: 100%;
+
+    .post {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .post:not(:last-child) {
+        margin-bottom: $standard-indent;
+        padding-bottom: $standard-indent;
+        border-bottom: 1px solid $text-main-color;
+    }
+}
+
+.post-creator {
+    width: 25%;
+    max-width: 150px;
+    margin-right: 5%;
+    vertical-align: top;
+    text-align: center;
+
+    img {
+        width: 44px;
+        border-radius: 22px;
+    }
+
+    .post-name {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: $mini-indent;
+        font-size: $usual-text;
+    }
+}
+
+.post-text-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: 70%;
+
+    p {
+        display: inline-block;
+        margin: 0;
+    }
+
+    .message-handler {
+        width: 100%;
+        text-align: right;
+        color: $text-shadowed-color;
+
+        p {
+            font-size: $minor-text;
+        }
+
+        p:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .post-delete {
+            margin-left: $standard-indent;
+        }
+    }
+
+    .post-date {
+        width: 100%;
+        max-width: 150px;
+        margin: $mini-indent 0;
+        text-align: right;
+        font-size: $minor-text;
+        color: $text-shadowed-color;
+    }
+
+    .post-text {
+        width: 100%;
+        word-break: break-word;
+        font-size: $main-text;
+    }
+}
+
+.close {
+    float: right;
+    padding: 0;
+    border: 0;
+    font-size: 18px;
+    color: $text-second-color;
+    background-color: transparent;
+}
+
+.close:hover {
+    cursor: pointer;
+    color: $text-main-color;
+}
+
+
+@media only screen and (min-width: $large-screen) {
+
+    #message-container {
+        width: 65vw;
+
+        md-paginator {
+            flex-wrap: initial;
+        }
+
+        md-paginator /deep/ .mat-paginator-range-label {
+            margin: initial;
+        }
+    }
+
+    .post-text-block {
+        .message-handler {
+            flex-grow: 2;
+            width: initial;
+            margin: 0;
+        }
+
+        .post-date {
+            flex-grow: 1;
+            margin: 0;
+        }
+
+        .post-text {
+            margin-top: $standard-indent;
+        }
+    }
+}

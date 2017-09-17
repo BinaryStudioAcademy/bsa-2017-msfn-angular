@@ -56,7 +56,7 @@ export class MessagePostingComponent implements OnInit {
                 isRemoved: false
             };
 
-            if (this.parentElement === ('userDb' || 'event')) {
+            if (this.parentElement === 'userDb' || this.parentElement === 'event') {
                 if (this.parentElement === 'event') {
                     postData.event = this.eventId;
                 }

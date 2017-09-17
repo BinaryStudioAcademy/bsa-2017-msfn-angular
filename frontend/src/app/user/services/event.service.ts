@@ -140,6 +140,18 @@ export class EventService {
         });
     }
 
+    getMessages(id, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/messages/' + id,
+            method: 'GET',
+            body: {},
+            failMessage: 'Can\'t show messages'
+        };
+        this.httpService.sendRequest(req).then(data => {
+            callback(data);
+        });
+    }
+
     participate(eventId: string, userId: string, callback) {
         const req: IHttpReq = {
             url: '/api/event/apply/' + eventId,
@@ -201,11 +213,16 @@ export class EventService {
         });
     }
 
-    setDateOutput(item): void {
-        item.startDateOutput = this.dateService
-            .convertDateToIso(new Date(item.startDate), true);
-        item.endDateOutput = this.dateService
-            .convertDateToIso(new Date(item.endDate), true);
+    setDateOutput(item, isMessage?: boolean): void {
+        if (isMessage) {
+            item.dateOutput = this.dateService
+                .convertDateToIso(new Date(item.date), true);
+        } else {
+            item.startDateOutput = this.dateService
+                .convertDateToIso(new Date(item.startDate), true);
+            item.endDateOutput = this.dateService
+                .convertDateToIso(new Date(item.endDate), true);
+        }
     }
 
     isUserApplied(event, userId: string) {

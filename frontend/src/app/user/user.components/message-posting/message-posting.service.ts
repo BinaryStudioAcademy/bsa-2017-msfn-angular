@@ -27,8 +27,6 @@ export class MessagePostingService {
         let route: string;
         if (message.hasOwnProperty('coach')) {
             route = '/api/coach/testimonial';
-        } else if (message.hasOwnProperty('event')) {
-            route = '/api/event/message';
         } else {
             route = '/api/message';
         }
