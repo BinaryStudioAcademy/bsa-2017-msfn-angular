@@ -11,7 +11,6 @@
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    position: relative;
     width: 70vw;
     font-family: $font-general;
     font-size: $usual-text;
@@ -67,7 +66,7 @@
     width: 260px;
     height: 180px;
     margin: 10px;
-        color: $btn-color;
+    color: $btn-color;
     background-color: $gradient-to-color;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -113,9 +112,7 @@
     order: 1000;
     display: flex;
     align-items: center;
-    flex-direction: column;
     justify-content: center;
-    text-align: center;
     width: 260px;
     height: 180px;
     margin: 10px;
