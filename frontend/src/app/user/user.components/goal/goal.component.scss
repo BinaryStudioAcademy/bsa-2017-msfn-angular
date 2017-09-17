@@ -57,6 +57,11 @@
 .ghost {
     opacity: 0.5;
 }
+
+.white {
+    color: $text-main-color;
+}
+
 .item-container {
     display: flex;
     align-items: center;

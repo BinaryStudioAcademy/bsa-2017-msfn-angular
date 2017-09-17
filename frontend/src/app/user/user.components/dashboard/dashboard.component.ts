@@ -30,12 +30,10 @@ export class DashboardComponent implements OnInit {
         disabled: (this.innerWidth < 440)
     };
 
-    goalItems = [];
     weightItems = [];
     user: IUser;
 
     ngOnInit() {
-        this.getGoalItems();
         this.getWeightItems();
         this.getUser();
         this.innerWidth = window.innerWidth;
@@ -44,16 +42,6 @@ export class DashboardComponent implements OnInit {
 
     onResize(event) {
         this.innerWidth = window.innerWidth;
-    }
-
-    getGoalItems(): void {
-        this.dashboardService.getGoalData(res => {
-            if (res[0].hasOwnProperty('value')) {
-                this.goalItems = res;
-            } else {
-                this.goalItems = [];
-            }
-        });
     }
 
     getWeightItems(): void {
