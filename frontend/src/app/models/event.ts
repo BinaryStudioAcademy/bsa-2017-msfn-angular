@@ -1,7 +1,8 @@
 export interface IEvent {
     title: string;
-    creator: string;
+    creator: any;
     startDate: Date;
+    _id?: string;
     endDate?: Date;
     dateCreated?: Date;
     location?: {
@@ -11,10 +12,14 @@ export interface IEvent {
             lng: number
         }
     };
-    description?: string,
+    description?: string;
     image?: string;
-    participants?: [string];
-    followers?: [string];
-    messages?: [string];
+    participants?: [any];
+    followers?: [any];
+    // messages?: [any];
     isRemoved?: boolean;
+    startDateOutput?: string;
+    endDateOutput?: string;
+    isParticipating?: boolean;
+    isFollowing?: boolean;
 }

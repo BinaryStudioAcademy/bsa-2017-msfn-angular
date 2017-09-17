@@ -1,104 +1,46 @@
-@import "../../globalStyles/variables.scss";
-@import '../../globalStyles/text.scss';
+@import '../../globalStyles/variables.scss';
 @import '../../globalStyles/indentations.scss';
+@import '../../globalStyles/text.scss';
 
 $height: calc(100vh - 70px);
-
-.menu-element {
-    display: block;
-}
-
-aside {
-    width: 100%;
-    height: 100%;
-    min-height: $height;
-    font-family: $font-general;
-    font-weight: 600;
-    font-size: $usual-text;
-    float: left;
-    background: linear-gradient($bg-color 75%, $gradient-from-color);
-    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
-
-    nav {
-        float: right;
-        width: 90%;
-        position: relative;
-
-        a {
-            line-height: $header-text;
-            text-decoration: none;
-            color: #aaa;
-        }
-
-        .navigation__icon {
-            float: left;
-            fill: #aaa;
-            vertical-align: middle;
-            width: 24px;
-            height: 24px;
-            margin-right: 13px;
-        }
-
-        .active-link {
-            svg {
-                fill: #fff;
-            }
-            color: #fff;
-            font-weight: bold;
-        }
-
-        .active-link::before {
-            content: "•";
-            position: absolute;
-            display: block;
-            font-size: 30px;
-            left: 0;
-            line-height: $header-text;
-            color: #82A690;
-        }
-    }
-}
 
 .body-container {
     display: flex;
 }
 
 .sidebar-container {
-    flex: 0 0 calc(15vw);
-    min-width: 15vw; /*need -20px for scrollbar*/
+    flex: 0 0 15vw;
+    width: calc(15vw - 20px);
+    position: fixed;
+    left: 0;
+    top: 70px;
+    height: $height;
+    transition: 1s;
+    z-index: 99;
 }
 
 .child-container {
-    flex: 0 0 85vw;
-    min-width: 85vw;
-    overflow-y: auto;
+    width: 85%;
+    margin-left: 15%;
 }
-
 @media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
-    aside {
-        width: 180px;
+    .sidebar-container {
+        min-width: calc(190px - 20px);
     }
     .child-container {
-        width: calc(100vw - 200px);
+        width: calc(100% - 190px);
+        margin-left: 190px;
     }
 }
-
-
 @media screen and (max-width: $medium-screen) {
     .sidebar-container {
-        flex: 0 0 55px;
-        width: 55px;
+        width: 170px;
     }
-
-    aside {
-        width: auto;
-
-        .navigation__title, .navigation__subheader {
-            display: none;
-        }
+    .hide {
+        left: -190px;
     }
-
     .child-container {
-        width: calc(100vw - 55px);
+        width: 100%;
+        margin-left: 0;
     }
 }

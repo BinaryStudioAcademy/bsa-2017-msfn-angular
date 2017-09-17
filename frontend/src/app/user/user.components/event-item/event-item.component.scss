@@ -1,0 +1,64 @@
+@import '../../../../globalStyles/variables.scss';
+@import '../../../../globalStyles/text.scss';
+@import '../../../../globalStyles/indentations';
+
+#event-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+    margin: 0 auto;
+}
+
+#event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: $macro-indent auto;
+
+    .event-buttons {
+        flex-basis: 50%;
+        text-align: right;
+
+        button {
+            width: 90%;
+            max-width: 160px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            font-size: $main-text;
+            font-weight: 600;
+            background: $main-color;
+        }
+
+        button:first-child {
+            margin-right: $macro-indent;
+        }
+    }
+}
+
+.mat-tab-nav-bar {
+    width: 100%;
+}
+
+.mat-tab-nav-bar /deep/ .mat-tab-links {
+    display: flex;
+
+    a {
+        flex-grow: 1;
+    }
+}
+
+router-outlet {
+    margin-top: $macro-indent;
+}
+
+
+@media only screen and (min-width: $large-screen) {
+
+    #event-container {
+        width: 65vw;
+    }
+}

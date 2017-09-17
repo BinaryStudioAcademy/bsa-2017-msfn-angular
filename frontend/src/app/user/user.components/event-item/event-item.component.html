@@ -1,3 +1,33 @@
-<p>
-  event-item works!
-</p>
+<div id="event-container" *ngIf="event">
+    <div id="event-header">
+        <h1>{{ event.title }}</h1>
+
+        <div class="event-buttons">
+            <button
+                md-icon-button
+                type="button">
+                <!--(click)="participatingAction(event)">-->
+                {{ event.isParticipating ? 'UNPARTICIPATE' : 'PARTICIPATE' }} <span>{{ event.participants.length || ''}}</span>
+            </button>
+            <button
+                md-icon-button
+                type="button">
+                <!--(click)="followAction(event)">-->
+                {{ event.isFollowing ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ event.followers.length || ''}}</span>
+            </button>
+        </div>
+    </div>
+
+    <nav md-tab-nav-bar>
+        <a
+            *ngFor="let navLink of navLinks"
+            md-tab-link
+            [routerLink]="navLink.link"
+            routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive">
+            {{ navLink.label }}
+        </a>
+    </nav>
+
+    <router-outlet></router-outlet>
+</div>

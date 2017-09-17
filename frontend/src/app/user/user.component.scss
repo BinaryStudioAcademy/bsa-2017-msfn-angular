@@ -15,21 +15,45 @@ $height: calc(100vh - 70px);
     left: 0;
     top: 70px;
     height: $height;
+    transition: 1s;
+    z-index: 99;
+}
+
+.sidebar-toggler {
+    display: none;
 }
 
 .child-container {
     width: 85%;
     margin-left: 15%;
-    //overflow-y: auto;
 }
-
-@media only screen and (max-width: $medium-screen) {
+@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
     .sidebar-container {
-        width: 55px;
+        min-width: calc(190px - 20px);
     }
-
     .child-container {
-        margin-left: 55px;
-        //overflow-y: auto;
+        width: calc(100% - 190px);
+        margin-left: 190px;
+    }
+}
+@media screen and (max-width: $medium-screen) {
+    .sidebar-container {
+        width: 220px;
+    }
+    .sidebar-toggler {
+        display: block;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        z-index: 101;
+        top: 15px;
+        left: 10%;
+    }
+    .hide {
+        left: -220px;
+    }
+    .child-container {
+        width: 100%;
+        margin-left: 0;
     }
 }

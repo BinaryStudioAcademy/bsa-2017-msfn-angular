@@ -5,7 +5,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const LaunchedFoodPlan = new Schema({
     title: String,
-    type: 'weekly' | 'daily',
+    kind: 'weekly' | 'daily',
     days: [{
         kcal: Number,
         name: 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday',

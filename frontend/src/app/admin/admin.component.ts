@@ -14,4 +14,12 @@ export class AdminComponent implements OnInit {
         this.socketService.send('join_room', JSON.stringify({room: 'admin'}));
     }
 
+    swipe(sidebar, swypetype) {
+        if (swypetype === 'swiperight') {
+            sidebar.classList.remove('hide');
+        } else if (swypetype === 'swipeleft') {
+            sidebar.classList.add('hide');
+        }
+    }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoodPlanService } from './food-plan.service';
 import { WeeklyComponent } from './weekly/weekly.component';
@@ -10,16 +10,18 @@ import { Subscription } from 'rxjs/Subscription';
     selector: 'app-food-plan',
     templateUrl: './food-plan.component.html',
     styleUrls: ['./food-plan.component.scss'],
-    providers: [FoodPlanService]
+    providers: [FoodPlanService],
+    encapsulation: ViewEncapsulation.None
 })
 export class FoodPlanComponent implements OnInit {
 
     foodplan = {
         title: '',
-        type: 'weekly',
+        kind: 'weekly',
         days: [],
         meals: [],
         _id: '',
+        errorName: false
     };
 
     @ViewChild(WeeklyComponent)
@@ -37,23 +39,37 @@ export class FoodPlanComponent implements OnInit {
         if (this.activatedRoute.snapshot.params.id) {
             const planID = this.activatedRoute.snapshot.params.id;
             this.foodPlanService.getFoodPlanByID(planID, (res) => {
-                console.log(res);
                 this.foodplan = res[0];
             });
         }
     }
-    currentType(currentType) {
-        this.foodplan.type = currentType;
+    currentKind(currentKind) {
+        this.foodplan.kind = currentKind;
         if (this.dailyData) {
             this.foodplan.meals = this.dailyData.meals;
+            this.foodplan.days.forEach((day, ind) => {
+                if (day.editMeal) {
+                    day.editMeal = false;
+                    day.editMealObj = undefined;
+                    day.selected = false;
+                }
+                if (day.selected) {
+                    day.selected = false;
+                }
+            });
         }
         if (this.weeklyData) {
             const daysPlan = this.weeklyData.days;
             this.foodplan.days = daysPlan;
         }
+        console.log(this.foodplan);
         return true;
     }
     savePlan() {
+        if (this.foodplan.title.length === 0) {
+            this.foodplan.errorName = true;
+            return false;
+        }
         if (this.weeklyData) {
             const daysPlan = this.weeklyData.days;
             daysPlan.forEach(day => {

@@ -1,15 +1,3 @@
-<button md-raised-button class="show-chats"
-        [class.active]="chatListVisible"
-        [class.got-messages]="(chats | totalUnread: userId) !== 0"
-        (click)="toggleChat()">
-    <span class="mobile">
-        <md-icon class="open">forum</md-icon>
-        <md-icon class="close">close</md-icon>
-        <span class="got-messages">{{chats | totalUnread: userId}}</span>
-    </span>
-    <span class="no-messages">{{(chatListVisible) ? 'Hide' : 'Show'}} chat list</span>
-    <span class="got-messages">{{chats | totalUnread: userId}} New Message{{((chats | totalUnread: userId) > 1) ? 's' : '' }}</span>
-</button>
 <div class="chats-list-wrapper active" [class.active]="chatListVisible">
     <div class="users-wrapper">
         <div class="user-wrapper"

@@ -68,6 +68,9 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
 import { EventCreateComponent } from './user.components/event-create/event-create.component';
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventItemComponent } from './user.components/event-item/event-item.component';
+import { GeneralComponent } from './user.components/event-item/general/general.component';
+import { DiscussComponent } from './user.components/event-item/discuss/discuss.component';
+import { PlaceTimeComponent } from './user.components/event-item/place-time/place-time.component';
 
 @NgModule({
     imports: [
@@ -140,6 +143,9 @@ import { EventItemComponent } from './user.components/event-item/event-item.comp
         EventCreateComponent,
         EventListComponent,
         EventItemComponent,
+        GeneralComponent,
+        DiscussComponent,
+        PlaceTimeComponent,
     ],
     providers: [
         ForAllUserGuard,

@@ -1,17 +1,27 @@
 <div class="container">
     <h2 class="title" md-dialog-title>{{id === '-1' ? 'Create' : 'Update'}} Goal</h2>
     <div class="item-container">
-        <md-select placeholder="I want to" [(ngModel)]="selectedType">
-            <md-option *ngFor="let type of types" [value]="type.name">
+        <md-input-container class="input-row">
+            <input mdInput type="text" [(ngModel)]="name" placeholder="Goal name">
+        </md-input-container>
+    </div>
+    <div class="item-container">
+        <md-select placeholder="I want to" [(ngModel)]="selectedType" (change)="getStartValue()">
+            <md-option *ngFor="let type of types" [value]="type._id">
                 {{type.name}}
             </md-option>
         </md-select>
     </div>
     <div class="item-container">
         <md-input-container class="input-row">
-            <input autofocus mdInput type="number" min="1" name="count" placeholder="Value" required [(ngModel)]="value" (change)="checkValue()">
+            <input mdInput type="number" [(ngModel)]="startValue" [disabled]="true" placeholder="Current value">
+        </md-input-container>
+    </div>
+    <div class="item-container smaller-margin">
+        <md-input-container class="input-row">
+            <input autofocus mdInput type="number" min="1" name="count" placeholder="End value" required [(ngModel)]="endValue" (change)="checkValue()">
             <md-hint *ngIf="!validValue">
-                    Value must me positive
+                Value must me positive
             </md-hint>
         </md-input-container>
     </div>
@@ -25,9 +35,9 @@
 
     <div class="btn-container">
         <button md-raised-button [md-dialog-close]="false">Close</button>
-        <button md-raised-button
-        (click)="addUpdateUserGoal({value: value, category: selectedType, deadline: deadline, _id: id})"
-        [md-dialog-close]="true"
-        [disabled]="!validValue">Save</button>
+        <button md-raised-button 
+        (click)="addUpdateUserGoal({startValue: startValue, endValue: endValue,
+        category: selectedType, deadline: deadline, name: name})"
+        [md-dialog-close]="true" [disabled]="!validValue || !loaded">Save</button>
     </div>
 </div>

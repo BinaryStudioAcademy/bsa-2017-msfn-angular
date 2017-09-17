@@ -1,9 +1,10 @@
-<div id="train-container" >
+<div id="train-container">
+    <h1 class="title">My training plans</h1>
     <div class="item-container" *ngFor="let item of data" (click)="openPlan(item._id)" (contextmenu)="deletePlan(item._id, $event)">
-            <i class="material-icons train-item-ico">face</i>
-            <p class="train-item-text">{{ item.name }}</p>
+        <i class="material-icons train-item-ico">face</i>
+        <p class="train-item-text">{{ item.name }}</p>
     </div>
     <div class="add-container" (click)="createPlan()">
-            <i class="material-icons add-item-ico">add</i>
+        <i class="material-icons add-item-ico">add</i>
     </div>
 </div>

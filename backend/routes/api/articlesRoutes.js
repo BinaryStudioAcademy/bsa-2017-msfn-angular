@@ -62,8 +62,8 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.put(baseUrl, function (req, res, next) {
-        articlesService.update(req.body.id, req.body, function (err, data) {
+    app.put(baseUrl + ':id', function (req, res, next) {
+        articlesService.update(req.params.id, req.body, function (err, data) {
             res.data = data;
             res.err = err;
             next();

@@ -16,11 +16,6 @@ header {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-family: $font-general;
 
-    .header-notifications {
-        position: relative;
-        display: flex;
-    }
-
     .logo {
         font-size: 25px;
         margin-left: $header-inner-margin;
@@ -32,7 +27,7 @@ header {
             align-items: center;
         }
 
-        .logo__icon {
+        .logo__text {
             width: 125px;
             height: 50px;
             background: url('../../../globalStyles/img/logo.png');
@@ -48,46 +43,62 @@ header {
                 animation: logoAnim 1s ease-in-out forwards;
             }
         }
-
-        .logo__title {
-            margin-left: $header-icons-intendation;
-            vertical-align: super;
-        }
     }
-
-    .settings {
+    .panel {
         display: flex;
+        justify-content: space-around;
         align-items: center;
 
-        .settings__name {
-            margin: 0 $header-icons-intendation;
-            vertical-align: super;
-            font-size: 17px;
+        .icons {
+            margin-right: $header-icons-intendation;
             cursor: pointer;
+            display: flex;
+            align-items: center;
         }
 
-        .settings__photo {
-            width: 35px;
-            border-radius: 50%;
+        .chat {
+            position: relative;
+            
+            .got-messages {
+                display: block;
+                position: absolute;
+                right: -4px;
+                top: -4px;
+                line-height: 12px;
+                border-radius: 50%;
+                font-size: 10px;
+                background-color: #7da7d9;
+                width: 12px;
+                height: 12px;    
+                text-align: center;
+                box-shadow: 0 0 2px 1px #7da7d9;
+            }
         }
 
-        md-icon {
+        .settings {
+            display: flex;
+            align-items: center;
+            margin-right: $header-inner-margin;
             cursor: pointer;
-        }
-    }
+    
+            .settings__photo {
+                margin-right: 5px;
+                width: 35px;
+                border-radius: 50%;
+            }
 
-    .header__navigation-panel {
-        margin-right: $header-inner-margin;
-
-        .header__button {
-            background: $btn-color;
-            border-radius: 5px;
-            line-height: 30px;
-            font-weight: bold;
+            .settings__name {
+                margin-right: $header-icons-intendation;
+                vertical-align: super;
+                font-size: 17px;
+            }
         }
+    
+        .burger {
+            display: none;
+        } 
     }
 }
-
 md-menu {
     display: none;
 }
@@ -110,26 +121,28 @@ md-menu {
     }
 }
 
-
-$large-screen: 960px;
-$medium-screen: 600px;
-$small-screen: 440px;
-
 @media screen and (max-width: $small-screen) {
     header {
-        .settings__photo, .settings__name, .logo__title {
+        justify-content: space-around;
+        .logo {
             display: none;
         }
-        .logo {
-            .logo-mini__icon {
-                width: 40px;
-                height: 40px;
+        .panel {
+            width: 100%;
+            flex-direction: row-reverse;
+            .icons {
+                margin-right: 0;
+                &/deep/ md-icon {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 40px;
+                }
             }
-            .logo__icon {
-                width: 75px;
-                height: 30px;
-                background: url('../../../globalStyles/img/logo.png');
-                background-size: contain;
+            .settings {
+                display: none;
+            }
+            .burger {
+                display: flex;
             }
         }
     }

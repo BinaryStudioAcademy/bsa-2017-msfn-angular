@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnChanges, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnChanges, OnInit, QueryList, ViewChildren, Input, Output, EventEmitter} from '@angular/core';
 import {WindowObj} from '../../services/window.service';
 import {ChatService} from '../../services/chat.service';
 import {ChatWindowComponent} from './components/chat-window/chat-window.component';
@@ -10,6 +10,8 @@ import {ChatWindowComponent} from './components/chat-window/chat-window.componen
 })
 export class ChatComponent implements OnInit, OnChanges, AfterViewInit {
 
+    @Input() toggler: boolean;
+    @Output() unreadMessage = new EventEmitter;
     public chatListVisible = false;
     private userId = (this.window.data._injectedData as any).userId;
 
@@ -22,6 +24,7 @@ export class ChatComponent implements OnInit, OnChanges, AfterViewInit {
         const changesSubscribe = this.chatService.data.subscribe(
             value => {
                 this.chats = value;
+                this.unreadMessage.emit(value);
             }
         );
         const activeChangesSubscribe = this.chatService.activeData.subscribe(
@@ -34,7 +37,10 @@ export class ChatComponent implements OnInit, OnChanges, AfterViewInit {
     ngOnInit() {
     }
 
-    ngOnChanges() {
+    ngOnChanges(ev) {
+        if (ev.toggler && !ev.toggler.firstChange) {
+            this.toggleChat();
+        }
     }
 
     ngAfterViewInit() {

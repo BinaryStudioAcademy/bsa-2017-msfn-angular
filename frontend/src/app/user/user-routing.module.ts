@@ -34,6 +34,9 @@ import { AchievementsListComponent } from './user.components/achievements-list/a
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventCreateComponent } from './user.components/event-create/event-create.component';
 import { EventItemComponent } from './user.components/event-item/event-item.component';
+import { GeneralComponent } from './user.components/event-item/general/general.component';
+import { PlaceTimeComponent } from './user.components/event-item/place-time/place-time.component';
+import { DiscussComponent } from './user.components/event-item/discuss/discuss.component';
 
 const userRoutes: Routes = [
     {
@@ -128,6 +131,10 @@ const userRoutes: Routes = [
                 component: ArticleAddComponent
             },
             {
+                path: 'articles/edit/:id',
+                component: ArticleAddComponent
+            },
+            {
                 path: 'articles/:id',
                 component: ArticleDetailComponent
             },
@@ -153,7 +160,21 @@ const userRoutes: Routes = [
             },
             {
                 path: 'events/:id',
-                component: EventItemComponent
+                component: EventItemComponent,
+                children: [
+                    {
+                        path: 'general',
+                        component: GeneralComponent
+                    },
+                    {
+                        path: 'place-time',
+                        component: PlaceTimeComponent,
+                    },
+                    {
+                        path: 'discuss',
+                        component: DiscussComponent,
+                    }
+                ]
             },
             {
                 path: 'food-list',
