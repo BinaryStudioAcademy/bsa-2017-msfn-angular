@@ -93,7 +93,7 @@ export class UserComponent implements OnInit, OnDestroy {
                     this.checkGoal('totalweight', this.total['weight']);
                 });
                 if (new Date().getDay() === 1) {
-                    this.userService.getWeekTrainCout(count => {
+                    this.userService.getWeekTrainCount(count => {
                         this.countWeekTrain = count;
                         this.checkPerfectWeek();
                     });

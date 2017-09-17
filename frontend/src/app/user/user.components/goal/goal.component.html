@@ -4,6 +4,7 @@
         <i class="material-icons" id="delete" (click)="deleteGoal(item, $event)">delete</i>
         <p class="goal-main-text">{{ item.name }}</p>
         <i class="material-icons">stars</i>
+        <p class="goal-main-text" [ngClass]="{'white': item.progress !== 100}">{{ item.progress }}%</p>
         <p class="goal-item-text">Due {{ item.deadline | date: 'yMd'}}</p>
     </div>
         <div class="add-container" (click)="openDialog({_id: '-1'})">

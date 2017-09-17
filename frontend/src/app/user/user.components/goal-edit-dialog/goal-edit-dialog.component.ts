@@ -94,7 +94,7 @@ export class GoalEditDialogComponent implements OnInit {
     }
 
     checkValue() {
-        this.validValue = this.endValue > 0 ? true : false;
+        this.validValue = (this.endValue > 0 && this.endValue !== this.startValue) ? true : false;
     }
 
     getStartValue() {
