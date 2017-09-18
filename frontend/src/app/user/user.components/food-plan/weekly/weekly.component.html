@@ -1,12 +1,12 @@
 <div class="content">
     <div class="days" [ngClass]="(daySelected)?'height':''">
         <div class="day" *ngFor="let day of days">
-            <div class="head" (click)="selectDay(day.name)">
+            <div class="head" (click)="selectDay(day.name)" [ngClass]="(day.selected) ? 'active' : '' ">
                 <span class="long-form">{{day.name}}</span>
                 <span class="short-form">{{day.name.substring(0,3)}}</span>
             </div>
             <div class="day-content" [ngClass]="(day.selected) ? 'show' : 'hidden' ">
-                <div class="day-plan"  perfect-scrollbar>
+                <div class="day-plan"  perfectScrollbar>
                     <div class="add-item" (click)="showForm(day);" *ngIf="!day.editMeal">
                         <i class="material-icons">add</i>
                         <span>Add meal</span>
