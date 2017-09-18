@@ -200,6 +200,7 @@ export class ProfileComponent implements OnInit {
         this.hideCropper = false;
 
         xhr.onreadystatechange  = () => {
+
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     const fileName = url.split('/').pop();
@@ -207,8 +208,15 @@ export class ProfileComponent implements OnInit {
 
                     const myReader: FileReader = new FileReader();
                     myReader.onloadend = (loadEvent: any) => {
+                        console.log(loadEvent);
                         image.src = loadEvent.target.result;
+                        image.onerror = () => {
+                            this.hideCropper = true;
+                        };
                         this.cropper.setImage(image);
+                    };
+                    myReader.onerror = () => {
+                        this.hideCropper = true;
                     };
 
                     myReader.readAsDataURL(xhr.response);
