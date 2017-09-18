@@ -1,6 +1,7 @@
 @import '../../../../../globalStyles/variables';
 @import '../../../../../globalStyles/indentations';
 @import '../../../../../globalStyles/text';
+
 @mixin linear-gradient($direction, $color-stops...) {
     background: nth(nth($color-stops, 1), 1);
     background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
@@ -101,7 +102,7 @@ label {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    >img {
+    > img {
         width: 150px;
         border-radius: 50%;
     }
@@ -163,7 +164,7 @@ label {
     display: flex;
     flex: 1 1 200px;
     flex-direction: column;
-    >p {
+    > p {
         margin: 0;
         text-align: left;
     }
@@ -242,8 +243,6 @@ label {
     justify-content: flex-end;
 }
 
-
-
 .profile-email-input {
     text-align: center;
 }
@@ -252,7 +251,7 @@ label {
     display: flex;
     flex-flow: row wrap;
     margin-top: 30px;
-    >div {
+    > div {
         justify-content: center;
         display: flex;
         flex: 1 1 130px;
@@ -271,7 +270,7 @@ label {
         flex: 100%;
     }
 
-    input{
+    input {
         display: none;
     }
 
@@ -314,7 +313,7 @@ label {
     flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 20px;
-    >div {
+    > div {
         justify-content: center;
         align-items: center;
         display: flex;
@@ -357,12 +356,12 @@ label {
 
 .social-wrapper {
     margin-top: 30px;
-    .addition-info{
+    .addition-info {
         margin: 5px 0 10px;
         text-align: center;
         font-size: $minor-text;
     }
-    .social-buttons{
+    .social-buttons {
         display: flex;
         justify-content: space-around;
     }
@@ -388,7 +387,7 @@ label {
         width: 80%;
     }
     .profile-birthday {
-        >div {
+        > div {
             margin: 20px 0 20px;
         }
     }

@@ -67,6 +67,7 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
 import { EventCreateComponent } from './user.components/event-create/event-create.component';
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventItemComponent } from './user.components/event-item/event-item.component';
+import { ImageUploadComponent } from './user.components/image-upload/image-upload.component';
 
 @NgModule({
     imports: [
@@ -138,6 +139,7 @@ import { EventItemComponent } from './user.components/event-item/event-item.comp
         EventCreateComponent,
         EventListComponent,
         EventItemComponent,
+        ImageUploadComponent,
     ],
     providers: [
         ForAllUserGuard,
@@ -150,6 +152,7 @@ import { EventItemComponent } from './user.components/event-item/event-item.comp
         GoalEditDialogComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
+        ImageUploadComponent
     ]
 })
 export class UserModule {

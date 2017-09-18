@@ -22,16 +22,20 @@ FileService.prototype.SaveFileByUrl = function(url, callback) {
     checkAndCreateFolder(folderPath, () => {
         checkAndRemoveDublicatFile(folderPath, fileName, () => {
             const file = fs.createWriteStream(dest);
-            const request = protocol.get(url, function (response) {
-                response.pipe(file);
-            }).on('error', function (err) { // Handle errors
-                fs.unlink(dest); // Delete the file async. (But we don't check the result)
-                if (err) callback(err);
-            });
-            file.on('finish', function () {
-                file.close();
-                callback(null, result);
-            });
+            try {
+                const request = protocol.get(url, function (response) {
+                    response.pipe(file);
+                }).on('error', function (err) { // Handle errors
+                    fs.unlink(dest); // Delete the file async. (But we don't check the result)
+                    if (err) callback(err);
+                });
+                file.on('finish', function () {
+                    file.close();
+                    callback(null, result);
+                });
+            } catch (error) {
+                return callback(new ApiError('Can`t find file'));
+            }
         });
     })
 };

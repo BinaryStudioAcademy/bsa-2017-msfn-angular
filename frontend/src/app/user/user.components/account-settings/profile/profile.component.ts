@@ -1,17 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ProfileService } from './profile.service';
-import { DateService } from '../../../../services/date.service';
-import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
-import { MdDialog } from '@angular/material';
-import { ConfirmPasswordDialogComponent } from '../../../../components/confirm-password-dialog/confirm-password-dialog.component';
-import { WindowObj } from '../../../../services/window.service';
-import { IUser } from '../../../../models/user';
-import { ToasterService } from '../../../../services/toastr.service';
-import { AddNewEmailDialogComponent } from '../../../../components/add-new-email-dialog/add-new-email-dialog.component';
-import { ChangeRootEmailDialogComponent } from '../../../../components/change-root-email-dialog/change-root-email-dialog.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, Validators, FormControl} from '@angular/forms';
+import {ProfileService} from './profile.service';
+import {DateService} from '../../../../services/date.service';
+import {CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
+import {MdDialog} from '@angular/material';
+import {ConfirmPasswordDialogComponent} from '../../../../components/confirm-password-dialog/confirm-password-dialog.component';
+import {WindowObj} from '../../../../services/window.service';
+import {IUser} from '../../../../models/user';
+import {ToasterService} from '../../../../services/toastr.service';
+import {AddNewEmailDialogComponent} from '../../../../components/add-new-email-dialog/add-new-email-dialog.component';
+import {ChangeRootEmailDialogComponent} from '../../../../components/change-root-email-dialog/change-root-email-dialog.component';
 import {HttpService} from '../../../../services/http.service';
 import {IHttpReq} from '../../../../models/http-req';
+import {ImageUploadComponent} from '../../../../user/user.components/image-upload/image-upload.component';
 
 @Component({
     selector: 'app-profile',
@@ -86,43 +87,59 @@ export class ProfileComponent implements OnInit {
                 Validators.maxLength(20)
             ])],
             'email': new FormControl({
-                    value: this.user.email,
-                    disabled: this.isDisabledEmail
+                value: this.user.email,
+                disabled: this.isDisabledEmail
             }),
             'weight': [this.user.weight, Validators.compose([
-                    Validators.required,
-                    Validators.min(30),
-                    Validators.max(300)
+                Validators.required,
+                Validators.min(30),
+                Validators.max(300)
             ])],
             'height': [this.user.height, Validators.compose([
-                    Validators.required,
-                    Validators.min(100),
-                    Validators.max(300)
+                Validators.required,
+                Validators.min(100),
+                Validators.max(300)
             ])],
             'activityLevel': [this.user.activityLevel, Validators.compose([
-                    Validators.required
+                Validators.required
             ])],
             'gender': [this.user.gender, Validators.compose([
-                    Validators.required
+                Validators.required
             ])],
             'location': [this.user.location, Validators.compose([
                 Validators.minLength(2),
                 Validators.maxLength(30)
             ])],
             'about': [this.user.about, Validators.compose([
-                    Validators.maxLength(500),
+                Validators.maxLength(500),
             ])]
-    });
+        });
     }
 
     onSelect(month: string, year: number) {
         this.days = this.dateService.generateDays(month, year);
     }
 
+    chooseFileModal(event) {
+        if (event.isTrusted) {
+            event.preventDefault();
+            const dialogRef = this.dialog.open(ImageUploadComponent,
+                {
+                    data: {
+                        event: event
+                    }
+                }
+            );
+            dialogRef.afterClosed().subscribe(result => {
+                if (result) {
+                    this.handleFileUrl(result);
+                }
+            });
+        }
+    }
 
     openAddNewEmailDialog() {
-        const dialogRef = this.dialog.open(AddNewEmailDialogComponent, {
-        });
+        const dialogRef = this.dialog.open(AddNewEmailDialogComponent, {});
         dialogRef.afterClosed().subscribe(email => {
             if (email && email !== this.user.email) {
                 this.profileService.addNewEmail(email, this.user._id, res => {
@@ -177,15 +194,34 @@ export class ProfileComponent implements OnInit {
     }
 
     handleFileUrl(url) {
-        const options: IHttpReq = {
-            url: '/api/file/remote/' + encodeURIComponent(url),
-            method: 'POST'
-        };
-        this.httpService.sendRequest(options).then(
-            (result) => {
-            console.log(result);
-        });
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        this.hideCropper = false;
 
+        xhr.onreadystatechange  = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const fileName = url.split('/').pop();
+                    const image: any = new Image();
+
+                    const myReader: FileReader = new FileReader();
+                    myReader.onloadend = (loadEvent: any) => {
+                        image.src = loadEvent.target.result;
+                        this.cropper.setImage(image);
+                    };
+
+                    myReader.readAsDataURL(xhr.response);
+                } else {
+                    this.hideCropper = true;
+                }
+            }
+        };
+        xhr.onerror = () => {
+            this.hideCropper = true;
+        };
+
+        xhr.send();
     }
 
     // for cropperImg:

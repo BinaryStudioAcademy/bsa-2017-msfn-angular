@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <button md-raised-button (click)="chooseFile()">Choose file</button>
+    </div>
+    <div class="row">or</div>
+    <div class="row">
+        <md-input-container>
+            <input #url type="text" mdInput placeholder="Enter file url">
+        </md-input-container>
+        <button md-button (click)="uploadFile(url.value)">Upload</button>
+    </div>
+</div>
