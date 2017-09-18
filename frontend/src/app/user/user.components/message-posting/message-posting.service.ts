@@ -24,10 +24,15 @@ export class MessagePostingService {
     }
 
     postMessage(message, callback): void {
+        let route: string;
+        if (message.hasOwnProperty('coach')) {
+            route = '/api/coach/testimonial';
+        } else {
+            route = '/api/message';
+        }
+
         const req: IHttpReq = {
-            url: message.hasOwnProperty('coach') ?
-                '/api/coach/testimonial' :
-                '/api/message',
+            url: route,
             method: 'POST',
             body: message,
             successMessage: 'Message hass been posted',

@@ -10,6 +10,7 @@ UserGoalRepository.prototype = new Repository();
 
 UserGoalRepository.prototype.findById = findById;
 UserGoalRepository.prototype.deleteById = deleteById;
+UserGoalRepository.prototype.updateValue = updateValue;
 
 function findById(userId, callback) {
     const query = this.model.find({
@@ -36,6 +37,23 @@ function deleteById(id, userId, callback) {
     },  {
         $set: {
             isRemoved: true
+        }
+    });
+    query.exec(callback);
+};
+
+function updateValue(id, userId, newValue, callback){
+    const query = this.model.update({
+        $and: [{
+                createdByUser: userId
+            },
+            {
+                _id: id,
+            }
+        ]
+    },  {
+        $set: {
+            currentValue: newValue
         }
     });
     query.exec(callback);

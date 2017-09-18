@@ -17,10 +17,15 @@ import {ConstantsService} from './services/constants.service';
 })
 export class AppComponent implements OnInit {
     isLoggedIn = false;
+    chats: any[] = [];
     constructor(private _windowObj: WindowObj,
                 public constantsService: ConstantsService) {
         this.isLoggedIn = this._windowObj.data._injectedData.isLoggedIn;
     }
 
     ngOnInit() {}
+
+    unreadMsg(chat) {
+        this.chats = chat;
+    }
 }

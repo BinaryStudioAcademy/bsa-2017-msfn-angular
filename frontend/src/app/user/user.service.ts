@@ -47,7 +47,15 @@ export class UserService {
         const promise4 = this.httpHandler.sendRequest(request4);
 
 
-        this.promiseFunc = Promise.all([promise1, promise2, promise3, promise4]).then(result => {
+        const request5: IHttpReq = {
+            url: '/api/user-goal/',
+            method: 'GET',
+            body: {}
+        };
+        const promise5 = this.httpHandler.sendRequest(request5);
+
+
+        this.promiseFunc = Promise.all([promise1, promise2, promise3, promise4, promise5]).then(result => {
             callback(...result);
         });
     }
@@ -124,7 +132,7 @@ export class UserService {
             });
     }
 
-    getWeekTrainCout(callback) {
+    getWeekTrainCount(callback) {
         const sendData: IHttpReq = {
             url: '/api/training-plan/weekplanscount',
             method: 'GET',
@@ -187,5 +195,42 @@ export class UserService {
             });
         });
         return [total, maxTraining];
+    }
+
+    addGoalCategory(goalId, callback) {
+        const sendData: IHttpReq = {
+            url: '/api/goal/' + goalId,
+            method: 'GET',
+            body: {},
+        };
+        this.httpHandler.sendRequest(sendData)
+            .then(data => {
+                callback(data);
+            });
+    }
+
+    getCategories(callback) {
+        const sendData: IHttpReq = {
+            url: '/api/goal/',
+            method: 'GET',
+            body: {},
+        };
+        this.httpHandler.sendRequest(sendData)
+            .then(data => {
+                callback(data);
+            });
+    }
+
+    updateCurrentValue(body, callback) {
+        const sendData: IHttpReq = {
+            url: '/api/user-goal/update',
+            method: 'POST',
+            body: body,
+        };
+        this.httpHandler.sendRequest(sendData)
+            .then(data => {
+                callback(data);
+            });
+            callback();
     }
 }

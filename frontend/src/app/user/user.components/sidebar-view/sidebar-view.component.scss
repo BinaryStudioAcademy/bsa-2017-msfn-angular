@@ -4,9 +4,6 @@
 
 $height: calc(100vh - 70px);
 
-.menu-element {
-    display: block;
-}
 md-list {
     padding-top: 0;
 }
@@ -27,20 +24,29 @@ aside {
         width: 100%;
         position: relative;
 
-        a {
-            line-height: $header-text;
-            text-decoration: none;
-            color: #aaa;
-            transition: transform 0.3s;
-        }
+        .menu-element {
+            display: block;
 
-        .navigation__icon {
-            float: left;
-            fill: #aaa;
-            vertical-align: middle;
-            width: 24px;
-            height: 24px;
-            margin-right: 13px;
+            a {
+                line-height: $header-text;
+                text-decoration: none;
+                color: #aaa;
+                transition: transform 0.3s;
+
+                .navigation__icon {
+                    float: left;
+                    fill: #aaa;
+                    vertical-align: middle;
+                    width: 24px;
+                    height: 24px;
+                    font-size: inherit;
+                    margin-right: 13px;
+                }
+
+                .navigation__title {
+                    font-size: inherit;
+                }
+            }
         }
 
         .active-link {
@@ -50,16 +56,35 @@ aside {
             color: #fff;
             font-weight: bold;
             transform: translateX(7px);
-        }
 
-        .active-link::before {
-            content: "•";
-            position: absolute;
-            display: block;
-            font-size: 30px;
-            left: -13px;
-            line-height: $header-text;
-            color: #82A690;
+            &:before {
+                content: "•";
+                position: absolute;
+                display: block;
+                font-size: 30px;
+                left: -13px;
+                line-height: $header-text;
+                color: #82A690;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $small-screen) {
+    aside {    
+        .navigation {    
+            .menu-element {
+                margin-bottom: 15px;
+                a {
+                    line-height: 30px;
+                    font-size: 20px;
+
+                    .navigation__icon {
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
+            }
         }
     }
 }

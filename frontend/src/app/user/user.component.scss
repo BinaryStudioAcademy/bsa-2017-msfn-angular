@@ -19,6 +19,10 @@ $height: calc(100vh - 70px);
     z-index: 99;
 }
 
+.sidebar-toggler {
+    display: none;
+}
+
 .child-container {
     width: 85%;
     margin-left: 15%;
@@ -34,10 +38,19 @@ $height: calc(100vh - 70px);
 }
 @media screen and (max-width: $medium-screen) {
     .sidebar-container {
-        width: 170px;
+        width: 220px;
+    }
+    .sidebar-toggler {
+        display: block;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        z-index: 101;
+        top: 15px;
+        left: 10%;
     }
     .hide {
-        left: -190px;
+        left: -220px;
     }
     .child-container {
         width: 100%;

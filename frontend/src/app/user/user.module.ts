@@ -68,6 +68,9 @@ import { EventCreateComponent } from './user.components/event-create/event-creat
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventItemComponent } from './user.components/event-item/event-item.component';
 import { ImageUploadComponent } from './user.components/image-upload/image-upload.component';
+import { GeneralComponent } from './user.components/event-item/general/general.component';
+import { DiscussComponent } from './user.components/event-item/discuss/discuss.component';
+import { PlaceTimeComponent } from './user.components/event-item/place-time/place-time.component';
 
 @NgModule({
     imports: [
@@ -140,6 +143,9 @@ import { ImageUploadComponent } from './user.components/image-upload/image-uploa
         EventListComponent,
         EventItemComponent,
         ImageUploadComponent,
+        GeneralComponent,
+        DiscussComponent,
+        PlaceTimeComponent,
     ],
     providers: [
         ForAllUserGuard,

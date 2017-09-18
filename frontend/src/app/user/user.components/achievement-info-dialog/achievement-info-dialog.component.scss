@@ -55,3 +55,9 @@
     width: 128px;
     height: 128px;
 }
+
+@media screen and (max-width: $medium-screen) {
+    .container{
+        width: 100%;
+    }
+}

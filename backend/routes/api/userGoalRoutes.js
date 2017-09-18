@@ -8,9 +8,12 @@ module.exports = function (app) {
 
     app.post(baseUrl, isLoggedIn, function (req, res, next) {
         body = {
+            name: req.body.name,
             category: req.body.category,
             createdByUser: req.user._id,
-            value: req.body.value,
+            startValue: req.body.startValue,
+            endValue: req.body.endValue,
+            currentValue: req.body.currentValue,
             deadline: req.body.deadline,
             startTime: req.body.startTime
         };
@@ -23,9 +26,12 @@ module.exports = function (app) {
 
     app.put(baseUrl, isLoggedIn, function (req, res, next) {
         body = {
+            name: req.body.name,
             category: req.body.category,
             createdByUser: req.user._id,
-            value: req.body.value,
+            startValue: req.body.startValue,
+            endValue: req.body.endValue,
+            currentValue: req.body.currentValue,
             deadline: req.body.deadline
         };
         userGoalService.updateUserGoal(req.body._id, body, function(err, data) {
@@ -48,6 +54,15 @@ module.exports = function (app) {
             if (!data.length) {
                 data = [{}];
             }
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+        app.post(baseUrl + 'update', isLoggedIn, function (req, res, next) {
+        console.log(req.body);
+        userGoalService.updateUserGoalValue(req.body._id, req.user._id, req.body.value, function(err, data) {
             res.data = data;
             res.err = err;
             next();

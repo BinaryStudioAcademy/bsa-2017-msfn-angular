@@ -34,7 +34,8 @@ import {
     MdNativeDateModule,
     MdButtonToggleModule,
     MdSliderModule,
-    MdProgressBarModule
+    MdProgressBarModule,
+    MdExpansionModule
 } from '@angular/material';
 import 'hammerjs';
 import { D3Service } from 'd3-ng2-service';
@@ -106,6 +107,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SortablejsModule,
         MdSliderModule,
         MdProgressBarModule,
+        MdExpansionModule,
         PerfectScrollbarModule
     ],
     declarations: [
