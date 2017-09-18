@@ -47,4 +47,17 @@ export class FoodTrackingService {
                 callback(res);
             });
     }
+
+    updateLaunchedFoodPlan(data, callback): void {
+        const request: IHttpReq = {
+            url: '/api/launchedfoodplan',
+            method: 'PUT',
+            body: data
+        };
+
+        this.httpService.sendRequest(request)
+            .then(res => {
+                callback(res);
+            });
+    }
 }

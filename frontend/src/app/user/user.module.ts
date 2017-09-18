@@ -158,6 +158,7 @@ import { PlaceTimeComponent } from './user.components/event-item/place-time/plac
         GoalEditDialogComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
+        SearchComponent,
     ]
 })
 export class UserModule {

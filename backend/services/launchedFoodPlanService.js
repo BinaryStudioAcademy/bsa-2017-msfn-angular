@@ -41,6 +41,9 @@ function getCurrentLaunchedFoodPlan(userId, callback) {
 }
 
 function updateLaunchedFoodPlan(id, body, callback) {
+    if (body.todayMeals.finished === true) {
+        body.todayMeals = {};
+    }
     launchedFoodPlanRepository.update(id, body, callback);
 }
 

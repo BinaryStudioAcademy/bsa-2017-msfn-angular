@@ -72,3 +72,118 @@ md-icon {
     color: $btn-color;
     cursor: pointer;
 }
+
+.container-launched {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.launched-meals {
+    width: 30%;
+    margin: 15px;
+    padding: 15px;
+    background: linear-gradient($gradient-to-color 75%, $bg-color);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    .launched-header {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+
+    .meals-item {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px 10px;
+        margin: 10px 0;
+    
+        .item-name {
+            font-weight: 900;
+        }
+
+        .item-add {
+            margin-left: 32px;
+            cursor: pointer;
+
+            &:hover {
+                color: $main-color;
+            }
+        }
+    }
+
+    .item-kcal {
+        font-size: 13px;
+        color: $text-second-color;
+    }
+
+    .item-product {
+        display: flex;
+        margin: 10px 0;
+        flex-flow: row nowrap;
+        align-items: center;
+        flex: 100%;
+
+        .product-checkbox {
+            margin-right: 10px;
+        }
+
+        & p::after {
+            content: "\00a0\00a0";
+        }
+
+        .product-quantity {
+            color: $main-color;
+        }
+    
+        .product-kcal {
+            font-size: 13px;
+            color: $text-second-color;
+        }
+    }
+
+    .missed {
+        text-decoration: line-through;
+        font-style: italic;
+        text-decoration-color: $text-warn-color;
+    }
+
+    .done {
+        text-decoration: line-through;
+        font-style: italic;
+        text-decoration-color: $main-color;
+    }
+
+    .buttons {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between
+    }
+
+    .btn-save {
+        display: block;
+        border: none;
+        width: 150px;
+        color: $text-main-color;
+        background-color: $btn-color;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 50px;
+        cursor: pointer;
+        outline: none;
+    }
+}
+
+.history {
+    display: flex;
+    flex-flow: row wrap;
+
+    .icon-arrow {
+        width: 17px;
+        height: 17px;
+        font-size: 17px;
+        cursor: pointer;
+    }
+}

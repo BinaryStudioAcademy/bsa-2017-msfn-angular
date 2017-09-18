@@ -30,6 +30,42 @@ const LaunchedFoodPlan = new Schema({
             _id: ObjectId,
         }]
     }],
+    todayMeals: {
+        date: String,
+        finished: Boolean,
+        eaten: Number,
+        totalKcal: Number,
+        meals: [{
+            kcal: Number,
+            name: String,
+            eaten: Number,
+            products: [{
+                kcal: Number,
+                name: String,
+                quantity: Number,
+                done: Boolean | null,
+                _id: ObjectId,
+            }]
+        }],
+    },
+    historyMeals: [{
+        date: String,
+        eaten: Number,
+        totalKcal: Number,
+        meals: [{
+            kcal: Number,
+            name: String,
+            date: String,
+            eaten: Number,
+            products: [{
+                kcal: Number,
+                name: String,
+                quantity: Number,
+                done: Boolean | null,
+                _id: ObjectId,
+            }]
+        }],
+    }],
     userID: ObjectId,
     isRemoved: Boolean,
     status: 'launched' | 'finished',
