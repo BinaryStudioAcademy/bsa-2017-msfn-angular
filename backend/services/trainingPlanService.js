@@ -24,7 +24,16 @@ class trainingPlanService {
             if (exerciseData === null) {
                 callback(null, new ApiError('Not found plan'));
             } else {
-                callback(null, exerciseData);
+                if (!data.length) {
+                    data = [];
+                }
+                let count = 0;
+                data.forEach(element => {
+                    if (element.days && element.days.length) {
+                        count += element.days.length;
+                    }
+                });
+                callback(null, count);
             }
         });
     }

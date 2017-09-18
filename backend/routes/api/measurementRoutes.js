@@ -2,11 +2,12 @@ const
     apiResponse = require('express-api-response'),
     measurementService = require('../../services/measurementService'),
     isAdmin = require('../../middleware/isAdminMiddleware'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/measurement/';
 
 module.exports = function (app) {
 
-    app.post(baseUrl, function (req, res, next) {
+    app.post(baseUrl, isAdmin, function (req, res, next) {
        measurementService.createMeasurement(req.body, function(err, data) {
             res.data = data;
             res.err = err;
@@ -14,7 +15,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.put(baseUrl, function (req, res, next) { 
+    app.put(baseUrl, isAdmin, function (req, res, next) { 
         measurementService.updateMeasurement(req.body.id, req.body, function(err, data) {
             res.data = data;
             res.err = err;
@@ -22,7 +23,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.delete(baseUrl, function (req, res, next) {
+    app.delete(baseUrl, isAdmin, function (req, res, next) {
         measurementService.deleteMeasurement(req.body.id, function(err, data) {
             res.err = err;
             res.data = data;
@@ -30,7 +31,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.get(baseUrl, function (req, res, next) {
+    app.get(baseUrl, isLoggedIn, function (req, res, next) {
             measurementService.getAllMeasurements(function(err, data) {
             if (data instanceof Array && !data.length){
                 data = [];
@@ -41,8 +42,8 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-        app.get(baseUrl + ":id/", function (req, res, next) {
-            measurementService.getMeasurement(req.params.id, function(err, data) {
+    app.get(baseUrl + ":id/", isLoggedIn, function (req, res, next) {
+        measurementService.getMeasurement(req.params.id, function(err, data) {
             if (data instanceof Array && data.length == 1){
                 res.data = data[0];
             }else if (data instanceof Array && data.length == 0){
@@ -52,10 +53,10 @@ module.exports = function (app) {
             }
             res.err = err;
             next();
-       });
+        });
     }, apiResponse);
 
-    app.get(baseUrl + "by-name/:name/", function (req, res, next) {
+    app.get(baseUrl + "by-name/:name/", isLoggedIn, function (req, res, next) {
             measurementService.getMeasurementByName(req.params.name, function(err, data) {
             if (data instanceof Array && data.length == 1){
                 res.data = data[0];

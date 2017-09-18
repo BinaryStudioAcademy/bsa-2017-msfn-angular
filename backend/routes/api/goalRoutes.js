@@ -2,6 +2,7 @@ const
     apiResponse = require('express-api-response'),
     goalService = require('../../services/goalService'),
     isAdmin = require('../../middleware/isAdminMiddleware'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/goal/';
 
 module.exports = function (app) {
@@ -32,7 +33,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.get(baseUrl, function (req, res, next) {
+    app.get(baseUrl, isLoggedIn, function (req, res, next) {
         goalService.getGoals(function(err, data) {
             if (!data.length) {
                 data = [{}];
@@ -43,7 +44,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + ':id', function (req, res, next) {
+    app.get(baseUrl + ':id', isLoggedIn, function (req, res, next) {
         goalService.getGoal(req.params.id, function(err, data) {
             res.data = data;
             res.err = err;

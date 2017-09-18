@@ -2,6 +2,7 @@ const
     apiResponse = require('express-api-response'),
     exerciseTypeService = require('../../services/exerciseTypeService'),
     isAdmin = require('../../middleware/isAdminMiddleware'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/exercise-type/';
 
 module.exports = function (app) {
@@ -30,7 +31,7 @@ module.exports = function (app) {
        });
     }, apiResponse);
 
-    app.get(baseUrl, function (req, res, next) {
+    app.get(baseUrl, isLoggedIn, function (req, res, next) {
         exerciseTypeService.getAllExerciseTypes(function(err, data) {
             if (!data.length) {
                 data = [{}];
