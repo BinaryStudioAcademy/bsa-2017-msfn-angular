@@ -5,10 +5,10 @@
     </div>
     <div class="child">
         <div class="exlist centerContent">
-            <app-exercises [exercisesList]="trainingPlan.exercisesList" [userMeasures]="userMeasures" (onChangeList)="onChangeList($event)"></app-exercises>
+            <app-exercises [exercisesList]="trainingPlan.exercisesList" [userMeasures]="userMeasures" (onChangeList)="onChangeList($event)" [class.errorBorder]="errors.emptyExList"></app-exercises>
         </div>
         <div class="intmenu centerContent"  *ngIf="trainingPlan.trainingType === 'interval'">
-            <app-interval-training-plan [intervalList]="trainingPlan.intervals" (intervalAction)="intervalAction($event)"></app-interval-training-plan>
+            <app-interval-training-plan [intervalList]="trainingPlan.intervals" (intervalAction)="intervalAction($event)"  [class.errorBorder]="errors.emptyIntervals" [exListLength]="trainingPlan.exercisesList.length"></app-interval-training-plan>
         </div>
     </div>
 </div>
