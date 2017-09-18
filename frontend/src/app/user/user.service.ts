@@ -132,7 +132,7 @@ export class UserService {
             });
     }
 
-    getWeekTrainCout(callback) {
+    getWeekTrainCount(callback) {
         const sendData: IHttpReq = {
             url: '/api/training-plan/weekplanscount',
             method: 'GET',

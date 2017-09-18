@@ -4,8 +4,8 @@
             <h1>{{title}}</h1>
         </div>
         <div class="field-container">
-            <md-input-container [class.errorBorder]="errorEmptyName">
-                <input mdInput placeholder="Plan name" value="New plan" class="plan-name" [(ngModel)]="trainingPlan.name" (focus)="errorEmptyName = false">
+            <md-input-container [class.errorBorder]="errors.emptyName">
+                <input mdInput placeholder="Plan name" value="New plan" class="plan-name" [(ngModel)]="trainingPlan.name" (focus)="errors.emptyName = false">
             </md-input-container>
         </div>
         <div class="field-container">
@@ -36,18 +36,6 @@
                     </div>
                 </div>
             </div>
-           
-            <!-- <div class="count-days">
-                <h3 class="field-title">
-                    Count per week
-                </h3>
-                <div class="field-item">
-                    <button md-fab class="counter" (click)="changeTrainingCount(false, 'dec');">-</button>
-                    <input type="text" name="count" (ngModelChange)="changeTrainingCount($event)" class="count"
-                           [ngModel]="trainingPlan.count" value="{{trainingPlan.count}}">
-                    <button md-fab class="counter" (click)="changeTrainingCount(false, 'inc');">+</button>
-                </div>
-            </div> -->
         </div>
         <div class="field-container">
                 <h2 class="field-title">
@@ -59,13 +47,14 @@
             </div>
     </div>
     <div class="childContainer">
-        <app-exercises [userMeasures]="userMeasures" [exercisesList]="trainingPlan.exercisesList" (onChangeList)="onChangeList($event)"></app-exercises>
-        <app-interval-training-plan [intervalList]="trainingPlan.intervals" [class.errorBorder]="errorEmptyIntervals" *ngIf="trainingPlan.trainingType === 'interval'"
+        <app-exercises [userMeasures]="userMeasures" [exercisesList]="trainingPlan.exercisesList" (onChangeList)="onChangeList($event)" [class.errorBorder]="errors.emptyExList"></app-exercises>
+        <app-interval-training-plan [intervalList]="trainingPlan.intervals" [class.errorBorder]="errors.emptyIntervals" [exListLength]="trainingPlan.exercisesList.length" *ngIf="trainingPlan.trainingType === 'interval'"
             (intervalAction)="intervalAction($event)"></app-interval-training-plan>
     </div>
     <div class="btn-container centerContent">
         <button md-button class="btn-save" (click)="savePlan()">Save</button>
-        <md-error *ngIf="errorEmptyIntervals">*Please create at least one interval</md-error>
-        <md-error *ngIf="errorEmptyName">*Name is empty</md-error>
+        <md-error *ngIf="errors.emptyIntervals">*Please create at least one interval</md-error>
+        <md-error *ngIf="errors.emptyExList">*Please add at least one exercise</md-error>
+        <md-error *ngIf="errors.emptyName">*Name is empty</md-error>
     </div>
 </div>

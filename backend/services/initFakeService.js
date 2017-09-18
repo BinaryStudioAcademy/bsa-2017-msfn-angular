@@ -264,15 +264,17 @@ module.exports = {
                         if (error) {
                             console.log('[InitService] - Error of adding user:');
                             console.log(error);
+                            return callback({err: error}, null)
                         } else {
                             console.log('[InitService] - User added');
+                            return callback(null, {done: true})
                         }
                     });
                 });
             } else {
                 console.log('[InitService] - Users are available');
+                return callback(null, null);
             }
-            return callback(null, null)
         });
     }
 

@@ -21,7 +21,7 @@
         <md-input-container class="input-row">
             <input autofocus mdInput type="number" min="1" name="count" placeholder="End value" required [(ngModel)]="endValue" (change)="checkValue()">
             <md-hint *ngIf="!validValue">
-                Value must me positive
+                Value must be positive and not current
             </md-hint>
         </md-input-container>
     </div>

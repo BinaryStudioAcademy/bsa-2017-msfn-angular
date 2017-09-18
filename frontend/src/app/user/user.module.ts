@@ -68,6 +68,7 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
 import { EventCreateComponent } from './user.components/event-create/event-create.component';
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventItemComponent } from './user.components/event-item/event-item.component';
+import { ImageUploadComponent } from './user.components/image-upload/image-upload.component';
 import { GeneralComponent } from './user.components/event-item/general/general.component';
 import { DiscussComponent } from './user.components/event-item/discuss/discuss.component';
 import { PlaceTimeComponent } from './user.components/event-item/place-time/place-time.component';
@@ -143,6 +144,7 @@ import { PlaceTimeComponent } from './user.components/event-item/place-time/plac
         EventCreateComponent,
         EventListComponent,
         EventItemComponent,
+        ImageUploadComponent,
         GeneralComponent,
         DiscussComponent,
         PlaceTimeComponent,
@@ -159,6 +161,7 @@ import { PlaceTimeComponent } from './user.components/event-item/place-time/plac
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
         SearchComponent,
+        ImageUploadComponent,
     ]
 })
 export class UserModule {
