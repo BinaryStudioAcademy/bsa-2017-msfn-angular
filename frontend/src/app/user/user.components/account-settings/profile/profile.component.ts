@@ -208,7 +208,6 @@ export class ProfileComponent implements OnInit {
 
                     const myReader: FileReader = new FileReader();
                     myReader.onloadend = (loadEvent: any) => {
-                        console.log(loadEvent);
                         image.src = loadEvent.target.result;
                         image.onerror = () => {
                             this.hideCropper = true;
