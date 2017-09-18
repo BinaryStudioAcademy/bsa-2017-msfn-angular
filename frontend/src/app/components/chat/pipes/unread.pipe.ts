@@ -7,6 +7,9 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class UnreadPipe implements PipeTransform {
 
     transform(value: any, userId?: any): any {
+        if (!value) {
+            return 0;
+        }
         const countUnread = value.filter(item => {
             if (item.sender !== userId) {
                 return (!item.read);
