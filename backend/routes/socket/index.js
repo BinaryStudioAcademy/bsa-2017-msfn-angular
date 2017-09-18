@@ -2,6 +2,7 @@ module.exports = (function () {
     const notificationService = require('../../services/notificationService');
     const chatService = require('../../services/chatService');
     const socketService = require('../../services/socketService');
+    const fileService = require('../../services/fileService');
 
     return {
         'add_notification': (json, callback) => {

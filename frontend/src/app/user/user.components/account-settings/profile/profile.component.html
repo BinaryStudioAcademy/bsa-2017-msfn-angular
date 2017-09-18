@@ -3,16 +3,27 @@
         <form *ngIf="user" class="profile-form" [formGroup]="profileForm">
             <div class="profile-header">
                 <div class="profile-avatar">
-                    <div class="profile-picture" [ngClass]="(window.data._injectedData.role !== 'coach')? '': 'coach-mark'">
+                    <div class="profile-picture"
+                         [ngClass]="(window.data._injectedData.role !== 'coach')? '': 'coach-mark'">
                         <img [src]="data.image" alt="user picture" class="profile-picture-img">
-                        <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
+                        <img-cropper #cropper
+                                     *ngIf="!hideCropper"
+                                     class="img-cropper"
+                                     [image]="data"
+                                     [settings]="cropperSettings"></img-cropper>
                     </div>
                     <div class="profile-upload">
                         <div class="profile-upload-container upload-btn" (click)="saveImg('save')">
                             <span>{{hideCropper ? 'Upload new picture' : 'Save'}}</span>
-                            <input type="file" accept="image/*" *ngIf="hideCropper" class="upload" (change)="fileChangeListener($event)"/>
+                            <input type="file"
+                                   accept="image/*"
+                                   *ngIf="hideCropper"
+                                   class="upload"
+                                   (click)="chooseFileModal($event)"
+                                   (change)="fileChangeListener($event)"/>
                         </div>
-                        <div class="profile-upload-container upload-btn" *ngIf="!hideCropper" (click)="saveImg('cancel')">Cancel</div>
+                        <div class="profile-upload-container upload-btn" *ngIf="!hideCropper"
+                             (click)="saveImg('cancel')">Cancel</div>
                     </div>
                 </div>
                 <div class="profile-fullname">
@@ -20,80 +31,78 @@
                         <input id="name" class="input" mdInput formControlName="firstName">
                         <md-error>Name can't consist less than two characters, and more than 20</md-error>
                     </md-input-container>
-
                     <md-input-container class="profile-lastname">
                         <input id="lastname" class="input" mdInput formControlName="lastName">
                         <md-error>Lastname can`t consist less than two characters, and more than 20</md-error>
                     </md-input-container>
                 </div>
             </div>
-        <!-- // moved to login-settings
-            <div class="profile-content">
-                <div class="profile-email">
-                    <div class="profile-current-emails">
-                        <div class="email-item" >
-                             <span class="email">{{ user.email }}</span>
-                             <span class="root-title">root</span>
+            <!-- // moved to login-settings
+                <div class="profile-content">
+                    <div class="profile-email">
+                        <div class="profile-current-emails">
+                            <div class="email-item" >
+                                 <span class="email">{{ user.email }}</span>
+                                 <span class="root-title">root</span>
+                            </div>
+                            <div class="email-item" *ngFor="let email of user.secondaryEmails" >
+                                 <span class="email">{{ email }}</span>
+                                 <span class="root-btn" (click)="makeRoot(email)">make root</span>
+                            </div>
                         </div>
-                        <div class="email-item" *ngFor="let email of user.secondaryEmails" >
-                             <span class="email">{{ email }}</span>
-                             <span class="root-btn" (click)="makeRoot(email)">make root</span>
+                        <div class=profile-email-btn>
+                            <button (click)="openAddNewEmailDialog()" md-raised-button>Add Email Address</button>
                         </div>
                     </div>
-                    <div class=profile-email-btn>
-                        <button (click)="openAddNewEmailDialog()" md-raised-button>Add Email Address</button>
-                    </div>
-                </div>
-            -->
+                -->
 
-                <div *ngIf="!user.gender" class="profile-gender">
-                    <h3 class="gender-header">Gender:</h3>
-                    <input formControlName="gender" id="Male" type="radio" value="Male" name="gender">
-                    <label for="Male">Male</label>
-                    <input formControlName="gender" id="Female" type="radio" value="Female" name="gender">
-                    <label for="Female">Female</label>
-                </div>
-
-                <div class="profile-birthday">
-                    <div class="birthday-month">
-                        <md-select placeholder="Month" [(ngModel)]="birthday.month" (change)="onSelect(birthday.month,birthday.year)"
-                                   [ngModelOptions]="{standalone: true}">
-                            <md-option *ngFor="let month of months" [value]="month">
-                                {{ month }}
-                            </md-option>
-                        </md-select>
-                    </div>
-                    <div class="birthday-day">
-                        <md-select placeholder="Day" [(ngModel)]="birthday.day" [ngModelOptions]="{standalone: true}">
-                            <md-option *ngFor="let day of days" [value]="day">
-                                {{ day }}
-                            </md-option>
-                        </md-select>
-                    </div>
-                    <div class="birthday-year">
-                        <md-select placeholder="Year" [(ngModel)]="birthday.year" (change)="onSelect(birthday.month,birthday.year)"
-                                   [ngModelOptions]="{standalone: true}">
-                            <md-option *ngFor="let year of years" [value]="year">
-                                {{ year }}
-                            </md-option>
-                        </md-select>
-                    </div>
-                </div>
-
-                <md-input-container class="profile-height" *ngIf="!user.height">
-                        <input mdInput type="number" name="height" placeholder="Height, cm" required formControlName="height">
-                        <md-error>
-                            Height should be 100-300cm
-                        </md-error>
-                </md-input-container>
-
-                <div class="profile-activity">
-                    <md-select placeholder="Activity level" formControlName="activityLevel">
-                        <md-option *ngFor="let level of activityLevelOptions" [value]="level.coef">
-                            {{ level.name }}
+            <div *ngIf="!user.gender" class="profile-gender">
+                <h3 class="gender-header">Gender:</h3>
+                <input formControlName="gender" id="Male" type="radio" value="Male" name="gender">
+                <label for="Male">Male</label>
+                <input formControlName="gender" id="Female" type="radio" value="Female" name="gender">
+                <label for="Female">Female</label>
+            </div>
+            <div class="profile-birthday">
+                <div class="birthday-month">
+                    <md-select placeholder="Month" [(ngModel)]="birthday.month"
+                               (change)="onSelect(birthday.month,birthday.year)"
+                               [ngModelOptions]="{standalone: true}">
+                        <md-option *ngFor="let month of months" [value]="month">
+                            {{ month }}
                         </md-option>
                     </md-select>
                 </div>
+                <div class="birthday-day">
+                    <md-select placeholder="Day" [(ngModel)]="birthday.day" [ngModelOptions]="{standalone: true}">
+                        <md-option *ngFor="let day of days" [value]="day">
+                            {{ day }}
+                        </md-option>
+                    </md-select>
+                </div>
+                <div class="birthday-year">
+                    <md-select placeholder="Year" [(ngModel)]="birthday.year"
+                               (change)="onSelect(birthday.month,birthday.year)"
+                               [ngModelOptions]="{standalone: true}">
+                        <md-option *ngFor="let year of years" [value]="year">
+                            {{ year }}
+                        </md-option>
+                    </md-select>
+                </div>
+            </div>
+            <md-input-container class="profile-height" *ngIf="!user.height">
+                <input mdInput type="number" name="height" placeholder="Height, cm" required formControlName="height">
+                <md-error>
+                    Height should be 100-300cm
+                </md-error>
+            </md-input-container>
+            <div class="profile-activity">
+                <md-select placeholder="Activity level" formControlName="activityLevel">
+                    <md-option *ngFor="let level of activityLevelOptions" [value]="level.coef">
+                        {{ level.name }}
+                    </md-option>
+                </md-select>
+            </div>
             <!-- // moved to characteristic
                 <div class="profile-physparam">
                     <div class="weight-container">
@@ -148,7 +157,6 @@
                 <input id="location" class="input" mdInput placeholder="Location" formControlName="location">
                 <md-error>Location can`t consist less than two characters, and more than 30</md-error>
             </md-input-container>
-
             <md-input-container class="profile-about">
                 <textarea mdInput placeholder="About" formControlName="about" md-tooltip="Add some info about you">
                 </textarea>
@@ -156,7 +164,7 @@
                     Must contain less than 500 characters
                 </md-error>
             </md-input-container>
-        <button type="submit" class="btn" (click)="onSubmit(profileForm.value)" >Save changes</button>
+            <button type="submit" class="btn" (click)="onSubmit(profileForm.value)">Save changes</button>
         </form>
     </div>
 </div>
