@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs/Subscription';
     selector: 'app-search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss'],
-    providers: [FoodPlanService],
     encapsulation: ViewEncapsulation.None
 })
 export class SearchComponent implements OnInit {
@@ -191,7 +190,7 @@ export class SearchComponent implements OnInit {
                     }
                     sendList.list.push(formatedItem);
                     this.foodPlanService.sendProductList(sendList);
-                    this.selectedFood.push(formatedItem);
+
                 } else {
                     food.errorCount = true;
                 }

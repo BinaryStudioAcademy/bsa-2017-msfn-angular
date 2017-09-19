@@ -75,6 +75,7 @@ import { PlaceTimeComponent } from './user.components/event-item/place-time/plac
 import { EditPanelComponent } from './user.components/event-item/edit-panel/edit-panel.component';
 import {ActivatedRouteSnapshot} from '@angular/router';
 import {EventService} from './services/event.service';
+import { FoodPlanService } from './user.components/food-plan/food-plan.service';
 
 @NgModule({
     imports: [
@@ -157,6 +158,7 @@ import {EventService} from './services/event.service';
         ForAllUserGuard,
         MarkdownService,
         EventService,
+        FoodPlanService,
     ],
     entryComponents: [
         FinishDialogComponent,

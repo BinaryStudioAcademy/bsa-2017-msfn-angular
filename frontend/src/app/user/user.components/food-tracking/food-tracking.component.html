@@ -11,6 +11,7 @@
         </div>
     </div>
     <div class="container-launched" *ngIf="launchedFoodPlan">
+        <h2>Tracking plan</h2>
         <div class="launched-meals">
             <div class="launched-header">
                 <p class="date">
@@ -38,26 +39,27 @@
             </div>
         </div>
         <div class="history">
+            <h2>History</h2>
             <div class="period-wrap">
                 <md-input-container>
                     <input mdInput
-                        [(ngModel)]="period.from"
-                        [mdDatepicker]="period_from"
-                        placeholder="from"
-                        (ngModelChange)="updateDataHistoryView()"
-                        [max]="minMaxCalendarDate"
-                    >
+                    [(ngModel)]="period.from"
+                    [mdDatepicker]="period_from"
+                    placeholder="from"
+                    (ngModelChange)="updateDataHistoryView()"
+                    [max]="minMaxCalendarDate"
+                >
                 </md-input-container>
                 <md-datepicker #period_from></md-datepicker>
                 <md-datepicker-toggle [for]="period_from"></md-datepicker-toggle>
                 <md-input-container>
                     <input mdInput
-                        [(ngModel)]="period.to"
-                        [mdDatepicker]="period_to"
-                        placeholder="to"
-                        (ngModelChange)="updateDataHistoryView()"
-                        [max]="minMaxCalendarDate"
-                    >
+                    [(ngModel)]="period.to"
+                    [mdDatepicker]="period_to"
+                    placeholder="to"
+                    (ngModelChange)="updateDataHistoryView()"
+                    [max]="minMaxCalendarDate"
+                >
                 </md-input-container>
                 <md-datepicker #period_to></md-datepicker>
                 <md-datepicker-toggle [for]="period_to"></md-datepicker-toggle>
