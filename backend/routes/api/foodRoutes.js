@@ -5,14 +5,14 @@ const
     isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/food/';
 
-module.exports = function(app) {
+module.exports = function (app) {
 
     app.post(baseUrl, isLoggedIn, (req, res, next) => {
         body = req.body;
-        if(req.user.isAdmin) {
+        if (req.user.isAdmin) {
             body.customUserId = '';
             body.isPublished = true;
-        } else{
+        } else {
             body.customUserId = req.user._id;
             body.isPublished = false;
         }
@@ -25,12 +25,12 @@ module.exports = function(app) {
     }, apiResponse);
 
     app.put(baseUrl, isLoggedIn, (req, res, next) => {
-        if(req.user.isAdmin) {
-            userId = '';
-        }else{
-            userId = req.user._id;
+        if (req.user.isAdmin) {
+            customUserId = '';
+        } else {
+            customUserId = req.user._id;
         }
-        foodService.updateFood(req.body._id, req.body, userId, (err, data) => {
+        foodService.updateFood(req.body._id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();
@@ -41,9 +41,9 @@ module.exports = function(app) {
 
 
     app.delete(baseUrl + ':id', isLoggedIn, (req, res, next) => {
-        if(req.user.isAdmin) {
+        if (req.user.isAdmin) {
             userId = '';
-        }else{
+        } else {
             userId = req.user._id;
         }
         foodService.deleteFood(req.params.id, userId, (err, data) => {
@@ -54,9 +54,9 @@ module.exports = function(app) {
     }, apiResponse);
 
     app.get(baseUrl, isLoggedIn, (req, res, next) => {
-        if(req.user.isAdmin) {
+        if (req.user.isAdmin) {
             userId = '';
-        }else{
+        } else {
             userId = req.user._id;
         }
         foodService.getOnlyPublishedFood(userId, (err, data) => {
@@ -82,12 +82,12 @@ module.exports = function(app) {
     }, apiResponse);
 
 
-        app.get(baseUrl + 'by-type/:name', isLoggedIn, (req, res, next) => {
-            if(req.user.isAdmin) {
-                userId = '';
-            }else{
-                userId = req.user._id;
-            }
+    app.get(baseUrl + 'by-type/:name', isLoggedIn, (req, res, next) => {
+        if (req.user.isAdmin) {
+            userId = '';
+        } else {
+            userId = req.user._id;
+        }
         foodService.getFoodByType(userId, req.params.name, (err, data) => {
             if (!data.length) {
                 data = [{}];

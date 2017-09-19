@@ -52,6 +52,7 @@ export class FoodService {
             );
     }
     addFood(body: IFood, callback): void {
+        console.log(body);
         body.measure = this.updateMeasure(body.measure);
         const request: IHttpReq = {
             url: 'api/food',
@@ -157,7 +158,7 @@ export class FoodService {
         if (measure === 'Liquid') {
             return 'l';
         } else if (measure === 'Weight') {
-            return (this.window.data._injectedData as any).settings.weight || 'kg';
+            return 'g';
         } else if (measure === 'Quantity') {
             return 'pieces';
         }

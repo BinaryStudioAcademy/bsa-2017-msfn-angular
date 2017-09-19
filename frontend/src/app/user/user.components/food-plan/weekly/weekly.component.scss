@@ -182,6 +182,9 @@
             max-height: 60vh;
             .head {
                 padding: 10px;
+                &.active{
+                    background-color: $gradient-to-color;
+                }
                 cursor: pointer; // width: 60px;
                 .short-form {
                     display: block;

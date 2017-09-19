@@ -37,6 +37,8 @@ import { EventItemComponent } from './user.components/event-item/event-item.comp
 import { GeneralComponent } from './user.components/event-item/general/general.component';
 import { PlaceTimeComponent } from './user.components/event-item/place-time/place-time.component';
 import { DiscussComponent } from './user.components/event-item/discuss/discuss.component';
+import { EditPanelComponent } from './user.components/event-item/edit-panel/edit-panel.component';
+import { IsEventCreatorGuard } from '../guards/is-event-creator.guard';
 
 const userRoutes: Routes = [
     {
@@ -173,6 +175,11 @@ const userRoutes: Routes = [
                     {
                         path: 'discuss',
                         component: DiscussComponent,
+                    },
+                    {
+                        path: 'edit-panel/:userId',
+                        component: EditPanelComponent,
+                        canActivate: [IsEventCreatorGuard]
                     }
                 ]
             },

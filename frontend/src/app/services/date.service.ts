@@ -104,6 +104,11 @@ export class DateService {
         return dateProps;
     }
 
+    updateDateTime(dateObject: Date, timeObject) {
+        const dateString = this.convertDateToIso(dateObject);
+        return new Date(`${dateString} ${timeObject.hours}:${timeObject.minutes}`);
+    }
+
     generateDays(selMonth: string, selYear: number): number[] {
         const daysOutput: number[] = [];
         let monthLength;
@@ -144,7 +149,9 @@ export class DateService {
     }
 
     addZero(amount: number | string): string | number {
-        amount = amount < 10 ? '0' + amount : amount;
+        if (amount < 10 && amount.toString().length < 2) {
+            amount = '0' + amount;
+        }
         return amount;
     }
 }

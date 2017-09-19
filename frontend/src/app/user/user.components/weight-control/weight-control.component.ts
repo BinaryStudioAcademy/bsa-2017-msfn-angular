@@ -65,6 +65,11 @@ export class WeightControlComponent implements OnInit {
         min: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 7)
     };
 
+    valid = {
+        max: new Date(),
+        min: new Date(2017, 0, 0)
+    };
+
     settings = {
         symbol: '',
         betterResult: false,

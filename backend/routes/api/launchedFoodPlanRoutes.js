@@ -1,11 +1,13 @@
 const
     apiResponse = require('express-api-response'),
     launchedFoodPlanService = require('../../services/launchedFoodPlanService'),
+    isAdmin = require('../../middleware/isAdminMiddleware'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/launchedfoodplan';
 
 module.exports = function (app) {
 
-    app.post(baseUrl, function (req, res, next) {
+    app.post(baseUrl, isLoggedIn, function (req, res, next) {
         launchedFoodPlanService.createLaunchedFoodPlan(req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -13,7 +15,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.put(baseUrl, function (req, res, next) {
+    app.put(baseUrl, isLoggedIn, function (req, res, next) {
         launchedFoodPlanService.updateLaunchedFoodPlan(req.body._id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -21,7 +23,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.delete(baseUrl, function (req, res, next) {
+    app.delete(baseUrl, isAdmin, function (req, res, next) {
         launchedFoodPlanService.deleteLaunchedFoodPlan(req.body._id, (err, data) => {
             res.err = err;
             res.data = data;
@@ -29,7 +31,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + '/current', function (req, res, next) {
+    app.get(baseUrl + '/current', isLoggedIn, function (req, res, next) {
         launchedFoodPlanService.getCurrentLaunchedFoodPlan(req.session.passport.user, (err, data) => {
             if (data instanceof Array && !data.length) {
                 data = [];
@@ -40,7 +42,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + '/:id', function (req, res, next) {
+    app.get(baseUrl + '/:id', isLoggedIn, function (req, res, next) {
         launchedFoodPlanService.getLaunchedFoodPlan({_id: req.params.id}, (err, data) => {
             if (data instanceof Array && !data.length) {
                 data = [];
@@ -51,7 +53,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + '/user/:id', function (req, res, next) {
+    app.get(baseUrl + '/user/:id', isLoggedIn, function (req, res, next) {
         launchedFoodPlanService.getLaunchedFoodPlanByUserId(req.params.id, (err, data) => {
             if (data instanceof Array && !data.length) {
                 data = [];
