@@ -63,6 +63,7 @@ export class FoodTrackingComponent implements OnInit {
         }
 
         this.historyMealsStatic = this.launchedFoodPlan.historyMeals;
+        this.foodTrackingService.updateLaunchedFoodPlan(this.launchedFoodPlan, res => { });
         this.updateDataHistoryView();
     }
 
