@@ -27,6 +27,14 @@
             [active]="rla.isActive">
             {{ navLink.label }}
         </a>
+        <a
+            *ngIf="userId === event.creator._id"
+            md-tab-link
+            [routerLink]="'edit-panel'"
+            routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive">
+            Edit Panel
+        </a>
     </nav>
 
     <router-outlet></router-outlet>

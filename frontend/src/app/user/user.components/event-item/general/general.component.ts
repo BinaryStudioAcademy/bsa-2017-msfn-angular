@@ -7,7 +7,8 @@ import {WindowObj} from '../../../../services/window.service';
 @Component({
     selector: 'app-general',
     templateUrl: './general.component.html',
-    styleUrls: ['./general.component.scss']
+    styleUrls: ['./general.component.scss'],
+    providers: [DateService]
 })
 export class GeneralComponent implements OnInit {
 
@@ -26,7 +27,6 @@ export class GeneralComponent implements OnInit {
             this.getEvent(eventId);
         }
     }
-
 
     getEvent(id: string): void {
         this.eventService.getItem(id, data => {

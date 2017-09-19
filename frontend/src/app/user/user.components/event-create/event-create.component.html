@@ -1,5 +1,5 @@
 <div id="event-container">
-    <h1>Creating an event</h1>
+    <h1 *ngIf="!eventId">Creating an event</h1>
     <div id="event-text-block">
         <md-input-container class="input-row">
             <input
@@ -116,10 +116,10 @@
         <button
             md-icon-button
             type="submit"
-            (click)="createEvent()"
+            (click)="eventId ? updateEvent() : createEvent()"
             [disabled]="!event.title"
             [style.background-color]="event.title ? '' : '#666'">
-            Create event
+            {{ submitButtonTitle }}
         </button>
     </div>
 </div>

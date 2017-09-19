@@ -22,7 +22,7 @@ export class EventItemComponent implements OnInit {
                 private window: WindowObj) {
     }
 
-    private _userId = this.window.data._injectedData.userId;
+    userId = this.window.data._injectedData.userId;
 
     navLinks = [
         {
@@ -44,6 +44,7 @@ export class EventItemComponent implements OnInit {
     ngOnInit() {
         if (this.activatedRoute.snapshot.params.id) {
             const eventId = this.activatedRoute.snapshot.params.id;
+            console.log(this.activatedRoute);
             this.getEvent(eventId);
         }
     }
@@ -53,7 +54,7 @@ export class EventItemComponent implements OnInit {
             this.event = data;
             console.log(data);
             this.eventService.setDateOutput(this.event);
-            this.eventService.isUserApplied(this.event, this._userId);
+            this.eventService.isUserApplied(this.event, this.userId);
         });
     }
 

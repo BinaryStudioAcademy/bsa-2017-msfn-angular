@@ -67,9 +67,13 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
 import { EventCreateComponent } from './user.components/event-create/event-create.component';
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventItemComponent } from './user.components/event-item/event-item.component';
+import { ImageUploadComponent } from './user.components/image-upload/image-upload.component';
 import { GeneralComponent } from './user.components/event-item/general/general.component';
 import { DiscussComponent } from './user.components/event-item/discuss/discuss.component';
 import { PlaceTimeComponent } from './user.components/event-item/place-time/place-time.component';
+import { EditPanelComponent } from './user.components/event-item/edit-panel/edit-panel.component';
+import {ActivatedRouteSnapshot} from '@angular/router';
+import {EventService} from './services/event.service';
 
 @NgModule({
     imports: [
@@ -141,13 +145,16 @@ import { PlaceTimeComponent } from './user.components/event-item/place-time/plac
         EventCreateComponent,
         EventListComponent,
         EventItemComponent,
+        ImageUploadComponent,
         GeneralComponent,
         DiscussComponent,
         PlaceTimeComponent,
+        EditPanelComponent,
     ],
     providers: [
         ForAllUserGuard,
-        MarkdownService
+        MarkdownService,
+        EventService,
     ],
     entryComponents: [
         FinishDialogComponent,
@@ -156,6 +163,7 @@ import { PlaceTimeComponent } from './user.components/event-item/place-time/plac
         GoalEditDialogComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
+        ImageUploadComponent
     ]
 })
 export class UserModule {

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="buttons-container" *ngIf="editMode">
-        <button md-button disableRipple class="btn" (click)="saveCircle()">Save
+        <button md-button disableRipple class="btn" [disabled]="!exListLength" [style.background]="(exListLength)? '': '#666'" (click)="saveCircle()" [title]="(!exListLength)? 'Before save choose exercises': 'Save interval'">Save
         </button>
         <button md-button disableRipple class="btn" (click)="deleteCircle()">Delete
         </button>
