@@ -3,6 +3,7 @@ const exerciseService = require('../../services/exerciseService');
 const trainingPlanService = require('../../services/trainingPlanService');
 const baseUrl = '/api/fake-data/';
 
+// sorry for this file; i dont create service (lazyman), because this file must be deleted before relize
 module.exports = function (app) {
     app.get(baseUrl + 'training-plan', function (req, res, next) {
         if (!req.session || !req.session.passport || !req.session.passport.user){

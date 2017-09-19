@@ -17,18 +17,15 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
     private chatWrapper: any;
     private messagesWrapper: any;
     private newMessageInput: any;
-    private messagesCount: number;
     private focused: boolean;
     private loading = false;
 
     constructor(private window: WindowObj,
                 private chatService: ChatService) {}
 
-    ngOnInit() {
-        if (this.chat) {
-            this.messagesCount = this.chat.messages.length;
-        }
-    }
+    ngOnInit() {}
+
+
 
     ngAfterViewInit() {
         this.chatWrapper = document.getElementById(this.chat.room);
@@ -42,7 +39,6 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
             }
         });
         this.newMessageInput.focus();
-        console.log(this);
     }
 
     public resizeInput(shadowInput, input, event) {
@@ -121,6 +117,9 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
     }
 
     private readNewMessages() {
+        if (!this.chat.messages) {
+            return false;
+        }
         this.chat.messages.forEach(message => {
             if (!message.read && message.sender !== this.userId) {
                 this.chatService.readMessage(message);

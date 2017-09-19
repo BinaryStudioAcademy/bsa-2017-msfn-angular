@@ -1,10 +1,11 @@
 const
     apiResponse = require('express-api-response'),
     coachService = require('../../services/coachService'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/coach/';
 
 module.exports = app => {
-    app.get(`${baseUrl}testimonial/:id`, (req, res, next) => {
+    app.get(`${baseUrl}testimonial/:id`, isLoggedIn, (req, res, next) => {
         coachService.getTestimonialsByCoachId(req, (err, data) => {
             if (!data.length) {
                 data = [{}];
@@ -15,7 +16,7 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.post(`${baseUrl}testimonial`, (req, res, next) => {
+    app.post(`${baseUrl}testimonial`, isLoggedIn, (req, res, next) => {
         coachService.addTestimonial(req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -23,7 +24,7 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.put(`${baseUrl}testimonial/:id`, (req, res, next) => {
+    app.put(`${baseUrl}testimonial/:id`, isLoggedIn, (req, res, next) => {
         coachService.updateTestimonial(req.params.id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -31,7 +32,7 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.delete(`${baseUrl}testimonial/:id`, (req, res, next) => {
+    app.delete(`${baseUrl}testimonial/:id`, isLoggedIn, (req, res, next) => {
         coachService.deleteTestimonial(req.params.id, req.session.passport.user, (err, data) => {
             res.data = data;
             res.err = err;

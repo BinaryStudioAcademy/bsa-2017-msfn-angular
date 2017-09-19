@@ -4,10 +4,11 @@ const
     trainingPlanRepository = require('../../repositories/trainingPlanRepository'),
     ApiError = require('../../services/apiErrorService'),
     decrypt = require('../../services/decryptService'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/training-plan';
 
 module.exports = function (app) {
-    app.get(baseUrl, function (req, res, next) {
+    app.get(baseUrl, isLoggedIn, function (req, res, next) {
         trainingPlanService.get({userID: req.session.passport.user}, function (err, data) {
             if (!data.length) {
                 data = [];
@@ -18,29 +19,20 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + '/user/:id', function (req, res, next) {
+    app.get(baseUrl + '/user/:id', isLoggedIn, function (req, res, next) {
         trainingPlanService.get({userID: req.params.id}, function (err, data) {
-            if (!data.length) {
-                data = [];
-            }
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.get(baseUrl + '/weekplanscount', function (req, res, next) {
+    app.get(baseUrl + '/weekplanscount', isLoggedIn, function (req, res, next) {
         trainingPlanService.get({userID: req.session.passport.user}, function (err, data) {
             if (!data.length) {
                 data = [];
             }
-            let count = 0;
-            data.forEach(element => {
-                if (element.days && element.days.length) {
-                    count += element.days.length;
-                }
-            });
-            res.data = count;
+            res.data = data;
             res.err = err;
             next();
         });
@@ -77,7 +69,7 @@ module.exports = function (app) {
             });
     }, apiResponse);
 
-    app.get(baseUrl + '/:id', function (req, res, next) {
+    app.get(baseUrl + '/:id', isLoggedIn, function (req, res, next) {
         trainingPlanService.get({_id: req.params.id, userID: req.session.passport.user}, function (err, data) {
             res.data = data;
             res.err = err;
@@ -85,7 +77,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.post(baseUrl, function (req, res, next) {
+    app.post(baseUrl, isLoggedIn, function (req, res, next) {
         const newPlan = req.body;
         newPlan.userID = req.session.passport.user;
         trainingPlanService.add(newPlan, function (err, data) {
@@ -95,7 +87,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.put(baseUrl + '/:id', function (req, res, next) {
+    app.put(baseUrl + '/:id', isLoggedIn, function (req, res, next) {
         trainingPlanService.update(req.params.id, req.body, function (err, data) {
             res.data = data;
             res.err = err;
@@ -103,7 +95,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.delete(baseUrl + '/:id', function (req, res, next) {
+    app.delete(baseUrl + '/:id', isLoggedIn, function (req, res, next) {
         trainingPlanService.delete(req.params.id, function (err, data) {
             res.data = data;
             res.err = err;

@@ -1,8 +1,9 @@
 const
     apiResponse = require('express-api-response'),
     exerciseService = require('../../services/exerciseService'),
-    exerciseRepository = require('../../repositories/exerciseRepository');
+    exerciseRepository = require('../../repositories/exerciseRepository'),
     isAdmin = require('../../middleware/isAdminMiddleware'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/exercise/';
 module.exports = function (app) {
 
@@ -16,7 +17,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl, function (req, res, next) {
+    app.get(baseUrl, isLoggedIn, function (req, res, next) {
         exerciseService.getAllExercises(function (err, data) {
             if (!data.length) {
                 data = [{}];
@@ -27,7 +28,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl+'type/:type', function (req, res, next) {
+    app.get(baseUrl+'type/:type', isLoggedIn, function (req, res, next) {
         exerciseService.getExercisesByType(req.params.category, function (err, data) {
             if (!data.length) {
                 data = [{}];
@@ -38,7 +39,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl+'sport/:id', function (req, res, next) {
+    app.get(baseUrl+'sport/:id', isLoggedIn, function (req, res, next) {
         exerciseService.getExercisesBySport(req.params.id, function (err, data) {
             if (!data.length) {
                 data = [{}];
@@ -49,7 +50,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + ':id', function (req, res, next) {
+    app.get(baseUrl + ':id', isLoggedIn, function (req, res, next) {
         exerciseService.getExerciseById(req.params.id, function (err, data) {
             res.data = data;
             res.err = err;

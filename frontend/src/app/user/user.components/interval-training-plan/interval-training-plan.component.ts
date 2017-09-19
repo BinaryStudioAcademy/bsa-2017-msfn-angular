@@ -11,6 +11,7 @@ import 'rxjs/add/observable/of';
 export class IntervalTrainingPlanComponent implements OnInit, OnChanges {
 
     @Input() intervalList: [any];
+    @Input() exListLength: number;
     @Output() intervalAction = new EventEmitter;
     displayedColumns = ['name', 'time'];
     dataSource: any;
@@ -33,6 +34,8 @@ export class IntervalTrainingPlanComponent implements OnInit, OnChanges {
     ngOnChanges(changes): void {
         if (changes.intervalList) {
             this.circles = this.intervalList;
+        } else {
+            console.log(changes);
         }
     }
 

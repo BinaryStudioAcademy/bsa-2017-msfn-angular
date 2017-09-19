@@ -57,7 +57,7 @@ export class SecundomerComponent implements OnInit, OnChanges, OnDestroy {
             this.choosedIntervals = this.generateIntervalArray(this.intervals);
         }
 
-        if (changes.reloadIntervals && !changes.reloadIntervals.firstChange) {
+        if (changes.reloadIntervals && !changes.reloadIntervals.firstChange && this.choosedIntervals[0]) {
             this.showExercises.emit(this.choosedIntervals[0].exList);
         }
     }
