@@ -74,9 +74,6 @@
                         placeholder="hrs"
                         [(ngModel)]="eventTime.startTime.hours"
                         (keyup)="handleTimeInput($event, 23)">
-                    <md-error *ngIf="startTimeHoursInputControl.hasError('min') || startTimeHoursInputControl.hasError('max')">
-                        Hour value should be 0-23
-                    </md-error>
                 </md-input-container>
                 <p>:</p>
                 <md-input-container class="time-input">
@@ -86,9 +83,6 @@
                         placeholder="mins"
                         [(ngModel)]="eventTime.startTime.minutes"
                         (keyup)="handleTimeInput($event, 59)">
-                    <md-error *ngIf="startTimeMinutesInputControl.hasError('min') || startTimeMinutesInputControl.hasError('max')">
-                        Minute value should be 0-59
-                    </md-error>
                 </md-input-container>
             </div>
 
@@ -100,9 +94,6 @@
                         placeholder="hrs"
                         [(ngModel)]="eventTime.endTime.hours"
                         (keyup)="handleTimeInput($event, 23)">
-                    <md-error *ngIf="endTimeHoursInputControl.hasError('min') || endTimeHoursInputControl.hasError('max')">
-                        Hour value should be 0-23
-                    </md-error>
                 </md-input-container>
                 <p>:</p>
                 <md-input-container class="time-input">
@@ -112,9 +103,6 @@
                         placeholder="mins"
                         [(ngModel)]="eventTime.endTime.minutes"
                         (keyup)="handleTimeInput($event, 59)">
-                    <md-error *ngIf="endTimeMinutesInputControl.hasError('min') || endTimeMinutesInputControl.hasError('max')">
-                        Minute value should be 0-59
-                    </md-error>
                 </md-input-container>
             </div>
         </div>

@@ -97,6 +97,11 @@ export class DateService {
         return dateProps;
     }
 
+    updateDateTime(dateObject: Date, timeObject) {
+        const dateString = this.convertDateToIso(dateObject);
+        return new Date(`${dateString} ${timeObject.hours}:${timeObject.minutes}`);
+    }
+
     generateDays(selMonth: string, selYear: number): number[] {
         const daysOutput: number[] = [];
         let monthLength;

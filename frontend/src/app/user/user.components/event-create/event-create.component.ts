@@ -58,23 +58,6 @@ export class EventCreateComponent implements OnInit {
         Validators.maxLength(30)
     ]);
 
-    startTimeHoursInputControl = new FormControl('', [
-        Validators.min(0),
-        Validators.max(23)
-    ]);
-    startTimeMinutesInputControl = new FormControl('', [
-        Validators.min(0),
-        Validators.max(59)
-    ]);
-    endTimeHoursInputControl = new FormControl('', [
-        Validators.min(0),
-        Validators.max(23)
-    ]);
-    endTimeMinutesInputControl = new FormControl('', [
-        Validators.min(0),
-        Validators.max(59)
-    ]);
-
     ngOnInit() {
         if (this.eventId) {
             this.submitButtonTitle = 'Update an event';
@@ -120,6 +103,11 @@ export class EventCreateComponent implements OnInit {
     }
 
     createEvent(): void {
+        this.event.startDate = this.dateService
+            .updateDateTime(this.event.startDate, this.eventTime.startTime);
+        this.event.endDate = this.dateService
+            .updateDateTime(this.event.endDate, this.eventTime.endTime);
+
         if (this.data.image) {
             const fileType = 'img';
             const fileName = this.event.title.replace(/ /g, '_') + Date.now();
