@@ -53,7 +53,7 @@ export class FoodListComponent implements OnInit {
     }
 
     openEditFoodDialog(newItem: boolean, foodData?: IFood) {
-        const food = newItem ? { name: '', foodType: '', description: '' } : foodData;
+        const food = newItem ? { name: '', description: '', foodType: {_id: false} } : foodData;
         const dialogRef = this.mdDialog.open(FoodEditDialogComponent, {
             data: {
                 newItem,
