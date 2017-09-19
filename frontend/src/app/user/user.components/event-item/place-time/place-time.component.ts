@@ -4,13 +4,16 @@ import {DateService} from '../../../../services/date.service';
 import {ActivatedRoute} from '@angular/router';
 import {WindowObj} from '../../../../services/window.service';
 
-
 declare const google: any;
 
 @Component({
     selector: 'app-place-time',
     templateUrl: './place-time.component.html',
-    styleUrls: ['./place-time.component.scss']
+    styleUrls: ['./place-time.component.scss'],
+    providers: [
+        DateService,
+        EventService
+    ]
 })
 export class PlaceTimeComponent implements OnInit {
 

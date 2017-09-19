@@ -19,9 +19,6 @@ export class EventService {
         };
         this.httpService.sendRequest(req)
             .then(data => {
-                // if (!data[0].hasOwnProperty('creator')) {
-                //     data = [];
-                // }
                 callback(data);
             });
     }
@@ -35,9 +32,6 @@ export class EventService {
 
         this.httpService.sendRequest(req)
             .then(data => {
-                // if (!data[0].hasOwnProperty('creator')) {
-                //     data = [];
-                // }
                 callback(data);
             });
     }
@@ -67,6 +61,19 @@ export class EventService {
             body: eventData,
             successMessage: 'Event has been created',
             failMessage: 'Event creation has been failed'
+        };
+
+        this.httpService.sendRequest(req)
+            .then(data => callback(data));
+    }
+
+    updateEvent(id, eventData, callback): void {
+        const req: IHttpReq = {
+            url: '/api/event/' + id,
+            method: 'PUT',
+            body: eventData,
+            successMessage: 'Event has been updated',
+            failMessage: 'Event update has been failed'
         };
 
         this.httpService.sendRequest(req)

@@ -47,6 +47,8 @@ import { ChatService } from './services/chat.service';
 import { ChatWindowComponent } from './components/chat/components/chat-window/chat-window.component';
 import { UnreadPipe } from './components/chat/pipes/unread.pipe';
 import { TotalUnreadPipe } from './components/chat/pipes/total-unread.pipe';
+import { IsEventCreatorGuard } from './guards/is-event-creator.guard';
+import { DateService } from './services/date.service';
 
 @NgModule({
     imports: [
@@ -96,7 +98,9 @@ import { TotalUnreadPipe } from './components/chat/pipes/total-unread.pipe';
         NotificationsService,
         ConfirmedPageService,
         ConstantsService,
-        ChatService
+        ChatService,
+        IsEventCreatorGuard,
+        DateService
     ],
     entryComponents: [
         ConfirmPasswordDialogComponent,

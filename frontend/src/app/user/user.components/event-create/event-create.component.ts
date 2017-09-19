@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, Input} from '@angular/core';
 import {EventService} from '../../services/event.service';
 import {IEvent} from '../../../models/event';
 import {CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
@@ -21,6 +21,9 @@ export class EventCreateComponent implements OnInit {
                 private window: WindowObj) {
     }
 
+    @Input() eventId: string = '';
+    submitButtonTitle: string = 'Create an event';
+
     userId = (this.window.data._injectedData as any).userId;
     event: IEvent;
 
@@ -40,6 +43,12 @@ export class EventCreateComponent implements OnInit {
     ]);
 
     ngOnInit() {
+        console.log('EVENT ID INPUT', this.eventId);
+        if (this.eventId) {
+            this.submitButtonTitle = 'Update an event';
+            this.getEvent();
+        }
+
         this.data = {
             image: this.image
         };
@@ -88,6 +97,21 @@ export class EventCreateComponent implements OnInit {
         }
     }
 
+    getEvent(): void {
+        this.eventService.getItem(this.eventId, data => {
+            this.event = data;
+            this.event.startDate = new Date(this.event.startDate);
+            this.event.endDate = new Date(this.event.endDate);
+            console.log('EVENT DATA', data);
+        });
+    }
+
+    updateEvent(): void {
+        this.eventService.updateEvent(this.eventId, this.event, data => {
+            console.log(data);
+        });
+    }
+
     initMap(): void {
         let centerCoords = {
             lat: 0,
@@ -95,7 +119,11 @@ export class EventCreateComponent implements OnInit {
         };
 
         this.eventService.getUserLocation(location => {
-            centerCoords = location;
+            if (this.eventId) {
+                centerCoords = this.event.location.coords;
+            } else {
+                centerCoords = location;
+            }
 
             const map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 12,
