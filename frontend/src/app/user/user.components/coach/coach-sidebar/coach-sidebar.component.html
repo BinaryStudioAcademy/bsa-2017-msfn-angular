@@ -4,7 +4,7 @@
             <h2 id="coach-name">{{ userData.fullName }}</h2>
             <p id="coach-location">{{ userData.location }}</p>
         </div>
-        <div id="follow-button">
+        <div id="follow-button" *ngIf="userData._id !== this._id">
             <button
                 *ngIf="userData._id !== _id"
                 md-icon-button
