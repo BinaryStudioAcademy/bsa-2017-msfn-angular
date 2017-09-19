@@ -6,7 +6,14 @@
     height: 60px;
 }
 #close {
-color: $btn-color;
+    color: $text-main-color;
+    &:hover{
+        cursor: pointer;
+        color: $btn-color;
+    } 
+}
+#close-btn{
+    background-color: $btn-color;
     &:hover{
         cursor: pointer;
     } 

@@ -39,11 +39,11 @@ const mongoose = require('mongoose'),
             category: 'changeweight',
         },
         {
-            name: 'Raise some weight in total',
+            name: 'Raise weight during exercises',
             category: 'totalweight',
         },
         {
-            name: 'Run some distance in total',
+            name: 'Run distance during exercises',
             category: 'totaldistance',
         },
         {
@@ -51,7 +51,7 @@ const mongoose = require('mongoose'),
             category: 'launchedtrainings',
         },
         {
-            name: 'Open app some count of day in a row',
+            name: 'Open app some count of days in a row',
             category: 'combo',
         },
         {
