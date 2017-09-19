@@ -1,0 +1,26 @@
+@import '../../../globalStyles/variables.scss';
+@import '../../../globalStyles/text.scss';
+@import '../../../globalStyles/indentations.scss';
+.container{
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.text {
+    font-size: 16px;
+}
+.btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.confirm-btn {
+    background-color: $btn-color;
+
+}
+.btn {
+    &:hover {
+        cursor: pointer;
+    }
+}

@@ -47,7 +47,8 @@ import { ChatService } from './services/chat.service';
 import { ChatWindowComponent } from './components/chat/components/chat-window/chat-window.component';
 import { UnreadPipe } from './components/chat/pipes/unread.pipe';
 import { TotalUnreadPipe } from './components/chat/pipes/total-unread.pipe';
-import {DateService} from './services/date.service';
+import { DateService } from './services/date.service';
+import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component';
 
 @NgModule({
     imports: [
@@ -82,6 +83,7 @@ import {DateService} from './services/date.service';
         ChatWindowComponent,
         UnreadPipe,
         TotalUnreadPipe,
+        LogoutDialogComponent,
     ],
     providers: [
         ToasterService,
@@ -109,7 +111,8 @@ import {DateService} from './services/date.service';
         RegistrationComponent,
         NotificationDataDialogComponent,
         SearchExerciseComponent,
-        ExerciseEditDialogComponent
+        ExerciseEditDialogComponent,
+        LogoutDialogComponent
 
     ],
     bootstrap: [AppComponent]
