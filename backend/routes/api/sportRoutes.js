@@ -3,11 +3,11 @@ const
     sportService = require('../../services/sportService'),
     sportRepository = require('../../repositories/sportRepository'),
     isAdmin = require('../../middleware/isAdminMiddleware'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/sport/';
 
 module.exports = app => {
-
-    app.get(baseUrl, (req, res, next) => {
+    app.get(baseUrl, isLoggedIn, (req, res, next) => {
         sportRepository.getAll((err, data) => {
             if (!data.length){
                 data = [{}];
@@ -18,7 +18,7 @@ module.exports = app => {
         });
     }, apiResponse);
 
-    app.get(baseUrl + ':code', (req, res, next) => {
+    app.get(baseUrl + ':code', isLoggedIn, (req, res, next) => {
         sportRepository.getByCode(req.params.code, (err, data) => {
             if (!data){
                 data = [{}];

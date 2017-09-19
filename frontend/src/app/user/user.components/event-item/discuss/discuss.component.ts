@@ -14,7 +14,8 @@ import {FormControl, Validators} from '@angular/forms';
     styleUrls: ['./discuss.component.scss'],
     providers: [
         EventService,
-        MessagePostingService
+        MessagePostingService,
+        DateService
     ]
 })
 export class DiscussComponent implements OnInit {

@@ -7,6 +7,8 @@
         <md-input-container>
             <input mdInput
                    [(ngModel)]="period.min"
+                   [min]="valid.min"
+                   [max]="valid.max"
                    [mdDatepicker]="period_min"
                    placeholder="Period start"
                    (change)="updateData()">
@@ -17,6 +19,8 @@
             <input mdInput
                    [(ngModel)]="period.max"
                    [mdDatepicker]="period_max"
+                   [min]="valid.min"
+                   [max]="valid.max"
                    placeholder="Period end"
                    (change)="updateData()">
         </md-input-container>

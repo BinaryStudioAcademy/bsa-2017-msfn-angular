@@ -17,6 +17,11 @@ export class ActiveTrainingComponent implements OnInit {
     userMeasures: any;
     trainingPlan: any;
     burnedCallories = 1445;
+    errors = {
+        emptyIntervals: null,
+        emptyName: null,
+        emptyExList: null
+    };
 
     // validation prop
     private editIntervalMode = false;
@@ -44,13 +49,19 @@ export class ActiveTrainingComponent implements OnInit {
 
     intervalAction(action) {
         if (action.type === 'save') {
-            this.editIntervalMode = false;
-            const data = action.data;
-            data.exList = this.trainingPlan.exercisesList;
-            this.trainingPlan.intervals[action.cacheIndex] = data;
-            this.trainingPlan.exercisesList = [];
-            if (this.trainingPlan._id) {
-                this.activeTrainingService.updateTraining(this.trainingPlan);
+            if (this.trainingPlan.exercisesList.length) {
+                this.editIntervalMode = false;
+                const data = action.data;
+                data.exList = this.trainingPlan.exercisesList;
+                this.trainingPlan.intervals[action.cacheIndex] = data;
+                this.trainingPlan.exercisesList = [];
+                this.errors.emptyIntervals = false;
+                this.errors.emptyExList = false;
+                if (this.trainingPlan._id) {
+                    this.activeTrainingService.updateTraining(this.trainingPlan);
+                }
+            } else {
+                this.errors.emptyExList = true;
             }
         } else if (action.type === 'delete') {
             this.editIntervalMode = false;
@@ -67,8 +78,24 @@ export class ActiveTrainingComponent implements OnInit {
             this.trainingPlan.exercisesList = exList;
         }
     }
-
+    validation() {
+        let result = true;
+        if (!this.trainingPlan.name) {
+            this.errors.emptyName = true;
+            result = false;
+        } else if ((this.trainingPlan.trainingType === 'interval') && (!this.trainingPlan.intervals.length)) {
+            result = this.errors.emptyIntervals = true;
+            result = false;
+        } else if ((this.trainingPlan.trainingType === 'general') && (!this.trainingPlan.exercisesList.length)) {
+            result = this.errors.emptyExList = true;
+            result = false;
+        }
+        return result;
+    }
     choosePlan() {
+        if (!this.validation()) {
+            return;
+        }
         this.activeTrainingService.getPlans((plan) => {
             if (plan === undefined) {
                 return;
@@ -108,5 +135,6 @@ export class ActiveTrainingComponent implements OnInit {
         if (this.trainingPlan._id) {
             this.activeTrainingService.updateTraining(this.trainingPlan);
         }
+        this.errors.emptyExList = false;
     }
 }

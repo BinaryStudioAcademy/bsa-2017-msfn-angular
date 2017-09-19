@@ -107,6 +107,7 @@ const mongoose = require('mongoose'),
             email: 'norris@msfn.com',
             password: 'aaaaaa',
             position: 2,
+            isCoach: true,
             gender: 'Male',
             height: 178,
             weight: 75,
@@ -264,15 +265,17 @@ module.exports = {
                         if (error) {
                             console.log('[InitService] - Error of adding user:');
                             console.log(error);
+                            return callback({err: error}, null)
                         } else {
                             console.log('[InitService] - User added');
+                            return callback(null, {done: true})
                         }
                     });
                 });
             } else {
                 console.log('[InitService] - Users are available');
+                return callback(null, null);
             }
-            return callback(null, null)
         });
     }
 

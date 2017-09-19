@@ -6,12 +6,17 @@
     height: 60px;
 }
 #close {
-    color:$text-main-color;
+    color: $text-main-color;
     &:hover{
-        color: $btn-color;
         cursor: pointer;
-    }
-    
+        color: $btn-color;
+    } 
+}
+#close-btn{
+    background-color: $btn-color;
+    &:hover{
+        cursor: pointer;
+    } 
 }
 .container {
     width: 400px;
@@ -54,4 +59,10 @@
 .icon{
     width: 128px;
     height: 128px;
+}
+
+@media screen and (max-width: $medium-screen) {
+    .container{
+        width: 100%;
+    }
 }

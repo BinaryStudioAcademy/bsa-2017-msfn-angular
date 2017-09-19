@@ -1,14 +1,19 @@
 import {Injectable} from '@angular/core';
 import {IHttpReq} from '../models/http-req';
 import {HttpService} from './http.service';
+import { WindowObj } from './window.service';
 
 @Injectable()
 export class ConstantsService {
 
     public measurements;
 
-    constructor(private httpService: HttpService) {
-        this.setMeasurements();
+    constructor(private windowObj: WindowObj, private httpService: HttpService) {
+        if (windowObj.data._injectedData.isLoggedIn) {
+            this.setMeasurements();
+        } else {
+            this.measurements = {};
+        }
     }
 
     getMeasurements() {

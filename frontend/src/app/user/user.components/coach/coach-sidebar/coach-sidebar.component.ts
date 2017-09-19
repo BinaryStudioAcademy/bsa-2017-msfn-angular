@@ -76,8 +76,7 @@ export class CoachSidebarComponent implements OnInit {
 
     getTestimonialData(): void {
         this.messagePostingService.getMessages(this.userData._id, data => {
-            this.coachData.testimonials = data;
-            this.coachData.testimonials = this.coachService.getRandomTestimonials(this.coachData.testimonials);
+            this.coachData.testimonials = this.coachService.getRandomTestimonials(data);
         }, true);
     }
 

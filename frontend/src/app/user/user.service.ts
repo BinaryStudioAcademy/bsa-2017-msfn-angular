@@ -22,7 +22,6 @@ export class UserService {
             body: {}
         };
         const promise1 = this.httpHandler.sendRequest(request1);
-
         const request2: IHttpReq = {
             url: '/api/measurement',
             method: 'GET',

@@ -2,12 +2,14 @@ const
     apiResponse = require('express-api-response'),
     foodPlanService = require('../../services/foodPlanService'),
     foodPlanRepository = require('../../repositories/foodPlanRepository'),
+    isAdmin = require('../../middleware/isAdminMiddleware'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     ApiError = require('../../services/apiErrorService'),
     decrypt = require('../../services/decryptService'),
     baseUrl = '/api/food-plan';
 
 module.exports = function (app) {
-    app.get(baseUrl, function (req, res, next) {
+    app.get(baseUrl, isLoggedIn, function (req, res, next) {
         foodPlanService.get({userID: req.session.passport.user}, function (err, data) {
             if (!data.length) {
                 data = [];
@@ -18,7 +20,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + '/user/:id', function (req, res, next) {
+    app.get(baseUrl + '/user/:id', isLoggedIn, function (req, res, next) {
         foodPlanService.get({userID: req.params.id}, function (err, data) {
             if (!data.length) {
                 data = [];
@@ -29,7 +31,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + '/public/:params', function (req, res, next) {
+    app.get(baseUrl + '/public/:params', isLoggedIn, function (req, res, next) {
         const params = decrypt(req.params.params);
         params.filter.isRemoved = false;
         params.filter.shared = true;
@@ -49,7 +51,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + '/:id', function (req, res, next) {
+    app.get(baseUrl + '/:id', isLoggedIn, function (req, res, next) {
         foodPlanService.get({_id: req.params.id, userID: req.session.passport.user}, function (err, data) {
             res.data = data;
             res.err = err;
@@ -57,7 +59,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.post(baseUrl, function (req, res, next) {
+    app.post(baseUrl, isLoggedIn, function (req, res, next) {
         const newPlan = req.body;
         newPlan.userID = req.session.passport.user;
         foodPlanService.add(newPlan, function (err, data) {
@@ -67,7 +69,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.put(baseUrl + '/:id', function (req, res, next) {
+    app.put(baseUrl + '/:id', isLoggedIn, function (req, res, next) {
         foodPlanService.update(req.params.id, req.body, function (err, data) {
             res.data = data;
             res.err = err;
@@ -75,7 +77,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.delete(baseUrl + '/:id', function (req, res, next) {
+    app.delete(baseUrl + '/:id', isLoggedIn, function (req, res, next) {
         foodPlanService.delete(req.params.id, function (err, data) {
             res.data = data;
             res.err = err;

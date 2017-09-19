@@ -1,0 +1,19 @@
+.container {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 300px;
+    flex-direction: column;
+
+    .heading {
+        font-size: 20px;
+    }
+
+    .row {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+    }
+}

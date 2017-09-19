@@ -1,5 +1,5 @@
 <div id="event-container">
-    <h1>Creating an event</h1>
+    <h1 *ngIf="!eventId">Creating an event</h1>
     <div id="event-text-block">
         <md-input-container class="input-row">
             <input
@@ -64,6 +64,48 @@
                 <md-datepicker #endPicker></md-datepicker>
             </div>
         </div>
+
+        <div id="event-time">
+            <div class="time">
+                <md-input-container class="time-input">
+                    <input
+                        mdInput
+                        name="hours"
+                        placeholder="hrs"
+                        [(ngModel)]="eventTime.startTime.hours"
+                        (keyup)="handleTimeInput($event, 23)">
+                </md-input-container>
+                <p>:</p>
+                <md-input-container class="time-input">
+                    <input
+                        mdInput
+                        name="minutes"
+                        placeholder="mins"
+                        [(ngModel)]="eventTime.startTime.minutes"
+                        (keyup)="handleTimeInput($event, 59)">
+                </md-input-container>
+            </div>
+
+            <div class="time">
+                <md-input-container class="time-input">
+                    <input
+                        mdInput
+                        name="hours"
+                        placeholder="hrs"
+                        [(ngModel)]="eventTime.endTime.hours"
+                        (keyup)="handleTimeInput($event, 23)">
+                </md-input-container>
+                <p>:</p>
+                <md-input-container class="time-input">
+                    <input
+                        mdInput
+                        name="minutes"
+                        placeholder="mins"
+                        [(ngModel)]="eventTime.endTime.minutes"
+                        (keyup)="handleTimeInput($event, 59)">
+                </md-input-container>
+            </div>
+        </div>
     </div>
 
     <div id="event-map">
@@ -116,10 +158,10 @@
         <button
             md-icon-button
             type="submit"
-            (click)="createEvent()"
+            (click)="eventId ? updateEvent() : createEvent()"
             [disabled]="!event.title"
             [style.background-color]="event.title ? '' : '#666'">
-            Create event
+            {{ submitButtonTitle }}
         </button>
     </div>
 </div>

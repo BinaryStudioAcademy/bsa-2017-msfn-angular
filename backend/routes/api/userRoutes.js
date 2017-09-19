@@ -13,7 +13,7 @@ const
     changeMailRoutes = require('./changeMailRoutes');
 
 module.exports = function (app) {
-    app.get(baseUrl + 'me', function (req, res, next) {
+    app.get(baseUrl + 'me', isLoggedIn, function (req, res, next) {
         userRepository.getById(req.session.passport.user, function (err, data) {
             res.data = data;
             res.err = err;
@@ -64,9 +64,9 @@ module.exports = function (app) {
 
     app.use(baseUrl + 'activate', activateRoutes);
 
-    app.use(baseUrl + 'changemail', changeMailRoutes);
+    app.use(baseUrl + 'changemail', isLoggedIn, changeMailRoutes);
 
-    app.get(baseUrl, function (req, res, next) {
+    app.get(baseUrl, isLoggedIn, function (req, res, next) {
         userRepository.getAll(function (err, data) {
             res.data = data;
             res.err = err;
@@ -82,7 +82,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl + 'coach-status-request/:id', (req, res, next) => {
+    app.get(baseUrl + 'coach-status-request/:id', isLoggedIn, (req, res, next) => {
          coachService.apply(req.params.id, (err, data) => {
             res.data = data;
             res.err = err;
@@ -108,7 +108,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.put(baseUrl + 'secondaryEmail/:id', function (req, res, next) {
+    app.put(baseUrl + 'secondaryEmail/:id', isLoggedIn, function (req, res, next) {
         userService.addEmailToItem(req.params.id, req.body, function (err, data) {
 
             res.data = {
@@ -138,7 +138,7 @@ module.exports = function (app) {
 
     app.use(baseUrl + 'subscribe', subscribeRoutes);
 
-    app.delete(baseUrl + ':id', function (req, res, next) {
+    app.delete(baseUrl + ':id', isAdmin, function (req, res, next) {
         userRepository.deleteById(req.params.id, function (err, data) {
             res.data = data;
             res.err = err;

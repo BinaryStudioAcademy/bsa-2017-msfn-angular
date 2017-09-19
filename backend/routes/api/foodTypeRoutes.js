@@ -2,11 +2,12 @@ const
     apiResponse = require('express-api-response'),
     foodTypeService = require('../../services/foodTypeService'),
     isAdmin = require('../../middleware/isAdminMiddleware'),
+    isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/food-type/';
 
 module.exports = function(app) {
 
-    app.get(baseUrl, (req, res, next) => {
+    app.get(baseUrl, isLoggedIn, (req, res, next) => {
         foodTypeService.getAllFoodTypes((err, data) => {
             if (!data.length) {
                 data = [{}];
