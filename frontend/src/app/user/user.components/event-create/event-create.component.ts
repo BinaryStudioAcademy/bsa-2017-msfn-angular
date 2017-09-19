@@ -5,6 +5,7 @@ import {CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
 import {ToasterService} from '../../../services/toastr.service';
 import {FormControl, Validators} from '@angular/forms';
 import {WindowObj} from '../../../services/window.service';
+import {DateService} from '../../../services/date.service';
 
 declare const google: any;
 
@@ -12,13 +13,17 @@ declare const google: any;
     selector: 'app-event-create',
     templateUrl: './event-create.component.html',
     styleUrls: ['./event-create.component.scss'],
-    providers: [EventService]
+    providers: [
+        EventService,
+        DateService
+    ]
 })
 export class EventCreateComponent implements OnInit {
 
     constructor(private eventService: EventService,
                 private toasterService: ToasterService,
-                private window: WindowObj) {
+                private window: WindowObj,
+                private dateService: DateService) {
     }
 
     @Input() eventId: string = '';
@@ -26,6 +31,17 @@ export class EventCreateComponent implements OnInit {
 
     userId = (this.window.data._injectedData as any).userId;
     event: IEvent;
+
+    eventTime = {
+        startTime: {
+            hours: '00',
+            minutes: '00'
+        },
+        endTime: {
+            hours: '00',
+            minutes: '00'
+        }
+    };
 
     image = new Image();
     type: string;
@@ -40,6 +56,23 @@ export class EventCreateComponent implements OnInit {
     titleInputControl = new FormControl('', [
         Validators.required,
         Validators.maxLength(30)
+    ]);
+
+    startTimeHoursInputControl = new FormControl('', [
+        Validators.min(0),
+        Validators.max(23)
+    ]);
+    startTimeMinutesInputControl = new FormControl('', [
+        Validators.min(0),
+        Validators.max(59)
+    ]);
+    endTimeHoursInputControl = new FormControl('', [
+        Validators.min(0),
+        Validators.max(23)
+    ]);
+    endTimeMinutesInputControl = new FormControl('', [
+        Validators.min(0),
+        Validators.max(59)
     ]);
 
     ngOnInit() {
@@ -70,6 +103,20 @@ export class EventCreateComponent implements OnInit {
         };
 
         this.initMap();
+    }
+
+    handleTimeInput(event, maxAmount) {
+        const checkValue = value => {
+            if (value < 0 || value > maxAmount) {
+                event.target.value = '00';
+            }
+        };
+
+        event.target.value = this.dateService.addZero(event.target.value);
+        if (event.target.value.length > 2) {
+            event.target.value = event.target.value.replace('0', '');
+        }
+        checkValue(event.target.value);
     }
 
     createEvent(): void {

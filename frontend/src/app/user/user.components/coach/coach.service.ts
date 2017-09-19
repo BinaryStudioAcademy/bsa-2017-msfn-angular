@@ -35,7 +35,7 @@ export class CoachService {
     }
 
     getRandomTestimonials(testimonialData: any[]): any[] {
-        if (!testimonialData.length) {
+        if (testimonialData.length < 3) {
             return testimonialData;
         }
         const max = Math.floor(testimonialData.length);

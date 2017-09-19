@@ -137,7 +137,9 @@ export class DateService {
     }
 
     addZero(amount: number | string): string | number {
-        amount = amount < 10 ? '0' + amount : amount;
+        if (amount < 10 && amount.toString().length < 2) {
+            amount = '0' + amount;
+        }
         return amount;
     }
 }
