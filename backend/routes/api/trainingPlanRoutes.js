@@ -28,10 +28,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(baseUrl + '/weekplanscount', isLoggedIn, function (req, res, next) {
-        trainingPlanService.get({userID: req.session.passport.user}, function (err, data) {
-            if (!data.length) {
-                data = [];
-            }
+        trainingPlanService.getCount({userID: req.session.passport.user}, function (err, data) {
             res.data = data;
             res.err = err;
             next();

@@ -24,6 +24,30 @@ class trainingPlanService {
             if (exerciseData === null) {
                 callback(null, new ApiError('Not found plan'));
             } else {
+                if (!exerciseData.length) {
+                    data = [];
+                }
+                callback(null, exerciseData);
+            }
+        });
+    }
+
+    getCount(data, callback){
+        const params = {
+            filter: {
+                isRemoved: false,
+            },
+            populate:'exercisesList.exercise'
+        };
+
+        if(data){
+           params.filter = Object.assign(params.filter, data);
+        }
+        trainingPlanRepository.get(params, (err, exerciseData) => {
+            if (err) return callback(err);
+            if (exerciseData === null) {
+                callback(null, new ApiError('Not found plan'));
+            } else {
                 if (!data.length) {
                     data = [];
                 }
