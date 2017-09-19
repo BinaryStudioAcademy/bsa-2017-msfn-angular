@@ -12,12 +12,6 @@
         color: $btn-color;
     } 
 }
-#close-btn{
-    background-color: $btn-color;
-    &:hover{
-        cursor: pointer;
-    } 
-}
 .container {
     width: 400px;
     display: flex;
