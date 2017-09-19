@@ -10,6 +10,7 @@ const Tribe = new Schema({
         ref: 'User'
     },
     description: String,
+    image: String,
     members: [{
         type: ObjectId,
         ref: 'User'

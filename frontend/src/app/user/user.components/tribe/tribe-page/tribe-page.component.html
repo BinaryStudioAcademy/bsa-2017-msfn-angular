@@ -4,6 +4,9 @@
         <h1>{{tribe.name}}</h1>
         <span class="mid-text menu-option">Send message</span>
         <span class="mid-text menu-option" (click)="showFollowers()">Followers</span>
+        <!--<a class="mid-text menu-option"
+           *ngIf="userId === trueTribe.creator"
+           routerLink="/settings">Settings</a>-->
         <button md-button class="btn">Follow</button>
     </div>
     <div class="content">
@@ -12,6 +15,14 @@
             <span>{{tribe.description}}</span>
         </div>
         <app-tribe-post *ngFor="let post of posts"></app-tribe-post>
+        <!--<app-tribe-post *ngFor="let post of truePosts"
+                        #post
+                        [author]="post.author"
+                        [image]="post.image"
+                        [text]="post.text"
+                        (onAddComment)="addComment()"
+                        (onAddFavourite)="addFavourite()"
+        ></app-tribe-post>-->
     </div>
 
 </div>

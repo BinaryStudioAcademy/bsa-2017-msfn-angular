@@ -4,12 +4,14 @@ const
     postService = require('../../services/postService'),
     baseUrl = '/api/tribe/';
 
-module.exports = (app) => {
+module.exports = function (app) {
 
     app.get(baseUrl, (req, res, next) => {
+        console.log('get tribe (routes)');
         tribeService.getAllTribes( (err, data) => {
             if (!data.length) {
                 data = [{}];
+                console.log('empty data(routes)');
             }
             res.data = data;
             res.err = err;
@@ -75,7 +77,7 @@ module.exports = (app) => {
         });
     }, apiResponse);
 
-    app.update(`${baseUrl}:id`, (req, res, next) => {
+    app.put(`${baseUrl}:id`, (req, res, next) => {
         tribeService.updateTribeById(req.body.id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -83,4 +85,7 @@ module.exports = (app) => {
         });
     }, apiResponse);
 
+    app.put(`${baseUrl}:id/posts/`, (req, res, next) => {
+
+    })
 };

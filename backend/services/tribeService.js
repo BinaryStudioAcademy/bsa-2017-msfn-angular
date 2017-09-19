@@ -24,6 +24,7 @@ function createTribe(body, callback) {
 }
 
 function getAllTribes(callback) {
+    console.log('tribe service');
     tribeRepository.getAllTribes(function (err, tribeData) {
         if (err) return callback(err);
         if (tribeData === null) {

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MdDialog} from '@angular/material';
 import {FullTribePostComponent} from '../full-tribe-post/full-tribe-post.component';
 import {TribeService} from '../tribe.service';
+import {WindowObj} from '../../../../services/window.service';
 
 @Component({
     selector: 'app-tribe-post',
@@ -15,20 +16,47 @@ export class TribePostComponent implements OnInit {
     @Input() text: string;
     @Input() image: string;
     @Input() author: string;
-    @Input() comments: Array<{author: string, text: string}>;
+    @Input() comments: Array<{author: string, text: string, firstName?: string, userPhoto?: string}>;
+    @Input() members: any[];
     @Input() createdAt: Date;
     @Output() onAddFavourite = new EventEmitter();
     @Output() onAddComment = new EventEmitter();
 
     hideComments: boolean;
-    fullComments: Array<{userPhoto: string, firstName: string, text: string}>;
-    firstView: boolean;
+    fullComments;
+    userPhoto: string;
+    userFirstName: string;
+
     constructor( private mdDialog: MdDialog,
-                 private tribeService: TribeService) { }
+                 private window: WindowObj,
+                 private tribeService: TribeService) {
+        this.userPhoto = (this.window.data._injectedData as any).userPhoto;
+        this.userFirstName = (this.window.data._injectedData as any).userFirstName;
+        this.fullComments = [];
+        this.members = [
+            {
+                _id: '59b8c7ab52d7d41022a59e77',
+                'firstName': 'John',
+                'userPhoto': 'https://www.looktothestars.org/photo/68-johnny-depp/teaser-1379520640.jpg'
+            }
+        ];
+    }
 
     ngOnInit() {
         this.hideComments = true;
-        this.firstView = true;
+        this.comments = [ {
+                'author': '59b8c7ab52d7d41022a59e77',
+                'text': 'For deep cloning, we need to use other alternatives because Object.assign() copies ' +
+                'property values. If the source value is a reference to an object, it only copies that reference value.'
+            }
+        ];
+        this.comments.map( (item) => {
+            const userInfo = this.members.find( (el) => (el._id === item.author));
+            console.log(userInfo);
+            Object.assign(item, {userPhoto: userInfo.userPhoto, firstName: userInfo.firstName});
+            this.fullComments.push(item);
+        });
+        console.log(this.fullComments);
         this.title = 'Post title';
         this.author = 'Super Tribe';
         this.text = 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,' +
@@ -50,15 +78,8 @@ export class TribePostComponent implements OnInit {
 
     toggleComments() {
         this.hideComments = !this.hideComments;
-        if (this.firstView) {
-            /*this.fullComments = this.comments.map( (item) => {
-                this.tribeService.getUserById(item.author, (res) => {
-
-                });
-            });*/
-        }
-        this.firstView = false;
     }
+
     addFavourite() {
         this.onAddFavourite.emit();
     }
