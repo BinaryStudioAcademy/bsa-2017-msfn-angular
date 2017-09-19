@@ -3,6 +3,7 @@ import { FoodService } from '../../services/food.service';
 import { MdDialog, MdSort } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IFood } from '../../../models/food';
+import { IFoodType } from '../../../models/food-type';
 import { FoodEditDialogComponent } from '../food-edit-dialog/food-edit-dialog.component';
 @Component({
     selector: 'app-food-list',
@@ -16,6 +17,7 @@ export class FoodListComponent implements OnInit {
     foods: IFood[] = [];
     allFood: IFood[];
     foodsShown: IFood[];
+    types: IFoodType[];
     itemsPerPage = 10000; // TODO: change to smaller and implement
     filter = '';
     page = 1;
@@ -26,7 +28,8 @@ export class FoodListComponent implements OnInit {
         private mdDialog: MdDialog) { }
 
     ngOnInit() {
-            this.foodService.getAllFoodTypes((result) => {
+        this.foodService.getAllFoodTypes((result) => {
+            this.types = result;
             for (const item of result) {
                 if (!this.options.includes(item.name)) {
                     this.options.push(item.name);
@@ -53,7 +56,7 @@ export class FoodListComponent implements OnInit {
     }
 
     openEditFoodDialog(newItem: boolean, foodData?: IFood) {
-        const food = newItem ? { name: '', description: '', foodType: {_id: false} } : foodData;
+        const food = newItem ? { name: '', description: '', foodType: { _id: false } } : foodData;
         const dialogRef = this.mdDialog.open(FoodEditDialogComponent, {
             data: {
                 newItem,
@@ -67,13 +70,12 @@ export class FoodListComponent implements OnInit {
 
     updateFoods() {
         if (this.items.length > 0) {
+            const selectedTypes = this.getArrOfTypes(this.items);
+            console.log(selectedTypes);
             this.foods = [];
             for (let i = 0; i < this.allFood.length; i++) {
-                for (let j = 0; j < this.items.length; j++) {
-                    if (this.allFood[i].foodType === this.items[j]) {
-                        this.foods.push(this.allFood[i]);
-                        break;
-                    }
+                if (selectedTypes.indexOf(this.allFood[i].foodType._id) >= 0) {
+                    this.foods.push(this.allFood[i]);
                 }
             }
         } else {
@@ -81,11 +83,31 @@ export class FoodListComponent implements OnInit {
         }
         this.foods = this.foods.filter((elem) => {
             return elem.name.toLowerCase().includes(this.filter.toLowerCase())
-            || elem.vendor.toLowerCase().includes(this.filter.toLowerCase());
+                || elem.vendor.toLowerCase().includes(this.filter.toLowerCase());
         });
         this.foodsShown = this.foods;
     }
-
+    getArrOfTypes(selectedTypes) {
+        const arrOfTypes = [];
+        const selectedTypesIds = [];
+        this.types.sort(function (a, b) {
+            return a.depthLvl - b.depthLvl;
+        });
+        this.types.forEach(type => {
+            if (
+                (selectedTypes.indexOf(type.name) >= 0)
+                    ||
+                (
+                    (type.parentType)
+                    &&
+                    (selectedTypesIds.indexOf(type.parentType._id) >= 0)
+                )
+                ) {                                     // search selected types & their childs
+                selectedTypesIds.push(type._id);
+            }
+        });
+        return selectedTypesIds;
+    }
 
     onScroll() {
         const filtered: IFood[] = this.foods.filter(food =>
