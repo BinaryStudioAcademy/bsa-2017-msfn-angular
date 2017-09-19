@@ -54,11 +54,12 @@ header {
             cursor: pointer;
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .chat {
             position: relative;
-            
+
             .got-messages {
                 display: block;
                 position: absolute;
@@ -69,7 +70,7 @@ header {
                 font-size: 10px;
                 background-color: #7da7d9;
                 width: 12px;
-                height: 12px;    
+                height: 12px;
                 text-align: center;
                 box-shadow: 0 0 2px 1px #7da7d9;
             }
@@ -80,7 +81,7 @@ header {
             align-items: center;
             margin-right: $header-inner-margin;
             cursor: pointer;
-    
+
             .settings__photo {
                 margin-right: 5px;
                 width: 35px;
@@ -93,10 +94,10 @@ header {
                 font-size: 17px;
             }
         }
-    
+
         .burger {
             display: none;
-        } 
+        }
     }
 }
 md-menu {
