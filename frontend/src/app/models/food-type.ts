@@ -1,5 +1,6 @@
 export interface IFoodType {
     id?: string;
+    _id?: string;
     name: string;
     depthLvl: number;
     parentType: {
