@@ -29,7 +29,7 @@ export class LogoutDialogComponent implements OnInit {
         this.httpHandler.sendRequest(sendData)
             .then((res) => {
                 location.reload();
-                this.router.navigate(['/']);
+                // this.router.navigate(['/']);
             });
     }
 }
