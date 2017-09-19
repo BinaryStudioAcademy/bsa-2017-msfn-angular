@@ -6,6 +6,7 @@ import {ToasterService} from '../../../services/toastr.service';
 import {FormControl, Validators} from '@angular/forms';
 import {WindowObj} from '../../../services/window.service';
 import {DateService} from '../../../services/date.service';
+import {Router} from '@angular/router';
 
 declare const google: any;
 
@@ -23,7 +24,8 @@ export class EventCreateComponent implements OnInit {
     constructor(private eventService: EventService,
                 private toasterService: ToasterService,
                 private window: WindowObj,
-                private dateService: DateService) {
+                private dateService: DateService,
+                private router: Router) {
     }
 
     @Input() eventId: string = '';
@@ -120,13 +122,13 @@ export class EventCreateComponent implements OnInit {
                     this.event.image = './resources/events/' + fileName + '.' + this.type;
 
                     this.eventService.createEvent(this.event, data => {
-                        console.log(data);
+                        this.router.navigate([`/user/events/${data._id}/general`]);
                     });
                 }
             });
         } else {
             this.eventService.createEvent(this.event, data => {
-                console.log(data);
+                this.router.navigate([`/user/events/${data._id}/general`]);
             });
         }
     }
