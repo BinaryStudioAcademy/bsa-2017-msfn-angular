@@ -57,8 +57,13 @@
             .time {
                 display: flex;
 
-                .time-input {
-                    width: 40px;
+                md-input-container {
+                    width: 30px;
+                    text-align: center;
+
+                    input {
+                        text-align: center;
+                    }
                 }
 
                 p {

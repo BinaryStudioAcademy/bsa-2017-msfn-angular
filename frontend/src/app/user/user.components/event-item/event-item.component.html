@@ -30,7 +30,8 @@
         <a
             *ngIf="userId === event.creator._id"
             md-tab-link
-            [routerLink]="'edit-panel'"
+            (click)="navigateToEditTab()"
+            [routerLink]="'edit-panel/'"
             routerLinkActive #rla="routerLinkActive"
             [active]="rla.isActive">
             Edit Panel

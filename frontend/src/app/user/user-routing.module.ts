@@ -180,9 +180,9 @@ const userRoutes: Routes = [
                         component: DiscussComponent,
                     },
                     {
-                        path: 'edit-panel',
+                        path: 'edit-panel/:userId',
                         component: EditPanelComponent,
-                        // canActivate: [IsEventCreatorGuard]
+                        canActivate: [IsEventCreatorGuard]
                     }
                 ]
             },
