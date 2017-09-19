@@ -1,3 +1,4 @@
+import { LogoutDialogComponent } from './../logout-dialog/logout-dialog.component';
 import {Component, OnInit, AfterContentChecked, Input, Output, EventEmitter} from '@angular/core';
 import {MdDialog} from '@angular/material';
 import { Router } from '@angular/router';
@@ -45,16 +46,7 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
     }
 
     logout() {
-        const sendData: IHttpReq = {
-            url: '/api/logout',
-            method: 'POST',
-            body: {}
-        };
-        this.httpHandler.sendRequest(sendData)
-            .then((res) => {
-                location.reload();
-                this.router.navigate(['/']);
-            });
+        this.dialog.open(LogoutDialogComponent, {});
     }
 
 }

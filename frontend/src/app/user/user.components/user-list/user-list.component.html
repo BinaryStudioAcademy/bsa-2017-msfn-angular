@@ -20,8 +20,10 @@
                  (scrolled)="onScroll('users')">
                 <md-list>
                     <md-list-item *ngFor="let user of users.show" class="user-container">
-                        <img md-list-avatar
-                             [src]="user.userPhoto || './resources/default.png'">
+                        <div md-list-avatar class="user-image">
+                            <img [src]="user.userPhoto || './resources/default.png'">
+                            <span *ngIf="user.role === 'coach'" class="coach-icon"></span>
+                        </div>
                         <a [routerLink]="'/user/profile/'+user._id">
                             <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
                         </a>
@@ -61,8 +63,10 @@
                      (scrolled)="onScroll('followers')">
                     <md-list>
                         <md-list-item *ngFor="let user of followers.show" class="user-container">
-                            <img md-list-avatar
-                                 [src]="user.userPhoto || './resources/default.png'">
+                            <div md-list-avatar class="user-image">
+                                <img [src]="user.userPhoto || './resources/default.png'">
+                                <span *ngIf="user.role === 'coach'" class="coach-icon"></span>
+                            </div>
                             <a [routerLink]="'/user/profile/'+user._id">
                                 <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
                             </a>
@@ -103,8 +107,10 @@
                      (scrolled)="onScroll('following')">
                     <md-list>
                         <md-list-item *ngFor="let user of following.show" class="user-container">
-                            <img md-list-avatar
-                                 [src]="user.userPhoto || './resources/default.png'">
+                            <div md-list-avatar class="user-image">
+                                <img [src]="user.userPhoto || './resources/default.png'">
+                                <span *ngIf="user.role === 'coach'" class="coach-icon"></span>
+                            </div>
                             <a [routerLink]="'/user/profile/'+user._id">
                                 <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
                             </a>

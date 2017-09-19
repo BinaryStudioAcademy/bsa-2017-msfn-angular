@@ -49,6 +49,7 @@ import { UnreadPipe } from './components/chat/pipes/unread.pipe';
 import { TotalUnreadPipe } from './components/chat/pipes/total-unread.pipe';
 import { IsEventCreatorGuard } from './guards/is-event-creator.guard';
 import { DateService } from './services/date.service';
+import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component';
 
 @NgModule({
     imports: [
@@ -83,6 +84,7 @@ import { DateService } from './services/date.service';
         ChatWindowComponent,
         UnreadPipe,
         TotalUnreadPipe,
+        LogoutDialogComponent,
     ],
     providers: [
         ToasterService,
@@ -111,7 +113,8 @@ import { DateService } from './services/date.service';
         RegistrationComponent,
         NotificationDataDialogComponent,
         SearchExerciseComponent,
-        ExerciseEditDialogComponent
+        ExerciseEditDialogComponent,
+        LogoutDialogComponent
 
     ],
     bootstrap: [AppComponent]

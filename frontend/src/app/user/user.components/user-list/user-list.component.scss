@@ -118,3 +118,24 @@ div.user-container > div.mat-list-item-content {
 div.user-container > div.mat-list-item-content > div {
     display: flex;
 }
+
+.user-image {
+    position: relative;
+
+    img {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+    }
+
+    .coach-icon {
+        background: url('../../../../../../resources/icons/whistle-icon.svg') center;
+        position: absolute;
+        display: block;
+        height: 18px;
+        width: 18px;
+        right: -2px;
+        bottom: -2px;
+        background-size: 170%;
+    }
+}

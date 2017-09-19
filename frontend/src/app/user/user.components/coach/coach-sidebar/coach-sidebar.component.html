@@ -6,6 +6,7 @@
         </div>
         <div id="follow-button">
             <button
+                *ngIf="userData._id !== _id"
                 md-icon-button
                 type="button"
                 (click)="followAction()">

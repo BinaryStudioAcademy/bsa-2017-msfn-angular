@@ -18,7 +18,6 @@ export class EditPanelComponent implements OnInit {
     ngOnInit() {
         if (this.activatedRoute.snapshot.parent.params.id) {
             this.eventId = this.activatedRoute.snapshot.parent.params.id;
-            console.log(this.eventId);
         }
     }
 }

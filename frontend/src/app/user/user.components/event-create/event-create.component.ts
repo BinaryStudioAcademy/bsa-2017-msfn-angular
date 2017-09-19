@@ -43,7 +43,6 @@ export class EventCreateComponent implements OnInit {
     ]);
 
     ngOnInit() {
-        console.log('EVENT ID INPUT', this.eventId);
         if (this.eventId) {
             this.submitButtonTitle = 'Update an event';
             this.getEvent();
@@ -103,6 +102,7 @@ export class EventCreateComponent implements OnInit {
             this.event.startDate = new Date(this.event.startDate);
             this.event.endDate = new Date(this.event.endDate);
             console.log('EVENT DATA', data);
+            this.initMap();
         });
     }
 

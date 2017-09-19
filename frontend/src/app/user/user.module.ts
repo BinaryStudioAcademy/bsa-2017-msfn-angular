@@ -155,7 +155,6 @@ import {EventService} from './services/event.service';
         ForAllUserGuard,
         MarkdownService,
         EventService,
-        // ActivatedRouteSnapshot
     ],
     entryComponents: [
         FinishDialogComponent,
