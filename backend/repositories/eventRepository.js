@@ -75,8 +75,8 @@ function findByDates(startDate, endDate, callback) {
         $and: [
             {
                 startDate: {
-                    $gt: startDate,
-                    $lt: endDate
+                    $gte: startDate,
+                    $lte: endDate
                 }
             },
             {

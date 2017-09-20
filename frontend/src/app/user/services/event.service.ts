@@ -47,9 +47,6 @@ export class EventService {
         };
         this.httpService.sendRequest(req)
             .then(data => {
-                if (!data[0].hasOwnProperty('creator')) {
-                    data = [];
-                }
                 callback(data);
             });
     }
