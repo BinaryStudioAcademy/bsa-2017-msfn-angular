@@ -12,16 +12,11 @@ PostRepository.prototype = new Repository();
 PostRepository.prototype.getByTribeId = getByTribeId;
 PostRepository.prototype.deleteById = deleteById;
 PostRepository.prototype.getByCreatorId = getByCreatorId;
+PostRepository.prototype.updateById = updateById;
 
 function getByTribeId(tribeId, callback) {
     const query = this.model.find({
-        $and: [
-            {
-                tribe : tribeId
-            }, {
-                isRemoved: false
-            }
-        ]
+        tribe : tribeId
     });
     query.exec(callback);
 }
@@ -46,11 +41,22 @@ function getByCreatorId(userId, tribeId, callback) {
                 tribe : tribeId
             }, {
                 author: userId
-            }, {
-                isRemoved: false
             }
         ]
     });
+    query.exec(callback);
+}
+
+function updateById(id, body, callback) {
+    const query = this.model.update(
+        {
+            _id: id
+        }, {
+            $set: {
+                body: body
+            }
+        }
+    );
     query.exec(callback);
 }
 

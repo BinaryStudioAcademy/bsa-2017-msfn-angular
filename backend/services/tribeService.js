@@ -24,8 +24,7 @@ function createTribe(body, callback) {
 }
 
 function getAllTribes(callback) {
-    console.log('tribe service');
-    tribeRepository.getAllTribes(function (err, tribeData) {
+    tribeRepository.getAll(function (err, tribeData) {
         if (err) return callback(err);
         if (tribeData === null) {
             callback(null, new ApiError('Cannot find tribes'));
@@ -36,14 +35,7 @@ function getAllTribes(callback) {
 }
 
 function updateTribeById(id, body, callback) {
-    tribeRepository.updateById(id, body, function (err, tribeData) {
-        if (err) return callback(err);
-        if (tribeData === null) {
-            callback(null, new ApiError('Cannot update tribe'));
-        } else {
-            callback(null, tribeData);
-        }
-    });
+    tribeRepository.update(id, body, callback);
 }
 
 function getTribeById(id, callback) {
@@ -57,8 +49,8 @@ function getTribeById(id, callback) {
     });
 }
 
-function getTribesByCreatorId(userId, callback) {
-    tribeRepository.getByCreatorId(userId, function (err, tribeData) {
+function getTribesByCreatorId(creator, callback) {
+    tribeRepository.getByCreatorId(creator, function (err, tribeData) {
         if (err) return callback(err);
         if (tribeData === null) {
             callback(null, new ApiError('Cannot find tribes'));

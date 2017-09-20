@@ -9,16 +9,13 @@ function TribeRepository() {
 TribeRepository.prototype = new Repository();
 
 TribeRepository.prototype.updateById = updateById;
-TribeRepository.prototype.getAllTribes = getAllTribes;
 TribeRepository.prototype.deleteById = deleteById;
 TribeRepository.prototype.getByCreatorId = getByCreatorId;
 
 function updateById(id, body, callback) {
     const query = this.model.update(
         {
-            $and: {
-                _id: id
-            }
+            _id: id
         }, {
             $set: {
                 body: body
@@ -32,15 +29,10 @@ function deleteById(id, callback) {
     this.updateById(id, { isRemoved: true}, callback);
 }
 
-function getByCreatorId(userId, callback ) {
-    const query = this.model.findOne({
-        creatorId: userId
+function getByCreatorId(creator, callback ) {
+    const query = this.model.find({
+        creator: creator
     });
-    query.exec(callback);
-}
-
-function getAllTribes(callback) {
-    const query = this.model.find({}).populate('name', 'description', 'creator');
     query.exec(callback);
 }
 

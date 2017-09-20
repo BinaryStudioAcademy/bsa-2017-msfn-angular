@@ -7,12 +7,10 @@
     margin: $close-top-margin auto 0 auto;
     display: flex;
 }
+
 .general, .content {
     display: flex;
     flex-direction: column;
-    /*
-    align-items: center;
-    */
     margin: 0;
 }
 .general {
@@ -57,4 +55,6 @@
 .menu-option {
     cursor: pointer;
     margin-top: $mini-indent;
+    color: $text-main-color;
+    text-decoration: none;
 }

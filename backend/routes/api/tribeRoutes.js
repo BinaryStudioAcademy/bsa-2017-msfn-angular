@@ -7,11 +7,9 @@ const
 module.exports = function (app) {
 
     app.get(baseUrl, (req, res, next) => {
-        console.log('get tribe (routes)');
         tribeService.getAllTribes( (err, data) => {
             if (!data.length) {
                 data = [{}];
-                console.log('empty data(routes)');
             }
             res.data = data;
             res.err = err;
@@ -19,7 +17,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(`${baseUrl}:id`, (req, res, next) => {
+    app.get(`${baseUrl}:id/`, (req, res, next) => {
         tribeService.getTribeById(req.params.id, (err, data) => {
             res.data = data;
             res.err = err;
@@ -27,17 +25,17 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(`${baseUrl}/author/:creator`, (req, res, next) => {
-        tribeService.getTribesByCreatorId(req.body.creator, (err, data) => {
+    app.get(`${baseUrl}creator/:creator/`, (req, res, next) => {
+        tribeService.getTribesByCreatorId(req.params.creator, (err, data) => {
             res.data = data;
             res.err = err;
             next();
         });
     }, apiResponse);
 
-    app.get(`${baseUrl}:id/posts`, (req, res, next) => {
-        postService.getPostsByTribeId(req.body.tribe, (err, data) => {
-            if (!data.length) {
+    app.get(`${baseUrl}:id/posts/`, (req, res, next) => {
+        postService.getPostsByTribeId(req.params.id, (err, data) => {
+            if (!data) {
                 data = [{}];
             }
             res.data = data;
@@ -46,10 +44,9 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    // ???
-    app.get(`${baseUrl}:id/posts/author/:author`, (req, res, next) => {
+    app.get(`${baseUrl}:id/posts/author/:author/`, (req, res, next) => {
         postService.getPostsByCreatorAndTribe(
-            req.body.author, req.body.tribe, (err, data) => {
+            req.params.author, req.params.id, (err, data) => {
                 if (!data.length) {
                     data = [{}];
                 }
@@ -68,7 +65,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.post(`${baseUrl}:id/posts`, (req, res, next) => {
+    app.post(`${baseUrl}:id/posts/`, (req, res, next) => {
         const body = req.body;
         postService.createPost(body, (err, data) => {
             res.data = data;
@@ -77,7 +74,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.put(`${baseUrl}:id`, (req, res, next) => {
+    app.put(baseUrl, (req, res, next) => {
         tribeService.updateTribeById(req.body.id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
@@ -86,6 +83,10 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.put(`${baseUrl}:id/posts/`, (req, res, next) => {
-
-    })
+        postService.updatePostById(req.body.id, req.body,  (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
 };

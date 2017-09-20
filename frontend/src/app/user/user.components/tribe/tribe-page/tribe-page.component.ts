@@ -15,16 +15,14 @@ import { ToasterService } from '../../../../services/toastr.service';
     providers: [TribeService]
 })
 export class TribePageComponent implements OnInit {
-    tribe: ITribe = {
-    name: 'Super Tribe',
-    description: '**Description** Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n' +
-    '            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n' +
-    '            quis nostrud exercitation ullamco laboris nisi ut aliquip',
-    members: ['59b8c7ab52d7d41022a59e72', '59b8c7ab52d7d41022a59e77'],
+    posts: ITribePost[];
+    trueTribe: ITribe = {
+        name: '',
+        creator: '',
+        members: [],
+        description: '',
+        image: ''
     };
-    posts = [1, 2, 3];
-    truePosts: ITribePost[];
-    trueTribe: ITribe;
     userId: string;
 
     constructor(private mdDialog: MdDialog,
@@ -32,26 +30,27 @@ export class TribePageComponent implements OnInit {
                 public activatedRoute: ActivatedRoute,
                 private toasterService: ToasterService,
                 private window: WindowObj) {
-    this.userId = (this.window.data._injectedData as any).userId;
+        this.userId = (this.window.data._injectedData as any).userId;
     }
 
     ngOnInit() {
+        console.log(this.trueTribe);
         const tribeID = this.activatedRoute.snapshot.params.id;
-        if (tribeID && !this.trueTribe) {
+        if (tribeID) {
             this.tribeService.getTribe(tribeID, (resp) => {
-                if (resp) {
-                    this.trueTribe = resp[0];
-                    this.tribeService.getPostsByTribe(tribeID, (res) => {
-                        this.truePosts = res;
-                    });
-                }
+                this.trueTribe = resp;
+                console.log(this.trueTribe);
+            });
+            this.tribeService.getPostsByTribe(tribeID, (res) => {
+                this.posts = res;
+                console.log(this.posts);
             });
         }
     }
 
     showFollowers() {
         this.mdDialog.open(TribeMembersDialogComponent, {
-            data: this.tribe.members
+            data: this.trueTribe.members
         });
     }
 
@@ -71,4 +70,7 @@ export class TribePageComponent implements OnInit {
         );
     }
 
+    addComment() {}
+
+    addFavourite() {}
 }

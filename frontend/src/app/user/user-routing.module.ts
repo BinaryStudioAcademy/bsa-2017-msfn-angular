@@ -26,11 +26,12 @@ import { ArticleAddComponent } from './user.components/article-add/article-add.c
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
-import {ArticleListComponent} from './user.components/article-list/article-list.component';
+import { ArticleListComponent } from './user.components/article-list/article-list.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
-import {TribePostComponent} from './user.components/tribe/tribe-post/tribe-post.component';
-import {TribePageComponent} from './user.components/tribe/tribe-page/tribe-page.component';
-import {CreateTribePostComponent} from './user.components/tribe/create-tribe-post/create-tribe-post.component';
+import { TribePostComponent } from './user.components/tribe/tribe-post/tribe-post.component';
+import { TribePageComponent } from './user.components/tribe/tribe-page/tribe-page.component';
+import { CreateTribePostComponent } from './user.components/tribe/create-tribe-post/create-tribe-post.component';
+import { TribeSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.component';
 
 const userRoutes: Routes = [
     {
@@ -141,16 +142,16 @@ const userRoutes: Routes = [
                 component: AchievementsListComponent
             },
             {
-                path: 'test-tribe-post',
-                component: TribePostComponent
-            },
-            {
-                path: 'test-tribe',
+                path: 'tribe/:id',
                 component: TribePageComponent
             },
             {
-                path: 'test-tribe-post-create',
+                path: 'create-tribe-post',
                 component: CreateTribePostComponent
+            },
+            {
+                path: 'tribe-settings',
+                component: TribeSettingsComponent
             }
         ]
     }

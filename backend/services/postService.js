@@ -5,7 +5,7 @@ const postRepository = require('../repositories/postRepository');
 function PostService() {}
 
 PostService.prototype.createPost = createPost;
-PostService.prototype.updatePost = updatePost;
+PostService.prototype.updatePostById = updatePostById;
 PostService.prototype.getPostsByTribeId = getPostsByTribeId;
 PostService.prototype.getPostsByCreatorAndTribe = getPostsByCreatorAndTribe;
 
@@ -23,7 +23,7 @@ function createPost(body, callback) {
 function getPostsByTribeId(tribeId, callback) {
     postRepository.getByTribeId(tribeId, function (err, postData) {
         if (err) return callback(err);
-        if (exerciseData === null) {
+        if (postData === null) {
             callback(null, new ApiError('Cannot find posts'));
         } else {
             callback(null, postData);
@@ -34,7 +34,7 @@ function getPostsByTribeId(tribeId, callback) {
 function getPostsByCreatorAndTribe(userId, tribeId, callback) {
     postRepository.getByCreatorId(userId, tribeId, function (err, postData) {
         if (err) return callback(err);
-        if (exerciseData === null) {
+        if (postData === null) {
             callback(null, new ApiError('Cannot find posts'));
         } else {
             callback(null, postData);
@@ -42,8 +42,8 @@ function getPostsByCreatorAndTribe(userId, tribeId, callback) {
     });
 }
 
-function updatePost() {
-
+function updatePostById(id, body, callback) {
+    postRepository.update(id, body, callback);
 }
 
 module.exports = new PostService();

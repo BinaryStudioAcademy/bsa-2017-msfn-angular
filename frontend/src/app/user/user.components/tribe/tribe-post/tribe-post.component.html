@@ -1,20 +1,17 @@
 <div class="post-container">
     <div class="meta-info">
-        <span>Posted by <a href="#">{{author}}</a></span>
-        <span>Sep 12, 2017</span>
+        <span>Posted by <a>{{post.author.firstName}} {{post.author.lastName}}</a></span>
+        <span>{{post.createdAt | date}}</span>
     </div>
-    <h2>{{title}}</h2>
-    <div class="post-text">{{text.substring(0, 400)}}...<span class="more-info" (click)="viewFull()">See more</span></div>
-    <img src="{{image}}" class="post-image">
+    <h2>{{post.title}}</h2>
+    <div class="post-text">{{post.text.substring(0, 400)}}...<span class="more-info" (click)="viewFull()">See more</span></div>
+    <img src="{{post.image}}" class="post-image">
     <div class="user-reaction">
         <span class="star-button" md-tooltip="Bookmark this post" (click)="addFavourite()">☆</span>
         <md-icon mdSuffix (click)="toggleComments(); $event.stopPropagation()">comment</md-icon>
     </div>
     <div class="post-comments" [hidden]="hideComments">
-<!--
-        <div *ngIf="comments.length === 0" (click)="addComment()">Be the first to comment this post</div>
--->
-        <div class="comment-container" *ngFor="let comment of fullComments" >
+        <div class="comment-container" *ngFor="let comment of post.comments" >
             <div class="commentator">
                 <img src="{{comment.userPhoto || './resources/default.png'}}">
                 <span>{{comment.firstName}}</span>
