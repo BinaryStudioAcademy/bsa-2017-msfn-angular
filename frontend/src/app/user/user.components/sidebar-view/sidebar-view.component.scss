@@ -49,13 +49,12 @@ aside {
             }
             .active-link {
                 color: #fff;
-                font-weight: bold;
                 transform: translateX(7px);
-    
+
                 svg {
                     fill: #fff;
                 }
-                
+
                 &:before {
                     content: "•";
                     position: absolute;
@@ -71,8 +70,8 @@ aside {
 }
 
 @media only screen and (max-width: $small-screen) {
-    aside {    
-        .navigation {    
+    aside {
+        .navigation {
             .menu-element {
                 margin-bottom: 15px;
                 a {
