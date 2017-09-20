@@ -13,6 +13,7 @@ PostRepository.prototype.getByTribeId = getByTribeId;
 PostRepository.prototype.deleteById = deleteById;
 PostRepository.prototype.getByCreatorId = getByCreatorId;
 PostRepository.prototype.updateById = updateById;
+PostRepository.prototype.addComment = addComment;
 
 function getByTribeId(tribeId, callback) {
     const query = this.model.find({
@@ -57,6 +58,21 @@ function updateById(id, body, callback) {
             }
         }
     );
+    query.exec(callback);
+}
+
+function addComment(id, body, callback) {
+    const query = this.model.update(
+        {
+            _id: id
+        }, {
+            $push: {
+                'comments': {
+                    author: body.author,
+                    text: body.text
+                }
+            }
+        });
     query.exec(callback);
 }
 

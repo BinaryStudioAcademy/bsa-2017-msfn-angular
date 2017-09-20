@@ -1,21 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ITribePost } from '../../../../models/tribe-post';
 import { CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
 import { ToasterService } from '../../../../services/toastr.service';
 import { TribeService } from '../tribe.service';
+import { ITribe } from '../../../../models/tribe';
 import { NgForm } from '@angular/forms';
+import { WindowObj } from '../../../../services/window.service';
 
 @Component({
     selector: 'app-create-tribe-post',
-    templateUrl: './create-tribe-post.component.html',
-    styleUrls: ['./create-tribe-post.component.scss'],
+    templateUrl: './create-tribe.component.html',
+    styleUrls: ['./create-tribe.component.scss'],
     providers: [TribeService]
 })
-export class CreateTribePostComponent implements OnInit {
-    tribePost: ITribePost = {
-        title: '',
+export class CreateTribeComponent implements OnInit {
+    tribe: ITribe = {
+        name: '',
         image: '',
-        text: '',
+        description: '',
     };
     image: any = new Image();
     type: string;
@@ -28,6 +29,7 @@ export class CreateTribePostComponent implements OnInit {
 
     constructor(
         private toasterService: ToasterService,
+        private window: WindowObj,
         private tribeService: TribeService
     ) {
     }
@@ -35,6 +37,7 @@ export class CreateTribePostComponent implements OnInit {
     ngOnInit() {
         this.data = {};
         this.cropperSettings = this.tribeService.getCropperSettings();
+        this.tribe.creator = (this.window.data._injectedData as any).userId;
     }
 
     fileChangeListener($event) {
@@ -55,9 +58,9 @@ export class CreateTribePostComponent implements OnInit {
         myReader.onloadend = (loadEvent: any) => {
             this.image.src = loadEvent.target.result;
             if (this.type === 'gif') {
-                this.hideCropper = true;
-                // this.exercise.image = this.image.src;
+                this.tribe.image = this.image.src;
                 this.data.image = this.image.src;
+                this.hideCropper = true;
             } else {
                 this.cropper.setImage(this.image);
             }
@@ -66,9 +69,8 @@ export class CreateTribePostComponent implements OnInit {
     }
 
     cropperBtn(action) {
-        this.oldImg = this.tribePost.image;
         if (action === 'save') {
-            this.tribePost.image = this.data.image;
+            this.tribe.image = this.data.image;
         }
         this.hideCropper = true;
     }
@@ -76,16 +78,17 @@ export class CreateTribePostComponent implements OnInit {
     save(form: NgForm) {
         if (form.valid) {
             if (this.data.image) {
-                const folder = 'tribe-post-image';
+                const folder = 'tribe-image';
                 const fileType = 'img';
-                const fileName = this.tribePost.title.replace(/ /g, '_') + Date.now();
+                const fileName = this.tribe.name.replace(/ /g, '_') + Date.now();
                 this.tribeService.saveImg(this.data.image, fileName, fileType, folder, result => {
                     if (result.err) {
-                        this.tribePost.image = this.oldImg;
+                        this.tribe.image = this.oldImg;
                         this.toasterService.showMessage('error', result.err);
                     } else {
-                        this.tribePost.image = './resources/articles-image/' + fileName + '.' + this.type;
-                        this.tribeService.createTribe(this.tribePost, (err, data) => {});
+                        this.tribe.image = './resources/articles-image/' + fileName + '.' + this.type;
+                        this.tribeService.createTribe(this.tribe, () => {
+                        });
                     }
                 });
             }

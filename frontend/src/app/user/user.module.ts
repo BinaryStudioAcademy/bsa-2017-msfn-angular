@@ -63,7 +63,9 @@ import { TribePostComponent } from './user.components/tribe/tribe-post/tribe-pos
 import { TribeSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.component';
 import { CreateTribePostComponent } from './user.components/tribe/create-tribe-post/create-tribe-post.component';
 import { FullTribePostComponent } from './user.components/tribe/full-tribe-post/full-tribe-post.component';
-import {TribeMembersDialogComponent} from './user.components/tribe/tribe-members-dialog/tribe-members-dialog.component';
+import { TribeMembersDialogComponent} from './user.components/tribe/tribe-members-dialog/tribe-members-dialog.component';
+import { CreateTribeComponent } from './user.components/tribe/create-tribe/create-tribe.component';
+
 
 @NgModule({
     imports: [
@@ -130,7 +132,8 @@ import {TribeMembersDialogComponent} from './user.components/tribe/tribe-members
         TribeSettingsComponent,
         CreateTribePostComponent,
         FullTribePostComponent,
-        TribeMembersDialogComponent
+        TribeMembersDialogComponent,
+        CreateTribeComponent,
     ],
     providers: [
         ForAllUserGuard,

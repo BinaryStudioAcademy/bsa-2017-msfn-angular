@@ -7,7 +7,7 @@
         <a class="mid-text menu-option"
            *ngIf="userId === trueTribe.creator"
            routerLink="/user/tribe-settings">Settings</a>
-        <a class="mid-text menu-option" routerLink="/user/create-tribe-post">Add post</a>
+        <a class="mid-text menu-option" [routerLink]="['/user/create-tribe-post' , { tribe: tribeID }]">Add post</a>
         <button md-button class="btn">Follow</button>
     </div>
     <div class="content">

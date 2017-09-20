@@ -24,6 +24,7 @@ export class TribePageComponent implements OnInit {
         image: ''
     };
     userId: string;
+    tribeID: string;
 
     constructor(private mdDialog: MdDialog,
                 private tribeService: TribeService,
@@ -31,17 +32,17 @@ export class TribePageComponent implements OnInit {
                 private toasterService: ToasterService,
                 private window: WindowObj) {
         this.userId = (this.window.data._injectedData as any).userId;
+        this.tribeID = this.activatedRoute.snapshot.params.id;
     }
 
     ngOnInit() {
         console.log(this.trueTribe);
-        const tribeID = this.activatedRoute.snapshot.params.id;
-        if (tribeID) {
-            this.tribeService.getTribe(tribeID, (resp) => {
+        if (this.tribeID) {
+            this.tribeService.getTribe(this.tribeID, (resp) => {
                 this.trueTribe = resp;
                 console.log(this.trueTribe);
             });
-            this.tribeService.getPostsByTribe(tribeID, (res) => {
+            this.tribeService.getPostsByTribe(this.tribeID, (res) => {
                 this.posts = res;
                 console.log(this.posts);
             });
