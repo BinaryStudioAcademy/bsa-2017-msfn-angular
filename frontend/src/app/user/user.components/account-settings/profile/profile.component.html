@@ -1,7 +1,7 @@
 <div class="container">
     <div class="profile">
         <form *ngIf="user" class="profile-form" [formGroup]="profileForm">
-            <div class="profile-header">
+            <div class="profile-header profile-row">
                 <div class="profile-avatar">
                     <div class="profile-picture"
                          [ngClass]="(window.data._injectedData.role !== 'coach')? '': 'coach-mark'">
@@ -37,35 +37,17 @@
                     </md-input-container>
                 </div>
             </div>
-            <!-- // moved to login-settings
-                <div class="profile-content">
-                    <div class="profile-email">
-                        <div class="profile-current-emails">
-                            <div class="email-item" >
-                                 <span class="email">{{ user.email }}</span>
-                                 <span class="root-title">root</span>
-                            </div>
-                            <div class="email-item" *ngFor="let email of user.secondaryEmails" >
-                                 <span class="email">{{ email }}</span>
-                                 <span class="root-btn" (click)="makeRoot(email)">make root</span>
-                            </div>
-                        </div>
-                        <div class=profile-email-btn>
-                            <button (click)="openAddNewEmailDialog()" md-raised-button>Add Email Address</button>
-                        </div>
-                    </div>
-                -->
-
-            <div *ngIf="!user.gender" class="profile-gender">
+            <div *ngIf="!user.gender" class="profile-gender profile-row">
                 <h3 class="gender-header">Gender:</h3>
                 <input formControlName="gender" id="Male" type="radio" value="Male" name="gender">
                 <label for="Male">Male</label>
                 <input formControlName="gender" id="Female" type="radio" value="Female" name="gender">
                 <label for="Female">Female</label>
             </div>
-            <div class="profile-birthday">
+            <div class="profile-birthday profile-row">
                 <div class="birthday-month">
-                    <md-select placeholder="Month" [(ngModel)]="birthday.month"
+                    <md-select class="responsive-width"
+                               placeholder="Month" [(ngModel)]="birthday.month"
                                (change)="onSelect(birthday.month,birthday.year)"
                                [ngModelOptions]="{standalone: true}">
                         <md-option *ngFor="let month of months" [value]="month">
@@ -74,14 +56,16 @@
                     </md-select>
                 </div>
                 <div class="birthday-day">
-                    <md-select placeholder="Day" [(ngModel)]="birthday.day" [ngModelOptions]="{standalone: true}">
+                    <md-select class="responsive-width"
+                               placeholder="Day" [(ngModel)]="birthday.day" [ngModelOptions]="{standalone: true}">
                         <md-option *ngFor="let day of days" [value]="day">
                             {{ day }}
                         </md-option>
                     </md-select>
                 </div>
                 <div class="birthday-year">
-                    <md-select placeholder="Year" [(ngModel)]="birthday.year"
+                    <md-select class="responsive-width"
+                               placeholder="Year" [(ngModel)]="birthday.year"
                                (change)="onSelect(birthday.month,birthday.year)"
                                [ngModelOptions]="{standalone: true}">
                         <md-option *ngFor="let year of years" [value]="year">
@@ -90,80 +74,41 @@
                     </md-select>
                 </div>
             </div>
-            <md-input-container class="profile-height" *ngIf="!user.height">
-                <input mdInput type="number" name="height" placeholder="Height, cm" required formControlName="height">
+            <md-input-container class="profile-height profile-row" *ngIf="!user.height">
+                <input class="responsive-width"
+                       mdInput
+                       type="number"
+                       name="height"
+                       placeholder="Height, cm"
+                       required formControlName="height">
                 <md-error>
                     Height should be 100-300cm
                 </md-error>
             </md-input-container>
-            <div class="profile-activity">
-                <md-select placeholder="Activity level" formControlName="activityLevel">
+            <div class="profile-activity profile-row">
+                <md-select class="responsive-width"
+                           placeholder="Activity level" formControlName="activityLevel">
                     <md-option *ngFor="let level of activityLevelOptions" [value]="level.coef">
                         {{ level.name }}
                     </md-option>
                 </md-select>
             </div>
-            <!-- // moved to characteristic
-                <div class="profile-physparam">
-                    <div class="weight-container">
-                        <label for='weight' class="label">Weight, kg</label>
-                        <md-input-container class="ph-input">
-                            <input type="number" id="weight" class="input" mdInput formControlName="weight">
-                            <md-error>Weight should be 30-300 kgs</md-error>
-                        </md-input-container>
-                    </div>
-                    <div class="height-container">
-                        <label for='height' class="label">Height, cm</label>
-                        <md-input-container class="ph-input">
-                            <input type="number" id="height" class="input" mdInput formControlName="height">
-                            <md-error>Height should be 100-300 cm</md-error>
-                        </md-input-container>
-                    </div>
-                </div>
-            -->
-            <!-- // moved to login-settings
-                <div class="button-wrapper">
-                    <div class="profile-password">
-                        <button md-raised-button (click)="openConfirmPasswordDialog()" class="">Change password</button>
-                    </div>
-                    <div *ngIf="window.data._injectedData.role !== 'coach'" id="coach-button">
-                        <button md-raised-button type="submit"  *ngIf="!requestForCoaching" (click)="applyForCoaching()">
-                            Become a coach
-                        </button>
-                        <div *ngIf="requestForCoaching">
-                            {{ coachingMessage }}
-                        </div>
-                    </div>
-                </div>
-                <div class="social-wrapper">
-                    <div class="addition-info">
-                        Link your account with social networks for a simple login
-                    </div>
-                    <div class="social-buttons">
-                        <a md-raised-button [disabled]="user.facebookID" href="/auth/facebook">
-                            <md-icon *ngIf="user.facebookID">done</md-icon>
-                            Facebook</a>
-                        <a md-raised-button [disabled]="user.googleID" href="/auth/google">
-                            <md-icon *ngIf="user.googleID">done</md-icon>
-                            Google+</a>
-                        <a md-raised-button [disabled]="user.twitterID" href="/auth/twitter">
-                            <md-icon *ngIf="user.twitterID">done</md-icon>
-                            Twitter</a>
-                    </div>
-                </div>
+            <div class="profile-row">
+                <md-input-container class="profile-location responsive-width">
+                    <input class="input"
+                           id="location"
+                           mdInput placeholder="Location" formControlName="location">
+                    <md-error>Location can`t consist less than two characters, and more than 30</md-error>
+                </md-input-container>
+                <md-input-container class="profile-about responsive-width">
+                    <textarea mdInput placeholder="About"
+                              formControlName="about" md-tooltip="Add some info about you">
+                    </textarea>
+                    <md-error>
+                        Must contain less than 500 characters
+                    </md-error>
+                </md-input-container>
             </div>
-        -->
-            <md-input-container class="profile-location">
-                <input id="location" class="input" mdInput placeholder="Location" formControlName="location">
-                <md-error>Location can`t consist less than two characters, and more than 30</md-error>
-            </md-input-container>
-            <md-input-container class="profile-about">
-                <textarea mdInput placeholder="About" formControlName="about" md-tooltip="Add some info about you">
-                </textarea>
-                <md-error>
-                    Must contain less than 500 characters
-                </md-error>
-            </md-input-container>
             <button type="submit" class="btn" (click)="onSubmit(profileForm.value)">Save changes</button>
         </form>
     </div>

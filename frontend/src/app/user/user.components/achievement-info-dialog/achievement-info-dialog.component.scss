@@ -6,9 +6,10 @@
     height: 60px;
 }
 #close {
-color: $btn-color;
+    color: $text-main-color;
     &:hover{
         cursor: pointer;
+        color: $btn-color;
     } 
 }
 .container {
