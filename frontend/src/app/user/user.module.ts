@@ -53,9 +53,10 @@ import { ArticleAddComponent } from './user.components/article-add/article-add.c
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
-import {ArticleListComponent} from './user.components/article-list/article-list.component';
+import { ArticleListComponent } from './user.components/article-list/article-list.component';
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
 import { FoodPlanListComponent } from './user.components/food-plan-list/food-plan-list.component';
+import { FoodTrackingComponent } from './user.components/food-tracking/food-tracking.component';
 import { SearchComponent } from './user.components/food-plan/search/search.component';
 import { WeeklyComponent } from './user.components/food-plan/weekly/weekly.component';
 import { DailyComponent } from './user.components/food-plan/daily/daily.component';
@@ -74,6 +75,7 @@ import { PlaceTimeComponent } from './user.components/event-item/place-time/plac
 import { EditPanelComponent } from './user.components/event-item/edit-panel/edit-panel.component';
 import {ActivatedRouteSnapshot} from '@angular/router';
 import {EventService} from './services/event.service';
+import { FoodPlanService } from './user.components/food-plan/food-plan.service';
 
 @NgModule({
     imports: [
@@ -133,6 +135,7 @@ import {EventService} from './services/event.service';
         TrainingHistoryDetailComponent,
         FoodPlanComponent,
         FoodPlanListComponent,
+        FoodTrackingComponent,
         SearchComponent,
         WeeklyComponent,
         DailyComponent,
@@ -155,6 +158,7 @@ import {EventService} from './services/event.service';
         ForAllUserGuard,
         MarkdownService,
         EventService,
+        FoodPlanService,
     ],
     entryComponents: [
         FinishDialogComponent,
@@ -163,7 +167,8 @@ import {EventService} from './services/event.service';
         GoalEditDialogComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
-        ImageUploadComponent
+        SearchComponent,
+        ImageUploadComponent,
     ]
 })
 export class UserModule {

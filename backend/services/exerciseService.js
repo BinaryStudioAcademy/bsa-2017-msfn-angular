@@ -37,10 +37,10 @@ function getAllExercises(callback) {
     });
 }
 
-function getExercisesByType(type, callback){
+function getExercisesByType(category, callback){
     const params = {
         filter: {
-            type: type
+            category: category
         },
     };
     exerciseRepository.get(params, (err, exerciseData) => {

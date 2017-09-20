@@ -31,4 +31,17 @@ export class DashboardService {
             callback(res);
         });
     }
+
+    getFoodPlanData(callback): void {
+        const request: IHttpReq = {
+            url: '/api/launchedfoodplan/current',
+            method: 'GET',
+            body: {}
+        };
+
+        this.httpService.sendRequest(request)
+            .then(data => {
+                callback(data);
+            });
+    }
 }

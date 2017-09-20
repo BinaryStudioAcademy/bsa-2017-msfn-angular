@@ -32,7 +32,7 @@
                        [mdDatepicker]="period_to"
                        placeholder="to"
                        (ngModelChange)="updateData('to')"
-                       [min]="minMaxCalendarDate">
+                       [max]="minMaxCalendarDate">
             </md-input-container>
             <md-datepicker #period_to></md-datepicker>
             <md-datepicker-toggle [for]="period_to"></md-datepicker-toggle>
