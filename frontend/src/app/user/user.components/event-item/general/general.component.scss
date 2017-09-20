@@ -1,0 +1,107 @@
+@import '../../../../../globalStyles/variables.scss';
+@import '../../../../../globalStyles/text.scss';
+@import '../../../../../globalStyles/indentations';
+
+#general-container {
+    width: 65vw;
+
+    a {
+        text-decoration: none;
+        color: $text-main-color;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .text-block {
+        display: inline-block;
+        width: 45%;
+        margin-right: 50px;
+        vertical-align: top;
+        font-size: $main-text;
+
+        .creator {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: $macro-indent;
+            text-align: center;
+
+            .secondary-text {
+                font-size: $usual-text;
+                color: $text-shadowed-color;
+            }
+
+            .creator-name {
+                margin-right: $standard-indent;
+                font-size: $large-text;
+            }
+
+            .creator-avatar {
+                display: inline-block;
+                vertical-align: top;
+
+                img {
+                    width: 80px;
+                    border-radius: 40px;
+                }
+            }
+        }
+
+        .description {
+            margin-bottom: $standard-indent;
+        }
+
+        #participants,
+        #followers {
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+
+            .user {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                font-size: $main-text;
+
+                .user-avatar {
+                    width: 12%;
+                    margin-right: $standard-indent;
+                    vertical-align: top;
+
+                    img {
+                        width: 44px;
+                        border-radius: 22px;
+                    }
+                }
+
+                .user-name {
+                    text-align: right;
+                }
+            }
+        }
+
+        #followers {
+            float: right;
+        }
+    }
+
+    #event-image {
+        display: inline-block;
+        width: 50%;
+        float: right;
+
+        img {
+            height: 400px;
+            float: right;
+        }
+    }
+
+    .creator-avatar:hover,
+    .creator-name > a > p:hover,
+    .user-avatar:hover,
+    .user-name:hover {
+        cursor: pointer;
+    }
+}

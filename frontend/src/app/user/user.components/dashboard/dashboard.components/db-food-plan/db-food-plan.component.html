@@ -1,31 +1,33 @@
 <div class="food-plan inner-container">
     <h2 class="drag-handle">{{ title }}</h2>
     <div class="content">
-        <div id="eaten">
-            <div>
-                <div class="kcal-title">{{ kcal.eaten.title }}:</div>
-                <div class="kcal-amount">
-                    {{ kcal.eaten.amount }}
-                    <span> kcal</span>
-                </div>
-            </div>
-            <div>
-                <div class="kcal-title">{{ kcal.left.title }}:</div>
-                <div class="kcal-amount">
-                    {{ kcal.left.amount }}
-                    <span> kcal</span>
-                </div>
-            </div>
+        <div class="no-items" *ngIf="!foodPlan">
+            You haven't started to track any plan yet.
+            <button md-icon-button type="button" routerLink="food-tracking">
+                Start now!
+            </button>
         </div>
-
-        <div id="meal-list">
-            <md-checkbox
-                class="meal"
-                *ngFor = "let item of meal"
-                checked = "item.eaten"
-                [(ngModel)]="item.eaten">
-                {{ item.title }} <span>({{ item.amount }} kcal)</span>
-            </md-checkbox>
+        <div class="food-plan-status" *ngIf="foodPlan">
+            <div>
+                <div class="kcal-title">today eaten:</div>
+                <div class="kcal-amount">
+                    {{ foodPlan.todayMeals.eaten > 0 ? foodPlan.todayMeals.eaten : 0 }}
+                    <span> kcal</span>
+                </div>
+            </div>
+            <div>
+                <div class="kcal-title">left to eate:</div>
+                <div class="kcal-amount">
+                    {{ foodPlan.todayMeals.totalKcal - (foodPlan.todayMeals.eaten > 0 ? foodPlan.todayMeals.eaten : 0) }}
+                    <span> kcal</span>
+                </div>
+            </div>
+            <div class="meal-list">
+                <div class="list-meal" *ngFor="let item of foodPlan.todayMeals.meals" routerLink="food-tracking">
+                    <md-checkbox class="meal" [disabled]="true" checked="{{item.eaten === item.kcal ? 'true': ''}}"></md-checkbox>
+                    <p>{{ item.name }}</p><span> ({{ item.eaten > 0 ? item.eaten : 0 }} kcal of {{ item.kcal }} kcal)</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

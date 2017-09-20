@@ -48,12 +48,8 @@ export class FoodEditDialogComponent implements OnInit {
         Validators.maxLength(300)
     ]);
 
-    numberFormControl = new FormControl('', [
-        Validators.pattern(/^(\d+|\d+.\d+)$/)
-    ]);
-
     ngOnInit() {
-        this.food = this.data.food;
+        this.food = Object.assign({}, this.data.food);
         this.food.measure = this.foodService.updateMeasureBack(this.food.measure);
         this.newItem = this.data.newItem;
         this.foodService.getAllFoodTypes((data) => {

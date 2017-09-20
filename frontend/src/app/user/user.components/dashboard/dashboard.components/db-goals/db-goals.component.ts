@@ -15,139 +15,31 @@ import { WindowObj } from '../../../../../services/window.service';
         DateService
     ]
 })
-export class DbGoalsComponent implements OnInit, OnChanges {
+export class DbGoalsComponent implements OnInit {
 
-    constructor(private goalProgressService: GoalProgressService,
-                private dateService: DateService,
-                private window: WindowObj) { }
+    constructor(private goalProgressService: GoalProgressService) { }
 
-    userId = (this.window.data._injectedData as any).userId;
     title = 'Goals';
-    goalTypes: string[] = [];
+    goalItems = [];
 
-    dataToProcess = {
-        weight: [],
-        training: []
-    };
-
-    getGoalData = {
-        'Lose weight': goal => {
-            if (this.dataToProcess.weight.length === 0) {
-                this.dataToProcess.weight = this.weightItems;
-            }
-            this.getProgress(goal, 'getWeightProgress', 'weight', true);
-        },
-
-        'Increase weight': goal => {
-            if (this.dataToProcess.weight.length === 0) {
-                this.dataToProcess.weight = this.weightItems;
-            }
-            this.getProgress(goal, 'getWeightProgress', 'weight');
-        },
-
-        'Burn calories': (goal) => {
-
-        },
-        'Run distance': (goal) => {
-
-        },
-
-        'Do some count of exercises': (goal) => {
-            if (this.dataToProcess.training.length === 0) {
-                this.goalProgressService.getLaunchedTrainingData(this.userId, res => {
-                    this.dataToProcess.training = res;
-                    this.getProgress(goal, 'getExerciseCountProgress', 'training');
+    ngOnInit() {
+        this.goalProgressService.getUserGoals(goals => {
+            if (goals.length === 1 && !goals[0]._id) {
+                goals = [];
+            } else {
+                goals.forEach(e => {
+                    e.progress = Math.round(Math.min(1, Math.max(0, (e.currentValue - e.startValue) /
+                        (e.endValue - e.startValue))) * 100);
                 });
-            } else {
-                this.getProgress(goal, 'getExerciseCountProgress', 'training');
             }
-        },
-
-        'Do trainings count per week': (goal) => {
-            if (this.dataToProcess.training.length === 0) {
-                this.goalProgressService.getLaunchedTrainingData(this.userId, res => {
-                    this.dataToProcess.training = res;
-                    this.getProgress(goal, 'getTrainingCountProgress', 'training');
-                });
-            } else {
-                this.getProgress(goal, 'getTrainingCountProgress', 'training');
-            }
-        },
-
-        'Eat calories per day': (goal) => {
-
-        },
-        'Gain muscles': (goal) => {
-
-        },
-        'Beat your records': (goal) => {
-
-        }
-    };
-
-    @Input() goalItems: any[];
-    private _weightItems: any[];
-
-    @Input()
-    set weightItems(weightItems: any[]) {
-        this._weightItems = weightItems || [];
+            console.log(goals, 'I');
+            this.goalItems = goals;
+        });
     }
 
-    get weightItems(): any[] {
-        return this._weightItems;
-    }
-
-    gotData = {
-        goal: false,
-        weightControl: false
-    };
-
-    ngOnInit() { }
-
-    ngOnChanges() {
-        if (this.goalItems.length > 0 && !this.gotData.goal) {
-            this.gotData.goal = true;
-
-            for (const goal of this.goalItems) {
-                goal.startDateOutput = this.dateService.convertDateToIso(
-                    new Date(goal.startTime), true);
-                goal.deadlineOutput = this.dateService.convertDateToIso(
-                    new Date(goal.deadline), true);
-
-                if (!this.goalTypes.includes(goal.category)) {
-                    this.goalTypes.push(goal.category);
-                    setTimeout(() => this.getGoalData[goal.category](goal), 200);
-                }
-            }
-        }
-    }
-
-    getProgress(goal,
-                serviceMethod: string,
-                dataType: string,
-                diffReversed?: boolean): void {
-
-        goal.progress = this.goalProgressService
-            [serviceMethod](this.dataToProcess[dataType], goal);
-
-        let diff, currentDiff;
-
-        if (serviceMethod === ('getExerciseCountProgress' || 'getTrainingCountProgress')) {
-            diff = goal.progress.goal;
-            currentDiff = goal.progress.current;
-        } else {
-            if (diffReversed) {
-                diff = goal.progress.start - goal.progress.goal;
-                currentDiff = goal.progress.start - goal.progress.current;
-            } else {
-                diff = goal.progress.goal - goal.progress.start;
-                currentDiff = goal.progress.current - goal.progress.start;
-            }
-        }
-
-        goal.progress.value = currentDiff / diff * 100;
-        if (goal.progress.value < 0) {
-            goal.progress.value = 0;
-        }
+    getProgress(progress: number, curr: number) {
+        const minimum = 50;
+        const width = curr.toString().length * 9 + minimum;
+        return 'calc(' + progress + '% - (' + Math.round(width * progress / 100) + 'px))';
     }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../../dashboard.service';
 
 @Component({
     selector: 'app-db-food-plan',
@@ -10,39 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DbFoodPlanComponent implements OnInit {
 
-    constructor() { }
+    constructor(
+        private dashboardService: DashboardService,
+    ) { }
 
     title = 'Food Plan';
 
-    kcal = {
-        eaten: {
-            title: 'Already eaten',
-            amount: 0
-        },
-        left: {
-            title: 'Left to eat',
-            amount: 0
-        }
-    };
-
-    meal = [
-        {
-            title: 'breakfast',
-            amount: 400,
-            eaten: false
-        },
-        {
-            title: 'lunch',
-            amount: 500,
-            eaten: false
-        },
-        {
-            title: 'dinner',
-            amount: 405,
-            eaten: false
-        }
-    ];
+    foodPlan;
 
     ngOnInit() {
+        this.getFoodPlanData();
+    }
+
+    getFoodPlanData(): void {
+        this.dashboardService.getFoodPlanData(res => {
+            if (res._id) {
+                this.foodPlan = res;
+            }
+        });
     }
 }

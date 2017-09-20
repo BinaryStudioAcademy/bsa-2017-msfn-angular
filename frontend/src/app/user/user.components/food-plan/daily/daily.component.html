@@ -41,9 +41,9 @@
                                 <i class="material-icons">close</i></span></div>
       </div>
     </div>
-    <div class="meal" *ngFor="let meal of meals; let i = index;">
+    <div class="meal" *ngFor="let meal of meals; let i = index;" [ngClass]="(editableMeal) ? 'hidden-md' : '' ">
       <h4>{{meal.name}}</h4>
-      <div class="kcal">{{meal.kcal}}</div>
+      <div class="kcal">{{meal.kcal}} kcal</div>
       <div class="products">
         <div class="list" *ngIf="meal.products">
           <div class="item" *ngFor="let product of meal.products">

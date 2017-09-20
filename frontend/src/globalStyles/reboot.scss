@@ -4,6 +4,7 @@
 @import '../../../node_modules/ngx-toastr/toastr.css';
 @import './toastrStyles.scss';
 @import './markdownStyles.scss';
+@import '~perfect-scrollbar/dist/css/perfect-scrollbar.min.css';
 // Reboot
 //
 // Normalization of HTML elements, manually forked from Normalize.css to remove
@@ -374,4 +375,8 @@ template {
 // Needed for proper display in IE 10-.
 [hidden] {
     display: none !important;
+}
+
+button[md-raised-button] {
+    background-color: $btn-color;
 }

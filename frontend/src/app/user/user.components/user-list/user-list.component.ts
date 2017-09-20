@@ -73,6 +73,7 @@ export class UserListComponent implements OnInit {
                     }
                 }
             }
+            console.log(this.users);
         });
         this.userListService.getFollowers(currentUser.id, data => {
             data.forEach(element => {

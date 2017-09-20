@@ -18,18 +18,20 @@ EventRepository.prototype.applyUser = applyUser;
 EventRepository.prototype.deleteById = deleteById;
 
 function getById(id, callback) {
-    console.log('REPO', id);
     const query = this.model.findOne({
         _id: id
     })
         .populate({
             path: 'creator',
-            select: [
-                'firstName',
-                'lastName',
-                'fullName',
-                'userPhoto',
-            ]
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
+        })
+        .populate({
+            path: 'participants',
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
+        })
+        .populate({
+            path: 'followers',
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         });
     query.exec(callback);
 }
@@ -38,12 +40,7 @@ function getAll(callback) {
     const query = this.model.find({})
         .populate({
             path: 'creator',
-            select: [
-                'firstName',
-                'lastName',
-                'fullName',
-                'userPhoto',
-            ]
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         });
     query.exec(callback);
 }
@@ -61,23 +58,13 @@ function findByUserId(userId, callback) {
     })
         .populate({
             path: 'user',
-            select: [
-                'firstName',
-                'lastName',
-                'fullName',
-                'userPhoto',
-            ]
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         })
         .populate({
             path: 'message',
             populate: {
                 path: 'user',
-                select: [
-                    'firstName',
-                    'lastName',
-                    'fullName',
-                    'userPhoto',
-                ]
+                select: ['firstName', 'lastName', 'fullName', 'userPhoto']
             }
         });
     query.exec(callback);
@@ -99,23 +86,13 @@ function findByDates(startDate, endDate, callback) {
     })
         .populate({
             path: 'user',
-            select: [
-                'firstName',
-                'lastName',
-                'fullName',
-                'userPhoto',
-            ]
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         })
         .populate({
             path: 'message',
             populate: {
                 path: 'user',
-                select: [
-                    'firstName',
-                    'lastName',
-                    'fullName',
-                    'userPhoto',
-                ]
+                select: ['firstName', 'lastName', 'fullName', 'userPhoto']
             }
         });
     query.exec(callback);
@@ -130,12 +107,7 @@ function getParticipants(id, callback) {
     })
         .populate({
             path: 'participants',
-            select: [
-                'firstName',
-                'lastName',
-                'fullName',
-                'userPhoto',
-            ]
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         });
     query.exec(callback);
 }
@@ -148,12 +120,7 @@ function getFollowers(id, callback) {
     })
         .populate({
             path: 'followers',
-            select: [
-                'firstName',
-                'lastName',
-                'fullName',
-                'userPhoto',
-            ]
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         });
     query.exec(callback);
 }

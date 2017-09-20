@@ -50,18 +50,16 @@ export class DbNewsComponent implements OnInit {
 
     getData() {
         this.messagePostingService.getMessages(this.userId, data => {
-            if (data[0].hasOwnProperty('user')) {
-                this.messages = data;
+            this.messages = data;
 
-                for (const message of this.messages) {
-                    message.dateOutput = this.dateService
-                        .convertDateToIso(new Date(message.date), true);
-                    message.editing = false;
-                }
-                this.news = this.news.concat(this.messages);
-
-                this.makePaginatorOutput();
+            for (const message of this.messages) {
+                message.dateOutput = this.dateService
+                    .convertDateToIso(new Date(message.date), true);
+                message.editing = false;
             }
+            this.news = this.news.concat(this.messages);
+
+            this.makePaginatorOutput();
         });
     }
 

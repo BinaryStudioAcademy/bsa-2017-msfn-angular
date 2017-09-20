@@ -1,53 +1,42 @@
-<div id="event-container">
-    <h1>Event List</h1>
-    <div class="event-item" *ngIf="event">
-        <div id="event-text-block">
-            <p class="title">{{ event.title }}</p>
-            <div class="creator">
-                <p>Event creator:</p>
-                <div class="creator-avatar">
-                    <a routerLink="/user/profile/{{ event.creator._id }}">
-                        <img src="{{ event.creator.userPhoto }}">
-                    </a>
-                </div>
-                <a routerLink="/user/profile/{{ event.creator._id }}">
-                    <p class="creator-name">{{ event.creator.fullName }}</p>
-                </a>
-            </div>
-            <div class="dates">
-                <p class="startDate">From: {{ event.startDateOutput }}</p>
-                <p class="endDate">Till: {{ event.endDateOutput }}</p>
-            </div>
-            <p class="location">Location: {{ event.location.name }}</p>
-        </div>
+<div id="event-container" *ngIf="event">
+    <div id="event-header">
+        <h1>{{ event.title }}</h1>
 
-        <div class="event-image">
-            <img src="{{ event.image }}">
-        </div>
-
-        <div id="event-map">
-            <div class="tips">
-                <p>Drag the marker or click on the map to set a location</p>
-            </div>
-            <div id="map"></div>
-        </div>
-
-        <div class="event-handle">
-            <div class="event-buttons">
-                <button
-                    md-icon-button
-                    type="button">
-                    <!--(click)="participatingAction(event)">-->
-                    {{ event.isParticipating ? 'UNPARTICIPATE' : 'PARTICIPATE' }} <span>{{ event.participants.length || ''}}</span>
-                </button>
-                <button
-                    md-icon-button
-                    type="button">
-                    <!--(click)="followAction(event)">-->
-                    {{ event.isFollowing ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ event.followers.length || ''}}</span>
-                </button>
-            </div>
-            <a class="more-link" routerLink="/user/events/{{ event._id }}">more ></a>
+        <div class="event-buttons">
+            <button
+                md-icon-button
+                type="button">
+                <!--(click)="participatingAction(event)">-->
+                {{ event.isParticipating ? 'UNPARTICIPATE' : 'PARTICIPATE' }} <span>{{ event.participants.length || ''}}</span>
+            </button>
+            <button
+                md-icon-button
+                type="button">
+                <!--(click)="followAction(event)">-->
+                {{ event.isFollowing ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ event.followers.length || ''}}</span>
+            </button>
         </div>
     </div>
+
+    <nav md-tab-nav-bar>
+        <a
+            *ngFor="let navLink of navLinks"
+            md-tab-link
+            [routerLink]="navLink.link"
+            routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive">
+            {{ navLink.label }}
+        </a>
+        <a
+            *ngIf="userId === event.creator._id"
+            md-tab-link
+            (click)="navigateToEditTab()"
+            [routerLink]="'edit-panel/'"
+            routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive">
+            Edit Panel
+        </a>
+    </nav>
+
+    <router-outlet></router-outlet>
 </div>

@@ -73,6 +73,11 @@
         .add-container {
             max-width: 260px;
             margin: 0 auto;
+
+            &:hover {
+                color: $main-color;
+                cursor: pointer;
+            }
         }
 
         .article-wrap {
@@ -136,11 +141,6 @@
         justify-content: center;
     }
 
-    .add-container:hover {
-        color: $main-color;
-        cursor: pointer;
-    }
-
     .material-icons{
         margin: 8px;
         font-size: 30px;
@@ -154,7 +154,7 @@
         justify-content: center;
         background: #222;
         opacity: 0.9;
-        z-index: 10;
+        z-index: 6;
         top: 0;
         left: 0;
     }

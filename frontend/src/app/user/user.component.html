@@ -1,5 +1,6 @@
-<div class="body-container">
-    <div class="sidebar-container">
+<div class="body-container" (swiperight)="swipe(sidebar, $event.type)" (swipeleft)="swipe(sidebar, $event.type)">
+    <div class="sidebar-toggler" (click)="sidebar.classList.toggle('hide')"></div>
+    <div #sidebar class="sidebar-container hide">
         <app-sidebar-view></app-sidebar-view>
     </div>
     <div class="child-container">

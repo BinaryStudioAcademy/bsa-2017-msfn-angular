@@ -1,5 +1,5 @@
-<app-header-view [style.display]="isLoggedIn ? '' : 'none'"></app-header-view>
+<app-header-view [style.display]="isLoggedIn ? '' : 'none'" (toggleringChat)="toggleChat = !toggleChat" [chats]="chats"></app-header-view>
 <div [ngClass]="isLoggedIn ? 'login-child' : 'index-child'">
     <router-outlet></router-outlet>
 </div>
-<app-chat *ngIf="isLoggedIn"></app-chat>
+<app-chat [toggler]="toggleChat" (unreadMessage)="unreadMsg($event)"></app-chat>

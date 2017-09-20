@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import IArticle = ArticleApi.IArticle;
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { ToasterService } from '../../../services/toastr.service';
 import { NgForm } from '@angular/forms';
@@ -16,14 +16,19 @@ import { ArticleDetailComponent } from './../article-detail/article-detail.compo
     styleUrls: ['./article-add.component.scss']
 })
 export class ArticleAddComponent implements OnInit {
-    article: IArticle;
+    article: IArticle = {
+        title: '',
+        detail: '',
+        preview: '',
+        image: ''
+    };
     image: any = new Image();
     type: string;
     cropperSettings: CropperSettings;
     data: any;
-    converted: {
-        detail: string,
-        preview: string
+    converted = {
+        preview: '',
+        detail: ''
     };
     @ViewChild('cropper', undefined)
     cropper: ImageCropperComponent;
@@ -33,6 +38,7 @@ export class ArticleAddComponent implements OnInit {
     constructor(private toasterService: ToasterService,
         private articleAddService: ArticleAddService,
         public router: ActivatedRoute,
+        private routerNav: Router,
         private markdownService: MarkdownService) {
     }
 
@@ -49,17 +55,6 @@ export class ArticleAddComponent implements OnInit {
                 };
 
             });
-        } else {
-            this.article = {
-                title: '',
-                detail: '',
-                preview: '',
-                image: ''
-            };
-            this.converted = {
-                preview: '',
-                detail: ''
-            };
         }
     }
 
@@ -135,12 +130,13 @@ export class ArticleAddComponent implements OnInit {
             } else {
                 if (this.article._id) {
                     this.articleAddService.send(this.article, this.article._id, (err, data) => {
-                        return true;
+                        return this.routerNav.navigate(['/user/articles/' + this.article._id]);
                     });
                 } else {
                     this.articleAddService.send(this.article, '', (err, data) => {
                         if (data) {
                             this.article._id = data._id;
+                            return this.routerNav.navigate(['/user/articles/' + data._id]);
                         }
                     });
                 }

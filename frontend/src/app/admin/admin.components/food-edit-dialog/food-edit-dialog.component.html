@@ -11,30 +11,27 @@
             </md-error>
         </md-input-container>
 
-        <md-select [(ngModel)]="food.foodType" class="select-type" placeholder="Type">
+        <md-select [(ngModel)]="food.foodType._id" class="select-type" placeholder="Type">
             <md-option *ngFor="let type of foodTypes" [value]="type._id">{{type.name}}</md-option>
         </md-select>
 
 
         <div class="energy-container">
             <md-input-container class="energy-item">
-                <input mdInput [(ngModel)]="food.kcal" placeholder="Kcal" name="kcal" [formControl]="numberFormControl">
+                <input mdInput [(ngModel)]="food.kcal" placeholder="Kcal" name="kcal" type="number">
             </md-input-container>
             <md-input-container class="energy-item">
-                <input mdInput [(ngModel)]="food.protein" placeholder="Proteins" name="protein" [formControl]="numberFormControl">
+                <input mdInput [(ngModel)]="food.protein" placeholder="Proteins" name="protein" type="number">
 
             </md-input-container>
             <md-input-container class="energy-item">
-                <input mdInput [(ngModel)]="food.fat" placeholder="Fats" name="fat" [formControl]="numberFormControl">
+                <input mdInput [(ngModel)]="food.fat" placeholder="Fats" name="fat" type="number">
             </md-input-container>
             <md-input-container class="energy-item">
-                <input mdInput [(ngModel)]="food.carbons" placeholder="Carbons" name="carbons" [formControl]="numberFormControl">
+                <input mdInput [(ngModel)]="food.carbons" placeholder="Carbons" name="carbons" type="number">
             </md-input-container>
 
         </div>
-            <md-error *ngIf="numberFormControl.hasError('pattern')" class="num-error">
-                    Must be a numeric value
-            </md-error>
         <md-select [(ngModel)]="food.measure" placeholder="Measure" id="measure-select">
             <md-option *ngFor="let measure of measures" [value]="measure">{{measure}}</md-option>
         </md-select>
@@ -75,9 +72,6 @@
 
     </md-dialog-content>
     <md-dialog-actions>
-        <button md-button class="btn" (click)="save()" [disabled]="(food.customUserId !== '' && !newItem)
-        || !nameFormControl.valid
-        || !numberFormControl.valid
-        || !descriptionFormControl.valid" [md-dialog-close]="true">Save</button>
+        <button md-button class="btn" (click)="save()" [disabled]="!nameFormControl.valid || !descriptionFormControl.valid" [md-dialog-close]="true">Save</button>
     </md-dialog-actions>
 </div>

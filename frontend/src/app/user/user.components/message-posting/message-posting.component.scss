@@ -2,6 +2,11 @@
 @import '../../../../globalStyles/indentations.scss';
 @import '../../../../globalStyles/text.scss';
 
+#post-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
 .close {
     float: right;
     padding: 0;

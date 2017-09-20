@@ -1,4 +1,5 @@
-import {Component, OnInit, AfterContentChecked} from '@angular/core';
+import { LogoutDialogComponent } from './../logout-dialog/logout-dialog.component';
+import {Component, OnInit, AfterContentChecked, Input, Output, EventEmitter} from '@angular/core';
 import {MdDialog} from '@angular/material';
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
@@ -12,7 +13,8 @@ import { NotificationsService } from '../../services/notifications.service';
     styleUrls: ['./header-view.component.scss']
 })
 export class HeaderViewComponent implements OnInit, AfterContentChecked  {
-
+    @Input() chats: any;
+    @Output() toggleringChat = new EventEmitter;
     public userId: string;
     public thereIsLoggedInUser: boolean;
     public displayName: string;
@@ -44,16 +46,7 @@ export class HeaderViewComponent implements OnInit, AfterContentChecked  {
     }
 
     logout() {
-        const sendData: IHttpReq = {
-            url: '/api/logout',
-            method: 'POST',
-            body: {}
-        };
-        this.httpHandler.sendRequest(sendData)
-            .then((res) => {
-                location.reload();
-                this.router.navigate(['/']);
-            });
+        this.dialog.open(LogoutDialogComponent, {});
     }
 
 }

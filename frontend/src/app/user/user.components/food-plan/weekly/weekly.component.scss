@@ -13,12 +13,24 @@
             &:hover {
                 background-color: $gradient-to-color;
             }
+            .short-form {
+                display: none;
+            }
+            .long-form {
+                display: block;
+            }
+        }
+        .day-content.hidden {
+            display: none!important;
+        }
+        .day-content.show {
+            display: block;
         }
         .day-plan {
             transition: all linear 0.5s;
-            padding: 10px 20px;
+            padding: 10px 20px!important;
             border: 1px solid #424242;
-            height: calc(60vh - 280px);
+            height: calc(60vh - 283px);
             overflow-y: scroll;
             .add-item {
                 display: flex;
@@ -145,6 +157,117 @@
                                 cursor: pointer;
                                 display: flex;
                                 align-items: center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $large-screen) {
+    .days {
+        height: auto;
+        margin-bottom: 10px;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        position: relative;
+        &.height {
+            height: 250px
+        }
+        .day {
+            height: auto;
+            max-height: 60vh;
+            .head {
+                padding: 10px;
+                &.active{
+                    background-color: $gradient-to-color;
+                }
+                cursor: pointer; // width: 60px;
+                .short-form {
+                    display: block;
+                }
+                .long-form {
+                    display: none;
+                }
+            }
+            .day-content {
+                position: absolute;
+                top: 45px;
+                left: 0;
+                width: 100%;
+                .products {
+                    .list {
+                        .item {
+                            .del {
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                            }
+                        }
+                    }
+                }
+                .day-plan {
+                    height: 200px;
+                    .meal {
+                        h4 {
+                            margin-bottom: 5px;
+                        }
+                        // h4+.kcal {
+                        //     position: initial;
+                        //     border-bottom: 1px solid #9f9f9f;
+                        //     padding-bottom: 5px;
+                        //     margin-bottom: 5px;
+                        // }
+                        .list {
+                            // .item {
+                            //     flex-wrap: wrap;
+                            //     .name {
+                            //         width: 100%;
+                            //     }
+                            //     .quantity {
+                            //         margin-left: 0;
+                            //     }
+                            // }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $small-screen) {
+    .days {
+        .day {
+            .head {
+                padding: 7px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+            .day-content {
+                .day-plan {
+                    .meal {
+                        h4 {
+                            margin-bottom: 5px;
+                        }
+                        h4+.kcal {
+                            position: absolute;
+                            border-bottom: none;
+                            padding-bottom: 0;
+                            margin-bottom: 0;
+                        }
+                        .list {
+                            .item {
+                                flex-wrap: nowrap;
+                                .name {
+                                    width: auto;
+                                }
+                                .quantity {
+                                    margin-left: auto;
+                                }
                             }
                         }
                     }

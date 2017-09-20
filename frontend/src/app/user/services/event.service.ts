@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import {CropperSettings} from 'ng2-img-cropper';
 import {IHttpReq} from '../../models/http-req';
 import {HttpService} from '../../services/http.service';
+import {DateService} from '../../services/date.service';
 
 @Injectable()
 export class EventService {
 
-    constructor(private httpService: HttpService) {
+    constructor(private httpService: HttpService,
+                private dateService: DateService) {
     }
 
     getItem(id: string, callback) {
@@ -15,15 +17,8 @@ export class EventService {
             method: 'GET',
             body: {}
         };
-
-        console.log(req);
-
         this.httpService.sendRequest(req)
             .then(data => {
-                if (!data[0].hasOwnProperty('creator')) {
-                    data = [];
-                }
-                console.log('SERVICE', data);
                 callback(data);
             });
     }
@@ -37,9 +32,6 @@ export class EventService {
 
         this.httpService.sendRequest(req)
             .then(data => {
-                if (!data[0].hasOwnProperty('creator')) {
-                    data = [];
-                }
                 callback(data);
             });
     }
@@ -47,12 +39,12 @@ export class EventService {
     getPeriodItems(dates, callback) {
         const startTimeStamp = dates.startDate.getTime();
         const endTimeStamp = dates.endDate.getTime();
+
         const req: IHttpReq = {
             url: `/api/event/period/${startTimeStamp}/${endTimeStamp}`,
             method: 'GET',
             body: dates
         };
-
         this.httpService.sendRequest(req)
             .then(data => {
                 if (!data[0].hasOwnProperty('creator')) {
@@ -69,6 +61,19 @@ export class EventService {
             body: eventData,
             successMessage: 'Event has been created',
             failMessage: 'Event creation has been failed'
+        };
+
+        this.httpService.sendRequest(req)
+            .then(data => callback(data));
+    }
+
+    updateEvent(id, eventData, callback): void {
+        const req: IHttpReq = {
+            url: '/api/event/' + id,
+            method: 'PUT',
+            body: eventData,
+            successMessage: 'Event has been updated',
+            failMessage: 'Event update has been failed'
         };
 
         this.httpService.sendRequest(req)
@@ -142,6 +147,18 @@ export class EventService {
         });
     }
 
+    getMessages(id, callback) {
+        const req: IHttpReq = {
+            url: '/api/event/messages/' + id,
+            method: 'GET',
+            body: {},
+            failMessage: 'Can\'t show messages'
+        };
+        this.httpService.sendRequest(req).then(data => {
+            callback(data);
+        });
+    }
+
     participate(eventId: string, userId: string, callback) {
         const req: IHttpReq = {
             url: '/api/event/apply/' + eventId,
@@ -201,5 +218,26 @@ export class EventService {
                 callback(null, data);
             }
         });
+    }
+
+    setDateOutput(item, isMessage?: boolean): void {
+        if (isMessage) {
+            item.dateOutput = this.dateService
+                .convertDateToIso(new Date(item.date), true);
+        } else {
+            item.startDateOutput = this.dateService
+                .convertDateToIso(new Date(item.startDate), true);
+            item.endDateOutput = this.dateService
+                .convertDateToIso(new Date(item.endDate), true);
+        }
+    }
+
+    isUserApplied(event, userId: string) {
+        if (event.participants.includes(userId)) {
+            event.isParticipating = true;
+        }
+        if (event.followers.includes(userId)) {
+            event.isParticipating = true;
+        }
     }
 }

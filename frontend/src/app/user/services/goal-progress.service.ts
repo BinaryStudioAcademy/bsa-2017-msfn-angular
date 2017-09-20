@@ -70,4 +70,17 @@ export class GoalProgressService {
             });
     }
 
+    getUserGoals(callback) {
+        const req: IHttpReq = {
+            url: 'api/user-goal',
+            method: 'GET',
+            body: {},
+        };
+
+        this.httpService.sendRequest(req)
+            .then(data => {
+                callback(data);
+            });
+    }
+
 }

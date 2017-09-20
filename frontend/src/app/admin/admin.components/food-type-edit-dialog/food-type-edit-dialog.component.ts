@@ -29,9 +29,9 @@ export class FoodTypeEditDialogComponent implements OnInit {
 
     ngOnInit() {
         this.foodType = this.data.foodType;
+        console.log(this.foodType);
         this.newItem = this.data.newItem;
         this.foodService.getAllFoodTypes((data) => {
-            console.log(data);
             this.types = data;
         });
     }
@@ -41,13 +41,12 @@ export class FoodTypeEditDialogComponent implements OnInit {
             this.foodType.depthLvl = 1;
         } else {
             const parent = this.types.find((el, ind) => {
-                if (el._id === this.foodType.parentType) {
-                    console.log(el);
+                if (el._id === this.foodType.parentType._id) {
+                    this.foodType.parentType = el;
                     return true;
                 }
                 return false;
             });
-            console.log(parent);
             this.foodType.depthLvl = parent.depthLvl + 1;
         }
         console.log(this.foodType);

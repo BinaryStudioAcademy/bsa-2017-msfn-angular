@@ -7,7 +7,7 @@
     .add-item {
         display: flex;
         align-items: center;
-        cursor: pointer;        
+        cursor: pointer;
         i {
             background-color: $main-color;
             border-radius: 15px;
@@ -87,7 +87,7 @@
         padding: 10px 20px;
         border: 1px solid #424242;
         margin: 10px 0;
-        h4{
+        h4 {
             margin-top: 0;
         }
         h4+.kcal {
@@ -288,3 +288,12 @@
     }
 }
 
+@media only screen and (max-width: $small-screen) {
+    .meals {
+        height: auto;
+        min-height: 50px;
+        .meal.hidden-md{
+            display: none;
+        }
+    }
+}

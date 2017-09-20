@@ -60,6 +60,13 @@ export class DateService {
         return isoDate;
     }
 
+    beautifyDate(date): string {  // 18.09.2017
+        const d = new Date(date);
+        return this.addZero(d.getDate()) + '.' +
+               this.addZero(d.getMonth() + 1) + '.' +
+               d.getFullYear();
+    }
+
     getDateString(month: number, day: number): string {
         const monthOutput = this.addZero(month + 1),
             dayOutput = this.addZero(day);
@@ -95,6 +102,11 @@ export class DateService {
             minutes: date.getUTCMinutes()
         };
         return dateProps;
+    }
+
+    updateDateTime(dateObject: Date, timeObject) {
+        const dateString = this.convertDateToIso(dateObject);
+        return new Date(`${dateString} ${timeObject.hours}:${timeObject.minutes}`);
     }
 
     generateDays(selMonth: string, selYear: number): number[] {
@@ -137,7 +149,9 @@ export class DateService {
     }
 
     addZero(amount: number | string): string | number {
-        amount = amount < 10 ? '0' + amount : amount;
+        if (amount < 10 && amount.toString().length < 2) {
+            amount = '0' + amount;
+        }
         return amount;
     }
 }

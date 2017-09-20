@@ -19,6 +19,7 @@ export class MessagePostingComponent implements OnInit {
 
     @Input() parentElement: string;
     @Input() coachId: string;
+    @Input() eventId: string;
 
     userId = (this.window.data._injectedData as any).userId;
     buttonValue: string;
@@ -55,7 +56,11 @@ export class MessagePostingComponent implements OnInit {
                 isRemoved: false
             };
 
-            if (this.parentElement === 'userDb') {
+            if (this.parentElement === 'userDb' || this.parentElement === 'event') {
+                if (this.parentElement === 'event') {
+                    postData.event = this.eventId;
+                }
+
                 this.messagePostingService.postMessage(postData, data => {
                     if (data) {
                         this.hideInput.emit();

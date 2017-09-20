@@ -29,10 +29,16 @@ import { TrainingHistoryDetailComponent } from './user.components/training-histo
 import { ArticleListComponent } from './user.components/article-list/article-list.component';
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
 import { FoodPlanListComponent } from './user.components/food-plan-list/food-plan-list.component';
+import { FoodTrackingComponent } from './user.components/food-tracking/food-tracking.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventCreateComponent } from './user.components/event-create/event-create.component';
 import { EventItemComponent } from './user.components/event-item/event-item.component';
+import { GeneralComponent } from './user.components/event-item/general/general.component';
+import { PlaceTimeComponent } from './user.components/event-item/place-time/place-time.component';
+import { DiscussComponent } from './user.components/event-item/discuss/discuss.component';
+import { EditPanelComponent } from './user.components/event-item/edit-panel/edit-panel.component';
+import { IsEventCreatorGuard } from '../guards/is-event-creator.guard';
 
 const userRoutes: Routes = [
     {
@@ -139,10 +145,6 @@ const userRoutes: Routes = [
                 component: TrainingHistoryComponent
             },
             {
-                path: 'food/plan/add',
-                component: FoodPlanComponent
-            },
-            {
                 path: 'training-history/:id',
                 component: TrainingHistoryDetailComponent
             },
@@ -160,7 +162,26 @@ const userRoutes: Routes = [
             },
             {
                 path: 'events/:id',
-                component: EventItemComponent
+                component: EventItemComponent,
+                children: [
+                    {
+                        path: 'general',
+                        component: GeneralComponent
+                    },
+                    {
+                        path: 'place-time',
+                        component: PlaceTimeComponent,
+                    },
+                    {
+                        path: 'discuss',
+                        component: DiscussComponent,
+                    },
+                    {
+                        path: 'edit-panel/:userId',
+                        component: EditPanelComponent,
+                        canActivate: [IsEventCreatorGuard]
+                    }
+                ]
             },
             {
                 path: 'food-list',
@@ -173,6 +194,10 @@ const userRoutes: Routes = [
             {
                 path: 'food-list/:id',
                 component: FoodPlanComponent
+            },
+            {
+                path: 'food-tracking',
+                component: FoodTrackingComponent
             },
         ]
     }

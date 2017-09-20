@@ -1,0 +1,218 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+.container-foodPlans {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 70vw;
+    font-family: $font-general;
+    font-size: $usual-text;
+    margin: $content-tb-margin auto;
+
+}
+
+h2 {
+    flex: 100%;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: $header-text;
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 260px;
+    height: 180px;
+    margin: 10px;
+    color: $btn-color;
+    background-color: $gradient-to-color;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.train-item-text {
+    font-size: $flat-item-text;
+    margin: 5px;
+    letter-spacing: 1px;
+}
+
+.item-container:hover {
+    background-color: #353535;
+    cursor: pointer;
+}
+
+md-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+}
+
+.material-icons.add-item-ico{
+    font-size: 40px;
+}
+.add-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 260px;
+    height: 180px;
+    margin: 10px;
+    color: #CCCCCC;
+    background-color: #353535;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.add-container:hover {
+    color: $btn-color;
+    cursor: pointer;
+}
+
+.container-launched {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    md-tab-group {
+        width: 100%;
+    }
+}
+
+.launched-meals {
+    width: 400px;
+    margin: 15px auto;
+    padding: 15px;
+    background: linear-gradient($gradient-to-color 75%, $bg-color);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    .launched-header {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+
+    .meals-item {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px 10px;
+        margin: 10px 0;
+    
+        .item-name {
+            font-weight: 900;
+        }
+
+        .item-add {
+            margin-left: 32px;
+            cursor: pointer;
+
+            &:hover {
+                color: $main-color;
+            }
+        }
+    }
+
+    .item-kcal {
+        font-size: 13px;
+        color: $text-second-color;
+    }
+
+    .item-product {
+        display: flex;
+        margin: 10px 0;
+        flex-flow: row nowrap;
+        align-items: center;
+        flex: 100%;
+
+        .product-checkbox {
+            margin-right: 10px;
+        }
+
+        & p::after {
+            content: "\00a0\00a0";
+        }
+
+        .product-quantity {
+            color: $main-color;
+        }
+    
+        .product-kcal {
+            font-size: 13px;
+            color: $text-second-color;
+        }
+
+        .product-added {
+            color: $text-warn-color;
+        }
+    }
+
+    .missed {
+        text-decoration: line-through;
+        font-style: italic;
+        text-decoration-color: $text-warn-color;
+    }
+
+    .done {
+        text-decoration: line-through;
+        font-style: italic;
+        text-decoration-color: $main-color;
+    }
+
+    .buttons {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between
+    }
+
+    .btn-save {
+        display: block;
+        border: none;
+        width: 150px;
+        margin: 0 5px;
+        color: $text-main-color;
+        background-color: $btn-color;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 50px;
+        cursor: pointer;
+        outline: none;
+    }
+}
+
+.history {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+    .period-wrap {
+        display: flex;
+        margin: 10px 0 0 15px;
+        justify-content: center;
+        flex: 100%;
+    }
+    
+    .meals-item {
+        flex-flow: column nowrap;
+        align-items: flex-start;
+    }
+
+    .icon-arrow {
+        width: 17px;
+        height: 17px;
+        font-size: 17px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: $small-screen) {
+    .launched-meals {
+        width: 300px;
+    }
+}

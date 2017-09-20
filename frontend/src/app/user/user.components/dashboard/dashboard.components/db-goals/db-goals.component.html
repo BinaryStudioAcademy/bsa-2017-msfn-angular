@@ -1,4 +1,4 @@
-<div class="goals inner-container">
+<div class="goals inner-container" perfectScrollbar>
     <h2 class="drag-handle"><a routerLink="goals">{{ title }}</a></h2>
     <div class="content">
         <div class="no-items" *ngIf="goalItems.length === 0">
@@ -11,31 +11,31 @@
         <div class="goal-item" *ngFor="let goal of goalItems">
             <div class="goal-body" *ngIf="goalItems.length > 0">
                 <div class="goal-start-date">
-                    start: {{ goal.startDateOutput }}
+                    start: {{ goal.startTime | date: 'yMd' }}
                 </div>
                 <div class="goal-end-date">
-                    deadline: {{ goal.deadlineOutput }}
+                    deadline: {{ goal.deadline | date: 'yMd' }}
                 </div>
                 <div class="goal-value">
                     <div class="goal-type">
-                        {{ goal.category }}
+                        {{ goal.name }}
                     </div>
-                    ({{ goal.value }})
+                    ({{ goal.currentValue }})
                 </div>
-                <div class="goal-progress" *ngIf="goal.progress">
-                    <p class="start-value" *ngIf="goal.progress.current !== goal.progress.start">
-                        initial: {{ goal.progress.start }}
+                <div class="goal-progress">
+                    <p class="start-value">
+                        initial: {{ goal.startValue }}
                     </p>
-                    <p class="current-value" [ngStyle]="{'left': goal.progress.value + '%'}">
-                        current: {{ goal.progress.current }}
+                    <p class="current-value" [ngStyle]="{'left': getProgress(goal.progress, goal.currentValue)}">
+                        current: {{ goal.currentValue }}
                     </p>
                     <p class="end-value">
-                        goal: {{ goal.progress.goal }}
+                        goal: {{ goal.endValue }}
                     </p>
                     <md-progress-bar
                         [color]="accent"
                         [mode]="determinate"
-                        [value]="goal.progress.value">
+                        [value]="goal.progress">
                     </md-progress-bar>
                 </div>
             </div>

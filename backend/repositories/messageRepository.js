@@ -9,6 +9,7 @@ function MessageRepository() {
 MessageRepository.prototype = new Repository();
 
 MessageRepository.prototype.findByUserId = findByUserId;
+MessageRepository.prototype.findByEventId = findByEventId;
 MessageRepository.prototype.updateById = updateById;
 MessageRepository.prototype.deleteById = deleteById;
 
@@ -25,12 +26,25 @@ function findByUserId(userId, callback) {
     })
         .populate({
             path: 'user',
-            select: [
-                'firstName',
-                'lastName',
-                'fullName',
-                'userPhoto',
-            ]
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
+        });
+    query.exec(callback);
+}
+
+function findByEventId(eventId, callback) {
+    const query = this.model.find({
+        $and: [
+            {
+                event: eventId
+            },
+            {
+                isRemoved: false
+            }
+        ]
+    })
+        .populate({
+            path: 'user',
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         });
     query.exec(callback);
 }

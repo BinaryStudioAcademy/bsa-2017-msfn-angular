@@ -39,7 +39,13 @@ export class GoalComponent implements OnInit {
         this.goalService.getData((data) => {
             if (data.length === 1 && !data[0]._id) {
                 data = [];
+            } else {
+                data.forEach(e => {
+                    e.progress = Math.round(Math.min(1, Math.max(0, (e.currentValue - e.startValue) /
+                        (e.endValue - e.startValue))) * 100);
+                });
             }
+            console.log(data, 'L');
             this.data = data;
         });
     }

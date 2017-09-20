@@ -6,9 +6,6 @@ const
 module.exports = app => {
     app.get(`${baseUrl}user/:id`, (req, res, next) => {
         messageService.getItemsByUserId(req, (err, data) => {
-            if (!data.length) {
-                data = [{}];
-            }
             res.data = data;
             res.err = err;
             next();

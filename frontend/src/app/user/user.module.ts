@@ -53,9 +53,10 @@ import { ArticleAddComponent } from './user.components/article-add/article-add.c
 import { ArticleDetailComponent } from './user.components/article-detail/article-detail.component';
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
-import {ArticleListComponent} from './user.components/article-list/article-list.component';
+import { ArticleListComponent } from './user.components/article-list/article-list.component';
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
 import { FoodPlanListComponent } from './user.components/food-plan-list/food-plan-list.component';
+import { FoodTrackingComponent } from './user.components/food-tracking/food-tracking.component';
 import { SearchComponent } from './user.components/food-plan/search/search.component';
 import { WeeklyComponent } from './user.components/food-plan/weekly/weekly.component';
 import { DailyComponent } from './user.components/food-plan/daily/daily.component';
@@ -67,6 +68,14 @@ import { AchievementInfoDialogComponent } from './user.components/achievement-in
 import { EventCreateComponent } from './user.components/event-create/event-create.component';
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventItemComponent } from './user.components/event-item/event-item.component';
+import { ImageUploadComponent } from './user.components/image-upload/image-upload.component';
+import { GeneralComponent } from './user.components/event-item/general/general.component';
+import { DiscussComponent } from './user.components/event-item/discuss/discuss.component';
+import { PlaceTimeComponent } from './user.components/event-item/place-time/place-time.component';
+import { EditPanelComponent } from './user.components/event-item/edit-panel/edit-panel.component';
+import {ActivatedRouteSnapshot} from '@angular/router';
+import {EventService} from './services/event.service';
+import { FoodPlanService } from './user.components/food-plan/food-plan.service';
 
 @NgModule({
     imports: [
@@ -126,6 +135,7 @@ import { EventItemComponent } from './user.components/event-item/event-item.comp
         TrainingHistoryDetailComponent,
         FoodPlanComponent,
         FoodPlanListComponent,
+        FoodTrackingComponent,
         SearchComponent,
         WeeklyComponent,
         DailyComponent,
@@ -138,10 +148,17 @@ import { EventItemComponent } from './user.components/event-item/event-item.comp
         EventCreateComponent,
         EventListComponent,
         EventItemComponent,
+        ImageUploadComponent,
+        GeneralComponent,
+        DiscussComponent,
+        PlaceTimeComponent,
+        EditPanelComponent,
     ],
     providers: [
         ForAllUserGuard,
-        MarkdownService
+        MarkdownService,
+        EventService,
+        FoodPlanService,
     ],
     entryComponents: [
         FinishDialogComponent,
@@ -150,6 +167,8 @@ import { EventItemComponent } from './user.components/event-item/event-item.comp
         GoalEditDialogComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
+        SearchComponent,
+        ImageUploadComponent,
     ]
 })
 export class UserModule {

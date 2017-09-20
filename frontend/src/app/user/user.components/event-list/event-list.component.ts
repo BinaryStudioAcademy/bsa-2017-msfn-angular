@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService} from '../../services/event.service';
-import {DateService} from '../../../services/date.service';
+// import {DateService} from '../../../services/date.service';
 import {WindowObj} from '../../../services/window.service';
 
 @Component({
@@ -9,13 +9,13 @@ import {WindowObj} from '../../../services/window.service';
     styleUrls: ['./event-list.component.scss'],
     providers: [
         EventService,
-        DateService
+        // DateService
     ]
 })
 export class EventListComponent implements OnInit {
 
     constructor(private eventService: EventService,
-                private dateService: DateService,
+                // private dateService: DateService,
                 private window: WindowObj) {
     }
 
@@ -27,7 +27,7 @@ export class EventListComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.getAllEvents();
+        this.getAllEvents();         // change to period events
         console.log(this.period);
     }
 
@@ -37,8 +37,8 @@ export class EventListComponent implements OnInit {
             this.events = data;
             console.log(data);
             for (const event of this.events) {
-                this.setDateOutput(event);
-                this.isUserApplied(event);
+                this.eventService.setDateOutput(event);
+                this.eventService.isUserApplied(event, this._userId);
             }
         });
     }
@@ -49,26 +49,10 @@ export class EventListComponent implements OnInit {
             this.events = data;
             console.log(data);
             for (const event of this.events) {
-                this.setDateOutput(event);
-                this.isUserApplied(event);
+                this.eventService.setDateOutput(event);
+                this.eventService.isUserApplied(event, this._userId);
             }
         });
-    }
-
-    setDateOutput(item): void {
-        item.startDateOutput = this.dateService
-            .convertDateToIso(new Date(item.startDate), true);
-        item.endDateOutput = this.dateService
-            .convertDateToIso(new Date(item.endDate), true);
-    }
-
-    isUserApplied(event) {
-        if (event.participants.includes(this._userId)) {
-            event.isParticipating = true;
-        }
-        if (event.followers.includes(this._userId)) {
-            event.isParticipating = true;
-        }
     }
 
     participatingAction(event): void {

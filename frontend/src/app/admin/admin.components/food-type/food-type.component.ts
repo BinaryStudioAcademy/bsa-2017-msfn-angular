@@ -31,6 +31,7 @@ export class FoodTypeComponent implements OnInit {
         mdDialog.afterAllClosed
             .subscribe(() => {
                 this.foodService.getAllFoodTypes( (response) => {
+                    console.log(response);
                     this.tableDatabase.addFoodTypes(response);
                 });
             });
@@ -60,7 +61,7 @@ export class FoodTypeComponent implements OnInit {
 
 
     openFoodTypeEditDialog(newItem: boolean, foodTypeData: IFoodType) {
-        const foodType = newItem ? { name: '', description: ''} : foodTypeData;
+        const foodType = newItem ? { name: '', description: '', parentType: {_id: ''}} : foodTypeData;
         this.mdDialog.open(FoodTypeEditDialogComponent, {
             data: {
                 newItem,
