@@ -54,7 +54,8 @@ export class EventListComponent implements OnInit {
     }
 
     applicationAction(category: string, event): void {
-        if (event.isParticipating) {
+        const status = category === 'participants' ? 'isParticipating' : 'isFollowing';
+        if (event[status]) {
             this.unapply(category, event);
         } else {
             this.apply(category, event);
@@ -62,7 +63,6 @@ export class EventListComponent implements OnInit {
     }
 
     apply(category, event): void {
-        console.log('PART EVENT', event._id);
         this.eventService.apply(category, event._id, this._userId, () => {
             if (category === 'participants') {
                 event.isParticipating = true;
@@ -77,7 +77,11 @@ export class EventListComponent implements OnInit {
 
     unapply(category, event): void {
         this.eventService.unapply(category, event._id, this._userId, () => {
-            event.isParticipating = false;
+            if (category === 'participants') {
+                event.isParticipating = false;
+            } else {
+                event.isFollowing = false;
+            }
             this.eventService.getApplicants(category, event._id, data => {
                 event[category] = data;
             });

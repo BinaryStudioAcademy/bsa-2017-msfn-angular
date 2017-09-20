@@ -58,7 +58,8 @@ export class EventItemComponent implements OnInit {
     }
 
     applicationAction(category: string, event): void {
-        if (event.isParticipating) {
+        const status = category === 'participants' ? 'isParticipating' : 'isFollowing';
+        if (event[status]) {
             this.unapply(category, event);
         } else {
             this.apply(category, event);
@@ -80,10 +81,9 @@ export class EventItemComponent implements OnInit {
 
     unapply(category, event): void {
         this.eventService.unapply(category, event._id, this.userId, () => {
-            if (category === 'followers') {
-                event.isFollowing = false;
-            } else {
+            if (category === 'participants') {
                 event.isParticipating = false;
+            } else {
                 event.isFollowing = false;
             }
             this.eventService.getApplicants(category, event._id, data => {
