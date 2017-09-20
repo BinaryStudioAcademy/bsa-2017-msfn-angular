@@ -2,7 +2,6 @@ const
     eventRepository = require('../../repositories/eventRepository'),
     apiResponse = require('express-api-response'),
     eventService = require('../../services/eventService'),
-    isAdmin = require('../../middleware/isAdminMiddleware'),
     isLoggedIn = require('../../middleware/isLoggedInMiddleware'),
     baseUrl = '/api/event/';
 
@@ -40,7 +39,7 @@ module.exports = app => {
     }, apiResponse);
 
     app.get(`${baseUrl}participants/:id`, isLoggedIn, (req, res, next) => {
-        eventService.getParticipants(req, (err, data) => {
+        eventService.getApplicants('participants', req, (err, data) => {
             res.data = data;
             res.err = err;
             next();
@@ -48,7 +47,7 @@ module.exports = app => {
     }, apiResponse);
 
     app.get(`${baseUrl}followers/:id`, isLoggedIn, (req, res, next) => {
-        eventService.getFollowers(req, (err, data) => {
+        eventService.getApplicants('followers', req, (err, data) => {
             res.data = data;
             res.err = err;
             next();
@@ -81,6 +80,14 @@ module.exports = app => {
 
     app.put(`${baseUrl}apply/:id`, isLoggedIn, (req, res, next) => {
         eventService.applyUser(req.params.id, req.body, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.put(`${baseUrl}unapply/:id`, isLoggedIn, (req, res, next) => {
+        eventService.unapplyUser(req.params.id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService} from '../../services/event.service';
-// import {DateService} from '../../../services/date.service';
 import {WindowObj} from '../../../services/window.service';
 
 @Component({
@@ -15,7 +14,6 @@ import {WindowObj} from '../../../services/window.service';
 export class EventListComponent implements OnInit {
 
     constructor(private eventService: EventService,
-                // private dateService: DateService,
                 private window: WindowObj) {
     }
 
@@ -55,55 +53,33 @@ export class EventListComponent implements OnInit {
         });
     }
 
-    participatingAction(event): void {
+    applicationAction(category: string, event): void {
         if (event.isParticipating) {
-            this.unparticipate(event);
+            this.unapply(category, event);
         } else {
-            this.participate(event);
+            this.apply(category, event);
         }
     }
 
-    followAction(event): void {
-        if (event.isFollowing) {
-            this.unfollow(event);
-        } else {
-            this.follow(event);
-        }
-    }
-
-    participate(event): void {
+    apply(category, event): void {
         console.log('PART EVENT', event._id);
-        this.eventService.participate(event._id, this._userId, () => {
-            event.isParticipating = true;
-            this.eventService.getParticipants(event._id, data => {
-                event.participants = data;
+        this.eventService.apply(category, event._id, this._userId, () => {
+            if (category === 'participants') {
+                event.isParticipating = true;
+            } else {
+                event.isFollowing = true;
+            }
+            this.eventService.getApplicants(category, event._id, data => {
+                event[category] = data;
             });
         });
     }
 
-    unparticipate(event): void {
-        this.eventService.unparticipate(event._id, this._userId, () => {
+    unapply(category, event): void {
+        this.eventService.unapply(category, event._id, this._userId, () => {
             event.isParticipating = false;
-            this.eventService.getParticipants(event._id, data => {
-                event.participants = data;
-            });
-        });
-    }
-
-    follow(event): void {
-        this.eventService.follow(event._id, this._userId, () => {
-            event.isFollowing = true;
-            this.eventService.getFollowers(event._id, data => {
-                event.followers = data;
-            });
-        });
-    }
-
-    unfollow(event): void {
-        this.eventService.unfollow(event._id, this._userId, () => {
-            event.isFollowing = false;
-            this.eventService.getFollowers(event._id, data => {
-                event.followers = data;
+            this.eventService.getApplicants(category, event._id, data => {
+                event[category] = data;
             });
         });
     }

@@ -12,7 +12,6 @@
         </div>
 
         <p>Select period:</p>
-
         <div class="date">
             <md-input-container>
                 <input
@@ -24,7 +23,6 @@
             <md-datepicker-toggle [for]="startPicker"></md-datepicker-toggle>
             <md-datepicker #startPicker></md-datepicker>
         </div>
-
         <div class="date">
             <md-input-container>
                 <input
@@ -77,18 +75,20 @@
 
             <div class="event-handle">
                 <div class="event-buttons">
-                        <button
-                            md-icon-button
-                            type="button"
-                            (click)="participatingAction(event)">
-                            {{ event.isParticipating ? 'UNPARTICIPATE' : 'PARTICIPATE' }} <span>{{ event.participants.length || ''}}</span>
-                        </button>
-                        <button
-                            md-icon-button
-                            type="button"
-                            (click)="followAction(event)">
-                            {{ event.isFollowing ? 'UNFOLLOW' : 'FOLLOW' }} <span>{{ event.followers.length || ''}}</span>
-                        </button>
+                    <button
+                        md-icon-button
+                        type="button"
+                        (click)="applicationAction('participants', event)">
+                        {{ event.isParticipating ? 'UNPARTICIPATE' : 'PARTICIPATE' }}
+                        <span>{{ event.participants.length || ''}}</span>
+                    </button>
+                    <button
+                        md-icon-button
+                        type="button"
+                        (click)="applicationAction('followers', event)">
+                        {{ event.isFollowing ? 'UNFOLLOW' : 'FOLLOW' }}
+                        <span>{{ event.followers.length || ''}}</span>
+                    </button>
                 </div>
                 <a class="more-link" routerLink="/user/events/{{ event._id }}/general">more ></a>
             </div>

@@ -122,27 +122,15 @@ export class EventService {
         return cropperSettings;
     }
 
-    getParticipants(id, callback) {
+    getApplicants(category: string, id: string, callback) {
         const req: IHttpReq = {
-            url: '/api/event/participants/' + id,
+            url: `/api/event/${category}/${id}`,
             method: 'GET',
             body: {},
-            failMessage: 'Can\'t show participants'
+            failMessage: `Can\'t show ${category}`
         };
         this.httpService.sendRequest(req).then(data => {
-            console.log('PART DATA', data);
-            callback(data);
-        });
-    }
-
-    getFollowers(id, callback) {
-        const req: IHttpReq = {
-            url: '/api/event/followers/' + id,
-            method: 'GET',
-            body: {},
-            failMessage: 'Can\'t show followers'
-        };
-        this.httpService.sendRequest(req).then(data => {
+            console.log(`${category} DATA`, data);
             callback(data);
         });
     }
@@ -159,12 +147,12 @@ export class EventService {
         });
     }
 
-    participate(eventId: string, userId: string, callback) {
+    apply(category: string, eventId: string, userId: string, callback) {
         const req: IHttpReq = {
             url: '/api/event/apply/' + eventId,
             method: 'PUT',
             body: {
-                fieldName: 'participants',
+                fieldName: category,
                 userId
             }
         };
@@ -175,41 +163,12 @@ export class EventService {
         });
     }
 
-    unparticipate(eventId: string, userId: string, callback) {
+    unapply(category: string, eventId: string, userId: string, callback) {
         const req: IHttpReq = {
-            url: '/api/event/unparticipate/' + eventId,
+            url: '/api/event/unapply/' + eventId,
             method: 'PUT',
             body: {
-                userId
-            }
-        };
-        this.httpService.sendRequest(req).then(data => {
-            if (data) {
-                callback(null, data);
-            }
-        });
-    }
-
-    follow(eventId: string, userId: string, callback) {
-        const req: IHttpReq = {
-            url: '/api/event/follow/' + eventId,
-            method: 'PUT',
-            body: {
-                userId
-            }
-        };
-        this.httpService.sendRequest(req).then(data => {
-            if (data) {
-                callback(null, data);
-            }
-        });
-    }
-
-    unfollow(eventId: string, userId: string, callback) {
-        const req: IHttpReq = {
-            url: '/api/event/unfollow/' + eventId,
-            method: 'PUT',
-            body: {
+                fieldName: category,
                 userId
             }
         };
