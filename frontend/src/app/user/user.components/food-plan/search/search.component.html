@@ -56,7 +56,7 @@
                 </md-icon>
             </span>
             </div>
-            <md-list class="product-list" *ngIf="foods">
+            <md-list class="product-list" *ngIf="foods" perfectScrollbar>
                 <md-list-item *ngFor="let food of foods" [hidden]="food.isRemoved" ngDefaultControl name="foods">
                     <!-- <md-checkbox #checkFood [id]="food._id" [(ngModel)]="food.checked" class="food-part"></md-checkbox> -->
                     <div class="food-part">

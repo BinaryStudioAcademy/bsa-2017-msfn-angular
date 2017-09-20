@@ -40,7 +40,8 @@
                      class="active"
                      md-tooltip="{{ row.description }}"
                      >
-                {{ row.description.substring(0, 20) }}...
+
+                {{ (row.description)?row.description.substring(0, 20):'' }}...
             </md-cell>
         </ng-container>
 

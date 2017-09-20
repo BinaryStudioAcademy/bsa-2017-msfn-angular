@@ -19,14 +19,31 @@ export class GoalEditDialogComponent implements OnInit {
     deadline: Date;
     endValue: number;
     startValue;
-    validValue = true;
+    validValue = false;
     settings = {};
     weights = {
         weightControl: null,
         weight: null,
     };
+    goalType = null;
     measures = {};
     total = {};
+    minValue = {
+        combo: 1,
+        changeweight: 35,
+        followers: 1,
+        totalweight: 100,
+        totaldistance: 1,
+        launchedtrainings: 1,
+    };
+    maxValue = {
+        combo: 36500,
+        changeweight: 160,
+        followers: 100000,
+        totalweight: 10000000000,
+        totaldistance: 100000000,
+        launchedtrainings: 10000,
+    };
     constructor(
         @Inject(MD_DIALOG_DATA) public data: any,
         private goalEditDialogService: GoalEditDialogService,
@@ -94,12 +111,18 @@ export class GoalEditDialogComponent implements OnInit {
     }
 
     checkValue() {
-        this.validValue = (this.endValue > 0 && this.endValue !== this.startValue) ? true : false;
+        if (!this.goalType) {
+            return false;
+        }
+        console.log(this.goalType, this.minValue[this.goalType], this.maxValue[this.goalType]);
+        this.validValue = (this.endValue >= this.minValue[this.goalType] && this.endValue !== this.startValue &&
+         this.endValue <= this.maxValue[this.goalType]) ? true : false;
     }
 
     getStartValue() {
         this.userService.addGoalCategory(this.selectedType, (goal) => {
         this.name = goal.name;
+        this.goalType = goal.category;
         if (goal.category === 'totalweight' || goal.category === 'totaldistance') {
             this.userService.getLaunchedTrainings(trainings => {
                 const result = this.userService.getTotalMeasures(trainings);

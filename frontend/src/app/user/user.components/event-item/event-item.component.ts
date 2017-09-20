@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EventService} from '../../services/event.service';
 import {DateService} from '../../../services/date.service';
 import {IEvent} from '../../../models/event';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {WindowObj} from '../../../services/window.service';
 
 @Component({
@@ -18,11 +18,11 @@ export class EventItemComponent implements OnInit {
 
     constructor(public activatedRoute: ActivatedRoute,
                 private eventService: EventService,
-                private dateService: DateService,
+                private router: Router,
                 private window: WindowObj) {
     }
 
-    private _userId = this.window.data._injectedData.userId;
+    userId = this.window.data._injectedData.userId;
 
     navLinks = [
         {
@@ -53,8 +53,11 @@ export class EventItemComponent implements OnInit {
             this.event = data;
             console.log(data);
             this.eventService.setDateOutput(this.event);
-            this.eventService.isUserApplied(this.event, this._userId);
+            this.eventService.isUserApplied(this.event, this.userId);
         });
     }
 
+    navigateToEditTab() {
+        this.router.navigate([`/user/events/${this.event._id}/edit-panel/${this.userId}`]);
+    }
 }

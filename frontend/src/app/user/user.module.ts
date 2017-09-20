@@ -71,6 +71,9 @@ import { ImageUploadComponent } from './user.components/image-upload/image-uploa
 import { GeneralComponent } from './user.components/event-item/general/general.component';
 import { DiscussComponent } from './user.components/event-item/discuss/discuss.component';
 import { PlaceTimeComponent } from './user.components/event-item/place-time/place-time.component';
+import { EditPanelComponent } from './user.components/event-item/edit-panel/edit-panel.component';
+import {ActivatedRouteSnapshot} from '@angular/router';
+import {EventService} from './services/event.service';
 
 @NgModule({
     imports: [
@@ -146,10 +149,12 @@ import { PlaceTimeComponent } from './user.components/event-item/place-time/plac
         GeneralComponent,
         DiscussComponent,
         PlaceTimeComponent,
+        EditPanelComponent,
     ],
     providers: [
         ForAllUserGuard,
-        MarkdownService
+        MarkdownService,
+        EventService,
     ],
     entryComponents: [
         FinishDialogComponent,

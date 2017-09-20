@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const async = require('async');
 const parallel = require('async/parallel');
 
-function FoodService() {}
+function FoodService() { }
 
 FoodService.prototype.addAll = addAll;
 FoodService.prototype.getAllFood = getAllFood;
@@ -33,11 +33,11 @@ function addAll(types, callback) {
                 let currentRes = results[i];
                 createdItems.push(currentRes[0]);
             }
-            callback(err, {status: `Created ${results.length} food items `, items: createdItems});
+            callback(err, { status: `Created ${results.length} food items `, items: createdItems });
         });
 }
 function getOnlyPublishedFood(userId, callback) {
-    foodRepository.getOnlyPublished(userId,(err, foodData) => {
+    foodRepository.getOnlyPublished(userId, (err, foodData) => {
         if (err) {
             return err;
         }
@@ -50,7 +50,6 @@ function getOnlyPublishedFood(userId, callback) {
 }
 
 function getAllFood(callback) {
-    console.log('ALL');
     foodRepository.getAll((err, foodData) => {
         if (err) {
             return err;
@@ -104,44 +103,34 @@ function getFood(id, callback) {
 }
 
 function createFood(body, callback) {
-            foodRepository.add(body, (err, foodData) => {
-                if (err) {
-                    return err;
-                }
-                if (foodData === null) {
-                    callback(null, []);
-                } else {
-                    callback(null, foodData);
-                }
-            });
+    foodRepository.add(body, (err, foodData) => {
+        if (err) {
+            return err;
+        }
+        if (foodData === null) {
+            callback(null, []);
+        } else {
+            callback(null, foodData);
+        }
+    });
 }
 
-function updateFood(id, body, userId, callback) {
-            foodRepository.updateById(id, body, userId, (err, foodData) => {
-                if (err) {
-                    return err;
-                }
-                if (foodData === null) {
-                    callback(null, []);
-                } else {
-                    callback(null, foodData);
-                }
-            })
-
+function updateFood(id, body, callback) {
+    foodRepository.update(id, body, callback);
 }
 
 
 function publishFood(id, isPublished, callback) {
-            foodRepository.updateIsPublished(id, isPublished, (err, foodData) => {
-                if (err) {
-                    return err;
-                }
-                if (foodData === null) {
-                    callback(null, []);
-                } else {
-                    callback(null, foodData);
-                }
-            })
+    foodRepository.updateIsPublished(id, isPublished, (err, foodData) => {
+        if (err) {
+            return err;
+        }
+        if (foodData === null) {
+            callback(null, []);
+        } else {
+            callback(null, foodData);
+        }
+    })
 
 }
 

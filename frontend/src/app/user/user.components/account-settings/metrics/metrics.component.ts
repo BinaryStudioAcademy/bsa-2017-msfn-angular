@@ -38,16 +38,15 @@ export class MetricsComponent implements OnInit {
         this.timeZone = this.settingsService.getTimeZone();
         this.settingsService.getMeasurements((res) => {
             this.settings = this.settingsService.convertSettings(res);
-        });
-
-        this.settingsService.getUserSettings((data) => {
-            if (!data.settings) {
-                this.userSettings = this.userSettingsDefault;
-            } else {
-                this.userSettings = data.settings;
-            }
-            this.userSettings.unitType = 'default';
-            this.checkUnitFormat();
+            this.settingsService.getUserSettings((data) => {
+                if (!data.settings) {
+                    this.userSettings = this.userSettingsDefault;
+                } else {
+                    this.userSettings = data.settings;
+                }
+                this.userSettings.unitType = 'default';
+                this.checkUnitFormat();
+            });
         });
 
     }

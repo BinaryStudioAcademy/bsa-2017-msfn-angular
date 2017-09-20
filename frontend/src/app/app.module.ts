@@ -47,6 +47,7 @@ import { ChatService } from './services/chat.service';
 import { ChatWindowComponent } from './components/chat/components/chat-window/chat-window.component';
 import { UnreadPipe } from './components/chat/pipes/unread.pipe';
 import { TotalUnreadPipe } from './components/chat/pipes/total-unread.pipe';
+import { IsEventCreatorGuard } from './guards/is-event-creator.guard';
 import { DateService } from './services/date.service';
 import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component';
 
@@ -100,6 +101,7 @@ import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.
         ConfirmedPageService,
         ConstantsService,
         ChatService,
+        IsEventCreatorGuard,
         DateService
     ],
     entryComponents: [

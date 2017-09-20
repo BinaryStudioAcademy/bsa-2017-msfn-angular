@@ -7,9 +7,6 @@ const
 module.exports = app => {
     app.get(`${baseUrl}testimonial/:id`, isLoggedIn, (req, res, next) => {
         coachService.getTestimonialsByCoachId(req, (err, data) => {
-            if (!data.length) {
-                data = [{}];
-            }
             res.data = data;
             res.err = err;
             next();
