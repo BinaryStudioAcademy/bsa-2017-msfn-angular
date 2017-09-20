@@ -70,7 +70,7 @@ export class EventListComponent implements OnInit {
                 event.isFollowing = true;
             }
             this.eventService.getApplicants(category, event._id, data => {
-                event[category] = data;
+                event[category] = data[0][category];
             });
         });
     }
@@ -83,7 +83,7 @@ export class EventListComponent implements OnInit {
                 event.isFollowing = false;
             }
             this.eventService.getApplicants(category, event._id, data => {
-                event[category] = data;
+                event[category] = data[0][category];
             });
         });
     }
