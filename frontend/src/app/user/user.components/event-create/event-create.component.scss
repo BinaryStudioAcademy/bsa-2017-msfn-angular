@@ -46,7 +46,33 @@
 
             .date {
                 display: flex;
-                flex-flow: row nowrap;
+            }
+        }
+
+        #event-time {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            .time {
+                display: flex;
+
+                md-input-container {
+                    width: 30px;
+                    text-align: center;
+
+                    input {
+                        text-align: center;
+                    }
+                }
+
+                p {
+                    margin: auto $micro-indent;
+                }
+            }
+
+            .time:first-child {
+                margin-right: $macro-indent;
             }
         }
     }

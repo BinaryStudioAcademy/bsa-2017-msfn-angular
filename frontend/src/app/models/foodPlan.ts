@@ -1,7 +1,7 @@
 export interface IFoodPlan {
     _id?: string;
     title: string;
-    type: 'weekly' | 'daily';
+    kind: 'weekly' | 'daily';
     days: [{
         kcal: number,
         name: 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday',

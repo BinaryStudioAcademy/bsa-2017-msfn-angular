@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EventService} from '../../services/event.service';
 import {DateService} from '../../../services/date.service';
 import {IEvent} from '../../../models/event';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {WindowObj} from '../../../services/window.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class EventItemComponent implements OnInit {
 
     constructor(public activatedRoute: ActivatedRoute,
                 private eventService: EventService,
-                private dateService: DateService,
+                private router: Router,
                 private window: WindowObj) {
     }
 
@@ -44,7 +44,6 @@ export class EventItemComponent implements OnInit {
     ngOnInit() {
         if (this.activatedRoute.snapshot.params.id) {
             const eventId = this.activatedRoute.snapshot.params.id;
-            console.log(this.activatedRoute);
             this.getEvent(eventId);
         }
     }
@@ -58,4 +57,7 @@ export class EventItemComponent implements OnInit {
         });
     }
 
+    navigateToEditTab() {
+        this.router.navigate([`/user/events/${this.event._id}/edit-panel/${this.userId}`]);
+    }
 }

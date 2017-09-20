@@ -47,24 +47,24 @@ aside {
                     font-size: inherit;
                 }
             }
-        }
-
-        .active-link {
-            svg {
-                fill: #fff;
-            }
-            color: #fff;
-            font-weight: bold;
-            transform: translateX(7px);
-
-            &:before {
-                content: "•";
-                position: absolute;
-                display: block;
-                font-size: 30px;
-                left: -13px;
-                line-height: $header-text;
-                color: #82A690;
+            .active-link {
+                color: #fff;
+                font-weight: bold;
+                transform: translateX(7px);
+    
+                svg {
+                    fill: #fff;
+                }
+                
+                &:before {
+                    content: "•";
+                    position: absolute;
+                    display: block;
+                    font-size: 30px;
+                    left: -13px;
+                    line-height: $header-text;
+                    color: #82A690;
+                }
             }
         }
     }

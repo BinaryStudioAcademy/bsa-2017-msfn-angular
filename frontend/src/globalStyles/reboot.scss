@@ -376,3 +376,7 @@ template {
 [hidden] {
     display: none !important;
 }
+
+button[md-raised-button] {
+    background-color: $btn-color;
+}

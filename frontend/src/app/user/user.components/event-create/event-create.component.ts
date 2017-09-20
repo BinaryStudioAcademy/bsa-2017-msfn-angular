@@ -5,6 +5,8 @@ import {CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
 import {ToasterService} from '../../../services/toastr.service';
 import {FormControl, Validators} from '@angular/forms';
 import {WindowObj} from '../../../services/window.service';
+import {DateService} from '../../../services/date.service';
+import {Router} from '@angular/router';
 
 declare const google: any;
 
@@ -12,13 +14,18 @@ declare const google: any;
     selector: 'app-event-create',
     templateUrl: './event-create.component.html',
     styleUrls: ['./event-create.component.scss'],
-    providers: [EventService]
+    providers: [
+        EventService,
+        DateService
+    ]
 })
 export class EventCreateComponent implements OnInit {
 
     constructor(private eventService: EventService,
                 private toasterService: ToasterService,
-                private window: WindowObj) {
+                private window: WindowObj,
+                private dateService: DateService,
+                private router: Router) {
     }
 
     @Input() eventId: string = '';
@@ -26,6 +33,17 @@ export class EventCreateComponent implements OnInit {
 
     userId = (this.window.data._injectedData as any).userId;
     event: IEvent;
+
+    eventTime = {
+        startTime: {
+            hours: '00',
+            minutes: '00'
+        },
+        endTime: {
+            hours: '00',
+            minutes: '00'
+        }
+    };
 
     image = new Image();
     type: string;
@@ -72,7 +90,26 @@ export class EventCreateComponent implements OnInit {
         this.initMap();
     }
 
+    handleTimeInput(event, maxAmount) {
+        const checkValue = value => {
+            if (value < 0 || value > maxAmount) {
+                event.target.value = '00';
+            }
+        };
+
+        event.target.value = this.dateService.addZero(event.target.value);
+        if (event.target.value.length > 2) {
+            event.target.value = event.target.value.replace('0', '');
+        }
+        checkValue(event.target.value);
+    }
+
     createEvent(): void {
+        this.event.startDate = this.dateService
+            .updateDateTime(this.event.startDate, this.eventTime.startTime);
+        this.event.endDate = this.dateService
+            .updateDateTime(this.event.endDate, this.eventTime.endTime);
+
         if (this.data.image) {
             const fileType = 'img';
             const fileName = this.event.title.replace(/ /g, '_') + Date.now();
@@ -85,13 +122,13 @@ export class EventCreateComponent implements OnInit {
                     this.event.image = './resources/events/' + fileName + '.' + this.type;
 
                     this.eventService.createEvent(this.event, data => {
-                        console.log(data);
+                        this.router.navigate([`/user/events/${data._id}/general`]);
                     });
                 }
             });
         } else {
             this.eventService.createEvent(this.event, data => {
-                console.log(data);
+                this.router.navigate([`/user/events/${data._id}/general`]);
             });
         }
     }

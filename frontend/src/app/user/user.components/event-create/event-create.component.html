@@ -64,6 +64,48 @@
                 <md-datepicker #endPicker></md-datepicker>
             </div>
         </div>
+
+        <div id="event-time">
+            <div class="time">
+                <md-input-container class="time-input">
+                    <input
+                        mdInput
+                        name="hours"
+                        placeholder="hrs"
+                        [(ngModel)]="eventTime.startTime.hours"
+                        (keyup)="handleTimeInput($event, 23)">
+                </md-input-container>
+                <p>:</p>
+                <md-input-container class="time-input">
+                    <input
+                        mdInput
+                        name="minutes"
+                        placeholder="mins"
+                        [(ngModel)]="eventTime.startTime.minutes"
+                        (keyup)="handleTimeInput($event, 59)">
+                </md-input-container>
+            </div>
+
+            <div class="time">
+                <md-input-container class="time-input">
+                    <input
+                        mdInput
+                        name="hours"
+                        placeholder="hrs"
+                        [(ngModel)]="eventTime.endTime.hours"
+                        (keyup)="handleTimeInput($event, 23)">
+                </md-input-container>
+                <p>:</p>
+                <md-input-container class="time-input">
+                    <input
+                        mdInput
+                        name="minutes"
+                        placeholder="mins"
+                        [(ngModel)]="eventTime.endTime.minutes"
+                        (keyup)="handleTimeInput($event, 59)">
+                </md-input-container>
+            </div>
+        </div>
     </div>
 
     <div id="event-map">
