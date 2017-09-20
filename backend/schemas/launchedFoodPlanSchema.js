@@ -44,6 +44,7 @@ const LaunchedFoodPlan = new Schema({
                 name: String,
                 quantity: Number,
                 done: Boolean | null,
+                noPlan: Boolean,
                 _id: ObjectId,
             }]
         }],
@@ -62,6 +63,7 @@ const LaunchedFoodPlan = new Schema({
                 name: String,
                 quantity: Number,
                 done: Boolean | null,
+                noPlan: Boolean,
                 _id: ObjectId,
             }]
         }],

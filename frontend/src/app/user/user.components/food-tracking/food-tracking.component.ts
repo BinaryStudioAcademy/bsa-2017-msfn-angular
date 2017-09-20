@@ -17,6 +17,7 @@ export class FoodTrackingComponent implements OnInit {
     foodPlans;
     launchedFoodPlan;
     historyMealsStatic;
+    tomorrowFoodPlan;
     private searchDialog: MdDialogRef<any> | null;
     period = {
         to: new Date(),
@@ -36,6 +37,7 @@ export class FoodTrackingComponent implements OnInit {
         this.foodTrackingService.getCurentLaunchedFoodPlan(res => {
             if (res._id) {
                 this.createLaunchedFoodPlan(res);
+                this.checkTomorowData();
             } else {
                 this.getAllFoodPlans();
             }
@@ -98,6 +100,7 @@ export class FoodTrackingComponent implements OnInit {
         this.searchDialog = this.dialog.open(SearchComponent);
         this.searchDialog.afterClosed().subscribe(() => {
             this.searchDialog.componentInstance.selectedFood.forEach(el => {
+                el.noPlan = true;
                 meal.products.push(el);
             });
             this.searchDialog = null;
@@ -110,14 +113,22 @@ export class FoodTrackingComponent implements OnInit {
         });
     }
 
-    finish() {
+    finish(status) {
         if (this.checkCheckedProduct(this.launchedFoodPlan.todayMeals.meals)) {
             this.launchedFoodPlan.historyMeals.push(this.launchedFoodPlan.todayMeals);
             this.launchedFoodPlan.todayMeals.finished = true;
+            if (status === 'plan') {
+                this.launchedFoodPlan.status = 'finished';
+            }
             this.foodTrackingService.updateLaunchedFoodPlan(this.launchedFoodPlan, res => {
                 this.toasterService.showMessage('success', null, 'Saved');
-                this.launchedFoodPlan.todayMeals.meals = [];
-                this.createLaunchedFoodPlan(this.launchedFoodPlan);
+                if (status === 'plan') {
+                    this.launchedFoodPlan = null;
+                    this.getAllFoodPlans();
+                } else {
+                    this.launchedFoodPlan.todayMeals.meals = [];
+                    this.createLaunchedFoodPlan(this.launchedFoodPlan);
+                }
             });
         } else {
             this.toasterService.showMessage('error', null, 'select all products');
@@ -137,5 +148,13 @@ export class FoodTrackingComponent implements OnInit {
             return new Date(el.date) < new Date(this.period.to.getTime() + 1000 * 60 * 60 * 24 - 1000 * 60)
             && new Date(el.date) > this.period.from;
         });
+    }
+
+    checkTomorowData() {
+        if (this.launchedFoodPlan.kind === 'weekly') {
+            this.tomorrowFoodPlan = this.launchedFoodPlan.days[new Date().getDay()].meals;
+        } else {
+            this.tomorrowFoodPlan = this.launchedFoodPlan.meals;
+        }
     }
 }

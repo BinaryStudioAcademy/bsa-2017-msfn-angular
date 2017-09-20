@@ -10,84 +10,113 @@
             <i class="material-icons add-item-ico">add</i>
         </div>
     </div>
+
     <div class="container-launched" *ngIf="launchedFoodPlan">
-        <h2>Tracking plan</h2>
-        <div class="launched-meals">
-            <div class="launched-header">
-                <p class="date">
-                    {{dateService.beautifyDate(launchedFoodPlan.todayMeals.date)}}
-                    <span class="item-kcal">
-                        ({{launchedFoodPlan.todayMeals.totalKcal}} kcal)
-                    </span>
-                </p>
-                <p class="item-kcal" *ngIf="launchedFoodPlan.todayMeals.eaten">eaten: {{launchedFoodPlan.todayMeals.eaten}} kcal</p>
-            </div>
-            <div class="meals-item" *ngFor="let meal of launchedFoodPlan.todayMeals.meals">
-                <p class="item-name">{{ meal.name }} <span class="item-kcal">({{ meal.kcal }} kcal)</span></p>
-                <p class="item-kcal" *ngIf="meal.eaten"> eaten: {{ meal.eaten }} kcal</p>
-                <div class="item-product" *ngFor="let product of meal.products" [ngClass]="{'done': product.done, 'missed': product.done === null}">
-                    <md-checkbox class="product-checkbox" (change)="checkProduct(meal, product)" [ngModel]="product.done" [indeterminate]="product.done === null"></md-checkbox>
-                    <p class="product-name">{{ product.name }}</p>
-                    <p class="product-quantity">{{ product.quantity }}</p>
-                    <p class="product-kcal">{{ product.kcal }} kcal</p>
+
+        <h2>Tracking food plan</h2>
+        <md-tab-group position="0" selectedIndex="1">
+
+            <md-tab label="Yesterday" [disabled]="!launchedFoodPlan.historyMeals || !launchedFoodPlan.historyMeals.length">
+                <div class="history">
+                        <div class="period-wrap">
+                                <md-input-container>
+                                    <input mdInput 
+                                        [(ngModel)]="period.from"
+                                        [mdDatepicker]="period_from"
+                                        placeholder="from"
+                                        (ngModelChange)="updateDataHistoryView()"
+                                        [max]="minMaxCalendarDate"
+                                    >
+                                </md-input-container>
+                                <md-datepicker #period_from></md-datepicker>
+                                <md-datepicker-toggle [for]="period_from"></md-datepicker-toggle>
+                                <md-input-container>
+                                    <input mdInput 
+                                        [(ngModel)]="period.to"
+                                        [mdDatepicker]="period_to"
+                                        placeholder="to"
+                                        (ngModelChange)="updateDataHistoryView()"
+                                        [max]="minMaxCalendarDate"
+                                    >
+                                </md-input-container>
+                                <md-datepicker #period_to></md-datepicker>
+                                <md-datepicker-toggle [for]="period_to"></md-datepicker-toggle>
+                            </div>
+                    <div class="launched-meals" *ngFor="let history of launchedFoodPlan.historyMeals">
+                        <div class="launched-header">
+                            <p class="date">
+                                {{dateService.beautifyDate(history.date)}}
+                                <span class="item-kcal">
+                                        ({{history.totalKcal}} kcal)
+                                    </span>
+                            </p>
+                            <p class="item-kcal" *ngIf="history.eaten">eaten: {{history.eaten}} kcal</p>
+                        </div>
+                        <div class="meals-item" *ngFor="let meal of history.meals">
+                            <p class="item-name">{{ meal.name }} <span class="item-kcal">({{ meal.kcal }} kcal)</span></p>
+                            <!-- <md-icon class="icon-arrow" (click)="meal.hideProduct =! meal.hideProduct">{{meal.hideProduct ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</md-icon> -->
+                            <p class="item-kcal" *ngIf="meal.eaten"> eaten: {{ meal.eaten }} kcal</p>
+                            <!-- <div *ngIf="meal.hideProduct">   and remove <div> below-->
+                            <div>
+                                <div class="item-product" *ngFor="let product of meal.products" [ngClass]="{'done': product.done, 'missed': product.done === null}">
+                                    <md-checkbox class="product-checkbox" [disabled]="true" [ngModel]="product.done" [indeterminate]="product.done === null"></md-checkbox>
+                                    <p class="product-name">{{ product.name }}</p>
+                                    <p class="product-quantity">{{ product.quantity }}</p>
+                                    <p class="product-kcal">{{ product.kcal }} kcal</p>
+                                    <p class="product-added" *ngIf="product.noPlan">added</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="item-add" (click)="addProduct(meal)">add product</div>
-            </div>
-            <div class="buttons">
-                <button md-button class="btn-save" (click)="save()">save</button>
-                <button md-button class="btn-save" (click)="finish()">finish day</button>
-            </div>
-        </div>
-        <div class="history">
-            <h2>History</h2>
-            <div class="period-wrap">
-                <md-input-container>
-                    <input mdInput
-                    [(ngModel)]="period.from"
-                    [mdDatepicker]="period_from"
-                    placeholder="from"
-                    (ngModelChange)="updateDataHistoryView()"
-                    [max]="minMaxCalendarDate"
-                >
-                </md-input-container>
-                <md-datepicker #period_from></md-datepicker>
-                <md-datepicker-toggle [for]="period_from"></md-datepicker-toggle>
-                <md-input-container>
-                    <input mdInput
-                    [(ngModel)]="period.to"
-                    [mdDatepicker]="period_to"
-                    placeholder="to"
-                    (ngModelChange)="updateDataHistoryView()"
-                    [max]="minMaxCalendarDate"
-                >
-                </md-input-container>
-                <md-datepicker #period_to></md-datepicker>
-                <md-datepicker-toggle [for]="period_to"></md-datepicker-toggle>
-            </div>
-            <div class="launched-meals" *ngFor="let history of launchedFoodPlan.historyMeals">
-                <div class="launched-header">
-                    <p class="date">
-                        {{dateService.beautifyDate(history.date)}}
-                        <span class="item-kcal">
-                            ({{history.totalKcal}} kcal)
+            </md-tab>
+
+            <md-tab label="Today">
+                <div class="launched-meals">
+                    <div class="launched-header">
+                        <p class="date">
+                            {{dateService.beautifyDate(launchedFoodPlan.todayMeals.date)}}
+                            <span class="item-kcal">
+                            ({{launchedFoodPlan.todayMeals.totalKcal}} kcal)
                         </span>
-                    </p>
-                    <p class="item-kcal" *ngIf="history.eaten">eaten: {{history.eaten}} kcal</p>
-                </div>
-                <div class="meals-item" *ngFor="let meal of history.meals">
-                    <p class="item-name">{{ meal.name }} <span class="item-kcal">({{ meal.kcal }} kcal)</span></p>
-                    <md-icon class="icon-arrow" (click)="meal.hideProduct =! meal.hideProduct">{{meal.hideProduct ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</md-icon>
-                    <p class="item-kcal" *ngIf="meal.eaten"> eaten: {{ meal.eaten }} kcal</p>
-                    <div *ngIf="meal.hideProduct">
+                        </p>
+                        <p class="item-kcal" *ngIf="launchedFoodPlan.todayMeals.eaten">eaten: {{launchedFoodPlan.todayMeals.eaten}} kcal</p>
+                    </div>
+                    <div class="meals-item" *ngFor="let meal of launchedFoodPlan.todayMeals.meals">
+                        <p class="item-name">{{ meal.name }} <span class="item-kcal">({{ meal.kcal }} kcal)</span></p>
+                        <p class="item-kcal" *ngIf="meal.eaten"> eaten: {{ meal.eaten }} kcal</p>
                         <div class="item-product" *ngFor="let product of meal.products" [ngClass]="{'done': product.done, 'missed': product.done === null}">
-                            <md-checkbox class="product-checkbox" [disabled]="true" [ngModel]="product.done" [indeterminate]="product.done === null"></md-checkbox>
+                            <md-checkbox class="product-checkbox" (change)="checkProduct(meal, product)" [ngModel]="product.done" [indeterminate]="product.done === null"></md-checkbox>
+                            <p class="product-name">{{ product.name }}</p>
+                            <p class="product-quantity">{{ product.quantity }}</p>
+                            <p class="product-kcal">{{ product.kcal }} kcal</p>
+                            <p class="product-added" *ngIf="product.noPlan">added</p>
+                        </div>
+                        <div class="item-add" (click)="addProduct(meal)">add product</div>
+                    </div>
+                    <div class="buttons">
+                        <button md-button class="btn-save" (click)="save()">save</button>
+                        <button md-button class="btn-save" (click)="finish('day')">finish day</button>
+                    </div>
+                </div>
+            </md-tab>
+
+            <md-tab label="Tomorrow">
+                <div class="launched-meals" *ngIf="tomorrowFoodPlan">
+                    <p *ngIf="tomorrowFoodPlan.length === 0">no food plan</p>
+                    <div class="meals-item" *ngFor="let meal of tomorrowFoodPlan">
+                        <p class="item-name">{{ meal.name }} <span class="item-kcal">({{ meal.kcal }} kcal)</span></p>
+                        <div class="item-product" *ngFor="let product of meal.products">
+                            <md-checkbox class="product-checkbox" [disabled]="true"></md-checkbox>
                             <p class="product-name">{{ product.name }}</p>
                             <p class="product-quantity">{{ product.quantity }}</p>
                             <p class="product-kcal">{{ product.kcal }} kcal</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </md-tab>
+
+        </md-tab-group>
+        <button md-button (click)="finish('plan')">start to track new food plan</button>
     </div>
 </div>

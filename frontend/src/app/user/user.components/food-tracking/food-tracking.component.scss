@@ -12,12 +12,13 @@
     font-size: $usual-text;
     margin: $content-tb-margin auto;
 
-    h2 {
-        flex: 100%;
-        margin-bottom: 0;
-        text-align: center;
-        font-size: $header-text;
-    }
+}
+
+h2 {
+    flex: 100%;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: $header-text;
 }
 
 .item-container {
@@ -77,11 +78,15 @@ md-icon {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+
+    md-tab-group {
+        width: 100%;
+    }
 }
 
 .launched-meals {
-    width: 30%;
-    margin: 15px;
+    width: 400px;
+    margin: 15px auto;
     padding: 15px;
     background: linear-gradient($gradient-to-color 75%, $bg-color);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -142,6 +147,10 @@ md-icon {
             font-size: 13px;
             color: $text-second-color;
         }
+
+        .product-added {
+            color: $text-warn-color;
+        }
     }
 
     .missed {
@@ -166,6 +175,7 @@ md-icon {
         display: block;
         border: none;
         width: 150px;
+        margin: 0 5px;
         color: $text-main-color;
         background-color: $btn-color;
         font-weight: bold;
@@ -179,11 +189,30 @@ md-icon {
 .history {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
+
+    .period-wrap {
+        display: flex;
+        margin: 10px 0 0 15px;
+        justify-content: center;
+        flex: 100%;
+    }
+    
+    .meals-item {
+        flex-flow: column nowrap;
+        align-items: flex-start;
+    }
 
     .icon-arrow {
         width: 17px;
         height: 17px;
         font-size: 17px;
         cursor: pointer;
+    }
+}
+
+@media screen and (max-width: $small-screen) {
+    .launched-meals {
+        width: 300px;
     }
 }
