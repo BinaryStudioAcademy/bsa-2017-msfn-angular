@@ -28,7 +28,7 @@ module.exports = function (app) {
         });
     }, apiResponse);
 
-    app.get(baseUrl+'type/:type', isLoggedIn, function (req, res, next) {
+    app.get(baseUrl+'type/:category', isLoggedIn, function (req, res, next) {
         exerciseService.getExercisesByType(req.params.category, function (err, data) {
             if (!data.length) {
                 data = [{}];
