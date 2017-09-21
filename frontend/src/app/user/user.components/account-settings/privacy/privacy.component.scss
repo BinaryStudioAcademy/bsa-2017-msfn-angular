@@ -6,6 +6,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-content: center;
+    width: 100%;
 
     .title {
         margin: $header-top-margin auto $content-between-margin;
@@ -29,13 +30,32 @@
         padding: 15px;
         color: $text-main-color;
         background-color: $btn-color;
-        font-size: $button-text;
         font-weight: 600;
         font-size: 11pt;
         border-radius: 50px;
         outline: none;
         &:hover {
             cursor: pointer;
+        }
+    }
+}
+
+@media screen and (max-width: $medium-screen) {
+    .container {
+        justify-content: center;
+
+        .title {
+            text-align: center;
+            max-width: 80%;
+        }
+
+        .checkbox-wrap {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .btn {
+            width: 80%;
         }
     }
 }
