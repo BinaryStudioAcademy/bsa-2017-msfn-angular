@@ -127,7 +127,6 @@ export class EventService {
             failMessage: `Can\'t show ${category}`
         };
         this.httpService.sendRequest(req).then(data => {
-            console.log(`${category} DATA`, data);
             callback(data);
         });
     }

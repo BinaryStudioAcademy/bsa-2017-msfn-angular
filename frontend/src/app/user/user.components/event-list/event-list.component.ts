@@ -22,7 +22,17 @@ export class EventListComponent implements OnInit {
     };
 
     ngOnInit() {
+        this.getstartDate();
         this.getPeriodEvents();
+    }
+
+    getstartDate() {
+        const now = this.period.startDate;
+        this.period.startDate = new Date(
+            now.getUTCFullYear(),
+            now.getUTCMonth(),
+            now.getUTCDate()
+        );
     }
 
     getAllEvents(): void {
