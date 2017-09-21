@@ -23,7 +23,7 @@
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    margin: $macro-indent auto;
+    margin: 0 auto $macro-indent;
 
     h1 {
         flex-basis: 100%;
@@ -92,6 +92,8 @@ router-outlet {
     }
 
     #event-header {
+        margin: $macro-indent auto;
+
         h1 {
             flex-basis: initial;
         }
