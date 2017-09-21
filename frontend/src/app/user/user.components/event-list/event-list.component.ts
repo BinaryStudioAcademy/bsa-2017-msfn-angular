@@ -22,7 +22,7 @@ export class EventListComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.getAllEvents();         // change to period events
+        this.getPeriodEvents();
     }
 
     getAllEvents(): void {
