@@ -32,6 +32,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
         'Quantity': 'pc',
 
     };
+    isModal;
+
     constructor(
         public foodPlanService: FoodPlanService,
         public el: ElementRef,
@@ -59,6 +61,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         const hostElem = this.el.nativeElement;
         if (hostElem.parentNode.localName === 'md-dialog-container') {
             hostElem.children[0].style.height = '80vh';
+            this.isModal = true;
             this.currentMealProducts = {
                 data: {
                     list: [],

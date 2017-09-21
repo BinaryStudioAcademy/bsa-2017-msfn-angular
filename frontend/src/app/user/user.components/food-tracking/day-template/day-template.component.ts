@@ -28,13 +28,12 @@ export class DayTemplateComponent implements OnInit, AfterViewInit {
         public el: ElementRef,
     ) { }
 
-    ngOnInit() {
-        console.log(this.historyFoodPlan);
-    }
+    ngOnInit() { }
 
     ngAfterViewInit() {
         const hostElem = this.el.nativeElement;
         if (hostElem.parentNode.localName === 'md-dialog-container') {
+            hostElem.parentNode.setAttribute('perfectScrollbar', '');
             this.foodTrackingService.getCurentLaunchedFoodPlan(res => {
                 this.createLaunchedFoodPlan(res);
                 this.isModal = true;
