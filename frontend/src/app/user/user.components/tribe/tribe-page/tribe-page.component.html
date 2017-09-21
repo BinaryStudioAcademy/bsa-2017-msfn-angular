@@ -1,19 +1,19 @@
 <div class="page-container">
     <div class="general">
-        <img src="https://pbs.twimg.com/profile_images/805545477760552960/ktKI2KU8_400x400.jpg" class="tribe-logo">
-        <h1>{{trueTribe.name}}</h1>
+        <img src="{{tribe.image}}" class="tribe-logo">
+        <h1>{{tribe.name}}</h1>
         <span class="mid-text menu-option">Send message</span>
         <span class="mid-text menu-option" (click)="showFollowers()">Followers</span>
         <a class="mid-text menu-option"
-           *ngIf="userId === trueTribe.creator"
+           *ngIf="userId === tribe.creator"
            routerLink="/user/tribe-settings">Settings</a>
-        <a class="mid-text menu-option" [routerLink]="['/user/create-tribe-post' , { tribe: tribeID }]">Add post</a>
+        <a class="mid-text menu-option" (click)="addPost()">Add post</a>
         <button md-button class="btn">Follow</button>
     </div>
     <div class="content">
         <div class="description">
             <h2 class="mid-text">About</h2>
-            <span>{{trueTribe.description}}</span>
+            <span>{{tribe.description}}</span>
         </div>
         <div *ngIf="posts">
             <app-tribe-post *ngFor="let currentPost of posts"

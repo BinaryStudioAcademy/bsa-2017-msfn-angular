@@ -1,10 +1,10 @@
 import { ActivatedRoute } from '@angular/router';
-import { TribeService } from './../../../tribe.service';
+import { TribeService } from '../../../tribe.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { HttpService } from '../../../../../../services/http.service';
-import { MdDialog } from '@angular/material/material';
+import { MdDialog } from '@angular/material';
 import { WindowObj } from '../../../../../../services/window.service';
 import { ToasterService } from '../../../../../../services/toastr.service';
 @Component({

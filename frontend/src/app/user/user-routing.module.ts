@@ -44,6 +44,7 @@ import { TribePageComponent } from './user.components/tribe/tribe-page/tribe-pag
 import { CreateTribePostComponent } from './user.components/tribe/create-tribe-post/create-tribe-post.component';
 import { TribeSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.component';
 import { CreateTribeComponent } from './user.components/tribe/create-tribe/create-tribe.component';
+import { TribeListComponent } from './user.components/tribe/tribe-list/tribe-list.component';
 
 const userRoutes: Routes = [
     {
@@ -225,6 +226,10 @@ const userRoutes: Routes = [
                         component: GeneralSettingsComponent
                     }
                 ]
+            },
+            {
+                path: 'tribe-list',
+                component: TribeListComponent
             }
         ]
     }

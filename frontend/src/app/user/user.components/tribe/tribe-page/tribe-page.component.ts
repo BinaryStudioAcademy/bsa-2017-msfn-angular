@@ -7,6 +7,7 @@ import { TribeService } from '../tribe.service';
 import { ActivatedRoute } from '@angular/router';
 import { WindowObj } from '../../../../services/window.service';
 import { ToasterService } from '../../../../services/toastr.service';
+import { CreateTribePostComponent } from '../create-tribe-post/create-tribe-post.component';
 
 @Component({
     selector: 'app-tribe-page',
@@ -16,7 +17,7 @@ import { ToasterService } from '../../../../services/toastr.service';
 })
 export class TribePageComponent implements OnInit {
     posts: ITribePost[];
-    trueTribe: ITribe = {
+    tribe: ITribe = {
         name: '',
         creator: '',
         members: [],
@@ -36,11 +37,11 @@ export class TribePageComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.trueTribe);
+        console.log(this.tribe);
         if (this.tribeID) {
             this.tribeService.getTribe(this.tribeID, (resp) => {
-                this.trueTribe = resp;
-                console.log(this.trueTribe);
+                this.tribe = resp;
+                console.log(this.tribe);
             });
             this.tribeService.getPostsByTribe(this.tribeID, (res) => {
                 this.posts = res;
@@ -51,13 +52,22 @@ export class TribePageComponent implements OnInit {
 
     showFollowers() {
         this.mdDialog.open(TribeMembersDialogComponent, {
-            data: this.trueTribe.members
+            data: this.tribe.members
+        });
+    }
+
+    addPost() {
+        this.mdDialog.open(CreateTribePostComponent, {
+            data: {
+                tribeId: this.tribeID,
+                userId: this.userId
+            }
         });
     }
 
     saveComment(postId, text) {
         this.tribeService.commentPost(
-            this.trueTribe._id,
+            this.tribe._id,
             postId,
             this.userId,
             text,
