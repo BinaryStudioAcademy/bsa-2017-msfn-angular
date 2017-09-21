@@ -83,6 +83,7 @@ import { CreateTribePostComponent } from './user.components/tribe/create-tribe-p
 import { FullTribePostComponent } from './user.components/tribe/full-tribe-post/full-tribe-post.component';
 import { TribeMembersDialogComponent} from './user.components/tribe/tribe-members-dialog/tribe-members-dialog.component';
 import { CreateTribeComponent } from './user.components/tribe/create-tribe/create-tribe.component';
+import { GeneralSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/general-settings/general-settings.component';
 
 
 @NgModule({
@@ -168,6 +169,7 @@ import { CreateTribeComponent } from './user.components/tribe/create-tribe/creat
         FullTribePostComponent,
         TribeMembersDialogComponent,
         CreateTribeComponent,
+        GeneralSettingsComponent,
     ],
     providers: [
         ForAllUserGuard,

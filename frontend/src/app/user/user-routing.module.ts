@@ -1,3 +1,4 @@
+import { GeneralSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/general-settings/general-settings.component';
 import { GoalComponent } from './user.components/goal/goal.component';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { MetricsComponent } from './user.components/account-settings/metrics/metrics.component';
@@ -216,8 +217,14 @@ const userRoutes: Routes = [
                 component: CreateTribeComponent
             },
             {
-                path: 'tribe-settings',
-                component: TribeSettingsComponent
+                path: 'tribe-settings/:id',
+                component: TribeSettingsComponent,
+                children: [
+                    {
+                        path: 'general',
+                        component: GeneralSettingsComponent
+                    }
+                ]
             }
         ]
     }
