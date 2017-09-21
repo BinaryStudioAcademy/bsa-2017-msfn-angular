@@ -149,10 +149,11 @@ export class EventService {
             url: '/api/event/apply/' + eventId,
             method: 'PUT',
             body: {
-                fieldName: category,
+                category,
                 userId
             }
         };
+        console.log(req);
         this.httpService.sendRequest(req).then(data => {
             if (data) {
                 callback(null, data);
@@ -165,10 +166,11 @@ export class EventService {
             url: '/api/event/unapply/' + eventId,
             method: 'PUT',
             body: {
-                fieldName: category,
+                category,
                 userId
             }
         };
+        console.log(req);
         this.httpService.sendRequest(req).then(data => {
             if (data) {
                 callback(null, data);

@@ -68,28 +68,34 @@ export class EventItemComponent implements OnInit {
 
     apply(category, event): void {
         this.eventService.apply(category, event._id, this.userId, () => {
-            if (category === 'participants') {
-                event.isParticipating = true;
-            } else {
-                event.isFollowing = true;
-            }
             this.eventService.getApplicants(category, event._id, data => {
                 event[category] = data[0][category];
             });
+
+            this.postApplyAction(event, category, true);
         });
     }
 
     unapply(category, event): void {
         this.eventService.unapply(category, event._id, this.userId, () => {
-            if (category === 'participants') {
-                event.isParticipating = false;
-            } else {
-                event.isFollowing = false;
-            }
             this.eventService.getApplicants(category, event._id, data => {
                 event[category] = data[0][category];
             });
+
+            this.postApplyAction(event, category, false);
         });
+    }
+
+    postApplyAction(event, category, isApplied: boolean) {
+        if (category === 'participants') {
+            event.isParticipating = isApplied;
+            event.isFollowing = isApplied;
+            this.eventService.getApplicants('followers', event._id, data => {
+                event[category] = data[0][category];
+            });
+        } else {
+            event.isFollowing = isApplied;
+        }
     }
 
     navigateToEditTab() {

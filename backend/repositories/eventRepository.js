@@ -110,7 +110,7 @@ function applyUser(id, body, callback) {
             _id: id
         },
         { $addToSet: {
-            [body.fieldName]: body.userId
+            [body.category]: body.userId
         }}
     );
     query.exec(callback);
@@ -122,7 +122,7 @@ function unapplyUser(id, body, callback) {
             _id: id
         },
         { $pull: {
-            [body.fieldName]: body.userId
+            [body.category]: body.userId
         }}
     );
     query.exec(callback);
