@@ -1,6 +1,7 @@
 #toast-container {
+    position: absolute;
     right: 0;
-    bottom: -6px;
+    bottom: 0;
     width: 200px;
     .toast {
         width: 100%;

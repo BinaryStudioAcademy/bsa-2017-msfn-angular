@@ -66,6 +66,7 @@ label {
     position: relative;
     width: 460px;
     padding: 20px;
+    overflow-x: hidden;
 }
 
 .profile-title {
@@ -367,7 +368,68 @@ label {
     }
 }
 
-@media only screen and (max-width: $small-screen) {
+@media only screen and (max-width: $large-screen) {
+    .profile {
+        width: 100%;
+        overflow-x: hidden;
+
+        .profile-row {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+
+        .responsive-width {
+            width: 80%;
+        }
+
+        .btn {
+            width: 80%;
+        }
+
+        .profile-fullname {
+            align-items: center;
+
+            .profile-name,
+            .profile-lastname {
+                width: 80%;
+            }
+        }
+
+        .profile-birthday {
+            .birthday-year,
+            .birthday-month,
+            .birthday-day {
+                flex: none;
+                width: 100%;
+            }
+        }
+    }
+}
+@media only screen and (max-width: $medium-screen) {
+    .profile {
+        width: 100%;
+        padding: 10px;
+
+        .profile-row {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+
+        .responsive-width {
+            width: 80%;
+        }
+
+        .btn {
+            width: 80%;
+        }
+    }
+
     .profile-current-email {
         justify-content: center;
         margin: 0 15px 15px;

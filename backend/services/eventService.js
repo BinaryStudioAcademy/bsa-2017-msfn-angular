@@ -7,12 +7,12 @@ function EventService() { }
 EventService.prototype.getItemById = getItemById;
 EventService.prototype.getAllItems = getAllItems;
 EventService.prototype.getItemsByUserId = getItemsByUserId;
-EventService.prototype.getFollowers = getFollowers;
-EventService.prototype.getParticipants = getParticipants;
+EventService.prototype.getApplicants = getApplicants;
 EventService.prototype.getItemsByDates = getItemsByDates;
 EventService.prototype.getMessages = getMessages;
 EventService.prototype.addItem = addItem;
 EventService.prototype.applyUser = applyUser;
+EventService.prototype.unapplyUser = unapplyUser;
 EventService.prototype.deleteItem = deleteItem;
 
 function getItemById(req, callback) {
@@ -61,16 +61,9 @@ function getItemsByDates(body, callback) {
     });
 }
 
-function getParticipants(body, callback) {
+function getApplicants(category, body, callback) {
     const eventId = body.params.id;
-    eventRepository.getParticipants(eventId, (err, data) => {
-        callback(err, data);
-    });
-}
-
-function getFollowers(body, callback) {
-    const eventId = body.params.id;
-    eventRepository.getFollowers(eventId, (err, data) => {
+    eventRepository.getApplicants(category, eventId, (err, data) => {
         callback(err, data);
     });
 }
@@ -108,7 +101,31 @@ function applyUser(eventId, body, callback) {
         if (data === null){
             callback(new ApiError('Event not found'));
         } else {
-            eventRepository.applyUser(eventId, body, callback);
+            if (data.creator._id.toString() === body.userId) {
+                callback(new ApiError('Creator cannot be applied to event'));
+            } else {
+                if (body.category === 'participants') {
+                    const followBody = {userId: body.userId, category: 'followers'};
+                    eventRepository.applyUser(eventId, followBody, callback);
+                }
+                eventRepository.applyUser(eventId, body, callback);
+            }
+        }
+    })
+}
+
+function unapplyUser(eventId, body, callback) {
+    eventRepository.getById(eventId, (err, data) => {
+        if (err) return callback(err);
+
+        if (data === null){
+            callback(new ApiError('Event not found'));
+        } else {
+            if (body.category === 'participants') {
+                const followBody = {userId: body.userId, category: 'followers'};
+                eventRepository.unapplyUser(eventId, followBody, callback);
+            }
+            eventRepository.unapplyUser(eventId, body, callback);
         }
     })
 }

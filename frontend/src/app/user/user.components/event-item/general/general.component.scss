@@ -3,7 +3,7 @@
 @import '../../../../../globalStyles/indentations';
 
 #general-container {
-    width: 65vw;
+    width: 100%;
 
     a {
         text-decoration: none;
@@ -16,8 +16,7 @@
 
     .text-block {
         display: inline-block;
-        width: 45%;
-        margin-right: 50px;
+        width: 100%;
         vertical-align: top;
         font-size: $main-text;
 
@@ -56,7 +55,7 @@
         #participants,
         #followers {
             display: inline-block;
-            width: 45%;
+            width: 100%;
             vertical-align: top;
 
             .user {
@@ -89,12 +88,12 @@
 
     #event-image {
         display: inline-block;
-        width: 50%;
-        float: right;
+        width: 100%;
+        margin: $standard-indent auto;
 
         img {
-            height: 400px;
-            float: right;
+            width: 100%;
+            height: auto;
         }
     }
 
@@ -103,5 +102,66 @@
     .user-avatar:hover,
     .user-name:hover {
         cursor: pointer;
+    }
+}
+
+
+@media screen and (min-width: $large-screen) {
+
+    #general-container {
+        .text-block {
+            #participants,
+            #followers {
+                width: 45%;
+            }
+        }
+
+        #event-image {
+            text-align: center;
+            float: none;
+
+            img {
+                width: 80%;
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: $hd-screen) {
+
+    #general-container {
+        .text-block {
+            width: 45%;
+            margin-right: $large-indent;
+        }
+
+        #event-image {
+            width: 50%;
+            float: right;
+
+            img {
+                width: 100%;
+                height: auto;
+                float: right;
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: $full-hd-screen) {
+
+    #general-container {
+        .text-block {
+            margin-right: 50px;
+        }
+
+        #event-image {
+            img {
+                width: auto;
+                height: 400px;
+            }
+        }
     }
 }

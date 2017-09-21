@@ -11,13 +11,13 @@ $height: calc(100vh - 70px);
 .mainblock {
     display: flex;
     width: 60%;
-    height: calc(100vh - 70px - 45px*2);
+    height: calc(100vh - 70px - 45px * 2);
     min-height: 450px;
     margin: $header-top-margin auto;
     background-color: $gradient-to-color;
 }
 
-aside {
+.aside {
     flex: 0 0 30%;
     height: 100%;
     // float: left;
@@ -26,7 +26,7 @@ aside {
     font-size: $usual-text;
     background: linear-gradient($bg-color 75%, $gradient-from-color);
 
-    nav {
+    .navigation {
         width: 90%;
         float: right;
         position: relative;
@@ -71,23 +71,52 @@ aside {
     overflow-y: auto;
 }
 
-@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
-    aside {
+@media screen and (max-width: $large-screen) {
+    .mainblock {
+        width: 100%;
+        height: calc(100vh - 70px);
+        margin: 0;
+        position: relative;
+    }
+
+    .aside {
         width: 180px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        flex: none;
+    }
+
+    .child {
+        width: calc(100% - 180px);
+        margin-left: 180px;
+        flex: none;
+        max-height: 100%;
     }
 }
 
-@media screen and (max-width: $small-screen) {
+@media screen and (max-width: $medium-screen) {
     .mainblock {
-        width: 98%;
-        margin: 1%;
+        width: 100%;
+        height: auto;
+        margin: 0;
     }
 
-    aside {
-        width: 55px;
+    .aside {
+        width: 100px;
+        height: calc(100% - 70px);
+        position: fixed;
+        left: 0;
+        top: 70px;
+        display: block;
+    }
 
-        .navigation__title, .navigation__subheader {
-            display: none;
-        }
+    .child {
+        width: calc(100% - 100px);
+        margin-left: 100px;
+        flex: none;
+        max-height: initial;
     }
 }

@@ -3,7 +3,7 @@
 @import '../../../../../globalStyles/indentations';
 
 #event-map {
-    width: 65vw;
+    width: 100%;
 
     p {
         display: inline-block;
@@ -11,10 +11,9 @@
 
     .text-block {
         display: inline-block;
-        width: 35%;
-        margin-right: 50px;
+        width: 100%;
         vertical-align: top;
-        font-size: $large-text;
+        font-size: $usual-text;
 
         .dates {
             display: flex;
@@ -24,6 +23,7 @@
 
             p {
                 flex-basis: 100%;
+                margin: $micro-indent;
             }
         }
 
@@ -39,8 +39,38 @@
 
     #map {
         display: inline-block;
-        width: 60%;
-        height: 60vh;
-        float: right;
+        width: 100%;
+        height: 50vh;
+        margin-bottom: $standard-indent;
+    }
+}
+
+
+@media screen and (min-width: $large-screen) {
+
+    #event-map {
+        width: 65vw;
+
+        .text-block {
+            width: 35%;
+            margin-right: $large-indent;
+            font-size: $large-text;
+        }
+
+        #map {
+            width: 60%;
+            height: 60vh;
+            float: right;
+        }
+    }
+}
+
+
+@media screen and (min-width: $full-hd-screen) {
+
+    #event-map {
+        .text-block {
+            margin-right: 50px;
+        }
     }
 }

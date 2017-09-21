@@ -51,10 +51,55 @@ export class EventItemComponent implements OnInit {
     getEvent(id: string): void {
         this.eventService.getItem(id, data => {
             this.event = data;
-            console.log(data);
             this.eventService.setDateOutput(this.event);
-            this.eventService.isUserApplied(this.event, this.userId);
+            this.event.isParticipating = this.event.participants.find(item => {
+                return item._id === this.userId;
+            });
+            this.event.isFollowing = this.event.followers.find(item => {
+                return item._id === this.userId;
+            });
         });
+    }
+
+    applicationAction(category: string, event): void {
+        const status = category === 'participants' ? 'isParticipating' : 'isFollowing';
+        if (event[status]) {
+            this.unapply(category, event);
+        } else {
+            this.apply(category, event);
+        }
+    }
+
+    apply(category: string, event): void {
+        this.eventService.apply(category, event._id, this.userId, () => {
+            this.eventService.getApplicants(category, event._id, data => {
+                event[category] = data[0][category];
+            });
+
+            this.postApplyAction(event, category, true);
+        });
+    }
+
+    unapply(category: string, event): void {
+        this.eventService.unapply(category, event._id, this.userId, () => {
+            this.eventService.getApplicants(category, event._id, data => {
+                event[category] = data[0][category];
+            });
+
+            this.postApplyAction(event, category, false);
+        });
+    }
+
+    postApplyAction(event, category: string, isApplied: boolean) {
+        if (category === 'participants') {
+            event.isParticipating = isApplied;
+            event.isFollowing = isApplied;
+            this.eventService.getApplicants('followers', event._id, data => {
+                event.followers = data[0].followers;
+            });
+        } else {
+            event.isFollowing = isApplied;
+        }
     }
 
     navigateToEditTab() {

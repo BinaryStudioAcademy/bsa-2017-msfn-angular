@@ -4,5 +4,5 @@
     <img [src]="data.achieved ? data.icon : './resources/achievements_icon/blocked.png'" class="icon"/>
     <div class="text">{{data.achieved ? data.hiddenMessage : data.message}}</div>
     <div class="data" *ngIf="data.achieved">Achieved: {{data.finished | date: 'yMd'}}</div>
-    <button md-raised-button [md-dialog-close]="false" id="close-btn">OK</button>
+    <button md-raised-button [md-dialog-close]="false">OK</button>
 </div>

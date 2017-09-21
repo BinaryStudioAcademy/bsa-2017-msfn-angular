@@ -12,17 +12,82 @@
 
 .index__banner-wrap {
     width: 100%;
-    background: url('../../../globalStyles/img/banner.png') no-repeat;
-    background-attachment: fixed;
+    background: url('../../../globalStyles/img/bg_general.png') fixed;
+    background-size: 100vw 100vh;
+    opacity: 0;
+    animation: show 3s forwards;
+}
+@keyframes show {
+    from {opacity: 0}
+    to {opacity: 1}
 }
 
 .container {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    background: url('../../../globalStyles/img/msfn_logo.png') no-repeat calc(100vw - 1900px) calc(100vh - 500px);
     padding: 0 5%;
     width: 100%;
     height: 100%;
 
+    .descript {
+        width: 50vw;
+        height: 20vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+
+        .wrap-gallery {
+            width: 200vw;
+            position: absolute;
+            animation: gallery 20s 2s infinite forwards;
+            div {
+                width: 50vw;
+                height: 30vh;
+                float: left;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 5vh;
+                font-family: inherit;
+                font-weight: bold;
+
+
+                &.first {
+                    // background-color: red;
+                }
+                &.second {
+                    // background-color: yellow;
+                }
+                &.third {
+                    // background-color: green;
+                }
+            }
+        }
+    }
+}
+
+@keyframes gallery {
+    0% {
+        left: 0;
+    }
+    10% {
+        left: -50vw;
+    }
+    35% {
+        left: -50vw;
+    }
+    45% {
+        left: -100vw;
+    }
+    70% {
+        left: -100vw;
+    }
+    80% {
+        left: -150vw;
+    }
 }
 
 .isnt-logedin {
@@ -31,7 +96,7 @@
 
 .index__banner-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
 
@@ -56,9 +121,7 @@
         justify-content: center;
         text-align: center;
         padding: 20px;
-        margin: 40px 100px 40px 20px;
-        background: #222222;
-        background: linear-gradient(#424242, #222222);
+        background: rgba(66, 66, 66, 0.8);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 
         .index__auth-socials-wrap {
@@ -82,11 +145,11 @@
 }
 
 @media screen and (max-width: 768px) {
-    .index__banner-wrap {
-        background: linear-gradient(to top, $bg-color 75%, $gradient-from-color);
-    }
     .container {
         display: block;
+        .descript {
+            display: none;
+        }
     }
     .index__banner-content {
         .index__auth-wrap {

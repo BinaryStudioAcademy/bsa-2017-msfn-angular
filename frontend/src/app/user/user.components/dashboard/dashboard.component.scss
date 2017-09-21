@@ -92,17 +92,6 @@
     h2 {
         margin: 0 0 5% 0;
     }
-
-    .inner-container {
-        .content {
-            .no-items {
-                button {
-                    display: inline-block;
-                    margin: 0 0 0 $content-between-margin;
-                }
-            }
-        }
-    }
 }
 
 
@@ -118,6 +107,21 @@
 
             md-paginator /deep/ .mat-paginator-range-label {
                 margin: initial;
+            }
+        }
+    }
+}
+
+
+@media only screen and (min-width: $hd-screen) {
+
+    .inner-container {
+        .content {
+            .no-items {
+                button {
+                    display: inline-block;
+                    margin: 0 0 0 $content-between-margin;
+                }
             }
         }
     }

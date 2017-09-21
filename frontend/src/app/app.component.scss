@@ -1,3 +1,5 @@
+@import '../globalStyles/variables.scss';
+
 body {
     position: absolute;
     width: 100%;
@@ -19,3 +21,9 @@ app-header-view {
     width: 100%;
     height: 100vh;
 }
+@media screen and (max-width: $small-screen) {
+    .login-child {
+        height: calc(100vh - 50px);
+        margin-top: 50px;
+    }
+}    

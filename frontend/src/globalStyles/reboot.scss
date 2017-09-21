@@ -1,7 +1,7 @@
 @import './variables.scss';
 @import './indentations.scss';
 @import './text.scss';
-@import '../../../node_modules/ngx-toastr/toastr.css';
+@import '~/ngx-toastr/toastr.css';
 @import './toastrStyles.scss';
 @import './markdownStyles.scss';
 @import '~perfect-scrollbar/dist/css/perfect-scrollbar.min.css';
@@ -375,4 +375,8 @@ template {
 // Needed for proper display in IE 10-.
 [hidden] {
     display: none !important;
+}
+
+button[md-raised-button] {
+    background-color: $btn-color;
 }

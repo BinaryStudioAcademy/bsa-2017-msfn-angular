@@ -1,6 +1,6 @@
 <div class="container">
     <div class="profile">
-        <div class="profile-content">
+        <div class="profile-content profile-row">
             <h3 class="setting-header">Email</h3>
             <div class="profile-email">
                 <div class="profile-current-emails">
@@ -20,12 +20,12 @@
         </div>
 
         <h3 class="setting-header">Password</h3>
-        <div class="profile-password">
+        <div class="profile-password profile-row">
             <button md-raised-button (click)="openConfirmPasswordDialog()" class="">{{user.password ? 'Change password' : 'Set password'}}</button>
         </div>
 
         <h3 class="setting-header">Social account</h3>
-        <div class="social-wrapper">
+        <div class="social-wrapper profile-row">
             <div class="social-buttons">
                 <a md-raised-button (mouseover)="hoverFb = true" (mouseout)="hoverFb = false"  [mdTooltip]="user.facebookID ? 'unlink account' : 'add account'" mdTooltipPosition="above" href="/auth/facebook">
                     <md-icon *ngIf="user.facebookID && !hoverFb">done</md-icon>
@@ -48,7 +48,7 @@
         </div>
 
         <h3 class="setting-header">Google calendar</h3>
-        <div class="profile-calendar">
+        <div class="profile-calendar profile-row">
             <button md-raised-button
                     *ngIf="!gcalendarService.inited"
                     disabled="true"
