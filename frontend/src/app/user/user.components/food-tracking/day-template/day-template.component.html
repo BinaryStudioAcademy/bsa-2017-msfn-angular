@@ -1,14 +1,14 @@
-<div class="launched-meals" *ngIf="launchedFoodPlan" [ngClass]="{'launched-modal': isModal}">
+<div class="launched-meals" *ngIf="historyFoodPlan" [ngClass]="{'launched-modal': isModal}">
     <div class="launched-header">
         <p class="date">
-            {{dateService.beautifyDate(launchedFoodPlan.todayMeals.date)}}
+            {{dateService.beautifyDate(historyFoodPlan.todayMeals.date)}}
             <span class="item-kcal">
-                ({{launchedFoodPlan.todayMeals.totalKcal}} kcal)
+                ({{historyFoodPlan.todayMeals.totalKcal}} kcal)
              </span>
         </p>
-        <p class="item-kcal" *ngIf="eaten">eaten: {{launchedFoodPlan.todayMeals.eaten}} kcal</p>
+        <p class="item-kcal" *ngIf="eaten">eaten: {{historyFoodPlan.todayMeals.eaten}} kcal</p>
     </div>
-    <div class="meals-item" *ngFor="let meal of launchedFoodPlan.todayMeals.meals">
+    <div class="meals-item" *ngFor="let meal of historyFoodPlan.todayMeals.meals">
         <p class="item-name">{{ meal.name }} <span class="item-kcal">({{ meal.kcal }} kcal)</span></p>
         <p class="item-kcal" *ngIf="meal.eaten"> eaten: {{ meal.eaten }} kcal</p>
         <div class="item-product" *ngFor="let product of meal.products" [ngClass]="{'done': product.done, 'missed': product.done === null}">

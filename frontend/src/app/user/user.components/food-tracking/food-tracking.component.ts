@@ -62,7 +62,7 @@ export class FoodTrackingComponent implements OnInit {
             }, 0);
         }
 
-        this.historyMealsStatic = this.launchedFoodPlan.historyMeals;
+        this.historyMealsStatic = JSON.parse(JSON.stringify(this.launchedFoodPlan.historyMeals));
         this.foodTrackingService.updateLaunchedFoodPlan(this.launchedFoodPlan, res => { });
         this.updateDataHistoryView();
     }
@@ -80,7 +80,6 @@ export class FoodTrackingComponent implements OnInit {
     }
 
     finish(status) {
-        console.log(this.launchedFoodPlan);
         if (status === 'plan') {
             this.launchedFoodPlan.status = 'finished';
             this.launchedFoodPlan = null;

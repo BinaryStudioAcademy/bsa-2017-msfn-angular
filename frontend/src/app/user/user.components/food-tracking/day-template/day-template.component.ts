@@ -14,7 +14,7 @@ import { DateService } from '../../../../services/date.service';
 
 export class DayTemplateComponent implements OnInit, AfterViewInit {
 
-    @Input() launchedFoodPlan;
+    @Input() historyFoodPlan;
     @Input() history;
     @Output() onFinish = new EventEmitter();
     isModal;
@@ -29,7 +29,7 @@ export class DayTemplateComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.launchedFoodPlan);
+        console.log(this.historyFoodPlan);
     }
 
     ngAfterViewInit() {
@@ -45,12 +45,12 @@ export class DayTemplateComponent implements OnInit, AfterViewInit {
     checkProduct(meal, product) {
         if (product.done === undefined || product.done === false) {
             meal.eaten = meal.eaten ? meal.eaten + product.kcal : product.kcal;
-            this.launchedFoodPlan.todayMeals.eaten =
-                this.launchedFoodPlan.todayMeals.eaten ? this.launchedFoodPlan.todayMeals.eaten + product.kcal : product.kcal;
+            this.historyFoodPlan.todayMeals.eaten =
+                this.historyFoodPlan.todayMeals.eaten ? this.historyFoodPlan.todayMeals.eaten + product.kcal : product.kcal;
             product.done = true;
         } else if (product.done === true) {
             meal.eaten = meal.eaten - product.kcal;
-            this.launchedFoodPlan.todayMeals.eaten = this.launchedFoodPlan.todayMeals.eaten - product.kcal;
+            this.historyFoodPlan.todayMeals.eaten = this.historyFoodPlan.todayMeals.eaten - product.kcal;
             product.done = null;
         } else if (product.done === null) {
             product.done = false;
@@ -74,20 +74,20 @@ export class DayTemplateComponent implements OnInit, AfterViewInit {
     }
 
     save() {
-        this.foodTrackingService.updateLaunchedFoodPlan(this.launchedFoodPlan, res => {
+        this.foodTrackingService.updateLaunchedFoodPlan(this.historyFoodPlan, res => {
             this.toasterService.showMessage('success', null, 'Saved');
         });
     }
 
     finish() {
-        if (this.checkCheckedProduct(this.launchedFoodPlan.todayMeals.meals)) {
-            this.launchedFoodPlan.historyMeals.push(this.launchedFoodPlan.todayMeals);
-            this.launchedFoodPlan.todayMeals.finished = true;
+        if (this.checkCheckedProduct(this.historyFoodPlan.todayMeals.meals)) {
+            this.historyFoodPlan.historyMeals.push(this.historyFoodPlan.todayMeals);
+            this.historyFoodPlan.todayMeals.finished = true;
 
-            this.foodTrackingService.updateLaunchedFoodPlan(this.launchedFoodPlan, res => {
+            this.foodTrackingService.updateLaunchedFoodPlan(this.historyFoodPlan, res => {
                 this.toasterService.showMessage('success', null, 'Saved');
-                this.launchedFoodPlan.todayMeals.meals = [];
-                this.createLaunchedFoodPlan(this.launchedFoodPlan);
+                this.historyFoodPlan.todayMeals.meals = [];
+                this.createLaunchedFoodPlan(this.historyFoodPlan);
             });
         } else {
             this.toasterService.showMessage('error', null, 'select all products');
@@ -103,31 +103,25 @@ export class DayTemplateComponent implements OnInit, AfterViewInit {
     }
 
     createLaunchedFoodPlan(foodPlan) {
-        this.launchedFoodPlan = null;
-        this.launchedFoodPlan = { };
-        for (const key in foodPlan) {
-            if (foodPlan.hasOwnProperty(key)) {
-                this.launchedFoodPlan[key] = foodPlan[key];
-            }
-        }
-        if (!this.launchedFoodPlan.todayMeals.meals || this.launchedFoodPlan.todayMeals.meals.length === 0) {
+        this.historyFoodPlan = JSON.parse(JSON.stringify(foodPlan));
+        if (!this.historyFoodPlan.todayMeals.meals || this.historyFoodPlan.todayMeals.meals.length === 0) {
             if (foodPlan.kind === 'weekly') {
                 foodPlan.days[new Date().getDay() - 1].meals.forEach(el => {
-                    this.launchedFoodPlan.todayMeals.meals.push(el);
+                    this.historyFoodPlan.todayMeals.meals.push(el);
                 });
             } else {
-                this.launchedFoodPlan.meals.forEach(el => {
-                    this.launchedFoodPlan.todayMeals.meals.push(el);
+                this.historyFoodPlan.meals.forEach(el => {
+                    this.historyFoodPlan.todayMeals.meals.push(el);
                 });
             }
         }
 
-        if (!this.launchedFoodPlan.todayMeals.date) {
-            this.launchedFoodPlan.todayMeals.date = new Date();
+        if (!this.historyFoodPlan.todayMeals.date) {
+            this.historyFoodPlan.todayMeals.date = new Date();
         }
 
-        if (!this.launchedFoodPlan.todayMeals.totalKcal) {
-            this.launchedFoodPlan.todayMeals.totalKcal = this.launchedFoodPlan.todayMeals.meals.reduce((total, el) => {
+        if (!this.historyFoodPlan.todayMeals.totalKcal) {
+            this.historyFoodPlan.todayMeals.totalKcal = this.historyFoodPlan.todayMeals.meals.reduce((total, el) => {
                 return total + el.kcal;
             }, 0);
         }
