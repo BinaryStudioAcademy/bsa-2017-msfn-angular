@@ -1,0 +1,24 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+
+p {
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
+.user-name-text {
+    font-size: $usual-text;
+}
+a {
+    text-decoration: none;
+    color: $text-main-color;
+    padding-left: $input-padding;
+}
+
+h2 {
+    text-align: center;
+    font-size: $large-text;
+}

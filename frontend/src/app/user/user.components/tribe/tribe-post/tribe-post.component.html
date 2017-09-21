@@ -1,0 +1,36 @@
+<div class="post-container">
+    <div class="meta-info">
+        <span>Posted by <a>{{post.author.firstName}} {{post.author.lastName}}</a></span>
+        <span>{{post.createdAt | date}}</span>
+    </div>
+    <h2>{{post.title}}</h2>
+    <div class="post-text">{{post.text.substring(0, 400)}}...<span class="more-info" (click)="viewFull()">See more</span></div>
+    <img src="{{post.image}}" class="post-image">
+    <div class="user-reaction">
+        <span class="star-button" md-tooltip="Bookmark this post" (click)="addFavourite()">☆</span>
+        <md-icon mdSuffix (click)="toggleComments(); $event.stopPropagation()">comment</md-icon>
+    </div>
+    <div class="post-comments" [hidden]="hideComments">
+        <div class="comment-container" *ngFor="let comment of post.comments" >
+            <div class="commentator">
+                <img src="{{comment.userPhoto || './resources/default.png'}}">
+                <span>{{comment.firstName}}</span>
+            </div>
+            <div class="comment-content">
+                <p>{{comment.text}}</p>
+            </div>
+        </div>
+        <div class="comment-container">
+            <div class="commentator">
+                <img md-list-avatar
+                     [src]="userPhoto || './resources/default.png'">
+                <span>{{userFirstName}}</span>
+            </div>
+            <div class="comment-content">
+                <textarea mdInput placeholder="What do you think about the post?"></textarea>
+                <button md-button (click)="addComment()">Add comment</button>
+            </div>
+        </div>
+    </div>
+
+</div>
