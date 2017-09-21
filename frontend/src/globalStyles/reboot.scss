@@ -53,7 +53,7 @@ body {
     line-height: 1.15;
     -webkit-font-smoothing: antialiased;
     color: #fff;
-    background: url('./img/bg_general.png');
+    background: url('./img/bg_general.png') fixed;
     background-size: 100vw 100vh;
 }
 
