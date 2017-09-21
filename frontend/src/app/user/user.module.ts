@@ -76,6 +76,7 @@ import { EditPanelComponent } from './user.components/event-item/edit-panel/edit
 import {ActivatedRouteSnapshot} from '@angular/router';
 import {EventService} from './services/event.service';
 import { FoodPlanService } from './user.components/food-plan/food-plan.service';
+import { DayTemplateComponent } from './user.components/food-tracking/day-template/day-template.component';
 
 @NgModule({
     imports: [
@@ -153,6 +154,7 @@ import { FoodPlanService } from './user.components/food-plan/food-plan.service';
         DiscussComponent,
         PlaceTimeComponent,
         EditPanelComponent,
+        DayTemplateComponent,
     ],
     providers: [
         ForAllUserGuard,
@@ -169,6 +171,7 @@ import { FoodPlanService } from './user.components/food-plan/food-plan.service';
         AchievementInfoDialogComponent,
         SearchComponent,
         ImageUploadComponent,
+        DayTemplateComponent,
     ]
 })
 export class UserModule {
