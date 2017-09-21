@@ -3,10 +3,10 @@
     <h2>Search products</h2>
     <div class="content">
         <div class="side-content">
-            <md-input-container>
+            <md-input-container class="search-types">
                 <input mdInput placeholder="Search type" #searchInput (keyup)="searchType(searchInput.value)">
             </md-input-container>
-            <div class="types">
+            <div class="types" perfectScrollbar>
                 <div class="types-depth" *ngFor="let type of filtered || typesDepth">
                     <div class="depth-wrap">
                         <div class="name-wrap">

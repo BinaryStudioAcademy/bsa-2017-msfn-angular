@@ -64,7 +64,6 @@ function getItemsByDates(body, callback) {
 function getApplicants(category, body, callback) {
     const eventId = body.params.id;
     eventRepository.getApplicants(category, eventId, (err, data) => {
-        console.log(category, 'SERVICE', data);
         callback(err, data);
     });
 }

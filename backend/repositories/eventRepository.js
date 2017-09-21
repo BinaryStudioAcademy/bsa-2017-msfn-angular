@@ -112,20 +112,26 @@ function getApplicants(category, id, callback) {
 }
 
 function applyUser(id, body, callback) {
-    const query = this.model.update(id, {
-        $addToSet: {
+    const query = this.model.update(
+        {
+            _id: id
+        },
+        { $addToSet: {
             [body.fieldName]: body.userId
-        }
-    });
+        }}
+    );
     query.exec(callback);
 }
 
 function unapplyUser(id, body, callback) {
-    const query = this.model.update(id, {
-        $pull: {
+    const query = this.model.update(
+        {
+            _id: id
+        },
+        { $pull: {
             [body.fieldName]: body.userId
-        }
-    });
+        }}
+    );
     query.exec(callback);
 }
 

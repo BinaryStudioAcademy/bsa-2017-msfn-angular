@@ -40,7 +40,6 @@ module.exports = app => {
 
     app.get(`${baseUrl}participants/:id`, isLoggedIn, (req, res, next) => {
         eventService.getApplicants('participants', req, (err, data) => {
-            console.log('PART DATA ROUTE', data);
             res.data = data;
             res.err = err;
             next();
@@ -49,7 +48,6 @@ module.exports = app => {
 
     app.get(`${baseUrl}followers/:id`, isLoggedIn, (req, res, next) => {
         eventService.getApplicants('followers', req, (err, data) => {
-            console.log('FOLLOW DATA ROUTE', data);
             res.data = data;
             res.err = err;
             next();
