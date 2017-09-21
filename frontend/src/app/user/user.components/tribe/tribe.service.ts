@@ -59,7 +59,7 @@ export class TribeService {
             });
     }
 
-    getPostsByCreator(creatorId, callback) {
+    getTribesByCreator(creatorId, callback) {
         const request: IHttpReq = {
             url: `api/tribe/creator/${creatorId}`,
             method: 'GET',

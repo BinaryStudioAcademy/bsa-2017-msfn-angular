@@ -28,11 +28,9 @@ export class TribeListComponent implements OnInit {
     ngOnInit() {
         this.tribeService.getAllTribes((resp) => {
             this.tribes = resp;
-            for (const item of this.tribes) {
-                if (item.creator === this.userId) {
-                    this.myTribes.push(item);
-                }
-            }
+        });
+        this.tribeService.getTribesByCreator(this.userId, (resp) => {
+            this.myTribes = resp;
         });
     }
 
