@@ -138,7 +138,6 @@ export class EventCreateComponent implements OnInit {
             this.event = data;
             this.event.startDate = new Date(this.event.startDate);
             this.event.endDate = new Date(this.event.endDate);
-            console.log('EVENT DATA', data);
             this.initMap();
         });
     }
@@ -177,6 +176,7 @@ export class EventCreateComponent implements OnInit {
             map.addListener('click', event => {
                 centerCoords = event.latLng.toJSON();
                 marker.setPosition(event.latLng);
+                this.event.location.coords = centerCoords;
             });
 
             map.addListener('mouseout', () => {
@@ -203,7 +203,6 @@ export class EventCreateComponent implements OnInit {
             this.hideCropper = true;
             return;
         }
-        console.log(file);
         const myReader: FileReader = new FileReader();
         this.type = file.type.split('/')[1];
 
