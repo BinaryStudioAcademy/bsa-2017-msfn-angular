@@ -1,3 +1,6 @@
+import { TribeBanlistComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-banlist/tribe-banlist.component';
+import { TribePermissionsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-permissions/tribe-permissions.component';
+// tslint:disable-next-line:max-line-length
 import { GeneralSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/general-settings/general-settings.component';
 import { GoalComponent } from './user.components/goal/goal.component';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
@@ -218,12 +221,20 @@ const userRoutes: Routes = [
                 component: CreateTribeComponent
             },
             {
-                path: 'tribe-settings',
+                path: 'tribe-settings/:id',
                 component: TribeSettingsComponent,
                 children: [
                     {
-                        path: 'general/:id',
+                        path: 'general',
                         component: GeneralSettingsComponent
+                    },
+                    {
+                        path: 'permissions',
+                        component: TribePermissionsComponent
+                    },
+                    {
+                        path: 'banlist',
+                        component: TribeBanlistComponent
                     }
                 ]
             },

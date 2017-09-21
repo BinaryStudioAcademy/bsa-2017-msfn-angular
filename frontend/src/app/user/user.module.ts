@@ -86,6 +86,8 @@ import { CreateTribeComponent } from './user.components/tribe/create-tribe/creat
 // tslint:disable-next-line:max-line-length
 import { GeneralSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/general-settings/general-settings.component';
 import { TribeListComponent } from './user.components/tribe/tribe-list/tribe-list.component';
+import { TribePermissionsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-permissions/tribe-permissions.component';
+import { TribeBanlistComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-banlist/tribe-banlist.component';
 
 
 @NgModule({
@@ -173,6 +175,8 @@ import { TribeListComponent } from './user.components/tribe/tribe-list/tribe-lis
         CreateTribeComponent,
         TribeListComponent,
         GeneralSettingsComponent,
+        TribePermissionsComponent,
+        TribeBanlistComponent,
     ],
     providers: [
         ForAllUserGuard,

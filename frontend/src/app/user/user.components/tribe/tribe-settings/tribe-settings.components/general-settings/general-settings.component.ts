@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TribeService } from '../../../tribe.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -34,6 +34,7 @@ export class GeneralSettingsComponent implements OnInit {
     userId = (this.window.data._injectedData as any).userId;
 
     constructor(
+        private router: Router,
         private httpService: HttpService,
         private dialog: MdDialog,
         private window: WindowObj,
@@ -41,10 +42,11 @@ export class GeneralSettingsComponent implements OnInit {
         private tribeService: TribeService,
         private activatedRoute: ActivatedRoute) {
         this.userId = (this.window.data._injectedData as any).userId;
-        this.tribeID = this.activatedRoute.snapshot.params.id;
     }
 
     ngOnInit() {
+        console.log(this.router.url);
+        this.tribeID = this.router.url.split('/general')[0].split('tribe-settings/').pop();
         console.log(this.tribeID);
         if (this.tribeID) {
             this.tribeService.getTribe(this.tribeID, (resp) => {
@@ -140,9 +142,13 @@ export class GeneralSettingsComponent implements OnInit {
     }
 
     saveImg(event) {
+        const fileType = 'img';
+        const folder = 'tribe-image';
+        const fileName = this.trueTribe.image.split(folder).pop().slice(1).split('.').slice(0, -1).join('.')
+            || this.trueTribe.name.replace(/ /g, '_') + Date.now();
         if (event === 'save') {
             if (!this.hideCropper) {
-                this.tribeService.saveImg(this.data.image, this.tribeID, 'img', 'tribe-image', result => {
+                this.tribeService.saveImg(this.data.image, fileName, fileType, folder, result => {
                     if (result.err) {
                         this.data.image = this.image;
                         this.toasterService.showMessage('error', result.err);
