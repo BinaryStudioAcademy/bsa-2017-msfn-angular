@@ -19,6 +19,14 @@ const Tribe = new Schema({
         type: ObjectId,
         ref: 'User'
     }],
+    canPost: [{
+        type: ObjectId,
+        ref: 'User'
+    }],
+    canComment: [{
+        type: ObjectId,
+        ref: 'User'
+    }],
     postWithOwnName: {
         type: Boolean,
         default: false

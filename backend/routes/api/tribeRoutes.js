@@ -7,7 +7,7 @@ const
 module.exports = function (app) {
 
     app.get(baseUrl, (req, res, next) => {
-        tribeService.getAllTribes( (err, data) => {
+        tribeService.getAllTribes((err, data) => {
             if (!data.length) {
                 data = [{}];
             }
@@ -84,7 +84,32 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.put(`${baseUrl}:id/posts/`, (req, res, next) => {
-        postService.updatePostById(req.body.id, req.body,  (err, data) => {
+        postService.updatePostById(req.body.id, req.body, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(`${baseUrl}members/:id`, isLoggedIn, (req, res, next) => {
+        console.log(req);
+        tribeService.getApplicants('members', req, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(`${baseUrl}can-comment/:id`, isLoggedIn, (req, res, next) => {
+        tribeService.getApplicants('canComment', req, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+    
+    app.get(`${baseUrl}can-post/:id`, isLoggedIn, (req, res, next) => {
+        tribeService.getApplicants('canPost', req, (err, data) => {
             res.data = data;
             res.err = err;
             next();

@@ -86,8 +86,10 @@ import { CreateTribeComponent } from './user.components/tribe/create-tribe/creat
 // tslint:disable-next-line:max-line-length
 import { GeneralSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/general-settings/general-settings.component';
 import { TribeListComponent } from './user.components/tribe/tribe-list/tribe-list.component';
+// tslint:disable-next-line:max-line-length
 import { TribePermissionsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-permissions/tribe-permissions.component';
 import { TribeBanlistComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-banlist/tribe-banlist.component';
+import { SelectUsersDialogComponent } from './user.components/select-users-dialog/select-users-dialog.component';
 
 
 @NgModule({
@@ -177,6 +179,7 @@ import { TribeBanlistComponent } from './user.components/tribe/tribe-settings/tr
         GeneralSettingsComponent,
         TribePermissionsComponent,
         TribeBanlistComponent,
+        SelectUsersDialogComponent,
     ],
     providers: [
         ForAllUserGuard,
@@ -195,7 +198,8 @@ import { TribeBanlistComponent } from './user.components/tribe/tribe-settings/tr
         ImageUploadComponent,
         FullTribePostComponent,
         TribeMembersDialogComponent,
-        CreateTribeComponent
+        CreateTribeComponent,
+        SelectUsersDialogComponent
     ]
 })
 export class UserModule {

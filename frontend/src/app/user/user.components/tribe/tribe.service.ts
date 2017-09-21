@@ -155,4 +155,18 @@ export class TribeService {
             callback(data);
         });
     }
+
+    getTribeMembers(id, whom, callback) {
+        const request: IHttpReq = {
+            url: `/api/tribe/${whom}/${id}`,
+            method: 'GET',
+            body: {},
+            successMessage: 'Members received',
+            failMessage: 'Cannot get members'
+        };
+        this.httpService.sendRequest(request)
+            .then( (data) => {
+                callback(data);
+            });
+    }
 }

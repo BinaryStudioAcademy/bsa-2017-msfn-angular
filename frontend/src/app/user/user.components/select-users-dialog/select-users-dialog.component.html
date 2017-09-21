@@ -1,0 +1,17 @@
+<div class="container">
+<md-list [hidden]="!members">
+    <md-list-item *ngFor="let user of members" class="user-container">
+        <img md-list-avatar
+             [src]="user.userPhoto || './resources/default.png'">
+        <a [routerLink]="'/user/profile/'+user._id">
+            <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+        </a>
+    </md-list-item>
+</md-list>
+<span [hidden]="members">There are no members yet</span>
+
+      <div class="btn-container">
+        <button md-raised-button [md-dialog-close]="false">Close</button>
+        <button md-raised-button [md-dialog-close]="true">Save</button>
+    </div>
+</div>

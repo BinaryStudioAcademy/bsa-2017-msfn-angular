@@ -7,6 +7,7 @@ function TribeService() {}
 TribeService.prototype.createTribe = createTribe;
 TribeService.prototype.getAllTribes = getAllTribes;
 TribeService.prototype.updateTribeById = updateTribeById;
+TribeService.prototype.getApplicants = getApplicants;
 TribeService.prototype.getTribeById = getTribeById;
 TribeService.prototype.getTribesByCreatorId = getTribesByCreatorId;
 
@@ -20,6 +21,14 @@ function createTribe(body, callback) {
         } else {
             callback(null, tribeData);
         }
+    });
+}
+
+function getApplicants(category, body, callback) {
+    const tribeId = body.params.id;
+    console.log(tribeId, category);
+    tribeRepository.getApplicants(category, tribeId, (err, data) => {
+        callback(err, data);
     });
 }
 

@@ -9,6 +9,7 @@ function TribeRepository() {
 TribeRepository.prototype = new Repository();
 
 TribeRepository.prototype.updateById = updateById;
+TribeRepository.prototype.getApplicants = getApplicants;
 TribeRepository.prototype.deleteById = deleteById;
 TribeRepository.prototype.getByCreatorId = getByCreatorId;
 
@@ -33,6 +34,19 @@ function getByCreatorId(creator, callback ) {
     const query = this.model.find({
         creator: creator
     });
+    query.exec(callback);
+}
+
+function getApplicants(category, id, callback) {
+    const query = this.model.find({
+        _id: id
+    }, {
+        [category]: 1
+    })
+        .populate({
+            path: category,
+            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
+        });
     query.exec(callback);
 }
 
