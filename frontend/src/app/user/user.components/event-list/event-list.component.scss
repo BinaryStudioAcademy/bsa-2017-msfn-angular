@@ -3,7 +3,7 @@
 @import '../../../../globalStyles/indentations';
 
 #event-list-container {
-    max-width: 60%;
+    max-width: 90%;
     margin: 0 auto;
 
     h1 {
@@ -13,12 +13,20 @@
     }
 
     #event-period {
-        position: absolute;
-        left: 17vw;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        width: 12%;
+        width: 100%;
+        margin-bottom: $large-indent;
+        text-align: center;
+
+        p {
+            width: 100%;
+        }
+
+        .date {
+            margin: 0 auto;
+        }
 
         .apply-button {
             width: 100%;
@@ -58,14 +66,13 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        margin-bottom: $macro-indent;
+        margin-bottom: $standard-indent;
         padding: $standard-indent 0;
         border-bottom: 1px solid $text-main-color;
     }
 
     #event-text-block {
-        width: 45%;
-        margin-right: 50px;
+        width: 100%;
         font-size: $main-text;
 
         a {
@@ -75,10 +82,6 @@
 
         a:hover {
             text-decoration: underline;
-        }
-
-        p {
-            margin-bottom: $large-indent;
         }
 
         .title {
@@ -102,7 +105,7 @@
             .creator-avatar {
                 display: inline-block;
                 width: 12%;
-                margin-right: $standard-indent;
+                margin: 0 $standard-indent 0 auto;
                 vertical-align: top;
 
                 img {
@@ -124,6 +127,8 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
+            color: $text-shadowed-color;
+            font-size: $minor-text;
 
             .endDate {
                 text-align: right;
@@ -132,16 +137,17 @@
     }
 
     .event-image {
-        width: 45%;
+        width: 100%;
 
         img {
-            height: 200px;
-            float: right;
+            width: 100%;
+            height: auto;
         }
     }
 
     .event-handle {
         width: 100%;
+        margin-top: $standard-indent;
         font-size: $main-text;
         color: $text-main-color;
 
@@ -151,15 +157,19 @@
 
             button {
                 width: 90%;
-                max-width: 160px;
+                max-width: 120px;
                 height: 40px;
                 margin-right: $macro-indent;
                 border: none;
                 border-radius: 20px;
                 outline: none;
-                font-size: $main-text;
+                font-size: $usual-text;
                 font-weight: 600;
                 background: $main-color;
+            }
+
+            button:first-child {
+                margin-bottom: $mini-indent;
             }
         }
 
@@ -177,43 +187,125 @@
     }
 
     .add-container {
-        max-width: 260px;
-        margin: 0 auto;
-
-        &:hover {
-            color: $main-color;
-            cursor: pointer;
-        }
-    }
-
-    .item-container {
+        position: relative;
         display: flex;
-        align-items: center;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
         text-align: center;
-        width: 31.33%;
-        height: 180px;
-        margin: 10px auto;
-        color: $btn-color;
+        width: 170px;
+        height: 120px;
+        margin: $large-indent auto;
+        cursor: pointer;
+        color: $main-color;
         background-color: $gradient-to-color;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        position: relative;
     }
 }
 
-@media screen and (max-width: $large-screen) {
+
+@media screen and (min-width: $medium-screen) {
+
     #event-list-container {
-        .item-container {
-            width: 48%;
+        .event-image {
+            width: 70%;
+            margin: 0 auto;
         }
     }
 }
 
-@media screen and (max-width: $small-screen) {
+
+@media screen and (min-width: $large-screen) {
+
     #event-list-container {
-        .item-container {
-            width: 100%;
+        max-width: 60%;
+        margin: 0 auto 0 30vw;
+
+        #event-period {
+            position: fixed;
+            left: 17vw;
+            width: 20%;
+            margin-bottom: initial;
+
+            .apply-button {
+                button:first-child {
+                    margin-bottom: initial;
+                }
+            }
+        }
+
+        #event-text-block {
+            .dates {
+                font-size: $usual-text;
+            }
+        }
+
+        .event-item {
+            margin-bottom: $macro-indent;
+        }
+    }
+}
+
+
+@media screen and (min-width: $hd-screen) {
+
+    #event-list-container {
+        margin: 0 auto 0 25vw;
+
+        #event-period {
+            width: 18%;
+        }
+
+        #event-text-block {
+            width: 45%;
+            margin-right: 50px;
+
+            p {
+                margin-bottom: $large-indent;
+            }
+
+            .dates {
+                font-size: $main-text;
+            }
+        }
+
+        .event-image {
+            width: 45%;
+            margin: initial;
+
+            img {
+                width: auto;
+                height: 200px;
+                float: right;
+            }
+        }
+
+        .event-handle {
+            margin-top: initial;
+
+            .event-buttons {
+                button {
+                    max-width: 160px;
+                    font-size: $main-text;
+                }
+            }
+        }
+
+        .add-container {
+            width: 260px;
+            height: 180px;
+        }
+    }
+}
+
+
+@media screen and (min-width: $full-hd-screen) {
+
+    #event-list-container {
+        margin: 0 auto 0 20vw;
+
+        #event-period {
+            width: 15%;
         }
     }
 }
