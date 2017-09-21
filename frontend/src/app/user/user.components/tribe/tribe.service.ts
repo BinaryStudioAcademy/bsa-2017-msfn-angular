@@ -88,10 +88,10 @@ export class TribeService {
             .then( (data) => { callback(data); });
     }
 
-    createPost(tribeId: string, body: ITribePost, callback) {
-        Object.assign(body, { tribe : tribeId});
+    createPost(body: ITribePost, callback) {
+        Object.assign(body, { tribe : body.tribe});
         const request: IHttpReq = {
-            url: `/api/tribe/${tribeId}/posts`,
+            url: `/api/tribe/${body.tribe}/posts`,
             method: 'POST',
             body: body,
             successMessage: 'Post added',
