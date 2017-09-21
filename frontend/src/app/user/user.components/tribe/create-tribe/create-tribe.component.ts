@@ -86,7 +86,7 @@ export class CreateTribeComponent implements OnInit {
                         this.tribe.image = this.oldImg;
                         this.toasterService.showMessage('error', result.err);
                     } else {
-                        this.tribe.image = './resources/articles-image/' + fileName + '.' + this.type;
+                        this.tribe.image = './resources/tribe-image/' + fileName + '.' + this.type;
                         this.tribeService.createTribe(this.tribe, () => {
                         });
                     }

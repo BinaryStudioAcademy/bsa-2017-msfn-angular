@@ -90,7 +90,7 @@ export class CreateTribePostComponent implements OnInit {
                         this.tribePost.image = this.oldImg;
                         this.toasterService.showMessage('error', result.err);
                     } else {
-                        this.tribePost.image = './resources/tribes-image/' + fileName + '.' + this.type;
+                        this.tribePost.image = './resources/tribe-post-image/' + fileName + '.' + this.type;
                         this.tribeService.createPost(this.tribePost, (err, data) => {
                         });
                     }
