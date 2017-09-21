@@ -1,5 +1,5 @@
 <div class="chats-list-wrapper active" [class.active]="chatListVisible">
-    <div class="empty-list-placeholder" *ngIf="!activeChats.length">Chat list empty</div>
+    <div class="empty-list-placeholder" *ngIf="!chats.length">Chat list empty</div>
     <div class="users-wrapper">
         <div class="user-wrapper"
              *ngFor="let chat of chats"
