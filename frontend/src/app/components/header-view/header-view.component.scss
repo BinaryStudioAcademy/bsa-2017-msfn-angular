@@ -129,11 +129,7 @@ md-menu {
                 }
             }
             .settings {
-                order: -1;
-                margin: 0;
-                .settings__name {
-                    display: none;
-                }
+                display: none;
             }
             .burger {
                 display: flex;
