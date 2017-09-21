@@ -1,0 +1,29 @@
+<div class="launched-meals" *ngIf="launchedFoodPlan" [ngClass]="{'launched-modal': isModal}">
+    <div class="launched-header">
+        <p class="date">
+            {{dateService.beautifyDate(launchedFoodPlan.todayMeals.date)}}
+            <span class="item-kcal">
+                ({{launchedFoodPlan.todayMeals.totalKcal}} kcal)
+             </span>
+        </p>
+        <p class="item-kcal" *ngIf="eaten">eaten: {{launchedFoodPlan.todayMeals.eaten}} kcal</p>
+    </div>
+    <div class="meals-item" *ngFor="let meal of launchedFoodPlan.todayMeals.meals">
+        <p class="item-name">{{ meal.name }} <span class="item-kcal">({{ meal.kcal }} kcal)</span></p>
+        <p class="item-kcal" *ngIf="meal.eaten"> eaten: {{ meal.eaten }} kcal</p>
+        <div class="item-product" *ngFor="let product of meal.products" [ngClass]="{'done': product.done, 'missed': product.done === null}">
+            <md-checkbox class="product-checkbox" [disabled]="history" (change)="checkProduct(meal, product)" [ngModel]="product.done"
+                [indeterminate]="product.done === null"></md-checkbox>
+            <p class="product-name">{{ product.name }}</p>
+            <p class="product-quantity">{{ product.quantity }}</p>
+            <p class="product-kcal">{{ product.kcal }} kcal</p>
+            <p class="product-added" *ngIf="product.noPlan">added</p>
+        </div>
+        <div class="item-add" *ngIf="!history" (click)="addProduct(meal)">add product</div>
+    </div>
+    <div class="buttons" *ngIf="!history">
+        <button *ngIf="isModal" md-button md-dialog-close class="btn-save" (click)="save()">save</button>
+        <button *ngIf="!isModal" md-button class="btn-save" (click)="save()">save</button>
+        <button md-button class="btn-save" *ngIf="!isModal" (click)="finish()">finish day</button>
+    </div>
+</div>
