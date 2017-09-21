@@ -28,9 +28,12 @@
             height: 90%;
             padding: 10px;
             padding-left: 0;
-            overflow-y: scroll;
             border-right: 1px solid #424242;
+            .search-types{
+                width: 100%;
+            }
             .types {
+                overflow-y: scroll;            
                 .depth-wrap {
                     display: flex;
                     flex-flow: column nowrap;

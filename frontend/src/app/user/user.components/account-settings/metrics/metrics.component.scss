@@ -13,7 +13,6 @@ md-error {
     padding: 15px;
     color: $text-main-color;
     background-color: $btn-color;
-    font-size: $button-text;
     font-weight: 600;
     font-size: 11pt;
     border-radius: 50px;
@@ -54,4 +53,33 @@ md-error {
     width: 50%;
     margin-right: 30px;
     text-align: right;
+}
+
+.row-select {
+    padding-top: 0;
+    width: 50%
+}
+
+@media screen and (max-width: $medium-screen) {
+    .container {
+        padding: 10px;
+
+        .row {
+
+            .row-name {
+                flex-basis: 35%;
+                overflow: hidden;
+                word-break: break-word;
+                margin-right: 5%;
+            }
+
+            .row-select {
+                flex-basis: 60%;
+            }
+        }
+
+        .btn {
+            width: 80%;
+        }
+    }
 }

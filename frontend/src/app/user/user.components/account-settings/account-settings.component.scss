@@ -71,9 +71,29 @@ $height: calc(100vh - 70px);
     overflow-y: auto;
 }
 
-@media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
+@media screen and (max-width: $large-screen) {
+    .mainblock {
+        width: 100%;
+        height: calc(100vh - 70px);
+        margin: 0;
+        position: relative;
+    }
+
     .aside {
         width: 180px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        flex: none;
+    }
+
+    .child {
+        width: calc(100% - 180px);
+        margin-left: 180px;
+        flex: none;
+        max-height: 100%;
     }
 }
 
@@ -97,5 +117,6 @@ $height: calc(100vh - 70px);
         width: calc(100% - 100px);
         margin-left: 100px;
         flex: none;
+        max-height: initial;
     }
 }
