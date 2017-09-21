@@ -217,11 +217,11 @@ const userRoutes: Routes = [
                 component: CreateTribeComponent
             },
             {
-                path: 'tribe-settings/:id',
+                path: 'tribe-settings',
                 component: TribeSettingsComponent,
                 children: [
                     {
-                        path: 'general',
+                        path: 'general/:id',
                         component: GeneralSettingsComponent
                     }
                 ]

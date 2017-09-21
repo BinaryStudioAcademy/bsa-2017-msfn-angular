@@ -38,11 +38,13 @@ function updateTribeById(id, body, callback) {
     tribeRepository.update(id, body, callback);
 }
 
-function getTribeById(id, callback) {
+function getTribeById(id, callback) { 
+    console.log(id);
     tribeRepository.getById(id, function (err, tribeData) {
+        console.log(tribeData);
         if (err) return callback(err);
         if (tribeData === null) {
-            callback(null, new ApiError('Cannot delete tribe'));
+            callback(null, new ApiError('Cannot get tribe'));
         } else {
             callback(null, tribeData);
         }

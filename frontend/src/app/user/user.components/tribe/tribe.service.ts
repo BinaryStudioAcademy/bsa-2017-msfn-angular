@@ -143,4 +143,16 @@ export class TribeService {
             callback(data);
         });
     }
+
+    updateTribe(body, callback) {
+                const sendData: IHttpReq = {
+            url: '/api/tribe',
+            method: 'PUT',
+            body: body,
+        };
+
+        this.httpService.sendRequest(sendData).then(data => {
+            callback(data);
+        });
+    }
 }

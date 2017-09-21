@@ -18,6 +18,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.get(`${baseUrl}:id/`, (req, res, next) => {
+        console.log('ID: ', req.params.id);
         tribeService.getTribeById(req.params.id, (err, data) => {
             res.data = data;
             res.err = err;
@@ -75,7 +76,7 @@ module.exports = function (app) {
     }, apiResponse);
 
     app.put(baseUrl, (req, res, next) => {
-        tribeService.updateTribeById(req.body.id, req.body, (err, data) => {
+        tribeService.updateTribeById(req.body._id, req.body, (err, data) => {
             res.data = data;
             res.err = err;
             next();
