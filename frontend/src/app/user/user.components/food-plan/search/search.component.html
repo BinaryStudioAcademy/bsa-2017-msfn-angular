@@ -79,6 +79,7 @@
             <div class="product-nofood" *ngIf="!foods || !foods.length">There is no food in this category</div>
         </div>
     </div>
+    <button md-button *ngIf="isModal" md-dialog-close class="btn-save-modal">Ok</button>
     <div class="overlay" *ngIf="!currentMealProducts || !currentMealProducts.data.show">
             <span>
                 Please select meal to edit

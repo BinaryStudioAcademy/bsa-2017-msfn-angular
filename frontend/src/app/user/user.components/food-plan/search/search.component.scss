@@ -135,6 +135,20 @@
     }
 }
 
+.btn-save-modal {
+    display: block;
+    border: none;
+    width: 150px;
+    margin: -40px auto 15px;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+}
+
 @media only screen and (max-width: $hd-screen) {
     .food-search-container {
         .content {
