@@ -1,7 +1,8 @@
-import { TribeBanlistComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-banlist/tribe-banlist.component';
-import { TribePermissionsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-permissions/tribe-permissions.component';
 // tslint:disable-next-line:max-line-length
 import { GeneralSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/general-settings/general-settings.component';
+import { TribeBanlistComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-banlist/tribe-banlist.component';
+// tslint:disable-next-line:max-line-length
+import { TribePermissionsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-permissions/tribe-permissions.component';
 import { GoalComponent } from './user.components/goal/goal.component';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { MetricsComponent } from './user.components/account-settings/metrics/metrics.component';

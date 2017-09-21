@@ -1,0 +1,42 @@
+@import "../../../../../../../globalStyles/variables.scss";
+@import '../../../../../../../globalStyles/text.scss';
+@import '../../../../../../../globalStyles/indentations.scss';
+.btn {
+    border: none;
+    margin: 35px auto 0 auto;
+    width: 90%;
+    padding: 15px;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-size: $button-text;
+    font-weight: 600;
+    font-size: 11pt;
+    border-radius: 50px;
+    outline: none;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
+    justify-content: center;
+}
+
+.header {
+    font-style: italic;
+    margin: 15px;
+}
+
+.user-container {
+    margin-top: 10px;
+    background-color: $bg-color;
+    width: 100%;
+    height: 20vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow-y: auto;
+}

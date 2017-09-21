@@ -45,9 +45,7 @@ export class GeneralSettingsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.router.url);
         this.tribeID = this.router.url.split('/general')[0].split('tribe-settings/').pop();
-        console.log(this.tribeID);
         if (this.tribeID) {
             this.tribeService.getTribe(this.tribeID, (resp) => {
                 this.trueTribe = resp;

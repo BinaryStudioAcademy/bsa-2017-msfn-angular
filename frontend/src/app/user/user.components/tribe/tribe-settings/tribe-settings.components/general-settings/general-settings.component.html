@@ -1,19 +1,19 @@
 
 <div class="container">
-    <div class="profile">
-        <form class="profile-form" *ngIf="tribeID">
-            <div class="profile-header profile-row">
-                <div class="profile-avatar">
-                    <div class="profile-picture">
-                        <img [src]="data.image" alt="user picture" class="profile-picture-img">
+    <div class="tribe">
+        <form class="tribe-form" *ngIf="tribeID">
+            <div class="tribe-header tribe-row">
+                <div class="tribe-avatar">
+                    <div class="tribe-picture">
+                        <img [src]="data.image" alt="user picture" class="tribe-picture-img">
                         <img-cropper #cropper
                                      *ngIf="!hideCropper"
                                      class="img-cropper"
                                      [image]="data"
                                      [settings]="cropperSettings"></img-cropper>
                     </div>
-                    <div class="profile-upload">
-                        <div class="profile-upload-container upload-btn" (click)="saveImg('save')">
+                    <div class="tribe-upload">
+                        <div class="tribe-upload-container upload-btn" (click)="saveImg('save')">
                             <span>{{hideCropper ? 'Upload new picture' : 'Save'}}</span>
                             <input type="file"
                                    accept="image/*"
@@ -22,12 +22,12 @@
                                    (click)="chooseFileModal($event)"
                                    (change)="fileChangeListener($event)"/>
                         </div>
-                        <div class="profile-upload-container upload-btn" *ngIf="!hideCropper"
+                        <div class="tribe-upload-container upload-btn" *ngIf="!hideCropper"
                              (click)="saveImg('cancel')">Cancel</div>
                     </div>
                 </div>
-                <div class="profile-fullname">
-                    <md-input-container class="profile-name">
+                <div class="tribe-fullname">
+                    <md-input-container class="tribe-name">
                         <input id="name" 
                         class="input" 
                         mdInput 
@@ -37,8 +37,8 @@
                 </div>
             </div>
             
-            <div class="profile-row">
-                <md-input-container class="profile-about responsive-width">
+            <div class="tribe-row">
+                <md-input-container class="tribe-about responsive-width">
                     <textarea mdInput placeholder="About"
                         name="description"
                         [(ngModel)]="trueTribe.description"
