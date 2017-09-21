@@ -88,6 +88,7 @@ export class DayTemplateComponent implements OnInit, AfterViewInit {
                 this.toasterService.showMessage('success', null, 'Saved');
                 this.historyFoodPlan.todayMeals.meals = [];
                 this.createLaunchedFoodPlan(this.historyFoodPlan);
+                this.onFinish.emit();
             });
         } else {
             this.toasterService.showMessage('error', null, 'select all products');

@@ -72,7 +72,7 @@
             </md-tab>
 
             <md-tab label="Today">
-                <app-day-template [(historyFoodPlan)]="launchedFoodPlan"></app-day-template>
+                <app-day-template [(historyFoodPlan)]="launchedFoodPlan" (onFinish)="ngOnInit()"></app-day-template>
             </md-tab>
 
             <md-tab label="Tomorrow">
