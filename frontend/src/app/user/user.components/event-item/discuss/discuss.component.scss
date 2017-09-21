@@ -3,7 +3,7 @@
 @import '../../../../../globalStyles/indentations';
 
 #message-container {
-    width: 80vw;
+    width: 100%;
 
     a {
         text-decoration: none;
@@ -152,8 +152,6 @@
 @media only screen and (min-width: $large-screen) {
 
     #message-container {
-        width: 65vw;
-
         md-paginator {
             flex-wrap: initial;
         }

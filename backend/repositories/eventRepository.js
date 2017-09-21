@@ -57,7 +57,7 @@ function findByUserId(userId, callback) {
         ]
     })
         .populate({
-            path: 'user',
+            path: 'creator',
             select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         })
         .populate({
@@ -85,15 +85,8 @@ function findByDates(startDate, endDate, callback) {
         ]
     })
         .populate({
-            path: 'user',
+            path: 'creator',
             select: ['firstName', 'lastName', 'fullName', 'userPhoto']
-        })
-        .populate({
-            path: 'message',
-            populate: {
-                path: 'user',
-                select: ['firstName', 'lastName', 'fullName', 'userPhoto']
-            }
         });
     query.exec(callback);
 }

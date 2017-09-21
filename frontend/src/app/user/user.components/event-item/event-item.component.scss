@@ -6,24 +6,35 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80vw;
+    width: 90%;
     margin: 0 auto;
+}
+
+#event-container /deep/ app-general,
+#event-container /deep/ app-place-time,
+#event-container /deep/ app-discuss,
+#event-container /deep/ app-edit-panel {
+    width: 100%;
 }
 
 #event-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
-    margin: $macro-indent auto;
+    margin: 0 auto $macro-indent;
+
+    h1 {
+        flex-basis: 100%;
+    }
 
     .event-buttons {
-        flex-basis: 50%;
-        text-align: right;
+        flex-basis: 100%;
 
         button {
             width: 90%;
-            max-width: 160px;
+            max-width: 120px;
             height: 40px;
             border: none;
             border-radius: 20px;
@@ -33,8 +44,8 @@
             background: $main-color;
         }
 
-        button:first-child {
-            margin-right: $macro-indent;
+        button:nth-child(2) {
+            float: right;
         }
     }
 }
@@ -45,9 +56,15 @@
 
 .mat-tab-nav-bar /deep/ .mat-tab-links {
     display: flex;
+    flex-wrap: wrap;
 
     a {
         flex-grow: 1;
+        flex-basis: 50%;
+    }
+
+    md-ink-bar {
+        top: 48px;
     }
 }
 
@@ -56,9 +73,47 @@ router-outlet {
 }
 
 
+@media only screen and (min-width: $medium-screen) {
+
+    #event-header {
+        .event-buttons {
+            button {
+                max-width: 160px;
+            }
+        }
+    }
+}
+
+
 @media only screen and (min-width: $large-screen) {
 
     #event-container {
-        width: 65vw;
+        width: 80%;
+    }
+
+    #event-header {
+        margin: $macro-indent auto;
+
+        h1 {
+            flex-basis: initial;
+        }
+
+        .event-buttons {
+            flex-basis: 70%;
+            text-align: right;
+
+            button:first-child {
+                margin-right: $macro-indent;
+            }
+        }
+    }
+
+    .mat-tab-nav-bar /deep/ .mat-tab-links {
+        flex-wrap: nowrap;
+
+        md-ink-bar {
+            top: initial;
+            bottom: 0;
+        }
     }
 }

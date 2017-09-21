@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    max-width: 90%;
+    width: 100%;
     margin: 0 auto;
 
     h1 {
@@ -81,7 +81,7 @@
 
         #map {
             width: 100%;
-            height: 400px;
+            height: 50vh;
         }
     }
 
@@ -201,8 +201,6 @@
 @media only screen and (min-width: $large-screen) {
 
     #event-container {
-        max-width: 85%;
-
         h1 {
             width: 100%;
             margin: $macro-indent auto;
@@ -266,8 +264,6 @@
 @media only screen and (min-width: $full-hd-screen) {
 
     #event-container {
-        max-width: 70%;
-
         #event-text-block {
             textarea {
                 height: 200px;
