@@ -6,7 +6,7 @@
             <md-input-container>
                 <input mdInput placeholder="Search type" #searchInput (keyup)="searchType(searchInput.value)">
             </md-input-container>
-            <div class="types">
+            <div class="types" perfectScrollbar>
                 <div class="types-depth" *ngFor="let type of filtered || typesDepth">
                     <div class="depth-wrap">
                         <div class="name-wrap">
