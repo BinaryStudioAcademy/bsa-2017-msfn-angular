@@ -26,6 +26,7 @@ export class TribePageComponent implements OnInit {
     };
     userId: string;
     tribeID: string;
+    settingsLink: string;
 
     constructor(private mdDialog: MdDialog,
                 private tribeService: TribeService,
@@ -34,6 +35,7 @@ export class TribePageComponent implements OnInit {
                 private window: WindowObj) {
         this.userId = (this.window.data._injectedData as any).userId;
         this.tribeID = this.activatedRoute.snapshot.params.id;
+        this.settingsLink = '/user/tribe-settings/' + this.tribeID + '/general';
     }
 
     ngOnInit() {

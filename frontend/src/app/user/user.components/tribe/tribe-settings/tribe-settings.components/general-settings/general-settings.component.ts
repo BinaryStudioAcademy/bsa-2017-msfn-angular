@@ -55,7 +55,6 @@ export class GeneralSettingsComponent implements OnInit {
                     image: this.image
                 };
                 this.cropperSettings = this.tribeService.getCropperSettings();
-                console.log(this.data.image);
             });
         }
     }

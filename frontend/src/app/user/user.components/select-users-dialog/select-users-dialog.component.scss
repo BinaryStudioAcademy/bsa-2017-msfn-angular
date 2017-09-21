@@ -18,11 +18,42 @@ a {
     padding-left: $input-padding;
 }
 
+.img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
 h2 {
     text-align: center;
     font-size: $large-text;
 }
 
+.btn {
+    margin: 10px;
+}
+
+.user-container{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+    align-items: center;
+}
+
+.text {
+    text-align: center;
+    font-style: italic;
+}
+
+.selected {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.material-icons {
+    color: $btn-color;
+    margin-right: 5px;
+}
 
 .btn-container{
     display: flex;

@@ -40,6 +40,7 @@ function getByCreatorId(creator, callback ) {
 }
 
 function getApplicants(category, id, callback) {
+    console.log('getApplicants');
     const query = this.model.find({
         _id: id
     }, {
@@ -49,6 +50,7 @@ function getApplicants(category, id, callback) {
             path: category,
             select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         });
+    query.exec(callback);
 }
 
 

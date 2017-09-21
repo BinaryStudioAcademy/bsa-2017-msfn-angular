@@ -6,7 +6,7 @@
         <span class="mid-text menu-option" (click)="showFollowers()">Followers</span>
         <a class="mid-text menu-option"
            *ngIf="userId === tribe.creator"
-           routerLink="/user/tribe-settings">Settings</a>
+           routerLink="{{settingsLink}}">Settings</a>
         <a class="mid-text menu-option" (click)="addPost()">Add post</a>
         <button md-button class="btn" (click)="follow()">Follow</button>
     </div>

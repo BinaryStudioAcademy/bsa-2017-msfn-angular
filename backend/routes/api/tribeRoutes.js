@@ -107,6 +107,14 @@ module.exports = function (app) {
             next();
         });
     }, apiResponse);
+
+    app.get(`${baseUrl}banlist/:id`, isLoggedIn, (req, res, next) => {
+        tribeService.getApplicants('banned', req, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
     
     app.get(`${baseUrl}can-post/:id`, isLoggedIn, (req, res, next) => {
         tribeService.getApplicants('canPost', req, (err, data) => {

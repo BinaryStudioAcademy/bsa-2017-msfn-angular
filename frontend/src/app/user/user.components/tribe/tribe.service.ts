@@ -30,7 +30,7 @@ export class TribeService {
             body: {}
         };
         this.httpService.sendRequest(request)
-            .then( (data) => {
+            .then((data) => {
                 callback(data);
             });
     }
@@ -42,7 +42,7 @@ export class TribeService {
             body: {}
         };
         this.httpService.sendRequest(request)
-            .then( (data) => {
+            .then((data) => {
                 callback(data);
             });
     }
@@ -54,7 +54,7 @@ export class TribeService {
             body: {}
         };
         this.httpService.sendRequest(request)
-            .then( (data) => {
+            .then((data) => {
                 callback(data);
             });
     }
@@ -66,7 +66,7 @@ export class TribeService {
             body: {}
         };
         this.httpService.sendRequest(request)
-            .then( (data) => {
+            .then((data) => {
                 callback(data);
             });
     }
@@ -82,11 +82,11 @@ export class TribeService {
             }
         };
         this.httpService.sendRequest(request)
-            .then( (data) => { callback(data); });
+            .then((data) => { callback(data); });
     }
 
     createPost(body: ITribePost, callback) {
-        Object.assign(body, { tribe : body.tribe});
+        Object.assign(body, { tribe: body.tribe });
         const request: IHttpReq = {
             url: `/api/tribe/${body.tribe}/posts`,
             method: 'POST',
@@ -95,7 +95,7 @@ export class TribeService {
             failMessage: 'Cannot add post'
         };
         this.httpService.sendRequest(request)
-            .then( (data) => {
+            .then((data) => {
                 callback(data);
             });
     }
@@ -109,7 +109,7 @@ export class TribeService {
             failMessage: 'Cannot create tribe'
         };
         this.httpService.sendRequest(request)
-            .then( (data) => {
+            .then((data) => {
                 callback(data);
             });
     }
@@ -123,7 +123,7 @@ export class TribeService {
             }
         };
         this.httpService.sendRequest(request)
-            .then( (data) => {
+            .then((data) => {
                 callback(data);
             });
     }
@@ -147,7 +147,7 @@ export class TribeService {
         const sendData: IHttpReq = {
             url: '/api/file',
             method: 'POST',
-            body: {data: image, fileName: fileName, fileType: fileType, folder: folder},
+            body: { data: image, fileName: fileName, fileType: fileType, folder: folder },
         };
 
         this.httpService.sendRequest(sendData).then(data => {
@@ -156,10 +156,12 @@ export class TribeService {
     }
 
     updateTribe(body, callback) {
-                const sendData: IHttpReq = {
+        const sendData: IHttpReq = {
             url: '/api/tribe',
             method: 'PUT',
             body: body,
+            successMessage: 'Permissions updated',
+            failMessage: 'Cannot update permissions'
         };
 
         this.httpService.sendRequest(sendData).then(data => {
@@ -171,12 +173,10 @@ export class TribeService {
         const request: IHttpReq = {
             url: `/api/tribe/${whom}/${id}`,
             method: 'GET',
-            body: {},
-            successMessage: 'Members received',
-            failMessage: 'Cannot get members'
+            body: {}
         };
         this.httpService.sendRequest(request)
-            .then( (data) => {
+            .then((data) => {
                 callback(data);
             });
     }

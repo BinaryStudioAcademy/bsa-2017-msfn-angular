@@ -1,3 +1,13 @@
-<p>
-  tribe-banlist works!
-</p>
+<div class="container" perfect-scrollbar>
+    <div class="header">Banlist</div>
+    <div class="user-container" perfect-scrollbar>
+        <div *ngFor="let user of banned" class="user-element">
+            <img class="img" [src]="user.userPhoto || './resources/default.png'">
+            <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+        </div>
+        <div class="err" *ngIf="banned.length === 0">
+            <div class="err-text">Empty</div>
+        </div>
+    </div>
+    <button class="btn" (click)="openDialog('canPost')">Update banlist</button>
+</div>
