@@ -17,6 +17,17 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoaGcD9cAMR0dc6vRg9m35Fg5uacgpsmM" async defer></script>
 <script type="text/javascript">
     window._injectedData = JSON.parse('["data_replace"]');
+
+    // Prevent Google Maps API from rewriting our Roboto font
+    const head = document.getElementsByTagName('head')[0];
+    const insertBefore = head.insertBefore;
+    head.insertBefore = (newElement, referenceElement) => {
+        if (newElement.href && newElement.href.indexOf('https://fonts.googleapis.com/css?family=Roboto') === 0) {
+            return;
+        }
+        insertBefore.call(head, newElement, referenceElement);
+    };
+
 </script>
 <!-- FOR EASY FRONTEND DEVELOPMENT CAN BE REMOVED -->
 <script src="http://localhost:35729/livereload.js"></script>

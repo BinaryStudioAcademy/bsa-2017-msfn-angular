@@ -12,9 +12,9 @@ EventRepository.prototype.getById = getById;
 EventRepository.prototype.getAll = getAll;
 EventRepository.prototype.findByUserId = findByUserId;
 EventRepository.prototype.findByDates = findByDates;
-EventRepository.prototype.getParticipants = getParticipants;
-EventRepository.prototype.getFollowers = getFollowers;
+EventRepository.prototype.getApplicants = getApplicants;
 EventRepository.prototype.applyUser = applyUser;
+EventRepository.prototype.unapplyUser = unapplyUser;
 EventRepository.prototype.deleteById = deleteById;
 
 function getById(id, callback) {
@@ -75,8 +75,8 @@ function findByDates(startDate, endDate, callback) {
         $and: [
             {
                 startDate: {
-                    $gt: startDate,
-                    $lt: endDate
+                    $gte: startDate,
+                    $lte: endDate
                 }
             },
             {
@@ -98,39 +98,40 @@ function findByDates(startDate, endDate, callback) {
     query.exec(callback);
 }
 
-function getParticipants(id, callback) {
-    console.log('GET PART', id);
+function getApplicants(category, id, callback) {
     const query = this.model.find({
         _id: id
     }, {
-        participants: 1
+        [category]: 1
     })
         .populate({
-            path: 'participants',
-            select: ['firstName', 'lastName', 'fullName', 'userPhoto']
-        });
-    query.exec(callback);
-}
-
-function getFollowers(id, callback) {
-    const query = this.model.find({
-        _id: id
-    }, {
-        followers: 1
-    })
-        .populate({
-            path: 'followers',
+            path: category,
             select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         });
     query.exec(callback);
 }
 
 function applyUser(id, body, callback) {
-    console.log('ADD PART', id, body);
-    const fieldName = body.fieldName;
-    const query = this.model.update(id, {
-        $push: {[fieldName]: body.userId}
-    });
+    const query = this.model.update(
+        {
+            _id: id
+        },
+        { $addToSet: {
+            [body.fieldName]: body.userId
+        }}
+    );
+    query.exec(callback);
+}
+
+function unapplyUser(id, body, callback) {
+    const query = this.model.update(
+        {
+            _id: id
+        },
+        { $pull: {
+            [body.fieldName]: body.userId
+        }}
+    );
     query.exec(callback);
 }
 
