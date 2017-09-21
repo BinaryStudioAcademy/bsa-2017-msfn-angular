@@ -9,28 +9,38 @@
         flex-wrap: nowrap;
         height: 70%;
 
-        #eaten {
+        .food-plan-status {
             width: 100%;
         }
 
-        #meal-list {
+        .meal-list {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             width: 90%;
 
+            .list-meal {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
+                cursor: pointer;
+            }
+
             md-checkbox {
                 margin: 10px;
+                cursor: pointer;
+            }
 
-                span {
-                    font-size: $minor-text;
-                }
+            span {
+                margin-left: 5px;
+                font-size: $minor-text;
+                color: $text-second-color;
             }
         }
     }
 }
 
-#eaten > div {
+.food-plan-status > div {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -52,7 +62,7 @@
 
 @media only screen and (min-width: $medium-screen) {
 
-    .food-plan > .content > #eaten {
+    .food-plan > .content > .food-plan-status {
         width: 50%;
     }
 }

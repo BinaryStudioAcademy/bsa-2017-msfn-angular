@@ -253,7 +253,7 @@
                 height: calc(100% - 90px);
 
                 .exercise-row {
-                    width: 100%;
+                    width: 80%;
                     padding: 30px;
                     margin: 0;
                     font-size: 16px;
@@ -293,6 +293,14 @@
                     }
                 }
             }
+        }
+       
+    }
+    .empty-list{
+        display: flex;
+        justify-content: center;
+        .add-item{
+            margin: 0;
         }
     }
 }

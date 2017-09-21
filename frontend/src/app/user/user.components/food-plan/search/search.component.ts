@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, AfterViewInit } from '@angular/core';
 import { IFood } from '../../../../models/food';
 import { IFoodType } from '../../../../models/food-type';
 import { FoodPlanService } from './../food-plan.service';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
     styleUrls: ['./search.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, AfterViewInit {
     foods: IFood[];
     foodsStatic: IFood[];
     types: IFoodType[];
@@ -34,6 +34,7 @@ export class SearchComponent implements OnInit {
     };
     constructor(
         public foodPlanService: FoodPlanService,
+        public el: ElementRef,
     ) {
         this.subscription = this.foodPlanService.getProductList().subscribe(products => { this.currentMealProducts = products; });
     }
@@ -52,6 +53,19 @@ export class SearchComponent implements OnInit {
             this.types = res;
             this.createTypesDepth(res);
         });
+    }
+
+    ngAfterViewInit() {
+        const hostElem = this.el.nativeElement;
+        if (hostElem.parentNode.localName === 'md-dialog-container') {
+            hostElem.children[0].style.height = '80vh';
+            this.currentMealProducts = {
+                data: {
+                    list: [],
+                    show: true
+                }
+            };
+        }
     }
 
     createTypesDepth(types) {
@@ -190,7 +204,7 @@ export class SearchComponent implements OnInit {
                     }
                     sendList.list.push(formatedItem);
                     this.foodPlanService.sendProductList(sendList);
-
+                    this.selectedFood.push(formatedItem);
                 } else {
                     food.errorCount = true;
                 }

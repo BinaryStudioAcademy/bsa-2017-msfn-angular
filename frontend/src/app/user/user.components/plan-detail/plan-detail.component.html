@@ -7,28 +7,26 @@
             <md-input-container [class.errorBorder]="errors.emptyName">
                 <input mdInput placeholder="Plan name" value="New plan" class="plan-name" [(ngModel)]="trainingPlan.name" (focus)="errors.emptyName = false">
             </md-input-container>
+            <md-slide-toggle checked="trainingPlan.shared" [(ngModel)]="trainingPlan.shared">Public</md-slide-toggle>
         </div>
         <div class="field-container">
             <h2 class="field-title">
                 Type
             </h2>
-            <div class="field-item">
+            <div class="field-item types">
                 <md-radio-group class="radio-group" [(ngModel)]="trainingPlan.trainingType">
                     <md-radio-button class="radio-button" *ngFor="let type of types" [checked]="type.checked" [value]="type.key">
                         {{type.value}}
                     </md-radio-button>
                 </md-radio-group>
             </div>
-            <md-slide-toggle checked="trainingPlan.shared" [(ngModel)]="trainingPlan.shared">Public</md-slide-toggle>
+            
         </div>
         <div class="field-container">
             <h2 class="field-title">
                 Schedule
             </h2>
             <div class="week-days">
-                <h3 class="field-title">
-                    Week days
-                </h3>
                 <div class="field-item days">
                     <div class="item" *ngFor="let day of days">
                         <input type="checkbox" id="day-{{day.key}}" value="{{day.key}}" [(ngModel)]="day.checked" name="weekdays[]" (change)="selectDays()">
@@ -41,7 +39,7 @@
                 <h2 class="field-title">
                     Description
                 </h2>
-                <md-input-container class="example-full-width" class="input">
+                <md-input-container class="full-width input">
                     <textarea mdInput [(ngModel)]="trainingPlan.description" name="text"></textarea>
                 </md-input-container>
             </div>

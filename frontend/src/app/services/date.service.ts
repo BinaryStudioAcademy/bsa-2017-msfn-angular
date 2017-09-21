@@ -60,6 +60,13 @@ export class DateService {
         return isoDate;
     }
 
+    beautifyDate(date): string {  // 18.09.2017
+        const d = new Date(date);
+        return this.addZero(d.getDate()) + '.' +
+               this.addZero(d.getMonth() + 1) + '.' +
+               d.getFullYear();
+    }
+
     getDateString(month: number, day: number): string {
         const monthOutput = this.addZero(month + 1),
             dayOutput = this.addZero(day);

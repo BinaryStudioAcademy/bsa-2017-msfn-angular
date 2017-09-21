@@ -57,6 +57,41 @@ export class EventItemComponent implements OnInit {
         });
     }
 
+    applicationAction(category: string, event): void {
+        const status = category === 'participants' ? 'isParticipating' : 'isFollowing';
+        if (event[status]) {
+            this.unapply(category, event);
+        } else {
+            this.apply(category, event);
+        }
+    }
+
+    apply(category, event): void {
+        this.eventService.apply(category, event._id, this.userId, () => {
+            if (category === 'participants') {
+                event.isParticipating = true;
+            } else {
+                event.isFollowing = true;
+            }
+            this.eventService.getApplicants(category, event._id, data => {
+                event[category] = data[0][category];
+            });
+        });
+    }
+
+    unapply(category, event): void {
+        this.eventService.unapply(category, event._id, this.userId, () => {
+            if (category === 'participants') {
+                event.isParticipating = false;
+            } else {
+                event.isFollowing = false;
+            }
+            this.eventService.getApplicants(category, event._id, data => {
+                event[category] = data[0][category];
+            });
+        });
+    }
+
     navigateToEditTab() {
         this.router.navigate([`/user/events/${this.event._id}/edit-panel/${this.userId}`]);
     }

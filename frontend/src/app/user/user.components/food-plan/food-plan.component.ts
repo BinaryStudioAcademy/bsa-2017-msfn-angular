@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs/Subscription';
     selector: 'app-food-plan',
     templateUrl: './food-plan.component.html',
     styleUrls: ['./food-plan.component.scss'],
-    providers: [FoodPlanService],
     encapsulation: ViewEncapsulation.None
 })
 export class FoodPlanComponent implements OnInit {
