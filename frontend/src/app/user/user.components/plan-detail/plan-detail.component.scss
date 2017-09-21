@@ -17,7 +17,7 @@
         height: calc(90% - 70px); // 70px for save-button
         min-height: 400px;
         padding-left: 10px;
-        background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
+        // background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
 
         .title-container {
             display: flex;
@@ -140,7 +140,7 @@
         min-height: 400px;
         display: flex;
         flex-wrap: wrap;
-        background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
+        // background: linear-gradient(to top, $gradient-from-color, $gradient-to-color);
 
         app-exercises {
             width: 100%;
