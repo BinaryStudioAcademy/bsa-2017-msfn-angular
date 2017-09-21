@@ -82,6 +82,9 @@ export class FoodTrackingComponent implements OnInit {
     finish(status) {
         if (status === 'plan') {
             this.launchedFoodPlan.status = 'finished';
+            this.foodTrackingService.updateLaunchedFoodPlan(this.launchedFoodPlan, res => {
+                this.toasterService.showMessage('success', null, 'Saved');
+            });
             this.launchedFoodPlan = null;
             this.getAllFoodPlans();
         }

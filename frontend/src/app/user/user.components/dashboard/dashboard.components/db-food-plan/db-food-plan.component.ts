@@ -40,7 +40,7 @@ export class DbFoodPlanComponent implements OnInit {
             height: '80vh'
         });
         this.foodTrackingDialog.afterClosed().subscribe(() => {
-            this.foodPlan = this.foodTrackingDialog.componentInstance.launchedFoodPlan;
+            this.foodPlan = this.foodTrackingDialog.componentInstance.historyFoodPlan;
             this.foodTrackingDialog = null;
         });
     }

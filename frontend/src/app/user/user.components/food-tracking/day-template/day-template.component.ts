@@ -107,13 +107,9 @@ export class DayTemplateComponent implements OnInit, AfterViewInit {
         this.historyFoodPlan = JSON.parse(JSON.stringify(foodPlan));
         if (!this.historyFoodPlan.todayMeals.meals || this.historyFoodPlan.todayMeals.meals.length === 0) {
             if (foodPlan.kind === 'weekly') {
-                foodPlan.days[new Date().getDay() - 1].meals.forEach(el => {
-                    this.historyFoodPlan.todayMeals.meals.push(el);
-                });
+                this.historyFoodPlan.todayMeals.meals = JSON.parse(JSON.stringify(foodPlan.days[new Date().getDay() - 1].meals));
             } else {
-                this.historyFoodPlan.meals.forEach(el => {
-                    this.historyFoodPlan.todayMeals.meals.push(el);
-                });
+                this.historyFoodPlan.todayMeals.meals = JSON.parse(JSON.stringify(this.historyFoodPlan.meals));
             }
         }
 
