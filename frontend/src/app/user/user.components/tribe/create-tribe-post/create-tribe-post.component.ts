@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { ITribePost } from '../../../../models/tribe-post';
 import { CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
 import { ToasterService } from '../../../../services/toastr.service';
 import { TribeService } from '../tribe.service';
 import { NgForm } from '@angular/forms';
+import {NavigationEnd, Router, Event as NavigationEvent, Event, NavigationStart} from '@angular/router';
+import {MD_DIALOG_DATA} from '@angular/material';
 
 @Component({
     selector: 'app-create-tribe-post',
@@ -27,9 +29,13 @@ export class CreateTribePostComponent implements OnInit {
     oldImg;
 
     constructor(
+        @Inject(MD_DIALOG_DATA) public tribeData,
         private toasterService: ToasterService,
-        private tribeService: TribeService
+        private tribeService: TribeService,
+        private router: Router
     ) {
+        this.tribePost.tribe = this.tribeData.tribeId;
+        this.tribePost.author = this.tribeData.userId;
     }
 
     ngOnInit() {
@@ -84,8 +90,9 @@ export class CreateTribePostComponent implements OnInit {
                         this.tribePost.image = this.oldImg;
                         this.toasterService.showMessage('error', result.err);
                     } else {
-                        this.tribePost.image = './resources/articles-image/' + fileName + '.' + this.type;
-                        this.tribeService.createTribe(this.tribePost, (err, data) => {});
+                        this.tribePost.image = './resources/tribe-post-image/' + fileName + '.' + this.type;
+                        this.tribeService.createPost(this.tribePost, (err, data) => {
+                        });
                     }
                 });
             }

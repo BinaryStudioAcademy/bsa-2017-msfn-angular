@@ -1,0 +1,32 @@
+<md-tab-group>
+    <md-tab label="All">
+        <md-list>
+            <md-list-item *ngFor="let item of tribes">
+                <img md-list-avatar
+                     [src]="item.image || './resources/default.png'">
+                <a (click)="goToTribe(item._id)"  md-tooltip="{{item.description}}">{{item.name}}</a>
+            </md-list-item>
+        </md-list>
+    </md-tab>
+    <md-tab label="Followed">
+        <md-list>
+            <md-list-item *ngFor="let item of tribes">
+                <img md-list-avatar
+                     [src]="item.image || './resources/default.png'">
+                <a (click)="goToTribe(item._id)">{{item.name}}</a>
+            </md-list-item>
+        </md-list>
+    </md-tab>
+    <md-tab label="Created by me">
+        <div *ngIf="!myTribes">
+            <p>You have not created tribes yet.</p>
+            <button md-button (click)="create()">Create</button>
+        </div>
+        <md-list *ngIf="myTribes">
+            <md-list-item *ngFor="let item of myTribes">
+                <a (click)="goToTribe(item._id)">{{item.name}}</a>
+            </md-list-item>
+        </md-list>
+    </md-tab>
+</md-tab-group>
+
