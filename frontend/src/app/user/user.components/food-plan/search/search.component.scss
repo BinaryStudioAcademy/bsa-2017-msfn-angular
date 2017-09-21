@@ -29,6 +29,9 @@
             padding: 10px;
             padding-left: 0;
             border-right: 1px solid #424242;
+            .search-types{
+                width: 100%;
+            }
             .types {
                 overflow-y: scroll;            
                 .depth-wrap {
