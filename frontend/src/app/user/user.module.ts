@@ -54,7 +54,6 @@ import { ArticleDetailComponent } from './user.components/article-detail/article
 import { TrainingHistoryComponent } from './user.components/training-history/training-history.component';
 import { TrainingHistoryDetailComponent } from './user.components/training-history-detail/training-history-detail.component';
 import { ArticleListComponent } from './user.components/article-list/article-list.component';
-<<<<<<< HEAD
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
 import { FoodPlanListComponent } from './user.components/food-plan-list/food-plan-list.component';
 import { FoodTrackingComponent } from './user.components/food-tracking/food-tracking.component';
@@ -62,13 +61,10 @@ import { SearchComponent } from './user.components/food-plan/search/search.compo
 import { WeeklyComponent } from './user.components/food-plan/weekly/weekly.component';
 import { DailyComponent } from './user.components/food-plan/daily/daily.component';
 import { ProductListComponent } from './user.components/food-plan/product-list/product-list.component';
-=======
->>>>>>> ba148a78448d0ee613ed4e0049381aa472485e3e
 import { MessagePostingComponent } from './user.components/message-posting/message-posting.component';
 import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 import { AchievementReceivedDialogComponent } from './user.components/achievement-received-dialog/achievement-received-dialog.component';
 import { AchievementInfoDialogComponent } from './user.components/achievement-info-dialog/achievement-info-dialog.component';
-<<<<<<< HEAD
 import { EventCreateComponent } from './user.components/event-create/event-create.component';
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventItemComponent } from './user.components/event-item/event-item.component';
@@ -80,7 +76,6 @@ import { EditPanelComponent } from './user.components/event-item/edit-panel/edit
 import {ActivatedRouteSnapshot} from '@angular/router';
 import {EventService} from './services/event.service';
 import { FoodPlanService } from './user.components/food-plan/food-plan.service';
-=======
 import { TribePageComponent } from './user.components/tribe/tribe-page/tribe-page.component';
 import { TribePostComponent } from './user.components/tribe/tribe-post/tribe-post.component';
 import { TribeSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.component';
@@ -89,7 +84,6 @@ import { FullTribePostComponent } from './user.components/tribe/full-tribe-post/
 import { TribeMembersDialogComponent} from './user.components/tribe/tribe-members-dialog/tribe-members-dialog.component';
 import { CreateTribeComponent } from './user.components/tribe/create-tribe/create-tribe.component';
 
->>>>>>> ba148a78448d0ee613ed4e0049381aa472485e3e
 
 @NgModule({
     imports: [
@@ -159,7 +153,6 @@ import { CreateTribeComponent } from './user.components/tribe/create-tribe/creat
         AchievementsListComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
-<<<<<<< HEAD
         EventCreateComponent,
         EventListComponent,
         EventItemComponent,
@@ -168,7 +161,6 @@ import { CreateTribeComponent } from './user.components/tribe/create-tribe/creat
         DiscussComponent,
         PlaceTimeComponent,
         EditPanelComponent,
-=======
         TribePageComponent,
         TribePostComponent,
         TribeSettingsComponent,
@@ -176,7 +168,6 @@ import { CreateTribeComponent } from './user.components/tribe/create-tribe/creat
         FullTribePostComponent,
         TribeMembersDialogComponent,
         CreateTribeComponent,
->>>>>>> ba148a78448d0ee613ed4e0049381aa472485e3e
     ],
     providers: [
         ForAllUserGuard,
@@ -191,13 +182,10 @@ import { CreateTribeComponent } from './user.components/tribe/create-tribe/creat
         GoalEditDialogComponent,
         AchievementReceivedDialogComponent,
         AchievementInfoDialogComponent,
-<<<<<<< HEAD
         SearchComponent,
         ImageUploadComponent,
-=======
         FullTribePostComponent,
         TribeMembersDialogComponent,
->>>>>>> ba148a78448d0ee613ed4e0049381aa472485e3e
     ]
 })
 export class UserModule {
