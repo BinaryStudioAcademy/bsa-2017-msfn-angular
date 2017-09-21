@@ -1,7 +1,7 @@
 @import './variables.scss';
 @import './indentations.scss';
 @import './text.scss';
-@import '../../../node_modules/ngx-toastr/toastr.css';
+@import '~/ngx-toastr/toastr.css';
 @import './toastrStyles.scss';
 @import './markdownStyles.scss';
 @import '~perfect-scrollbar/dist/css/perfect-scrollbar.min.css';
@@ -53,8 +53,7 @@ body {
     line-height: 1.15;
     -webkit-font-smoothing: antialiased;
     color: #fff;
-    background: url('./img/bg_general.png') fixed;
-    background-size: 100vw 100vh;
+    background: $gradient-from-color;
 }
 
 // Suppress the focus outline on elements that cannot be accessed via keyboard.
