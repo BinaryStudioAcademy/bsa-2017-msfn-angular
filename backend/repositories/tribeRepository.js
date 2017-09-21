@@ -12,6 +12,8 @@ TribeRepository.prototype.updateById = updateById;
 TribeRepository.prototype.getApplicants = getApplicants;
 TribeRepository.prototype.deleteById = deleteById;
 TribeRepository.prototype.getByCreatorId = getByCreatorId;
+TribeRepository.prototype.addFollowers = addFollowers;
+TribeRepository.prototype.banUser = banUser;
 
 function updateById(id, body, callback) {
     const query = this.model.update(
@@ -47,6 +49,28 @@ function getApplicants(category, id, callback) {
             path: category,
             select: ['firstName', 'lastName', 'fullName', 'userPhoto']
         });
+}
+
+
+function addFollowers(id, user, callback) {
+    const query = this.model.update({
+        _id: id
+    }, {
+        $addToSet: {
+            members: user
+        }
+    });
+    query.exec(callback);
+}
+
+function banUser(id, user, callback) {
+    const query = this.model.update({
+        _id: id
+    }, {
+        $addToSet: {
+            banned: user
+        }
+    });
     query.exec(callback);
 }
 

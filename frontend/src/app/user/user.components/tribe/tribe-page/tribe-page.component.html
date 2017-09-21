@@ -8,7 +8,7 @@
            *ngIf="userId === tribe.creator"
            routerLink="/user/tribe-settings">Settings</a>
         <a class="mid-text menu-option" (click)="addPost()">Add post</a>
-        <button md-button class="btn">Follow</button>
+        <button md-button class="btn" (click)="follow()">Follow</button>
     </div>
     <div class="content">
         <div class="description">

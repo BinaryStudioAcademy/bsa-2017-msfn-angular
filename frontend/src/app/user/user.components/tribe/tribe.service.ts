@@ -59,7 +59,7 @@ export class TribeService {
             });
     }
 
-    getPostsByCreator(creatorId, callback) {
+    getTribesByCreator(creatorId, callback) {
         const request: IHttpReq = {
             url: `api/tribe/creator/${creatorId}`,
             method: 'GET',
@@ -73,15 +73,12 @@ export class TribeService {
 
     commentPost(tribeId, postId, userId, text, callback) {
         const request: IHttpReq = {
-            url: `/api/tribe/${tribeId}/post/${postId}/comments`,
+            url: `/api/tribe/${tribeId}/comments`,
             method: 'PUT',
             body: {
-                comments: [
-                    {
-                        author: userId,
-                        text: text
-                    }
-                ]
+                id: postId,
+                author: userId,
+                text: text
             }
         };
         this.httpService.sendRequest(request)
@@ -110,6 +107,20 @@ export class TribeService {
             body: body,
             successMessage: 'Tribe created',
             failMessage: 'Cannot create tribe'
+        };
+        this.httpService.sendRequest(request)
+            .then( (data) => {
+                callback(data);
+            });
+    }
+
+    addFollower(tribeId, userId, callback) {
+        const request: IHttpReq = {
+            url: `api/tribe/${tribeId}/followers`,
+            method: 'PUT',
+            body: {
+                newMember: userId
+            }
         };
         this.httpService.sendRequest(request)
             .then( (data) => {

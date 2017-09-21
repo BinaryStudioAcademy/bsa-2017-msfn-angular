@@ -1,6 +1,5 @@
 const ApiError = require('./apiErrorService'),
-    tribeRepository = require('../repositories/tribeRepository'),
-    postRepository = require('../repositories/postRepository');
+    tribeRepository = require('../repositories/tribeRepository');
 
 function TribeService() {}
 
@@ -10,6 +9,7 @@ TribeService.prototype.updateTribeById = updateTribeById;
 TribeService.prototype.getApplicants = getApplicants;
 TribeService.prototype.getTribeById = getTribeById;
 TribeService.prototype.getTribesByCreatorId = getTribesByCreatorId;
+TribeService.prototype.addFollowers = addFollowers;
 
 
 function createTribe(body, callback) {
@@ -47,7 +47,7 @@ function updateTribeById(id, body, callback) {
     tribeRepository.update(id, body, callback);
 }
 
-function getTribeById(id, callback) { 
+function getTribeById(id, callback) {
     console.log(id);
     tribeRepository.getById(id, function (err, tribeData) {
         console.log(tribeData);
@@ -67,6 +67,17 @@ function getTribesByCreatorId(creator, callback) {
             callback(null, new ApiError('Cannot find tribes'));
         } else {
             callback(null, tribeData);
+        }
+    });
+}
+
+function addFollowers(id, userId, callback) {
+    tribeRepository.addFollowers(id, userId, (err, data) => {
+        if (err) return callback(err);
+        if (data === null) {
+            callback(null, new ApiError('Cannot add follower'));
+        } else {
+            callback(null, data);
         }
     });
 }
