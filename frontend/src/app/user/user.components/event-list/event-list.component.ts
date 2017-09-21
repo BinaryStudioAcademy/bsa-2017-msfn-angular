@@ -29,7 +29,6 @@ export class EventListComponent implements OnInit {
         this.events = [];
         this.eventService.getAllItems(data => {
             this.events = data;
-            console.log(data);
             for (const event of this.events) {
                 this.eventService.setDateOutput(event);
                 this.eventService.isUserApplied(event, this._userId);
@@ -48,7 +47,6 @@ export class EventListComponent implements OnInit {
 
         this.eventService.getPeriodItems(period, data => {
             this.events = data;
-            console.log(data);
             for (const event of this.events) {
                 this.eventService.setDateOutput(event);
                 this.eventService.isUserApplied(event, this._userId);
@@ -65,29 +63,35 @@ export class EventListComponent implements OnInit {
         }
     }
 
-    apply(category, event): void {
+    apply(category: string, event): void {
         this.eventService.apply(category, event._id, this._userId, () => {
-            if (category === 'participants') {
-                event.isParticipating = true;
-            } else {
-                event.isFollowing = true;
-            }
             this.eventService.getApplicants(category, event._id, data => {
                 event[category] = data[0][category];
             });
+
+            this.postApplyAction(event, category, true);
         });
     }
 
-    unapply(category, event): void {
+    unapply(category: string, event): void {
         this.eventService.unapply(category, event._id, this._userId, () => {
-            if (category === 'participants') {
-                event.isParticipating = false;
-            } else {
-                event.isFollowing = false;
-            }
             this.eventService.getApplicants(category, event._id, data => {
                 event[category] = data[0][category];
             });
+
+            this.postApplyAction(event, category, false);
         });
+    }
+
+    postApplyAction(event, category: string, isApplied: boolean) {
+        if (category === 'participants') {
+            event.isParticipating = isApplied;
+            event.isFollowing = isApplied;
+            this.eventService.getApplicants('followers', event._id, data => {
+                event.followers = data[0].followers;
+            });
+        } else {
+            event.isFollowing = isApplied;
+        }
     }
 }

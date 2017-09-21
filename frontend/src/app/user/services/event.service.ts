@@ -153,7 +153,6 @@ export class EventService {
                 userId
             }
         };
-        console.log(req);
         this.httpService.sendRequest(req).then(data => {
             if (data) {
                 callback(null, data);
@@ -170,7 +169,6 @@ export class EventService {
                 userId
             }
         };
-        console.log(req);
         this.httpService.sendRequest(req).then(data => {
             if (data) {
                 callback(null, data);
@@ -195,7 +193,7 @@ export class EventService {
             event.isParticipating = true;
         }
         if (event.followers.includes(userId)) {
-            event.isParticipating = true;
+            event.isFollowing = true;
         }
     }
 }

@@ -51,9 +51,13 @@ export class EventItemComponent implements OnInit {
     getEvent(id: string): void {
         this.eventService.getItem(id, data => {
             this.event = data;
-            console.log(data);
             this.eventService.setDateOutput(this.event);
-            this.eventService.isUserApplied(this.event, this.userId);
+            this.event.isParticipating = this.event.participants.find(item => {
+                return item._id === this.userId;
+            });
+            this.event.isFollowing = this.event.followers.find(item => {
+                return item._id === this.userId;
+            });
         });
     }
 
@@ -66,7 +70,7 @@ export class EventItemComponent implements OnInit {
         }
     }
 
-    apply(category, event): void {
+    apply(category: string, event): void {
         this.eventService.apply(category, event._id, this.userId, () => {
             this.eventService.getApplicants(category, event._id, data => {
                 event[category] = data[0][category];
@@ -76,7 +80,7 @@ export class EventItemComponent implements OnInit {
         });
     }
 
-    unapply(category, event): void {
+    unapply(category: string, event): void {
         this.eventService.unapply(category, event._id, this.userId, () => {
             this.eventService.getApplicants(category, event._id, data => {
                 event[category] = data[0][category];
@@ -86,12 +90,12 @@ export class EventItemComponent implements OnInit {
         });
     }
 
-    postApplyAction(event, category, isApplied: boolean) {
+    postApplyAction(event, category: string, isApplied: boolean) {
         if (category === 'participants') {
             event.isParticipating = isApplied;
             event.isFollowing = isApplied;
             this.eventService.getApplicants('followers', event._id, data => {
-                event[category] = data[0][category];
+                event.followers = data[0].followers;
             });
         } else {
             event.isFollowing = isApplied;
