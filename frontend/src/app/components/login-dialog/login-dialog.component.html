@@ -10,7 +10,7 @@
         <p *ngIf="!verified" class="instruct">Before start you need finish the registration. Check your mailbox (or spam folder) to our mail with next instructions. If you don't see this mail, you can re-send.</p>
         
         <md-input-container class="login-imput-container">
-            <input autofocus mdInput type="email" placeholder="Email" [(ngModel)]="email" [formControl]="emailFormControl">
+            <input autofocus mdInput type="email" name="email" placeholder="Email" [(ngModel)]="email" [formControl]="emailFormControl">
             <md-error *ngIf="emailFormControl.hasError('pattern')">
                 Please enter a valid email address
             </md-error>
