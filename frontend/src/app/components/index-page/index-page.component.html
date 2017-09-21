@@ -1,10 +1,14 @@
 <section class="index__banner-wrap" [ngClass]="isLoggedIn ? '' : 'isnt-logedin'">
     <div class="container">
-        <div class="index__banner-content">
-            <div class="index__heading-wrap">
-                <!-- <div class="index__heading-text">Just do it</div>
-                <p class="index__heading-description">Organize your fitness, and enjoy life.</p> -->
+        <div class="descript">
+            <div class="wrap-gallery">
+                <div class="first">Get the most out of fitness</div>
+                <div class="second">Manage your sports activities</div>
+                <div class="third">Balance your diet</div>
+                <div class="first">Get the most out of fitness</div>
             </div>
+        </div>
+        <div class="index__banner-content">
             <div class="index__auth-wrap" *ngIf="!isLoggedIn">
                 <div class="index__auth-socials-wrap">
                     <div class="index__auth-socials-heading">Join now</div>
