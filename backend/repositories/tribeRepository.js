@@ -11,6 +11,8 @@ TribeRepository.prototype = new Repository();
 TribeRepository.prototype.updateById = updateById;
 TribeRepository.prototype.deleteById = deleteById;
 TribeRepository.prototype.getByCreatorId = getByCreatorId;
+TribeRepository.prototype.addFollowers = addFollowers;
+TribeRepository.prototype.banUser = banUser;
 
 function updateById(id, body, callback) {
     const query = this.model.update(
@@ -32,6 +34,28 @@ function deleteById(id, callback) {
 function getByCreatorId(creator, callback ) {
     const query = this.model.find({
         creator: creator
+    });
+    query.exec(callback);
+}
+
+function addFollowers(id, user, callback) {
+    const query = this.model.update({
+        _id: id
+    }, {
+        $addToSet: {
+            members: user
+        }
+    });
+    query.exec(callback);
+}
+
+function banUser(id, user, callback) {
+    const query = this.model.update({
+        _id: id
+    }, {
+        $addToSet: {
+            banned: user
+        }
     });
     query.exec(callback);
 }

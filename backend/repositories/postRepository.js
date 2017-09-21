@@ -61,11 +61,17 @@ function updateById(id, body, callback) {
     query.exec(callback);
 }
 
-function addComment(id, body, callback) {
+function addComment(id, tribe, body, callback) {
     const query = this.model.update(
+        { $and: [
+            {
+                tribe: tribe
+            },
+            {
+                _id: id,
+            }
+        ]},
         {
-            _id: id
-        }, {
             $push: {
                 'comments': {
                     author: body.author,

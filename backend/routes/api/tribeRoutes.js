@@ -90,4 +90,20 @@ module.exports = function (app) {
             next();
         });
     }, apiResponse);
+
+    app.put(`${baseUrl}:id/comments/`, (req, res, next) => {
+        postService.addComment(req.body.id, req.params.id, req.body,(err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.put(`${baseUrl}:id/followers/`, (req, res, next) => {
+        tribeService.addFollowers(req.params.id, req.body.newMember, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
 };

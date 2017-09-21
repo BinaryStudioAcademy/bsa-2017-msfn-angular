@@ -47,8 +47,8 @@ function updatePostById(id, body, callback) {
     postRepository.update(id, body, callback);
 }
 
-function addComment(id, body, callback) {
-    postRepository.addComment(id, body, (err, data) => {
+function addComment(id, tribe, body, callback) {
+    postRepository.addComment(id, tribe, body, (err, data) => {
         if (err) {
             return err;
         }

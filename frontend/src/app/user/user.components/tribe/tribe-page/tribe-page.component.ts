@@ -84,4 +84,12 @@ export class TribePageComponent implements OnInit {
     addComment() {}
 
     addFavourite() {}
+
+    follow() {
+        if (!this.tribe.members.includes(this.userId)) {
+            this.tribeService.addFollower(this.tribeID, this.userId, () => {});
+        } else {
+            this.toasterService.showMessage( 'error', 'You already follow this tribe');
+        }
+    }
 }
