@@ -39,15 +39,16 @@ $height: calc(100vh - 70px);
 @media screen and (max-width: $medium-screen) {
     .sidebar-container {
         width: 220px;
+        top:50px;
     }
     .sidebar-toggler {
         display: block;
-        position: absolute;
-        width: 40px;
-        height: 40px;
+        position: fixed;
+        width: 30px;
+        height: 30px;
         z-index: 101;
-        top: 15px;
-        left: 10%;
+        top: 11px;
+        left: 8%;
     }
     .hide {
         left: -220px;

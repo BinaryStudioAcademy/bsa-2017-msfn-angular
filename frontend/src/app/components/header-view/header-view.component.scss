@@ -1,11 +1,9 @@
 @import '../../../globalStyles/variables.scss';
 @import '../../../globalStyles/text.scss';
 @import '../../../globalStyles/indentations.scss';
-
 $header-inner-margin: 5%;
 $header-icons-intendation: 14px;
 $header-height: 70px;
-
 header {
     display: flex;
     justify-content: space-between;
@@ -15,18 +13,15 @@ header {
     background-color: $gradient-to-color;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-family: $font-general;
-
     .logo {
         font-size: 25px;
         margin-left: $header-inner-margin;
-
         a {
             text-decoration: none;
             color: $text-main-color;
             display: flex;
             align-items: center;
         }
-
         .logo__text {
             width: 125px;
             height: 50px;
@@ -38,7 +33,6 @@ header {
             height: 60px;
             background: url('../../../globalStyles/img/mini_logo.png') center no-repeat;
             background-size: 90%;
-
             &:hover {
                 animation: logoAnim 1s ease-in-out forwards;
             }
@@ -48,7 +42,6 @@ header {
         display: flex;
         justify-content: space-around;
         align-items: center;
-
         .icons {
             margin-right: $header-icons-intendation;
             cursor: pointer;
@@ -56,10 +49,8 @@ header {
             align-items: center;
             position: relative;
         }
-
         .chat {
             position: relative;
-
             .got-messages {
                 display: block;
                 position: absolute;
@@ -75,31 +66,28 @@ header {
                 box-shadow: 0 0 2px 1px #7da7d9;
             }
         }
-
         .settings {
             display: flex;
             align-items: center;
             margin-right: $header-inner-margin;
             cursor: pointer;
-
             .settings__photo {
                 margin-right: 5px;
                 width: 35px;
                 border-radius: 50%;
             }
-
             .settings__name {
                 margin-right: $header-icons-intendation;
                 vertical-align: super;
                 font-size: 17px;
             }
         }
-
         .burger {
             display: none;
         }
     }
 }
+
 md-menu {
     display: none;
 }
@@ -124,6 +112,7 @@ md-menu {
 
 @media screen and (max-width: $small-screen) {
     header {
+        height: 50px;
         justify-content: space-around;
         .logo {
             display: none;
@@ -134,13 +123,17 @@ md-menu {
             .icons {
                 margin-right: 0;
                 &/deep/ md-icon {
-                    width: 40px;
-                    height: 40px;
-                    font-size: 40px;
+                    width: 30px;
+                    height: 30px;
+                    font-size: 30px;
                 }
             }
             .settings {
-                display: none;
+                order: -1;
+                margin: 0;
+                .settings__name {
+                    display: none;
+                }
             }
             .burger {
                 display: flex;
@@ -148,3 +141,4 @@ md-menu {
         }
     }
 }
+
