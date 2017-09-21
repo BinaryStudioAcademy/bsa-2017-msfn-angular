@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
 
     h1 {
@@ -257,6 +257,14 @@
 
     .cropper-buttons {
         margin: initial;
+    }
+}
+
+
+@media only screen and (min-width: $large-screen) {
+
+    #event-container {
+        width: 80%;
     }
 }
 

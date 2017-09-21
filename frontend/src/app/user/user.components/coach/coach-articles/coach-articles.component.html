@@ -24,6 +24,7 @@
             [pageSize]="pageEvent.pageSize"
             [pageSizeOptions]="pageSizeOptions"
             (page)="pageEvent = $event"
+            (focusin)="makePaginatorOutput()"
             (click)="makePaginatorOutput()">
         </md-paginator>
     </div>

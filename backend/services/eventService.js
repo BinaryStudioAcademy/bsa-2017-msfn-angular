@@ -104,6 +104,10 @@ function applyUser(eventId, body, callback) {
             if (data.creator._id.toString() === body.userId) {
                 callback(new ApiError('Creator cannot be applied to event'));
             } else {
+                if (body.category === 'participants') {
+                    const followBody = {userId: body.userId, category: 'followers'};
+                    eventRepository.applyUser(eventId, followBody, callback);
+                }
                 eventRepository.applyUser(eventId, body, callback);
             }
         }
@@ -117,6 +121,10 @@ function unapplyUser(eventId, body, callback) {
         if (data === null){
             callback(new ApiError('Event not found'));
         } else {
+            if (body.category === 'participants') {
+                const followBody = {userId: body.userId, category: 'followers'};
+                eventRepository.unapplyUser(eventId, followBody, callback);
+            }
             eventRepository.unapplyUser(eventId, body, callback);
         }
     })

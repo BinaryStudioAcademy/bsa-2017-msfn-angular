@@ -1,8 +1,7 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {EventService} from '../../../services/event.service';
 import {DateService} from '../../../../services/date.service';
 import {ActivatedRoute} from '@angular/router';
-import {WindowObj} from '../../../../services/window.service';
 
 declare const google: any;
 
@@ -18,12 +17,11 @@ declare const google: any;
 export class PlaceTimeComponent implements OnInit {
 
     constructor(public activatedRoute: ActivatedRoute,
-                private eventService: EventService,
-                private dateService: DateService,
-                private window: WindowObj) {
+                private eventService: EventService) {
     }
 
     @Input() event;
+    validCoords: boolean = false;
 
     ngOnInit() {
         if (this.activatedRoute.snapshot.parent.params.id) {
@@ -34,7 +32,6 @@ export class PlaceTimeComponent implements OnInit {
 
     initMap(): void {
         const centerCoords = this.event.location.coords;
-
         const map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
             center: centerCoords
@@ -53,9 +50,11 @@ export class PlaceTimeComponent implements OnInit {
     getEvent(id: string): void {
         this.eventService.getItem(id, data => {
             this.event = data;
-            console.log(data);
             this.eventService.setDateOutput(this.event);
-            this.initMap();
+            if (this.event.location.coords.lat !== null && this.event.location.coords.lng !== null) {
+                this.validCoords = true;
+                this.initMap();
+            }
         });
     }
 }

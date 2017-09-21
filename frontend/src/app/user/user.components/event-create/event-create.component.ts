@@ -61,6 +61,8 @@ export class EventCreateComponent implements OnInit {
     ]);
 
     ngOnInit() {
+        this.setCurrentTime();
+
         if (this.eventId) {
             this.submitButtonTitle = 'Update an event';
             this.getEvent();
@@ -88,6 +90,13 @@ export class EventCreateComponent implements OnInit {
         };
 
         this.initMap();
+    }
+
+    setCurrentTime() {
+        const now = new Date;
+        this.eventTime.startTime.hours = this.dateService.addZero(now.getHours()).toString();
+        this.eventTime.startTime.minutes = this.dateService.addZero(now.getMinutes()).toString();
+        this.eventTime.endTime = Object.assign(this.eventTime.endTime, this.eventTime.startTime);
     }
 
     handleTimeInput(event, maxAmount) {
@@ -138,7 +147,6 @@ export class EventCreateComponent implements OnInit {
             this.event = data;
             this.event.startDate = new Date(this.event.startDate);
             this.event.endDate = new Date(this.event.endDate);
-            console.log('EVENT DATA', data);
             this.initMap();
         });
     }
@@ -177,6 +185,7 @@ export class EventCreateComponent implements OnInit {
             map.addListener('click', event => {
                 centerCoords = event.latLng.toJSON();
                 marker.setPosition(event.latLng);
+                this.event.location.coords = centerCoords;
             });
 
             map.addListener('mouseout', () => {
@@ -203,7 +212,6 @@ export class EventCreateComponent implements OnInit {
             this.hideCropper = true;
             return;
         }
-        console.log(file);
         const myReader: FileReader = new FileReader();
         this.type = file.type.split('/')[1];
 

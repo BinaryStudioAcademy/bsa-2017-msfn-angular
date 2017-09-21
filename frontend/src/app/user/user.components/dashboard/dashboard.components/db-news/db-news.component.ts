@@ -57,8 +57,7 @@ export class DbNewsComponent implements OnInit {
                     .convertDateToIso(new Date(message.date), true);
                 message.editing = false;
             }
-            this.news = this.news.concat(this.messages);
-
+            this.news = this.sortAndFilterMessages(this.news.concat(this.messages));
             this.makePaginatorOutput();
         });
     }
@@ -72,6 +71,18 @@ export class DbNewsComponent implements OnInit {
         for (let i = startPos; i < pageSize; i++) {
             this.paginatorOutput.push(this.news[i]);
         }
+    }
+
+    sortAndFilterMessages(value: any[]): any {
+        return value.filter(message => {
+            if (message.event) {
+                return false;
+            }
+            return true;
+        })
+        .sort((a, b) => {
+            return (new Date(b.date).valueOf() - new Date(a.date).valueOf());
+        });
     }
 
     openMessageInput(): void {

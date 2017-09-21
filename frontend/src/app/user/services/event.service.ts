@@ -127,7 +127,6 @@ export class EventService {
             failMessage: `Can\'t show ${category}`
         };
         this.httpService.sendRequest(req).then(data => {
-            console.log(`${category} DATA`, data);
             callback(data);
         });
     }
@@ -149,7 +148,7 @@ export class EventService {
             url: '/api/event/apply/' + eventId,
             method: 'PUT',
             body: {
-                fieldName: category,
+                category,
                 userId
             }
         };
@@ -165,7 +164,7 @@ export class EventService {
             url: '/api/event/unapply/' + eventId,
             method: 'PUT',
             body: {
-                fieldName: category,
+                category,
                 userId
             }
         };
@@ -193,7 +192,7 @@ export class EventService {
             event.isParticipating = true;
         }
         if (event.followers.includes(userId)) {
-            event.isParticipating = true;
+            event.isFollowing = true;
         }
     }
 }
