@@ -264,7 +264,8 @@ export class PlanDetailComponent implements OnInit {
                                         if (res) {
                                             if (!res.nModified) {
                                                 this.trainingPlan._id = res._id;
-                                                this.router.navigate(['/user/training-list']);                                                
+                                                this.router
+                                                    .navigate(['/user/training-list']);
                                             }
                                         }
                                     });
@@ -286,7 +287,7 @@ export class PlanDetailComponent implements OnInit {
                             if (res) {
                                 if (!res.nModified) {
                                     this.trainingPlan._id = res._id;
-                                    this.router.navigate(['/user/training-list']);                                    
+                                    this.router.navigate(['/user/training-list']);
                                 }
                             }
                         });
@@ -299,7 +300,7 @@ export class PlanDetailComponent implements OnInit {
                     if (res) {
                         if (!res.nModified) {
                             this.trainingPlan._id = res._id;
-                            this.router.navigate(['/user/training-list']);                            
+                            this.router.navigate(['/user/training-list']);
                         }
                     }
                 });
