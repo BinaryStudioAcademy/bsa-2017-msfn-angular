@@ -1,3 +1,8 @@
+// tslint:disable-next-line:max-line-length
+import { GeneralSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/general-settings/general-settings.component';
+import { TribeBanlistComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-banlist/tribe-banlist.component';
+// tslint:disable-next-line:max-line-length
+import { TribePermissionsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-permissions/tribe-permissions.component';
 import { GoalComponent } from './user.components/goal/goal.component';
 import { TrainingListComponent } from './user.components/training-list/training-list.component';
 import { MetricsComponent } from './user.components/account-settings/metrics/metrics.component';
@@ -30,7 +35,6 @@ import { ArticleListComponent } from './user.components/article-list/article-lis
 import { FoodPlanComponent } from './user.components/food-plan/food-plan.component';
 import { FoodPlanListComponent } from './user.components/food-plan-list/food-plan-list.component';
 import { FoodTrackingComponent } from './user.components/food-tracking/food-tracking.component';
-import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
 import { EventListComponent } from './user.components/event-list/event-list.component';
 import { EventCreateComponent } from './user.components/event-create/event-create.component';
 import { EventItemComponent } from './user.components/event-item/event-item.component';
@@ -39,6 +43,12 @@ import { PlaceTimeComponent } from './user.components/event-item/place-time/plac
 import { DiscussComponent } from './user.components/event-item/discuss/discuss.component';
 import { EditPanelComponent } from './user.components/event-item/edit-panel/edit-panel.component';
 import { IsEventCreatorGuard } from '../guards/is-event-creator.guard';
+import { AchievementsListComponent } from './user.components/achievements-list/achievements-list.component';
+import { TribePageComponent } from './user.components/tribe/tribe-page/tribe-page.component';
+import { CreateTribePostComponent } from './user.components/tribe/create-tribe-post/create-tribe-post.component';
+import { TribeSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.component';
+import { CreateTribeComponent } from './user.components/tribe/create-tribe/create-tribe.component';
+import { TribeListComponent } from './user.components/tribe/tribe-list/tribe-list.component';
 
 const userRoutes: Routes = [
     {
@@ -199,6 +209,40 @@ const userRoutes: Routes = [
                 path: 'food-tracking',
                 component: FoodTrackingComponent
             },
+            {
+                path: 'tribe/:id',
+                component: TribePageComponent
+            },
+            {
+                path: 'create-tribe-post',
+                component: CreateTribePostComponent
+            },
+            {
+                path: 'create-tribe',
+                component: CreateTribeComponent
+            },
+            {
+                path: 'tribe-settings/:id',
+                component: TribeSettingsComponent,
+                children: [
+                    {
+                        path: 'general',
+                        component: GeneralSettingsComponent
+                    },
+                    {
+                        path: 'permissions',
+                        component: TribePermissionsComponent
+                    },
+                    {
+                        path: 'banlist',
+                        component: TribeBanlistComponent
+                    }
+                ]
+            },
+            {
+                path: 'tribe-list',
+                component: TribeListComponent
+            }
         ]
     }
 ];

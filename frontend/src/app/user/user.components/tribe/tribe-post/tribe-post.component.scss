@@ -1,0 +1,102 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+
+.post-image {
+    width: 100%;
+    height: 30vh;
+    margin: $content-tb-margin auto;
+}
+.post-container {
+    margin: 40px auto 0;
+    padding: $content-between-margin;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2), 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12);
+}
+
+.meta-info {
+    display: flex;
+    justify-content: space-between;
+    a {
+        color: #b9ef95;
+        text-decoration: none;
+    }
+}
+
+.post-text {
+    text-align: justify;
+}
+
+.more-info {
+    color: $secondary-color;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-reaction {
+    display: flex;
+    align-items: center;
+    md-icon {
+        cursor: pointer;
+    }
+}
+
+md-icon {
+    color: $main-color;
+}
+
+.comment-container {
+    display: flex;
+}
+
+.commentator, .comment-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.commentator {
+    width: 20%;
+    align-items: center;
+    padding-top: $content-between-margin;
+    img {
+        width: 80px;
+        border-radius: 50%;
+    }
+}
+
+.comment-content {
+    width: 80%;
+    align-items: flex-end;
+    justify-content: center;
+    padding: $content-between-margin;
+    textarea {
+        width: 100%;
+        min-height: 80px;
+        border: 0;
+        padding: 0;
+        background-color: $gradient-from-color;
+        color: $text-main-color;
+        text-align: justify;
+    }
+    p {
+        align-self: flex-start;
+        text-align: justify;
+    }
+    button {
+        margin-top: $micro-indent;
+        background-color: #82ca9c;
+    }
+}
+
+@media screen and (max-width: $small-screen) {
+    .commentator {
+        img {
+            width: 50px;
+        }
+    }
+    .comment-content {
+        margin-right: 0;
+    }
+}

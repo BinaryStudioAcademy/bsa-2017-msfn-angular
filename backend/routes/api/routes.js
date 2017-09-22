@@ -28,5 +28,6 @@ module.exports = function (app) {
         eventRoutes: require('./eventRoutes')(app),
         foodPlanRoutes: require('./foodPlanRoutes')(app),
         launchedFoodPlanRoutes: require('./launchedFoodPlanRoutes')(app),
+        tribeRoutes: require('./tribeRoutes')(app)
     };
 };

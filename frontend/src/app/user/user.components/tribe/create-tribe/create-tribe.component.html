@@ -1,0 +1,48 @@
+<div class="tribe-container">
+    <form #form="ngForm">
+        <h1>Create new tribe</h1>
+        <md-input-container class="input">
+            <input mdInput
+                   placeholder="Tribe name"
+                   [(ngModel)]="tribe.name"
+                   name="name"
+                   required>
+        </md-input-container>
+        <md-input-container class="example-full-width input">
+            <textarea mdInput
+                      placeholder="Describe your tribe"
+                      [(ngModel)]="tribe.description"
+                      maxlength="450"
+                      name="description"
+                      required></textarea>
+            <md-hint align="end">{{tribe.description.length}} / 450</md-hint>
+        </md-input-container>
+        <div class="image-button" *ngIf="hideCropper">
+            <span>Upload tribe image</span>
+            <button class="btn upload-container" *ngIf="hideCropper">
+                <span>+</span>
+                <input type="file"
+                       accept="image/*"
+                       class="upload"
+                       (change)="fileChangeListener($event)"/>
+            </button>
+        </div>
+        <div class="preview">
+            <img-cropper #cropper *ngIf="!hideCropper" class="img-cropper" [image]="data"
+                         [settings]="cropperSettings"></img-cropper>
+            <div class="cropper-buttons" *ngIf="!hideCropper">
+                <button class="cropper-btn save" (click)="cropperBtn('save')"><i class="material-icons">check</i>
+                </button>
+                <button class="cropper-btn cancel" (click)="cropperBtn('cancel')"><i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="image-preview" *ngIf="data.image || tribe.image">
+                <img *ngIf="!hideCropper" [src]='data.image' [width]="cropperSettings.croppedWidth"
+                     [height]="cropperSettings.croppedHeight">
+                <img *ngIf="hideCropper" [src]='tribe.image'>
+            </div>
+        </div>
+        <button class="btn" *ngIf="hideCropper" (click)="save(form)">Save</button>
+    </form>
+</div>
+

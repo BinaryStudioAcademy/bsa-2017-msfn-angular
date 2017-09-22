@@ -1,0 +1,107 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+
+
+.page-container {
+    width: 80%;
+    margin: $close-top-margin auto 0 auto;
+    display: flex;
+}
+
+.side-tribe-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.general, .content {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+.general {
+    width: 20%;
+    position: fixed;
+}
+
+.content {
+    width: 80%;
+    margin-left: 30%;
+}
+
+.tribe-logo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+}
+
+.btn {
+    border: none;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+    width: 40%;
+    height: 40px;
+    margin-top: 20px;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    padding: $content-tb-margin;
+    background-color: $gradient-to-color;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.mid-text {
+    font-size: $main-text;
+}
+
+.menu-option {
+    cursor: pointer;
+    margin-top: $mini-indent;
+    color: $text-main-color;
+    text-decoration: none;
+}
+
+.ban-message {
+    margin: $macro-indent auto;
+    font-style: italic;
+    font-size: $large-text;
+}
+
+@media screen and (max-width: $small-screen) {
+    .page-container {
+        flex-direction: column;
+    }
+    .general, .content {
+        width: 100%;
+        position: inherit;
+        margin: $standard-indent auto;
+    }
+    .tribe-logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
+    .btn {
+        width: 80%;
+        margin: auto;
+    }
+    .side-tribe-options {
+        //margin-left: 45%;
+        display: flex;
+        flex-direction: column;
+    }
+    .mobile-options {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: $standard-indent;
+    }
+    .menu-option {
+        display: flex;
+    }
+}

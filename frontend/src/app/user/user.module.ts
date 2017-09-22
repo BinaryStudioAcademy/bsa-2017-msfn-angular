@@ -76,6 +76,21 @@ import { EditPanelComponent } from './user.components/event-item/edit-panel/edit
 import {ActivatedRouteSnapshot} from '@angular/router';
 import {EventService} from './services/event.service';
 import { FoodPlanService } from './user.components/food-plan/food-plan.service';
+import { TribePageComponent } from './user.components/tribe/tribe-page/tribe-page.component';
+import { TribePostComponent } from './user.components/tribe/tribe-post/tribe-post.component';
+import { TribeSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.component';
+import { CreateTribePostComponent } from './user.components/tribe/create-tribe-post/create-tribe-post.component';
+import { FullTribePostComponent } from './user.components/tribe/full-tribe-post/full-tribe-post.component';
+import { TribeMembersDialogComponent} from './user.components/tribe/tribe-members-dialog/tribe-members-dialog.component';
+import { CreateTribeComponent } from './user.components/tribe/create-tribe/create-tribe.component';
+// tslint:disable-next-line:max-line-length
+import { GeneralSettingsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/general-settings/general-settings.component';
+import { TribeListComponent } from './user.components/tribe/tribe-list/tribe-list.component';
+// tslint:disable-next-line:max-line-length
+import { TribePermissionsComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-permissions/tribe-permissions.component';
+import { TribeBanlistComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-banlist/tribe-banlist.component';
+import { SelectUsersDialogComponent } from './user.components/select-users-dialog/select-users-dialog.component';
+
 import { DayTemplateComponent } from './user.components/food-tracking/day-template/day-template.component';
 
 @NgModule({
@@ -154,6 +169,18 @@ import { DayTemplateComponent } from './user.components/food-tracking/day-templa
         DiscussComponent,
         PlaceTimeComponent,
         EditPanelComponent,
+        TribePageComponent,
+        TribePostComponent,
+        TribeSettingsComponent,
+        CreateTribePostComponent,
+        FullTribePostComponent,
+        TribeMembersDialogComponent,
+        CreateTribeComponent,
+        TribeListComponent,
+        GeneralSettingsComponent,
+        TribePermissionsComponent,
+        TribeBanlistComponent,
+        SelectUsersDialogComponent,
         DayTemplateComponent,
     ],
     providers: [
@@ -171,6 +198,10 @@ import { DayTemplateComponent } from './user.components/food-tracking/day-templa
         AchievementInfoDialogComponent,
         SearchComponent,
         ImageUploadComponent,
+        FullTribePostComponent,
+        TribeMembersDialogComponent,
+        CreateTribeComponent,
+        SelectUsersDialogComponent,
         DayTemplateComponent,
     ]
 })

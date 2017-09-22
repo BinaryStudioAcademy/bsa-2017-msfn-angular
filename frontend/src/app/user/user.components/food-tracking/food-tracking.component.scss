@@ -10,7 +10,7 @@
     width: 70vw;
     font-family: $font-general;
     font-size: $usual-text;
-    margin: $content-tb-margin auto;
+    margin: 0 auto;
 
 }
 
@@ -196,11 +196,6 @@ md-icon {
         margin: 10px 0 0 15px;
         justify-content: center;
         flex: 100%;
-    }
-    
-    .meals-item {
-        flex-flow: column nowrap;
-        align-items: flex-start;
     }
 
     .icon-arrow {

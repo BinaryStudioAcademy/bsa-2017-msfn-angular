@@ -119,7 +119,7 @@ export class EventCreateComponent implements OnInit {
         this.event.endDate = this.dateService
             .updateDateTime(this.event.endDate, this.eventTime.endTime);
 
-        if (this.data.image) {
+        if (this.data.image.length) {
             const fileType = 'img';
             const fileName = this.event.title.replace(/ /g, '_') + Date.now();
 
@@ -136,6 +136,7 @@ export class EventCreateComponent implements OnInit {
                 }
             });
         } else {
+            this.event.image = './resources/events/default.jpg';
             this.eventService.createEvent(this.event, data => {
                 this.router.navigate([`/user/events/${data._id}/general`]);
             });
