@@ -1,0 +1,16 @@
+<div class="container">
+<div [hidden]="!members">
+    <div *ngFor="let user of members" class="user-container" [ngClass]="{'selected': user.isSelected}"
+    (click)="toggle(user)">
+        <img class="img"
+             [src]="user.userPhoto || './resources/default.png'">
+            <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+            <i class="material-icons add-item-ico">{{user.isSelected ? 'done':'add'}}</i>
+    </div>
+</div>
+<span [hidden]="members" class="text">There are no members yet</span>
+      <div class="btn-container">
+        <button md-raised-button [md-dialog-close]="false" class="btn">Close</button>
+        <button md-raised-button class="btn" md-dialog-close="{{ save() }}">Save</button>
+    </div>
+</div>

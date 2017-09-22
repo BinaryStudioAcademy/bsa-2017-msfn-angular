@@ -1,0 +1,122 @@
+@import '../../../../../globalStyles/variables';
+@import '../../../../../globalStyles/indentations';
+@import '../../../../../globalStyles/text';
+
+$height: calc(100vh - 70px);
+
+.menu-element {
+    display: block;
+}
+
+.mainblock {
+    display: flex;
+    width: 60%;
+    height: calc(100vh - 70px - 45px * 2);
+    min-height: 450px;
+    margin: $header-top-margin auto;
+    background-color: $gradient-to-color;
+}
+
+.aside {
+    flex: 0 0 30%;
+    height: 100%;
+    // float: left;
+    font-family: $font-general;
+    font-weight: 600;
+    font-size: $usual-text;
+    background: linear-gradient($bg-color 75%, $gradient-from-color);
+
+    .navigation {
+        width: 90%;
+        float: right;
+        position: relative;
+
+        a {
+            line-height: $header-text;
+            text-decoration: none;
+            color: #aaa;
+        }
+
+        .navigation__your-section {
+            margin-top: $content-between-margin;
+        }
+
+        .navigation__title {
+            font-family: inherit;
+            font-weight: inherit;
+            font-size: inherit;
+        }
+
+        .navigation__icon {
+            float: left;
+            fill: #aaa;
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            margin-right: 13px;
+        }
+
+        .active-link {
+            display: block;
+            color: #fff;
+            font-weight: bold;
+            background-color: $gradient-to-color;
+        }
+    }
+}
+
+.child {
+    flex: 0 0 70%;
+    background-color: $gradient-to-color;
+    overflow-y: auto;
+}
+
+@media screen and (max-width: $large-screen) {
+    .mainblock {
+        width: 100%;
+        height: calc(100vh - 70px);
+        margin: 0;
+        position: relative;
+    }
+
+    .aside {
+        width: 180px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        flex: none;
+    }
+
+    .child {
+        width: calc(100% - 180px);
+        margin-left: 180px;
+        flex: none;
+        max-height: 100%;
+    }
+}
+
+@media screen and (max-width: $medium-screen) {
+    .mainblock {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .aside {
+        width: 100px;
+        height: calc(100% - 70px);
+        position: fixed;
+        left: 0;
+        top: 70px;
+        display: block;
+    }
+
+    .child {
+        width: calc(100% - 100px);
+        margin-left: 100px;
+        flex: none;
+        max-height: initial;
+    }
+}
