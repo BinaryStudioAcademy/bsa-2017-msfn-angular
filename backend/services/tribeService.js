@@ -8,6 +8,7 @@ TribeService.prototype.getAllTribes = getAllTribes;
 TribeService.prototype.updateTribeById = updateTribeById;
 TribeService.prototype.getApplicants = getApplicants;
 TribeService.prototype.getTribeById = getTribeById;
+TribeService.prototype.getFollowed = getFollowed;
 TribeService.prototype.getTribesByCreatorId = getTribesByCreatorId;
 TribeService.prototype.addFollowers = addFollowers;
 
@@ -26,7 +27,6 @@ function createTribe(body, callback) {
 
 function getApplicants(category, body, callback) {
     const tribeId = body.params.id;
-    console.log(tribeId, category);
     tribeRepository.getApplicants(category, tribeId, (err, data) => {
         callback(err, data);
     });
@@ -48,7 +48,6 @@ function updateTribeById(id, body, callback) {
 }
 
 function getTribeById(id, callback) {
-    console.log(id);
     tribeRepository.getById(id, function (err, tribeData) {
         console.log(tribeData);
         if (err) return callback(err);
@@ -78,6 +77,17 @@ function addFollowers(id, userId, callback) {
             callback(null, new ApiError('Cannot add follower'));
         } else {
             callback(null, data);
+        }
+    });
+}
+
+function getFollowed(id, callback) {
+    tribeRepository.getFollowed(id, (err, tribeData) => {
+        if (err) return callback(err);
+        if (tribeData === null) {
+            callback(null, new ApiError('Cannot get tribes'));
+        } else {
+            callback(null, tribeData);
         }
     });
 }

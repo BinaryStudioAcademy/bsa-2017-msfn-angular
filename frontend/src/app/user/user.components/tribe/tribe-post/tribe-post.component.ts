@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MdDialog} from '@angular/material';
 import {FullTribePostComponent} from '../full-tribe-post/full-tribe-post.component';
 import {WindowObj} from '../../../../services/window.service';
@@ -12,7 +12,6 @@ import {ToasterService} from '../../../../services/toastr.service';
     providers: [TribeService]
 })
 export class TribePostComponent implements OnInit {
-    @Output() onAddFavourite = new EventEmitter();
     @Input() canAddComment;
     @Input() tribe;
     @Input() post;
@@ -78,10 +77,6 @@ export class TribePostComponent implements OnInit {
 
     toggleComments() {
         this.hideComments = !this.hideComments;
-    }
-
-    addFavourite() {
-        this.onAddFavourite.emit();
     }
 
     viewFull() {

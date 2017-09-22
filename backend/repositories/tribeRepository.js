@@ -10,6 +10,7 @@ TribeRepository.prototype = new Repository();
 
 TribeRepository.prototype.updateById = updateById;
 TribeRepository.prototype.getApplicants = getApplicants;
+TribeRepository.prototype.getFollowed = getFollowed;
 TribeRepository.prototype.deleteById = deleteById;
 TribeRepository.prototype.getByCreatorId = getByCreatorId;
 TribeRepository.prototype.addFollowers = addFollowers;
@@ -76,5 +77,11 @@ function banUser(id, user, callback) {
     query.exec(callback);
 }
 
+function getFollowed(userId, callback) {
+    const query = this.model.find({
+        members: userId
+    });
+    query.exec(callback);
+}
 
 module.exports = new TribeRepository();

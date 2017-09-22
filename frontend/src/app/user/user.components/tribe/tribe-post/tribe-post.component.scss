@@ -43,17 +43,6 @@
     }
 }
 
-.star-button {
-    color: $main-color;
-    font-weight: 700;
-    padding-right: $input-padding;
-    font-size: 2em;
-    &:hover:before {
-        content: "\2605";
-        position: absolute;
-    }
-}
-
 md-icon {
     color: $main-color;
 }
@@ -92,7 +81,7 @@ md-icon {
         text-align: justify;
     }
     p {
-        text-align: justify;
+        align-self: flex-start;
     }
     button {
         margin-top: $micro-indent;

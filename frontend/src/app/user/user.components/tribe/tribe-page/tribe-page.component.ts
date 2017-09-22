@@ -74,7 +74,6 @@ export class TribePageComponent implements OnInit {
         });
     }
 
-    addFavourite() {}
 
     follow() {
         if (!this.tribe.members.includes(this.userId)) {

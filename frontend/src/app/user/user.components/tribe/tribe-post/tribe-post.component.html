@@ -7,7 +7,6 @@
     <div class="post-text">{{post.text.substring(0, 400)}}...<span class="more-info" (click)="viewFull()">See more</span></div>
     <img src="{{post.image}}" class="post-image">
     <div class="user-reaction">
-        <span class="star-button" md-tooltip="Bookmark this post" (click)="addFavourite()">☆</span>
         <md-icon mdSuffix (click)="toggleComments(); $event.stopPropagation()">comment</md-icon>
     </div>
     <div class="post-comments" [hidden]="hideComments">

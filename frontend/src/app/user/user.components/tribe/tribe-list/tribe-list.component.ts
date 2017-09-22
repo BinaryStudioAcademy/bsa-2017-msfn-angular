@@ -13,6 +13,7 @@ import { ITribe } from '../../../../models/tribe';
 })
 export class TribeListComponent implements OnInit {
     tribes: ITribe[];
+    followedTribes: ITribe[];
     myTribes: ITribe[];
     userId: string;
 
@@ -28,6 +29,9 @@ export class TribeListComponent implements OnInit {
     ngOnInit() {
         this.tribeService.getAllTribes((resp) => {
             this.tribes = resp;
+        });
+        this.tribeService.getFollowedTribes(this.userId, (resp) => {
+            this.followedTribes = resp;
         });
         this.tribeService.getTribesByCreator(this.userId, (resp) => {
             this.myTribes = resp;

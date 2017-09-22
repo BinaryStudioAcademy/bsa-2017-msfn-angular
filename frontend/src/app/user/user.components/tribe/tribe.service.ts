@@ -71,6 +71,18 @@ export class TribeService {
             });
     }
 
+    getFollowedTribes(user, callback) {
+        const request: IHttpReq = {
+            url: `api/tribe/followed-by/${user}`,
+            method: 'GET',
+            body: {}
+        };
+        this.httpService.sendRequest(request)
+            .then((data) => {
+                callback(data);
+            });
+    }
+
     commentPost(tribeId, postId, userId, text, callback) {
         const request: IHttpReq = {
             url: `/api/tribe/${tribeId}/comments`,

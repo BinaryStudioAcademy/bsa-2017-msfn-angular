@@ -115,7 +115,7 @@ module.exports = function (app) {
             next();
         });
     }, apiResponse);
-    
+
     app.get(`${baseUrl}can-post/:id`, isLoggedIn, (req, res, next) => {
         tribeService.getApplicants('canPost', req, (err, data) => {
             res.data = data;
@@ -134,6 +134,14 @@ module.exports = function (app) {
 
     app.put(`${baseUrl}:id/followers/`, (req, res, next) => {
         tribeService.addFollowers(req.params.id, req.body.newMember, (err, data) => {
+            res.data = data;
+            res.err = err;
+            next();
+        });
+    }, apiResponse);
+
+    app.get(`${baseUrl}followed-by/:id`, (req, res, next) => {
+        tribeService.getFollowed(req.params.id, (err, data) => {
             res.data = data;
             res.err = err;
             next();

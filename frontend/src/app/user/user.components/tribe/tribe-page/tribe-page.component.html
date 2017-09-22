@@ -26,7 +26,6 @@
                             [post]="currentPost"
                             [canAddComment]="canComment"
                             [tribe]="tribeID"
-                            (onAddFavourite)="addFavourite()"
             ></app-tribe-post>
         </div>
         <div *ngIf="isBanned" class="ban-message">You activity on this page is limited</div>
