@@ -1,4 +1,4 @@
-<h1 class="title">My goals</h1>
+<h1 class="title">Goals</h1>
 <div id="goal-container" [sortablejs]="data" [sortablejsOptions]="dragOptions">
     <div class="item-container" *ngFor="let item of data" (click)="openDialog(item)">
         <i class="material-icons" id="delete" (click)="deleteGoal(item, $event)">delete</i>
