@@ -50,7 +50,7 @@ export class TribePageComponent implements OnInit {
                 this.tribe = resp;
                 this.canComment = this.tribe.canComment.includes(this.userId) || this.userId === this.tribe.creator;
                 this.canPost = this.tribe.canPost.includes(this.userId) || this.userId === this.tribe.creator;
-                this.isBanned = this.tribe.banned.includes(this.userId) || this.userId === this.tribe.creator;
+                this.isBanned = this.tribe.banned.includes(this.userId);
             });
             this.tribeService.getPostsByTribe(this.tribeID, (res) => {
                 this.posts = res;
