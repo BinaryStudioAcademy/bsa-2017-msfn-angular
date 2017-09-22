@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"msfn.exercises"},{"v":2,"unique":true,"key":{"externalId":1},"name":"externalId_1","ns":"msfn.exercises","background":true}]}
