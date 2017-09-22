@@ -141,6 +141,7 @@ export class ArticleListComponent implements OnInit {
                 this.articles = result;
             }).then(() => {
             this.loading = false;
+            console.log(this.articles);
         });
     }
 
