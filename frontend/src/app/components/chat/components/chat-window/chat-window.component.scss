@@ -275,3 +275,8 @@ $mobile-minized-size: 40px;
         }
     }
 }
+@media screen and (max-width: $small-screen) {
+    .chats-wrapper {
+        height: calc(100vh - 50px);
+    }
+}  

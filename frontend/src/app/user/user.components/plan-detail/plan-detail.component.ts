@@ -4,7 +4,7 @@ import {IntervalTrainingPlanComponent} from './../interval-training-plan/interva
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {IHttpReq} from './../../../models/http-req';
 import {HttpService} from '../../../services/http.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ExercisesComponent} from './../exercises/exercises.component';
 import {GCalendarService} from '../../../services/gcalendar.service';
 
@@ -75,7 +75,8 @@ export class PlanDetailComponent implements OnInit {
     constructor(private gcalendar: GCalendarService,
                 private dialog: MdDialog,
                 private httpHandler: HttpService,
-                public activatedRoute: ActivatedRoute) {
+                public activatedRoute: ActivatedRoute,
+                public router: Router) {
     }
 
     ngOnInit() {
@@ -244,6 +245,7 @@ export class PlanDetailComponent implements OnInit {
                                         if (res) {
                                             if (!res.nModified) {
                                                 this.trainingPlan._id = res._id;
+                                                this.router.navigate(['/user/training-list']);
                                             }
                                         }
                                     });
@@ -262,6 +264,7 @@ export class PlanDetailComponent implements OnInit {
                                         if (res) {
                                             if (!res.nModified) {
                                                 this.trainingPlan._id = res._id;
+                                                this.router.navigate(['/user/training-list']);                                                
                                             }
                                         }
                                     });
@@ -283,6 +286,7 @@ export class PlanDetailComponent implements OnInit {
                             if (res) {
                                 if (!res.nModified) {
                                     this.trainingPlan._id = res._id;
+                                    this.router.navigate(['/user/training-list']);                                    
                                 }
                             }
                         });
@@ -295,6 +299,7 @@ export class PlanDetailComponent implements OnInit {
                     if (res) {
                         if (!res.nModified) {
                             this.trainingPlan._id = res._id;
+                            this.router.navigate(['/user/training-list']);                            
                         }
                     }
                 });

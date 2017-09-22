@@ -1,6 +1,7 @@
 @import "./../../../../globalStyles/variables";
 @import "./../../../../globalStyles/indentations";
 @import "./../../../../globalStyles/text";
+
 @keyframes cf3FadeInOut {
     0% {
         opacity: 1;
@@ -73,3 +74,8 @@
     margin-bottom: 10px;
 }
 
+@media only screen and (max-width: $small-screen) {
+    .preview {
+        width: 100%;
+    }
+}    

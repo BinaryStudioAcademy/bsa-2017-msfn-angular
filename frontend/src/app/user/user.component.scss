@@ -44,11 +44,11 @@ $height: calc(100vh - 70px);
     .sidebar-toggler {
         display: block;
         position: fixed;
-        width: 30px;
+        width: 40px;
         height: 30px;
         z-index: 101;
         top: 11px;
-        left: 8%;
+        left: 11%;
     }
     .hide {
         left: -220px;
@@ -58,3 +58,9 @@ $height: calc(100vh - 70px);
         margin-left: 0;
     }
 }
+
+@media only screen and (max-width: $small-screen) {
+    .sidebar-container{
+        height: calc(100vh - 50px);
+    }
+}    

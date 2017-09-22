@@ -1,9 +1,7 @@
 @import '../../../../../globalStyles/variables';
 @import '../../../../../globalStyles/indentations';
 @import '../../../../../globalStyles/text';
-
 $height: calc(100vh - 70px);
-
 .menu-element {
     display: block;
 }
@@ -19,34 +17,28 @@ $height: calc(100vh - 70px);
 
 .aside {
     flex: 0 0 30%;
-    height: 100%;
-    // float: left;
+    height: 100%; // float: left;
     font-family: $font-general;
     font-weight: 600;
     font-size: $usual-text;
     background: linear-gradient($bg-color 75%, $gradient-from-color);
-
     .navigation {
         width: 90%;
         float: right;
         position: relative;
-
         a {
             line-height: $header-text;
             text-decoration: none;
             color: #aaa;
         }
-
         .navigation__your-section {
             margin-top: $content-between-margin;
         }
-
         .navigation__title {
             font-family: inherit;
             font-weight: inherit;
             font-size: inherit;
         }
-
         .navigation__icon {
             float: left;
             fill: #aaa;
@@ -55,7 +47,6 @@ $height: calc(100vh - 70px);
             height: 24px;
             margin-right: 13px;
         }
-
         .active-link {
             display: block;
             color: #fff;
@@ -74,11 +65,10 @@ $height: calc(100vh - 70px);
 @media screen and (max-width: $large-screen) {
     .mainblock {
         width: 100%;
-        height: calc(100vh - 70px);
+        height: $height;
         margin: 0;
         position: relative;
     }
-
     .aside {
         width: 180px;
         height: 100%;
@@ -88,7 +78,6 @@ $height: calc(100vh - 70px);
         display: block;
         flex: none;
     }
-
     .child {
         width: calc(100% - 180px);
         margin-left: 180px;
@@ -103,7 +92,6 @@ $height: calc(100vh - 70px);
         height: auto;
         margin: 0;
     }
-
     .aside {
         width: 100px;
         height: calc(100% - 70px);
@@ -112,11 +100,20 @@ $height: calc(100vh - 70px);
         top: 70px;
         display: block;
     }
-
     .child {
         width: calc(100% - 100px);
         margin-left: 100px;
         flex: none;
         max-height: initial;
+    }
+}
+
+@media only screen and (max-width: $small-screen) {
+    .mainblock {
+        height: calc(100vh - 50px);
+    }
+    .aside {
+        height: calc(100% - 50px);
+        top: 50px;
     }
 }

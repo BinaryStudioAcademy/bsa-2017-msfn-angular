@@ -187,3 +187,10 @@ md-paginator /deep/ .mat-paginator-range-label {
         }
     }
 }
+
+
+@media screen and (max-width: $small-screen) {
+    #main-content, #sidebar-wrapper app-coach-sidebar  {
+        height: calc(100vh - 50px);
+    }
+}  

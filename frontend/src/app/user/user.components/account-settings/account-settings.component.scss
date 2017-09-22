@@ -74,7 +74,7 @@ $height: calc(100vh - 70px);
 @media screen and (max-width: $large-screen) {
     .mainblock {
         width: 100%;
-        height: calc(100vh - 70px);
+        height: $height;
         margin: 0;
         position: relative;
     }
@@ -120,3 +120,12 @@ $height: calc(100vh - 70px);
         max-height: initial;
     }
 }
+@media screen and (max-width: $small-screen) {
+    .mainblock{
+        height: calc(100vh - 50px);
+    }
+    .aside  {
+        height: calc(100vh - 50px);
+        top: 50px;
+    }
+}  

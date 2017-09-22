@@ -2,6 +2,8 @@
 @import '../../../globalStyles/indentations.scss';
 @import '../../../globalStyles/text.scss';
 
+$height: calc(100vh - 70px);
+
 .show-chats {
     position: fixed;
     bottom: 0;
@@ -236,7 +238,7 @@
     .chat-windows {
         right: 0;
         width: calc(100vw - 55px);
-        height: calc(100vh - 70px);
+        height: $height;
 
         .chat-window {
             margin: 0;
@@ -245,3 +247,9 @@
         }
     }
 }
+
+@media screen and (max-width: $small-screen) {
+    .chats-list-wrapper, .chat-windows {
+        height: calc(100vh - 50px);
+    }
+}  

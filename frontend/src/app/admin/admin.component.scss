@@ -1,9 +1,7 @@
 @import '../../globalStyles/variables.scss';
 @import '../../globalStyles/indentations.scss';
 @import '../../globalStyles/text.scss';
-
 $height: calc(100vh - 70px);
-
 .body-container {
     display: flex;
 }
@@ -23,6 +21,7 @@ $height: calc(100vh - 70px);
     width: 85%;
     margin-left: 15%;
 }
+
 @media screen and (min-width: $medium-screen + 1) and (max-width: $large-screen) {
     .sidebar-container {
         min-width: calc(190px - 20px);
@@ -32,6 +31,7 @@ $height: calc(100vh - 70px);
         margin-left: 190px;
     }
 }
+
 @media screen and (max-width: $medium-screen) {
     .sidebar-container {
         width: 170px;
@@ -42,5 +42,11 @@ $height: calc(100vh - 70px);
     .child-container {
         width: 100%;
         margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: $small-screen) {
+    .sidebar-container {
+        height: calc(100vh - 50px);;
     }
 }
