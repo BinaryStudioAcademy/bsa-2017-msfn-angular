@@ -2,7 +2,7 @@
     <div class="container-foodPlans" *ngIf="!launchedFoodPlan && foodPlans">
         <h2>Start tracking plan</h2>
         <div class="item-container" *ngFor="let item of foodPlans">
-            <md-icon>room_service</md-icon>
+            <md-icon>restaurant</md-icon>
             <p class="train-item-text">{{ item.title }}</p>
             <button md-button (click)="startTracking(item)">start tracking</button>
         </div>
