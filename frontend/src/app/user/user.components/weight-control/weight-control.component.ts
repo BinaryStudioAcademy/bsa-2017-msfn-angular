@@ -287,6 +287,11 @@ export class WeightControlComponent implements OnInit {
     }
 
     updateData(): void {
+        this.period = {
+            max: new Date(),
+            min: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 7)
+        };
+
         this.weightControlService.getWeightItems(res => {
             if (res[0].hasOwnProperty('weight')) {
                 // this.periodItems = this.weightControlService.getWeeklyWeightItems(res);
@@ -334,6 +339,8 @@ export class WeightControlComponent implements OnInit {
                 });
             }
         });
+
+        console.log(this.periodItems);
 
         const width = +svg.node().clientWidth - this.margin.left - this.margin.right,
             height = +svg.node().clientHeight - this.margin.top - this.margin.bottom;
