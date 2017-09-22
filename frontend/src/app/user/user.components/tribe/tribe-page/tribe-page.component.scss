@@ -59,3 +59,9 @@
     color: $text-main-color;
     text-decoration: none;
 }
+
+.ban-message {
+    margin: $macro-indent auto;
+    font-style: italic;
+    font-size: $large-text;
+}

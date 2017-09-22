@@ -2,20 +2,25 @@
     <div class="general">
         <img src="{{tribe.image}}" class="tribe-logo">
         <h1>{{tribe.name}}</h1>
-        <span class="mid-text menu-option">Send message</span>
-        <span class="mid-text menu-option" (click)="showFollowers()">Followers</span>
+        <span class="mid-text menu-option" [hidden]="isBanned">Send message</span>
+        <span class="mid-text menu-option"
+              [hidden]="isBanned"
+              (click)="showFollowers()">Followers</span>
         <a class="mid-text menu-option"
            *ngIf="userId === tribe.creator"
            routerLink="{{settingsLink}}">Settings</a>
-        <a class="mid-text menu-option" (click)="addPost()" [hidden]="!canPost">Add post</a>
-        <button md-button class="btn" (click)="follow()">Follow</button>
+        <a class="mid-text menu-option" (click)="addPost()" [hidden]="!canPost || isBanned">Add post</a>
+        <button md-button
+                class="btn"
+                [hidden]="isBanned"
+                (click)="follow()">Follow</button>
     </div>
     <div class="content">
         <div class="description">
             <h2 class="mid-text">About</h2>
             <span>{{tribe.description}}</span>
         </div>
-        <div *ngIf="posts">
+        <div *ngIf="posts" [hidden]="isBanned">
             <app-tribe-post *ngFor="let currentPost of posts"
                             #post
                             [post]="currentPost"
@@ -24,5 +29,6 @@
                             (onAddFavourite)="addFavourite()"
             ></app-tribe-post>
         </div>
+        <div *ngIf="isBanned" class="ban-message">You activity on this page is limited</div>
     </div>
 </div>
