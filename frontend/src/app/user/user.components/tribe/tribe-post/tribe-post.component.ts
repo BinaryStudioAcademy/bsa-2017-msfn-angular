@@ -3,6 +3,7 @@ import {MdDialog} from '@angular/material';
 import {FullTribePostComponent} from '../full-tribe-post/full-tribe-post.component';
 import {WindowObj} from '../../../../services/window.service';
 import {TribeService} from '../tribe.service';
+import {ToasterService} from '../../../../services/toastr.service';
 
 @Component({
     selector: 'app-tribe-post',
@@ -12,19 +13,23 @@ import {TribeService} from '../tribe.service';
 })
 export class TribePostComponent implements OnInit {
     @Output() onAddFavourite = new EventEmitter();
-    @Output() onAddComment = new EventEmitter();
+    @Input() tribe;
     @Input() post;
 
 
     hideComments: boolean;
     userPhoto: string;
     userFirstName: string;
+    userID: string;
+    commentText: string;
 
     constructor( private mdDialog: MdDialog,
                  private tribeService: TribeService,
+                 private toasterService: ToasterService,
                  private window: WindowObj) {
         this.userPhoto = (this.window.data._injectedData as any).userPhoto;
         this.userFirstName = (this.window.data._injectedData as any).userFirstName;
+        this.userID = (this.window.data._injectedData as any).userId;
     }
 
     ngOnInit() {
@@ -51,7 +56,16 @@ export class TribePostComponent implements OnInit {
     }
 
     addComment() {
-        this.onAddComment.emit();
+        if (!this.commentText) {
+            this.toasterService.showMessage('warning', 'Cannot add empty comment');
+            return;
+        }
+        this.tribeService.commentPost(
+            this.tribe,
+            this.post._id,
+            this.userID,
+            this.commentText,
+            () => {});
     }
 
     toggleComments() {

@@ -19,7 +19,7 @@
             <app-tribe-post *ngFor="let currentPost of posts"
                             #post
                             [post]="currentPost"
-                            (onAddComment)="addComment()"
+                            [tribe]="tribeID"
                             (onAddFavourite)="addFavourite()"
             ></app-tribe-post>
         </div>
