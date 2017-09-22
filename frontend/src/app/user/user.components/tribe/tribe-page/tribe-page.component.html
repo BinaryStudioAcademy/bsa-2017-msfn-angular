@@ -1,15 +1,19 @@
 <div class="page-container">
     <div class="general">
-        <img src="{{tribe.image}}" class="tribe-logo">
-        <h1>{{tribe.name}}</h1>
-        <span class="mid-text menu-option" [hidden]="isBanned">Send message</span>
-        <span class="mid-text menu-option"
-              [hidden]="isBanned"
-              (click)="showFollowers()">Followers</span>
-        <a class="mid-text menu-option"
-           *ngIf="userId === tribe.creator"
-           routerLink="{{settingsLink}}">Settings</a>
-        <a class="mid-text menu-option" (click)="addPost()" [hidden]="!canPost || isBanned">Add post</a>
+        <div class="mobile-options">
+            <img src="{{tribe.image}}" class="tribe-logo">
+            <div class="side-tribe-options">
+                <h1>{{tribe.name}}</h1>
+                <span class="mid-text menu-option" [hidden]="isBanned">Send message</span>
+                <span class="mid-text menu-option"
+                      [hidden]="isBanned"
+                      (click)="showFollowers()">Followers</span>
+                <a class="mid-text menu-option"
+                   *ngIf="userId === tribe.creator"
+                   routerLink="{{settingsLink}}">Settings</a>
+                <a class="mid-text menu-option" (click)="addPost()" [hidden]="!canPost || isBanned">Add post</a>
+            </div>
+        </div>
         <button md-button
                 class="btn"
                 [hidden]="isBanned"

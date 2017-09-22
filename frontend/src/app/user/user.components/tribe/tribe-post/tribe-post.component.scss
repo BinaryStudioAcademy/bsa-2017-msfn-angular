@@ -82,9 +82,21 @@ md-icon {
     }
     p {
         align-self: flex-start;
+        text-align: justify;
     }
     button {
         margin-top: $micro-indent;
         background-color: #82ca9c;
+    }
+}
+
+@media screen and (max-width: $small-screen) {
+    .commentator {
+        img {
+            width: 50px;
+        }
+    }
+    .comment-content {
+        margin-right: 0;
     }
 }
