@@ -27,10 +27,7 @@
                 <span>{{userFirstName}}</span>
             </div>
             <div class="comment-content">
-                <textarea mdInput
-                          [(ngModel)]="commentText"
-                          name="commentText"
-                          placeholder="What do you think about the post?"></textarea>
+                <textarea mdInput placeholder="What do you think about the post?"></textarea>
                 <button md-button (click)="addComment()">Add comment</button>
             </div>
         </div>

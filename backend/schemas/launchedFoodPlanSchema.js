@@ -39,7 +39,6 @@ const LaunchedFoodPlan = new Schema({
             kcal: Number,
             name: String,
             eaten: Number,
-            done: Boolean,
             products: [{
                 kcal: Number,
                 name: String,
@@ -59,7 +58,6 @@ const LaunchedFoodPlan = new Schema({
             name: String,
             date: String,
             eaten: Number,
-            done: Boolean,
             products: [{
                 kcal: Number,
                 name: String,

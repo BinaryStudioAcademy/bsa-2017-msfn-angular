@@ -5,6 +5,10 @@
     width: 100%;
     min-height: 100%;
     padding: 20px 6%;
+    .slimscroll-bar{
+        height: 100px;
+        border: 1px solid #424242;
+    }
     .error .mat-input-underline.mat-form-field-underline {
         border-bottom: 1px solid $error-color;
     }

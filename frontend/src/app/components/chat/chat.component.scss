@@ -57,7 +57,7 @@
     right: 0;
     width: 200px;
     height: calc(100vh - 70px);
-    background: linear-gradient($bg-color 75%, $gradient-from-color);
+    background-color: $gradient-to-color;
     z-index: 5;
     transform: translateX(300px);
     transition: transform 0.7s;

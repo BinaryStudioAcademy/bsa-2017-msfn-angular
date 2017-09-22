@@ -23,8 +23,8 @@
                 </div>
             </div>
             <div class="meal-list">
-                <div class="list-meal" *ngFor="let item of foodPlan.todayMeals.meals" (click)="openFoodTracking()">
-                    <md-checkbox class="meal" [disabled]="true" [ngModel]="item.done"></md-checkbox>
+                <div class="list-meal" *ngFor="let item of foodPlan.todayMeals.meals" routerLink="food-tracking">
+                    <md-checkbox class="meal" [disabled]="true" checked="{{item.eaten === item.kcal ? 'true': ''}}"></md-checkbox>
                     <p>{{ item.name }}</p><span> ({{ item.eaten > 0 ? item.eaten : 0 }} kcal of {{ item.kcal }} kcal)</span>
                 </div>
             </div>
