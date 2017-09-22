@@ -1,0 +1,52 @@
+
+<div class="container">
+    <div class="tribe">
+        <form class="tribe-form" *ngIf="tribeID">
+            <div class="tribe-header tribe-row">
+                <div class="tribe-avatar">
+                    <div class="tribe-picture">
+                        <img [src]="data.image" alt="user picture" class="tribe-picture-img">
+                        <img-cropper #cropper
+                                     *ngIf="!hideCropper"
+                                     class="img-cropper"
+                                     [image]="data"
+                                     [settings]="cropperSettings"></img-cropper>
+                    </div>
+                    <div class="tribe-upload">
+                        <div class="tribe-upload-container upload-btn" (click)="saveImg('save')">
+                            <span>{{hideCropper ? 'Upload new picture' : 'Save'}}</span>
+                            <input type="file"
+                                   accept="image/*"
+                                   *ngIf="hideCropper"
+                                   class="upload"
+                                   (click)="chooseFileModal($event)"
+                                   (change)="fileChangeListener($event)"/>
+                        </div>
+                        <div class="tribe-upload-container upload-btn" *ngIf="!hideCropper"
+                             (click)="saveImg('cancel')">Cancel</div>
+                    </div>
+                </div>
+                <div class="tribe-fullname">
+                    <md-input-container class="tribe-name">
+                        <input id="name" 
+                        class="input" 
+                        mdInput 
+                        name="name"
+                        [(ngModel)]="trueTribe.name">
+                    </md-input-container>
+                </div>
+            </div>
+            
+            <div class="tribe-row">
+                <md-input-container class="tribe-about responsive-width">
+                    <textarea mdInput placeholder="About"
+                        name="description"
+                        [(ngModel)]="trueTribe.description"
+                        md-tooltip="Add some info about tribe">
+                    </textarea>
+                </md-input-container>
+            </div>
+            <button type="submit" class="btn" (click)="onSubmit()">Save changes</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="mainblock">
+    <aside class="aside">
+        <nav class="navigation">
+            <md-nav-list>
+                <div class="navigation__your-section">
+                    <div md-subheader class="navigation__subheader">SETTINGS</div>
+                    <a routerLink="general" routerLinkActive="active-link">
+                        <md-list-item class="menu-element">
+                            <span md-line class="navigation__title">General info</span>
+                        </md-list-item >
+                    </a>
+                    <a routerLink="permissions" routerLinkActive="active-link">
+                        <md-list-item class="menu-element">
+                            <span md-line class="navigation__title">User permissions</span>
+                        </md-list-item >
+                    </a>
+                    <a routerLink="banlist" routerLinkActive="active-link">
+                        <md-list-item class="menu-element">
+                            <span md-line class="navigation__title">Banlist</span>
+                        </md-list-item >
+                    </a>
+                </div>
+            </md-nav-list>
+        </nav>
+    </aside>
+    <div class="child" perfect-scrollbar>
+        <router-outlet></router-outlet>
+    </div>
+</div>

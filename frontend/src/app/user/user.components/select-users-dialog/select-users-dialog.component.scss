@@ -1,0 +1,61 @@
+@import '../../../../globalStyles/variables';
+@import '../../../../globalStyles/indentations';
+@import '../../../../globalStyles/text';
+
+p {
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
+.user-name-text {
+    font-size: $usual-text;
+}
+a {
+    text-decoration: none;
+    color: $text-main-color;
+    padding-left: $input-padding;
+}
+
+.img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+h2 {
+    text-align: center;
+    font-size: $large-text;
+}
+
+.btn {
+    margin: 10px;
+}
+
+.user-container{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+    align-items: center;
+}
+
+.text {
+    text-align: center;
+    font-style: italic;
+}
+
+.selected {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.material-icons {
+    color: $btn-color;
+    margin-right: 5px;
+}
+
+.btn-container{
+    display: flex;
+    justify-content: space-between;
+}

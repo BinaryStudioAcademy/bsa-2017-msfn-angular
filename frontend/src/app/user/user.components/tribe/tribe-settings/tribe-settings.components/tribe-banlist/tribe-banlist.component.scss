@@ -1,0 +1,91 @@
+@import "../../../../../../../globalStyles/variables.scss";
+@import '../../../../../../../globalStyles/text.scss';
+@import '../../../../../../../globalStyles/indentations.scss';
+.btn {
+    border: none;
+    margin: 35px auto 20px auto;
+    width: 90%;
+    padding: 15px;
+    color: $text-main-color;
+    background-color: $btn-color;
+    font-size: $button-text;
+    font-weight: 600;
+    font-size: 11pt;
+    border-radius: 50px;
+    outline: none;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: $text-main-color;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.header {
+    font-style: italic;
+    margin: 15px;
+    text-align: center;
+}
+
+.user-container {
+    margin: 10px 20px 0 20px;
+    background-color: $bg-color;
+    width: calc(100% - 40px);
+    height: 20vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow-y: auto;
+}
+
+.user-name-text {
+    font-size: $usual-text;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+a {
+    text-decoration: none;
+    color: $text-main-color;
+    padding-left: $input-padding;
+}
+
+.img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 20px; 
+}
+
+.err {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.err-text {
+    text-align: center;
+    font-style: italic;
+    font-size: 18px;
+}
+
+.user-element{
+    cursor: not-allowed;
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+    align-items: center;
+    &:hover{
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+}
+
+.text {
+    text-align: center;
+    font-style: italic;
+}

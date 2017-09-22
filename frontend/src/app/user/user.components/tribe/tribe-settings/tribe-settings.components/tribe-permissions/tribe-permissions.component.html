@@ -1,0 +1,24 @@
+<div class="container" perfect-scrollbar>
+    <div class="header">Can post</div>
+    <div class="user-container" perfect-scrollbar>
+        <div *ngFor="let user of canPost" class="user-element">
+            <img class="img" [src]="user.userPhoto || './resources/default.png'">
+            <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+        </div>
+        <div class="err" *ngIf="canPost.length === 0">
+            <div class="err-text">Empty</div>
+        </div>
+    </div>
+    <button class="btn" (click)="openDialog('canPost')">Update permissions</button>
+    <div class="header">Can comment</div>
+    <div class="user-container" perfect-scrollbar>
+        <div *ngFor="let user of canComment" class="user-element">
+            <img class="img" [src]="user.userPhoto || './resources/default.png'">
+            <p class="user-name-text">{{user.firstName + ' ' + user.lastName}}</p>
+        </div>
+        <div class="err" *ngIf="canComment.length === 0">
+            <div class="err-text">Empty</div>
+        </div>
+    </div>
+    <button class="btn" (click)="openDialog('canComment')">Update permissions</button>
+</div>
