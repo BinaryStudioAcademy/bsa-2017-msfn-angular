@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoodTrackingService } from './food-tracking.service';
 import { MdDialog, MdDialogRef } from '@angular/material';
@@ -18,7 +18,6 @@ export class FoodTrackingComponent implements OnInit {
     launchedFoodPlan;
     historyMealsStatic;
     tomorrowFoodPlan;
-    private searchDialog: MdDialogRef<any> | null;
     period = {
         to: new Date(),
         from: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 7)
@@ -28,7 +27,6 @@ export class FoodTrackingComponent implements OnInit {
     constructor(
         public foodTrackingService: FoodTrackingService,
         public activatedRoute: ActivatedRoute,
-        private dialog: MdDialog,
         private toasterService: ToasterService,
         private dateService: DateService,
     ) { }
@@ -64,7 +62,7 @@ export class FoodTrackingComponent implements OnInit {
             }, 0);
         }
 
-        this.historyMealsStatic = this.launchedFoodPlan.historyMeals;
+        this.historyMealsStatic = JSON.parse(JSON.stringify(this.launchedFoodPlan.historyMeals));
         this.foodTrackingService.updateLaunchedFoodPlan(this.launchedFoodPlan, res => { });
         this.updateDataHistoryView();
     }
@@ -81,57 +79,14 @@ export class FoodTrackingComponent implements OnInit {
         });
     }
 
-    checkProduct(meal, product) {
-        if (product.done === undefined || product.done === false) {
-            meal.eaten = meal.eaten ? meal.eaten + product.kcal : product.kcal;
-            this.launchedFoodPlan.todayMeals.eaten =
-                this.launchedFoodPlan.todayMeals.eaten ? this.launchedFoodPlan.todayMeals.eaten + product.kcal : product.kcal;
-            product.done = true;
-        } else if (product.done === true) {
-            meal.eaten = meal.eaten - product.kcal;
-            this.launchedFoodPlan.todayMeals.eaten = this.launchedFoodPlan.todayMeals.eaten - product.kcal;
-            product.done = null;
-        } else if (product.done === null) {
-            product.done = false;
-        }
-    }
-
-    addProduct(meal) {
-        this.searchDialog = this.dialog.open(SearchComponent);
-        this.searchDialog.afterClosed().subscribe(() => {
-            this.searchDialog.componentInstance.selectedFood.forEach(el => {
-                el.noPlan = true;
-                meal.products.push(el);
-            });
-            this.searchDialog = null;
-        });
-    }
-
-    save() {
-        this.foodTrackingService.updateLaunchedFoodPlan(this.launchedFoodPlan, res => {
-            this.toasterService.showMessage('success', null, 'Saved');
-        });
-    }
-
     finish(status) {
-        if (this.checkCheckedProduct(this.launchedFoodPlan.todayMeals.meals)) {
-            this.launchedFoodPlan.historyMeals.push(this.launchedFoodPlan.todayMeals);
-            this.launchedFoodPlan.todayMeals.finished = true;
-            if (status === 'plan') {
-                this.launchedFoodPlan.status = 'finished';
-            }
+        if (status === 'plan') {
+            this.launchedFoodPlan.status = 'finished';
             this.foodTrackingService.updateLaunchedFoodPlan(this.launchedFoodPlan, res => {
                 this.toasterService.showMessage('success', null, 'Saved');
-                if (status === 'plan') {
-                    this.launchedFoodPlan = null;
-                    this.getAllFoodPlans();
-                } else {
-                    this.launchedFoodPlan.todayMeals.meals = [];
-                    this.createLaunchedFoodPlan(this.launchedFoodPlan);
-                }
             });
-        } else {
-            this.toasterService.showMessage('error', null, 'select all products');
+            this.launchedFoodPlan = null;
+            this.getAllFoodPlans();
         }
     }
 

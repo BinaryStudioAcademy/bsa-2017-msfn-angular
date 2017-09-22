@@ -7,9 +7,9 @@
         <p class="goal-main-text" [ngClass]="{'white': item.progress !== 100}">{{ item.progress ? item.progress : '0' }}%</p>
         <p class="goal-item-text">Due {{ item.deadline | date: 'yMd'}}</p>
     </div>
-        <div class="add-container" (click)="openDialog({_id: '-1'})">
-            <i class="material-icons add-item-ico">add</i>
-        </div>
+    <div class="add-container" (click)="openDialog({_id: '-1'})">
+        <i class="material-icons add-item-ico">add</i>
+    </div>
 </div>
 <div class="delete-line">
         <div class="drop-area"><i class="material-icons" [sortablejs]="itemsDropped" [sortablejsOptions]="dragOptions">delete</i></div>

@@ -91,6 +91,7 @@ import { TribePermissionsComponent } from './user.components/tribe/tribe-setting
 import { TribeBanlistComponent } from './user.components/tribe/tribe-settings/tribe-settings.components/tribe-banlist/tribe-banlist.component';
 import { SelectUsersDialogComponent } from './user.components/select-users-dialog/select-users-dialog.component';
 
+import { DayTemplateComponent } from './user.components/food-tracking/day-template/day-template.component';
 
 @NgModule({
     imports: [
@@ -180,6 +181,7 @@ import { SelectUsersDialogComponent } from './user.components/select-users-dialo
         TribePermissionsComponent,
         TribeBanlistComponent,
         SelectUsersDialogComponent,
+        DayTemplateComponent,
     ],
     providers: [
         ForAllUserGuard,
@@ -199,7 +201,8 @@ import { SelectUsersDialogComponent } from './user.components/select-users-dialo
         FullTribePostComponent,
         TribeMembersDialogComponent,
         CreateTribeComponent,
-        SelectUsersDialogComponent
+        SelectUsersDialogComponent,
+        DayTemplateComponent,
     ]
 })
 export class UserModule {

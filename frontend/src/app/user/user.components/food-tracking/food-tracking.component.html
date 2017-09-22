@@ -21,27 +21,27 @@
                         <div class="period-wrap">
                                 <md-input-container>
                                     <input mdInput 
-                                        [(ngModel)]="period.from"
-                                        [mdDatepicker]="period_from"
-                                        placeholder="from"
-                                        (ngModelChange)="updateDataHistoryView()"
-                                        [max]="minMaxCalendarDate"
-                                    >
+                                            [(ngModel)]="period.from"
+                                            [mdDatepicker]="period_from"
+                                            placeholder="from"
+                                            (ngModelChange)="updateDataHistoryView()"
+                                            [max]="minMaxCalendarDate"
+                                        >
                                 </md-input-container>
                                 <md-datepicker #period_from></md-datepicker>
                                 <md-datepicker-toggle [for]="period_from"></md-datepicker-toggle>
                                 <md-input-container>
-                                    <input mdInput 
-                                        [(ngModel)]="period.to"
-                                        [mdDatepicker]="period_to"
-                                        placeholder="to"
-                                        (ngModelChange)="updateDataHistoryView()"
-                                        [max]="minMaxCalendarDate"
-                                    >
+                                     <input mdInput 
+                                            [(ngModel)]="period.to"
+                                            [mdDatepicker]="period_to"
+                                            placeholder="to"
+                                            (ngModelChange)="updateDataHistoryView()"
+                                            [max]="minMaxCalendarDate"
+                                        >
                                 </md-input-container>
                                 <md-datepicker #period_to></md-datepicker>
                                 <md-datepicker-toggle [for]="period_to"></md-datepicker-toggle>
-                            </div>
+                        </div>
                     <div class="launched-meals" *ngFor="let history of launchedFoodPlan.historyMeals">
                         <div class="launched-header">
                             <p class="date">
@@ -72,33 +72,7 @@
             </md-tab>
 
             <md-tab label="Today">
-                <div class="launched-meals">
-                    <div class="launched-header">
-                        <p class="date">
-                            {{dateService.beautifyDate(launchedFoodPlan.todayMeals.date)}}
-                            <span class="item-kcal">
-                            ({{launchedFoodPlan.todayMeals.totalKcal}} kcal)
-                        </span>
-                        </p>
-                        <p class="item-kcal" *ngIf="launchedFoodPlan.todayMeals.eaten">eaten: {{launchedFoodPlan.todayMeals.eaten}} kcal</p>
-                    </div>
-                    <div class="meals-item" *ngFor="let meal of launchedFoodPlan.todayMeals.meals">
-                        <p class="item-name">{{ meal.name }} <span class="item-kcal">({{ meal.kcal }} kcal)</span></p>
-                        <p class="item-kcal" *ngIf="meal.eaten"> eaten: {{ meal.eaten }} kcal</p>
-                        <div class="item-product" *ngFor="let product of meal.products" [ngClass]="{'done': product.done, 'missed': product.done === null}">
-                            <md-checkbox class="product-checkbox" (change)="checkProduct(meal, product)" [ngModel]="product.done" [indeterminate]="product.done === null"></md-checkbox>
-                            <p class="product-name">{{ product.name }}</p>
-                            <p class="product-quantity">{{ product.quantity }}</p>
-                            <p class="product-kcal">{{ product.kcal }} kcal</p>
-                            <p class="product-added" *ngIf="product.noPlan">added</p>
-                        </div>
-                        <div class="item-add" (click)="addProduct(meal)">add product</div>
-                    </div>
-                    <div class="buttons">
-                        <button md-button class="btn-save" (click)="save()">save</button>
-                        <button md-button class="btn-save" (click)="finish('day')">finish day</button>
-                    </div>
-                </div>
+                <app-day-template [(historyFoodPlan)]="launchedFoodPlan" (onFinish)="ngOnInit()"></app-day-template>
             </md-tab>
 
             <md-tab label="Tomorrow">
