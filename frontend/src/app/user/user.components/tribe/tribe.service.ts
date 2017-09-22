@@ -91,7 +91,9 @@ export class TribeService {
                 id: postId,
                 author: userId,
                 text: text
-            }
+            },
+            successMessage: 'Comment added',
+            failMessage: 'Cannot add comment'
         };
         this.httpService.sendRequest(request)
             .then((data) => { callback(data); });
@@ -132,7 +134,8 @@ export class TribeService {
             method: 'PUT',
             body: {
                 newMember: userId
-            }
+            },
+            successMessage: 'Now following'
         };
         this.httpService.sendRequest(request)
             .then((data) => {

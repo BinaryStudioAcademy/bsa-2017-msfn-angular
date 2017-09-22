@@ -34,14 +34,12 @@ export class TribePostComponent implements OnInit {
 
     ngOnInit() {
         this.hideComments = true;
-        console.log(this.post.comments);
         if (this.post.comments) {
             for (let item of this.post.comments) {
                 this.tribeService.getUserById(item.author, (res) => {
                     item = Object.assign(item, {userPhoto: res.userPhoto, firstName: res.firstName});
                 });
             }
-            console.log(this.post.comments);
         }
         this.tribeService.getUserById(this.post.author, (res) => {
             this.post.author = Object.assign(
@@ -65,12 +63,7 @@ export class TribePostComponent implements OnInit {
             this.post._id,
             this.userID,
             this.commentText,
-            (resp) => {
-                if (resp.requested) {
-                    this.toasterService.showMessage('success', 'Comment saved');
-                } else {
-                    this.toasterService.showMessage('error', 'Failed to add comment');
-                }
+            () => {
             }
         );
     }
