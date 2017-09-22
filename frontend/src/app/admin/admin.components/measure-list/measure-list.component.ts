@@ -122,7 +122,7 @@ export class MeasureTypeDataSource extends DataSource<any> {
     connect(): Observable<any[]> {
         const displayDataChanges = [
             this._tableDatabase.dataChange,
-            this._sort.mdSortChange,
+            this._sort.sortChange,
             this._filterChange,
         ];
         return Observable.merge(...displayDataChanges).map(() => {

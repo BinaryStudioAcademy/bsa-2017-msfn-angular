@@ -128,7 +128,7 @@ export class FoodTypeDataSource extends DataSource<IFoodType> {
     connect(): Observable<any[]> {
         const displayDataChanges = [
             this._tableDatabase.dataChange,
-            this._sort.mdSortChange,
+            this._sort.sortChange,
             this._filterChange,
         ];
         return Observable.merge(...displayDataChanges).map(() => {

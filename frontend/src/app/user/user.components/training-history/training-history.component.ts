@@ -133,7 +133,7 @@ export class ExampleDataSource extends DataSource<any> {
     connect(): Observable<any[]> {
         const displayDataChanges = [
             this._exampleDatabase.dataChange,
-            this._sort.mdSortChange,
+            this._sort.sortChange,
             this._filterChange,
             this._filterDateChange,
             this._paginator.page,
