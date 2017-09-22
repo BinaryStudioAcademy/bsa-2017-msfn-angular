@@ -13,6 +13,7 @@ import {ToasterService} from '../../../../services/toastr.service';
 })
 export class TribePostComponent implements OnInit {
     @Output() onAddFavourite = new EventEmitter();
+    @Input() canAddComment;
     @Input() tribe;
     @Input() post;
 
@@ -65,7 +66,14 @@ export class TribePostComponent implements OnInit {
             this.post._id,
             this.userID,
             this.commentText,
-            () => {});
+            (resp) => {
+                if (resp.requested) {
+                    this.toasterService.showMessage('success', 'Comment saved');
+                } else {
+                    this.toasterService.showMessage('error', 'Failed to add comment');
+                }
+            }
+        );
     }
 
     toggleComments() {

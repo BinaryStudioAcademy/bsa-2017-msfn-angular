@@ -20,7 +20,7 @@
                 <p>{{comment.text}}</p>
             </div>
         </div>
-        <div class="comment-container">
+        <div class="comment-container"  [hidden]="!canAddComment">
             <div class="commentator">
                 <img md-list-avatar
                      [src]="userPhoto || './resources/default.png'">

@@ -89,12 +89,13 @@ md-icon {
         padding: 0;
         background-color: $gradient-from-color;
         color: $text-main-color;
+        text-align: justify;
     }
     p {
         text-align: justify;
     }
     button {
-        width: 10%;
-        margin-right: $content-between-margin;
+        margin-top: $micro-indent;
+        background-color: #82ca9c;
     }
 }

@@ -21,11 +21,17 @@ export class TribePageComponent implements OnInit {
         name: '',
         creator: '',
         members: [],
+        banned: [],
+        canPost: [],
+        canComment: [],
         description: '',
         image: ''
     };
     userId: string;
     tribeID: string;
+    canPost: boolean;
+    canComment: boolean;
+    isBanned: boolean;
     settingsLink: string;
 
     constructor(private mdDialog: MdDialog,
@@ -39,11 +45,12 @@ export class TribePageComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.tribe);
         if (this.tribeID) {
             this.tribeService.getTribe(this.tribeID, (resp) => {
                 this.tribe = resp;
-                console.log(this.tribe);
+                this.canComment = this.tribe.canComment.includes(this.userId) || this.userId === this.tribe.creator;
+                this.canPost = this.tribe.canPost.includes(this.userId) || this.userId === this.tribe.creator;
+                this.isBanned = this.tribe.banned.includes(this.userId) || this.userId === this.tribe.creator;
             });
             this.tribeService.getPostsByTribe(this.tribeID, (res) => {
                 this.posts = res;
@@ -66,24 +73,6 @@ export class TribePageComponent implements OnInit {
             }
         });
     }
-
-    saveComment(postId, text) {
-        this.tribeService.commentPost(
-            this.tribe._id,
-            postId,
-            this.userId,
-            text,
-            (resp) => {
-                if (resp.requested) {
-                    this.toasterService.showMessage('success', 'Comment saved' );
-                } else {
-                    this.toasterService.showMessage('error', 'Failed to add comment');
-                }
-            }
-        );
-    }
-
-    addComment() {}
 
     addFavourite() {}
 

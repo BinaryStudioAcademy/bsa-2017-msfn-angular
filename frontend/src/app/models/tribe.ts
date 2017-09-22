@@ -4,6 +4,8 @@ export interface ITribe {
     name: string;
     image?: string;
     description?: string;
+    canPost?: string[];
+    canComment?: string[];
     members?: string[];
     banned?: string[];
     postWithOwnName?: boolean;
