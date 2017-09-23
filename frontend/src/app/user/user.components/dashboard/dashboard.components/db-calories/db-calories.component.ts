@@ -52,7 +52,7 @@ export class DbCaloriesComponent implements OnInit {
         },
         {
             day : 'Sat',
-            amount : 20
+            amount : 121
         },
         {
             day : 'Sun',
